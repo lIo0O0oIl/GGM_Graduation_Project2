@@ -8,11 +8,21 @@ using UnityEngine.EventSystems;
 
 public class TextBox : MonoBehaviour
 {
-    [SerializeField] public ScrollRect scrollRect;
-    [SerializeField] TextMeshProUGUI textBox;
+    [Header("Object")]
+    [SerializeField] ScrollRect scrollRect;
+    [SerializeField] RectTransform chatBoxParent;
     [SerializeField] TMP_InputField inputField;
 
-    EventSystem evet;
+    [Header("Prefabs")]
+    [SerializeField] Transform currentSpeech;
+    [SerializeField] GameObject speechBalloon;
+    [SerializeField] GameObject myChatBox;
+    [SerializeField] GameObject otherChatBox;
+
+    [Header("isBool")]
+    [SerializeField] bool isCurrentUser;
+
+    EventSystem evt;
 
     private void Update()
     {
@@ -20,27 +30,48 @@ public class TextBox : MonoBehaviour
             InputText("test");
 
         if (inputField.isFocused == false)
+            inputField.OnPointerClick(new PointerEventData(evt));
+    }
+
+    public void InputText(string msg = null)
+    {
+        bool user;
+        if (msg == "")
+            user = true;
+        else
+            user = false;
+
+        if (currentSpeech == null || isCurrentUser != user)
         {
-            inputField.OnPointerClick(new PointerEventData(evet));
+            if (user)
+            {
+                GameObject temp = Instantiate(myChatBox);
+                temp.transform.SetParent(chatBoxParent);
+                currentSpeech = temp.transform;
+                isCurrentUser = true;
+            }
+            else
+            {
+                GameObject temp = Instantiate(otherChatBox);
+                temp.transform.SetParent(chatBoxParent);
+                currentSpeech = temp.transform;
+                isCurrentUser = false;
+            }
         }
-    }
 
-    public void InputText(string msg)
-    {
-        textBox.text += msg + System.Environment.NewLine;
-        LineAlignment();
-    }
-
-    public void InputField()
-    {
-        textBox.text += inputField.text + System.Environment.NewLine;
+        GameObject speech = Instantiate(speechBalloon);
+        if (msg == "")
+            speech.GetComponentInChildren<TextMeshProUGUI>().text = inputField.text;
+        else
+            speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
+        speech.transform.SetParent(currentSpeech);
         inputField.text = null;
         LineAlignment();
     }
 
     private void LineAlignment()
     {
-        LayoutRebuilder.ForceRebuildLayoutImmediate(textBox.rectTransform);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(chatBoxParent);
         StartCoroutine(ScrollRectDown());
     }
 
