@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class File : MonoBehaviour, IPointerClickHandler
 {
     public string myPath;
-    public string goPath;
+    private string goPath;
+
+    private void Start()
+    {
+        goPath = $"{myPath}\\{GetComponentInChildren<TMP_Text>().text}";
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
