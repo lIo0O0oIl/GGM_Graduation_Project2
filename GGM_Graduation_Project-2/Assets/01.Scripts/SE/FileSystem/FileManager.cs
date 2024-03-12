@@ -81,18 +81,34 @@ public class FileManager : MonoBehaviour
             for (int i = 0;i < path.Length - 1; ++i)
             {
                 upLinePathBtn[i].SetActive(true);
-                upLinePathText[i].text = path[i + 1];
+                upLinePathText[i].text = path[i + 1] + " >";
             }
-            for (int i = path.Length; i < 3; ++i)
+            for (int i = path.Length - 1; i < 3; ++i)
             {
                 upLinePathBtn[i].SetActive(false);      // 경로가 없는 것이면 지워주기
             }
         }
+        else
+        {
+            for (int i = 0; i < 3; ++i)
+            {
+                upLinePathBtn[i].SetActive(false);      // 경로가 지금 아무것도 없으면 다 지워주기
+            }
+        }
     }
 
-    public void GoMain()
+    public void GoMain()        // 윗줄에서 메인을 눌렀을 때
     {
         GoFile(nowPath, "메인");
+    }
+
+    public void UpLinePath(int num)
+    {
+        string[] names = nowPath.Split("\\");       // 1. nowPath를 \ 를 기준으로 나눠준다.
+        string buttonName = names[num];         //  2. 누른 버튼에 적힌 이름을 가져와준다.
+        int index = nowPath.IndexOf(buttonName) + buttonName.Length;            // 2. 누른 버튼의 인덱스 + 사이즈만큼을 nowPath에서 추출한다.
+        string goPath = nowPath.Substring(0, index);        // 문자열을 만들어준다.
+        GoFile(nowPath, goPath);
     }
 }
 
