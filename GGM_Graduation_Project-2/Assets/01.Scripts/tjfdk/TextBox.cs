@@ -27,7 +27,7 @@ public class TextBox : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
-            InputText("test");
+            InputText("야이 개1새야");
 
         if (inputField.isFocused == false)
             inputField.OnPointerClick(new PointerEventData(evt));
