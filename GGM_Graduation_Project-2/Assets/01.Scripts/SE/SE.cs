@@ -7,7 +7,7 @@ public class SE : MonoBehaviour
 {
     private void Start()
     {
-        var processList = DI.Process.GetProcessesByName("explorer");
+/*        var processList = DI.Process.GetProcessesByName("explorer");
         if (processList.Length > 0)
         {
             //프로세스가 1개이상 동작중..
@@ -31,8 +31,11 @@ public class SE : MonoBehaviour
                 a++;
             }
         }
-        Debug.Log(a);
+        Debug.Log(a);*/     // 프로세스 관련 공부
+    }
 
-
+    public void OnClick()
+    {
+        Debug.Log("눌러짐");
     }
 }
