@@ -24,11 +24,14 @@ public class FileManager : MonoBehaviour
 
     public BackBtn backBtn;         // 뒤로가기
     public GameObject[] upLinePathBtn;     // 윗줄에 경로 표시용
-    public FileTree[] fileTrees;        // 파일 전체 구조
 
     private string nowPath;     // 지금 경로
     private TMP_Text[] upLinePathText;       // 윗줄에 경로 표시 텍스트
 
+    public GameObject imagePanel;       // 이미지 관련
+    public Image showImage;        // 보여질 이미지
+
+    public FileTree[] fileTrees;        // 파일 전체 구조
 
     private void Awake()
     {
@@ -42,6 +45,8 @@ public class FileManager : MonoBehaviour
             upLinePathBtn[i].SetActive(false);
         }
     }
+
+    #region 폴더 이동 관련 함수
     /*
      GoFile 함수
     1. 갈 경로와 현재 경로가 같이 들어옴
@@ -110,5 +115,22 @@ public class FileManager : MonoBehaviour
         string goPath = nowPath.Substring(0, index);        // 문자열을 만들어준다.
         GoFile(nowPath, goPath);
     }
+    #endregion
+
+    #region 이미지 폴더 열기 관련 함수
+    public void OpenImageFile(Sprite image, Vector3 scale)
+    {
+        Debug.Log("이미지 열기");
+
+        imagePanel.SetActive(true);
+        showImage.sprite = image;
+        showImage.transform.localScale = scale;
+    }
+
+    public void ImageBackClick()
+    {
+        imagePanel.SetActive(false);
+    }
+    #endregion
 }
 

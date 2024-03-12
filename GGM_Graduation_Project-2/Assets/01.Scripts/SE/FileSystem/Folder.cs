@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class File : MonoBehaviour, IPointerClickHandler
+public class Folder : MonoBehaviour, IPointerClickHandler
 {
     public string myPath;
     private string goPath;
