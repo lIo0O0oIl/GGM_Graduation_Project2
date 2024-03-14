@@ -4,10 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ImageFile : MonoBehaviour, IPointerClickHandler
+public class TextFile : MonoBehaviour, IPointerClickHandler
 {
-    public Sprite image;        // 보여질 이미지 스프라이트
-    public Vector3 showScale;       // 보여질 크기
+    public string text;        // 보여질 텍스트
     private string fileName;
 
     private void Start()
@@ -19,7 +18,7 @@ public class ImageFile : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.clickCount == 2)
         {
-            FileManager.instance.OpenImageFile(image, showScale, fileName);
+            FileManager.instance.OpenTextFile(text, fileName);
         }
     }
 }
