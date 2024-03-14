@@ -29,7 +29,12 @@ public class FileManager : MonoBehaviour
     private TMP_Text[] upLinePathText;       // 윗줄에 경로 표시 텍스트
 
     public GameObject imagePanel;       // 이미지 관련
+    public TMP_Text imageName;      // 보이질 이미지의 이름
     public Image showImage;        // 보여질 이미지
+
+    public GameObject textNotePanel;    // 메모장 관련
+    public TMP_Text textName;      // 보이질 텍스트의 이름
+    public TMP_Text showText;       // 보여질 텍스트
 
     public FileTree[] fileTrees;        // 파일 전체 구조
 
@@ -118,18 +123,35 @@ public class FileManager : MonoBehaviour
     #endregion
 
     #region 이미지 폴더 열기 관련 함수
-    public void OpenImageFile(Sprite image, Vector3 scale)
+    public void OpenImageFile(Sprite image, Vector3 scale, string name)
     {
         Debug.Log("이미지 열기");
 
         imagePanel.SetActive(true);
         showImage.sprite = image;
         showImage.transform.localScale = scale;
+        imageName.text = name;
     }
 
     public void ImageBackClick()
     {
         imagePanel.SetActive(false);
+    }
+    #endregion
+
+    #region 텍스트 폴더 열기 관련 함수
+    public void OpenTextFile(string text, string name)
+    {
+        Debug.Log("텍스트 열기");
+
+        textNotePanel.SetActive(true);
+        showText.text = text;
+        textName.text = name;
+    }
+
+    public void TextBackClick()
+    {
+        textNotePanel.SetActive(false);
     }
     #endregion
 }
