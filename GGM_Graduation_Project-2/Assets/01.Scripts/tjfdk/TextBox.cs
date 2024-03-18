@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using static Unity.Burst.Intrinsics.X86.Avx;
 using UnityEngine.EventSystems;
+using UnityEditor.Tilemaps;
+using JetBrains.Annotations;
 
 public class TextBox : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class TextBox : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] Transform currentSpeech;
     [SerializeField] GameObject speechBalloon;
+    [SerializeField] GameObject choiceBalloon;
     [SerializeField] GameObject myChatBox;
     [SerializeField] GameObject otherChatBox;
 
@@ -24,10 +27,15 @@ public class TextBox : MonoBehaviour
 
     EventSystem evt;
 
+    int myChatCount = 0;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
-            InputText("야이 개1새야");
+            InputText("조수의 말");
+
+        if (Input.GetKeyDown(KeyCode.T))
+            InputText("");
 
         if (inputField.isFocused == false)
             inputField.OnPointerClick(new PointerEventData(evt));
@@ -59,14 +67,37 @@ public class TextBox : MonoBehaviour
             }
         }
 
-        GameObject speech = Instantiate(speechBalloon);
+        GameObject speech = null;
         if (msg == "")
-            speech.GetComponentInChildren<TextMeshProUGUI>().text = inputField.text;
+        {
+            speech = Instantiate(choiceBalloon);
+            speech.name += "-" + myChatCount;
+            myChatCount++;
+            speech.GetComponent<Button>().onClick.AddListener(() => ChoiceQuestion());
+            speech.GetComponentInChildren<TextMeshProUGUI>().text = "test";
+        }
         else
+        {
+            speech = Instantiate(speechBalloon);
             speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
+        }
         speech.transform.SetParent(currentSpeech);
         inputField.text = null;
         LineAlignment();
+    }
+
+    public void ChoiceQuestion()
+    {
+        GameObject currentSelectedButton = EventSystem.current.currentSelectedGameObject;
+
+        for (int i = 0; i < currentSpeech.childCount; ++i)
+        {
+            if (currentSpeech.GetChild(i).name != currentSelectedButton.name)
+            {
+                currentSelectedButton.GetComponent<Button>().interactable = false;
+                Destroy(currentSpeech.GetChild(i).gameObject);
+            }
+        }
     }
 
     private void LineAlignment()
