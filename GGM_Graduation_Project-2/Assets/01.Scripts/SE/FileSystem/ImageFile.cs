@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class ImageFile : MonoBehaviour, IPointerClickHandler
 {
     public Sprite image;        // 보여질 이미지 스프라이트
-    public Vector3 showScale;       // 보여질 크기
+    public Vector2 showScale = new Vector2(500, 500);       // 보여질 크기
     private string fileName;
 
     private void Start()

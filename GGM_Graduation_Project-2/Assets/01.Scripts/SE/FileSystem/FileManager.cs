@@ -31,6 +31,7 @@ public class FileManager : MonoBehaviour
     public GameObject imagePanel;       // 이미지 관련
     public TMP_Text imageName;      // 보이질 이미지의 이름
     public Image showImage;        // 보여질 이미지
+    private RectTransform imageSize;        // 보여질 이미지의 사이즈
 
     public GameObject textNotePanel;    // 메모장 관련
     public TMP_Text textName;      // 보이질 텍스트의 이름
@@ -49,6 +50,8 @@ public class FileManager : MonoBehaviour
             upLinePathText[i] = upLinePathBtn[i].GetComponentInChildren<TMP_Text>();
             upLinePathBtn[i].SetActive(false);
         }
+
+        imageSize = showImage.gameObject.GetComponent<RectTransform>();
     }
 
     #region 폴더 이동 관련 함수
@@ -123,14 +126,14 @@ public class FileManager : MonoBehaviour
     #endregion
 
     #region 이미지 폴더 열기 관련 함수
-    public void OpenImageFile(Sprite image, Vector3 scale, string name)
+    public void OpenImageFile(Sprite image, Vector2 scale, string name)
     {
         Debug.Log("이미지 열기");
 
-        imagePanel.SetActive(true);
         showImage.sprite = image;
-        showImage.transform.localScale = scale;
+        imageSize.sizeDelta = scale;
         imageName.text = name;
+        imagePanel.SetActive(true);
     }
 
     public void ImageBackClick()
