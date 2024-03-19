@@ -28,13 +28,20 @@ public class FileManager : MonoBehaviour
     private string nowPath;     // 지금 경로
     private TMP_Text[] upLinePathText;       // 윗줄에 경로 표시 텍스트
 
+    [Header("Image")]
     public GameObject imagePanel;       // 이미지 관련
     public TMP_Text imageName;      // 보이질 이미지의 이름
     public Image showImage;        // 보여질 이미지
+    private RectTransform imageSize;        // 보여질 이미지의 사이즈
 
+    [Header("TextNote")]
     public GameObject textNotePanel;    // 메모장 관련
     public TMP_Text textName;      // 보이질 텍스트의 이름
     public TMP_Text showText;       // 보여질 텍스트
+
+    [Header("Lock")]
+    public GameObject lockPanel;        // 잠금 관련
+    private LockSystem lockSystem;      // 잠금 관련 시스템
 
     public FileTree[] fileTrees;        // 파일 전체 구조
 
@@ -49,6 +56,9 @@ public class FileManager : MonoBehaviour
             upLinePathText[i] = upLinePathBtn[i].GetComponentInChildren<TMP_Text>();
             upLinePathBtn[i].SetActive(false);
         }
+
+        imageSize = showImage.gameObject.GetComponent<RectTransform>();
+        lockSystem = lockPanel.GetComponent<LockSystem>();
     }
 
     #region 폴더 이동 관련 함수
@@ -105,6 +115,8 @@ public class FileManager : MonoBehaviour
                 upLinePathBtn[i].SetActive(false);      // 경로가 지금 아무것도 없으면 다 지워주기
             }
         }
+
+        InvisibleFileManager.Instance.DontShowRound();      // 잚못 켜준거 있으면 꺼주기
     }
 
     public void GoMain()        // 윗줄에서 메인을 눌렀을 때
@@ -122,15 +134,33 @@ public class FileManager : MonoBehaviour
     }
     #endregion
 
+    private string RemoveSpace(string name)     // 줄바꿈, .(확장자) 전에 공백이 있는 경우에 지워주기
+    {
+        name = name.Replace("\n", "");
+
+        int dotIndex = name.IndexOf('.');       // 점있는 인덱스 찾기
+        if (dotIndex >= 0 && name[dotIndex - 1] == ' ')     // 뒤에가 공백인 경우에만
+        {
+            int lastSpaceIndex = name.LastIndexOf(" ");
+            if (lastSpaceIndex >= 0 )
+            {
+                // '.' 이전의 공백 제거
+                name = name.Remove(lastSpaceIndex, dotIndex - lastSpaceIndex);
+            }
+        }
+        Debug.Log(name);
+        return name;
+    }
+
     #region 이미지 폴더 열기 관련 함수
-    public void OpenImageFile(Sprite image, Vector3 scale, string name)
+    public void OpenImageFile(Sprite image, Vector2 scale, string name)
     {
         Debug.Log("이미지 열기");
 
-        imagePanel.SetActive(true);
         showImage.sprite = image;
-        showImage.transform.localScale = scale;
-        imageName.text = name;
+        imageSize.sizeDelta = scale;
+        imageName.text = RemoveSpace(name);
+        imagePanel.SetActive(true);
     }
 
     public void ImageBackClick()
@@ -146,12 +176,27 @@ public class FileManager : MonoBehaviour
 
         textNotePanel.SetActive(true);
         showText.text = text;
-        textName.text = name;
+        textName.text = RemoveSpace(name);
     }
 
     public void TextBackClick()
     {
         textNotePanel.SetActive(false);
+    }
+    #endregion
+
+    #region 잠김 파일 열기 관련 함수
+    public void OpenLock(string fileName, string password, Image lockImage)
+    {
+        Debug.Log("잠금 열기");
+
+        lockPanel.SetActive(true);
+        lockSystem.Init(fileName, password, lockImage);
+    }
+
+    public void LookBackClick()
+    {
+        lockPanel.SetActive(false);
     }
     #endregion
 }

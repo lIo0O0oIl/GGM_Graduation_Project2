@@ -7,16 +7,18 @@ using UnityEngine.EventSystems;
 
 public class ImageZoom : MonoBehaviour, IScrollHandler
 {
-    public TMP_Text ZoomPersent;
+    public TMP_Text ZoomPersentText;
     public float zoomSpeed = 0.05f;
     public float minScale = 0.7f;      // 최소로 보여질 값은 70% 임.
     public float maxScale = 10.0f;         // 최대로 보여질 값은 1000% 까지임.
 
     private Vector3 originScale;       // 오리지널 스케일, min 스케일.
 
-    private void Start()
+    private void OnEnable()
     {
         originScale = transform.localScale;
+        ZoomPersentText.text = "100%";
+        transform.localScale = Vector3.one;
     }
 
     public void OnScroll(PointerEventData eventData)
@@ -60,7 +62,7 @@ public class ImageZoom : MonoBehaviour, IScrollHandler
     {
         float currentScale = transform.localScale.x / originScale.x;        // 현재 스케일을 본래 스케일로 나눈 비율
         float persent = MathF.Round(currentScale * 100);
-        ZoomPersent.text = $"{persent}%";
+        ZoomPersentText.text = $"{persent}%";
     }
 
 }
