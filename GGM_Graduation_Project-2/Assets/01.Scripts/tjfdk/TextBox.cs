@@ -5,8 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using static Unity.Burst.Intrinsics.X86.Avx;
 using UnityEngine.EventSystems;
+using UnityEditor.Tilemaps;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 
-public class TextBox : MonoBehaviour
+public class TextBox : Singleton<TextBox>
 {
     [Header("Object")]
     [SerializeField] ScrollRect scrollRect;
@@ -16,6 +19,7 @@ public class TextBox : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] Transform currentSpeech;
     [SerializeField] GameObject speechBalloon;
+    [SerializeField] GameObject choiceBalloon;
     [SerializeField] GameObject myChatBox;
     [SerializeField] GameObject otherChatBox;
 
@@ -24,23 +28,22 @@ public class TextBox : MonoBehaviour
 
     EventSystem evt;
 
+    int myChatCount = 0;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
-            InputText("야이 개1새야");
+            InputText(false, "조수의 말");
+
+        if (Input.GetKeyDown(KeyCode.T))
+            InputText(true, "d");
 
         if (inputField.isFocused == false)
             inputField.OnPointerClick(new PointerEventData(evt));
     }
 
-    public void InputText(string msg = null)
+    public void InputText(bool user, string msg)
     {
-        bool user;
-        if (msg == "")
-            user = true;
-        else
-            user = false;
-
         if (currentSpeech == null || isCurrentUser != user)
         {
             if (user)
@@ -59,19 +62,52 @@ public class TextBox : MonoBehaviour
             }
         }
 
-        GameObject speech = Instantiate(speechBalloon);
-        if (msg == "")
-            speech.GetComponentInChildren<TextMeshProUGUI>().text = inputField.text;
-        else
+        GameObject speech = null;
+        if (user)
+        {
+            speech = Instantiate(choiceBalloon);
+            speech.name += "-" + myChatCount;
+            myChatCount++;
+            speech.GetComponent<Button>().onClick.AddListener(() => ChoiceQuestion());
             speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
+        }
+        else
+        {
+            speech = Instantiate(speechBalloon);
+            speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
+        }
         speech.transform.SetParent(currentSpeech);
         inputField.text = null;
         LineAlignment();
     }
 
+    public void ChoiceQuestion()
+    {
+        GameObject currentSelectedButton = EventSystem.current.currentSelectedGameObject;
+
+        for (int i = 0; i < currentSpeech.childCount; ++i)
+        {
+            if (currentSpeech.GetChild(i).name != currentSelectedButton.name)
+            {
+                currentSelectedButton.GetComponent<Button>().interactable = false;
+                Destroy(currentSpeech.GetChild(i).gameObject);
+            }
+        }
+
+        StartCoroutine(LineRefresh());
+
+        ChattingManager.Instance.answer(currentSelectedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+    }
+
+    private IEnumerator LineRefresh()
+    {
+        yield return null;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(chatBoxParent);
+    }
+
     private void LineAlignment()
     {
-        LayoutRebuilder.ForceRebuildLayoutImmediate(chatBoxParent);
+        StartCoroutine(LineRefresh());
         StartCoroutine(ScrollRectDown());
     }
 
