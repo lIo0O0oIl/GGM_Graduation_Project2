@@ -28,14 +28,20 @@ public class FileManager : MonoBehaviour
     private string nowPath;     // 지금 경로
     private TMP_Text[] upLinePathText;       // 윗줄에 경로 표시 텍스트
 
+    [Header("Image")]
     public GameObject imagePanel;       // 이미지 관련
     public TMP_Text imageName;      // 보이질 이미지의 이름
     public Image showImage;        // 보여질 이미지
     private RectTransform imageSize;        // 보여질 이미지의 사이즈
 
+    [Header("TextNote")]
     public GameObject textNotePanel;    // 메모장 관련
     public TMP_Text textName;      // 보이질 텍스트의 이름
     public TMP_Text showText;       // 보여질 텍스트
+
+    [Header("Lock")]
+    public GameObject lockPanel;        // 잠금 관련
+    private LockSystem lockSystem;      // 잠금 관련 시스템
 
     public FileTree[] fileTrees;        // 파일 전체 구조
 
@@ -52,6 +58,7 @@ public class FileManager : MonoBehaviour
         }
 
         imageSize = showImage.gameObject.GetComponent<RectTransform>();
+        lockSystem = lockPanel.GetComponent<LockSystem>();
     }
 
     #region 폴더 이동 관련 함수
@@ -108,6 +115,8 @@ public class FileManager : MonoBehaviour
                 upLinePathBtn[i].SetActive(false);      // 경로가 지금 아무것도 없으면 다 지워주기
             }
         }
+
+        InvisibleFileManager.Instance.DontShowRound();      // 잚못 켜준거 있으면 꺼주기
     }
 
     public void GoMain()        // 윗줄에서 메인을 눌렀을 때
@@ -155,6 +164,21 @@ public class FileManager : MonoBehaviour
     public void TextBackClick()
     {
         textNotePanel.SetActive(false);
+    }
+    #endregion
+
+    #region 잠김 파일 열기 관련 함수
+    public void OpenLock(string fileName, string password, Image lockImage)
+    {
+        Debug.Log("잠금 열기");
+
+        lockPanel.SetActive(true);
+        lockSystem.Init(fileName, password, lockImage);
+    }
+
+    public void LookBackClick()
+    {
+        lockPanel.SetActive(false);
     }
     #endregion
 }
