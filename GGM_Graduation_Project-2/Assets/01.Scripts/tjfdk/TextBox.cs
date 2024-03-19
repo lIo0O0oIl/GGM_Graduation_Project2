@@ -7,8 +7,9 @@ using static Unity.Burst.Intrinsics.X86.Avx;
 using UnityEngine.EventSystems;
 using UnityEditor.Tilemaps;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 
-public class TextBox : MonoBehaviour
+public class TextBox : Singleton<TextBox>
 {
     [Header("Object")]
     [SerializeField] ScrollRect scrollRect;
@@ -32,23 +33,17 @@ public class TextBox : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
-            InputText("조수의 말");
+            InputText(false, "조수의 말");
 
         if (Input.GetKeyDown(KeyCode.T))
-            InputText("");
+            InputText(true, "d");
 
         if (inputField.isFocused == false)
             inputField.OnPointerClick(new PointerEventData(evt));
     }
 
-    public void InputText(string msg = null)
+    public void InputText(bool user, string msg)
     {
-        bool user;
-        if (msg == "")
-            user = true;
-        else
-            user = false;
-
         if (currentSpeech == null || isCurrentUser != user)
         {
             if (user)
@@ -68,13 +63,13 @@ public class TextBox : MonoBehaviour
         }
 
         GameObject speech = null;
-        if (msg == "")
+        if (user)
         {
             speech = Instantiate(choiceBalloon);
             speech.name += "-" + myChatCount;
             myChatCount++;
             speech.GetComponent<Button>().onClick.AddListener(() => ChoiceQuestion());
-            speech.GetComponentInChildren<TextMeshProUGUI>().text = "test";
+            speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
         }
         else
         {
@@ -98,11 +93,21 @@ public class TextBox : MonoBehaviour
                 Destroy(currentSpeech.GetChild(i).gameObject);
             }
         }
+
+        StartCoroutine(LineRefresh());
+
+        ChattingManager.Instance.answer(currentSelectedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+    }
+
+    private IEnumerator LineRefresh()
+    {
+        yield return null;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(chatBoxParent);
     }
 
     private void LineAlignment()
     {
-        LayoutRebuilder.ForceRebuildLayoutImmediate(chatBoxParent);
+        StartCoroutine(LineRefresh());
         StartCoroutine(ScrollRectDown());
     }
 
