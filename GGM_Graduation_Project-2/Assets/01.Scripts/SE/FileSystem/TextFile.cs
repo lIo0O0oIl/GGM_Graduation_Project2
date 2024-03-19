@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class TextFile : MonoBehaviour, IPointerClickHandler
 {
+    [TextArea(3, 10)]
     public string text;        // 보여질 텍스트
     private string fileName;
 

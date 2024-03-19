@@ -134,6 +134,24 @@ public class FileManager : MonoBehaviour
     }
     #endregion
 
+    private string RemoveSpace(string name)     // 줄바꿈, .(확장자) 전에 공백이 있는 경우에 지워주기
+    {
+        name = name.Replace("\n", "");
+
+        int dotIndex = name.IndexOf('.');       // 점있는 인덱스 찾기
+        if (dotIndex >= 0 && name[dotIndex - 1] == ' ')     // 뒤에가 공백인 경우에만
+        {
+            int lastSpaceIndex = name.LastIndexOf(" ");
+            if (lastSpaceIndex >= 0 )
+            {
+                // '.' 이전의 공백 제거
+                name = name.Remove(lastSpaceIndex, dotIndex - lastSpaceIndex);
+            }
+        }
+        Debug.Log(name);
+        return name;
+    }
+
     #region 이미지 폴더 열기 관련 함수
     public void OpenImageFile(Sprite image, Vector2 scale, string name)
     {
@@ -141,7 +159,7 @@ public class FileManager : MonoBehaviour
 
         showImage.sprite = image;
         imageSize.sizeDelta = scale;
-        imageName.text = name;
+        imageName.text = RemoveSpace(name);
         imagePanel.SetActive(true);
     }
 
@@ -158,7 +176,7 @@ public class FileManager : MonoBehaviour
 
         textNotePanel.SetActive(true);
         showText.text = text;
-        textName.text = name;
+        textName.text = RemoveSpace(name);
     }
 
     public void TextBackClick()
