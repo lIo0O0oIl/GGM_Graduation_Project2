@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using UnityEngine;
 
 public class ChattingManager : Singleton<ChattingManager>
@@ -26,9 +25,7 @@ public class ChattingManager : Singleton<ChattingManager>
 
         if (isChoice == false)
         {
-            //if (chapterSO[currentChapter].temp[currentStep].isDone == false)
             TextBox.Instance.InputText(false, chapterSO[currentChapter].temp[currentStep].text);
-            //chapterSO[currentChapter].temp[currentStep].isDone = true;
 
             if (chapterSO[currentChapter].temp[currentStep].next.Count == 0)
                 currentStep++;
@@ -59,7 +56,6 @@ public class ChattingManager : Singleton<ChattingManager>
                 ttt.isDone = true;
                 foreach (test ttttt in ttt.next)
                 {
-                    //if (ttttt.isDone == false)
                     {
                         TextBox.Instance.InputText(false, ttttt.text);
                     }

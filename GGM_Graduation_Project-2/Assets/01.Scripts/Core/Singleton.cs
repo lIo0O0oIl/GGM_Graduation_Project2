@@ -4,9 +4,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour       // ±×³É 
 {
     static T instance;
 
-    [TextArea]
-    public string description;
-
     public static T Instance
     {
         get

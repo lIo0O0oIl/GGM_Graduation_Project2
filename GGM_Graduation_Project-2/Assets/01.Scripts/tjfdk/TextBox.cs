@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using static Unity.Burst.Intrinsics.X86.Avx;
 using UnityEngine.EventSystems;
-using UnityEditor.Tilemaps;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 
-public class TextBox : Singleton<TextBox>
+public class TextBox : MonoBehaviour
 {
+    public static TextBox Instance;
+
     [Header("Object")]
     [SerializeField] ScrollRect scrollRect;
     [SerializeField] RectTransform chatBoxParent;
-    [SerializeField] TMP_InputField inputField;
 
     [Header("Prefabs")]
     [SerializeField] Transform currentSpeech;
@@ -26,23 +23,14 @@ public class TextBox : Singleton<TextBox>
     [Header("isBool")]
     [SerializeField] bool isCurrentUser;
 
-    EventSystem evt;
-
     int myChatCount = 0;
 
-    private void Update()
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-            InputText(false, "조수의 말");
-
-        if (Input.GetKeyDown(KeyCode.T))
-            InputText(true, "d");
-
-        if (inputField.isFocused == false)
-            inputField.OnPointerClick(new PointerEventData(evt));
+        Instance = this;
     }
 
-    public void InputText(bool user, string msg)
+    public void InputText(bool user, string msg)        // user true 일면 플레이어가 말하는 것임.
     {
         if (currentSpeech == null || isCurrentUser != user)
         {
@@ -77,7 +65,6 @@ public class TextBox : Singleton<TextBox>
             speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
         }
         speech.transform.SetParent(currentSpeech);
-        inputField.text = null;
         LineAlignment();
     }
 
