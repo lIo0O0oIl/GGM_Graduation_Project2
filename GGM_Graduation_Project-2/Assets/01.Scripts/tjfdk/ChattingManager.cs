@@ -1,18 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 
 public class ChattingManager : Singleton<ChattingManager>
 {
-    // 대화 관리
-
-    // 진행을 위한 조수의 대화 (시작점)
-    // 유저의 선택 또는 질문에 대한 답
-    // 
-    // = 다이얼로그 제작.
-
-    // 챕터 별로 관리? -> so 만들기?
-
     [SerializeField]
     private List<DialogueSO> chapterSO = new List<DialogueSO>();
 
@@ -20,6 +12,7 @@ public class ChattingManager : Singleton<ChattingManager>
     public int currentStep = 0;
 
     public bool isChoice = false;
+    public bool isFunc;
 
     private void Update()
     {
@@ -29,9 +22,13 @@ public class ChattingManager : Singleton<ChattingManager>
 
     public void Chapter()
     {
+        isFunc = false;
+
         if (isChoice == false)
         {
+            //if (chapterSO[currentChapter].temp[currentStep].isDone == false)
             TextBox.Instance.InputText(false, chapterSO[currentChapter].temp[currentStep].text);
+            //chapterSO[currentChapter].temp[currentStep].isDone = true;
 
             if (chapterSO[currentChapter].temp[currentStep].next.Count == 0)
                 currentStep++;
@@ -39,13 +36,17 @@ public class ChattingManager : Singleton<ChattingManager>
             {
                 foreach (test ttt in chapterSO[currentChapter].temp[currentStep].next)
                 {
-                    isChoice = true;
-                    TextBox.Instance.InputText(true, ttt.text);
+                    if (ttt.isDone == false)
+                    {
+                        isChoice = true;
+                        TextBox.Instance.InputText(true, ttt.text);
+                        isFunc = true;
+                    }
                 }
-            }
 
-            //if (chapterSO[currentChapter].temp.Count >= currentStep)
-            //    ChapterReset(); 
+                if (isFunc == false)
+                    currentStep++;
+            }
         }
     }
 
@@ -55,12 +56,21 @@ public class ChattingManager : Singleton<ChattingManager>
         {
             if (ttt.text == str)
             {
+                ttt.isDone = true;
                 foreach (test ttttt in ttt.next)
-                    TextBox.Instance.InputText(false, ttttt.text);
+                {
+                    //if (ttttt.isDone == false)
+                    {
+                        TextBox.Instance.InputText(false, ttttt.text);
+                    }
+                }
+                    // 현재 눌린 거 삭제 (so에서?...)ㄴ
+                    // 걍 bool로 확인했는지 확인하고 전부 다 확인했다면 step++
             }
         }
         isChoice = false;
-        //currentStep++;
+
+        // if 현재 눌렸을 때 ttttt가 눌린 것 밖에 없다면
     }
 
     public void ChapterReset()

@@ -8,7 +8,8 @@ using UnityEngine;
 [Serializable]
 public class test
 {
-    public string text;
+    public string text = "";
+    public bool isDone = false;
     public List<test> next = new List<test>();
 }
 
@@ -17,5 +18,4 @@ public class DialogueSO : ScriptableObject
 {
     public int chapter;
     public List<test> temp = new List<test>();
-
 }
