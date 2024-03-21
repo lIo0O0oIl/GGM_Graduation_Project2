@@ -8,20 +8,18 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> panels;
 
-    public void Panle_OnOff(GameObject panel)
+    public void Panle_OnOff(GameObject panel)       // 셋팅창에서 사용함.
     {
-        //foreach (GameObject panle in panles)
         panel.SetActive(!panel.activeSelf);
     }
 
     public void Panel_Popup(GameObject panel)
     {
-        //GameObject button = EventSystem.current.currentSelectedGameObject;
         if (panel.activeSelf == false)
         {
             foreach (GameObject obj in panels)
-                obj.SetActive(false); 
+                obj.SetActive(false);       // 전부 꺼주기
+            panel.SetActive(true);      // 내꺼는 켜주기
         }
-        panel.SetActive(!panel.activeSelf);
     }
 }

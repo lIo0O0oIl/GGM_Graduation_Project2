@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public struct RoundFile
 {
-    public string round;
+    public string round;        // == Chapter
     public GameObject[] Files;
 }
 
