@@ -4,10 +4,10 @@ using System.Net.Sockets;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Sudocu : MonoBehaviour
+public class Sudoku : MonoBehaviour
 {
     //int[,] board = new int[9, 9];
-    SudocuTile[,] tiles = new SudocuTile[9, 9];
+    SudokuTile[,] tiles = new SudokuTile[9, 9];
 
     // 한 그룹이 순서대로 1 ~ 9까지 오도록 설정
     // 특정한 두 수를 정해 위치를 셔플한다 
@@ -30,32 +30,32 @@ public class Sudocu : MonoBehaviour
         //    }
         //}
 
-        // b ver (group) - success
-        for (int i = 0; i < 9; i++)
-        {
-            for (int j = 0; j < transform.GetChild(i).childCount; ++j)
-            {
-                Debug.Log(j);
-                tiles[i, j] = transform.GetChild(i).GetChild(j).GetComponent<SudocuTile>();
-            }
-        }
+        //// b ver (group) - success
+        //for (int i = 0; i < 9; i++)
+        //{
+        //    for (int j = 0; j < transform.GetChild(i).childCount; ++j)
+        //    {
+        //        Debug.Log(j);
+        //        tiles[i, j] = transform.GetChild(i).GetChild(j).GetComponent<SudocuTile>();
+        //    }
+        //}
 
         //// b ver (group) - success
-        //for (int i = 0; i < 9; i += 3)
+        //for (int l = 0; l < 9; l+=3) // l i = 세로
         //{
-        //    for (int j = 0; j < 9; j += 3)
+        //    for (int i = 0; i < 3; ++i)
         //    {
-        //        for (int k = 0; k < 3; ++k)
+        //        for (int j = 0; j < 9; j += 3) // j k = 가로
         //        {
-        //            for (int l = 0; l < 3; ++l)
+        //            for (int k = 0; k < 3; ++k)
         //            {
-        //                tiles[i + k, j + l] = transform.GetChild(i).GetChild(j + l).GetComponent<SudocuTile>();
+        //                tiles[] = transform.GetChild(l + i).GetChild(j + k).GetComponent<SudocuTile>();
         //            }
         //        }
         //    }
         //}
 
-        Init();
+        //Init();
     }
 
     private void Init()
@@ -96,12 +96,12 @@ public class Sudocu : MonoBehaviour
         {
             for (int j = 0; j < 9; ++j)
             {
-                if (tiles[i, j].number == _value1)
+                if (tiles[i, j].GetNumber() == _value1)
                 {
                     x1 = i;
                     y1 = j;
                 }
-                if (tiles[i, j].number == _value2)
+                if (tiles[i, j].GetNumber() == _value2)
                 {
                     x2 = i;
                     y2 = j;
