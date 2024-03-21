@@ -1,6 +1,8 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -41,30 +43,82 @@ public class Sudoku : MonoBehaviour
         //}
 
         //// b ver (group) - success
-        //for (int l = 0; l < 9; l+=3) // l i = 세로
+        //for (int a = 0; a < 9; a++)
         //{
-        //    for (int i = 0; i < 3; ++i)
+        //    for (int b = 0; b < 9; b++)
         //    {
-        //        for (int j = 0; j < 9; j += 3) // j k = 가로
+        //        for (int l = 0; l < 9; l += 3) // l i = 세로
         //        {
-        //            for (int k = 0; k < 3; ++k)
+        //            for (int i = 0; i < 3; ++i)
         //            {
-        //                tiles[] = transform.GetChild(l + i).GetChild(j + k).GetComponent<SudocuTile>();
+        //                for (int j = 0; j < 9; j += 3) // j k = 가로
+        //                {
+        //                    for (int k = 0; k < 3; ++k)
+        //                    {
+        //                        tiles[a, b] = transform.GetChild(l + i).GetChild(j + k).GetComponent<SudokuTile>();
+        //                    }
+        //                }
         //            }
         //        }
         //    }
         //}
 
-        //Init();
+        int x = 0, y = 0;
+        int nx = 0, ny = 0;
+
+        //int kk = 1; // debug
+
+        for (int i = 0; i < 9; ++i)
+        {
+            y = ny;
+            for (int j = 0; j < 9; ++j)
+            {
+                //Debug.Log(x + " " + y + " / " + i + " " + j);
+                //transform.GetChild(x).GetChild(y).GetComponent<SudokuTile>().SetNumber(kk); // debug
+
+                tiles[i, j] = transform.GetChild(x).GetChild(y).GetComponent<SudokuTile>();
+
+                //if (kk == 9) // debug
+                //    kk = 0; // debug
+                //kk++; // debug
+
+                y++;
+                if ((j + 1) % 3 == 0)
+                {
+                    x++;
+                    y = ny;
+                }
+            }
+
+            ny += 3;
+            if (ny == 9)
+                ny = 0;
+
+            if ((i + 1) % 3 == 0)
+                nx = i + 1;
+
+            if (x % 3 == 0)
+                x = nx;
+        }
+
+        Init();
     }
 
     private void Init()
     {
+        //for (int i = 0; i < 9; ++i)
+        //{
+        //    for (int j = 0; j < 9; ++j)
+        //    {
+        //        tiles[i, j].SetNumber(j + 1);
+        //    }
+        //}
+
         for (int i = 0; i < 9; ++i)
         {
             for (int j = 0; j < 9; ++j)
             {
-                tiles[i, j].SetNumber(j + 1);
+                tiles[i, j].SetNumber((i * 3 + i / 3 + j) % 9 + 1);
             }
         }
 
