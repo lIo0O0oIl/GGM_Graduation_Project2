@@ -8,17 +8,9 @@ using Random = UnityEngine.Random;
 
 public class Sudoku : MonoBehaviour
 {
-    //int[,] board = new int[9, 9];
-    SudokuTile[,] tiles = new SudokuTile[9, 9];
-
-    // 한 그룹이 순서대로 1 ~ 9까지 오도록 설정
-    // 특정한 두 수를 정해 위치를 셔플한다 
-    // 셔플하는 과정에서 행 렬과 그룹에 대해 조건을 검사한다
-    // 셔플 과정을 반복한다
-
-    // 문제는 UI를 어떻게 행렬 순서대로 옮길 것 인가?
-    // 한 그룹을 순서대로 넣는다면... init은 쉬워지는데
-    // 셔플 과정 검사를 뜯어봐야 할 것 같다...
+    public SudokuTile[,] tiles = new SudokuTile[9, 9];
+    [SerializeField] private int suffleAmount = 0;
+    [SerializeField] private int hiddingAmount = 0;
 
     private void Start()
     {
@@ -66,21 +58,12 @@ public class Sudoku : MonoBehaviour
         int x = 0, y = 0;
         int nx = 0, ny = 0;
 
-        //int kk = 1; // debug
-
         for (int i = 0; i < 9; ++i)
         {
             y = ny;
             for (int j = 0; j < 9; ++j)
             {
-                //Debug.Log(x + " " + y + " / " + i + " " + j);
-                //transform.GetChild(x).GetChild(y).GetComponent<SudokuTile>().SetNumber(kk); // debug
-
                 tiles[i, j] = transform.GetChild(x).GetChild(y).GetComponent<SudokuTile>();
-
-                //if (kk == 9) // debug
-                //    kk = 0; // debug
-                //kk++; // debug
 
                 y++;
                 if ((j + 1) % 3 == 0)
@@ -106,28 +89,21 @@ public class Sudoku : MonoBehaviour
 
     private void Init()
     {
-        //for (int i = 0; i < 9; ++i)
-        //{
-        //    for (int j = 0; j < 9; ++j)
-        //    {
-        //        tiles[i, j].SetNumber(j + 1);
-        //    }
-        //}
-
         for (int i = 0; i < 9; ++i)
         {
             for (int j = 0; j < 9; ++j)
             {
-                tiles[i, j].SetNumber((i * 3 + i / 3 + j) % 9 + 1);
+                tiles[i, j].SetCorrect((i * 3 + i / 3 + j) % 9 + 1);
             }
         }
 
-        Suffle(10);
+        Suffle(suffleAmount);
+        Hide(hiddingAmount);
     }
 
-    private void Suffle(int suffleAmount)
+    private void Suffle(int _suffleAmount)
     {
-        for (int i = 0; i < suffleAmount; ++i)
+        for (int i = 0; i < _suffleAmount; ++i)
         {
             int value1 = Random.Range(1, 10);
             int value2 = Random.Range(1, 10);
@@ -141,8 +117,6 @@ public class Sudoku : MonoBehaviour
 
     private void Mix(int _value1, int _value2)
     {
-        Debug.Log(_value1 + " " + _value2);
-
         int x1 = 0, x2 = 0;
         int y1 = 0, y2 = 0;
 
@@ -150,19 +124,39 @@ public class Sudoku : MonoBehaviour
         {
             for (int j = 0; j < 9; ++j)
             {
-                if (tiles[i, j].GetNumber() == _value1)
+                if (tiles[i, j].GetCorrect() == _value1)
                 {
                     x1 = i;
                     y1 = j;
                 }
-                if (tiles[i, j].GetNumber() == _value2)
+                if (tiles[i, j].GetCorrect() == _value2)
                 {
                     x2 = i;
                     y2 = j;
                 }
             }
-            tiles[x1, y1].SetNumber(_value2);
-            tiles[x2, y2].SetNumber(_value1);
+            tiles[x1, y1].SetCorrect(_value2);
+            tiles[x2, y2].SetCorrect(_value1);
+        }
+    }
+
+    private void Hide(int _hideAmount)
+    {
+        for (int i = 0; i < _hideAmount; ++i)
+        {
+            int x = 0, y = 0;
+
+            x = Random.Range(0, 9);
+            y = Random.Range(0, 9);
+
+            //while (tiles[x, y].GetNumber() == 0)
+            //{
+            //    x = Random.Range(0, 9);
+            //    y = Random.Range(0, 9);
+            //}
+
+            Debug.Log(x + " " + y);
+            tiles[x, y].SetNumber();
         }
     }
 }

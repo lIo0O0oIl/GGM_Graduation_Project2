@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class SudokuTile : MonoBehaviour
 {
-    private int number = 0;
-    private int correct = 0;
+    [SerializeField] private int number = 0;
+    [SerializeField] private int correct = 0;
     public TextMeshProUGUI text;
     public Button button;
 
@@ -20,10 +21,14 @@ public class SudokuTile : MonoBehaviour
         image = GetComponent<Image>();
     }
 
-    public void SetNumber(int _number)
+    public void SetNumber(int _number = 0)
     {
         number = _number;
-        text.text = number.ToString();
+        if (_number != 0)
+            text.text = _number.ToString();
+        else
+            text.text = "";
+        button.interactable = true;
     }
 
     public int GetNumber()
@@ -34,6 +39,8 @@ public class SudokuTile : MonoBehaviour
     public void SetCorrect(int _correct)
     {
         correct = _correct;
+        text.text = _correct.ToString();
+        button.interactable = false;
     }
 
     public int GetCorrect()
@@ -60,9 +67,9 @@ public class SudokuTile : MonoBehaviour
     {
         if (number == correct)
         {
-            SetTxtColor(Color.green);
-            SetLook();
+            SetColor(Color.green);
             StartCoroutine(DelayColor());
+            SetLook();
         }
         else
         {

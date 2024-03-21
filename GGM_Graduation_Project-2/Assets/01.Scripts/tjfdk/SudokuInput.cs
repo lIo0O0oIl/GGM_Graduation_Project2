@@ -9,7 +9,10 @@ using UnityEngine.UI;
 public class SudokuInput : MonoBehaviour
 {
     public SudokuTile focusTile = null;
-    public bool isAnwser = true;
+    public bool isAnswer = true;
+
+    public GameObject currentButton;
+    public GameObject oldButton;
 
     public List<Transform> buttons = new List<Transform>();
 
@@ -24,16 +27,19 @@ public class SudokuInput : MonoBehaviour
 
     public void InputNumber()
     {
-        int num = int.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TextMeshProUGUI>().text);
-        focusTile.SetNumber(num);
-        if (isAnwser)
+        if (currentButton != null)
         {
-            focusTile.SetTxtColor(Color.black);
-            focusTile.CheckAnwser();
-        }
-        else
-        {
-            focusTile.SetTxtColor(Color.gray);
+            int num = int.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TextMeshProUGUI>().text);
+            focusTile.SetNumber(num);
+            if (isAnswer)
+            {
+                focusTile.SetTxtColor(Color.black);
+                focusTile.CheckAnwser();
+            }
+            else
+            {
+                focusTile.SetTxtColor(Color.gray);
+            }
         }
     }
     
@@ -45,8 +51,14 @@ public class SudokuInput : MonoBehaviour
         focusTile.SetColor(Color.yellow);
     }
 
-    public void ChangeMode()
+    public void ChangeMode(bool _isAnswer)
     {
-        isAnwser = !isAnwser;
+        isAnswer = _isAnswer;
+
+        oldButton = currentButton;
+        currentButton = EventSystem.current.currentSelectedGameObject;
+        if (oldButton)
+            oldButton.GetComponent<Image>().color = Color.white;
+        currentButton.GetComponent<Image>().color = Color.yellow;
     }
 }
