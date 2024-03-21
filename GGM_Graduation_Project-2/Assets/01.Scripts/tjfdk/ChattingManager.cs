@@ -7,8 +7,8 @@ public class ChattingManager : Singleton<ChattingManager>
     [SerializeField]
     private List<DialogueSO> chapterSO = new List<DialogueSO>();
 
-    public int currentChapter = 0;
-    public int currentStep = 0;
+    public int currentChapter = 0;      // Áö±İ Ã©ÅÍ
+    public int currentStep = 0;         // Áö±İ ÀÎµ¦½º
 
     public bool isChoice = false;
     public bool isFunc;

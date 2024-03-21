@@ -30,7 +30,7 @@ public class TextBox : MonoBehaviour
         Instance = this;
     }
 
-    public void InputText(bool user, string msg)        // user true 일면 플레이어가 말하는 것임.
+    public void InputText(bool user, string msg)        // user가 true 일면 플레이어가 말하는 것임.
     {
         if (currentSpeech == null || isCurrentUser != user)
         {

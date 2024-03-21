@@ -13,7 +13,7 @@ public class test
     public List<test> next = new List<test>();
 }
 
-[CreateAssetMenu(fileName = "dialogueSO", menuName = "SO",  order = 0)]
+[CreateAssetMenu(fileName = "dialogueSO", menuName = "SO/DialogueSO")]
 public class DialogueSO : ScriptableObject
 {
     public int chapter;
