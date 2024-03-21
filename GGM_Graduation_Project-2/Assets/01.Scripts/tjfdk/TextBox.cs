@@ -9,6 +9,8 @@ public class TextBox : MonoBehaviour
 {
     public static TextBox Instance;
 
+    public int cutTextSize = 20;
+
     [Header("Object")]
     [SerializeField] ScrollRect scrollRect;
     [SerializeField] RectTransform chatBoxParent;       // 쳇팅이 들어갈 박스의 뿌리. 그룹이랑 싸이즈 필터 컴포넌트 들어가 있음.
@@ -36,8 +38,23 @@ public class TextBox : MonoBehaviour
         // 공백으로 나눠주고 잘리는 부분의 인덱스와 가장 가까운 것을 잡아서 거기서 줄내림을 추가해준다.
         // 그런데 인덱스보다 큰데 한... 5이상이 넘는 줄이면 그 뒤에 것에서 줄내림을 해준다.
         Debug.Log(msg);
-        string[] 
-
+        if (msg.Length > cutTextSize)
+        {
+            if (msg[cutTextSize] == ' ')     // 자르려는 곳에 공백이 있으면
+            {
+                msg = $"{msg.Substring(0, cutTextSize)}\n{msg.Substring(cutTextSize + 1, (msg.Length - cutTextSize) - 1)}";
+            }
+            else
+            {
+                //string[] sentence = msg.Split(' ');     // 공백 기준으로 잘라준다.
+                int space = msg.IndexOf(" ", cutTextSize);       // 20 뒤에 첫번째로 있는 공백을 찾아준다.
+                int space2 = msg.Substring(0, cutTextSize).LastIndexOf(" ", cutTextSize);     // 0 부터 20까지 있는 문자열에서 가장 마지막에 있는 공백을 찾아준다.
+                int endIndex = space > space2 ? space2 : space;     // 둘 중 작은 것 넣어주기
+                Debug.Log($"{space} , {space2}, {endIndex}");
+                msg = $"{msg.Substring(0, endIndex)}\n{msg.Substring(endIndex + 1, (msg.Length - endIndex) - 1)}";
+            }
+        }
+        
 
         if (currentSpeech == null || isCurrentUser != user)
         {
