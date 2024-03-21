@@ -13,9 +13,9 @@ public class test
     public List<test> next = new List<test>();
 }
 
-[CreateAssetMenu(fileName = "dialogueSO", menuName = "SO",  order = 0)]
+[CreateAssetMenu(fileName = "dialogueSO", menuName = "SO/DialogueSO")]
 public class DialogueSO : ScriptableObject
 {
-    public int chapter;
-    public List<test> temp = new List<test>();
+    public int chapter;     // 지금 챕터
+    public List<test> temp = new List<test>();      // 대화 및 선택지 적기
 }

@@ -23,10 +23,14 @@ public class FileManager : MonoBehaviour
     public static FileManager instance;     // 어디서나 호출할 수 있도록
 
     public BackBtn backBtn;         // 뒤로가기
-    public GameObject[] upLinePathBtn;     // 윗줄에 경로 표시용
-
+    
     private string nowPath;     // 지금 경로
-    private TMP_Text[] upLinePathText;       // 윗줄에 경로 표시 텍스트
+    private TMP_Text[] upLinePathText;       // 윗줄에 경로 표시용 텍스트
+
+    [Header("UpLine")]
+    public GameObject[] upLinePathBtn;     // 윗줄에 경로 표시용
+    public RectTransform UpLineSizeFitter;      // 윗줄 사이즈 정렬용
+    private RectTransform[] upLineRectFitter;       // 윗줄에 버튼들 정렬용
 
     [Header("Image")]
     public GameObject imagePanel;       // 이미지 관련
@@ -59,6 +63,12 @@ public class FileManager : MonoBehaviour
 
         imageSize = showImage.gameObject.GetComponent<RectTransform>();
         lockSystem = lockPanel.GetComponent<LockSystem>();
+
+        upLineRectFitter = new RectTransform[3];
+        for (int i = 0; i < 3; i++)
+        {
+            upLineRectFitter[i] = upLinePathBtn[i].GetComponent<RectTransform>();
+        }
     }
 
     #region 폴더 이동 관련 함수
@@ -101,12 +111,16 @@ public class FileManager : MonoBehaviour
             for (int i = 0;i < path.Length - 1; ++i)
             {
                 upLinePathBtn[i].SetActive(true);
-                upLinePathText[i].text = path[i + 1] + " >";
+                upLinePathText[i].text = " " + path[i + 1] + " >";
             }
             for (int i = path.Length - 1; i < 3; ++i)
             {
                 upLinePathBtn[i].SetActive(false);      // 경로가 없는 것이면 지워주기
             }
+            LayoutRebuilder.ForceRebuildLayoutImmediate(UpLineSizeFitter);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(upLineRectFitter[0]);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(upLineRectFitter[1]);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(upLineRectFitter[2]);
         }
         else
         {
