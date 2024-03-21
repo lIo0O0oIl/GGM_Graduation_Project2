@@ -40,5 +40,5 @@ public class SE : MonoBehaviour
     }
 
     public ChatSO chatso;
-
+    public AskAndReplySO ask;
 }

@@ -11,14 +11,14 @@ public class TextBox : MonoBehaviour
 
     [Header("Object")]
     [SerializeField] ScrollRect scrollRect;
-    [SerializeField] RectTransform chatBoxParent;
+    [SerializeField] RectTransform chatBoxParent;       // 쳇팅이 들어갈 박스의 뿌리. 그룹이랑 싸이즈 필터 컴포넌트 들어가 있음.
 
     [Header("Prefabs")]
-    [SerializeField] Transform currentSpeech;
-    [SerializeField] GameObject speechBalloon;
-    [SerializeField] GameObject choiceBalloon;
-    [SerializeField] GameObject myChatBox;
-    [SerializeField] GameObject otherChatBox;
+    [SerializeField] Transform currentSpeech;       // 가장 최근의 대화
+    [SerializeField] GameObject speechBalloon;      // 말하는 말풍선
+    [SerializeField] GameObject choiceBalloon;          // 고르는 말풍선 (버튼달린)
+    [SerializeField] GameObject myChatBox;          // 내 챗팅박스
+    [SerializeField] GameObject otherChatBox;           // 조수의 쳇팅박스
 
     [Header("isBool")]
     [SerializeField] bool isCurrentUser;
@@ -32,6 +32,13 @@ public class TextBox : MonoBehaviour
 
     public void InputText(bool user, string msg)        // user가 true 일면 플레이어가 말하는 것임.
     {
+        // 텍스트 내려주기 기능 만들기
+        // 공백으로 나눠주고 잘리는 부분의 인덱스와 가장 가까운 것을 잡아서 거기서 줄내림을 추가해준다.
+        // 그런데 인덱스보다 큰데 한... 5이상이 넘는 줄이면 그 뒤에 것에서 줄내림을 해준다.
+        Debug.Log(msg);
+        string[] 
+
+
         if (currentSpeech == null || isCurrentUser != user)
         {
             if (user)

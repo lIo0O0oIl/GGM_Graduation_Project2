@@ -27,7 +27,7 @@ MonoBehaviour:
     isDone: 0
     next:
     - text: "\uCD08\uB3D9\uC218\uC0AC \uBCF4\uACE0\uC11C"
-      isDone: 0
+      isDone: 1
       next:
       - text: "\uCD08\uB3D9\uC218\uC0AC \uBCF4\uACE0\uC11C \uC785\uB2C8\uB2E4!"
         isDone: 0
@@ -36,13 +36,13 @@ MonoBehaviour:
         isDone: 0
         next: []
     - text: "\uC6A9\uC758\uC790 \uBAA9\uB85D"
-      isDone: 0
+      isDone: 1
       next:
       - text: "\uC6A9\uC758\uC790 \uBAA9\uB85D \uC785\uB2C8\uB2E4!"
         isDone: 0
         next: []
     - text: "\uD53C\uD574\uC790\uC758 \uC720\uB958\uD488"
-      isDone: 0
+      isDone: 1
       next:
       - text: "\uD53C\uD574\uC790\uC758 \uD734\uB300\uD3F0 \uC785\uB2C8\uB2E4!"
         isDone: 0

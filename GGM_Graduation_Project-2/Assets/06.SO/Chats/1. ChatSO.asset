@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ee679ddf4086741addd190dd22a39e, type: 3}
+  m_Name: 1. ChatSO
+  m_EditorClassIdentifier: 
+  chat:
+  - state: 0
+    text: "\uD615\uC0AC\uB2D8! \uCD9C\uADFC\uD558\uC168\uAD70\uC694."
+  - state: 1
+    text: "\uC624\uB298 \uC0AC\uAC74\uC740 \uC5B4\uB5A4\uAC70\uC57C?"
+  - state: 0
+    text: "\uC5B4\uC81C \uBC24 11\uC2DC 30\uBD84\uC5D0\uC11C 12\uC2DC\uCBE4, \uD559\uAD50
+      \uC625\uC0C1 \uC544\uB798\uC11C \uC2DC\uCCB4\uB97C \uBC1C\uACAC\uD588\uC5B4\uC694."
+  - state: 0
+    text: "\uC0AC\uC778\uC740 \uD0C0\uC758\uC5D0 \uC758\uD55C \uB099\uC0AC\uB85C
+      \uBCF4\uC785\uB2C8\uB2E4."
+  - state: 0
+    text: "\uD56D\uC0C1 \uD558\uC2DC\uB358\uB300\uB85C \uBAA8\uB4E0 \uC790\uB8CC\uB97C
+      \uD30C\uC77C\uB85C \uC62E\uACA8 \uB4DC\uB9B4\uAC8C\uC694."
+  - state: 0
+    text: "\uC5B4\uB5A4 \uAC83 \uBD80\uD130 \uC62E\uACA8\uB4DC\uB9B4\uAE4C\uC694?"
+  is_Ask: 1
+  askName: First

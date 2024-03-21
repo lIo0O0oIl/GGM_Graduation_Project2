@@ -4007,6 +4007,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chapterSO:
   - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
+  chats:
+  - {fileID: 11400000, guid: ef0e561ee8d66a8419a38489b3ddebee, type: 2}
+  nowChatIndex: 0
   currentChapter: 0
   currentStep: 0
   isChoice: 0
@@ -5794,6 +5797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatso: {fileID: 0}
+  ask: {fileID: 0}
 --- !u!4 &841014630
 Transform:
   m_ObjectHideFlags: 0
@@ -9102,6 +9106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatso: {fileID: 11400000, guid: ef0e561ee8d66a8419a38489b3ddebee, type: 2}
+  ask: {fileID: 11400000, guid: 91b65c038f554274d93719c9b1c34745, type: 2}
 --- !u!4 &1183093879
 Transform:
   m_ObjectHideFlags: 0
