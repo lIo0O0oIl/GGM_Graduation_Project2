@@ -14,20 +14,20 @@ public class SudokuInput : MonoBehaviour
     public GameObject currentButton;
     public GameObject oldButton;
 
-    public List<Transform> buttons = new List<Transform>();
+    //public List<Transform> buttons = new List<Transform>();
 
     private void Start()
     {
         for (int i = 0; i < transform.GetChild(0).childCount; ++i)
         {
             transform.GetChild(0).GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
-            buttons.Add(transform.GetChild(0).GetChild(i));
+            //buttons.Add(transform.GetChild(0).GetChild(i));
         }
     }
 
     public void InputNumber()
     {
-        if (currentButton != null)
+        if (currentButton != null && focusTile.IsEnd() == false)
         {
             int num = int.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TextMeshProUGUI>().text);
             focusTile.SetNumber(num);
@@ -38,7 +38,7 @@ public class SudokuInput : MonoBehaviour
             }
             else
             {
-                focusTile.SetTxtColor(Color.gray);
+                focusTile.SetTxtColor(Color.red);
             }
         }
     }
