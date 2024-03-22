@@ -64,7 +64,7 @@ public class ChattingManager : Singleton<ChattingManager>
 
     public void Chapterr()
     {
-        if (is_choosing == false)        // 선택중이 아니라면
+        if (is_choosing == false && nowChatIndex < chats[0].chat.Length)        // 선택중이 아니라면
         {
             bool state = chats[0].chat[nowChatIndex].state == ChatState.Assistant ? false : true;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
             TextBox.Instance.InputText(state, chats[0].chat[nowChatIndex].text);
