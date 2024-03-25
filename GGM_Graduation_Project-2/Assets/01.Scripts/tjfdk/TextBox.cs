@@ -36,7 +36,7 @@ public class TextBox : MonoBehaviour
         // 공백으로 나눠주고 잘리는 부분의 인덱스와 가장 가까운 것을 잡아서 거기서 줄내림을 추가해준다.
         // 그런데 인덱스보다 큰데 한... 5이상이 넘는 줄이면 그 뒤에 것에서 줄내림을 해준다.
         Debug.Log(msg);
-        string[] 
+        //string[] 
 
 
         if (currentSpeech == null || isCurrentUser != user)
