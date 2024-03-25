@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 
 public class Board : MonoBehaviour
 {
     [SerializeField]
-    private GameObject tile;                        
+    private GameObject tile;
+    [SerializeField]
+    private GameObject sliderPuzzle;
     [SerializeField]
     private Transform boardTrm;
 
@@ -35,10 +38,10 @@ public class Board : MonoBehaviour
         int[,] goalState = GetGoalState(); // 목표 상태
 
         int minMoves = PuzzleSolver.CalculateMinimumMoves(initialState, goalState);
-        minNum = minMoves;
-        Debug.Log("Minimum moves to solve the puzzle: " + minMoves);
+        minNum = 100;
+        //Debug.Log("Minimum moves to solve the puzzle: " + minMoves);
 
-        minnumNumMoves.text = $"최소 횟수 : {24}";
+        minnumNumMoves.text = $"최소 횟수 : {minNum}";
 
         tileList = new List<Tile>();
 
@@ -93,21 +96,21 @@ public class Board : MonoBehaviour
     }
 
 
-    private void SpawnTiles()
-    {
-        for (int y = 0; y < puzzleSize; ++y)
-        {
-            for (int x = 0; x < puzzleSize; ++x)
-            {
-                GameObject clone = Instantiate(this.tile, boardTrm);
-                Tile tile = clone.GetComponent<Tile>();
+    //private void SpawnTiles()
+    //{
+    //    for (int y = 0; y < puzzleSize; ++y)
+    //    {
+    //        for (int x = 0; x < puzzleSize; ++x)
+    //        {
+    //            GameObject clone = Instantiate(this.tile, boardTrm);
+    //            Tile tile = clone.GetComponent<Tile>();
 
-                tile.Setup(this, puzzleSize * puzzleSize, y * puzzleSize + x + 1);
+    //            tile.Setup(this, puzzleSize * puzzleSize, y * puzzleSize + x + 1);
 
-                tileList.Add(tile);
-            }
-        }
-    }
+    //            tileList.Add(tile);
+    //        }
+    //    }
+    //}
 
     //private IEnumerator Suffle()
     //{
@@ -142,7 +145,7 @@ public class Board : MonoBehaviour
 
             if(minNum <= MoveCount)
             {
-                Debug.Log("게임 종료");
+                Destroy(sliderPuzzle);
             }
         }
     }
