@@ -14,7 +14,7 @@ public class SudokuTile : MonoBehaviour
     public TextMeshProUGUI text;
     public TMP_InputField input;
 
-    public bool isEnd;
+    public bool isHide;
 
     private Image backGround;
 
@@ -52,6 +52,7 @@ public class SudokuTile : MonoBehaviour
     {
         text.gameObject.SetActive(false);
         input.interactable = true;
+        isHide = true;
     }
 
     public void open()
@@ -59,6 +60,7 @@ public class SudokuTile : MonoBehaviour
         Sudoku.Instance.down();
         text.gameObject.SetActive(true);
         input.interactable = false;
+        isHide = false;
     }
 
     //public void SetNumber(int _number = 0)
