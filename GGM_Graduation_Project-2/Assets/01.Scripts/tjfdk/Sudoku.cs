@@ -159,17 +159,13 @@ public class Sudoku : Singleton<Sudoku>
         {
             int x = 0, y = 0;
 
-            x = Random.Range(0, 9);
-            y = Random.Range(0, 9);
-
-            //while (tiles[x, y].GetNumber() == 0)
-            //{
-            //    x = Random.Range(0, 9);
-            //    y = Random.Range(0, 9);
-            //}
+            do
+            {
+                x = Random.Range(0, 9);
+                y = Random.Range(0, 9);
+            }   while (tiles[x, y].isHide);
 
             Debug.Log(x + " " + y);
-            //tiles[x, y].button.interactable = true;
             tiles[x, y].Hide();
         }
     }
