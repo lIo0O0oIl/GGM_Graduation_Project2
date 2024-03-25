@@ -37,7 +37,7 @@ public class TextBox : MonoBehaviour
         // 텍스트 내려주기 기능 만들기
         // 공백으로 나눠주고 잘리는 부분의 인덱스와 가장 가까운 것을 잡아서 거기서 줄내림을 추가해준다.
         // 그런데 인덱스보다 큰데 한... 5이상이 넘는 줄이면 그 뒤에 것에서 줄내림을 해준다.
-        Debug.Log(msg);
+
         if (msg.Length > cutTextSize)
         {
             if (msg[cutTextSize] == ' ')     // 자르려는 곳에 공백이 있으면
@@ -46,8 +46,10 @@ public class TextBox : MonoBehaviour
             }
             else
             {
+                Debug.Log(msg);
                 //string[] sentence = msg.Split(' ');     // 공백 기준으로 잘라준다.
                 int space = msg.IndexOf(" ", cutTextSize);       // 20 뒤에 첫번째로 있는 공백을 찾아준다.
+                if (space == -1) space = 50;        // 공백이 안 찾아진다면
                 int space2 = msg.Substring(0, cutTextSize).LastIndexOf(" ", cutTextSize);     // 0 부터 20까지 있는 문자열에서 가장 마지막에 있는 공백을 찾아준다.
                 int endIndex = space > space2 ? space2 : space;     // 둘 중 작은 것 넣어주기
                 Debug.Log($"{space} , {space2}, {endIndex}");
@@ -102,12 +104,12 @@ public class TextBox : MonoBehaviour
             {
                 currentSelectedButton.GetComponent<Button>().interactable = false;
                 Destroy(currentSpeech.GetChild(i).gameObject);
-            }
+            }       // 나머지 친구들 다 지워주기
         }
 
         StartCoroutine(LineRefresh());
 
-        ChattingManager.Instance.answer(currentSelectedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+        ChattingManager.Instance.answerr(currentSelectedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
     }
 
     private IEnumerator LineRefresh()

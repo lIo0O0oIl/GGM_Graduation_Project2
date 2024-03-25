@@ -3,99 +3,134 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChattingManager : Singleton<ChattingManager>
+[Serializable]
+public struct Chapters
 {
-    [SerializeField]
-    private List<DialogueSO> chapterSO = new List<DialogueSO>();
+    public ChatSO chatSO;
+    public AskAndReplySO[] askAndReplySO;
+}
 
-    public ChatSO[] chats;      // 쳇팅 SO들을 넣어줌.
-    public int nowChatIndex = 0;
+public class ChattingManager : MonoBehaviour
+{
+    public static ChattingManager Instance;
+
+    public Chapters[] chats;      // 쳇팅 SO들을 넣어줌.
+    public int nowChatIndex = 0;            // 쳇팅들
+    public int nowLevel = 0;            // 현재 쳇팅의 레벨
     private bool is_choosing;       // 선택지가 있어서 선택중일 때
     private bool is_Player;      // 플레이어가 말하는 중인가
+    private int replyCount = 0;     // first 일 때 2번 하고 바로 나가게 해주는 것.
 
-    public int currentChapter = 0;      // 지금 챕터
-    public int currentStep = 0;         // 지금 챕터의 대화들
-
-    public bool isChoice = false;       // 선택지를 고르고 있는 중일 때
-    public bool isFunc;
+    private void Start()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
-            Chapter();
+        {
+            Debug.Log("df");
+            //Chapter();
+        }
 
         if (Input.GetKeyDown(KeyCode.C))
         {
+            Debug.Log("df");
             Chapterr();
         }
     }
 
-    public void Chapter()
+    private void OnDisable()
     {
-        isFunc = false;
-
-        if (isChoice == false)      // 뭘 고르고 있는 상태라면
+        foreach (var chats in chats)
         {
-            TextBox.Instance.InputText(false, chapterSO[currentChapter].temp[currentStep].text);
-            Debug.Log(chapterSO[currentChapter].temp[currentStep].text);
-
-            if (chapterSO[currentChapter].temp[currentStep].next.Count == 0)
+            foreach(var ask in chats.askAndReplySO)
             {
-                currentStep++;
-                Debug.Log("스텝 증가");
-            }
-            else
-            {
-                foreach (test ttt in chapterSO[currentChapter].temp[currentStep].next)      // 선택지가 있을 때 모두 출력해주기
-                {
-                    if (ttt.isDone == false)
-                    {
-                        isChoice = true;
-                        TextBox.Instance.InputText(true, ttt.text);
-                        isFunc = true;
-                    }
-                }
-
-                if (isFunc == false)
-                    currentStep++;
+                ask.ask.is_used = false;        // 사용하지 않았음.
             }
         }
+        chats[0].chatSO.is_Ask = true;      // 첫번째꺼에 질문이 있음. 하드코딩.
     }
 
     public void Chapterr()
     {
-        if (is_choosing == false && nowChatIndex < chats[0].chat.Length)        // 선택중이 아니라면
+        if (is_choosing == false && nowChatIndex < chats[nowLevel].chatSO.chat.Length)        // 선택중이 아니라면
         {
-            bool state = chats[0].chat[nowChatIndex].state == ChatState.Assistant ? false : true;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
-            TextBox.Instance.InputText(state, chats[0].chat[nowChatIndex].text);
+            bool state = chats[nowLevel].chatSO.chat[nowChatIndex].state == ChatState.Assistant ? false : true;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
+            TextBox.Instance.InputText(state, chats[nowLevel].chatSO.chat[nowChatIndex].text);
             nowChatIndex++;
         }
-    }
-
-    public void answer(string str)      // 선택지에서 눌린 것.
-    {
-        foreach (test ttt in chapterSO[currentChapter].temp[currentStep].next)
+        else if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length && is_choosing != true)       // 현재 쳇팅 정도를 넘었고 선택중인 상태가 아닐 때
         {
-            if (ttt.text == str)
+            if (chats[nowLevel].chatSO.is_Ask)        // 만약 질문이 있다면
             {
-                ttt.isDone = true;
-                foreach (test ttttt in ttt.next)
+                foreach (var askSO in chats[nowLevel].askAndReplySO)      // 선택지가 있을 때 모두 출력해주기
                 {
+                    if (askSO.ask.is_used == false)       // 사용되지 않은 질문이였다면
                     {
-                        TextBox.Instance.InputText(false, ttttt.text);
+                        is_choosing = true;
+                        TextBox.Instance.InputText(true, askSO.ask.ask);
                     }
                 }
-                    // 현재 눌린 거 삭제 (so에서?...)ㄴ
-                    // 걍 bool로 확인했는지 확인하고 전부 다 확인했다면 step++
+            }
+            else
+            {
+                nowLevel++;
+                nowChatIndex = 0;
             }
         }
-        isChoice = false;
-
-        // if 현재 눌렸을 때 ttttt가 눌린 것 밖에 없다면
     }
 
-    public void ChapterReset()
+    public void answerr(string str)
     {
-        currentStep = 0;
+        Debug.Log(str);
+        foreach (var replySO in chats[nowLevel].askAndReplySO)
+        {
+            if (replySO.ask.ask == str)
+            {
+                replySO.ask.is_used = true;
+                StartCoroutine(ReplyPrint(replySO.ask.GetReplys()));
+            }
+        }
+    }
+
+    private WaitForSeconds delay = new WaitForSeconds(1f);
+
+    private IEnumerator ReplyPrint(string[] replys)     // first 질문들일 때 대답하도록
+    {
+        if (chats[nowLevel].askAndReplySO[0].askName == "First")
+        {
+            replyCount++;
+            Debug.Log(replyCount);
+            if (replyCount == 2)
+            {
+                yield return delay;
+                TextBox.Instance.InputText(false, replys[0]);       // "~~~을 옮겨드렸어요"
+                yield return delay;
+                string remainder = null;
+                foreach (var noUse in chats[nowLevel].askAndReplySO)
+                {
+                    if (noUse.ask.is_used == false)
+                    {
+                        remainder = noUse.ask.ask;          // "~~~부터 줘"
+                        remainder = remainder.Substring(0, remainder.IndexOf("부터") - 1);
+                    }
+                }
+                TextBox.Instance.InputText(false, $"그리고 나머지 {remainder}도 옮겨드렸어요.");
+                replyCount = 0;
+                is_choosing = false;
+                chats[nowLevel].chatSO.is_Ask = false;
+                yield break;
+            }
+        }
+
+        foreach(var text in replys)
+        {
+            yield return delay;
+            TextBox.Instance.InputText(false, text);
+        }
+
+        is_choosing = false;
     }
 }
