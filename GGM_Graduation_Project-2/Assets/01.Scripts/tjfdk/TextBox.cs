@@ -46,13 +46,10 @@ public class TextBox : MonoBehaviour
             }
             else
             {
-                Debug.Log(msg);
-                //string[] sentence = msg.Split(' ');     // 공백 기준으로 잘라준다.
                 int space = msg.IndexOf(" ", cutTextSize);       // 20 뒤에 첫번째로 있는 공백을 찾아준다.
                 if (space == -1) space = 50;        // 공백이 안 찾아진다면
                 int space2 = msg.Substring(0, cutTextSize).LastIndexOf(" ", cutTextSize);     // 0 부터 20까지 있는 문자열에서 가장 마지막에 있는 공백을 찾아준다.
                 int endIndex = space > space2 ? space2 : space;     // 둘 중 작은 것 넣어주기
-                Debug.Log($"{space} , {space2}, {endIndex}");
                 msg = $"{msg.Substring(0, endIndex)}\n{msg.Substring(endIndex + 1, (msg.Length - endIndex) - 1)}";
             }
         }
