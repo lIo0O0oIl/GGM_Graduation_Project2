@@ -8,61 +8,82 @@ using UnityEditor.UI;
 
 public class SudokuTile : MonoBehaviour
 {
-    [SerializeField] private int number = 0;
+    //[SerializeField] private int number = 0;
     [SerializeField] private int correct = 0;
-    public TextMeshProUGUI text;
-    public Button button;
-    public bool isEnd;
-    //public TMP_InputField button;
 
-    private Image image;
+    public TextMeshProUGUI text;
+    public TMP_InputField input;
+
+    public bool isEnd;
+
+    private Image backGround;
 
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
-        button = GetComponent<Button>();
-        //button = GetComponent<TMP_InputField>();
-        image = GetComponent<Image>();
+        input = GetComponentInChildren<TMP_InputField>();
+        backGround = GetComponent<Image>();
+        //button = GetComponent<Button>();
     }
 
-    public bool IsEnd()
-    {
-        return isEnd;
-    }
-    
-    //public void InputNumber()
+    //public bool IsEnd()
     //{
-    //    if (button.text != "")
-    //    {
-    //        SetNumber(int.Parse(button.text));
-    //        CheckAnwser();
-    //    }
+    //    return isEnd;
     //}
 
-    public void SetNumber(int _number = 0)
+    public void InputNumber()
     {
-        number = _number;
-        if (_number != 0)
-            text.text = _number.ToString();
-        //button.text = _number.ToString();
-        else
-            text.text = "";
-        //button.text = "";
-        button.interactable = true;
+        if (input.text != "")
+        {
+            //SetNumber(int.Parse(input.text));
+            //input(int.Parse(input.text));
+            CheckAnwser();
+        }
     }
 
-    public int GetNumber()
+    public void Init(int _value)
     {
-        return number;
+        correct = _value;
+        text.text = _value.ToString();
+        input.interactable = false;
     }
 
-    public void SetCorrect(int _correct)
+    public void Hide()
     {
-        correct = _correct;
-        text.text = _correct.ToString();
-        //button.text = _correct.ToString();
-        button.interactable = false;
+        text.gameObject.SetActive(false);
+        input.interactable = true;
     }
+
+    public void open()
+    {
+        Sudoku.Instance.down();
+        text.gameObject.SetActive(true);
+        input.interactable = false;
+    }
+
+    //public void SetNumber(int _number = 0)
+    //{
+    //    number = _number;
+
+    //    if (_number != 0)
+    //        text.text = _number.ToString();
+    //    else
+    //        text.text = "";
+
+    //    input.interactable = false;
+    //}
+
+    //public int GetNumber()
+    //{
+    //    return number;
+    //}
+
+    //public void SetCorrect(int _correct)
+    //{
+    //    correct = _correct;
+    //    text.text = _correct.ToString();
+    //    input.interactable = false;
+    //}
 
     public int GetCorrect()
     {
@@ -71,7 +92,7 @@ public class SudokuTile : MonoBehaviour
 
     public void SetColor(Color _color)
     {
-        image.color = _color;
+        backGround.color = _color;
     }
 
     public void SetTxtColor(Color _color)
@@ -79,24 +100,25 @@ public class SudokuTile : MonoBehaviour
         //text.color = _color;
     }
 
-    public void SetLook()
-    {
-        button.interactable = false;
-        isEnd = true;
-    }
+    //public void SetLook()
+    //{
+    //    //button.interactable = false;
+    //    isEnd = true;
+    //}
 
     public void CheckAnwser()
     {
-        if (number == correct)
+        if (int.Parse(input.text) == correct)
         {
             SetColor(Color.green);
             StartCoroutine(DelayColor());
-            SetLook();
+            open();
+            //SetLook();
         }
         else
         {
+            input.text = "";
             SetColor(Color.red);
-            SetNumber(0);
             StartCoroutine(DelayColor());
         }
     }
