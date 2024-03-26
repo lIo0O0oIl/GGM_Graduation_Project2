@@ -6,55 +6,25 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Sudoku : Singleton<Sudoku>
+public class Sudoku : MonoBehaviour
 {
+    static public Sudoku Instance;
+
     public SudokuTile[,] tiles = new SudokuTile[9, 9];
     [SerializeField] private int suffleAmount = 0;
     [SerializeField] private int hiddingAmount = 0;
     [SerializeField] private int puzzleAmount;
 
-    private void Start()
+    [SerializeField] private Folder lockFolder;
+
+    private void Awake()
     {
-        // s ver
-        //for (int i = 0; i < 9; i++)
-        //{
-        //    for (int j = 0; j < 9; ++j)
-        //    {
-        //        Debug.Log(i * 9 + j);
-        //        tiles[i, j] = transform.GetChild(i * 9 + j).GetComponent<SudocuTile>();
-        //    }
-        //}
+        Instance = this;
+    }
 
-        //// b ver (group) - success
-        //for (int i = 0; i < 9; i++)
-        //{
-        //    for (int j = 0; j < transform.GetChild(i).childCount; ++j)
-        //    {
-        //        Debug.Log(j);
-        //        tiles[i, j] = transform.GetChild(i).GetChild(j).GetComponent<SudocuTile>();
-        //    }
-        //}
-
-        //// b ver (group) - success
-        //for (int a = 0; a < 9; a++)
-        //{
-        //    for (int b = 0; b < 9; b++)
-        //    {
-        //        for (int l = 0; l < 9; l += 3) // l i = ¼¼·Î
-        //        {
-        //            for (int i = 0; i < 3; ++i)
-        //            {
-        //                for (int j = 0; j < 9; j += 3) // j k = °¡·Î
-        //                {
-        //                    for (int k = 0; k < 3; ++k)
-        //                    {
-        //                        tiles[a, b] = transform.GetChild(l + i).GetChild(j + k).GetComponent<SudokuTile>();
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+    public void Setting()
+    {
+        Debug.Log("½ºµµÄí ÁøÀÔ");
 
         puzzleAmount = hiddingAmount;
 
@@ -87,7 +57,19 @@ public class Sudoku : Singleton<Sudoku>
                 x = nx;
         }
 
+        Clear();
         Init();
+    }
+
+    private void Clear()
+    {
+        for (int i = 0; i < 9; ++i)
+        {
+            for (int j = 0; j < 9; ++j)
+            {
+                tiles[i, j].Init(0);
+            }
+        }
     }
 
     public void down()
@@ -97,6 +79,8 @@ public class Sudoku : Singleton<Sudoku>
         if (puzzleAmount == 0)
         {
             Debug.Log("R°× ³¡");
+            FileManager.instance.PuzzleLockBackClick();     // ÆÛÁñÆÇ³Ú ²¨ÁÖ±â
+            lockFolder.PuzzleClear();       // ÆÛÁñ Å¬¸®¾îµÊ
         }
     }
 
