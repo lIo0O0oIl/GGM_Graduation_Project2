@@ -34,10 +34,10 @@ public class Board : MonoBehaviour
     private IEnumerator Start()
     {
         // 게임이 시작될 때 A* 알고리즘을 사용하여 최소 이동 횟수를 계산
-        int[,] initialState = GetInitialState(); // 초기 상태
-        int[,] goalState = GetGoalState(); // 목표 상태
+        //int[,] initialState = GetInitialState(); // 초기 상태
+        //int[,] goalState = GetGoalState(); // 목표 상태
 
-        int minMoves = PuzzleSolver.CalculateMinimumMoves(initialState, goalState);
+        //int minMoves = PuzzleSolver.CalculateMinimumMoves(initialState, goalState);
         minNum = 100;
         //Debug.Log("Minimum moves to solve the puzzle: " + minMoves);
 
@@ -45,8 +45,8 @@ public class Board : MonoBehaviour
 
         tileList = new List<Tile>();
 
-        //SpawnTiles();
-        SetupTilesFromState(goalState);
+        SpawnTiles();
+        //SetupTilesFromState(goalState);
 
         UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(boardTrm.GetComponent<RectTransform>());
 
@@ -54,9 +54,10 @@ public class Board : MonoBehaviour
 
         tileList.ForEach(x => x.SetPosition());
 
-        //StartCoroutine(Suffle());
+        StartCoroutine(Suffle());
     }
 
+    /* 위치 고정시 필요한 코드
     private int[,] GetGoalState()
     {
         int[,] initialState = new int[3, 3] {
@@ -73,7 +74,7 @@ public class Board : MonoBehaviour
         int[,] initialState = new int[3, 3] {
         {1, 2, 3},
         {4, 5, 6},
-        {7, 8, 9}  
+        {7, 8, 9}
         };
 
         return initialState;
@@ -93,42 +94,43 @@ public class Board : MonoBehaviour
                 tileList.Add(tile);
             }
         }
+        //EmptyTilePosition = tileList[tileList.Count - 1].GetComponent<RectTransform>().localPosition;
+    }*/
+
+
+    private void SpawnTiles()
+    {
+        for (int y = 0; y < puzzleSize; ++y)
+        {
+            for (int x = 0; x < puzzleSize; ++x)
+            {
+                GameObject clone = Instantiate(this.tile, boardTrm);
+                Tile tile = clone.GetComponent<Tile>();
+
+                tile.Setup(this, puzzleSize * puzzleSize, y * puzzleSize + x + 1);
+
+                tileList.Add(tile);
+            }
+        }
     }
 
+    private IEnumerator Suffle()
+    {
+        float current = 0;
+        float percent = 0;
 
-    //private void SpawnTiles()
-    //{
-    //    for (int y = 0; y < puzzleSize; ++y)
-    //    {
-    //        for (int x = 0; x < puzzleSize; ++x)
-    //        {
-    //            GameObject clone = Instantiate(this.tile, boardTrm);
-    //            Tile tile = clone.GetComponent<Tile>();
+        while (percent < 1)
+        {
+            current += Time.deltaTime;
+            percent = current / 0.1f;
 
-    //            tile.Setup(this, puzzleSize * puzzleSize, y * puzzleSize + x + 1);
+            int index = UnityEngine.Random.Range(0, puzzleSize * puzzleSize);
+            tileList[index].transform.SetAsLastSibling();
 
-    //            tileList.Add(tile);
-    //        }
-    //    }
-    //}
-
-    //private IEnumerator Suffle()
-    //{
-    //    float current = 0;
-    //    float percent = 0;
-
-    //    while (percent < 1)
-    //    {
-    //        current += Time.deltaTime;
-    //        percent = current / 0.1f;
-
-    //        int index = UnityEngine.Random.Range(0, puzzleSize * puzzleSize);
-    //        tileList[index].transform.SetAsLastSibling();
-
-    //        yield return null;
-    //    }
-    //    EmptyTilePosition = tileList[tileList.Count - 1].GetComponent<RectTransform>().localPosition;
-    //}
+            yield return null;
+        }
+        EmptyTilePosition = tileList[tileList.Count - 1].GetComponent<RectTransform>().localPosition;
+    }
 
     public void IsMoveTile(Tile tile)
     {
@@ -150,5 +152,15 @@ public class Board : MonoBehaviour
         }
     }
 
-    
+    public void IsGameOver()
+    {
+        List<Tile> tiles = tileList.FindAll(x => x.IsCorrected == true);
+
+        Debug.Log("Correct Count : " + tiles.Count);
+
+        if (tiles.Count == puzzleSize * puzzleSize - 1)
+        {
+            Debug.Log("클리어");
+        }
+    }
 }
