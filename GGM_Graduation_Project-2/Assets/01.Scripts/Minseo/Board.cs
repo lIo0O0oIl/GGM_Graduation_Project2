@@ -9,17 +9,18 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject tile;
-    [SerializeField]
-    private GameObject sliderPuzzle;
-    [SerializeField]
-    private Transform boardTrm;
+    static public Board Instance;
 
-    [SerializeField]
-    private TextMeshProUGUI numberOfMoves;
-    [SerializeField]
-    private TextMeshProUGUI minnumNumMoves; // 최소 횟수를 나타낼 TMP
+    [SerializeField] private GameObject tile;
+    [SerializeField] private GameObject sliderPuzzle;
+    [SerializeField] private Transform boardTrm;
+
+    [SerializeField] private TextMeshProUGUI numberOfMoves;
+    [SerializeField] private TextMeshProUGUI minnumNumMoves; // 최소 횟수를 나타낼 TMP
+
+    [SerializeField] private Folder lockFolder;
+    [SerializeField] private GameObject passwordUI;
+    [SerializeField] private GameObject numUI;
 
     private List<Tile> tileList;                         
 
@@ -31,22 +32,29 @@ public class Board : MonoBehaviour
     public int Playtime { private set; get; } = 0;     
     public int MoveCount { private set; get; } = 0;
 
-    private IEnumerator Start()
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public IEnumerator Start()
     {
         // 게임이 시작될 때 A* 알고리즘을 사용하여 최소 이동 횟수를 계산
         //int[,] initialState = GetInitialState(); // 초기 상태
         //int[,] goalState = GetGoalState(); // 목표 상태
 
         //int minMoves = PuzzleSolver.CalculateMinimumMoves(initialState, goalState);
-        minNum = 100;
         //Debug.Log("Minimum moves to solve the puzzle: " + minMoves);
+        //SetupTilesFromState(goalState);
+        MoveCount = 0;
+        minNum = 100;
 
-        minnumNumMoves.text = $"최소 횟수 : {minNum}";
+        minnumNumMoves.text = $"제한 횟수 : {minNum}";
 
         tileList = new List<Tile>();
 
         SpawnTiles();
-        //SetupTilesFromState(goalState);
 
         UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(boardTrm.GetComponent<RectTransform>());
 
@@ -160,7 +168,12 @@ public class Board : MonoBehaviour
 
         if (tiles.Count == puzzleSize * puzzleSize - 1)
         {
-            Debug.Log("클리어");
+            FileManager.instance.PuzzleLockBackClick();     // 퍼즐판넬 꺼주기
+            lockFolder.PuzzleClear();       // 퍼즐 클리어됨
+
+            passwordUI.SetActive(true);
+            numUI.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

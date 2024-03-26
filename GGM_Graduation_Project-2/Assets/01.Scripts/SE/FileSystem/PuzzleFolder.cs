@@ -6,6 +6,11 @@ using UnityEngine;
 public class PuzzleFolder : MonoBehaviour
 {
     public int myPuzzleNum;     // 1번이 스토쿠, 2번이 8퍼즐
+    
+    [SerializeField]
+    private Transform board;
+    [SerializeField]
+    private GameObject puzzlePrefab;
 
     public void OpenPuzzle()
     {
@@ -16,7 +21,7 @@ public class PuzzleFolder : MonoBehaviour
         }
         else if (myPuzzleNum == 2)
         {
-            // 민서 퍼즐 인잇할거 넣어주기
+            Instantiate(puzzlePrefab, board);
         }
     }
 }
