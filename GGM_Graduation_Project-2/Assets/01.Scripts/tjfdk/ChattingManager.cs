@@ -199,6 +199,6 @@ public class ChattingManager : MonoBehaviour
     {
         yield return delay;
         Debug.Log(answer + "·Î ³¡³²");
-        //GameManager.Instance.EndGame(answer);
+        SelectSuspectManager.Instance.Select(answer);
     }
 }
