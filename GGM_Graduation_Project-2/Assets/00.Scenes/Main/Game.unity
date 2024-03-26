@@ -4005,15 +4005,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0ffcb21753f5a418c8b46f89bb1f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chapterSO:
-  - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
   chats:
-  - {fileID: 11400000, guid: ef0e561ee8d66a8419a38489b3ddebee, type: 2}
+  - chatSO: {fileID: 11400000, guid: ef0e561ee8d66a8419a38489b3ddebee, type: 2}
+    askAndReplySO:
+    - {fileID: 11400000, guid: 91b65c038f554274d93719c9b1c34745, type: 2}
+    - {fileID: 11400000, guid: aae8753189ba1504cb37bfd5c34e818d, type: 2}
+    - {fileID: 11400000, guid: 22713faea8b05d84d8056d01d291cbc3, type: 2}
+  - chatSO: {fileID: 11400000, guid: 8001a9f6478e47945a6aa6eef8062fae, type: 2}
+    askAndReplySO: []
+  - chatSO: {fileID: 11400000, guid: fee085853d1089046a076c372c8c0c6e, type: 2}
+    askAndReplySO: []
+  - chatSO: {fileID: 11400000, guid: 04c3a4d9186a4a74680f01029b74e253, type: 2}
+    askAndReplySO: []
+  - chatSO: {fileID: 11400000, guid: 7f17983ac5e07644095453639163b299, type: 2}
+    askAndReplySO: []
+  - chatSO: {fileID: 11400000, guid: 3b5a3fcf359918e46bbceb1a20823365, type: 2}
+    askAndReplySO:
+    - {fileID: 11400000, guid: 9520458dcf5418140851c85b2c435c91, type: 2}
+    - {fileID: 11400000, guid: 8c1dc9c8cc675bf4aa9293518d510321, type: 2}
   nowChatIndex: 0
-  currentChapter: 0
-  currentStep: 0
-  isChoice: 0
-  isFunc: 0
+  nowLevel: 0
 --- !u!114 &594023515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7796,6 +7807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685edae2af811864eb3505f6317938d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutTextSize: 20
   scrollRect: {fileID: 1385734600}
   chatBoxParent: {fileID: 1949353846}
   currentSpeech: {fileID: 0}
@@ -10409,7 +10421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 199.7728
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13568,7 +13580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 417.3728
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -16677,7 +16689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 308.5728
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.y

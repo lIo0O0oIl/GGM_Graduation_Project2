@@ -9,16 +9,18 @@ public class TextBox : MonoBehaviour
 {
     public static TextBox Instance;
 
+    public int cutTextSize = 20;
+
     [Header("Object")]
     [SerializeField] ScrollRect scrollRect;
-    [SerializeField] RectTransform chatBoxParent;       // √¬∆√¿Ã µÈæÓ∞• π⁄Ω∫¿« ª—∏Æ. ±◊∑Ï¿Ã∂˚ ΩŒ¿Ã¡Ó « ≈Õ ƒƒ∆˜≥Õ∆Æ µÈæÓ∞° ¿÷¿Ω.
+    [SerializeField] RectTransform chatBoxParent;       // Ï≥áÌåÖÏù¥ Îì§Ïñ¥Í∞à Î∞ïÏä§Ïùò ÎøåÎ¶¨. Í∑∏Î£πÏù¥Îûë Ïã∏Ïù¥Ï¶à ÌïÑÌÑ∞ Ïª¥Ìè¨ÎÑåÌä∏ Îì§Ïñ¥Í∞Ä ÏûàÏùå.
 
     [Header("Prefabs")]
-    [SerializeField] Transform currentSpeech;       // ∞°¿Â √÷±Ÿ¿« ¥Î»≠
-    [SerializeField] GameObject speechBalloon;      // ∏ª«œ¥¬ ∏ª«≥º±
-    [SerializeField] GameObject choiceBalloon;          // ∞Ì∏£¥¬ ∏ª«≥º± (πˆ∆∞¥ﬁ∏∞)
-    [SerializeField] GameObject myChatBox;          // ≥ª √™∆√π⁄Ω∫
-    [SerializeField] GameObject otherChatBox;           // ¡∂ºˆ¿« √¬∆√π⁄Ω∫
+    [SerializeField] Transform currentSpeech;       // Í∞ÄÏû• ÏµúÍ∑ºÏùò ÎåÄÌôî
+    [SerializeField] GameObject speechBalloon;      // ÎßêÌïòÎäî ÎßêÌíçÏÑ†
+    [SerializeField] GameObject choiceBalloon;          // Í≥†Î•¥Îäî ÎßêÌíçÏÑ† (Î≤ÑÌäºÎã¨Î¶∞)
+    [SerializeField] GameObject myChatBox;          // ÎÇ¥ Ï±óÌåÖÎ∞ïÏä§
+    [SerializeField] GameObject otherChatBox;           // Ï°∞ÏàòÏùò Ï≥áÌåÖÎ∞ïÏä§
 
     [Header("isBool")]
     [SerializeField] bool isCurrentUser;
@@ -30,14 +32,28 @@ public class TextBox : MonoBehaviour
         Instance = this;
     }
 
-    public void InputText(bool user, string msg)        // user∞° true ¿œ∏È «√∑π¿ÃæÓ∞° ∏ª«œ¥¬ ∞Õ¿”.
+    public void InputText(bool user, string msg, bool ask = true)        // userÍ∞Ä true ÏùºÎ©¥ ÌîåÎ†àÏù¥Ïñ¥Í∞Ä ÎßêÌïòÎäî Í≤ÉÏûÑ.
     {
-        // ≈ÿΩ∫∆Æ ≥ª∑¡¡÷±‚ ±‚¥… ∏∏µÈ±‚
-        // ∞¯πÈ¿∏∑Œ ≥™¥≤¡÷∞Ì ¿ﬂ∏Æ¥¬ ∫Œ∫–¿« ¿Œµ¶Ω∫øÕ ∞°¿Â ∞°±ÓøÓ ∞Õ¿ª ¿‚æ∆º≠ ∞≈±‚º≠ ¡Ÿ≥ª∏≤¿ª √ﬂ∞°«ÿ¡ÿ¥Ÿ.
-        // ±◊∑±µ• ¿Œµ¶Ω∫∫∏¥Ÿ ≈´µ• «—... 5¿ÃªÛ¿Ã ≥—¥¬ ¡Ÿ¿Ã∏È ±◊ µ⁄ø° ∞Õø°º≠ ¡Ÿ≥ª∏≤¿ª «ÿ¡ÿ¥Ÿ.
-        Debug.Log(msg);
-        //string[] 
+        // ÌÖçÏä§Ìä∏ ÎÇ¥Î†§Ï£ºÍ∏∞ Í∏∞Îä• ÎßåÎì§Í∏∞
+        // Í≥µÎ∞±ÏúºÎ°ú ÎÇòÎà†Ï£ºÍ≥† ÏûòÎ¶¨Îäî Î∂ÄÎ∂ÑÏùò Ïù∏Îç±Ïä§ÏôÄ Í∞ÄÏû• Í∞ÄÍπåÏö¥ Í≤ÉÏùÑ Ïû°ÏïÑÏÑú Í±∞Í∏∞ÏÑú Ï§ÑÎÇ¥Î¶ºÏùÑ Ï∂îÍ∞ÄÌï¥Ï§ÄÎã§.
+        // Í∑∏Îü∞Îç∞ Ïù∏Îç±Ïä§Î≥¥Îã§ ÌÅ∞Îç∞ Ìïú... 5Ïù¥ÏÉÅÏù¥ ÎÑòÎäî Ï§ÑÏù¥Î©¥ Í∑∏ Îí§Ïóê Í≤ÉÏóêÏÑú Ï§ÑÎÇ¥Î¶ºÏùÑ Ìï¥Ï§ÄÎã§.
 
+        if (msg.Length > cutTextSize)
+        {
+            if (msg[cutTextSize] == ' ')     // ÏûêÎ•¥Î†§Îäî Í≥≥Ïóê Í≥µÎ∞±Ïù¥ ÏûàÏúºÎ©¥
+            {
+                msg = $"{msg.Substring(0, cutTextSize)}\n{msg.Substring(cutTextSize + 1, (msg.Length - cutTextSize) - 1)}";
+            }
+            else
+            {
+                int space = msg.IndexOf(" ", cutTextSize);       // 20 Îí§Ïóê Ï≤´Î≤àÏß∏Î°ú ÏûàÎäî Í≥µÎ∞±ÏùÑ Ï∞æÏïÑÏ§ÄÎã§.
+                if (space == -1) space = 50;        // Í≥µÎ∞±Ïù¥ Ïïà Ï∞æÏïÑÏßÑÎã§Î©¥
+                int space2 = msg.Substring(0, cutTextSize).LastIndexOf(" ", cutTextSize);     // 0 Î∂ÄÌÑ∞ 20ÍπåÏßÄ ÏûàÎäî Î¨∏ÏûêÏó¥ÏóêÏÑú Í∞ÄÏû• ÎßàÏßÄÎßâÏóê ÏûàÎäî Í≥µÎ∞±ÏùÑ Ï∞æÏïÑÏ§ÄÎã§.
+                int endIndex = space > space2 ? space2 : space;     // Îëò Ï§ë ÏûëÏùÄ Í≤É ÎÑ£Ïñ¥Ï£ºÍ∏∞
+                msg = $"{msg.Substring(0, endIndex)}\n{msg.Substring(endIndex + 1, (msg.Length - endIndex) - 1)}";
+            }
+        }
+        
 
         if (currentSpeech == null || isCurrentUser != user)
         {
@@ -60,10 +76,17 @@ public class TextBox : MonoBehaviour
         GameObject speech = null;
         if (user)
         {
-            speech = Instantiate(choiceBalloon);
+            if (ask == false)
+            {
+                speech = Instantiate(speechBalloon);
+            }
+            else
+            {
+                speech = Instantiate(choiceBalloon);
+                speech.GetComponent<Button>().onClick.AddListener(() => ChoiceQuestion());
+            }
             speech.name += "-" + myChatCount;
             myChatCount++;
-            speech.GetComponent<Button>().onClick.AddListener(() => ChoiceQuestion());
             speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
         }
         else
@@ -84,13 +107,22 @@ public class TextBox : MonoBehaviour
             if (currentSpeech.GetChild(i).name != currentSelectedButton.name)
             {
                 currentSelectedButton.GetComponent<Button>().interactable = false;
+                currentSelectedButton.GetComponent<Image>().color = Color.white;
                 Destroy(currentSpeech.GetChild(i).gameObject);
-            }
+            }       // ÎÇòÎ®∏ÏßÄ ÏπúÍµ¨Îì§ Îã§ ÏßÄÏõåÏ£ºÍ∏∞
         }
 
         StartCoroutine(LineRefresh());
 
         ChattingManager.Instance.answer(currentSelectedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+    }
+
+    public void CurrentSpeechColorChange()
+    {
+        for (int i = 0; i < currentSpeech.childCount; ++i)
+        {
+            currentSpeech.GetChild(i).GetComponent<Image>().color = Color.white;
+        }
     }
 
     private IEnumerator LineRefresh()

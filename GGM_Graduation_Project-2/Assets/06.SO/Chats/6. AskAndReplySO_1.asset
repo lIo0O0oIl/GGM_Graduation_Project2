@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b9db6579d4f87247aec95b1ee2865d6, type: 3}
-  m_Name: 1. AskAndReplySO_1
+  m_Name: 6. AskAndReplySO_1
   m_EditorClassIdentifier: 
-  askName: First
+  askName: End
   ask:
-    ask: "\uCD08\uAE30 \uC218\uC0AC \uBCF4\uACE0\uC11C\uBD80\uD130 \uC62E\uACA8\uC918."
-    reply: "\uCD08\uAE30 \uC218\uC0AC \uBCF4\uACE0\uC11C\uB97C \uC62E\uACA8\uB4DC\uB838\uC5B4\uC694.\\\uB2E4\uC74C\uC740
-      \uC5B4\uB5A4 \uAC83\uC744 \uC62E\uACA8\uB4DC\uB9B4\uAE4C\uC694? "
+    ask: "\uBC94\uC778\uC744 \uCC3E\uC740 \uAC83 \uAC19\uC544."
+    reply: "\uC5B4\uB5A4 \uBD84\uC778\uAC00\uC694?\\\uC0AC\uB78C\uC774\uB984"
     is_used: 0

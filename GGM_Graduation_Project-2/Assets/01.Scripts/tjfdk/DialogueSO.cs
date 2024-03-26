@@ -19,3 +19,10 @@ public class DialogueSO : ScriptableObject
     public int chapter;     // 지금 챕터
     public List<test> temp = new List<test>();      // 대화 및 선택지 적기
 }
+
+
+/*
+
+이거 안쓰는 코드임 이 SO 사용하지 않음~
+
+*/
