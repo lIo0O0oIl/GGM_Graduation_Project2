@@ -47,6 +47,9 @@ public class FileManager : MonoBehaviour
     public GameObject lockPanel;        // 잠금 관련
     private LockSystem lockSystem;      // 잠금 관련 시스템
 
+    [Header("PuzzleLock")]
+    public GameObject puzzlePanel;       // 퍼즐관련 관련
+
     public FileTree[] fileTrees;        // 파일 전체 구조
 
     private void Awake()
@@ -228,9 +231,24 @@ public class FileManager : MonoBehaviour
         lockSystem.Init(fileName, password, lockImage);
     }
 
-    public void LookBackClick()
+    public void LockBackClick()
     {
         lockPanel.SetActive(false);
+    }
+
+    public void OpenPuzzleLock(int puzzleNum)
+    {
+        puzzlePanel.transform.GetChild(puzzleNum).gameObject.SetActive(true);
+        puzzlePanel.SetActive(true);
+    }
+
+    public void PuzzleLockBackClick()
+    {
+        for (int i = 1; i < puzzlePanel.transform.childCount; i++)
+        {
+            puzzlePanel.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        puzzlePanel.SetActive(false);
     }
     #endregion
 }

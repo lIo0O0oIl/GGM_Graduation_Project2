@@ -15,6 +15,8 @@ public class Folder : MonoBehaviour, IPointerClickHandler
     private string goPath;
     private string fileName;
 
+    public bool is_puzzle = false;      // ∆€¡Ò¿Ã∂Û∏È
+
     private void Start()
     {
         fileName = GetComponentInChildren<TMP_Text>().text;
@@ -29,14 +31,29 @@ public class Folder : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.clickCount == 2)
         {
-            if (is_Lock)
+            if (is_puzzle == false)
             {
-                FileManager.instance.OpenLock(fileName, password, lockImage);
+                if (is_Lock)
+                {
+                    FileManager.instance.OpenLock(fileName, password, lockImage);
+                }
+                else
+                {
+                    FileManager.instance.GoFile(myPath, goPath);
+                }
             }
             else
             {
-                FileManager.instance.GoFile(myPath, goPath);
+                // ∆€¡Ò¿Ã∂Û∏È
+                GetComponent<PuzzleFolder>().OpenPuzzle();
             }
         }
+    }
+
+    public void PuzzleClear()
+    {
+        lockImage.gameObject.SetActive(false);
+        is_puzzle = false;
+        is_Lock = false;
     }
 }
