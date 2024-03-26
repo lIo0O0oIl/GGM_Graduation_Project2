@@ -4734,7 +4734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.28627452, g: 0.28627452, b: 0.28627452, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17620,7 +17620,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 841014628}
         m_TargetAssemblyTypeName: FileManager, Assembly-CSharp
-        m_MethodName: LookBackClick
+        m_MethodName: LockBackClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19518,7 +19518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &747651171
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19599,7 +19599,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 841014628}
         m_TargetAssemblyTypeName: FileManager, Assembly-CSharp
-        m_MethodName: LookBackClick
+        m_MethodName: LockBackClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -47823,7 +47823,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 841014628}
         m_TargetAssemblyTypeName: FileManager, Assembly-CSharp
-        m_MethodName: LookBackClick
+        m_MethodName: LockBackClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
