@@ -6,11 +6,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Sudoku : MonoBehaviour
+public class Sudoku : Singleton<Sudoku>
 {
     public SudokuTile[,] tiles = new SudokuTile[9, 9];
     [SerializeField] private int suffleAmount = 0;
     [SerializeField] private int hiddingAmount = 0;
+    [SerializeField] private int puzzleAmount;
 
     private void Start()
     {
@@ -55,6 +56,8 @@ public class Sudoku : MonoBehaviour
         //    }
         //}
 
+        puzzleAmount = hiddingAmount;
+
         int x = 0, y = 0;
         int nx = 0, ny = 0;
 
@@ -87,13 +90,23 @@ public class Sudoku : MonoBehaviour
         Init();
     }
 
+    public void down()
+    {
+        puzzleAmount--;
+
+        if (puzzleAmount == 0)
+        {
+            Debug.Log("R°× ³¡");
+        }
+    }
+
     private void Init()
     {
         for (int i = 0; i < 9; ++i)
         {
             for (int j = 0; j < 9; ++j)
             {
-                tiles[i, j].SetCorrect((i * 3 + i / 3 + j) % 9 + 1);
+                tiles[i, j].Init((i * 3 + i / 3 + j) % 9 + 1);
             }
         }
 
@@ -135,28 +148,25 @@ public class Sudoku : MonoBehaviour
                     y2 = j;
                 }
             }
-            tiles[x1, y1].SetCorrect(_value2);
-            tiles[x2, y2].SetCorrect(_value1);
+            tiles[x1, y1].Init(_value2);
+            tiles[x2, y2].Init(_value1);
         }
     }
 
-    private void Hide(int _hideAmount)
+    private void Hide(int _hideAmount)  
     {
         for (int i = 0; i < _hideAmount; ++i)
         {
             int x = 0, y = 0;
 
-            x = Random.Range(0, 9);
-            y = Random.Range(0, 9);
-
-            //while (tiles[x, y].GetNumber() == 0)
-            //{
-            //    x = Random.Range(0, 9);
-            //    y = Random.Range(0, 9);
-            //}
+            do
+            {
+                x = Random.Range(0, 9);
+                y = Random.Range(0, 9);
+            }   while (tiles[x, y].isHide);
 
             Debug.Log(x + " " + y);
-            tiles[x, y].SetNumber();
+            tiles[x, y].Hide();
         }
     }
 }

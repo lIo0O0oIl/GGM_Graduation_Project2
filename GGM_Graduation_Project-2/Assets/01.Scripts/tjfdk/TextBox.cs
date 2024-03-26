@@ -13,14 +13,14 @@ public class TextBox : MonoBehaviour
 
     [Header("Object")]
     [SerializeField] ScrollRect scrollRect;
-    [SerializeField] RectTransform chatBoxParent;       // ÃÂÆÃÀÌ µé¾î°¥ ¹Ú½ºÀÇ »Ñ¸®. ±×·ìÀÌ¶û ½ÎÀÌÁî ÇÊÅÍ ÄÄÆ÷³ÍÆ® µé¾î°¡ ÀÖÀ½.
+    [SerializeField] RectTransform chatBoxParent;       // ì³‡íŒ…ì´ ë“¤ì–´ê°ˆ ë°•ìŠ¤ì˜ ë¿Œë¦¬. ê·¸ë£¹ì´ë‘ ì‹¸ì´ì¦ˆ í•„í„° ì»´í¬ë„ŒíŠ¸ ë“¤ì–´ê°€ ìˆìŒ.
 
     [Header("Prefabs")]
-    [SerializeField] Transform currentSpeech;       // °¡Àå ÃÖ±ÙÀÇ ´ëÈ­
-    [SerializeField] GameObject speechBalloon;      // ¸»ÇÏ´Â ¸»Ç³¼±
-    [SerializeField] GameObject choiceBalloon;          // °í¸£´Â ¸»Ç³¼± (¹öÆ°´Ş¸°)
-    [SerializeField] GameObject myChatBox;          // ³» ÃªÆÃ¹Ú½º
-    [SerializeField] GameObject otherChatBox;           // Á¶¼öÀÇ ÃÂÆÃ¹Ú½º
+    [SerializeField] Transform currentSpeech;       // ê°€ì¥ ìµœê·¼ì˜ ëŒ€í™”
+    [SerializeField] GameObject speechBalloon;      // ë§í•˜ëŠ” ë§í’ì„ 
+    [SerializeField] GameObject choiceBalloon;          // ê³ ë¥´ëŠ” ë§í’ì„  (ë²„íŠ¼ë‹¬ë¦°)
+    [SerializeField] GameObject myChatBox;          // ë‚´ ì±—íŒ…ë°•ìŠ¤
+    [SerializeField] GameObject otherChatBox;           // ì¡°ìˆ˜ì˜ ì³‡íŒ…ë°•ìŠ¤
 
     [Header("isBool")]
     [SerializeField] bool isCurrentUser;
@@ -32,24 +32,24 @@ public class TextBox : MonoBehaviour
         Instance = this;
     }
 
-    public void InputText(bool user, string msg, bool ask = true)        // user°¡ true ÀÏ¸é ÇÃ·¹ÀÌ¾î°¡ ¸»ÇÏ´Â °ÍÀÓ.
+    public void InputText(bool user, string msg, bool ask = true)        // userê°€ true ì¼ë©´ í”Œë ˆì´ì–´ê°€ ë§í•˜ëŠ” ê²ƒì„.
     {
-        // ÅØ½ºÆ® ³»·ÁÁÖ±â ±â´É ¸¸µé±â
-        // °ø¹éÀ¸·Î ³ª´²ÁÖ°í Àß¸®´Â ºÎºĞÀÇ ÀÎµ¦½º¿Í °¡Àå °¡±î¿î °ÍÀ» Àâ¾Æ¼­ °Å±â¼­ ÁÙ³»¸²À» Ãß°¡ÇØÁØ´Ù.
-        // ±×·±µ¥ ÀÎµ¦½ºº¸´Ù Å«µ¥ ÇÑ... 5ÀÌ»óÀÌ ³Ñ´Â ÁÙÀÌ¸é ±× µÚ¿¡ °Í¿¡¼­ ÁÙ³»¸²À» ÇØÁØ´Ù.
+        // í…ìŠ¤íŠ¸ ë‚´ë ¤ì£¼ê¸° ê¸°ëŠ¥ ë§Œë“¤ê¸°
+        // ê³µë°±ìœ¼ë¡œ ë‚˜ëˆ ì£¼ê³  ì˜ë¦¬ëŠ” ë¶€ë¶„ì˜ ì¸ë±ìŠ¤ì™€ ê°€ì¥ ê°€ê¹Œìš´ ê²ƒì„ ì¡ì•„ì„œ ê±°ê¸°ì„œ ì¤„ë‚´ë¦¼ì„ ì¶”ê°€í•´ì¤€ë‹¤.
+        // ê·¸ëŸ°ë° ì¸ë±ìŠ¤ë³´ë‹¤ í°ë° í•œ... 5ì´ìƒì´ ë„˜ëŠ” ì¤„ì´ë©´ ê·¸ ë’¤ì— ê²ƒì—ì„œ ì¤„ë‚´ë¦¼ì„ í•´ì¤€ë‹¤.
 
         if (msg.Length > cutTextSize)
         {
-            if (msg[cutTextSize] == ' ')     // ÀÚ¸£·Á´Â °÷¿¡ °ø¹éÀÌ ÀÖÀ¸¸é
+            if (msg[cutTextSize] == ' ')     // ìë¥´ë ¤ëŠ” ê³³ì— ê³µë°±ì´ ìˆìœ¼ë©´
             {
                 msg = $"{msg.Substring(0, cutTextSize)}\n{msg.Substring(cutTextSize + 1, (msg.Length - cutTextSize) - 1)}";
             }
             else
             {
-                int space = msg.IndexOf(" ", cutTextSize);       // 20 µÚ¿¡ Ã¹¹øÂ°·Î ÀÖ´Â °ø¹éÀ» Ã£¾ÆÁØ´Ù.
-                if (space == -1) space = 50;        // °ø¹éÀÌ ¾È Ã£¾ÆÁø´Ù¸é
-                int space2 = msg.Substring(0, cutTextSize).LastIndexOf(" ", cutTextSize);     // 0 ºÎÅÍ 20±îÁö ÀÖ´Â ¹®ÀÚ¿­¿¡¼­ °¡Àå ¸¶Áö¸·¿¡ ÀÖ´Â °ø¹éÀ» Ã£¾ÆÁØ´Ù.
-                int endIndex = space > space2 ? space2 : space;     // µÑ Áß ÀÛÀº °Í ³Ö¾îÁÖ±â
+                int space = msg.IndexOf(" ", cutTextSize);       // 20 ë’¤ì— ì²«ë²ˆì§¸ë¡œ ìˆëŠ” ê³µë°±ì„ ì°¾ì•„ì¤€ë‹¤.
+                if (space == -1) space = 50;        // ê³µë°±ì´ ì•ˆ ì°¾ì•„ì§„ë‹¤ë©´
+                int space2 = msg.Substring(0, cutTextSize).LastIndexOf(" ", cutTextSize);     // 0 ë¶€í„° 20ê¹Œì§€ ìˆëŠ” ë¬¸ìì—´ì—ì„œ ê°€ì¥ ë§ˆì§€ë§‰ì— ìˆëŠ” ê³µë°±ì„ ì°¾ì•„ì¤€ë‹¤.
+                int endIndex = space > space2 ? space2 : space;     // ë‘˜ ì¤‘ ì‘ì€ ê²ƒ ë„£ì–´ì£¼ê¸°
                 msg = $"{msg.Substring(0, endIndex)}\n{msg.Substring(endIndex + 1, (msg.Length - endIndex) - 1)}";
             }
         }
@@ -109,7 +109,7 @@ public class TextBox : MonoBehaviour
                 currentSelectedButton.GetComponent<Button>().interactable = false;
                 currentSelectedButton.GetComponent<Image>().color = Color.white;
                 Destroy(currentSpeech.GetChild(i).gameObject);
-            }       // ³ª¸ÓÁö Ä£±¸µé ´Ù Áö¿öÁÖ±â
+            }       // ë‚˜ë¨¸ì§€ ì¹œêµ¬ë“¤ ë‹¤ ì§€ì›Œì£¼ê¸°
         }
 
         StartCoroutine(LineRefresh());
