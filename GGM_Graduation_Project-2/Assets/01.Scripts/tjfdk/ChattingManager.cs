@@ -21,6 +21,7 @@ public class ChattingManager : MonoBehaviour
     private bool is_choosing;       // 선택지가 있어서 선택중일 때
     private bool is_Player;      // 플레이어가 말하는 중인가
     private int replyCount = 0;     // first 일 때 2번 하고 바로 나가게 해주는 것.
+    private bool is_SelectCriminalTiming = false;
 
     private string selectCriminal;
 
@@ -29,15 +30,15 @@ public class ChattingManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        selectCriminal = chats[chats.Length - 1].askAndReplySO[0].ask.reply;
-        StartChatting(5);           // 가장 처음은 0으로 해두기
+        selectCriminal = chats[chats.Length - 1].askAndReplySO[0].ask.GetReplys()[0];
+        StartChatting(0);           // 가장 처음은 0으로 해두기
     }
 
     private void OnDisable()        // SO 초기화
     {
         foreach (var chats in chats)
         {
-            foreach(var ask in chats.askAndReplySO)
+            foreach (var ask in chats.askAndReplySO)
             {
                 ask.ask.is_used = false;        // 사용하지 않았음.
             }
@@ -47,6 +48,8 @@ public class ChattingManager : MonoBehaviour
 
     public void StartChatting(int index)
     {
+        nowChatIndex = 0;
+        nowLevel = index;
         if (index != 0) StopCoroutine(StartChattingCoroutine(index - 1));       // 전에꺼 꺼주기
         StartCoroutine(StartChattingCoroutine(index));          // 지금꺼 시작
     }
@@ -54,9 +57,7 @@ public class ChattingManager : MonoBehaviour
     private IEnumerator StartChattingCoroutine(int index)
     {
         int chatLenght = chats[index].chatSO.chat.Length;       // 쳇팅들의 길이
-        Debug.Log(chatLenght);
         int askLenght = chats[index].askAndReplySO.Length == 0 ? 0 : 1;      // 질문들의 개수
-        nowLevel = index;
         for (int i = 0; i < chatLenght + askLenght; i++)
         {
             Chapter();
@@ -69,7 +70,7 @@ public class ChattingManager : MonoBehaviour
         if (is_choosing == false && nowChatIndex < chats[nowLevel].chatSO.chat.Length)        // 선택중이 아니라면
         {
             bool state = chats[nowLevel].chatSO.chat[nowChatIndex].state == ChatState.Assistant ? false : true;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
-            TextBox.Instance.InputText(state, chats[nowLevel].chatSO.chat[nowChatIndex].text);
+            TextBox.Instance.InputText(state, chats[nowLevel].chatSO.chat[nowChatIndex].text, false);
             nowChatIndex++;
         }
         else if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length && is_choosing == false)       // 현재 쳇팅 정도를 넘었고 선택중인 상태가 아닐 때
@@ -85,18 +86,18 @@ public class ChattingManager : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                nowLevel++;
-                nowChatIndex = 0;
-                Chapter();
-            }
         }
     }
 
-    public void answerr(string str)     // 버튼을 클릭했을 때
+    public void answer(string str)     // 버튼을 클릭했을 때
     {
-        Debug.Log(str);
+        if (is_SelectCriminalTiming)
+        {
+            string name = str.Substring(0, 3);      // 3글자
+            TextBox.Instance.InputText(false, $"네. 그럼 {name}씨를 구속하겠습니다.");
+            StartCoroutine(End(name));
+        }
+
         foreach (var replySO in chats[nowLevel].askAndReplySO)
         {
             if (replySO.ask.ask == str)
@@ -112,7 +113,6 @@ public class ChattingManager : MonoBehaviour
         if (chats[nowLevel].askAndReplySO[0].askName == "First")
         {
             replyCount++;
-            Debug.Log(replyCount);
             if (replyCount == 2)
             {
                 yield return delay;
@@ -137,19 +137,31 @@ public class ChattingManager : MonoBehaviour
         }
 
         yield return delay;
-        foreach(var text in replys)
+        foreach (var text in replys)
         {
+            TextBox.Instance.CurrentSpeechColorChange();
             TextBox.Instance.InputText(false, text);
             yield return delay;     // 딜레이 위치 판단하기!
             if (text == selectCriminal)
             {
                 Debug.Log("범인찾기!");     // 범인을 찾는 것 적어주기!
-                TextBox.Instance.InputText(false, $"네. 그럼 {000}씨를 구속하겠습니다.");
+                is_SelectCriminalTiming = true;     // 지금은 범인을 찾는 것.
+                TextBox.Instance.InputText(true, $"이수연씨를 구속해줘.");
+                TextBox.Instance.InputText(true, $"황준원씨를 구속해줘.");
+                TextBox.Instance.InputText(true, $"곽현석씨를 구속해줘.");
+                TextBox.Instance.InputText(true, $"이태광씨를 구속해줘.");
                 yield break;
             }
         }
 
         is_choosing = false;
         Chapter();
+    }
+
+    private IEnumerator End(string answer)
+    {
+        yield return delay;
+        Debug.Log(answer + "로 끝남");
+        //GameManager.Instance.EndGame(answer);
     }
 }

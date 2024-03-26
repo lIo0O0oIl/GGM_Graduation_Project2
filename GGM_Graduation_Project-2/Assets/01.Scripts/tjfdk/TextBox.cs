@@ -32,7 +32,7 @@ public class TextBox : MonoBehaviour
         Instance = this;
     }
 
-    public void InputText(bool user, string msg)        // user가 true 일면 플레이어가 말하는 것임.
+    public void InputText(bool user, string msg, bool ask = true)        // user가 true 일면 플레이어가 말하는 것임.
     {
         // 텍스트 내려주기 기능 만들기
         // 공백으로 나눠주고 잘리는 부분의 인덱스와 가장 가까운 것을 잡아서 거기서 줄내림을 추가해준다.
@@ -76,10 +76,17 @@ public class TextBox : MonoBehaviour
         GameObject speech = null;
         if (user)
         {
-            speech = Instantiate(choiceBalloon);
+            if (ask == false)
+            {
+                speech = Instantiate(speechBalloon);
+            }
+            else
+            {
+                speech = Instantiate(choiceBalloon);
+                speech.GetComponent<Button>().onClick.AddListener(() => ChoiceQuestion());
+            }
             speech.name += "-" + myChatCount;
             myChatCount++;
-            speech.GetComponent<Button>().onClick.AddListener(() => ChoiceQuestion());
             speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
         }
         else
@@ -100,13 +107,22 @@ public class TextBox : MonoBehaviour
             if (currentSpeech.GetChild(i).name != currentSelectedButton.name)
             {
                 currentSelectedButton.GetComponent<Button>().interactable = false;
+                currentSelectedButton.GetComponent<Image>().color = Color.white;
                 Destroy(currentSpeech.GetChild(i).gameObject);
             }       // 나머지 친구들 다 지워주기
         }
 
         StartCoroutine(LineRefresh());
 
-        ChattingManager.Instance.answerr(currentSelectedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+        ChattingManager.Instance.answer(currentSelectedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+    }
+
+    public void CurrentSpeechColorChange()
+    {
+        for (int i = 0; i < currentSpeech.childCount; ++i)
+        {
+            currentSpeech.GetChild(i).GetComponent<Image>().color = Color.white;
+        }
     }
 
     private IEnumerator LineRefresh()
