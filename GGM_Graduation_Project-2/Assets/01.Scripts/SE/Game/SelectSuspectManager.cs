@@ -43,7 +43,10 @@ public class SelectSuspectManager : Singleton<SelectSuspectManager>
         fadePanel.color = new Color(0, 0, 0, 0);
         Text.DOFade(1, 1.5f);
         yield return delay;
-        fadePanel.DOFade(1, 0.5f);
+        yield return delay;
+        fadePanel.DOFade(1, 1.5f);
+        yield return delay;
+        yield return delay;
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
