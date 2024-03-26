@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using Unity.VisualScripting;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,14 +21,15 @@ public class Sudoku : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        TileSet();
     }
 
-    public void Setting()
+    private void Start()
     {
-        Debug.Log("스도쿠 진입");
+    }
 
-        puzzleAmount = hiddingAmount;
-
+    private void TileSet()
+    {
         int x = 0, y = 0;
         int nx = 0, ny = 0;
 
@@ -56,6 +58,13 @@ public class Sudoku : MonoBehaviour
             if (x % 3 == 0)
                 x = nx;
         }
+    }
+
+    public void Setting()
+    {
+        Debug.Log("스도쿠 진입");
+
+        puzzleAmount = hiddingAmount;
 
         Clear();
         Init();
@@ -67,7 +76,7 @@ public class Sudoku : MonoBehaviour
         {
             for (int j = 0; j < 9; ++j)
             {
-                tiles[i, j].Init(0);
+                tiles[i, j].ClearSetting();
             }
         }
     }

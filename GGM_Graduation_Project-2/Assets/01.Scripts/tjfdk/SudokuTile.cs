@@ -8,7 +8,6 @@ using UnityEditor.UI;
 
 public class SudokuTile : MonoBehaviour
 {
-    //[SerializeField] private int number = 0;
     [SerializeField] private int correct = 0;
 
     public TextMeshProUGUI text;
@@ -23,20 +22,20 @@ public class SudokuTile : MonoBehaviour
         text = GetComponentInChildren<TextMeshProUGUI>();
         input = GetComponentInChildren<TMP_InputField>();
         backGround = GetComponent<Image>();
-        //button = GetComponent<Button>();
     }
 
-    //public bool IsEnd()
-    //{
-    //    return isEnd;
-    //}
+    public void ClearSetting()
+    {
+        isHide = false;
+        text.gameObject.SetActive(true);
+        input.gameObject.SetActive(true);
+        input.interactable = true;
+    }
 
     public void InputNumber()
     {
         if (input.text != "")
         {
-            //SetNumber(int.Parse(input.text));
-            //input(int.Parse(input.text));
             CheckAnwser();
         }
     }
@@ -62,31 +61,6 @@ public class SudokuTile : MonoBehaviour
         input.interactable = false;
         isHide = false;
     }
-
-    //public void SetNumber(int _number = 0)
-    //{
-    //    number = _number;
-
-    //    if (_number != 0)
-    //        text.text = _number.ToString();
-    //    else
-    //        text.text = "";
-
-    //    input.interactable = false;
-    //}
-
-    //public int GetNumber()
-    //{
-    //    return number;
-    //}
-
-    //public void SetCorrect(int _correct)
-    //{
-    //    correct = _correct;
-    //    text.text = _correct.ToString();
-    //    input.interactable = false;
-    //}
-
     public int GetCorrect()
     {
         return correct;
@@ -97,17 +71,6 @@ public class SudokuTile : MonoBehaviour
         backGround.color = _color;
     }
 
-    public void SetTxtColor(Color _color)
-    {
-        //text.color = _color;
-    }
-
-    //public void SetLook()
-    //{
-    //    //button.interactable = false;
-    //    isEnd = true;
-    //}
-
     public void CheckAnwser()
     {
         if (int.Parse(input.text) == correct)
@@ -115,7 +78,6 @@ public class SudokuTile : MonoBehaviour
             SetColor(Color.green);
             StartCoroutine(DelayColor());
             open();
-            //SetLook();
         }
         else
         {
