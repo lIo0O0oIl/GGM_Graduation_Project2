@@ -38,6 +38,7 @@ public class Board : MonoBehaviour
 
     public IEnumerator Start()
     {
+
         // 게임이 시작될 때 A* 알고리즘을 사용하여 최소 이동 횟수를 계산
         //int[,] initialState = GetInitialState(); // 초기 상태
         //int[,] goalState = GetGoalState(); // 목표 상태
@@ -46,7 +47,7 @@ public class Board : MonoBehaviour
         //Debug.Log("Minimum moves to solve the puzzle: " + minMoves);
         //SetupTilesFromState(goalState);
         MoveCount = 0;
-        minNum = 100;
+        minNum = 10;
 
         minnumNumMoves.text = $"제한 횟수 : {minNum}";
 
@@ -60,6 +61,7 @@ public class Board : MonoBehaviour
 
         tileList.ForEach(x => x.SetPosition());
 
+        passwordUI.SetActive(false);
         StartCoroutine(Suffle());
     }
 

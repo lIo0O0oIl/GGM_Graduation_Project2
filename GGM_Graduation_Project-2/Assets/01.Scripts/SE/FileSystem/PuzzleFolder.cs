@@ -14,14 +14,18 @@ public class PuzzleFolder : MonoBehaviour
 
     public void OpenPuzzle()
     {
+ /*       for (int i = 3; i < FileManager.instance.puzzlePanel.transform.childCount; i++)
+        {
+            Destroy(FileManager.instance.puzzlePanel.transform.GetChild(i));
+        }*/
+        if (myPuzzleNum == 2)
+        {
+            Instantiate(puzzlePrefab, board);
+        }
         FileManager.instance.OpenPuzzleLock(myPuzzleNum);
         if (myPuzzleNum == 1)
         {
             Sudoku.Instance.Setting();
-        }
-        else if (myPuzzleNum == 2)
-        {
-            Instantiate(puzzlePrefab, board);
         }
     }
 }
