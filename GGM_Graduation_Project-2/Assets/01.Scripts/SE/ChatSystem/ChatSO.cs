@@ -23,7 +23,6 @@ public class ChatSO : ScriptableObject
 {
     public Chat[] chat;
     public bool is_Ask;     // 묻는 것이 있냐
-    public string askName;      // is_Ask 가 true 라면 Ask의 이름을 적어주기
 }       // 쳇팅만 하는 SO
 
 

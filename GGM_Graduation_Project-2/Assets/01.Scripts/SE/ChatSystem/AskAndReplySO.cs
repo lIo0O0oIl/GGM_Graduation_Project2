@@ -8,6 +8,12 @@ public struct AskReply       // 하나의 질문과 그에 대한 답변. 답변이 2개 이상에 
 {
     public string ask;        // 물을 수 있는 선택지들
     public string reply;     // 그에 대한 대답들
+    public bool is_used;
+
+    public string[] GetReplys()
+    {
+        return reply.Split('\\');
+    }
 }
 
 [CreateAssetMenu(fileName = "AskAndReplySO", menuName = "SO/AskAndReplySO")]           // 이거 새로 스크립트 파서 만들어주기
