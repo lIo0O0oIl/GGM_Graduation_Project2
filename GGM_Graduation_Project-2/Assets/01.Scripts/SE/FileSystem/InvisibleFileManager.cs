@@ -23,6 +23,11 @@ public class InvisibleFileManager : MonoBehaviour
         ShowRoundSet.Clear();
     }
 
+    public void Start()
+    {
+        DontShowRound();
+    }
+
     public void  ShowRoundFile(string round)
     {
         foreach (var file in roundFile)
@@ -32,6 +37,7 @@ public class InvisibleFileManager : MonoBehaviour
                 foreach(var rountFile in file.Files)
                 {
                     rountFile.SetActive(true);
+                    FileManager.instance.NowFilePathIncludeFileCheck(rountFile);     // 키려는 것이 지금 경로에 있어야만함.
                 }
             }
         }
@@ -42,7 +48,7 @@ public class InvisibleFileManager : MonoBehaviour
     {
         foreach (var file in roundFile)
         {
-            if (ShowRoundSet.Contains(file.round) == false)      // 포함되어있지 않으면 꺼줘
+            if (ShowRoundSet.Contains(file.round) == false)      // 포함되어있지 않으면 꺼주고 현재 파일 경로에 없으면 지워줘야해.
             {
                 foreach (var obj in file.Files)
                 {

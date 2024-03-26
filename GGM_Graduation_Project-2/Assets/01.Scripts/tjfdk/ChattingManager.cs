@@ -65,10 +65,11 @@ public class ChattingManager : MonoBehaviour
         }
     }
 
-    public void Chapter()
+    private void Chapter()
     {
         if (is_choosing == false && nowChatIndex < chats[nowLevel].chatSO.chat.Length)        // 선택중이 아니라면
         {
+            if (nowLevel == 1 && nowChatIndex == 2) InvisibleFileManager.Instance.ShowRoundFile("1-1");     // 학교 파일 보내주기
             bool state = chats[nowLevel].chatSO.chat[nowChatIndex].state == ChatState.Assistant ? false : true;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
             TextBox.Instance.InputText(state, chats[nowLevel].chatSO.chat[nowChatIndex].text, false);
             nowChatIndex++;
@@ -93,9 +94,10 @@ public class ChattingManager : MonoBehaviour
     {
         if (is_SelectCriminalTiming)
         {
-            string name = str.Substring(0, 3);      // 3글자
+            string name = str.Substring(4, 3);      // 3글자
             TextBox.Instance.InputText(false, $"네. 그럼 {name}씨를 구속하겠습니다.");
             StartCoroutine(End(name));
+            return;     // 끝끝
         }
 
         foreach (var replySO in chats[nowLevel].askAndReplySO)
@@ -112,7 +114,11 @@ public class ChattingManager : MonoBehaviour
     {
         if (chats[nowLevel].askAndReplySO[0].askName == "First")
         {
+            string name = replys[0].Substring(0, replys[0].IndexOf(' '));
+            UpLoadFile(null, name);       // 파일을 업로드 하기 위해서, 보고서, 용의자, 피해자가 들어옴
+
             replyCount++;
+            
             if (replyCount == 2)
             {
                 yield return delay;
@@ -121,16 +127,21 @@ public class ChattingManager : MonoBehaviour
                 string remainder = null;
                 foreach (var noUse in chats[nowLevel].askAndReplySO)
                 {
-                    if (noUse.ask.is_used == false)
+                    if (noUse.ask.is_used == false)     // 남는거 하나 찾기
                     {
                         remainder = noUse.ask.ask;          // "~~~부터 줘"
                         remainder = remainder.Substring(0, remainder.IndexOf("부터"));
                     }
                 }
                 TextBox.Instance.InputText(false, $"그리고 나머지 {remainder}도 옮겨드렸어요.");
+                
+                name = remainder.Substring(0, remainder.IndexOf(' '));
+                UpLoadFile(null, name);
+                
                 replyCount = 0;
                 is_choosing = false;
                 chats[nowLevel].chatSO.is_Ask = false;
+                
                 StartChatting(1);
                 yield break;
             }
@@ -146,16 +157,42 @@ public class ChattingManager : MonoBehaviour
             {
                 Debug.Log("범인찾기!");     // 범인을 찾는 것 적어주기!
                 is_SelectCriminalTiming = true;     // 지금은 범인을 찾는 것.
-                TextBox.Instance.InputText(true, $"이수연씨를 구속해줘.");
-                TextBox.Instance.InputText(true, $"황준원씨를 구속해줘.");
-                TextBox.Instance.InputText(true, $"곽현석씨를 구속해줘.");
-                TextBox.Instance.InputText(true, $"이태광씨를 구속해줘.");
+                TextBox.Instance.InputText(true, $"범인은 이수연씨야");
+                TextBox.Instance.InputText(true, $"범인은 황준원씨야");
+                TextBox.Instance.InputText(true, $"범인은 곽현석씨야.");
+                TextBox.Instance.InputText(true, $"범인은 이태광씨야.");
                 yield break;
             }
         }
 
         is_choosing = false;
         Chapter();
+    }
+
+    private void UpLoadFile(string round, string name = null)       
+    {
+        if (name  != null)
+        {
+            switch (name)
+            {
+                case "보고서":
+                    InvisibleFileManager.Instance.ShowRoundFile("1-2");
+                    InvisibleFileManager.Instance.ShowRoundFile("1-2-1");
+                    break;
+                case "용의자":
+                    InvisibleFileManager.Instance.ShowRoundFile("1-3");
+                    break;
+                case "피해자":     // 유품
+                    InvisibleFileManager.Instance.ShowRoundFile("1-2");
+                    InvisibleFileManager.Instance.ShowRoundFile("1-2-2");
+                    break;
+                default:
+                    Debug.LogError("없는 이름입니다.");
+                    break;
+            }
+            return;
+        }
+        InvisibleFileManager.Instance.ShowRoundFile(round);
     }
 
     private IEnumerator End(string answer)

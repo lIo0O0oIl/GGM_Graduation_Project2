@@ -133,6 +133,26 @@ public class FileManager : MonoBehaviour
         InvisibleFileManager.Instance.DontShowRound();      // 잚못 켜준거 있으면 꺼주기
     }
 
+    public void NowFilePathIncludeFileCheck(GameObject file)
+    {
+        Debug.Log(nowPath);
+        bool is_Include = false;
+        foreach (var fileTree in fileTrees)
+        {
+            if (fileTree.path == nowPath)
+            {
+                foreach (var includeFile in fileTree.Files)
+                {
+                    if (file == includeFile)
+                    {
+                        is_Include = true;
+                    }
+                }
+            }
+        }
+        if (is_Include == false) file.SetActive(false);
+    }
+
     public void GoMain()        // 윗줄에서 메인을 눌렀을 때
     {
         GoFile(nowPath, "메인");

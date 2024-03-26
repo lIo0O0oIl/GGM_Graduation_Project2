@@ -10,6 +10,10 @@ public class ImageFile : MonoBehaviour, IPointerClickHandler
     public Vector2 showScale = new Vector2(500, 500);       // 보여질 크기
     private string fileName;
 
+    public bool assistantUse = false;
+    public int index;
+    private bool used = false;
+
     private void Start()
     {
         fileName = GetComponentInChildren<TMP_Text>().text;
@@ -20,6 +24,11 @@ public class ImageFile : MonoBehaviour, IPointerClickHandler
         if (eventData.clickCount == 2)
         {
             FileManager.instance.OpenImageFile(image, showScale, fileName);
+            if (assistantUse && !used)
+            {
+                ChattingManager.Instance.StartChatting(index);
+                used = true;
+            }
         }
     }
 }
