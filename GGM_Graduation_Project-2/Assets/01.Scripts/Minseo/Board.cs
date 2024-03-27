@@ -168,6 +168,7 @@ public class Board : MonoBehaviour
 
         if (tiles.Count == puzzleSize * puzzleSize - 1)
         {
+            Debug.Log("진입");
             FileManager.instance.PuzzleLockBackClick();     // 퍼즐판넬 꺼주기
             lockFolder.PuzzleClear();       // 퍼즐 클리어됨
 
