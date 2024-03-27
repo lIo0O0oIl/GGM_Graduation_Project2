@@ -248,6 +248,7 @@ public class FileManager : MonoBehaviour
         {
             puzzlePanel.transform.GetChild(i).gameObject.SetActive(false);
         }
+        Debug.Log(puzzlePanel.name);
         puzzlePanel.SetActive(false);
     }
     #endregion
