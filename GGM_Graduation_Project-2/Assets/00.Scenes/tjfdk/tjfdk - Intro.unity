@@ -1832,16 +1832,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffba31ca6d4b8b4987263d7fcf8cda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSounds: []
+  bgmSounds:
+  - soundName: intro
+    clip: {fileID: 8300000, guid: 40ae6394b75f4994ea39cfb196c3cf4e, type: 3}
   effectSounds:
   - soundName: click
-    clip: {fileID: 8300000, guid: a2cd43ccbb7b2b44bae761c4747fafe5, type: 3}
+    clip: {fileID: 8300000, guid: 12d3bdb1810e49f46a08aaef42df4aba, type: 3}
   - soundName: alarm
     clip: {fileID: 8300000, guid: a2cd43ccbb7b2b44bae761c4747fafe5, type: 3}
   - soundName: popup
-    clip: {fileID: 8300000, guid: a2cd43ccbb7b2b44bae761c4747fafe5, type: 3}
+    clip: {fileID: 8300000, guid: dcb486e72839ee342a951d03498e9007, type: 3}
   audioSourceBgmPlayers: {fileID: 1318594009}
-  audioSourceEffectsPlayers: {fileID: 1318594009}
+  audioSourceEffectsPlayers: {fileID: 1318594010}
 --- !u!82 &1318594009
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1851,12 +1853,12 @@ AudioSource:
   m_GameObject: {fileID: 1318594005}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8482671828794448264, guid: 097331ddd5b24db4b81717f0e8c0b330, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1947,7 +1949,7 @@ AudioSource:
   m_GameObject: {fileID: 1318594005}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6792560587974360074, guid: 097331ddd5b24db4b81717f0e8c0b330, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

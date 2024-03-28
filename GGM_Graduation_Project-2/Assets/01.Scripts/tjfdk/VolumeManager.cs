@@ -14,6 +14,8 @@ public class VolumeManager : MonoBehaviour
     public void Master()
     {
         mixer.SetFloat("Master", masterSlider.value);
+        mixer.SetFloat("BGM", masterSlider.value);
+        mixer.SetFloat("SFX", masterSlider.value);
     }
 
     public void BGM()

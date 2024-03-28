@@ -22,6 +22,12 @@ public class SoundManager : Singleton<SoundManager>
         PlayBGM("intro");
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+            PlaySFX("click");
+    }
+
     public void PlayBGM(string name) // BGM ½ÇÇà
     {
         for (int i = 0; i < bgmSounds.Length; i++)
