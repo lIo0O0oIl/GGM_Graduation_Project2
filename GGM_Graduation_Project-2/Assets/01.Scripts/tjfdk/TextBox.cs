@@ -57,20 +57,22 @@ public class TextBox : MonoBehaviour
 
         if (currentSpeech == null || isCurrentUser != user)
         {
+            GameObject temp = null;
             if (user)
             {
-                GameObject temp = Instantiate(myChatBox);
+                temp = Instantiate(myChatBox);
                 temp.transform.SetParent(chatBoxParent);
                 currentSpeech = temp.transform;
                 isCurrentUser = true;
             }
             else
             {
-                GameObject temp = Instantiate(otherChatBox);
+                temp = Instantiate(otherChatBox);
                 temp.transform.SetParent(chatBoxParent);
                 currentSpeech = temp.transform;
                 isCurrentUser = false;
             }
+            AssistantChatListAdd(temp);     // 만약 조수 대화면 리스트에 추가해라
         }
 
         GameObject speech = null;
@@ -94,8 +96,17 @@ public class TextBox : MonoBehaviour
             speech = Instantiate(speechBalloon);
             speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
         }
+        AssistantChatListAdd(speech);       // 조수랑 대화면 리스트에 추가
         speech.transform.SetParent(currentSpeech);
         LineAlignment();
+    }
+
+    private void AssistantChatListAdd(GameObject obj)
+    {
+        if (ChattingManager.Instance.chats[ChattingManager.Instance.nowLevel].whoSO.humanName == "조수")
+        {
+            ChattingManager.Instance.assistantChatList.Add(obj);
+        }
     }
 
     public void ChoiceQuestion()
@@ -140,6 +151,6 @@ public class TextBox : MonoBehaviour
     private IEnumerator ScrollRectDown()
     {
         yield return null;
-        scrollRect.verticalNormalizedPosition = 0;
+        scrollRect.normalizedPosition = new Vector2(0f, 0);
     }
 }
