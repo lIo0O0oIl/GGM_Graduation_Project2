@@ -17,7 +17,8 @@ public class TextBox : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] Transform currentSpeech;       // 가장 최근의 대화
-    [SerializeField] GameObject speechBalloon;      // 말하는 말풍선
+    [SerializeField] GameObject speechBalloon_left;      // 말하는 말풍선
+    [SerializeField] GameObject speechBalloon_right;      // 말하는 말풍선
     [SerializeField] GameObject choiceBalloon;          // 고르는 말풍선(버튼달린)
     [SerializeField] GameObject myChatBox;          // 내 쳇팅박스
     [SerializeField] GameObject otherChatBox;           // 조수의 쳇팅박스
@@ -81,7 +82,7 @@ public class TextBox : MonoBehaviour
         {
             if (ask == false)
             {
-                speech = Instantiate(speechBalloon);
+                speech = Instantiate(speechBalloon_right);
             }
             else
             {
@@ -94,7 +95,7 @@ public class TextBox : MonoBehaviour
         }
         else
         {
-            speech = Instantiate(speechBalloon);
+            speech = Instantiate(speechBalloon_left);
             speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
         }
         AssistantChatListAdd(speech);       // 조수랑 대화면 리스트에 추가
