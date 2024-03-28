@@ -53,7 +53,7 @@ public class TextBox : MonoBehaviour
                 msg = $"{msg.Substring(0, endIndex)}\n{msg.Substring(endIndex + 1, (msg.Length - endIndex) - 1)}";
             }
         }
-        
+        LineAlignment();
 
         if (currentSpeech == null || isCurrentUser != user)
         {
@@ -73,6 +73,7 @@ public class TextBox : MonoBehaviour
                 isCurrentUser = false;
             }
             AssistantChatListAdd(temp);     // 만약 조수 대화면 리스트에 추가해라
+            LineAlignment();
         }
 
         GameObject speech = null;
@@ -138,7 +139,7 @@ public class TextBox : MonoBehaviour
 
     private IEnumerator LineRefresh()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.1f);
         LayoutRebuilder.ForceRebuildLayoutImmediate(chatBoxParent);
     }
 
@@ -150,7 +151,7 @@ public class TextBox : MonoBehaviour
 
     private IEnumerator ScrollRectDown()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.1f);
         scrollRect.normalizedPosition = new Vector2(0f, 0);
     }
 }

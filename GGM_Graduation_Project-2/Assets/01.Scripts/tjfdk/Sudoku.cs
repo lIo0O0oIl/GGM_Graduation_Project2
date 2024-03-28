@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 public class Sudoku : MonoBehaviour
@@ -22,6 +23,16 @@ public class Sudoku : MonoBehaviour
 
     private void Start()
     {
+        Setting();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            puzzleAmount = 0;
+            down();
+        }
     }
 
     private void TileSet()
@@ -81,9 +92,9 @@ public class Sudoku : MonoBehaviour
     {
         puzzleAmount--;
 
-        if (puzzleAmount == 0)
+        if (puzzleAmount <= 0)
         {
-            Debug.Log("R°× ³¡");
+            Debug.Log("½ºµµÄí Å¬¸®¾î");
             FileManager.instance.PuzzleLockBackClick();     // ÆÛÁñÆÇ³Ú ²¨ÁÖ±â
             lockFolder.PuzzleClear();       // ÆÛÁñ Å¬¸®¾îµÊ
         }
