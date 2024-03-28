@@ -20,7 +20,6 @@ public class ChattingManager : MonoBehaviour
     [Header("chattinggRoom")]
     public GameObject chatContainer;        // 쳇팅들 담긴 곳임.
     public TMP_Text chattingHumanName;
-    public Image chattingBackGround;
     [HideInInspector]
     public List<GameObject> assistantChatList = new List<GameObject>();    // 조수와 나눈 대화는 저장해주기
 
@@ -44,7 +43,6 @@ public class ChattingManager : MonoBehaviour
         Instance = this;
         selectCriminal = chats[chats.Length - 1].askAndReplySO[0].ask.GetReplys()[0];
         chattingHumanName.text = chats[0].whoSO.humanName;
-        chattingBackGround.color = chats[0].whoSO.backGroundColor;
         StartChatting(0);           // 가장 처음은 0으로 해두기
     }
 
@@ -88,8 +86,7 @@ public class ChattingManager : MonoBehaviour
                 }
             }
 
-            chattingHumanName.text = chats[index].whoSO.humanName;      // 이름 넣어주고
-            chattingBackGround.color = chats[index].whoSO.backGroundColor;      // 색 넣어주고
+            chattingHumanName.text = chats[index].whoSO.humanName;      // 이름 넣어주기
         }
 
         int chatLenght = chats[index].chatSO.chat.Length;       // 쳇팅들의 길이

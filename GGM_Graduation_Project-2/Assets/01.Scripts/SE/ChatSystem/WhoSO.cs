@@ -6,6 +6,4 @@ using UnityEngine;
 public class WhoSO : ScriptableObject
 {
     public string humanName;
-    //[ColorUsage(false)];
-    public Color backGroundColor;
 }
