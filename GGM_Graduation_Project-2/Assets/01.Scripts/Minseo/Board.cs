@@ -47,7 +47,7 @@ public class Board : MonoBehaviour
         //Debug.Log("Minimum moves to solve the puzzle: " + minMoves);
         //SetupTilesFromState(goalState);
         MoveCount = 0;
-        minNum = 10;
+        minNum = 100;
 
         minnumNumMoves.text = $"제한 횟수 : {minNum}";
 
@@ -155,6 +155,7 @@ public class Board : MonoBehaviour
 
             if(minNum <= MoveCount)
             {
+                sliderPuzzle.transform.parent.gameObject.SetActive(false);
                 Destroy(sliderPuzzle);
             }
         }
