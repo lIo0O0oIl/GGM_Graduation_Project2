@@ -50,6 +50,8 @@ public class FileManager : MonoBehaviour
     [Header("PuzzleLock")]
     public GameObject puzzlePanel;       // 퍼즐관련 관련
 
+    [Space(25)]
+
     public FileTree[] fileTrees;        // 파일 전체 구조
 
     private void Awake()

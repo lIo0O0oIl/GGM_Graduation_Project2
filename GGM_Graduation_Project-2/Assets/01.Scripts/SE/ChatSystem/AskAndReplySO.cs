@@ -16,7 +16,7 @@ public struct AskReply       // 하나의 질문과 그에 대한 답변. 답변이 2개 이상에 
     }
 }
 
-[CreateAssetMenu(fileName = "AskAndReplySO", menuName = "SO/AskAndReplySO")]           // 이거 새로 스크립트 파서 만들어주기
+[CreateAssetMenu(fileName = "AskAndReplySO", menuName = "SO/AskAndReplySO")] 
 public class AskAndReplySO : ScriptableObject
 {
     public string askName;      // 묻는 것의 이름

@@ -1,25 +1,37 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public struct Chapters
 {
     public ChatSO chatSO;
     public AskAndReplySO[] askAndReplySO;
+    public WhoSO whoSO;     // 누군데?
 }
 
 public class ChattingManager : MonoBehaviour
 {
     public static ChattingManager Instance;
 
+    [Header("chattinggRoom")]
+    public GameObject chatContainer;        // 쳇팅들 담긴 곳임.
+    public TMP_Text chattingHumanName;
+    public Image chattingBackGround;
+    [HideInInspector]
+    public List<GameObject> assistantChatList = new List<GameObject>();    // 조수와 나눈 대화는 저장해주기
+
+    [Space(25)]
+
     public Chapters[] chats;      // 쳇팅 SO들을 넣어줌.
-    public int nowChatIndex = 0;            // 쳇팅들
+
+    private int nowChatIndex = 0;            // 쳇팅들
+    [HideInInspector]
     public int nowLevel = 0;            // 현재 쳇팅의 레벨
     private bool is_choosing;       // 선택지가 있어서 선택중일 때
-    private bool is_Player;      // 플레이어가 말하는 중인가
     private int replyCount = 0;     // first 일 때 2번 하고 바로 나가게 해주는 것.
     private bool is_SelectCriminalTiming = false;
 
@@ -31,6 +43,8 @@ public class ChattingManager : MonoBehaviour
     {
         Instance = this;
         selectCriminal = chats[chats.Length - 1].askAndReplySO[0].ask.GetReplys()[0];
+        chattingHumanName.text = chats[0].whoSO.humanName;
+        chattingBackGround.color = chats[0].whoSO.backGroundColor;
         StartChatting(0);           // 가장 처음은 0으로 해두기
     }
 
@@ -56,6 +70,28 @@ public class ChattingManager : MonoBehaviour
 
     private IEnumerator StartChattingCoroutine(int index)
     {
+        // 쳇팅창 정보 설정해주기
+        if (chattingHumanName.text != chats[index].whoSO.humanName)     // 이름이 다르면
+        {
+            // 지금까지 있던 대화 다 지워주기
+            for (int i = 0; i < chatContainer.transform.childCount; i++)
+            {
+                chatContainer.transform.GetChild(i).gameObject.SetActive(false);
+            }
+
+            if (chattingHumanName.text != "조수")      // 용의자랑 대화한 내역이였다면 대화 내역을 파일에 png 로 저장하고 대화 내역은 모두 지운다. 그리고 조수의 대화다 켜주기
+            {
+                Debug.Log("용의자 대화 내역 사진식으로 저장해주기!");
+                for (int i = 0; i < assistantChatList.Count; i++)
+                {
+                    assistantChatList[i].gameObject.SetActive(true);
+                }
+            }
+
+            chattingHumanName.text = chats[index].whoSO.humanName;      // 이름 넣어주고
+            chattingBackGround.color = chats[index].whoSO.backGroundColor;      // 색 넣어주고
+        }
+
         int chatLenght = chats[index].chatSO.chat.Length;       // 쳇팅들의 길이
         int askLenght = chats[index].askAndReplySO.Length == 0 ? 0 : 1;      // 질문들의 개수
         for (int i = 0; i < chatLenght + askLenght; i++)
@@ -118,7 +154,7 @@ public class ChattingManager : MonoBehaviour
             UpLoadFile(null, name);       // 파일을 업로드 하기 위해서, 보고서, 용의자, 피해자가 들어옴
 
             replyCount++;
-            
+
             if (replyCount == 2)
             {
                 yield return delay;
@@ -134,14 +170,14 @@ public class ChattingManager : MonoBehaviour
                     }
                 }
                 TextBox.Instance.InputText(false, $"그리고 나머지 {remainder}도 옮겨드렸어요.");
-                
+
                 name = remainder.Substring(0, remainder.IndexOf(' '));
                 UpLoadFile(null, name);
-                
+
                 replyCount = 0;
                 is_choosing = false;
                 chats[nowLevel].chatSO.is_Ask = false;
-                
+
                 StartChatting(1);
                 yield break;
             }
@@ -169,9 +205,9 @@ public class ChattingManager : MonoBehaviour
         Chapter();
     }
 
-    private void UpLoadFile(string round, string name = null)       
+    private void UpLoadFile(string round, string name = null)
     {
-        if (name  != null)
+        if (name != null)
         {
             switch (name)
             {
