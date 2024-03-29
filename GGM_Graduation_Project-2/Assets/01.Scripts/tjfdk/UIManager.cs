@@ -8,6 +8,12 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> panels;
+    [SerializeField] GameObject alarmIcon;
+
+    public void test()
+    {
+        alarmIcon.SetActive(!alarmIcon.activeSelf);
+    }
 
     public void Panle_OnOff(GameObject panel)       // 셋팅창에서 사용함.
     {

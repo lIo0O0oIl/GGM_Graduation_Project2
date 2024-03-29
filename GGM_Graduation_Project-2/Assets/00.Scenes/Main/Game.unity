@@ -5837,6 +5837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panels: []
+  alarmIcon: {fileID: 0}
 --- !u!4 &219428853
 Transform:
   m_ObjectHideFlags: 0
@@ -15428,8 +15429,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -34.6256}
-  m_SizeDelta: {x: 840, y: 998.7488}
+  m_AnchoredPosition: {x: 0, y: -43.560474}
+  m_SizeDelta: {x: 840, y: 980.879}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569421489
 MonoBehaviour:
@@ -16125,6 +16126,7 @@ MonoBehaviour:
   panels:
   - {fileID: 1045875628}
   - {fileID: 1569950624}
+  alarmIcon: {fileID: 1045675692}
 --- !u!4 &594023516
 Transform:
   m_ObjectHideFlags: 0
@@ -41312,8 +41314,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e7086839aefcbd34fa067ab96b87da2b, type: 2}
+  m_sharedMaterial: {fileID: 7459233553066929694, guid: e7086839aefcbd34fa067ab96b87da2b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -44606,7 +44608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 860, y: -1620}
+  m_AnchoredPosition: {x: 860, y: -540}
   m_SizeDelta: {x: 860, y: 1080}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1001 &1601168100
@@ -52382,8 +52384,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC870\uC0AC \uAE30\uB85D\uC9C0"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e7086839aefcbd34fa067ab96b87da2b, type: 2}
+  m_sharedMaterial: {fileID: 7459233553066929694, guid: e7086839aefcbd34fa067ab96b87da2b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
