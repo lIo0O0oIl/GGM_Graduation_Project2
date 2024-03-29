@@ -17,7 +17,7 @@ public class ChattingManager : MonoBehaviour
 {
     public static ChattingManager Instance;
 
-    [Header("chattinggRoom")]
+    [Header("ChattinggRoom")]
     public GameObject chatContainer;        // 쳇팅들 담긴 곳임.
     public TMP_Text chattingHumanName;
     [HideInInspector]

@@ -34,25 +34,8 @@ public class TextBox : MonoBehaviour
 
     public void InputText(bool user, string msg, bool ask = true)       // user가 true 일면 플레이어가 말하는 것임.
     {
-        // 텍스트 내려주기 기능 만들기
-        // 공백으로 나눠주고 잘리는 부분의 인덱스와 가장 가까운 것을 잡아서 거기서 줄내림을 추가해준다.
-        // 그런데 인덱스보다 큰데 한... 5이상이 넘는 줄이면 그 뒤에 것에서 줄내림을 해준다.
+        CutText(ref msg);
 
-        if (msg.Length > cutTextSize)
-        {
-            if (msg[cutTextSize] == ' ')     // 자르려는 곳에 공백이 있으면
-            {
-                msg = $"{msg.Substring(0, cutTextSize)}\n{msg.Substring(cutTextSize + 1, (msg.Length - cutTextSize) - 1)}";
-            }
-            else
-            {
-                int space = msg.IndexOf(" ", cutTextSize);       // 20 뒤에 첫번째로 있는 공백을 찾아준다.
-                if (space == -1) space = 50;         // 공백이 안 찾아진다면
-                int space2 = msg.Substring(0, cutTextSize).LastIndexOf(" ", cutTextSize);     // 0 부터 20까지 있는 문자열에서 가장 마지막에 있는 공백을 찾아준다.
-                int endIndex = space > space2 ? space2 : space;    // 둘 중 작은 것 넣어주기
-                msg = $"{msg.Substring(0, endIndex)}\n{msg.Substring(endIndex + 1, (msg.Length - endIndex) - 1)}";
-            }
-        }
         LineAlignment();
 
         if (currentSpeech == null || isCurrentUser != user)
@@ -100,6 +83,53 @@ public class TextBox : MonoBehaviour
         AssistantChatListAdd(speech);       // 조수랑 대화면 리스트에 추가
         speech.transform.SetParent(currentSpeech);
         LineAlignment();
+    }
+
+    private void CutText(ref string msg)
+    {
+        // 텍스트 내려주기 기능 만들기
+        // 공백으로 나눠주고 잘리는 부분의 인덱스와 가장 가까운 것을 잡아서 거기서 줄내림을 추가해준다.
+        // 그런데 인덱스보다 큰데 한... 5이상이 넘는 줄이면 자르기를 뒤에 것에서 잘라 줄내림을 해준다.
+
+        int cutIndex = cutTextSize;
+        int endIndex = 0;
+
+        while (msg.Length > cutIndex)
+        {
+            Debug.Log($"{msg.Length}, {cutIndex}");
+            if (msg[cutIndex] == ' ')     // 자르려는 곳에 공백이 있으면
+            {
+                // 0 부터 자르려는 곳까지 자르고 자르려던 곳에서 끝까지 잘라준다.
+                msg = $"{msg.Substring(0, cutIndex)}\n{msg.Substring(cutIndex + 1)}";
+                endIndex = cutIndex;
+            }
+            else
+            {
+                int space = msg.IndexOf(" ", cutIndex);       // 자르려는 곳 뒤에 첫번째로 있는 공백을 찾아준다.
+                if (space == -1) space = 300;         // 공백이 안 찾아진다면
+
+                int space2 = msg.LastIndexOf(" ", cutIndex);     // startIndex 부터 20까지 있는 문자열에서 가장 마지막에 있는 공백을 찾아준다.
+                
+                if (space >= cutIndex + 5)
+                {
+                    endIndex = space2;
+                }
+                else
+                {
+                    if (space < space2)
+                    {
+                        endIndex = space;
+                    }
+                    else endIndex = space2;
+                }
+
+                msg = $"{msg.Substring(0, endIndex)}\n{msg.Substring(endIndex + 1)}";
+
+            }
+            Debug.Log($"{msg}\n{endIndex}");
+            cutIndex = endIndex + cutTextSize;
+        }
+
     }
 
     private void AssistantChatListAdd(GameObject obj)
