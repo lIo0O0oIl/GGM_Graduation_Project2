@@ -6,22 +6,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class test2
+public class CutSceneText
 {
     public string text;
     public bool isEnd;
 }
 
 [Serializable]
-public class CutSceneChapter
+public class CutSceneDialoges
 {
     //public GameObject cut;
-    public List<test2> texts = new List<test2>();
+    public List<CutSceneText> texts = new List<CutSceneText>();
 }
 
 [CreateAssetMenu(fileName = "curSceneSO", menuName = "SO/CutSceneSO")]
 public class CutSceneSO : ScriptableObject
 {
     public string chapterName;
-    public List<CutSceneChapter> cutScenes = new List<CutSceneChapter>();
+    public List<CutSceneDialoges> cutScenes = new List<CutSceneDialoges>();
 }
