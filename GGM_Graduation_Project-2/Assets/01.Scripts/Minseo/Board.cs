@@ -36,16 +36,13 @@ public class Board : MonoBehaviour
         Instance = this;
     }
 
-    public IEnumerator Start()
+    private void OnEnable()
     {
+        StartCoroutine(Init());
+    }
 
-        // 게임이 시작될 때 A* 알고리즘을 사용하여 최소 이동 횟수를 계산
-        //int[,] initialState = GetInitialState(); // 초기 상태
-        //int[,] goalState = GetGoalState(); // 목표 상태
-
-        //int minMoves = PuzzleSolver.CalculateMinimumMoves(initialState, goalState);
-        //Debug.Log("Minimum moves to solve the puzzle: " + minMoves);
-        //SetupTilesFromState(goalState);
+    private IEnumerator Init()
+    {
         MoveCount = 0;
         minNum = 100;
 
@@ -130,7 +127,7 @@ public class Board : MonoBehaviour
         while (percent < 1)
         {
             current += Time.deltaTime;
-            percent = current / 0.1f;
+            percent = current / 0.3f;
 
             int index = UnityEngine.Random.Range(0, puzzleSize * puzzleSize);
             tileList[index].transform.SetAsLastSibling();
