@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CutSceneManager : MonoBehaviour
 {
     [Header("Object")]
+    [SerializeField] private GameObject cutScene;
     [SerializeField] private Image screen;
     [SerializeField] private Text text;
     //[SerializeField] private TextMeshProUGUI text;
@@ -20,14 +21,39 @@ public class CutSceneManager : MonoBehaviour
 
     private void Update()
     {
+        // 테스트를 위해 작성... 당연하게도 셋엑티브 꺼져 있으면 입력 안 먹는다...
         if (Input.GetKeyDown(KeyCode.V))
         {
-            PlayChapter("test");
+            CutScene(true, "Start");
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            CutScene(true,"End");
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            CutScene(false);
         }
     }
 
-    public void PlayChapter(string _chapterName)
+    // 컷 씬 호출 함수
+    public void CutScene(bool isOpen, string _chapterName = "")
     {
+        // 컷 씬을 키는 것인지 끄는 것인지
+        cutScene.SetActive(isOpen);
+
+        // 컷 씬의 이름 함수 호출
+        if (isOpen && _chapterName != "")
+            PlayChapter(_chapterName);
+    }
+
+    // 컷 씬 세팅 함수
+    private void PlayChapter(string _chapterName)
+    {
+        currentCutScene = null;
+
         // 현재 챕터 찾아주기
         foreach (CutSceneSO chapter in cutSceneChapters)
         {
@@ -46,6 +72,7 @@ public class CutSceneManager : MonoBehaviour
         currentCutNum = 0;
         currentTextNum = 0;
 
+        // 컷 씬 세팅
         CutSetting();
     }
 
@@ -53,7 +80,7 @@ public class CutSceneManager : MonoBehaviour
     private void CutSetting()
     {
         // 이미지 설정
-        //
+        screen.sprite = currentCutScene.cutScenes[currentCutNum].cut;
         // 대사 입력 함수 호출
         Texting(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum]);
     }
@@ -80,11 +107,23 @@ public class CutSceneManager : MonoBehaviour
             {
                 // 대사 인덱스 증가
                 currentTextNum++;
+
+                Debug.Log(currentTextNum);
+                Debug.Log(currentCutScene.cutScenes[currentCutNum].texts.Count);
+
                 // 현재 컷의 모든 대사를 실행했다면
-                if (currentTextNum >= currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text.Length - 1)
+                if (currentTextNum >= currentCutScene.cutScenes[currentCutNum].texts.Count)
                 {
-                    // 테스트용 디버그
-                    Debug.Log("끝!!!");
+                    currentCutNum++;
+                    if (currentCutNum >= currentCutScene.cutScenes.Count)
+                    {
+                        CutScene(false);
+                    }
+                    else
+                    {
+                        currentTextNum = 0;
+                        CutSetting();
+                    }
                 }
                 // 현재 컷의 대사가 남아있다면
                 else
@@ -97,7 +136,8 @@ public class CutSceneManager : MonoBehaviour
             }
         }
     }
-
+    
+    // 대사 입력 함수 (다트윈)
     private void Texting(CutSceneText temp)
     {
         // 이전 텍스트 삭제

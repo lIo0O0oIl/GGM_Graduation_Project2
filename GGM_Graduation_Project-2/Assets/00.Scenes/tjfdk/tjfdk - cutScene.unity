@@ -398,7 +398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1137378140
 RectTransform:
   m_ObjectHideFlags: 0
@@ -471,6 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20c022a4e0a16448b58b29f96dcbbf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutScene: {fileID: 1137378139}
   screen: {fileID: 2006288832}
   text: {fileID: 775147763}
   currentCutScene: {fileID: 0}
@@ -478,6 +479,7 @@ MonoBehaviour:
   currentTextNum: 0
   cutSceneChapters:
   - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
+  - {fileID: 11400000, guid: 72d10a1d28d6b0342ad49ae8c2313967, type: 2}
 --- !u!1 &1480610276
 GameObject:
   m_ObjectHideFlags: 0

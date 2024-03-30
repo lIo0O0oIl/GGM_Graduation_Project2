@@ -15,7 +15,7 @@ public class CutSceneText
 [Serializable]
 public class CutSceneDialoges
 {
-    //public GameObject cut;
+    public Sprite cut;
     public List<CutSceneText> texts = new List<CutSceneText>();
 }
 
