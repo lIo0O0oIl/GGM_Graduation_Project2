@@ -97,7 +97,6 @@ public class TextBox : MonoBehaviour
 
         while (msg.Length > cutIndex)
         {
-            Debug.Log($"{msg.Length}, {cutIndex}");
             if (msg[cutIndex] == ' ')     // 자르려는 곳에 공백이 있으면
             {
                 // 0 부터 자르려는 곳까지 자르고 자르려던 곳에서 끝까지 잘라준다.
@@ -127,7 +126,6 @@ public class TextBox : MonoBehaviour
                 msg = $"{msg.Substring(0, endIndex)}\n{msg.Substring(endIndex + 1)}";
 
             }
-            Debug.Log($"{msg}\n{endIndex}");
             cutIndex = endIndex + cutTextSize;
         }
 
