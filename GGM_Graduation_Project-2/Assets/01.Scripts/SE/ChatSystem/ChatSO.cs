@@ -6,8 +6,8 @@ using UnityEngine;
 
 public enum ChatState
 {
-    Assistant = 0,      // 조수가 말하는 것
-    Detective = 1,      // 형사가 말하는 것
+    Other = 0,      // 조수쪽이 말하는 것
+    Me = 1,      // 형사가 말하는 것
 }
 
 [Serializable]

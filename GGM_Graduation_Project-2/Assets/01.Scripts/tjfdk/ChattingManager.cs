@@ -31,17 +31,21 @@ public class ChattingManager : MonoBehaviour
     [HideInInspector]
     public int nowLevel = 0;            // 현재 쳇팅의 레벨
     private bool is_choosing;       // 선택지가 있어서 선택중일 때
-    private int replyCount = 0;     // first 일 때 2번 하고 바로 나가게 해주는 것.
     private bool is_SelectCriminalTiming = false;
 
-    private string selectCriminal;
+    private int studentChatCount = 0;       // 처음 학생과의 대화에서 선택카운트
 
-    private WaitForSeconds delay = new WaitForSeconds(0.75f);       // 대화 딜레이 시간
+    public float delayTime = 0.75f;
+    private WaitForSeconds delay;       // 대화 딜레이 시간
+    private WaitForSeconds delay2;       // 대화 딜레이 시간
 
     private void Start()
     {
         Instance = this;
-        selectCriminal = chats[chats.Length - 1].askAndReplySO[0].ask.GetReplys()[0];
+
+        delay = new WaitForSeconds(delayTime);
+        delay2 = new WaitForSeconds(delayTime * 3);
+
         chattingHumanName.text = chats[0].whoSO.humanName;
         StartChatting(0);           // 가장 처음은 0으로 해두기
     }
@@ -60,6 +64,7 @@ public class ChattingManager : MonoBehaviour
 
     public void StartChatting(int index)
     {
+        Debug.Log(index);
         nowChatIndex = 0;
         nowLevel = index;
         if (index != 0) StopCoroutine(StartChattingCoroutine(index - 1));       // 전에꺼 꺼주기
@@ -69,6 +74,7 @@ public class ChattingManager : MonoBehaviour
     private IEnumerator StartChattingCoroutine(int index)
     {
         // 쳇팅창 정보 설정해주기
+        Debug.Log($"{chattingHumanName.text}, {chats[index].whoSO.humanName}");
         if (chattingHumanName.text != chats[index].whoSO.humanName)     // 이름이 다르면
         {
             // 지금까지 있던 대화 다 지워주기
@@ -91,6 +97,7 @@ public class ChattingManager : MonoBehaviour
 
         int chatLenght = chats[index].chatSO.chat.Length;       // 쳇팅들의 길이
         int askLenght = chats[index].askAndReplySO.Length == 0 ? 0 : 1;      // 질문들의 개수
+        Debug.Log(chatLenght + askLenght);
         for (int i = 0; i < chatLenght + askLenght; i++)
         {
             Chapter();
@@ -102,10 +109,15 @@ public class ChattingManager : MonoBehaviour
     {
         if (is_choosing == false && nowChatIndex < chats[nowLevel].chatSO.chat.Length)        // 선택중이 아니라면
         {
-            if (nowLevel == 1 && nowChatIndex == 2) InvisibleFileManager.Instance.ShowRoundFile("1-1");     // 학교 파일 보내주기
-            bool state = chats[nowLevel].chatSO.chat[nowChatIndex].state == ChatState.Assistant ? false : true;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
+            bool state = chats[nowLevel].chatSO.chat[nowChatIndex].state == ChatState.Other ? false : true;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
             TextBox.Instance.InputText(state, chats[nowLevel].chatSO.chat[nowChatIndex].text, false);
             nowChatIndex++;
+
+            Debug.Log(nowChatIndex);
+            if (nowLevel == 4 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)      // 첫 학생과의 대화를 끝맺음 했다면.
+            {
+                StartCoroutine(EndOtherChat(5));
+            }
         }
         else if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length && is_choosing == false)       // 현재 쳇팅 정도를 넘었고 선택중인 상태가 아닐 때
         {
@@ -121,18 +133,21 @@ public class ChattingManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            Debug.LogError($"이게 왜 나와, 선택중? : {is_choosing}, 지금 어디야? : {nowLevel}, 지금 채팅은? : {nowChatIndex}");
+        }
+    }
+
+    private IEnumerator EndOtherChat(int next)
+    {
+        yield return delay2;
+        StartChatting(next);
     }
 
     public void answer(string str)     // 버튼을 클릭했을 때
     {
-        if (is_SelectCriminalTiming)
-        {
-            string name = str.Substring(4, 3);      // 3글자
-            TextBox.Instance.InputText(false, $"네. 그럼 {name}씨를 구속하겠습니다.");
-            StartCoroutine(End(name));
-            return;     // 끝끝
-        }
-
+        TextBox.Instance.CurrentSpeechColorChange();
         foreach (var replySO in chats[nowLevel].askAndReplySO)
         {
             if (replySO.ask.ask == str)
@@ -148,90 +163,80 @@ public class ChattingManager : MonoBehaviour
         if (chats[nowLevel].askAndReplySO[0].askName == "First")
         {
             string name = replys[0].Substring(0, replys[0].IndexOf(' '));
-            UpLoadFile(null, name);       // 파일을 업로드 하기 위해서, 보고서, 용의자, 피해자가 들어옴
+            UpLoadFile(name);       // 파일을 업로드 하기 위해서, 보고서, 학교 이 2개가 들어옴.
 
-            replyCount++;
+            yield return delay;
+            TextBox.Instance.InputText(false, replys[0]);       // "~~~을 옮겨드렸어요"
+            yield return delay;
 
-            if (replyCount == 2)
+            string remainder = null;
+            foreach (var noUse in chats[nowLevel].askAndReplySO)
             {
-                yield return delay;
-                TextBox.Instance.InputText(false, replys[0]);       // "~~~을 옮겨드렸어요"
-                yield return delay;
-                string remainder = null;
-                foreach (var noUse in chats[nowLevel].askAndReplySO)
+                if (noUse.ask.is_used == false)     // 남는거 하나 찾기
                 {
-                    if (noUse.ask.is_used == false)     // 남는거 하나 찾기
-                    {
-                        remainder = noUse.ask.ask;          // "~~~부터 줘"
-                        remainder = remainder.Substring(0, remainder.IndexOf("부터"));
-                    }
+                    remainder = noUse.ask.ask;          // "~~~부터 줘"
+                    remainder = remainder.Substring(0, remainder.IndexOf("부터"));
                 }
-                TextBox.Instance.InputText(false, $"그리고 나머지 {remainder}도 옮겨드렸어요.");
-
-                name = remainder.Substring(0, remainder.IndexOf(' '));
-                UpLoadFile(null, name);
-
-                replyCount = 0;
-                is_choosing = false;
-                chats[nowLevel].chatSO.is_Ask = false;
-
-                StartChatting(1);
-                yield break;
             }
-        }
+            TextBox.Instance.InputText(false, $"그리고 나머지 {remainder}도 옮겨드렸어요.");
+            yield return delay;
 
+            name = remainder.Substring(0, remainder.IndexOf(' '));
+            UpLoadFile(name);
+
+            is_choosing = false;
+            chats[nowLevel].chatSO.is_Ask = false;
+
+            StartChatting(1);       // 이어서 연결되는 것이기 때문에
+            yield break;
+
+        }
+        
         yield return delay;
-        foreach (var text in replys)
+
+        foreach (var text in replys)        // 기록들 추가해주기
         {
-            TextBox.Instance.CurrentSpeechColorChange();
             TextBox.Instance.InputText(false, text);
             yield return delay;     // 딜레이 위치 판단하기!
-            if (text == selectCriminal)
-            {
-                Debug.Log("범인찾기!");     // 범인을 찾는 것 적어주기!
-                is_SelectCriminalTiming = true;     // 지금은 범인을 찾는 것.
-                TextBox.Instance.InputText(true, $"범인은 이수연씨야");
-                TextBox.Instance.InputText(true, $"범인은 황준원씨야");
-                TextBox.Instance.InputText(true, $"범인은 곽현석씨야.");
-                TextBox.Instance.InputText(true, $"범인은 이태광씨야.");
-                yield break;
-            }
         }
 
         is_choosing = false;
+
+        // 이 아래로는 답변이 몇 개 이상일 때를 적어주는 곳임.
+        if (chats[nowLevel].askAndReplySO[0].askName == "StudentMeet")
+        {
+            StartCoroutine(EndOtherChat(3));
+            yield break;
+        }
+
+        if (chats[nowLevel].askAndReplySO[0].askName == "Student")
+        {
+            studentChatCount++;
+            if (studentChatCount == 3)
+            {
+                yield return delay;
+                StartChatting(4);
+                yield break;
+            }
+        }
+
+        Debug.Log("여기까지 온다고?");
         Chapter();
     }
 
-    private void UpLoadFile(string round, string name = null)
+    private void UpLoadFile(string round)
     {
-        if (name != null)
+        switch (round)
         {
-            switch (name)
-            {
-                case "보고서":
-                    InvisibleFileManager.Instance.ShowRoundFile("1-2");
-                    InvisibleFileManager.Instance.ShowRoundFile("1-2-1");
-                    break;
-                case "용의자":
-                    InvisibleFileManager.Instance.ShowRoundFile("1-3");
-                    break;
-                case "피해자":     // 유품
-                    InvisibleFileManager.Instance.ShowRoundFile("1-2");
-                    InvisibleFileManager.Instance.ShowRoundFile("1-2-2");
-                    break;
-                default:
-                    Debug.LogError("없는 이름입니다.");
-                    break;
-            }
-            return;
+            case "초동":
+                InvisibleFileManager.Instance.ShowRoundFile("보고서");
+                break;
+            case "학교":
+                InvisibleFileManager.Instance.ShowRoundFile("학교");
+                break;
+            default:
+                Debug.LogError($"{round}는 없는 이름입니다.");
+                break;
         }
-        InvisibleFileManager.Instance.ShowRoundFile(round);
-    }
-
-    private IEnumerator End(string answer)
-    {
-        yield return delay;
-        Debug.Log(answer + "로 끝남");
-        SelectSuspectManager.Instance.Select(answer);
     }
 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9db6579d4f87247aec95b1ee2865d6, type: 3}
+  m_Name: 4. AskAndReplySO_1
+  m_EditorClassIdentifier: 
+  askName: Student
+  ask:
+    ask: "\uD3C9\uC18C\uC5D0 \uD559\uC5C5 \uC2A4\uD2B8\uB808\uC2A4\uC5D0 \uC2DC\uB2EC\uB838\uB2C8?"
+    reply: "\uC800\uD76C \uD559\uAD50\uAC00 \uC774 \uADFC\uBC29\uC5D0\uC11C \uACF5\uBD80\uB85C
+      \uC720\uBA85\uD574\uC11C \uD559\uC5C5 \uC2A4\uD2B8\uB808\uC2A4\uB294 \uC544\uB9C8
+      \uC804\uAD50\uC0DD\uC774 \uACAA\uACE0 \uC788\uC744 \uAC70\uC608\uC694.\\\uC218\uC5F0\uC774\uB3C4
+      \uD559\uC5C5 \uC2A4\uD2B8\uB808\uC2A4\uB294 \uC788\uC5C8\uACA0\uC9C0\uB9CC...\\\uCD5C\uADFC\uC5D0
+      \uC131\uC801\uC774 \uB9CE\uC774 \uC62C\uB77C\uC11C \uD559\uC5C5 \uC2A4\uD2B8\uB808\uC2A4
+      \uB54C\uBB38 \uAC19\uC9C0\uB294 \uC54A\uC544\uC694."
+    is_used: 0

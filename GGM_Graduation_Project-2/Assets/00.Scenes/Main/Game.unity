@@ -4952,20 +4952,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c910b8e3553425749afbdfd392d14c6a, type: 3}
     - target: {fileID: 2172455667045873541, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
-      propertyPath: index
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2172455667045873541, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: showScale.x
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2172455667045873541, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: showScale.y
       value: 776
-      objectReference: {fileID: 0}
-    - target: {fileID: 2172455667045873541, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
-      propertyPath: assistantUse
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2765555979572780343, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: m_SizeDelta.y
@@ -16149,26 +16141,28 @@ MonoBehaviour:
     askAndReplySO:
     - {fileID: 11400000, guid: 91b65c038f554274d93719c9b1c34745, type: 2}
     - {fileID: 11400000, guid: aae8753189ba1504cb37bfd5c34e818d, type: 2}
-    - {fileID: 11400000, guid: 5119a8b8cd48e6a4b9ae02d11675c001, type: 2}
     whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
   - chatSO: {fileID: 11400000, guid: 8001a9f6478e47945a6aa6eef8062fae, type: 2}
     askAndReplySO: []
     whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
   - chatSO: {fileID: 11400000, guid: fee085853d1089046a076c372c8c0c6e, type: 2}
-    askAndReplySO: []
+    askAndReplySO:
+    - {fileID: 11400000, guid: 8c0d56c3d7bb3014f951e8d4d38a60eb, type: 2}
     whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
   - chatSO: {fileID: 11400000, guid: 04c3a4d9186a4a74680f01029b74e253, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
+    askAndReplySO:
+    - {fileID: 11400000, guid: 51940ee5d174d16469ec97b246a6ca14, type: 2}
+    - {fileID: 11400000, guid: 8e86abe819d89274d834a0cf6b266acc, type: 2}
+    - {fileID: 11400000, guid: 588e759679fff7748aca8276eb2fdee2, type: 2}
+    whoSO: {fileID: 11400000, guid: 443dcfb4c765f1045a65572cc6bec59f, type: 2}
   - chatSO: {fileID: 11400000, guid: 7f17983ac5e07644095453639163b299, type: 2}
     askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 3b5a3fcf359918e46bbceb1a20823365, type: 2}
-    askAndReplySO:
-    - {fileID: 11400000, guid: 9520458dcf5418140851c85b2c435c91, type: 2}
-    - {fileID: 11400000, guid: 8c1dc9c8cc675bf4aa9293518d510321, type: 2}
+    whoSO: {fileID: 11400000, guid: 443dcfb4c765f1045a65572cc6bec59f, type: 2}
+  - chatSO: {fileID: 11400000, guid: c82b6d022a9ea4345825f20b03bbaa3c, type: 2}
+    askAndReplySO: []
     whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
   nowLevel: 0
+  delayTime: 0.75
 --- !u!114 &594023515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23246,20 +23240,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 132d4cea08cec7e43af10958aa617c5a, type: 3}
     - target: {fileID: 2172455667045873541, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
-      propertyPath: index
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2172455667045873541, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: showScale.x
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2172455667045873541, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: showScale.y
       value: 555
-      objectReference: {fileID: 0}
-    - target: {fileID: 2172455667045873541, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
-      propertyPath: assistantUse
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2765555979572780343, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: m_SizeDelta.y
@@ -23410,18 +23396,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundFile:
-  - round: 1-1
-    Files:
-    - {fileID: 1285887173}
-  - round: 1-2
+  - round: "\uBCF4\uACE0\uC11C"
     Files:
     - {fileID: 1181589083}
-  - round: 1-3
+  - round: "\uD559\uAD50"
     Files:
-    - {fileID: 1723148459}
-  - round: 1-2-1
-    Files:
-    - {fileID: 1884471557}
+    - {fileID: 1285887173}
 --- !u!114 &841014628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39020,7 +39000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 216.6278
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -42991,7 +42971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6779606167719802697, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6779606167719802697, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -46778,7 +46758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 461.64783
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -51190,6 +51170,20 @@ PrefabInstance:
       propertyPath: m_text
       value: "\uB178\uD2B8.txt\n"
       objectReference: {fileID: 0}
+    - target: {fileID: 3491256015461934695, guid: 2c3f9bca0a7ec854eafcf26cc41f3a12, type: 3}
+      propertyPath: text
+      value: "\uD750\uADF8\uADF8.. \uC218\uC5F0\uC774\uAC00 \uB0A0 \uB54C\uB824 \u3160\u3160
+        \uD750\uD050\u3161\uD750\uADDC\n\uBBFC\uC11C\uAC00 \uC791\uC131\uD55C???
+        \uC655\uB530\uC758\uC789\u3139\uAE30 \uC368\uC8FC\uAE30 \u3134\u3134\u3134\u3147"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491256015461934695, guid: 2c3f9bca0a7ec854eafcf26cc41f3a12, type: 3}
+      propertyPath: index
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491256015461934695, guid: 2c3f9bca0a7ec854eafcf26cc41f3a12, type: 3}
+      propertyPath: assistantUse
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5077628976955892942, guid: 2c3f9bca0a7ec854eafcf26cc41f3a12, type: 3}
       propertyPath: m_Name
       value: SuyeonTextFile
@@ -52036,7 +52030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6179270782800822322, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: m_text
-      value: "\uCD08\uAE30 \uC218\uC0AC \n\uBCF4\uACE0\uC11C.png"
+      value: "\uCD08\uB3D9 \uC218\uC0AC \n\uBCF4\uACE0\uC11C.png"
       objectReference: {fileID: 0}
     - target: {fileID: 6779606167719802697, guid: 010f5b8df06bd9d4a93ef8c617408e40, type: 3}
       propertyPath: m_Pivot.x
@@ -53697,7 +53691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 339.13782
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -54881,7 +54875,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 25, y: 2}
-  m_SizeDelta: {x: 100, y: 50}
+  m_SizeDelta: {x: 519.1713, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1979682079
 MonoBehaviour:

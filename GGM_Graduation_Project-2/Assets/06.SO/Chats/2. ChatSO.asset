@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: 2. ChatSO
   m_EditorClassIdentifier: 
   chat:
-  - state: 1
-    text: "\uC218\uACE0\uD588\uC5B4."
-  - state: 1
-    text: "\uC7A5\uC18C\uB294 \uD559\uAD50\uC778\uAC00?"
   - state: 0
-    text: "\uB124 \uB9DE\uC544\uC694. \uD559\uAD50\uC5D0 \uB300\uD55C \uC790\uB8CC\uB3C4
-      \uC62C\uB824\uB4DC\uB9B4\uAC8C\uC694."
+    text: "\uD559\uAD50 \uD3F4\uB354\uB294 \uC7A5\uC18C\uC5D0 \uB530\uB77C \uD3F4\uB354\uAC00
+      \uB098\uB204\uC5B4\uC838\uC788\uC5B4\uC694."
+  - state: 0
+    text: "\uADF8\uB7FC \uC9C4\uC2E4\uC744 \uBC1D\uD788\uC2DC\uAE38 \uBC14\uB784\uAC8C\uC694."
+  - state: 1
+    text: "\uC218\uACE0\uD588\uB124."
   - state: 1
     text: "\uADF8\uB7FC \uC870\uC0AC\uB97C \uC2DC\uC791\uD558\uC9C0."
+  - state: 0
+    text: "\uB124. \uC54C\uACA0\uC2B5\uB2C8\uB2E4!"
   is_Ask: 0
