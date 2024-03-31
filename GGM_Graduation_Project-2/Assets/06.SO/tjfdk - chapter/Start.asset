@@ -14,23 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chapterName: Start
   cutScenes:
-  - cut: {fileID: -860633027, guid: d0a908cc248981d44a9a5716f622d181, type: 3}
+  - cut: {fileID: 21300000, guid: 4fed63953deba9f4b8edfdcbe9a63dbb, type: 3}
     texts:
-    - text: "\uD558\uD558 \uBC30 \uC874\uB098 \uACE0\uD504\uB124"
-      isEnd: 0
-    - text: "\uB0B4 \uC774\uB984\uC740 \uBA85\uD0D0\uC815, \uCF54\uB09C\uC774\uC8E0"
-      isEnd: 0
     - text: ...
       isEnd: 0
-    - text: "\uAC1C\uBC1C \uC548 \uD558\uACE0 \uCC45 \uC77D\uACE0 \uC2F6\uB2E4"
-      isEnd: 0
-  - cut: {fileID: 21300000, guid: fd839baf1c8cedf42aa2dd757b6664b0, type: 3}
+  - cut: {fileID: 21300000, guid: f6befe3053210c244ace7a5083625541, type: 3}
     texts:
-    - text: "\uC6D4\uAC04\uC774 \uBA70\uCE60\uB3C4 \uC548 \uB0A8\uC558\uB294\uB370?"
-      isEnd: 0
-    - text: "\uB2C8\uAC00 \uAC10\uD788 \uCC45\uC744 \uC77D\uACA0\uB2E4\uACE0? "
-      isEnd: 0
-    - text: "\uCC45 \uC77D\uC744 \uC2DC\uAC04\uC774 \uC5C6\uB2E4\uB294 \uAC74 \uBCC0\uBA85\uC774\uB2E4"
-      isEnd: 0
-    - text: "\"\uC77C\uD574\uB77C\""
+    - text: "\uCFF5!"
       isEnd: 0
