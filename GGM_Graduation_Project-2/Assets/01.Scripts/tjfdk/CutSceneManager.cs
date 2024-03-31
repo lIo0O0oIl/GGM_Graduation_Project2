@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -147,5 +148,8 @@ public class CutSceneManager : MonoBehaviour
         {
             temp.isEnd = true;
         });
+
+        if (temp.sound != null)
+            SoundManager.Instance.PlaySFX(temp.sound);
     }
 }
