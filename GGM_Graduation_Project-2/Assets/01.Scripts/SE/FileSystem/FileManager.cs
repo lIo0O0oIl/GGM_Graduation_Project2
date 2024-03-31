@@ -101,6 +101,7 @@ public class FileManager : MonoBehaviour
             {
                 foreach (var file in fileTree.Files)
                 {
+                    Debug.Log(file.name);
                     file.SetActive(true);
                 }
             }
@@ -187,15 +188,12 @@ public class FileManager : MonoBehaviour
                 name = name.Remove(lastSpaceIndex, dotIndex - lastSpaceIndex);
             }
         }
-        Debug.Log(name);
         return name;
     }
 
     #region 이미지 폴더 열기 관련 함수
     public void OpenImageFile(Sprite image, Vector2 scale, string name)
     {
-        Debug.Log("이미지 열기");
-
         showImage.sprite = image;
         imageSize.sizeDelta = scale;
         imageName.text = RemoveSpace(name);
@@ -211,8 +209,6 @@ public class FileManager : MonoBehaviour
     #region 텍스트 폴더 열기 관련 함수
     public void OpenTextFile(string text, string name)
     {
-        Debug.Log("텍스트 열기");
-
         textNotePanel.SetActive(true);
         showText.text = text;
         textName.text = RemoveSpace(name);
@@ -227,8 +223,6 @@ public class FileManager : MonoBehaviour
     #region 잠김 파일 열기 관련 함수
     public void OpenLock(string fileName, string password, Image lockImage)
     {
-        Debug.Log("잠금 열기");
-
         lockPanel.SetActive(true);
         lockSystem.Init(fileName, password, lockImage);
     }

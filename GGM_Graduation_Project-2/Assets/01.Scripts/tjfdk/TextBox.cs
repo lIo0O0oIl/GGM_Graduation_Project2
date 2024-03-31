@@ -158,7 +158,7 @@ public class TextBox : MonoBehaviour
         ChattingManager.Instance.answer(currentSelectedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
     }
 
-    public void CurrentSpeechColorChange()
+    public void CurrentSpeechColorChange()      // 지금 내가 말하고 있는 친구의 색을 모두 변경
     {
         for (int i = 0; i < currentSpeech.childCount; ++i)
         {

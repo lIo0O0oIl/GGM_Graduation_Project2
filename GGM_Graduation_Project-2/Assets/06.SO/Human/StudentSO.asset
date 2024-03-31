@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b9db6579d4f87247aec95b1ee2865d6, type: 3}
-  m_Name: 6. AskAndReplySO_1
+  m_Script: {fileID: 11500000, guid: c10b2401ac0dc2949879f7522c21225f, type: 3}
+  m_Name: StudentSO
   m_EditorClassIdentifier: 
-  askName: End
-  ask:
-    ask: "\uBC94\uC778\uC744 \uCC3E\uC740 \uAC83 \uAC19\uC544."
-    reply: "\uC5B4\uB5A4 \uBD84\uC778\uAC00\uC694?\\\uC0AC\uB78C\uC774\uB984"
-    is_used: 0
+  humanName: "\uAC19\uC740 \uBC18 \uD559\uC0DD"

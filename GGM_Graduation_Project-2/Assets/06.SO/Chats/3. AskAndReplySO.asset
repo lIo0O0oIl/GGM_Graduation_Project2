@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40ee679ddf4086741addd190dd22a39e, type: 3}
-  m_Name: 5. ChatSO
+  m_Script: {fileID: 11500000, guid: 1b9db6579d4f87247aec95b1ee2865d6, type: 3}
+  m_Name: 3. AskAndReplySO
   m_EditorClassIdentifier: 
-  chat:
-  - state: 1
-    text: "\uADF8\uB807\uAD6C\uB098. \uD611\uC870\uD574\uC918\uC11C \uACE0\uB9C8\uC6CC."
-  is_Ask: 0
+  askName: StudentMeet
+  ask:
+    ask: "\uBD80\uD0C1 \uD558\uC9C0."
+    reply: "\uBC14\uB85C \uC5F0\uACB0\uD574\uB4DC\uB9B4\uAC8C\uC694."
+    is_used: 0
