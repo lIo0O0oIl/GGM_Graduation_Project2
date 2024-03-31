@@ -101,6 +101,7 @@ public class FileManager : MonoBehaviour
             {
                 foreach (var file in fileTree.Files)
                 {
+                    Debug.Log(file.name);
                     file.SetActive(true);
                 }
             }

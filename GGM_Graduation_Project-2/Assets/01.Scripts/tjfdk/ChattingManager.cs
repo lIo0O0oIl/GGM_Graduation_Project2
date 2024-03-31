@@ -64,7 +64,6 @@ public class ChattingManager : MonoBehaviour
 
     public void StartChatting(int index)
     {
-        Debug.Log(index);
         nowChatIndex = 0;
         nowLevel = index;
         if (index != 0) StopCoroutine(StartChattingCoroutine(index - 1));       // 전에꺼 꺼주기
@@ -74,8 +73,8 @@ public class ChattingManager : MonoBehaviour
     private IEnumerator StartChattingCoroutine(int index)
     {
         // 쳇팅창 정보 설정해주기
-        Debug.Log($"{chattingHumanName.text}, {chats[index].whoSO.humanName}");
-        if (chattingHumanName.text != chats[index].whoSO.humanName)     // 이름이 다르면
+        //Debug.Log($"{chattingHumanName.text}, {chats[index].whoSO.humanName}");
+        if (chattingHumanName.text != chats[index].whoSO.humanName)     // 다른 사람과 대화를 하는 것이라면
         {
             // 지금까지 있던 대화 다 지워주기
             for (int i = 0; i < chatContainer.transform.childCount; i++)
@@ -97,7 +96,6 @@ public class ChattingManager : MonoBehaviour
 
         int chatLenght = chats[index].chatSO.chat.Length;       // 쳇팅들의 길이
         int askLenght = chats[index].askAndReplySO.Length == 0 ? 0 : 1;      // 질문들의 개수
-        Debug.Log(chatLenght + askLenght);
         for (int i = 0; i < chatLenght + askLenght; i++)
         {
             Chapter();
@@ -113,10 +111,14 @@ public class ChattingManager : MonoBehaviour
             TextBox.Instance.InputText(state, chats[nowLevel].chatSO.chat[nowChatIndex].text, false);
             nowChatIndex++;
 
-            Debug.Log(nowChatIndex);
             if (nowLevel == 4 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)      // 첫 학생과의 대화를 끝맺음 했다면.
             {
                 StartCoroutine(EndOtherChat(5));
+            }
+
+            if (nowLevel == 5 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)    // 일진의 정보를 요청했다면
+            {
+                UpLoadFile("일진정보");
             }
         }
         else if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length && is_choosing == false)       // 현재 쳇팅 정도를 넘었고 선택중인 상태가 아닐 때
@@ -139,11 +141,6 @@ public class ChattingManager : MonoBehaviour
         }
     }
 
-    private IEnumerator EndOtherChat(int next)
-    {
-        yield return delay2;
-        StartChatting(next);
-    }
 
     public void answer(string str)     // 버튼을 클릭했을 때
     {
@@ -158,7 +155,7 @@ public class ChattingManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ReplyPrint(string[] replys)     // first 질문들일 때 대답하도록
+    private IEnumerator ReplyPrint(string[] replys)     // 질문들이 들어올 때 대답하도록
     {
         if (chats[nowLevel].askAndReplySO[0].askName == "First")
         {
@@ -194,7 +191,7 @@ public class ChattingManager : MonoBehaviour
         
         yield return delay;
 
-        foreach (var text in replys)        // 기록들 추가해주기
+        foreach (var text in replys)        // 대답들 추가해주기
         {
             TextBox.Instance.InputText(false, text);
             yield return delay;     // 딜레이 위치 판단하기!
@@ -212,10 +209,9 @@ public class ChattingManager : MonoBehaviour
         if (chats[nowLevel].askAndReplySO[0].askName == "Student")
         {
             studentChatCount++;
-            if (studentChatCount == 3)
+            if (studentChatCount == 3)      // 3개의 질문을 했다면
             {
-                yield return delay;
-                StartChatting(4);
+                StartCoroutine(EndOtherChat(4));
                 yield break;
             }
         }
@@ -224,15 +220,26 @@ public class ChattingManager : MonoBehaviour
         Chapter();
     }
 
+    private IEnumerator EndOtherChat(int next)
+    {
+        yield return delay2;
+        StartChatting(next);
+    }
+
     private void UpLoadFile(string round)
     {
         switch (round)
         {
             case "초동":
+            case "보고서":
                 InvisibleFileManager.Instance.ShowRoundFile("보고서");
                 break;
             case "학교":
+            case "학교에 ":
                 InvisibleFileManager.Instance.ShowRoundFile("학교");
+                break;
+            case "일진정보":
+                InvisibleFileManager.Instance.ShowRoundFile("일진정보");
                 break;
             default:
                 Debug.LogError($"{round}는 없는 이름입니다.");
