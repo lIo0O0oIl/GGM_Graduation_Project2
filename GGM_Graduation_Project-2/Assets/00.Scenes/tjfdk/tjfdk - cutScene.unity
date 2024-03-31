@@ -356,6 +356,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a2cd43ccbb7b2b44bae761c4747fafe5, type: 3}
   - soundName: popup
     clip: {fileID: 8300000, guid: dcb486e72839ee342a951d03498e9007, type: 3}
+  - soundName: typing
+    clip: {fileID: 8300000, guid: 69785c176c52d214d82cebd4bf8dafb6, type: 3}
   audioSourceBgmPlayers: {fileID: 548184230}
   audioSourceEffectsPlayers: {fileID: 548184229}
 --- !u!4 &548184232

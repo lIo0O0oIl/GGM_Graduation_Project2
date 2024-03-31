@@ -144,9 +144,11 @@ public class CutSceneManager : MonoBehaviour
         // 이전 텍스트 삭제
         text.text = "";
         //다트윈으로 텍스트 작성
-        text.DOText(temp.text, 3f).OnComplete(() =>
+        SoundManager.Instance.PlaySFX("typing");
+        text.DOText(temp.text, 1.5f).OnComplete(() =>
         {
             temp.isEnd = true;
+            SoundManager.Instance.StopSFX();
         });
 
         if (temp.sound != null)
