@@ -47,7 +47,7 @@ public class ChattingManager : MonoBehaviour
         delay2 = new WaitForSeconds(delayTime * 3);
 
         chattingHumanName.text = chats[0].whoSO.humanName;
-        StartChatting(0);           // 가장 처음은 0으로 해두기
+        StartChatting(5);           // 가장 처음은 0으로 해두기
     }
 
     private void OnDisable()        // SO 초기화
@@ -87,7 +87,10 @@ public class ChattingManager : MonoBehaviour
                 Debug.Log("용의자 대화 내역 사진식으로 저장해주기!");
                 for (int i = 0; i < assistantChatList.Count; i++)
                 {
-                    assistantChatList[i].gameObject.SetActive(true);
+                    if (assistantChatList[i].gameObject != null)
+                    {
+                        assistantChatList[i].gameObject.SetActive(true);
+                    }
                 }
             }
 
@@ -116,10 +119,13 @@ public class ChattingManager : MonoBehaviour
                 StartCoroutine(EndOtherChat(5));
             }
 
-            if (nowLevel == 5 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)    // 일진의 정보를 요청했다면
+            if (nowLevel == 5)    // 일진의 정보를 요청했다면
             {
-                UpLoadFile("일진정보");
+                if (nowChatIndex == 1) UpLoadFile("채팅파일");
+                if (nowChatIndex == 5) UpLoadFile("강지현채팅");
             }
+
+
         }
         else if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length && is_choosing == false)       // 현재 쳇팅 정도를 넘었고 선택중인 상태가 아닐 때
         {
@@ -211,6 +217,7 @@ public class ChattingManager : MonoBehaviour
             studentChatCount++;
             if (studentChatCount == 3)      // 3개의 질문을 했다면
             {
+                Debug.Log("3개 이상");
                 StartCoroutine(EndOtherChat(4));
                 yield break;
             }
@@ -235,11 +242,14 @@ public class ChattingManager : MonoBehaviour
                 InvisibleFileManager.Instance.ShowRoundFile("보고서");
                 break;
             case "학교":
-            case "학교에 ":
+            case "학교에":
                 InvisibleFileManager.Instance.ShowRoundFile("학교");
                 break;
-            case "일진정보":
-                InvisibleFileManager.Instance.ShowRoundFile("일진정보");
+            case "채팅파일":
+                InvisibleFileManager.Instance.ShowRoundFile("채팅파일");
+                break;
+            case "강지현채팅":
+                InvisibleFileManager.Instance.ShowRoundFile("강지현채팅");
                 break;
             default:
                 Debug.LogError($"{round}는 없는 이름입니다.");
