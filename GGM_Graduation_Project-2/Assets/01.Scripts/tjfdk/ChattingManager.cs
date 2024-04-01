@@ -261,6 +261,7 @@ public class ChattingManager : MonoBehaviour
 
     private void UpLoadFile(string round)
     {
+        Debug.Log(round);
         switch (round)
         {
             case "√ µø":
