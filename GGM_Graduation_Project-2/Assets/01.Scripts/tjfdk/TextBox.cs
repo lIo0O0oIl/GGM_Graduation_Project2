@@ -84,7 +84,7 @@ public class TextBox : MonoBehaviour
         HiddingText(speech);
         AssistantChatListAdd(speech);       // 조수랑 대화면 리스트에 추가
         speech.transform.SetParent(currentSpeech);
-        StartCoroutine(OpenText(speech, ask));
+        StartCoroutine(OpenText(speech, user, ask));
         LineAlignment();
     }
 
@@ -193,10 +193,10 @@ public class TextBox : MonoBehaviour
         _temp.GetComponentInChildren<TextMeshProUGUI>().color = Color.clear;
     }
 
-    public IEnumerator OpenText(GameObject _temp, bool _isAsk)
+    public IEnumerator OpenText(GameObject _temp, bool _isUser, bool _isAsk)
     {
         yield return new WaitForSeconds(0.25f);
-        if (_isAsk)
+        if (_isUser && _isAsk)
         {
             Color color;
             ColorUtility.TryParseHtmlString("#CCFFB8", out color);
