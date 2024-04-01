@@ -129,10 +129,10 @@ public class ChattingManager : MonoBehaviour
                 StartCoroutine(EndOtherChat(8));
             }
 
-            if (nowLevel == 8 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length - 1)
+            if (nowLevel == 8)
             {
-                Debug.Log("부장교사물품");
-                UpLoadFile("부장교사물품");
+                if (nowChatIndex == 3) UpLoadFile("지현대화정리");
+                if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length - 1) UpLoadFile("부장교사물품");
             }
 
             if (nowLevel == 10 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
@@ -140,15 +140,26 @@ public class ChattingManager : MonoBehaviour
                 StartCoroutine(EndOtherChat(11));
             }       // 부장과 교사 끝남
 
+            if (nowLevel == 11 && nowChatIndex == 3)
+            {
+                UpLoadFile("부장대화정리");
+            }
+
             if (nowLevel == 13 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
             {
                 StartCoroutine(EndOtherChat(14));
             }       // 황준원와 대화 끝
 
+            if (nowLevel == 14 && nowChatIndex == 10)
+            {
+                UpLoadFile("준원대화정리");
+            }
+
             if (nowLevel == 15 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
             {
                 Debug.Log("화면 암전");
                 Debug.Log("저희 학교의 자살 사건이 이번이 처음이 아니에요...");
+                GameManager.Instance.DemoEnd();
             }
         }
         else if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length && is_choosing == false)       // 현재 쳇팅 정도를 넘었고 선택중인 상태가 아닐 때
@@ -296,6 +307,15 @@ public class ChattingManager : MonoBehaviour
                 break;
             case "부장교사물품":
                 InvisibleFileManager.Instance.ShowRoundFile("부장교사물품");
+                break;
+            case "지현대화정리":
+                InvisibleFileManager.Instance.ShowRoundFile("지현대화정리");
+                break;
+            case "부장대화정리":
+                InvisibleFileManager.Instance.ShowRoundFile("부장대화정리");
+                break;
+            case "준원대화정리":
+                InvisibleFileManager.Instance.ShowRoundFile("준원대화정리");
                 break;
             default:
                 Debug.LogError($"{round}는 없는 이름입니다.");
