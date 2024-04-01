@@ -47,7 +47,7 @@ public class ChattingManager : MonoBehaviour
         delay2 = new WaitForSeconds(delayTime * 3);
 
         chattingHumanName.text = chats[0].whoSO.humanName;
-        StartChatting(5);           // 가장 처음은 0으로 해두기
+        StartChatting(0);           // 가장 처음은 0으로 해두기
     }
 
     private void OnDisable()        // SO 초기화
@@ -122,7 +122,7 @@ public class ChattingManager : MonoBehaviour
             if (nowLevel == 5)    // 일진의 정보를 요청했다면
             {
                 if (nowChatIndex == 1) UpLoadFile("채팅파일");
-                if (nowChatIndex == 5) UpLoadFile("강지현채팅");
+                if (nowChatIndex == 5) UpLoadFile("강지현물품");
             }
 
             if (nowLevel == 7 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
@@ -274,8 +274,8 @@ public class ChattingManager : MonoBehaviour
             case "채팅파일":
                 InvisibleFileManager.Instance.ShowRoundFile("채팅파일");
                 break;
-            case "강지현채팅":
-                InvisibleFileManager.Instance.ShowRoundFile("강지현채팅");
+            case "강지현물품":
+                InvisibleFileManager.Instance.ShowRoundFile("강지현물품");
                 break;
             case "부장교사물품":
                 InvisibleFileManager.Instance.ShowRoundFile("부장교사물품");
