@@ -5263,6 +5263,19 @@ MonoBehaviour:
     askAndReplySO:
     - {fileID: 11400000, guid: 2a8e2bc5e481d1d468e79cf2138a1761, type: 2}
     whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
+  - chatSO: {fileID: 11400000, guid: 01456519459627d42818765a9287ba60, type: 2}
+    askAndReplySO: []
+    whoSO: {fileID: 11400000, guid: f944d3b96e4a57740a863365df2d75dd, type: 2}
+  - chatSO: {fileID: 11400000, guid: f79c26b6434bc334f96d63dd8167bc7e, type: 2}
+    askAndReplySO: []
+    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
+  - chatSO: {fileID: 11400000, guid: 4e2ee2ea886f9404ba78be72847e94ce, type: 2}
+    askAndReplySO:
+    - {fileID: 11400000, guid: b5432073313d7de48ac5da0b769e7ebb, type: 2}
+    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
+  - chatSO: {fileID: 11400000, guid: 6f857286cd0ea234798b8ae3469e0201, type: 2}
+    askAndReplySO: []
+    whoSO: {fileID: 11400000, guid: 465bb856cda12004cb9f510b36a3f752, type: 2}
   nowLevel: 0
   delayTime: 0.75
 --- !u!114 &594023515
@@ -7305,6 +7318,8 @@ MonoBehaviour:
     Files:
     - {fileID: 593690424}
     - {fileID: 877756415}
+  - round: "\uBD80\uC7A5\uAD50\uC0AC\uBB3C\uD488"
+    Files: []
   - round: NoShowwww
     Files: []
 --- !u!114 &841014628

@@ -125,7 +125,21 @@ public class ChattingManager : MonoBehaviour
                 if (nowChatIndex == 5) UpLoadFile("강지현채팅");
             }
 
+            if (nowLevel == 7 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
+            {
+                StartCoroutine(EndOtherChat(8));
+            }
 
+            if (nowLevel == 8 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length - 1)
+            {
+                Debug.Log("부장교사물품");
+                UpLoadFile("부장교사물품");
+            }
+
+            if (nowLevel == 10 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
+            {
+                //StartCoroutine(EndOtherChat(11));
+            }
         }
         else if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length && is_choosing == false)       // 현재 쳇팅 정도를 넘었고 선택중인 상태가 아닐 때
         {
@@ -194,7 +208,7 @@ public class ChattingManager : MonoBehaviour
             yield break;
 
         }
-        
+
         yield return delay;
 
         foreach (var text in replys)        // 대답들 추가해주기
@@ -221,6 +235,18 @@ public class ChattingManager : MonoBehaviour
                 StartCoroutine(EndOtherChat(4));
                 yield break;
             }
+        }
+
+        if (chats[nowLevel].askAndReplySO[0].askName == "JihyeonMeet")
+        {
+            StartCoroutine(EndOtherChat(7));
+            yield break;
+        }
+
+        if (chats[nowLevel].askAndReplySO[0].askName == "HyeonSeokMeet")
+        {
+            StartCoroutine(EndOtherChat(10));
+            yield break;
         }
 
         Debug.Log("여기까지 온다고?");
@@ -250,6 +276,9 @@ public class ChattingManager : MonoBehaviour
                 break;
             case "강지현채팅":
                 InvisibleFileManager.Instance.ShowRoundFile("강지현채팅");
+                break;
+            case "부장교사물품":
+                InvisibleFileManager.Instance.ShowRoundFile("부장교사물품");
                 break;
             default:
                 Debug.LogError($"{round}는 없는 이름입니다.");
