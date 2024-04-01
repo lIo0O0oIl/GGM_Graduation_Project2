@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
 
 public class TextBox : MonoBehaviour
 {
@@ -32,14 +31,6 @@ public class TextBox : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    public IEnumerator tlqkftlqkf(GameObject temp)
-    {
-        yield return new WaitForSeconds(0.5f);
-        temp.GetComponent<Image>().enabled = true;
-        temp.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
-        LineAlignment();
     }
 
     public void InputText(bool user, string msg, bool ask = true)       // user가 true 일면 플레이어가 말하는 것임.
@@ -90,14 +81,10 @@ public class TextBox : MonoBehaviour
             speech = Instantiate(speechBalloon_left);
             speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
         }
-        speech.transform.SetParent(currentSpeech);
-        //speech.GetComponent<Image>().enabled = false;
-        //speech.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
-
-        //StartCoroutine(tlqkftlqkf(speech));
-
+        HiddingText(speech);
         AssistantChatListAdd(speech);       // 조수랑 대화면 리스트에 추가
-
+        speech.transform.SetParent(currentSpeech);
+        StartCoroutine(OpenText(speech, ask));
         LineAlignment();
     }
 
@@ -182,21 +169,41 @@ public class TextBox : MonoBehaviour
         }
     }
 
-    private IEnumerator LineRefresh()
-    {
-        yield return new WaitForSeconds(0.1f);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(chatBoxParent);
-    }
-
     private void LineAlignment()
     {
         StartCoroutine(LineRefresh());
         StartCoroutine(ScrollRectDown());
     }
 
+    private IEnumerator LineRefresh()
+    {
+        yield return new WaitForSeconds(0.1f);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(chatBoxParent);
+    }
+
     private IEnumerator ScrollRectDown()
     {
         yield return new WaitForSeconds(0.1f);
         scrollRect.normalizedPosition = new Vector2(0f, 0);
+    }
+
+    private void HiddingText(GameObject _temp)
+    {
+        _temp.GetComponent<Image>().color = Color.clear;
+        _temp.GetComponentInChildren<TextMeshProUGUI>().color = Color.clear;
+    }
+
+    public IEnumerator OpenText(GameObject _temp, bool _isAsk)
+    {
+        yield return new WaitForSeconds(0.25f);
+        if (_isAsk)
+        {
+            Color color;
+            ColorUtility.TryParseHtmlString("#CCFFB8", out color);
+            _temp.GetComponent<Image>().color = color;
+        }
+        else
+            _temp.GetComponent<Image>().color = Color.white;
+        _temp.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
     }
 }

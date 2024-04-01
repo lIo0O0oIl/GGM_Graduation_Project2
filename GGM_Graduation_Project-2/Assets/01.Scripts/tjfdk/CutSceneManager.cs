@@ -22,21 +22,21 @@ public class CutSceneManager : MonoBehaviour
 
     private void Update()
     {
-        // 테스트를 위해 작성... 당연하게도 셋엑티브 꺼져 있으면 입력 안 먹는다...
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            CutScene(true, "Start");
-        }
+        //// 테스트를 위해 작성... 당연하게도 셋엑티브 꺼져 있으면 입력 안 먹는다...
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    CutScene(true, "Start");
+        //}
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            CutScene(true,"End");
-        }
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    CutScene(true,"End");
+        //}
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            CutScene(false);
-        }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    CutScene(false);
+        //}
     }
 
     // 컷 씬 호출 함수
