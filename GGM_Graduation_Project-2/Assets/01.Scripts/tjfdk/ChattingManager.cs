@@ -138,7 +138,18 @@ public class ChattingManager : MonoBehaviour
 
             if (nowLevel == 10 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
             {
-                //StartCoroutine(EndOtherChat(11));
+                StartCoroutine(EndOtherChat(11));
+            }       // 부장과 교사 끝남
+
+            if (nowLevel == 13 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
+            {
+                StartCoroutine(EndOtherChat(14));
+            }       // 황준원와 대화 끝
+
+            if (nowLevel == 15 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
+            {
+                Debug.Log("화면 암전");
+                Debug.Log("저희 학교의 자살 사건이 이번이 처음이 아니에요...");
             }
         }
         else if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length && is_choosing == false)       // 현재 쳇팅 정도를 넘었고 선택중인 상태가 아닐 때
@@ -246,6 +257,12 @@ public class ChattingManager : MonoBehaviour
         if (chats[nowLevel].askAndReplySO[0].askName == "HyeonSeokMeet")
         {
             StartCoroutine(EndOtherChat(10));
+            yield break;
+        }
+
+        if (chats[nowLevel].askAndReplySO[0].askName == "LastMeet")
+        {
+            StartCoroutine(EndOtherChat(15));
             yield break;
         }
 
