@@ -122,7 +122,7 @@ public class ChattingManager : MonoBehaviour
             if (nowLevel == 5)    // 일진의 정보를 요청했다면
             {
                 if (nowChatIndex == 1) UpLoadFile("채팅파일");
-                if (nowChatIndex == 5) UpLoadFile("강지현채팅");
+                if (nowChatIndex == 5) UpLoadFile("강지현물품");
             }
 
             if (nowLevel == 7 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
@@ -138,8 +138,13 @@ public class ChattingManager : MonoBehaviour
 
             if (nowLevel == 10 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
             {
-                //StartCoroutine(EndOtherChat(11));
-            }
+                StartCoroutine(EndOtherChat(11));
+            }       // 부장교사와 면담
+
+            if (nowLevel == 13 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
+            {
+                StartCoroutine(EndOtherChat(14));
+            }       // 황준원 학생 면담.
         }
         else if (nowChatIndex >= chats[nowLevel].chatSO.chat.Length && is_choosing == false)       // 현재 쳇팅 정도를 넘었고 선택중인 상태가 아닐 때
         {
@@ -249,6 +254,18 @@ public class ChattingManager : MonoBehaviour
             yield break;
         }
 
+        if (chats[nowLevel].askAndReplySO[0].askName == "JunWonMeet")
+        {
+            StartCoroutine(EndOtherChat(13));
+            yield break;
+        }
+
+        if (chats[nowLevel].askAndReplySO[0].askName == "LastMeet")
+        {
+            StartCoroutine(EndOtherChat(15));
+            yield break;
+        }
+
         Debug.Log("여기까지 온다고?");
         Chapter();
     }
@@ -274,8 +291,8 @@ public class ChattingManager : MonoBehaviour
             case "채팅파일":
                 InvisibleFileManager.Instance.ShowRoundFile("채팅파일");
                 break;
-            case "강지현채팅":
-                InvisibleFileManager.Instance.ShowRoundFile("강지현채팅");
+            case "강지현물품":
+                InvisibleFileManager.Instance.ShowRoundFile("강지현물품");
                 break;
             case "부장교사물품":
                 InvisibleFileManager.Instance.ShowRoundFile("부장교사물품");
