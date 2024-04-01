@@ -57,7 +57,7 @@ public class CutSceneManager : MonoBehaviour
         // ÄÆ ¾À Á¾·áÁ¡
         if (isOpen == false)
         {
-            Debug.Log("ÄÆ¾À ´ÝÇú´Ù!!!!");
+            ChattingManager.Instance.StartChatting(0);           // °¡Àå Ã³À½Àº 0À¸·Î ÇØµÎ±â
         }
     }
 

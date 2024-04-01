@@ -47,7 +47,6 @@ public class ChattingManager : MonoBehaviour
         delay2 = new WaitForSeconds(delayTime * 3);
 
         chattingHumanName.text = chats[0].whoSO.humanName;
-        StartChatting(0);           // 가장 처음은 0으로 해두기
     }
 
     private void OnDisable()        // SO 초기화
