@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class TextBox : MonoBehaviour
 {
@@ -31,6 +32,14 @@ public class TextBox : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    public IEnumerator tlqkftlqkf(GameObject temp)
+    {
+        yield return new WaitForSeconds(0.5f);
+        temp.GetComponent<Image>().enabled = true;
+        temp.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
+        LineAlignment();
     }
 
     public void InputText(bool user, string msg, bool ask = true)       // user가 true 일면 플레이어가 말하는 것임.
@@ -81,8 +90,14 @@ public class TextBox : MonoBehaviour
             speech = Instantiate(speechBalloon_left);
             speech.GetComponentInChildren<TextMeshProUGUI>().text = msg;
         }
-        AssistantChatListAdd(speech);       // 조수랑 대화면 리스트에 추가
         speech.transform.SetParent(currentSpeech);
+        //speech.GetComponent<Image>().enabled = false;
+        //speech.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+
+        //StartCoroutine(tlqkftlqkf(speech));
+
+        AssistantChatListAdd(speech);       // 조수랑 대화면 리스트에 추가
+
         LineAlignment();
     }
 
