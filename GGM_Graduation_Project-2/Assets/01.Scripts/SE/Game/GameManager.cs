@@ -24,9 +24,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator End()
     {
+        yield return new WaitForSeconds(1.0f);
         Canvas.gameObject.SetActive(true);
-        panel.DOFade(1, 2);
-        yield return new WaitForSeconds(2);
+        panel.DOFade(1, 2f);
+        yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

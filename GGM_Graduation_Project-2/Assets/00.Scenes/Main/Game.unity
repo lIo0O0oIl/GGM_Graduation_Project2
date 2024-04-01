@@ -7688,6 +7688,7 @@ MonoBehaviour:
     - {fileID: 593690424}
     - {fileID: 877756415}
     - {fileID: 1917222833}
+    - {fileID: 1508675833}
 --- !u!114 &841014629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15716,7 +15717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1517037178000250096, guid: ea40df5c5565c894da38e7725b9cd39b, type: 3}
       propertyPath: is_Lock
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1517037178000250096, guid: ea40df5c5565c894da38e7725b9cd39b, type: 3}
       propertyPath: is_puzzle

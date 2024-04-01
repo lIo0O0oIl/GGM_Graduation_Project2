@@ -140,9 +140,10 @@ public class ChattingManager : MonoBehaviour
                 StartCoroutine(EndOtherChat(11));
             }       // 부장과 교사 끝남
 
-            if (nowLevel == 11 && nowChatIndex == 3)
+            if (nowLevel == 11)
             {
-                UpLoadFile("부장대화정리");
+                if (nowChatIndex == 2) UpLoadFile("황준원물품");
+                if (nowChatIndex == 3) UpLoadFile("부장대화정리");
             }
 
             if (nowLevel == 13 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
@@ -150,9 +151,10 @@ public class ChattingManager : MonoBehaviour
                 StartCoroutine(EndOtherChat(14));
             }       // 황준원와 대화 끝
 
-            if (nowLevel == 14 && nowChatIndex == 10)
+            if (nowLevel == 14)
             {
-                UpLoadFile("준원대화정리");
+                if (nowChatIndex == 3) UpLoadFile("타살정황발견");
+                if (nowChatIndex == 10) UpLoadFile("준원대화정리");
             }
 
             if (nowLevel == 15 && nowChatIndex >= chats[nowLevel].chatSO.chat.Length)
@@ -308,6 +310,9 @@ public class ChattingManager : MonoBehaviour
             case "부장교사물품":
                 InvisibleFileManager.Instance.ShowRoundFile("부장교사물품");
                 break;
+            case "황준원물품":
+                InvisibleFileManager.Instance.ShowRoundFile("황준원물품");
+                break;
             case "지현대화정리":
                 InvisibleFileManager.Instance.ShowRoundFile("지현대화정리");
                 break;
@@ -316,6 +321,9 @@ public class ChattingManager : MonoBehaviour
                 break;
             case "준원대화정리":
                 InvisibleFileManager.Instance.ShowRoundFile("준원대화정리");
+                break;
+            case "타살정황발견":
+                InvisibleFileManager.Instance.ShowRoundFile("타살정황발견");
                 break;
             default:
                 Debug.LogError($"{round}는 없는 이름입니다.");
