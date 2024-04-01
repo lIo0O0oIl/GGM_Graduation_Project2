@@ -20,6 +20,11 @@ public class CutSceneManager : MonoBehaviour
     [Header("Data")]
     [SerializeField] private List<CutSceneSO> cutSceneChapters = new List<CutSceneSO>();
 
+    private void Start()
+    {
+        CutScene(true, "Start");
+    }
+
     private void Update()
     {
         //// 테스트를 위해 작성... 당연하게도 셋엑티브 꺼져 있으면 입력 안 먹는다...
@@ -48,6 +53,12 @@ public class CutSceneManager : MonoBehaviour
         // 컷 씬의 이름 함수 호출
         if (isOpen && _chapterName != "")
             PlayChapter(_chapterName);
+
+        // 컷 씬 종료점
+        if (isOpen == false)
+        {
+            Debug.Log("컷씬 닫혓다!!!!");
+        }
     }
 
     // 컷 씬 세팅 함수
@@ -141,17 +152,22 @@ public class CutSceneManager : MonoBehaviour
     // 대사 입력 함수 (다트윈)
     private void Texting(CutSceneText temp)
     {
+        // 사운드 출력
+        if (temp.sound != "")
+            SoundManager.Instance.PlaySFX(temp.sound);
+        else
+        {
+            Debug.Log("DSFasfd");
+            SoundManager.Instance.PlaySFX("typing");
+        }
+
         // 이전 텍스트 삭제
         text.text = "";
         //다트윈으로 텍스트 작성
-        SoundManager.Instance.PlaySFX("typing");
         text.DOText(temp.text, 1.5f).OnComplete(() =>
         {
             temp.isEnd = true;
             SoundManager.Instance.StopSFX();
         });
-
-        if (temp.sound != null)
-            SoundManager.Instance.PlaySFX(temp.sound);
     }
 }
