@@ -16,9 +16,11 @@ MonoBehaviour:
   cutScenes:
   - cut: {fileID: 21300000, guid: 4fed63953deba9f4b8edfdcbe9a63dbb, type: 3}
     texts:
-    - text: ...
+    - sound: 
+      text: ...
       isEnd: 0
   - cut: {fileID: 21300000, guid: f6befe3053210c244ace7a5083625541, type: 3}
     texts:
-    - text: "\uCFF5!"
+    - sound: popup
+      text: "\uCFF5!"
       isEnd: 0

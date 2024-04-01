@@ -142,6 +142,7 @@ public class TextBox : MonoBehaviour
     public void ChoiceQuestion()
     {
         GameObject currentSelectedButton = EventSystem.current.currentSelectedGameObject;
+        currentSelectedButton.GetComponent<Button>().interactable = false;
 
         for (int i = 0; i < currentSpeech.childCount; ++i)
         {

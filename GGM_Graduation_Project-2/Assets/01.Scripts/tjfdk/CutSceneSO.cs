@@ -8,6 +8,7 @@ using UnityEngine.UI;
 [Serializable]
 public class CutSceneText
 {
+    public string sound;
     public string text;
     public bool isEnd;
 }

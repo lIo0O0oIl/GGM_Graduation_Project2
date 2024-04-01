@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -63,7 +61,7 @@ public class SoundManager : Singleton<SoundManager>
         audioSourceBgmPlayers.Stop();
     }
 
-    public void StopEffectsSound()
+    public void StopSFX()
     {
         audioSourceEffectsPlayers.Stop();
     }
