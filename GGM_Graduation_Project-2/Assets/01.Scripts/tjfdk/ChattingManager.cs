@@ -272,6 +272,12 @@ public class ChattingManager : MonoBehaviour
             yield break;
         }
 
+        if (chats[nowLevel].askAndReplySO[0].askName == "JunWonMeet")
+        {
+            StartCoroutine(EndOtherChat(13));
+            yield break;
+        }
+
         if (chats[nowLevel].askAndReplySO[0].askName == "LastMeet")
         {
             StartCoroutine(EndOtherChat(15));
