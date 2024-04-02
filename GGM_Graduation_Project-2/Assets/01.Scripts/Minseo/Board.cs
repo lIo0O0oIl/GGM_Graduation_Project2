@@ -44,7 +44,7 @@ public class Board : MonoBehaviour
     private IEnumerator Init()
     {
         MoveCount = 0;
-        minNum = 100;
+        minNum = 1000;
 
         minnumNumMoves.text = $"제한 횟수 : {minNum}";
 
@@ -158,13 +158,13 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void IsGameOver()
+    public void IsGameClear()
     {
         List<Tile> tiles = tileList.FindAll(x => x.IsCorrected == true);
 
         Debug.Log("Correct Count : " + tiles.Count);
 
-        if (tiles.Count == puzzleSize * puzzleSize - 1)
+        if (tiles.Count == puzzleSize * puzzleSize - 1 || Input.GetKeyDown(KeyCode.L))
         {
             Debug.Log("진입");
             FileManager.instance.PuzzleLockBackClick();     // 퍼즐판넬 꺼주기

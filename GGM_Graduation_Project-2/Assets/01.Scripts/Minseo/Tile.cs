@@ -70,7 +70,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
         IsCorrected = correctPosition == GetComponent<RectTransform>().localPosition ? true : false;
 
-        board.IsGameOver();
+        board.IsGameClear();
     }
 
 }
