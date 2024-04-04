@@ -135,7 +135,7 @@ public class TextBox : MonoBehaviour
 
     private void AssistantChatListAdd(GameObject obj)
     {
-        if (ChattingManager.Instance.chats[ChattingManager.Instance.nowLevel].whoSO.humanName == "조수")
+        if (ChattingManager.Instance.chats[ChattingManager.Instance.nowLevel].who.humanName == "조수")
         {
             ChattingManager.Instance.assistantChatList.Add(obj);
         }

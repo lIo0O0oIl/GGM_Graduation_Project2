@@ -39,6 +39,4 @@ public class SE : MonoBehaviour
         Debug.Log("´­·¯Áü");
     }
 
-    public ChatSO chatso;
-    public AskAndReplySO ask;
 }
