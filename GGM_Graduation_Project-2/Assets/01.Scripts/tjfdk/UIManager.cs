@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     public void Panle_OnOff(GameObject panel)       // 셋팅창에서 사용함.
     {
         panel.SetActive(!panel.activeSelf);
+        if (SceneManager.GetActiveScene().name == "Game")
+            ChattingManager.Instance.ChatSpeed();
     }
 
     public void Panel_Popup(GameObject panel)

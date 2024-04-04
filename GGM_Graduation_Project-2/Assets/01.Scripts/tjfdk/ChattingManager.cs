@@ -39,6 +39,8 @@ public class ChattingManager : MonoBehaviour
     private WaitForSeconds delay;       // 대화 딜레이 시간
     private WaitForSeconds delay2;       // 대화 딜레이 시간
 
+    //public YieldInstruction test111;
+
     private void Start()
     {
         Instance = this;
@@ -47,6 +49,25 @@ public class ChattingManager : MonoBehaviour
         delay2 = new WaitForSeconds(delayTime * 3);
 
         chattingHumanName.text = chats[0].whoSO.humanName;
+
+        //test111 = delay;
+    }
+
+    //public void NextChat()
+    //{
+    //    //test111 = null;
+    //    StopAllCoroutines();
+    //}
+
+    public void ChangeDelaySpeed(float _value)
+    {
+        delayTime = _value;
+    }
+
+    public void ChatSpeed()
+    {
+        delay = new WaitForSeconds(delayTime);
+        delay2 = new WaitForSeconds(delayTime * 3);
     }
 
     private void OnDisable()        // SO 초기화
@@ -102,7 +123,9 @@ public class ChattingManager : MonoBehaviour
         {
             Chapter();
             yield return delay;
-        }
+            //test111 = delay;
+            //yield return test111;
+        } 
     }
 
     private void Chapter()
@@ -206,8 +229,10 @@ public class ChattingManager : MonoBehaviour
             UpLoadFile(name);       // 파일을 업로드 하기 위해서, 보고서, 학교 이 2개가 들어옴.
 
             yield return delay;
+            //yield return test111;
             TextBox.Instance.InputText(false, replys[0]);       // "~~~을 옮겨드렸어요"
             yield return delay;
+            //yield return test111;
 
             string remainder = null;
             foreach (var noUse in chats[nowLevel].askAndReplySO)
@@ -220,6 +245,7 @@ public class ChattingManager : MonoBehaviour
             }
             TextBox.Instance.InputText(false, $"그리고 나머지 {remainder}도 옮겨드렸어요.");
             yield return delay;
+            //yield return test111;
 
             name = remainder.Substring(0, remainder.IndexOf(' '));
             UpLoadFile(name);
@@ -229,15 +255,16 @@ public class ChattingManager : MonoBehaviour
 
             StartChatting(1);       // 이어서 연결되는 것이기 때문에
             yield break;
-
         }
 
         yield return delay;
+        //yield return test111;
 
         foreach (var text in replys)        // 대답들 추가해주기
         {
             TextBox.Instance.InputText(false, text);
             yield return delay;     // 딜레이 위치 판단하기!
+            //yield return test111;     // 딜레이 위치 판단하기!
         }
 
         is_choosing = false;
@@ -285,6 +312,7 @@ public class ChattingManager : MonoBehaviour
         }
 
         Debug.Log("여기까지 온다고?");
+            //test111 = delay;
         Chapter();
     }
 
