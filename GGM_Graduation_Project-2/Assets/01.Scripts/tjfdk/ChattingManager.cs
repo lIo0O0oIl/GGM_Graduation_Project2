@@ -232,7 +232,7 @@ public class ChattingManager : MonoBehaviour
             //yield return test111;
             TextBox.Instance.InputText(false, replys[0]);       // "~~~을 옮겨드렸어요"
             yield return delay;
-            //yield return test111;
+            //yield return test111; 
 
             string remainder = null;
             foreach (var noUse in chats[nowLevel].askAndReplySO)
