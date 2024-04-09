@@ -10,9 +10,7 @@ public class TextFile : MonoBehaviour, IPointerClickHandler
     public string text;        // 보여질 텍스트
     private string fileName;
 
-    public bool assistantUse = false;
-    public int index;
-    private bool used = false;
+    public int index = -1;
 
     private void Start()
     {
@@ -23,12 +21,7 @@ public class TextFile : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.clickCount == 2)
         {
-            FileManager.instance.OpenTextFile(text, fileName);
-            if (assistantUse && !used)
-            {
-                ChattingManager.Instance.StartChatting(index);
-                used = true;
-            }
+            FileManager.instance.OpenTextFile(text, fileName, index);
         }
     }
 }

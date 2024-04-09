@@ -10,9 +10,9 @@ public class ImageFile : MonoBehaviour, IPointerClickHandler
     public Vector2 showScale = new Vector2(500, 500);       // 보여질 크기
     private string fileName;
 
-    public bool assistantUse = false;
-    public int index;
-    private bool used = false;
+    public int index = -1;      // 기본적으로 -1, 뭐가 있는 애들만 바꿔주기
+
+    //public bool userKnowThis = false;       // 유져가 이걸 한번이라도 열어봤으면
 
     private void Start()
     {
@@ -23,12 +23,7 @@ public class ImageFile : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.clickCount == 2)
         {
-            FileManager.instance.OpenImageFile(image, showScale, fileName);
-            if (assistantUse && !used)
-            {
-                ChattingManager.Instance.StartChatting(index);
-                used = true;
-            }
+            FileManager.instance.OpenImageFile(image, showScale, fileName, index);
         }
     }
 }
