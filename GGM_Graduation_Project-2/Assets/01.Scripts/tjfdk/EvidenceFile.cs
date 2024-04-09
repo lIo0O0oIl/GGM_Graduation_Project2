@@ -50,6 +50,10 @@ public class EvidenceFile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        copy = Instantiate(this.gameObject);
+        copy.transform.position = this.transform.position;
+        copy.transform.SetParent(parent);
+
         rect.SetParent(canvas);
         rect.SetSiblingIndex(1);
     }
@@ -61,6 +65,8 @@ public class EvidenceFile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Destroy(copy);
+
         rect.SetParent(parent);
         rect.transform.position = previousPosition;
     }

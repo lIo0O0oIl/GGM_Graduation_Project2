@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3837891069155043792}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: Evidence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,11 +210,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35aff74f1f197bc43aba257f3b2aa41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tt: {fileID: 0}
+  canvas: {fileID: 0}
+  parent: {fileID: 0}
   previousPosition: {x: 0, y: 0, z: 0}
   rect: {fileID: 0}
-  button: {fileID: 0}
   isUseable: 0
+  sprite: {fileID: 0}
+  msg: 
+  type: Image
+  copy: {fileID: 0}
 --- !u!1 &7515156579858163868
 GameObject:
   m_ObjectHideFlags: 0

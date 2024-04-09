@@ -35,13 +35,19 @@ public class DropEvidence : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
+        if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Evidence"))
+        {
             upload.SetActive(true);
+            //eventData.pointerDrag.SetActive(false);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
+        if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Evidence"))
+        {
             upload.SetActive(false);
+            //eventData.pointerDrag.SetActive(true);
+        }
     }
 }

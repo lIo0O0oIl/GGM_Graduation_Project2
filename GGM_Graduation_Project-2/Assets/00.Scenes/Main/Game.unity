@@ -4693,6 +4693,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4233620415691644528, guid: 72061758d27943c4792f478556a7ef5c, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
     - target: {fileID: 6050651409706787168, guid: 72061758d27943c4792f478556a7ef5c, type: 3}
       propertyPath: m_text
       value: "\uBB38\uC11C"
@@ -8021,6 +8025,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4233620415691644528, guid: 72061758d27943c4792f478556a7ef5c, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
     - target: {fileID: 4292091943648336395, guid: 72061758d27943c4792f478556a7ef5c, type: 3}
       propertyPath: m_Colors.m_NormalColor.a
       value: 1
@@ -8057,6 +8065,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9348e23f3abd3ad4ea3943b7833e9459, type: 3}
+    - target: {fileID: 7473923144964785600, guid: 72061758d27943c4792f478556a7ef5c, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473923144964785600, guid: 72061758d27943c4792f478556a7ef5c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7999720696862535560, guid: 72061758d27943c4792f478556a7ef5c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
