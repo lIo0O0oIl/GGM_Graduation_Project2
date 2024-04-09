@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class TextBox : MonoBehaviour
 {
+    HashSet<string> aa = new HashSet<string>();
+
     public static TextBox Instance;
 
     public int cutTextSize = 20;
@@ -135,7 +137,7 @@ public class TextBox : MonoBehaviour
 
     private void AssistantChatListAdd(GameObject obj)
     {
-        if (ChattingManager.Instance.chats[ChattingManager.Instance.nowLevel].who.humanName == "조수")
+        if (ChattingManager.Instance.Chapters[ChattingManager.Instance.nowLevel].who == "조수")
         {
             ChattingManager.Instance.assistantChatList.Add(obj);
         }

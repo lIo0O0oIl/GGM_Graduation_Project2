@@ -30,6 +30,7 @@ public class InvisibleFileManager : MonoBehaviour
 
     public void  ShowRoundFile(string round)
     {
+        bool is_Exsist = false;
         foreach (var file in roundFile)
         {
             if (file.round == round)
@@ -39,8 +40,10 @@ public class InvisibleFileManager : MonoBehaviour
                     rountFile.SetActive(true);
                     FileManager.instance.NowFilePathIncludeFileCheck(rountFile);     // 키려는 것이 지금 경로에 있어야만함.
                 }
+                is_Exsist = true;
             }
         }
+        if (is_Exsist == false) Debug.LogError($"{round} 는(은) 없는 라운드 입니다.");
         ShowRoundSet.Add(round);
     }
 

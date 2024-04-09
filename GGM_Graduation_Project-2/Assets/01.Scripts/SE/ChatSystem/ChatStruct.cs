@@ -25,5 +25,12 @@ public struct AskAndReply
     public string[] reply;     // 그에 대한 대답들
 }
 
+[Serializable]
+public struct Chapters
+{
+    public Chat[] chat;
+    public AskAndReply[] askAndReply;
+    public string who;     // 누군데?
+}
 
 public class ChatStruct : MonoBehaviour { }

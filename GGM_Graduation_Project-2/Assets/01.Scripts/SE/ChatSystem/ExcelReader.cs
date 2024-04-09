@@ -6,13 +6,11 @@ using UnityEngine.Networking;
 
 public class ExcelReader : MonoBehaviour
 {
-    private const string address = "https://docs.google.com/spreadsheets/d/1MEv_FujCwHkHfq2Dti7aphwSL4xOQ2Zz";
+    private const string address = "https://docs.google.com/spreadsheets/d/1usgvZLjDXp4PFspWkVWEZCFeNFlLJKhJ";
     public string locations = "B3";     // 채팅들의 위치를 모아둔 것.
-    public const long id = 385840303;
+    public const long id = 1094657702; 
     private int nowReadLine = 0;        // 내가 지금 읽고 있는 줄
     private int nowAskIndex = 0;        // 내가 지금 가지고있는 질문 인덱스
-
-    public Chapters[] chapters;        // 채팅들 모음.
 
     private Chat[] chat;            // 채팅들
     private AskAndReply[] askAndReplySO;   // 질문들
@@ -28,7 +26,7 @@ public class ExcelReader : MonoBehaviour
         yield return www.SendWebRequest();
 
         string[] chatsLocation = www.downloadHandler.text.Split('\n');       // 쳇들의 위치에서 줄 내림 한 것으로 나눠주기
-        chapters = new Chapters[chatsLocation.Length];      // 총 대화의 개수
+        ChattingManager.Instance.Chapters = new Chapters[chatsLocation.Length];      // 총 대화의 개수
 
         for (int i = 0; i < chatsLocation.Length; i++)
         {
@@ -37,9 +35,9 @@ public class ExcelReader : MonoBehaviour
 
             string[] lineCut = www2.downloadHandler.text.Split("\n");       // 줄 내림 한 것으로 나눠주기
 
-            chapters[i].who = lineCut[0].Split('\t')[0];        // 이름 넣어주기
+            ChattingManager.Instance.Chapters[i].who = lineCut[0].Split('\t')[0];        // 이름 넣어주기
 
-            // 질문의 갯수 설정
+            // 질문과 텍스트의 크기를 가져오기
             string[] chatSize = lineCut[2].Split('\t');
             if (int.TryParse(chatSize[0], out int askCount))
             {
@@ -82,15 +80,20 @@ public class ExcelReader : MonoBehaviour
                 }
             }
 
-            // 챕터 만들어주기
-            chapters[i].chat = chat;
-            chapters[i].askAndReply = askAndReplySO;
-            
+            int endLine = nowReadLine + chat.Length + 4;
+            Debug.Log(endLine);
 
+            // 챕터 만들어주기
+            ChattingManager.Instance.Chapters[i].chat = chat;
+            ChattingManager.Instance.Chapters[i].askAndReply = askAndReplySO;
+            
             // 초기화
             nowAskIndex = 0;
             nowReadLine = 0;
         }
+
+        // 쳇팅 시스템 켜주기
+        ChattingManager.Instance.StartChatting(0);
     }
 
     public string GetTSVAddress(string range, long sheetID)
