@@ -157,7 +157,6 @@ public class CutSceneManager : MonoBehaviour
             SoundManager.Instance.PlaySFX(temp.sound);
         else
         {
-            Debug.Log("DSFasfd");
             SoundManager.Instance.PlaySFX("typing");
         }
 

@@ -10,5 +10,10 @@ public class Clue : MonoBehaviour
     public void ClickClue()
     {
         ClueManager.Instance.Texting(msg);
+        this.GetComponent<Button>().interactable = false;
+
+        //Color color;
+        //UnityEngine.ColorUtility.TryParseHtmlString("#A4A4A4", out color);
+        //this.GetComponent<Image>().color = color;
     }
 }

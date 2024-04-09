@@ -36,8 +36,8 @@ public class TextBox : MonoBehaviour
     [SerializeField] GameObject myChatBox;          // 내 쳇팅박스
     [SerializeField] GameObject otherChatBox;           // 조수의 쳇팅박스
 
-    public Sprite sprite;
-    public string msg;
+    public GameObject sprite;
+    public GameObject msg;
 
     [Header("isBool")]
     [SerializeField] bool isCurrentUser;
@@ -57,9 +57,7 @@ public class TextBox : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            Text txt = gameObject.AddComponent<Text>();
-            txt.text = msg;
-            InputFile(true, txt, "Data");
+            InputFile(true, msg, "Data");
         }
     }
 
@@ -118,7 +116,7 @@ public class TextBox : MonoBehaviour
         LineAlignment();
     }
 
-    public void InputFile(bool user, UnityEngine.Object file, string _type)       // user가 true 일면 플레이어가 말하는 것임.
+    public void InputFile(bool user, GameObject file, string _type)       // user가 true 일면 플레이어가 말하는 것임.
     {
         if (currentSpeech == null || isCurrentUser != user)
         {
@@ -137,6 +135,7 @@ public class TextBox : MonoBehaviour
                 currentSpeech = temp.transform;
                 isCurrentUser = false;
             }
+            
             AssistantChatListAdd(temp);     // 만약 조수 대화면 리스트에 추가해라
             LineAlignment();
         }
@@ -146,15 +145,13 @@ public class TextBox : MonoBehaviour
         if (_type == "Image")
         {
             data = Instantiate(imageBackground);
-            SpriteRenderer sprite = file.GetComponent<SpriteRenderer>();
-            data.GetComponent<Image>().sprite = sprite.sprite;
-            Vector3 size = sprite.bounds.size;
-            data.GetComponent<Transform>().localScale = size;
+            data.GetComponent<Image>().sprite = file.GetComponent<Image>().sprite;
+            data.GetComponent<RectTransform>().sizeDelta = file.GetComponent<Image>().sprite.bounds.size * 100;
         }
         else if (_type == "Data")
         {
             data = Instantiate(dataBackground);
-            data.GetComponent<TextMeshProUGUI>().text = file.GetComponentInChildren<Text>().text;
+            data.GetComponentInChildren<TextMeshProUGUI>().text = file.GetComponent<TextMesh>().text;
         }
 
         data.transform.SetParent(currentSpeech);
