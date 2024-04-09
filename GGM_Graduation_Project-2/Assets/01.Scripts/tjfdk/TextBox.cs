@@ -1,9 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
+
+//[Serializable]
+//public enum FileType
+//{
+//    Image = 0,
+//    Data
+//}
 
 public class TextBox : MonoBehaviour
 {
@@ -19,9 +28,16 @@ public class TextBox : MonoBehaviour
     [SerializeField] Transform currentSpeech;       // 가장 최근의 대화
     [SerializeField] GameObject speechBalloon_left;      // 말하는 말풍선
     [SerializeField] GameObject speechBalloon_right;      // 말하는 말풍선
+
+    [SerializeField] GameObject imageBackground; // 이미지 내보낼 그거 sprite만 수정하면서 사용
+    [SerializeField] GameObject dataBackground; // 얘도 마찬ㄴ가지 ㅇㅇ
+
     [SerializeField] GameObject choiceBalloon;          // 고르는 말풍선(버튼달린)
     [SerializeField] GameObject myChatBox;          // 내 쳇팅박스
     [SerializeField] GameObject otherChatBox;           // 조수의 쳇팅박스
+
+    public Sprite sprite;
+    public string msg;
 
     [Header("isBool")]
     [SerializeField] bool isCurrentUser;
@@ -31,6 +47,20 @@ public class TextBox : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            InputFile(true, sprite, "Image");
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Text txt = gameObject.AddComponent<Text>();
+            txt.text = msg;
+            InputFile(true, txt, "Data");
+        }
     }
 
     public void InputText(bool user, string msg, bool ask = true)       // user가 true 일면 플레이어가 말하는 것임.
@@ -85,6 +115,49 @@ public class TextBox : MonoBehaviour
         AssistantChatListAdd(speech);       // 조수랑 대화면 리스트에 추가
         speech.transform.SetParent(currentSpeech);
         StartCoroutine(OpenText(speech, user, ask));
+        LineAlignment();
+    }
+
+    public void InputFile(bool user, UnityEngine.Object file, string _type)       // user가 true 일면 플레이어가 말하는 것임.
+    {
+        if (currentSpeech == null || isCurrentUser != user)
+        {
+            GameObject temp = null;
+            if (user)
+            {
+                temp = Instantiate(myChatBox);
+                temp.transform.SetParent(chatBoxParent);
+                currentSpeech = temp.transform;
+                isCurrentUser = true;
+            }
+            else
+            {
+                temp = Instantiate(otherChatBox);
+                temp.transform.SetParent(chatBoxParent);
+                currentSpeech = temp.transform;
+                isCurrentUser = false;
+            }
+            AssistantChatListAdd(temp);     // 만약 조수 대화면 리스트에 추가해라
+            LineAlignment();
+        }
+
+        GameObject data = null;
+
+        if (_type == "Image")
+        {
+            data = Instantiate(imageBackground);
+            SpriteRenderer sprite = file.GetComponent<SpriteRenderer>();
+            data.GetComponent<Image>().sprite = sprite.sprite;
+            Vector3 size = sprite.bounds.size;
+            data.GetComponent<Transform>().localScale = size;
+        }
+        else if (_type == "Data")
+        {
+            data = Instantiate(dataBackground);
+            data.GetComponent<TextMeshProUGUI>().text = file.GetComponentInChildren<Text>().text;
+        }
+
+        data.transform.SetParent(currentSpeech);
         LineAlignment();
     }
 
@@ -199,7 +272,7 @@ public class TextBox : MonoBehaviour
         if (_isUser && _isAsk)
         {
             Color color;
-            ColorUtility.TryParseHtmlString("#CCFFB8", out color);
+            UnityEngine.ColorUtility.TryParseHtmlString("#CCFFB8", out color);
             _temp.GetComponent<Image>().color = color;
         }
         else
