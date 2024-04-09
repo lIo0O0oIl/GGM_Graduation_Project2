@@ -158,7 +158,7 @@ public class TextBox : MonoBehaviour
         {
             data = Instantiate(imageBackground);
             data.GetComponent<Image>().sprite = file.GetComponent<Image>().sprite;
-            data.GetComponent<RectTransform>().sizeDelta = file.GetComponent<Image>().sprite.bounds.size * 100;
+            data.GetComponent<RectTransform>().sizeDelta = file.GetComponent<Image>().sprite.bounds.size * 150;
         }
         else if (_type == "Data")
         {

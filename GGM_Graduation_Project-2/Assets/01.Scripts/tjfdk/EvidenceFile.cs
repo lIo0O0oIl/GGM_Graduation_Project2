@@ -16,9 +16,6 @@ public class EvidenceFile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     [SerializeField] private Transform canvas;
     [SerializeField] private Transform parent;
     [SerializeField] private Vector3 previousPosition;
-    [SerializeField] private RectTransform rect;
-
-    //public GameObject temp;
 
     [Header("Evidence")]
     [SerializeField] private bool isUseable;
@@ -37,9 +34,8 @@ public class EvidenceFile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private void Awake()
     {
         canvas = FindObjectOfType<Canvas>().transform;
-        rect = GetComponent<RectTransform>();
-        previousPosition = rect.transform.position;
-        parent = rect.parent;
+        previousPosition = this.transform.position;
+        parent = this.transform.parent;
     }
 
     private void Update()
@@ -51,23 +47,20 @@ public class EvidenceFile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public void OnBeginDrag(PointerEventData eventData)
     {
         copy = Instantiate(this.gameObject);
-        copy.transform.position = this.transform.position;
-        copy.transform.SetParent(parent);
+        Destroy(copy.transform.GetChild(0).gameObject);
 
-        rect.SetParent(canvas);
-        rect.SetSiblingIndex(1);
+        copy.transform.position = this.transform.position;
+        copy.transform.SetParent(canvas);
+        copy.transform.SetSiblingIndex(1);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rect.position = eventData.position;
+        copy.transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         Destroy(copy);
-
-        rect.SetParent(parent);
-        rect.transform.position = previousPosition;
     }
 }
