@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -24,7 +25,14 @@ public class EvidenceFile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     [SerializeField] private Sprite sprite;
     [SerializeField] private string msg;
     [SerializeField] private string type = "Image";
+
     public bool IsUseable => isUseable;
+    public Sprite Spriet => sprite;
+    public string Msg => msg;
+    public string Type => type;
+
+
+    public GameObject copy;
 
     private void Awake()
     {
@@ -43,8 +51,7 @@ public class EvidenceFile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public void OnBeginDrag(PointerEventData eventData)
     {
         rect.SetParent(canvas);
-        //rect.SetAsFirstSibling();
-        rect.SetSiblingIndex(2);
+        rect.SetSiblingIndex(1);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -54,14 +61,6 @@ public class EvidenceFile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        GameObject temp = new GameObject();
-        if (type == "Image")
-            temp.AddComponent<Image>().sprite = sprite;
-        else
-            temp.AddComponent<TextMesh>().text = msg;
-
-        TextBox.Instance.InputFile(true, temp, type);
-
         rect.SetParent(parent);
         rect.transform.position = previousPosition;
     }
