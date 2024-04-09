@@ -37,6 +37,16 @@ public class TextBox : MonoBehaviour
 
     public void InputText(bool user, string msg, bool ask = true)       // user가 true 일면 플레이어가 말하는 것임.
     {
+        foreach (var round in ChattingManager.Instance.Chapters[ChattingManager.Instance.nowLevel].round)
+        {
+            if (round.text.Substring(0, 5) == msg.Substring(0, 5))          // 5개까지만 해서 파악해줌
+            {
+                Debug.Log($"{round.text.Substring(0, 5)}, {msg.Substring(0, 5)}, {round.text == msg}");
+                InvisibleFileManager.Instance.ShowRoundFile(round.round);
+                Debug.Log("파일올려짐");
+            }
+        }
+
         CutText(ref msg);
 
         LineAlignment();

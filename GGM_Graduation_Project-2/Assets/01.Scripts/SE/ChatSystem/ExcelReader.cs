@@ -6,14 +6,15 @@ using UnityEngine.Networking;
 
 public class ExcelReader : MonoBehaviour
 {
-    private const string address = "https://docs.google.com/spreadsheets/d/1usgvZLjDXp4PFspWkVWEZCFeNFlLJKhJ";
+    private const string address = "https://docs.google.com/spreadsheets/d/1jBb3gjagzX7KhxNcG_g8yCLGGm0PDfHa";
     public string locations = "B3";     // 채팅들의 위치를 모아둔 것.
-    public const long id = 1094657702; 
+    public const long id = 562033554; 
     private int nowReadLine = 0;        // 내가 지금 읽고 있는 줄
     private int nowAskIndex = 0;        // 내가 지금 가지고있는 질문 인덱스
 
     private Chat[] chat;            // 채팅들
     private AskAndReply[] askAndReplySO;   // 질문들
+    private Round[] round;
 
     private void Start()
     {
@@ -80,12 +81,20 @@ public class ExcelReader : MonoBehaviour
                 }
             }
 
-            int endLine = nowReadLine + chat.Length + 4;
-            Debug.Log(endLine);
+            int roundStartLine = nowReadLine + chat.Length + 5;        // Round 시작 지점.
+            round = new Round[lineCut.Length - roundStartLine];
+            int roundCount = 0;
+            for (int j = roundStartLine; j < lineCut.Length; j++)
+            {
+                round[roundCount].round = lineCut[j].Split('\t')[0];
+                round[roundCount].text = lineCut[j].Split('\t')[1];
+                roundCount++;
+            }
 
             // 챕터 만들어주기
             ChattingManager.Instance.Chapters[i].chat = chat;
             ChattingManager.Instance.Chapters[i].askAndReply = askAndReplySO;
+            ChattingManager.Instance.Chapters[i].round = round;
             
             // 초기화
             nowAskIndex = 0;

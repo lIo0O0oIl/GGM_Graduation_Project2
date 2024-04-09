@@ -15,7 +15,7 @@ public class ChattingManager : MonoBehaviour
     public TMP_Text chattingHumanName;
     [HideInInspector]
     public List<GameObject> assistantChatList = new List<GameObject>();    // 조수와 나눈 대화는 저장해주기
-    private Chapters[] chapters;      // 쳇팅 SO들을 넣어줌.
+    [SerializeField] private Chapters[] chapters;      // 쳇팅 SO들을 넣어줌.
     public Chapters[] Chapters {  get { return chapters; } set { chapters = value; } }
 
     [Header("ChatDelay")]       // 쳇팅 딜레이 관련
@@ -178,9 +178,4 @@ public class ChattingManager : MonoBehaviour
     {
         delayTime = _value;
     }       // 쳇팅 딜레이 시간 변경
-
-    private void UpLoadFile(string round)
-    {
-        InvisibleFileManager.Instance.ShowRoundFile(round);
-    }       // 파일을 업로드 해주는 함수
 }

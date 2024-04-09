@@ -26,10 +26,18 @@ public struct AskAndReply
 }
 
 [Serializable]
+public struct Round
+{
+    public string round;
+    public string text;
+}
+
+[Serializable]
 public struct Chapters
 {
     public Chat[] chat;
     public AskAndReply[] askAndReply;
+    public Round[] round;
     public string who;     // ´©±ºµ¥?
 }
 
