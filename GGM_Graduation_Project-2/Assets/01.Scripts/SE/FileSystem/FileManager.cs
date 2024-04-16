@@ -80,7 +80,7 @@ public class FileManager : MonoBehaviour
             upLineRectFitter[i] = upLinePathBtn[i].GetComponent<RectTransform>();
         }
 
-        startChatEvent += ChattingManager.Instance.StartChatting;       // 이벤트 연결
+        startChatEvent += (index) => ChattingManager.Instance.StartChatting(index);       // 이벤트 연결
     }
 
     #region 폴더 이동 관련 함수
