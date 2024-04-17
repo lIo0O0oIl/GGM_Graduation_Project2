@@ -146,11 +146,12 @@ public class TextBox : MonoBehaviour
                 temp.transform.SetParent(chatBoxParent);
                 currentSpeech = temp.transform;
                 isCurrentUser = false;
+
+                AssistantChatListAdd(temp);     // 만약 조수 대화면 리스트에 추가해라
             }
-            
-            AssistantChatListAdd(temp);     // 만약 조수 대화면 리스트에 추가해라
-            LineAlignment();
         }
+
+        LineAlignment();
 
         GameObject data = null;
 
