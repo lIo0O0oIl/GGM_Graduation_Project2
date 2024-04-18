@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -8,9 +9,19 @@ using static Unity.VisualScripting.Member;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     [Header("Panel")]
-    [SerializeField] List<GameObject> panels;
-    [SerializeField] GameObject alarmIcon;
+    public List<GameObject> panels;
+    public GameObject alarmIcon;
+
+    public Action<int> startChatEvent;
+    public int chatIndex = 0;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     [Header("Connection System")]
     [SerializeField] GameObject connectionPanel;
@@ -21,7 +32,7 @@ public class UIManager : MonoBehaviour
         alarmIcon.SetActive(!alarmIcon.activeSelf);
     }
 
-    public void Panle_OnOff(GameObject panel)       // ¼ÂÆÃÃ¢¿¡¼­ »ç¿ëÇÔ.
+    public void Panle_OnOff(GameObject panel)       // ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
     {
         panel.SetActive(!panel.activeSelf);
     }
@@ -32,8 +43,13 @@ public class UIManager : MonoBehaviour
         if (panel.activeSelf == false)
         {
             foreach (GameObject obj in panels)
-                obj.SetActive(false);       // ÀüºÎ ²¨ÁÖ±â
-            panel.SetActive(true);      // ³»²¨´Â ÄÑÁÖ±â
+                obj.SetActive(false);       // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö±ï¿½
+            panel.SetActive(true);      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö±ï¿½
+            if (panel.gameObject.name == panels[0].gameObject.name && startChatEvent == null)         // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­Ã¢ï¿½Ì°ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ È£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            {
+                startChatEvent.Invoke(chatIndex);
+                startChatEvent -= (index) => ChattingManager.Instance.StartChatting(index);
+            }
         }
     }
 
