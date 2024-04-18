@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static Unity.VisualScripting.Member;
 
 public class UIManager : MonoBehaviour
@@ -18,14 +20,27 @@ public class UIManager : MonoBehaviour
     public Action<int> startChatEvent;
     public int chatIndex = 0;
 
+    [Header("Connection System")]
+    [SerializeField] GameObject connectionPanel;
+    [SerializeField] Transform connectionParent;
+
+    //[Header("InputField")]
+    //[SerializeField] Selectable firstInput;
+
     private void Awake()
     {
         Instance = this;
     }
 
-    [Header("Connection System")]
-    [SerializeField] GameObject connectionPanel;
-    [SerializeField] Transform connectionParent;
+    public void InputFieldFocus(InputField field)
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Selectable next = EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
+            if (next != null)
+                next.Select();
+        }
+    }
 
     public void test()
     {
