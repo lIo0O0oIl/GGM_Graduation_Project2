@@ -55,11 +55,13 @@ public class TextBox : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            InputFile(true, sprite, "Image");
+            InputText(true, "유저 입력 테스트");
+            //InputFile(true, sprite, "Image");
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            InputFile(true, msg, "Data");
+            InputText(false, "NPC 입력 테스트");
+            //InputFile(true, msg, "Data");
         }
     }
 
@@ -272,8 +274,8 @@ public class TextBox : MonoBehaviour
 
     private void HiddingText(GameObject _temp)
     {
-        _temp.GetComponent<Image>().color = Color.clear;
-        _temp.GetComponentInChildren<TextMeshProUGUI>().color = Color.clear;
+        //_temp.GetComponent<Image>().color = Color.clear;
+        //_temp.GetComponentInChildren<TextMeshProUGUI>().color = Color.clear;
     }
 
     public IEnumerator OpenText(GameObject _temp, bool _isUser, bool _isAsk)
