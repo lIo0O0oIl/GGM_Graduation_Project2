@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
         alarmIcon.SetActive(!alarmIcon.activeSelf);
     }
 
-    public void Panle_OnOff(GameObject panel)       // ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+    public void Panle_OnOff(GameObject panel)       // ÇØ´ç ÆÐ³Î ²¨ÁÖ±â
     {
         panel.SetActive(!panel.activeSelf);
     }
@@ -43,9 +43,9 @@ public class UIManager : MonoBehaviour
         if (panel.activeSelf == false)
         {
             foreach (GameObject obj in panels)
-                obj.SetActive(false);       // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö±ï¿½
-            panel.SetActive(true);      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö±ï¿½
-            if (panel.gameObject.name == panels[0].gameObject.name && startChatEvent == null)         // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­Ã¢ï¿½Ì°ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ È£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                obj.SetActive(false);       // ¸ðµå ÆÐ³Î ²¨ÁÖ±â
+            panel.SetActive(true);      // Å°·Á°í ÇÏ´Â ÆÐ³ÎÀº ÄÑÁÖ±â
+            if (panel.gameObject.name == panels[0].gameObject.name && startChatEvent == null)         // ¾Ë¶÷ÀÌ ¿Ã ¶§ Ã¤ÆÃ¿¡ °¡¾ß ´Ù½Ã 
             {
                 startChatEvent.Invoke(chatIndex);
                 startChatEvent -= (index) => ChattingManager.Instance.StartChatting(index);

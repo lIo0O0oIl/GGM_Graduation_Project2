@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CutSceneManager : MonoBehaviour
 {
+    public static CutSceneManager Instance;
+
     [Header("Object")]
     [SerializeField] private GameObject cutScene;
     [SerializeField] private Image screen;
@@ -20,9 +22,9 @@ public class CutSceneManager : MonoBehaviour
     [Header("Data")]
     [SerializeField] private List<CutSceneSO> cutSceneChapters = new List<CutSceneSO>();
 
-    private void Start()
+    private void Awake()
     {
-        CutScene(true, "Start");
+        Instance = this;
     }
 
     private void Update()

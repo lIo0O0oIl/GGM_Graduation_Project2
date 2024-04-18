@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class ExcelReader : MonoBehaviour
 {
     private const string address = "https://docs.google.com/spreadsheets/d/1ogh_aUgnIo8FNzaShRvGjYOCyq1bT2eX";
-    private string locations = "B4:B5";     // 채팅들의 위치를 모아둔 것.
+    private string locations = "B4:B17";     // 채팅들의 위치를 모아둔 것. 4 ~ 17 개 존재
     private const long id = 2137741761; 
     private int nowReadLine = 0;        // 내가 지금 읽고 있는 줄
     private int nowAskIndex = 0;        // 내가 지금 가지고있는 질문 인덱스
@@ -18,7 +18,7 @@ public class ExcelReader : MonoBehaviour
 
     private void Start()
     {
-        locations = "B4:B6";        // 3개만 임의로 불러와줌. 그대로는 너무 길어.
+        //locations = "B4:B6";        // 3개만 임의로 불러와줌. 그대로는 너무 길어.
         StartCoroutine(LoadData());
     }
 
@@ -55,8 +55,6 @@ public class ExcelReader : MonoBehaviour
                         chat = new Chat[chatCount + askCount];
                     }
                     else { Debug.LogError("대화 갯수 설정 실패"); }
-
-                    //int chatStartRow = 
 
                     for (int j = 4; j < chat.Length + 4; j++)         // 대화 넣어주기
                     {
@@ -114,7 +112,10 @@ public class ExcelReader : MonoBehaviour
         }
 
         // 쳇팅 시스템 켜주기
+        Debug.Log("챗팅 로딩 완료");
+        LoadingManager.Instance.LoadingEnd();
         ChattingManager.Instance.StartChatting(0);
+        CutSceneManager.Instance.CutScene(true, "Start");
     }
 
     public string GetTSVAddress(string range, long sheetID)
