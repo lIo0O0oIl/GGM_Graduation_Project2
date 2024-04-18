@@ -273,8 +273,8 @@ public class TextBox : MonoBehaviour
 
     private void HiddingText(GameObject _temp)
     {
-        //_temp.GetComponent<Image>().color = Color.clear;
-        //_temp.GetComponentInChildren<TextMeshProUGUI>().color = Color.clear;
+        _temp.GetComponent<Image>().color = Color.clear;
+        _temp.GetComponentInChildren<TextMeshProUGUI>().color = Color.clear;
     }
 
     public IEnumerator OpenText(GameObject _temp, bool _isUser, bool _isAsk)
