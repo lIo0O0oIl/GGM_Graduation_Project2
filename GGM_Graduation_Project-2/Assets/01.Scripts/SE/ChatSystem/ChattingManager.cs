@@ -10,7 +10,7 @@ public class ChattingManager : MonoBehaviour
 {
     public static ChattingManager Instance;
 
-    [Header("ChattinggContainer")]
+    [Header("ChattingContainer")]
     public GameObject chatContainer;        // 쳇팅들 담긴 곳임.
     public TMP_Text chattingHumanName;
     [HideInInspector]
@@ -58,6 +58,16 @@ public class ChattingManager : MonoBehaviour
 
     public void StartChatting(int index)
     {
+        // 만약 내 쳇팅이 꺼져있으면 켜질 때까지는 대기 엑션으로??
+        // 챗팅이 켜지면 액션으로 다시 이 함수를 부르게 한다?
+        if (UIManager.Instance.panels[0].activeSelf == false)
+        {
+            UIManager.Instance.alarmIcon.SetActive(true);
+            UIManager.Instance.chatIndex = index;
+            UIManager.Instance.startChatEvent += (chatIndex) => StartChatting(chatIndex);
+            return; 
+        }
+
         nowChatIndex = 0;
         nowAskChatIndex = 0;
         nowLevel = index;
@@ -106,6 +116,7 @@ public class ChattingManager : MonoBehaviour
                     state = true;
                     break;
                 case ChatState.Ask:
+                    notUseAskList.Clear();      // 전에 있던 것 모두 지워주기
                     for (int i = 0; i < askLenght; i++)
                     {
                         TextBox.Instance.InputText(true, chapters[nowLevel].chat[nowChatIndex].text, true);
@@ -133,14 +144,15 @@ public class ChattingManager : MonoBehaviour
 
     public void answer(string str)     // 버튼을 클릭했을 때
     {
+        Debug.Log(str);
         TextBox.Instance.CurrentSpeechColorChange();
         for (int i = 0; i < notUseAskList.Count; i++)
         {
-            if (notUseAskList[i] == str)
+            if (notUseAskList[i] == str)        // 이것의 숫자때문에 입력에서 하나의 대답만이 나오던 것임.
             {
                 nowAskLevel = i;
                 nowAskChatIndex = 0;
-                notUseAskList.RemoveAt(i);
+                notUseAskList[i] = "";
 
                 is_AskChat = true;
                 is_Choosing = false;

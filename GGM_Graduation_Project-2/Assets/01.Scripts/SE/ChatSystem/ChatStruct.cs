@@ -38,7 +38,7 @@ public struct Chapters
     public Chat[] chat;
     public AskAndReply[] askAndReply;
     public Round[] round;
-    public string who;     // 누군데?
+    public string who;     // 누군지
 }
 
 public class ChatStruct : MonoBehaviour { }

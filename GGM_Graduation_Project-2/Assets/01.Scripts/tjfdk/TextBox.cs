@@ -71,7 +71,6 @@ public class TextBox : MonoBehaviour
             {
                 Debug.Log($"{round.text.Substring(0, 5)}, {msg.Substring(0, 5)}, {round.text == msg}");
                 InvisibleFileManager.Instance.ShowRoundFile(round.round);
-                Debug.Log("파일올려짐");
             }
         }
 

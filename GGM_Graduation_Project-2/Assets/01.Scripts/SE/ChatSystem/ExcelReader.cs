@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class ExcelReader : MonoBehaviour
 {
     private const string address = "https://docs.google.com/spreadsheets/d/1ogh_aUgnIo8FNzaShRvGjYOCyq1bT2eX";
-    private string locations = "B4:B17";     // 채팅들의 위치를 모아둔 것.
+    private string locations = "B4:B5";     // 채팅들의 위치를 모아둔 것.
     private const long id = 2137741761; 
     private int nowReadLine = 0;        // 내가 지금 읽고 있는 줄
     private int nowAskIndex = 0;        // 내가 지금 가지고있는 질문 인덱스
@@ -18,6 +18,7 @@ public class ExcelReader : MonoBehaviour
 
     private void Start()
     {
+        locations = "B4:B6";        // 3개만 임의로 불러와줌. 그대로는 너무 길어.
         StartCoroutine(LoadData());
     }
 
@@ -33,7 +34,6 @@ public class ExcelReader : MonoBehaviour
 
             for (int i = 0; i < chatsLocation.Length; i++)
             {
-                Debug.Log(chatsLocation[i]);
                 using (UnityWebRequest www2 = UnityWebRequest.Get(GetTSVAddress(chatsLocation[i].Trim(), id)))        // 하나의 쳇팅에서 모든 것을 가져와주기
                 {
                     yield return www2.SendWebRequest();
@@ -63,8 +63,6 @@ public class ExcelReader : MonoBehaviour
                         string[] chatAndState = lineCut[j + nowReadLine].Split('\t');
                         chat[j - 4].text = chatAndState[1];       // 택스트 넣어줌.
 
-                        Debug.Log(chatAndState[0]);
-
                         ChatState state = (ChatState)Enum.Parse(typeof(ChatState), chatAndState[0]);
                         if (state == ChatState.Ask)
                         {
@@ -90,8 +88,6 @@ public class ExcelReader : MonoBehaviour
                     }
 
                     int roundStartLine = nowReadLine + chat.Length + 5;        // Round 시작 지점.
-                    Debug.Log(roundStartLine);
-                    Debug.Log(lineCut.Length - roundStartLine);
                     if (lineCut.Length - roundStartLine > 0)
                     {
                         round = new Round[lineCut.Length - roundStartLine];
