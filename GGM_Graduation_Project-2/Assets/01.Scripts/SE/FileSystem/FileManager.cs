@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 /*
@@ -54,6 +55,10 @@ public class FileManager : MonoBehaviour
 
     public FileTree[] fileTrees;        // 파일 전체 구조
 
+    [Header("ChatStartPoint")]
+    private Action<int> startChatEvent;
+    private int chatIndex = -1;
+
     private void Awake()
     {
         instance = this;
@@ -74,6 +79,16 @@ public class FileManager : MonoBehaviour
         {
             upLineRectFitter[i] = upLinePathBtn[i].GetComponent<RectTransform>();
         }
+    }
+
+    private void OnEnable()
+    {
+        startChatEvent += (index) => ChattingManager.Instance.StartChatting(index);       // 이벤트 연결
+    }
+
+    private void OnDisable()
+    {
+        startChatEvent -= (index) => ChattingManager.Instance.StartChatting(index);       // 이벤트 취소
     }
 
     #region 폴더 이동 관련 함수
@@ -191,30 +206,44 @@ public class FileManager : MonoBehaviour
     }
 
     #region 이미지 폴더 열기 관련 함수
-    public void OpenImageFile(Sprite image, Vector2 scale, string name)
+    public void OpenImageFile(Sprite image, Vector2 scale, string name, int chatIndex)
     {
         showImage.sprite = image;
         imageSize.sizeDelta = scale;
         imageName.text = RemoveSpace(name);
         imagePanel.SetActive(true);
+
+        this.chatIndex = chatIndex;
     }
 
     public void ImageBackClick()
     {
+        if (chatIndex != -1)
+        {
+            startChatEvent?.Invoke(chatIndex);
+            chatIndex = -1;     // 다시 초기화
+        }
         imagePanel.SetActive(false);
     }
     #endregion
 
     #region 텍스트 폴더 열기 관련 함수
-    public void OpenTextFile(string text, string name)
+    public void OpenTextFile(string text, string name, int chatIndex)
     {
         textNotePanel.SetActive(true);
         showText.text = text;
         textName.text = RemoveSpace(name);
+
+        this.chatIndex = chatIndex;
     }
 
     public void TextBackClick()
     {
+        if (chatIndex != -1)
+        {
+            startChatEvent?.Invoke(chatIndex);
+            chatIndex = -1;     // 다시 초기화
+        }
         textNotePanel.SetActive(false);
     }
     #endregion

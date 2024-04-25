@@ -55,11 +55,13 @@ public class TextBox : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            InputFile(true, sprite, "Image");
+            InputText(true, "유저 입력 테스트");
+            //InputFile(true, sprite, "Image");
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            InputFile(true, msg, "Data");
+            InputText(false, "NPC 입력 테스트");
+            //InputFile(true, msg, "Data");
         }
     }
 
@@ -71,7 +73,6 @@ public class TextBox : MonoBehaviour
             {
                 Debug.Log($"{round.text.Substring(0, 5)}, {msg.Substring(0, 5)}, {round.text == msg}");
                 InvisibleFileManager.Instance.ShowRoundFile(round.round);
-                Debug.Log("파일올려짐");
             }
         }
 
@@ -146,11 +147,12 @@ public class TextBox : MonoBehaviour
                 temp.transform.SetParent(chatBoxParent);
                 currentSpeech = temp.transform;
                 isCurrentUser = false;
+
+                AssistantChatListAdd(temp);     // 만약 조수 대화면 리스트에 추가해라
             }
-            
-            AssistantChatListAdd(temp);     // 만약 조수 대화면 리스트에 추가해라
-            LineAlignment();
         }
+
+        LineAlignment();
 
         GameObject data = null;
 
@@ -158,7 +160,7 @@ public class TextBox : MonoBehaviour
         {
             data = Instantiate(imageBackground);
             data.GetComponent<Image>().sprite = file.GetComponent<Image>().sprite;
-            data.GetComponent<RectTransform>().sizeDelta = file.GetComponent<Image>().sprite.bounds.size * 100;
+            data.GetComponent<RectTransform>().sizeDelta = file.GetComponent<Image>().sprite.bounds.size * 150;
         }
         else if (_type == "Data")
         {

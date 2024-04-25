@@ -94,7 +94,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8752915752828996631
 RectTransform:
   m_ObjectHideFlags: 0
@@ -213,7 +213,6 @@ MonoBehaviour:
   canvas: {fileID: 0}
   parent: {fileID: 0}
   previousPosition: {x: 0, y: 0, z: 0}
-  rect: {fileID: 0}
   isUseable: 0
   sprite: {fileID: 0}
   msg: 
