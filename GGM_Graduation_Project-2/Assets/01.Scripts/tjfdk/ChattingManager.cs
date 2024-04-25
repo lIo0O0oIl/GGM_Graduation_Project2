@@ -63,7 +63,7 @@ public class ChattingManager : MonoBehaviour
         nowLevel = index;
 
         // 쳇팅창 정보 설정해주기
-        if (chattingHumanName.text != chapters[index].who)     // 다른 사람과 대화를 하는 것이라면
+           if (chattingHumanName.text != chapters[index].who)     // 다른 사람과 대화를 하는 것이라면
         {
             // 지금까지 있던 대화 다 지워주기
             for (int i = 0; i < chatContainer.transform.childCount; i++)

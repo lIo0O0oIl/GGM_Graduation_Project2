@@ -673,6 +673,7 @@ MonoBehaviour:
   masterSlider: {fileID: 1172240726}
   bgmSlider: {fileID: 607024227}
   sfxSlider: {fileID: 1528286304}
+  speedSlider: {fileID: 0}
 --- !u!114 &85823089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3522,6 +3523,7 @@ MonoBehaviour:
   masterSlider: {fileID: 899995898}
   bgmSlider: {fileID: 904608798}
   sfxSlider: {fileID: 20463062}
+  speedSlider: {fileID: 0}
 --- !u!1 &1528286302
 GameObject:
   m_ObjectHideFlags: 0
