@@ -1,0 +1,30 @@
+.Speech {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.OtherChat {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+    background-color: rgb(192, 192, 192);
+}
+
+.ChatText {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 35px;
+}
+
+.MyChat {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+    background-color: rgb(104, 132, 121);
+    align-self: flex-end;
+}

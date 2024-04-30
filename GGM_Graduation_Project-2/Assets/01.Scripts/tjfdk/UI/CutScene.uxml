@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="MyChat" src="project://database/Assets/UI%20Toolkit/Prefab/MyChat.uxml?fileID=9197481963319205126&amp;guid=8c24340d17be1424c98c2acaa1ce4b02&amp;type=3#MyChat" />
+    <Style src="project://database/Assets/UI%20Toolkit/USS/Panel.uss?fileID=7433441132597879392&amp;guid=e2332cba0dd6d4b4bb677ce53ccc3e33&amp;type=3#Panel" />
+    <ui:VisualElement name="CutScene" class="BackGround" style="flex-grow: 1; border-left-width: 5px; display: flex;">
+        <ui:VisualElement class="BackGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 1620px; height: 780px; align-self: center; justify-content: center; margin-left: 50px; margin-right: 50px; margin-top: 50px; margin-bottom: 25px; background-image: url(&apos;project://database/Assets/02.Sprites/Main/intro.png?fileID=2800000&amp;guid=9fd94bf5662d09942bf1554e56b79c86&amp;type=3#intro&apos;); border-left-width: 5px;" />
+        <ui:VisualElement name="VisualElement" style="flex-grow: 0; background-color: rgb(0, 0, 0); align-items: center; justify-content: center; align-self: center; margin-left: 50px; margin-right: 50px; margin-top: 25px; margin-bottom: 50px; width: 1620px; padding-left: 25px; padding-right: 25px; padding-top: 25px; padding-bottom: 25px;">
+            <ui:Label tabindex="-1" text="아 배고프다;" display-tooltip-when-elided="true" style="align-items: center; justify-content: center; align-self: center; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Instance template="MyChat" name="MyChat" />
+</ui:UXML>

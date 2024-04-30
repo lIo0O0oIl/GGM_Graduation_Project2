@@ -1,0 +1,32 @@
+.File {
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.FileImage {
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    width: 100%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(27, 27, 27, 0);
+}
+
+.FileName {
+    width: 100%;
+    height: 15%;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    -unity-text-align: middle-center;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+}
