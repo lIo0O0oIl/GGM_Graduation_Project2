@@ -58,6 +58,7 @@ public class ChattingManager : MonoBehaviour
 
     public void StartChatting(int index)
     {
+        Debug.Log("체팅이 시작됨" + index);
         // 만약 내 쳇팅이 꺼져있으면 켜질 때까지는 대기 엑션으로??
         // 챗팅이 켜지면 액션으로 다시 이 함수를 부르게 한다?
         if (UIManager.Instance.panels[0].activeSelf == false)
@@ -109,13 +110,13 @@ public class ChattingManager : MonoBehaviour
             bool state = false;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
             switch (chapters[nowLevel].chat[nowChatIndex].state)
             {
-                case ChatState.Other:
+                case E_ChatState.Other:
                     state = false;
                     break;
-                case ChatState.Me:
+                case E_ChatState.Me:
                     state = true;
                     break;
-                case ChatState.Ask:
+                case E_ChatState.Ask:
                     notUseAskList.Clear();      // 전에 있던 것 모두 지워주기
                     for (int i = 0; i < askLenght; i++)
                     {
@@ -125,7 +126,7 @@ public class ChattingManager : MonoBehaviour
                     }
                     is_Choosing = true;
                     return;
-                case ChatState.LoadNext:
+                case E_ChatState.LoadNext:
                     Debug.LogError("아직 만들지 않는 LoadNext 예요.");
                     return;     // 아예 돌려
                 default:

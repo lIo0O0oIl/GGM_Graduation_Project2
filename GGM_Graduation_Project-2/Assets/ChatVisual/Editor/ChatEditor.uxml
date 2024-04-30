@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/ChatVisual/Editor/ChatEditor.uss?fileID=7433441132597879392&amp;guid=26d54c5307c4a3a4b92d81aa15fa5cb3&amp;type=3#ChatEditor" />
+    <ChatVisual.SplitView fixed-pane-initial-dimension="250">
+        <ui:VisualElement name="left-panel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ChatVisual.SplitView fixed-pane-initial-dimension="400" orientation="Vertical">
+                <ui:VisualElement name="hierarchy-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                    <ui:Label tabindex="-1" text="Hierarchy" display-tooltip-when-elided="true" class="title-label" />
+                    <ChatVisual.HierarchyView name="hierarchy-view" />
+                </ui:VisualElement>
+                <ui:VisualElement name="inspector-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                    <ui:Label tabindex="-1" text="Inspector" display-tooltip-when-elided="true" name="inspector-label" class="title-label" />
+                    <ui:IMGUIContainer name="inspector" style="flex-grow: 1;" />
+                </ui:VisualElement>
+            </ChatVisual.SplitView>
+        </ui:VisualElement>
+        <ui:VisualElement name="right-panel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:Label tabindex="-1" text="ChatView" display-tooltip-when-elided="true" class="title-label" />
+            <ChatVisual.ChatView focusable="true" name="chat-view" />
+        </ui:VisualElement>
+    </ChatVisual.SplitView>
+</ui:UXML>

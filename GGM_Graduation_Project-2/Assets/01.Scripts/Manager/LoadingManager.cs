@@ -35,7 +35,7 @@ public class LoadingManager : MonoBehaviour
             }
             for (int i = 0; i < loadingImage.Length; i++)
             {
-                loadingImage[i].SetActive(false);
+                loadingImage[i].gameObject.SetActive(false);
             }
             yield return dotWait;
         }
@@ -43,6 +43,7 @@ public class LoadingManager : MonoBehaviour
 
     public void LoadingStart()
     {
+        canvasGroup.gameObject.SetActive(true);
         canvasGroup.DOFade(1, 1f);
         is_Loading = true;
 
@@ -61,6 +62,7 @@ public class LoadingManager : MonoBehaviour
         {
             loadingImage[i].SetActive(false);
         }
+        canvasGroup.gameObject.SetActive(false);
 
         canvasGroup.DOFade(0, 1f);
     }

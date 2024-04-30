@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SE : MonoBehaviour
+namespace ChatVisual
 {
+    public class ChatNode : MonoBehaviour
+    {
 
+    }
 }

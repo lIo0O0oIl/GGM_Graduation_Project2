@@ -61,10 +61,10 @@ public class ExcelReader : MonoBehaviour
                         string[] chatAndState = lineCut[j + nowReadLine].Split('\t');
                         chat[j - 4].text = chatAndState[1];       // 택스트 넣어줌.
 
-                        ChatState state = (ChatState)Enum.Parse(typeof(ChatState), chatAndState[0]);
-                        if (state == ChatState.Ask)
+                        E_ChatState state = (E_ChatState)Enum.Parse(typeof(E_ChatState), chatAndState[0]);
+                        if (state == E_ChatState.Ask)
                         {
-                            chat[j - 4].state = ChatState.Ask;            // 질문이라는 타입을 넣어줌.
+                            chat[j - 4].state = E_ChatState.Ask;            // 질문이라는 타입을 넣어줌.
                             askAndReplySO[nowAskIndex].ask = chatAndState[1];       // 질문쪽에 텍스트를 넣어줌. 나중에 이걸로 찾아서 대답을 해줄거임. 딕셔너리를 쓸까? 스트링과 배열스트링으로?
                             if (int.TryParse(lineCut[j + nowReadLine + 1].Split('\t')[1], out int replyCount))      // 질문에 대한 대답의 갯수
                             {
@@ -114,7 +114,7 @@ public class ExcelReader : MonoBehaviour
         // 쳇팅 시스템 켜주기
         Debug.Log("챗팅 로딩 완료");
         LoadingManager.Instance.LoadingEnd();
-        ChattingManager.Instance.StartChatting(0);
+        //ChattingManager.Instance.StartChatting(0);
         CutSceneManager.Instance.CutScene(true, "Start");
     }
 

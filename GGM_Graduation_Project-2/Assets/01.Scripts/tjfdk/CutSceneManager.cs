@@ -59,6 +59,7 @@ public class CutSceneManager : MonoBehaviour
         // 컷 씬 종료점
         if (isOpen == false)
         {
+            Debug.Log("컷 씬 끝남");
             ChattingManager.Instance.StartChatting(0);           // 가장 처음은 0으로 해두기
         }
     }
@@ -122,8 +123,8 @@ public class CutSceneManager : MonoBehaviour
                 // 대사 인덱스 증가
                 currentTextNum++;
 
-                Debug.Log(currentTextNum);
-                Debug.Log(currentCutScene.cutScenes[currentCutNum].texts.Count);
+                //Debug.Log(currentTextNum);
+                //Debug.Log(currentCutScene.cutScenes[currentCutNum].texts.Count);
 
                 // 현재 컷의 모든 대사를 실행했다면
                 if (currentTextNum >= currentCutScene.cutScenes[currentCutNum].texts.Count)

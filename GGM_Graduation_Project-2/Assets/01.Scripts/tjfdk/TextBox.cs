@@ -5,14 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
-
-//[Serializable]
-//public enum FileType
-//{
-//    Image = 0,
-//    Data
-//}
 
 public class TextBox : MonoBehaviour
 {
