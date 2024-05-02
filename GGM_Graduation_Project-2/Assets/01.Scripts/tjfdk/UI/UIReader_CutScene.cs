@@ -33,7 +33,7 @@ public class UIReader_CutScene : MonoBehaviour
     {
         if  (Input.GetKeyDown(KeyCode.U))
         {
-            ChangeText("tlqkftlqkftlqkf", 4f);
+            ChangeText("너무 어려워요 도와주세요", 4f);
         }
         if  (Input.GetKeyDown(KeyCode.I))
             EndText();

@@ -47,11 +47,13 @@ public class TestUI : MonoBehaviour
     VisualTreeAsset ux_folderFile;
     VisualTreeAsset ux_imageFile;
     VisualTreeAsset ux_textFile;
+    VisualTreeAsset ux_filePath;
 
 
     //[Header("Sprite")]
     //[Header("Chat")]
     [SerializeField] private Sprite sp_speechrSprite;
+    [SerializeField] private Sprite s_speechrSprite;
     //[Header("File")]
     //[SerializeField] private Sprite sp_folderSprite;
     //[SerializeField] private Sprite sp_imageSprite;
@@ -76,7 +78,7 @@ public class TestUI : MonoBehaviour
 
         // Panel
         chattingPanel = root.Q<VisualElement>("Chatting");
-        connectionPanel = root.Q<VisualElement>("Connection");
+        //connectionPanel = root.Q<VisualElement>("Connection");
         imageFindingPanel = root.Q<VisualElement>("ImageFinding");
 
         // Chat
@@ -95,9 +97,10 @@ public class TestUI : MonoBehaviour
         ux_hiddenAskChat = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\HiddenAskChat.uxml");
 
         // File
-        ux_folderFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\MyChat.uxml");
-        ux_imageFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\OtherChat.uxml");
-        ux_textFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\AskChat.uxml");
+        ux_folderFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FolderFile.uxml");
+        ux_imageFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\ImageFile.uxml");
+        ux_textFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\TextFile.uxml");
+        ux_filePath = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FolderFile.uxml");
 
         // Sprite Load
 
@@ -112,13 +115,16 @@ public class TestUI : MonoBehaviour
         chattingButton.clickable.clicked += () =>
         {
             chattingPanel.SetEnabled(true);
-            connectionPanel.SetEnabled(false);
+            imageFindingPanel.SetEnabled(false);
+            //connectionPanel.SetEnabled(false);
         };
 
         connectionButton.clickable.clicked += () =>
         {
+            Debug.Log("te");
             chattingPanel.SetEnabled(false);
-            connectionPanel.SetEnabled(true);
+            imageFindingPanel.SetEnabled(true);
+            //connectionPanel.SetEnabled(true);
         };
 
         settingButton.clickable.clicked += () =>
@@ -133,9 +139,13 @@ public class TestUI : MonoBehaviour
         {
             InputQuestion(true, "크킄", actionTest);
         }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            InputChat(false, "킄", sp_speechrSprite);
+        }
         if (Input.GetKeyDown(KeyCode.X))
         {
-            InputChat(true, "크킄", sp_speechrSprite);
+            InputChat(true, "크킄", s_speechrSprite);
         }
     }
 
@@ -194,8 +204,23 @@ public class TestUI : MonoBehaviour
         fileGround.Add(file);
     }
 
+    public void AddFilePath(string pathName, Action action)
+    {
+        VisualElement filePath = null;
+        filePath = ux_filePath.Instantiate();
+        filePath.Q<Button>().clicked += action;
+        filePath.Q<Button>().text = pathName;
+        // 추가할 때 마다 배열 같은 곳에 순차적으로 저장 후 지워야 할 때 인덱스로 접근, FIleManager GoFile 참고
+    }
+
+    public void RemoveFilePath(int index)
+    {
+        // .
+    }
+
     private void actionTest()       
     {
         Debug.Log("tlqkf");
+        AddFile(FileType.FOLDER, "학교", actionTest, false);
     }
 }
