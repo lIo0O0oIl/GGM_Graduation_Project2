@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ChatVisual
 {
-    public class ChatNode : Node
+    public class LockAskNode : Node
     {
         protected override void OnStart()
         {

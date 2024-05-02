@@ -21,7 +21,7 @@ namespace ChatVisual
         public NodeView(Node node) : base("Assets/ChatVisual/Editor/NodeView/NodeView.uxml")
         {
             this.node = node;
-            this.title = node.name;
+            //this.title = node.name;
 
             //this.viewDataKey = node.guid;
 
@@ -29,12 +29,12 @@ namespace ChatVisual
             style.top = node.position.y;
 
             CreateInputPorts();
-            CreateOutputPorts();
-            SetUpClasses();
+            //CreateOutputPorts();
+            //SetUpClasses();
 
             Label descLabel = this.Q<Label>("description");
             descLabel.bindingPath = "description";
-            descLabel.Bind(new SerializedObject(node));      // node 라는 클래스에서 description 변수를 찾아서 넣어줌.
+            //descLabel.Bind(new SerializedObject(node));      // node 라는 클래스에서 description 변수를 찾아서 넣어줌.
         }
 
         private void CreateInputPorts()

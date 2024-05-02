@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using ChatVisual;       // 나중에 지우기
 
 public class ChattingManager : MonoBehaviour
 {
@@ -74,7 +75,7 @@ public class ChattingManager : MonoBehaviour
         nowLevel = index;
 
         // 쳇팅창 정보 설정해주기
-        if (chattingHumanName.text != chapters[index].who)     // 다른 사람과 대화를 하는 것이라면
+       /* if (chattingHumanName.text != chapters[index].who)     // 다른 사람과 대화를 하는 것이라면
         {
             // 지금까지 있던 대화 다 지워주기
             for (int i = 0; i < chatContainer.transform.childCount; i++)
@@ -94,8 +95,8 @@ public class ChattingManager : MonoBehaviour
                 }
             }
 
-            chattingHumanName.text = chapters[index].who;      // 이름 넣어주기
-        }
+            //chattingHumanName.text = chapters[index].who;      // 이름 넣어주기
+        }*/
 
         int chatLenght = chapters[index].chat.Length;       // 쳇팅들의 길이
         askLenght = chapters[index].askAndReply.Length;      // 질문들의 개수
@@ -110,7 +111,7 @@ public class ChattingManager : MonoBehaviour
             bool state = false;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
             switch (chapters[nowLevel].chat[nowChatIndex].state)
             {
-                case E_ChatState.Other:
+                /*case E_ChatState.Other:
                     state = false;
                     break;
                 case E_ChatState.Me:
@@ -128,7 +129,7 @@ public class ChattingManager : MonoBehaviour
                     return;
                 case E_ChatState.LoadNext:
                     Debug.LogError("아직 만들지 않는 LoadNext 예요.");
-                    return;     // 아예 돌려
+                    return;     // 아예 돌려*/
                 default:
                     Debug.LogError($"{chapters[nowLevel].chat[nowChatIndex].state} 는(은) 없는 유형이예요!");
                     break;
@@ -165,7 +166,7 @@ public class ChattingManager : MonoBehaviour
     {
         if (nowAskChatIndex < chapters[nowLevel].askAndReply[nowAskLevel].reply.Length)
         {
-            TextBox.Instance.InputText(false, chapters[nowLevel].askAndReply[nowAskLevel].reply[nowAskChatIndex]);
+            //TextBox.Instance.InputText(false, chapters[nowLevel].askAndReply[nowAskLevel].reply[nowAskChatIndex]);
             nowAskChatIndex++;
         }
         else

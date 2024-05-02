@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace ChatVisual
 {
-    public class ChatNode : Node
+    public class RootNode : Node
     {
         protected override void OnStart()
         {
+
         }
     }
 }

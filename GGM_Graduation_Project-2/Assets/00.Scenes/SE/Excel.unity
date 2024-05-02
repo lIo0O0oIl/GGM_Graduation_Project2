@@ -132,7 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 387772606}
-  - component: {fileID: 387772605}
+  - component: {fileID: 387772608}
+  - component: {fileID: 387772607}
   m_Layer: 0
   m_Name: Excel!!!!!!!
   m_TagString: Untagged
@@ -140,18 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &387772605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387772604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae516a8da240c74459d9f817e5e8f375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &387772606
 Transform:
   m_ObjectHideFlags: 0
@@ -167,6 +156,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &387772607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387772604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0ffcb21753f5a418c8b46f89bb1f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chatContainer: {fileID: 0}
+  chattingHumanName: {fileID: 0}
+  assistantChatList: []
+  chapters: []
+  delayTime: 0.75
+  nowLevel: 0
+--- !u!114 &387772608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387772604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da9dde4be1b3a4428b5cb9f293b2c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &561781002
 GameObject:
   m_ObjectHideFlags: 0

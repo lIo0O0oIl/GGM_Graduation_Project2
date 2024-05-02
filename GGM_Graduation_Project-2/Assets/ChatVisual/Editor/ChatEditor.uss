@@ -9,7 +9,7 @@
     --thick-line-color: rgba(193, 196, 192, 0.1);
 }
 
-#hierarchy-view {
+#inspector-view {
     flex-grow: 1;
     padding-left: 10px;
     padding-top: 5px;
@@ -29,4 +29,8 @@
     font-size: 17px;
     padding-left: 10px;
     padding-top: 0;
+}
+
+.red :hover {
+    background-color: rgba(255, 255, 255, 0.15);
 }
