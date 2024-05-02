@@ -19,12 +19,22 @@ public class TestUI : MonoBehaviour
 {
     private UIDocument document;
     private VisualElement root;
-    private Button test;
-    private Button testButton;
-    public bool movetest = false;
+
+    public GameObject settingPanel;
 
     [Header("UXML")]
+    [Header("Button")]
+    Button chattingButton;
+    Button connectionButton;
+    Button settingButton;
+    [Header("Panel")]
+    VisualElement chattingPanel;
+    VisualElement connectionPanel;
+    VisualElement imageFindingPanel;
+    [Header("Chat")]
+    VisualElement chattingFace;
 
+    [Header("Template")]
     [Header("Chat")]
     VisualElement chatGround;
     VisualTreeAsset ux_myChat;
@@ -39,21 +49,40 @@ public class TestUI : MonoBehaviour
     VisualTreeAsset ux_textFile;
 
 
-    [Header("Sprite")]
-    [Header("Chat")]
+    //[Header("Sprite")]
+    //[Header("Chat")]
     [SerializeField] private Sprite sp_speechrSprite;
-    [Header("File")]
-    [SerializeField] private Sprite sp_folderSprite;
-    [SerializeField] private Sprite sp_imageSprite;
-    [SerializeField] private Sprite sp_textSprite;
+    //[Header("File")]
+    //[SerializeField] private Sprite sp_folderSprite;
+    //[SerializeField] private Sprite sp_imageSprite;
+    //[SerializeField] private Sprite sp_textSprite;
 
 
     private void OnEnable()
     {
         document = GetComponent<UIDocument>();
         root = document.rootVisualElement;
-        test = root.Q<Button>("EvidenceImage");
 
+        Load();
+        AddEvent();
+    }
+
+    private void Load()
+    {
+        // Button
+        chattingButton = root.Q<Button>("ChattingBtn");
+        connectionButton = root.Q<Button>("ConnectionBtn");
+        settingButton = root.Q<Button>("SoundSettingBtn");
+
+        // Panel
+        chattingPanel = root.Q<VisualElement>("Chatting");
+        connectionPanel = root.Q<VisualElement>("Connection");
+        imageFindingPanel = root.Q<VisualElement>("ImageFinding");
+
+        // Chat
+        chattingFace = root.Q<VisualElement>("ChatFace");
+
+        // System Ground
         chatGround = root.Q<VisualElement>("ChatGround");
         fileGround = root.Q<VisualElement>("FileGround");
 
@@ -78,17 +107,41 @@ public class TestUI : MonoBehaviour
 
     }
 
+    private void AddEvent()
+    {
+        chattingButton.clickable.clicked += () =>
+        {
+            chattingPanel.SetEnabled(true);
+            connectionPanel.SetEnabled(false);
+        };
+
+        connectionButton.clickable.clicked += () =>
+        {
+            chattingPanel.SetEnabled(false);
+            connectionPanel.SetEnabled(true);
+        };
+
+        settingButton.clickable.clicked += () =>
+        {
+            settingPanel.SetActive(!settingPanel.activeSelf);
+        };
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             InputQuestion(true, "크킄", actionTest);
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            InputChat(true, "크킄", sp_speechrSprite);
+        }
     }
 
     // 기능 독립 시키기...
 
-    public void InputChat(bool isUser, string msg)
+    public void InputChat(bool isUser, string msg, Sprite face)
     {
         VisualElement chat = null;
 
@@ -97,6 +150,7 @@ public class TestUI : MonoBehaviour
         else
             chat = ux_otherChat.Instantiate();
 
+        chattingFace.style.backgroundImage = new StyleBackground(face);
         chat.Q<Label>().text = msg;
         chatGround.Add(chat);
     }
@@ -140,7 +194,7 @@ public class TestUI : MonoBehaviour
         fileGround.Add(file);
     }
 
-    private void actionTest()
+    private void actionTest()       
     {
         Debug.Log("tlqkf");
     }

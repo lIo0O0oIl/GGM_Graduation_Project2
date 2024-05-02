@@ -1,7 +1,8 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/Chat.uss?fileID=7433441132597879392&amp;guid=196e6005f5443d14a87a584d5b6e61e3&amp;type=3#Chat" />
+    <Style src="project://database/Assets/UI%20Toolkit/USS/Button.uss?fileID=7433441132597879392&amp;guid=d28c6cf77bec8e54c92d108a96fd1e35&amp;type=3#Button" />
     <ui:VisualElement name="AskChat">
-        <Style src="project://database/Assets/UI%20Toolkit/USS/Chat.uss?fileID=7433441132597879392&amp;guid=196e6005f5443d14a87a584d5b6e61e3&amp;type=3#Chat" />
-        <ui:Button text="Button" display-tooltip-when-elided="true" name="AskChat" class="MyChat NoButtonBorder" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-self: flex-end; align-items: flex-end;">
+        <ui:Button text="Button" display-tooltip-when-elided="true" name="AskChat" class="MyChat NoButtonBorder" style="align-self: flex-end; align-items: flex-end; margin-left: 20px; margin-right: 20px; margin-top: 20px; margin-bottom: 20px;">
             <ui:VisualElement name="Speech" class="Speech" style="background-color: rgb(120, 120, 120);">
                 <ui:Label text="Test" name="Text" class="ChatText" />
             </ui:VisualElement>

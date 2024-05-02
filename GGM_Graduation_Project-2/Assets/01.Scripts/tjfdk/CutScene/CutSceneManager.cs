@@ -8,9 +8,11 @@ public class CutSceneManager : MonoBehaviour
 {
     [Header("Object")]
     [SerializeField] private GameObject cutScene;
-    [SerializeField] private Image screen;
-    [SerializeField] private Text text;
+    UIReader_CutScene cutsceneUI;
+    //[SerializeField] private Image screen;
+    //[SerializeField] private Text text;
     //[SerializeField] private TextMeshProUGUI text;
+
 
     [Header("Current Index")]
     [SerializeField] private CutSceneSO currentCutScene;
@@ -19,6 +21,11 @@ public class CutSceneManager : MonoBehaviour
 
     [Header("Data")]
     [SerializeField] private List<CutSceneSO> cutSceneChapters = new List<CutSceneSO>();
+
+    private void Awake()
+    {
+        cutsceneUI = GetComponent<UIReader_CutScene>();
+    }
 
     private void Start()
     {
@@ -92,7 +99,7 @@ public class CutSceneManager : MonoBehaviour
     private void CutSetting()
     {
         // 이미지 설정
-        screen.sprite = currentCutScene.cutScenes[currentCutNum].cut;
+        cutsceneUI.ChangeCut(currentCutScene.cutScenes[currentCutNum].cut);
         // 대사 입력 함수 호출
         Texting(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum]);
     }
@@ -107,10 +114,11 @@ public class CutSceneManager : MonoBehaviour
             // 지금 진행중인 컷씬의 대사가 다 작성되지 않았다면
             if (currentText.isEnd == false)
             {
-                // 다트윈 강제 종료
-                text.DOKill();
-                // 대사 입력
-                text.text = currentText.text;
+                //// 다트윈 강제 종료
+                //text.DOKill();
+                //// 대사 입력
+                //text.text = currentText.text;
+                cutsceneUI.EndText();
                 // 대사 입력 완료
                 currentText.isEnd = true;
             }
@@ -160,13 +168,16 @@ public class CutSceneManager : MonoBehaviour
             SoundManager.Instance.PlaySFX("typing");
         }
 
-        // 이전 텍스트 삭제
-        text.text = "";
-        //다트윈으로 텍스트 작성
-        text.DOText(temp.text, 1.5f).OnComplete(() =>
-        {
-            temp.isEnd = true;
-            SoundManager.Instance.StopSFX();
-        });
+        // text 입력
+        float textDuring = temp.text.Length * 0.5f;
+        cutsceneUI.ChangeText(temp.text, textDuring);
+
+        // toolkit reader로 변경
+        ////다트윈으로 텍스트 작성
+        //text.DOText(temp.text, 1.5f).OnComplete(() =>
+        //{
+        //    temp.isEnd = true;
+        //    SoundManager.Instance.StopSFX();
+        //});
     }
 }
