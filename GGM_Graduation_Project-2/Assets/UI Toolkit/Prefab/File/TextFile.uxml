@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/File.uss?fileID=7433441132597879392&amp;guid=52529ae86f49f7f48b6ba569bcb8bcb6&amp;type=3#File" />
+    <ui:VisualElement name="TextFile" class="File">
+        <ui:Button name="FileImage" class="FileImage NoButtonBorder" style="background-image: url(&apos;project://database/Assets/02.Sprites/Icons/Txt.png?fileID=2800000&amp;guid=7fc8ff71e7ef85040874c7435d0120ff&amp;type=3#Txt&apos;);" />
+        <ui:Label text="텍스트" name="FileName" class="FileName" />
+    </ui:VisualElement>
+</ui:UXML>

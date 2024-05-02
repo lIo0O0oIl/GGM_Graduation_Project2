@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/File.uss?fileID=7433441132597879392&amp;guid=52529ae86f49f7f48b6ba569bcb8bcb6&amp;type=3#File" />
+    <ui:VisualElement name="ImageFile" class="File">
+        <ui:Button name="FileImage" class="FileImage NoButtonBorder" style="background-image: url(&apos;project://database/Assets/02.Sprites/Icons/Image%201.png?fileID=2800000&amp;guid=9348e23f3abd3ad4ea3943b7833e9459&amp;type=3#Image 1&apos;);" />
+        <ui:Label text="폴더 " name="FileName" class="FileName" />
+    </ui:VisualElement>
+</ui:UXML>

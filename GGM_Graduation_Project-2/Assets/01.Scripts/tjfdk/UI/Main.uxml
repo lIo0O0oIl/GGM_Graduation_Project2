@@ -1,24 +1,24 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="OtherChat" src="project://database/Assets/UI%20Toolkit/Prefab/OtherChat.uxml?fileID=9197481963319205126&amp;guid=45c4e00784c9c114eb0edee2da4a8634&amp;type=3#OtherChat" />
-    <ui:Template name="ChoiceChat" src="project://database/Assets/UI%20Toolkit/Prefab/ChoiceChat.uxml?fileID=9197481963319205126&amp;guid=1ad6e7f27ef77564c889c066d757ee37&amp;type=3#ChoiceChat" />
-    <ui:Template name="MyChat" src="project://database/Assets/UI%20Toolkit/Prefab/MyChat.uxml?fileID=9197481963319205126&amp;guid=8c24340d17be1424c98c2acaa1ce4b02&amp;type=3#MyChat" />
+    <ui:Template name="AskChat" src="project://database/Assets/UI%20Toolkit/Prefab/AskChat.uxml?fileID=9197481963319205126&amp;guid=eca624ffc6976be4cbe63439f47c4452&amp;type=3#AskChat" />
+    <ui:Template name="HiddenAskChat" src="project://database/Assets/UI%20Toolkit/Prefab/HiddenAskChat.uxml?fileID=9197481963319205126&amp;guid=167b99bf43499a4418fb5d4f44cf9276&amp;type=3#HiddenAskChat" />
     <ui:Template name="FilePathText" src="project://database/Assets/UI%20Toolkit/Prefab/FilePathText.uxml?fileID=9197481963319205126&amp;guid=7cc2fd9d76154224fbd0b7d07ba9eba9&amp;type=3#FilePathText" />
     <Style src="project://database/Assets/UI%20Toolkit/USS/Button.uss?fileID=7433441132597879392&amp;guid=d28c6cf77bec8e54c92d108a96fd1e35&amp;type=3#Button" />
     <Style src="project://database/Assets/UI%20Toolkit/USS/Chat.uss?fileID=7433441132597879392&amp;guid=196e6005f5443d14a87a584d5b6e61e3&amp;type=3#Chat" />
     <Style src="project://database/Assets/UI%20Toolkit/USS/Panel.uss?fileID=7433441132597879392&amp;guid=e2332cba0dd6d4b4bb677ce53ccc3e33&amp;type=3#Panel" />
     <Style src="project://database/Assets/UI%20Toolkit/USS/File.uss?fileID=7433441132597879392&amp;guid=52529ae86f49f7f48b6ba569bcb8bcb6&amp;type=3#File" />
-    <ui:VisualElement name="MainGame" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; display: flex; height: 100%; width: 100%;">
-        <ui:VisualElement name="ToolBar" class="BackGround" style="width: 5%; border-left-width: 5px;">
+    <ui:VisualElement name="MainGame" style="background-color: rgba(0, 0, 0, 0); flex-direction: row; display: flex; height: 100%; width: 100%; flex-grow: 1;">
+        <ui:VisualElement name="ToolBar" class="BackGround" style="width: 5%; border-left-width: 5px; display: flex;">
             <ui:Button display-tooltip-when-elided="true" name="ChattingBtn" class="MenuTopButton" style="width: 75px; height: 75px; align-items: auto; justify-content: flex-start; align-self: center; margin-top: 2px; position: relative; top: 10px; left: 0; right: 0; bottom: 0; background-image: url(&apos;project://database/Assets/02.Sprites/Icons/Speech.png?fileID=2800000&amp;guid=7c6d3615a031fd34d8cc8e88b54fef00&amp;type=3#Speech&apos;); background-color: rgba(0, 0, 0, 0); color: rgb(27, 27, 27); -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
             <ui:Button display-tooltip-when-elided="true" name="ConnectionBtn" class="MenuTopButton" style="width: 75px; height: 75px; align-items: auto; justify-content: flex-start; align-self: center; margin-top: 2px; position: relative; top: 10px; left: 0; right: 0; bottom: 0; background-image: url(&apos;project://database/Assets/02.Sprites/Icons/Txt.png?fileID=2800000&amp;guid=7fc8ff71e7ef85040874c7435d0120ff&amp;type=3#Txt&apos;); background-color: rgba(0, 0, 0, 0); color: rgb(27, 27, 27); -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
             <ui:Button display-tooltip-when-elided="true" name="SoundSettingBtn" class="MenuBottomButton" style="bottom: -76%; background-image: url(&apos;project://database/Assets/02.Sprites/Icons/setting.png?fileID=2800000&amp;guid=8226d985421b7634e9c1be1a5cede6be&amp;type=3#setting&apos;); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); justify-content: flex-start;" />
         </ui:VisualElement>
-        <ui:VisualElement name="Main" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; width: 100%; height: 100%;">
-            <ui:VisualElement name="MainSystem" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); border-left-width: 0; flex-direction: column; width: auto; height: auto; display: flex;">
-                <ui:VisualElement name="ImageFinding" class="BackGround" style="align-items: center; align-self: center; justify-content: flex-start; display: none; border-left-width: 0; height: 100%;">
+        <ui:VisualElement name="Main" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; width: 100%; height: 100%; display: flex;">
+            <ui:VisualElement name="MainSystem" class="BackGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); border-left-width: 0; flex-direction: column;">
+                <ui:VisualElement name="ImageFinding" class="BackGround" style="align-items: center; align-self: center; justify-content: flex-start; display: none; border-left-width: 0; height: 100%; flex-grow: 1; width: 100%;">
                     <ui:VisualElement name="Image" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 100%; width: 100%; background-image: url(&apos;project://database/Assets/02.Sprites/CutScene/Begin_fall.png?fileID=2800000&amp;guid=4fed63953deba9f4b8edfdcbe9a63dbb&amp;type=3#Begin_fall&apos;);">
                         <ui:VisualElement name="Evidence" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/02.Sprites/Main/intro.png?fileID=2800000&amp;guid=9fd94bf5662d09942bf1554e56b79c86&amp;type=3#intro&apos;);">
-                            <ui:VisualElement name="Descripte" class="BackGround" style="width: 200px; height: 250px; background-color: rgb(118, 118, 118); left: 276px; top: 581px; flex-wrap: wrap; align-self: auto; justify-content: flex-start; align-items: center; flex-direction: column; border-left-width: 5px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255);">
+                            <ui:VisualElement name="Descripte" class="BackGround" style="width: 200px; height: 250px; background-color: rgb(118, 118, 118); left: 276px; top: 581px; flex-wrap: wrap; align-self: auto; justify-content: flex-start; align-items: center; flex-direction: column; border-left-width: 5px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); display: none;">
                                 <ui:Label tabindex="-1" text="담배" display-tooltip-when-elided="true" name="EvidenceName" style="font-size: 30px;" />
                                 <ui:Label tabindex="-1" text="역시 지현이다 예상했지만 진짜로 담배를 피ㅇㄹㅇㄹㅇㄹㅇㄹ" display-tooltip-when-elided="true" name="Memo" style="align-items: auto; align-self: flex-start; font-size: 20px; flex-wrap: wrap; width: 100%; flex-direction: row; -unity-text-align: upper-left; white-space: normal; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; flex-shrink: 1; flex-grow: 1; transition-property: all, ignored, ignored; transition-duration: 0s, 0s, 0s; transition-timing-function: ease, ease, ease; transition-delay: 0s, 0s, 0s;" />
                             </ui:VisualElement>
@@ -26,41 +26,36 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="Chatting" class="BackGround" style="display: flex; border-left-width: 0;">
-                    <ui:VisualElement name="ChatNameBar" style="flex-grow: 0; background-color: rgb(38, 38, 38); height: 5%; width: 100%; flex-direction: row;">
+                <ui:VisualElement name="Chatting" class="BackGround" style="display: flex; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;">
+                    <ui:VisualElement name="ChatNameBar" class="BackGround" style="flex-grow: 0; background-color: rgb(38, 38, 38); height: 5%; width: 100%; flex-direction: row; border-top-width: 0; border-right-width: 0;">
                         <ui:Button display-tooltip-when-elided="true" text="o" name="ChangeTarget" class="NoButtonBorder" style="font-size: 25px; -unity-font-style: normal; -unity-font: initial; width: 55px; height: 100%; align-items: flex-start; background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-1304905567622442630&amp;guid=a11d7050c806a0645944b38c8744ac70&amp;type=3#arrow-down@2x&apos;); background-color: rgba(0, 0, 0, 0);" />
                         <ui:Label tabindex="-1" text="name" display-tooltip-when-elided="true" name="TargetName" style="height: 100%; color: rgb(255, 255, 255); -unity-text-align: middle-left; font-size: 45px; -unity-font: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo.ttf?fileID=12800000&amp;guid=ac8392ea6f9e97949882302322851c02&amp;type=3#DungGeunMo&apos;); width: 10%; align-items: flex-start; flex-grow: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="Main" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
-                        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center; flex-direction: row; flex-basis: auto; min-width: 20%; min-height: 100%;">
-                            <ui:VisualElement name="Face" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/01.Scripts/tjfdk/UI/image.png?fileID=2800000&amp;guid=cbaa76d609d888045a6a3d99570bd4a3&amp;type=3#image&apos;); flex-direction: column; align-self: center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 25px; padding-right: 25px; padding-top: 25px; padding-bottom: 25px; height: 50%;" />
+                    <ui:VisualElement name="Main" class="BackGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;">
+                        <ui:VisualElement name="FaceGround" class="BackGround" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-basis: 25%; min-width: 25%; min-height: auto; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; width: 25%; max-width: 25%;">
+                            <ui:VisualElement style="align-self: center; background-image: url(&apos;project://database/Assets/01.Scripts/tjfdk/UI/image.png?fileID=2800000&amp;guid=cbaa76d609d888045a6a3d99570bd4a3&amp;type=3#image&apos;); flex-grow: 1; margin-left: 25px; margin-right: 25px; margin-top: 25px; margin-bottom: 25px; height: 50%; width: 100%;" />
                         </ui:VisualElement>
-                        <ui:VisualElement name="Chat" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 75%; flex-direction: column; align-self: flex-start; align-items: flex-start; height: 100%;">
-                            <ui:Instance template="OtherChat" name="OtherChat" />
-                            <ui:Instance template="ChoiceChat" name="ChoiceChat" style="align-self: flex-end;" />
-                            <ui:Instance template="MyChat" name="MyChat" />
+                        <ui:VisualElement name="Chat" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; flex-direction: column; align-self: flex-start; height: 100%; display: flex;">
+                            <ui:ScrollView name="ChatGround" vertical-scroller-visibility="Hidden" style="align-self: auto;">
+                                <ui:Instance template="OtherChat" name="OtherChat" />
+                                <ui:Instance template="AskChat" name="AskChat" />
+                                <ui:Instance template="HiddenAskChat" name="HiddenAskChat" />
+                            </ui:ScrollView>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="FaceGround" class="BackGround" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-basis: 25%; min-width: 25%; min-height: auto; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; width: 25%; max-width: 25%; display: none;">
+                            <ui:VisualElement style="align-self: center; background-image: url(&apos;project://database/Assets/01.Scripts/tjfdk/UI/image.png?fileID=2800000&amp;guid=cbaa76d609d888045a6a3d99570bd4a3&amp;type=3#image&apos;); flex-grow: 1; margin-left: 25px; margin-right: 25px; margin-top: 25px; margin-bottom: 25px; height: 50%; width: 100%;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="FileSystem" class="BackGround" style="width: auto; flex-wrap: wrap; flex-grow: 0; flex-direction: row; height: auto; display: flex; flex-basis: 150px; min-width: 150px;">
-                <ui:VisualElement name="SizeChange" style="flex-grow: 0; background-color: rgb(130, 130, 130); width: 2.5px; height: 100%; display: flex; visibility: visible; overflow: visible; opacity: 1; -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgb(203, 203, 203); border-right-color: rgb(203, 203, 203); border-top-color: rgb(203, 203, 203); border-bottom-color: rgb(203, 203, 203); border-left-width: 0; border-right-width: 0; border-top-width: 5px; border-bottom-width: 5px;" />
+            <ui:VisualElement name="FileSystem" class="BackGround" style="flex-wrap: wrap; flex-grow: 0; flex-direction: row; display: flex; flex-basis: 150px; min-width: 150px; max-width: 33%;">
+                <ui:VisualElement name="SizeChange" style="flex-grow: 0; background-color: rgb(130, 130, 130); width: 2.5px; height: 100%; display: flex; visibility: visible; overflow: visible; opacity: 1; -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgb(203, 203, 203); border-right-color: rgb(203, 203, 203); border-top-color: rgb(203, 203, 203); border-bottom-color: rgb(203, 203, 203); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
                 <ui:VisualElement name="FileSystemGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                     <ui:VisualElement name="FilePath" style="flex-grow: 1; background-color: rgb(87, 87, 87); width: 100%; height: 2.5%; justify-content: flex-start; flex-direction: row; flex-wrap: nowrap; overflow: hidden; visibility: visible;">
                         <ui:Label tabindex="-1" text="메인 &gt; C드라이브 &gt; 한국 " display-tooltip-when-elided="true" name="FilePathText" enable-rich-text="true" style="align-self: flex-start; justify-content: flex-start; -unity-text-align: middle-left; font-size: 12px; width: 100%; height: 100%; margin-left: 5px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(255, 255, 255); flex-direction: row; display: none;" />
                         <ui:Instance template="FilePathText" name="FilePathText" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="FileGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 97.5%; align-self: auto; align-items: flex-start; flex-direction: row; flex-wrap: wrap; justify-content: flex-start;">
-                        <ui:VisualElement name="File" class="File">
-                            <ui:Button name="FileImage" class="FileImage NoButtonBorder" style="background-image: url(&apos;project://database/Assets/02.Sprites/Icons/Button1.png?fileID=2800000&amp;guid=10d043755baaae048b7d4a18e8b3d879&amp;type=3#Button1&apos;);" />
-                            <ui:Label text="학교" class="FileName" />
-                        </ui:VisualElement>
-                        <ui:VisualElement name="File" class="File">
-                            <ui:Button name="FileImage" class="FileImage NoButtonBorder" style="background-image: url(&apos;project://database/Assets/02.Sprites/Icons/Button1.png?fileID=2800000&amp;guid=10d043755baaae048b7d4a18e8b3d879&amp;type=3#Button1&apos;);" />
-                            <ui:Label text="학교" class="FileName" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="FileMain" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 97.5%; flex-direction: row; display: none;" />
+                    <ui:VisualElement name="FileGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 97.5%; align-self: auto; align-items: flex-start; flex-direction: row; flex-wrap: wrap; justify-content: center;" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
