@@ -123,7 +123,10 @@ GameObject:
   - component: {fileID: 108046254167963021}
   - component: {fileID: 8117235805642349169}
   - component: {fileID: 6209717158616286449}
+  - component: {fileID: 2832840500228054734}
+  - component: {fileID: 5199289500991203132}
   - component: {fileID: 6890242285030818289}
+  - component: {fileID: 8699897682972163423}
   m_Layer: 5
   m_Name: SuspectPanel
   m_TagString: Untagged
@@ -217,6 +220,48 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2832840500228054734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192837272068133516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74196709574b3fb4fb51e664b0680476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentFace: {fileID: 978320747, guid: 7b2d9aa4745b2bd48a08fcb53c3f8751, type: 3}
+  Faces:
+  - {fileID: 978320747, guid: 7b2d9aa4745b2bd48a08fcb53c3f8751, type: 3}
+  - {fileID: -1183895723, guid: 7b2d9aa4745b2bd48a08fcb53c3f8751, type: 3}
+  - {fileID: 1136064797, guid: 7b2d9aa4745b2bd48a08fcb53c3f8751, type: 3}
+  Name: "\uAC15\uC9C0\uD604"
+  Feature:
+  - "\uB2F4\uBC30\uD54C"
+  - "\uC880\uC608\uC068"
+  Memo: 
+  Age: 19
+  DoubtLevel: 2
+  DoubtLevelMax: 6
+--- !u!114 &5199289500991203132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192837272068133516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e5f02b446dda54b9ec165ce905de08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  face: {fileID: 7762474218660897158}
+  name: {fileID: 1673405198946419641}
+  feature: {fileID: 3931751642828334979}
+  age: {fileID: 0}
+  doubtLevel: {fileID: 640007719732130237}
 --- !u!114 &6890242285030818289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +274,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2753f0d8bef85c148a76648a39d5f543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDrag: 0
+  line: {fileID: 0}
+  lineMaterial: {fileID: 2100000, guid: d9bd296182c02db448664ee8a16c61d2, type: 2}
+  currentLineCnt: 0
+  lineParent: {fileID: 212970257343532251}
+--- !u!114 &8699897682972163423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192837272068133516}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2415703751762505202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,7 +1310,7 @@ GameObject:
   - component: {fileID: 1934893374383777531}
   - component: {fileID: 3931751642828334979}
   m_Layer: 5
-  m_Name: atb
+  m_Name: feature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
