@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ChatVisual
@@ -40,35 +41,35 @@ namespace ChatVisual
         public EChatState state;     // 말하는 것의 타입
         public string text;        // 말 하는 것.
         public EFace face;       // 말 할 때의 표정
-        public EChatEvent[] textEvent;
+        public List<EChatEvent> textEvent = new List<EChatEvent>();
     }
 
     [Serializable]
-    public struct AskAndReply
+    public class AskAndReply
     {
         public string ask;        // 물을 수 있는 선택지
-        public Chat[] reply;     // 그에 대한 대답들
+        public List<Chat> reply = new List<Chat>();     // 그에 대한 대답들
         public bool is_UseThis;     // 사용했는지
     }
 
     [Serializable]
-    public struct LockAskAndReply
+    public class LockAskAndReply
     {
-        public string[] evidence;
+        public List<string> evidence = new List<string>();
         public string ask;        // 물을 수 있는 선택지
-        public Chat[] reply;     // 그에 대한 대답들
+        public List<Chat> reply = new List<Chat>();     // 그에 대한 대답들
         public bool is_UseThis;     // 사용했는지
     }
 
     [Serializable]
-    public class Chapters
+    public class Chapter
     {
         public string showName;     // 보여질 이름
         public ESaveLocation saveLocation;     // 누군지
-        public Chat[] chat;         // 챗팅
-        public AskAndReply[] askAndReply;           // 질문들
-        public LockAskAndReply[] lockAskAndReply;       // 잠긴 질문들
-        public string[] round;           // 증거로 사용되어
+        public List<Chat> chat = new List<Chat>();         // 챗팅
+        public List<AskAndReply> askAndReply = new List<AskAndReply>();           // 질문들
+        public List<LockAskAndReply> lockAskAndReply = new List<LockAskAndReply>();       // 잠긴 질문들
+        public List<string> round = new List<string>();           // 증거로 사용되어
     }
 
     public class ChatStruct : MonoBehaviour { }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
-using UnityEditorInternal.VR;
 
 namespace ChatVisual
 {
@@ -10,7 +9,8 @@ namespace ChatVisual
         public new class UxmlFactory : UxmlFactory<InspectorView, UxmlTraits> { }
         public new class UxmlTraits : VisualElement.UxmlTraits { }
 
-        private Editor editor;
+        private SerializedObject inspectorObject;
+        private SerializedProperty inspectorProperty;
 
         public InspectorView()
         {
@@ -20,16 +20,21 @@ namespace ChatVisual
         public void UpdateSelection(NodeView node)      // 누른 노드가 다른거면
         {
             Clear();        // 엘리먼트 모두 없애고
-            Object.DestroyImmediate(editor);        // 에디터를 지워주고
 
-            //editor = Editor.CreateEditor(node.node);     // 유니티 기본 인스펙터뷰를 만들어준다.
+            var container = new IMGUIContainer();
+            /*container.onGUIHandler = () =>
+            {
+                inspectorObject = new SerializedObject(node.node.nodeContainer.GetComponent<Node.NodeContainer>());
+                inspectorProperty = inspectorObject.FindProperty("no");
+                Debug.Log($"{inspectorObject}, {inspectorProperty}");
 
-            var container = new IMGUIContainer(() => {
-                if (editor.target)      // 내가 지금 편집중인, 선택중인 얘가 있다면
+                if (inspectorObject != null && inspectorObject.targetObject != null)
                 {
-                    editor.OnInspectorGUI();     // 컨테이너로 넣어줌
+                    inspectorObject.Update();
+                    EditorGUILayout.PropertyField(inspectorProperty);
+                    inspectorObject.ApplyModifiedProperties();
                 }
-            });
+            };*/
 
             Add(container);     // UI 컨테이너에 넣어줌, 실제로 보이게 해줌.
         }

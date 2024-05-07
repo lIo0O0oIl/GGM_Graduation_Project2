@@ -17,13 +17,16 @@ namespace ChatVisual
     {
         [HideInInspector] public string guid;
         [HideInInspector] public Vector2 position;
-        [HideInInspector] public Hierarchy blackBoard;
+        //[HideInInspector] public Hierarchy blackBoard;
         [TextArea] public string description;
 
-  /*      public virtual Node Clone()     // 노드 복사하는 함수
-        {
-            return Instantiate(this);
-        }*/
+        //public Node child;
+        //public int index;
+
+        //public virtual Node Clone()     // 노드 복사하는 함수
+        //{
+        //    return Instantiate(this);
+        //}
 
         protected abstract void OnStart();
     }

@@ -59,12 +59,6 @@ public class ChatEditor : EditorWindow
         OnSelectionChange();
     }
 
-    private void OnDisable()
-    {
-        arrayAddBtn.clickable.clicked -= OnArrayAddBtn;
-        chatView.OnNodeSelected -= OnSelectionNodeChanged;
-    }
-
     private void OnArrayAddBtn()
     {
         if (chatContainer != null)
@@ -79,15 +73,16 @@ public class ChatEditor : EditorWindow
         inspectorView.UpdateSelection(nodeView);        // 이 노드를 눌렀다고 인스펙터에 알려줌.
     }
 
-    private void OnSelectionChange()        // 무언가를 선택했을 때
+    private void OnSelectionChange()        // 에디터를 킨 상태에서 무언가를 선택했을 때
     {
         if (Selection.activeGameObject != null)
         {
             if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))      // 하이어라키 창에서 가져오기
             {
+                chatContainer.ChangeNowChapter(0);      // 일단 0으로 가정하고
                 chatView.PopulateView(chatContainer);           // 채워줘라
 
-                Debug.Log(chatContainer.Chapters.Length);
+                Debug.Log($"{chatContainer.Chapters.Length}만큼 리스트가 생성되어야 함.");
 
                 chatObject = new SerializedObject(chatContainer);       // 직렬화 해주기
                 chatProperty = chatObject.FindProperty("hierarchy");       // 속성 찾아서 넣어주기

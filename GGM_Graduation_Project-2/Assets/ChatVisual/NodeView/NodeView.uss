@@ -81,22 +81,23 @@
     background-color: rgb(118, 118, 118);
 }
 
-.action #input {
-    background-color: rgb(6, 37, 245);
+.ask #input {
+    background-color: rgb(113, 241, 243);
+    min-height: 20px;
+}
+
+.chat #input {
+    background-color: rgb(142, 229, 139);
+    min-height: 20px;
 }
 
 .root #input {
-    background-color: rgb(245, 6, 13);
+    background-color: rgb(224, 39, 45);
     min-height: 20px;
 }
 
-.decorator #input {
-    background-color: rgb(221, 236, 26);
-    min-height: 20px;
-}
-
-.composite #input {
-    background-color: rgb(243, 122, 8);
+.lockAsk #input {
+    background-color: rgb(204, 204, 204);
     min-height: 20px;
 }
 

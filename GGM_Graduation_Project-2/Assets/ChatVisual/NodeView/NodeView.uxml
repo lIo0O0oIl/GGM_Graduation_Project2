@@ -14,7 +14,7 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:Label tabindex="-1" text="This is Description" display-tooltip-when-elided="true" name="description" />
+                <ui:Label tabindex="-1" text="Chat here" display-tooltip-when-elided="true" name="description" />
                 <ui:VisualElement name="divider" class="horizontal" />
                 <ui:VisualElement name="output" />
             </ui:VisualElement>

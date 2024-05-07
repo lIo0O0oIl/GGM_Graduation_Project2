@@ -16,8 +16,8 @@ public class ChattingManager : MonoBehaviour
     public TMP_Text chattingHumanName;
     [HideInInspector]
     public List<GameObject> assistantChatList = new List<GameObject>();    // 조수와 나눈 대화는 저장해주기
-    [SerializeField] private Chapters[] chapters;      // 쳇팅 SO들을 넣어줌.
-    public Chapters[] Chapters {  get { return chapters; } set { chapters = value; } }
+    [SerializeField] private Chapter[] chapters;      // 쳇팅 SO들을 넣어줌.
+    public Chapter[] Chapters {  get { return chapters; } set { chapters = value; } }
 
     [Header("ChatDelay")]       // 쳇팅 딜레이 관련
     public float delayTime = 0.75f;
@@ -98,15 +98,15 @@ public class ChattingManager : MonoBehaviour
             //chattingHumanName.text = chapters[index].who;      // 이름 넣어주기
         }*/
 
-        int chatLenght = chapters[index].chat.Length;       // 쳇팅들의 길이
-        askLenght = chapters[index].askAndReply.Length;      // 질문들의 개수
+        int chatLenght = chapters[index].chat.Count;       // 쳇팅들의 길이
+        askLenght = chapters[index].askAndReply.Count;      // 질문들의 개수
 
         is_Chatting = true;
     }
 
     private void Chapter()
     {
-        if (is_Choosing == false && nowChatIndex < chapters[nowLevel].chat.Length)        // 선택중이 아니라면
+        if (is_Choosing == false && nowChatIndex < chapters[nowLevel].chat.Count)        // 선택중이 아니라면
         {
             bool state = false;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
             switch (chapters[nowLevel].chat[nowChatIndex].state)
@@ -164,7 +164,7 @@ public class ChattingManager : MonoBehaviour
 
     private void AskChapter()
     {
-        if (nowAskChatIndex < chapters[nowLevel].askAndReply[nowAskLevel].reply.Length)
+        if (nowAskChatIndex < chapters[nowLevel].askAndReply[nowAskLevel].reply.Count)
         {
             //TextBox.Instance.InputText(false, chapters[nowLevel].askAndReply[nowAskLevel].reply[nowAskChatIndex]);
             nowAskChatIndex++;

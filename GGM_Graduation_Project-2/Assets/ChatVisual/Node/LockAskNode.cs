@@ -6,6 +6,8 @@ namespace ChatVisual
 {
     public class LockAskNode : Node
     {
+        public Node child;
+
         protected override void OnStart()
         {
         }
