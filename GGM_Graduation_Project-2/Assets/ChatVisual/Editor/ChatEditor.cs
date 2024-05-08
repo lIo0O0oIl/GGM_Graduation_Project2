@@ -75,6 +75,7 @@ public class ChatEditor : EditorWindow
 
     private void OnSelectionChange()        // 에디터를 킨 상태에서 무언가를 선택했을 때
     {
+        Debug.Log("변화가 일어남");
         if (Selection.activeGameObject != null)
         {
             if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))      // 하이어라키 창에서 가져오기
@@ -82,6 +83,7 @@ public class ChatEditor : EditorWindow
                 chatContainer.ChangeNowChapter(0);      // 일단 0으로 가정하고
                 chatView.PopulateView(chatContainer);           // 채워줘라
 
+                Debug.Log(chatContainer.nodes.Count);
                 Debug.Log($"{chatContainer.Chapters.Length}만큼 리스트가 생성되어야 함.");
 
                 chatObject = new SerializedObject(chatContainer);       // 직렬화 해주기

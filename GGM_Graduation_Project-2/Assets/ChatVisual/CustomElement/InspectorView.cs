@@ -9,9 +9,6 @@ namespace ChatVisual
         public new class UxmlFactory : UxmlFactory<InspectorView, UxmlTraits> { }
         public new class UxmlTraits : VisualElement.UxmlTraits { }
 
-        private SerializedObject inspectorObject;
-        private SerializedProperty inspectorProperty;
-
         public InspectorView()
         {
 
@@ -22,19 +19,19 @@ namespace ChatVisual
             Clear();        // 엘리먼트 모두 없애고
 
             var container = new IMGUIContainer();
-            /*container.onGUIHandler = () =>
+            container.onGUIHandler = () =>
             {
-                inspectorObject = new SerializedObject(node.node.nodeContainer.GetComponent<Node.NodeContainer>());
-                inspectorProperty = inspectorObject.FindProperty("no");
-                Debug.Log($"{inspectorObject}, {inspectorProperty}");
+                GUIStyle style = new GUIStyle(GUI.skin.label);
+                style.fontSize = 20;
+                GUILayout.Label($"{node.node.GetType().Name}", style);
+                GUILayout.Space(5);
+                GUILayout.Label("Description");
+                node.node.description = EditorGUILayout.TextArea(node.node.description, EditorStyles.textArea);
 
-                if (inspectorObject != null && inspectorObject.targetObject != null)
-                {
-                    inspectorObject.Update();
-                    EditorGUILayout.PropertyField(inspectorProperty);
-                    inspectorObject.ApplyModifiedProperties();
-                }
-            };*/
+                EditorGUI.BeginDisabledGroup(true);
+                EditorGUILayout.Toggle("child", node.node.child == null ? false : true);
+                EditorGUI.EndDisabledGroup();
+            };
 
             Add(container);     // UI 컨테이너에 넣어줌, 실제로 보이게 해줌.
         }

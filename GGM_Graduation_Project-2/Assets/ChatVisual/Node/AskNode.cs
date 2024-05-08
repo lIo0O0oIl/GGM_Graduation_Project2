@@ -6,8 +6,6 @@ namespace ChatVisual
 {
     public class AskNode : Node
     {
-        public Node child;
-
         protected override void OnStart()
         {
         }

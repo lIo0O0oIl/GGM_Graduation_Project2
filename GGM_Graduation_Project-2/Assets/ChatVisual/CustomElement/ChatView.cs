@@ -30,6 +30,8 @@ namespace ChatVisual
 
         public void PopulateView(ChatContainer chatContainer)
         {
+            Debug.Log("새로고침");
+
             this.chatContainer = chatContainer;
             graphViewChanged -= OnGraphViewChanged;
 
