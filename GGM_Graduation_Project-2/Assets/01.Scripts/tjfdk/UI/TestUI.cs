@@ -1,19 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEditor.U2D.Animation;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UIElements.Experimental;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public enum FileType
-{
-    FOLDER,
-    IMAGE,
-    TEXT
-}
+//public enum FileType
+//{
+//    FOLDER,
+//    IMAGE,
+//    TEXT
+//}
 
 public class TestUI : MonoBehaviour
 {
@@ -48,6 +51,9 @@ public class TestUI : MonoBehaviour
     VisualTreeAsset ux_imageFile;
     VisualTreeAsset ux_textFile;
     VisualTreeAsset ux_filePath;
+
+    [Header("Evidence")]
+    VisualElement testEvidence;
 
 
     //[Header("Sprite")]
@@ -87,6 +93,20 @@ public class TestUI : MonoBehaviour
         // System Ground
         chatGround = root.Q<VisualElement>("ChatGround");
         fileGround = root.Q<VisualElement>("FileGround");
+
+        //  Evidence
+        testEvidence = root.Q<VisualElement>("Evidence");
+
+        // connection
+        conncectionPanel = root.Q<VisualElement>("SuspectGround");
+        suspectPanel = conncectionPanel.Q<Button>("SuspectPanel");
+
+        //DragAndDropManipulator manipulator =
+        //    new DragAndDropManipulator(suspectPanel);
+        //suspectPanel.AddManipulator(manipulator);
+
+        //draggingElement = new VisualElement();
+        //draggingElement.style.color = new Color(1, 1, 1, 1);
 
         // UXML Load
 
@@ -131,6 +151,21 @@ public class TestUI : MonoBehaviour
         {
             settingPanel.SetActive(!settingPanel.activeSelf);
         };
+
+        testEvidence.Q<Button>("EvidenceImage").clickable.clicked += () =>
+        {
+            FindEvidence(testEvidence.Q<Button>());
+        };
+
+        //suspectPanel.RegisterCallback<PointerDownEvent>(OnMouseDown);
+        //suspectPanel.RegisterCallback<MouseDownEvent>(OnMouseDown);
+
+        suspectPanel.clicked += () =>
+        {
+            OnMouseDown(new MouseDownEvent());
+        };
+        //suspectPanel.RegisterCallback<MouseDownEvent>(OnMouseDown);
+        suspectPanel.RegisterCallback<MouseUpEvent>(OnMouseUp);
     }
 
     private void Update()
@@ -181,6 +216,24 @@ public class TestUI : MonoBehaviour
         chatGround.Add(chat);
     }
 
+    public void AddEvidence()
+    {
+        // 단서를 먼저 찾아온 다음에 값을 연결
+
+        // 일단 ㅍ리팹화 해둔 단서를 먼저 소환 .. 
+    }
+
+    public void FindEvidence(Button button)
+    {
+
+        VisualElement description = button.parent.Q<VisualElement>("Descripte");
+
+        //Label title = button.parent.Q<Label>("EvidenceName");
+        //Label description = button.parent.Q<Label>("Memo");
+
+        description.style.display = DisplayStyle.Flex;
+    }
+
     public void AddFile(FileType fieType, string fileName, Action action, bool isRock)
     {
         VisualElement file = null;
@@ -222,5 +275,74 @@ public class TestUI : MonoBehaviour
     {
         Debug.Log("tlqkf");
         AddFile(FileType.FOLDER, "학교", actionTest, false);
+    }
+
+    // Test Line
+
+    private VisualElement conncectionPanel;
+    private Button suspectPanel;
+    //private VisualElement draggingElement;
+
+    private Vector2 startMousePos;
+    private Vector2 endMousePos;
+
+    //private bool dragging;
+    //private Vector3 offset;
+
+    public void OnMouseDown(MouseDownEvent evt)
+    {
+        Debug.Log(suspectPanel.style.left.value.value + ", " + suspectPanel.style.top.value.value);
+        Debug.Log(suspectPanel.name);
+        //startMousePos = evt.mousePosition;
+        startMousePos = new Vector2(suspectPanel.style.left.value.value, suspectPanel.style.top.value.value);
+        //suspectPanel.RegisterCallback<MouseUpEvent>(OnMouseUp);
+        //dragging = true;
+        //offset = draggingElement.worldTransform.GetPosition() - evt.position;
+    }
+
+    public void OnMouseUp(MouseUpEvent evt)
+    {
+        Debug.Log(evt.mousePosition);
+        endMousePos = evt.mousePosition;
+        //endMousePos = new Vector2(endMousePos.x - 10, endMousePos.y);
+        DrawLine(startMousePos, endMousePos);
+        //suspectPanel.UnregisterCallback<MouseUpEvent>(OnMouseUp);
+    }
+
+    private void DrawLine(Vector2 start, Vector2 end)
+    {
+        Debug.Log(start + " stattstst");
+        VisualElement startDot = new VisualElement();
+        startDot.style.backgroundColor = new Color(1, 1, 1, 1);
+        startDot.style.width = 5;
+        startDot.style.height = 5;
+        startDot.style.position = Position.Absolute;
+        startDot.transform.position = start;
+        startDot.style.left = start.x;
+        startDot.style.top = start.y;
+
+        VisualElement endDot = new VisualElement();
+        endDot.style.backgroundColor = new Color(1, 1, 1, 1);
+        endDot.style.width = 5;
+        endDot.style.height = 5;
+        endDot.style.position = Position.Absolute;
+        endDot.style.left = end.x;
+        endDot.style.top = end.y;
+
+        // 선 생성
+        VisualElement line = new VisualElement();
+        line.style.backgroundColor = new Color(1, 1, 1, 1);
+        line.style.position = Position.Absolute;
+        line.style.width = Mathf.Sqrt(Mathf.Pow(end.x - start.x, 2) + Mathf.Pow(end.y - start.y, 2));
+        line.style.height = 3;
+        //line.transform.position = startMousePos
+        line.style.left = start.x - 100; 
+        line.style.top = start.y + 300; 
+        line.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(end.y - start.y, end.x - start.x));
+
+        // 시작점과 끝점, 선을 부모 요소에 추가
+        conncectionPanel.Add(startDot);
+        conncectionPanel.Add(endDot);
+        conncectionPanel.Add(line);
     }
 }

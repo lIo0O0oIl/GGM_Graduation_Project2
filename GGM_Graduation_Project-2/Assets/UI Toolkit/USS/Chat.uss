@@ -4,6 +4,8 @@
     padding-top: 15px;
     padding-bottom: 15px;
     background-color: rgb(188, 188, 188);
+    -unity-font-definition: initial;
+    -unity-font: url('project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo.ttf?fileID=12800000&guid=ac8392ea6f9e97949882302322851c02&type=3#DungGeunMo');
 }
 
 .OtherChat {
