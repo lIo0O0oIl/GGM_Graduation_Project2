@@ -21,7 +21,7 @@ namespace ChatVisual
 
         [SerializeField]
         private Chapter[] chapters;     // √©≈ÕµÈ
-        public Chapter[] Chapters { get { return chapters; } }
+        public Chapter[] Chapters { get { return chapters; } set { chapters = value; } }
 
         public void ChangeNowChapter(int index)
         {

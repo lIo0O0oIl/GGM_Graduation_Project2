@@ -137,10 +137,7 @@ namespace ChatVisual
             GenericMenu menu = new GenericMenu();
             menu.AddItem(new GUIContent("Clear"), false, () =>
             {
-                for (int i = 0; i < chatEventList.Count; i++)
-                {
-                    chatEventList[i] = EChatEvent.None;
-                }
+                chatEventList.Clear();
                 evidenceList.Clear();
             });
             menu.DropDown(position);

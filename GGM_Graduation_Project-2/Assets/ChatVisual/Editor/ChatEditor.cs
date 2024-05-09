@@ -15,6 +15,7 @@ public class ChatEditor : EditorWindow
     private InspectorView inspectorView;        // 인스팩터 일 것임.
     private IMGUIContainer hierarchyView;      // 코드기반 GUI, 위에꺼 말하는 것. 하이어라키.
     private Button arrayAddBtn;
+    private Button nodeClearBtn;
 
     private SerializedObject chatObject;        // 에디터에서 사용하기 위한 직렬화
     private SerializedProperty chatProperty;        // 위에꺼의 속성들 모음.
@@ -61,6 +62,8 @@ public class ChatEditor : EditorWindow
         };
         arrayAddBtn = root.Q<Button>("AddBtn");     // 버튼 가져오기
         arrayAddBtn.clickable.clicked += OnArrayAddBtn;
+        nodeClearBtn = root.Q<Button>("ClearBtn");
+        nodeClearBtn.clickable.clicked += OnClearNodes;
 
         chatView.OnNodeSelected += OnSelectionNodeChanged;      // 노드를 누른 것이 달라지면 이 이벤트 호출
 
@@ -73,6 +76,15 @@ public class ChatEditor : EditorWindow
         {
             Debug.Log("배열 추가해주기");
         }
+    }
+
+    private void OnClearNodes()
+    {
+        Debug.Log("Node Clear");
+        chatContainer.nodes.Clear();
+        chatContainer.rootNode = null;
+        chatContainer = null;
+        Close();
     }
 
     private void OnSelectionNodeChanged(NodeView nodeView)

@@ -33,7 +33,7 @@ namespace ChatVisual
             this.chatContainer = chatContainer;
 
             // 루트 노드가 없다면 에디터에서 다시 그리자
-            if (chatContainer.rootNode == null)     
+            if (this.chatContainer.rootNode == null)     
             {
                 this.chatContainer.rootNode = chatContainer.CreateNode(typeof(RootNode)) as RootNode;
                 Debug.Log(this.chatContainer.rootNode);
@@ -54,6 +54,7 @@ namespace ChatVisual
 
                 if (i == 0)     // 루트노드랑 연결해주기
                 {
+                    Debug.Log(this.chatContainer.nodes[0]);
                     RootNode rootNode = this.chatContainer.nodes[0] as RootNode;
                     rootNode.child = chatNode;
                 }
@@ -71,18 +72,36 @@ namespace ChatVisual
 
         public void SaveChatSystem()
         {
-            Debug.Log("저장");
+            Debug.Log("참조타입 빼고 도로 넣기. 저장해주기");
 
+            /*            this.chatContainer.nodes.ForEach(n =>
+                        {
+                            var children = this.chatContainer.GetChildren(n);
+                            NodeView parent = FindNodeView(n);
+                            children.ForEach(c =>
+                            {
+
+                            });
+                        });*/
+
+            int nowChapterIndex = 0;
+            int nowChatIndex = 0;       // 처음꺼로 가정하고
             this.chatContainer.nodes.ForEach(n =>
             {
-                var children = this.chatContainer.GetChildren(n);
-                NodeView parent = FindNodeView(n);
+                var children = this.chatContainer.GetChildren(n);       // 자식들 가져오기
                 children.ForEach(c =>
                 {
-
+                    ChatNode chatNode = c as ChatNode;      // 쳇팅 노드이면
+                    if (chatNode != null)
+                    {
+                        chatContainer.Chapters[nowChapterIndex].chat[nowChatIndex].state = chatNode.state;
+                        chatContainer.Chapters[nowChapterIndex].chat[nowChatIndex].text = chatNode.text;
+                        chatContainer.Chapters[nowChapterIndex].chat[nowChatIndex].face = chatNode.face;
+                        chatContainer.Chapters[nowChapterIndex].chat[nowChatIndex].textEvent = chatNode.textEvent;
+                        nowChatIndex++;
+                    }
                 });
             });
-
         }
 
         public void PopulateView()
