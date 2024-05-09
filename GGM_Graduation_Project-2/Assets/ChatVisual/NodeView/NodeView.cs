@@ -22,6 +22,7 @@ namespace ChatVisual
         {
             this.node = node;
             this.title = node.GetType().Name;
+            node.indexLabel = this.Q<Label>("index-label");
 
             this.viewDataKey = node.guid;
 
@@ -104,10 +105,27 @@ namespace ChatVisual
             }
         }
 
-        public override void OnSelected()
+        public override void SetPosition(Rect newPos)       // 노드가 움직였다면
+        {
+            base.SetPosition(newPos);
+
+            node.position.x = newPos.xMin;
+            node.position.y = newPos.yMin;
+        }
+
+        public override void OnSelected()       // 노드가 눌렸다면
         {
             base.OnSelected();
             OnNodeSelected.Invoke(this);
+        }
+
+        public void SortChildren()
+        {
+            var chatNode = node as ChatNode;
+            if (chatNode != null)
+            {
+                chatNode.child.Sort((left, right) => left.position.x < right.position.x ? -1 : 1);
+            }
         }
     }
 }

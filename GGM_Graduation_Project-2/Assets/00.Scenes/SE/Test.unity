@@ -259,9 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hierarchy:
-    moveToPosition: {x: 2, y: 2, z: 3}
-    lastSpotPosition: {x: 4, y: 1}
+  nowChaptersIndex: 0
+  nowChatIndex: 3
   nowChapter:
     showName: Test
     saveLocation: 1
@@ -272,6 +271,10 @@ MonoBehaviour:
       textEvent: 00000000
     - state: 1
       text: "(\uB300\uD654 \uC815\uB9AC)"
+      face: 0
+      textEvent: 01000000
+    - state: 0
+      text: dfsffse
       face: 0
       textEvent: 01000000
     askAndReply:
@@ -295,6 +298,10 @@ MonoBehaviour:
       textEvent: 00000000
     - state: 1
       text: "(\uB300\uD654 \uC815\uB9AC)"
+      face: 0
+      textEvent: 01000000
+    - state: 0
+      text: dfsffse
       face: 0
       textEvent: 01000000
     askAndReply:

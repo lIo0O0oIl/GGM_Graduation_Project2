@@ -30,6 +30,7 @@ namespace ChatVisual
 
     public enum EChatEvent
     {
+        None = 0,
         Vibration,      // 텍스트 진동
         Round,      // 파일 추가해주기      
         Camera,     // 카메라 효과 넣어주기

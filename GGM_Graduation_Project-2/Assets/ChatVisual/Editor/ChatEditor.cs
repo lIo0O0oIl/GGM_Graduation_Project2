@@ -27,6 +27,14 @@ public class ChatEditor : EditorWindow
         GetWindow<ChatEditor>("ChatEditor");
     }
 
+    private void OnDestroy()
+    {
+        if (chatView != null)
+        {
+            chatView.SaveChatSystem();
+        }
+    }
+
     public void CreateGUI()
     {
         VisualElement root = rootVisualElement;     // 루트로 설정해줌.
@@ -69,7 +77,6 @@ public class ChatEditor : EditorWindow
 
     private void OnSelectionNodeChanged(NodeView nodeView)
     {
-        Debug.Log("눌림");
         inspectorView.UpdateSelection(nodeView);        // 이 노드를 눌렀다고 인스펙터에 알려줌.
     }
 
@@ -81,9 +88,10 @@ public class ChatEditor : EditorWindow
             if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))      // 하이어라키 창에서 가져오기
             {
                 chatContainer.ChangeNowChapter(0);      // 일단 0으로 가정하고
-                chatView.PopulateView(chatContainer);           // 채워줘라
 
-                Debug.Log(chatContainer.nodes.Count);
+                chatView.LoadChatSystem(chatContainer);     // 로드 해주기
+                chatView.PopulateView();           // 채워줘라
+
                 Debug.Log($"{chatContainer.Chapters.Length}만큼 리스트가 생성되어야 함.");
 
                 chatObject = new SerializedObject(chatContainer);       // 직렬화 해주기
