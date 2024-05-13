@@ -265,16 +265,12 @@ MonoBehaviour:
     showName: Test
     saveLocation: 1
     chat:
-    - state: 0
-      text: sfsdfefsefsd
+    - state: 1
+      text: sfsdfefs
       face: 0
       textEvent: 01000000
     - state: 1
       text: "(\uB300\uD654 \uC815\uB9AC)"
-      face: 0
-      textEvent: 01000000
-    - state: 0
-      text: dfsffse
       face: 0
       textEvent: 01000000
     askAndReply:
@@ -292,16 +288,12 @@ MonoBehaviour:
   - showName: Test
     saveLocation: 1
     chat:
-    - state: 0
-      text: sfsdfefsefsd
+    - state: 1
+      text: sfsdfefs
       face: 0
       textEvent: 01000000
     - state: 1
       text: "(\uB300\uD654 \uC815\uB9AC)"
-      face: 0
-      textEvent: 01000000
-    - state: 0
-      text: dfsffse
       face: 0
       textEvent: 01000000
     askAndReply:

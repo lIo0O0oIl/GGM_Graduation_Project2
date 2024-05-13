@@ -17,16 +17,33 @@ namespace ChatVisual
 
         [SerializeField]
         private Chapter nowChapter;
-        public Chapter NowChapter { get { return nowChapter; } }
+        public Chapter NowChapter { get { return nowChapter; } set { nowChapter = value; } }
 
         [SerializeField]
         private Chapter[] chapters;     // 챕터들
         public Chapter[] Chapters { get { return chapters; } set { chapters = value; } }
 
-        public void ChangeNowChapter(int index)
+        public void ChangeNowChapter(int index)         // 깊은 복사
         {
             nowChaptersIndex = index;
-            nowChapter = chapters[index];
+            //nowChapter = chapters[index];
+            nowChapter.showName = chapters[index].showName;
+            nowChapter.saveLocation = chapters[index].saveLocation;
+            nowChapter.chat = new List<Chat>(chapters[index].chat);
+            nowChapter.askAndReply = new List<AskAndReply>(chapters[index].askAndReply);
+            nowChapter.lockAskAndReply = new List<LockAskAndReply>(chapters[index].lockAskAndReply);
+            nowChapter.round = new List<string>(chapters[index].round);
+        }
+
+        public void ChangeNewChpater()     // 깊은 복사
+        {
+            Debug.Log("챕터 변경");
+            chapters[nowChaptersIndex].showName = nowChapter.showName;
+            chapters[nowChaptersIndex].saveLocation = nowChapter.saveLocation;
+            chapters[nowChaptersIndex].chat = new List<Chat>(nowChapter.chat);
+            chapters[nowChaptersIndex].askAndReply = new List<AskAndReply>(nowChapter.askAndReply);
+            chapters[nowChaptersIndex].lockAskAndReply = new List<LockAskAndReply>(nowChapter.lockAskAndReply);
+            chapters[nowChaptersIndex].round = new List<string>(nowChapter.round);
         }
 
 #if UNITY_EDITOR
@@ -35,7 +52,7 @@ namespace ChatVisual
             var node = Activator.CreateInstance(type) as Node;
             node.guid = GUID.Generate().ToString();
 
-            nodes.Add(node);
+            nodes.Add(node);        // 리스트에 추가
 
             AssetDatabase.SaveAssets();
 
@@ -45,13 +62,24 @@ namespace ChatVisual
         public void DeleteNode(Node node)
         {
             nodes.Remove(node);
+            /*ChatNode chatNode = node as ChatNode;
+            if (chatNode != null)
+            {
+                foreach (var chat in nowChapter.chat)
+                {
+                    if (chat.text == chatNode.text)
+                    {
+                        nowChapter.chat.Remove(chat);
+                        break;
+                    }
+                }
+            }*/
             AssetDatabase.SaveAssets();
         }
 #endif
 
         public void AddChild(Node parent, Node child)
         {
-
             Debug.Log($"선 연결, parent : {parent}, child : {child}");
             var rootNode = parent as RootNode;      //부모가 루트이면
             if (rootNode != null)

@@ -74,17 +74,8 @@ namespace ChatVisual
         {
             Debug.Log("참조타입 빼고 도로 넣기. 저장해주기");
 
-            /*            this.chatContainer.nodes.ForEach(n =>
-                        {
-                            var children = this.chatContainer.GetChildren(n);
-                            NodeView parent = FindNodeView(n);
-                            children.ForEach(c =>
-                            {
+            chatContainer.NowChapter.chat.Clear();
 
-                            });
-                        });*/
-
-            int nowChapterIndex = 0;
             int nowChatIndex = 0;       // 처음꺼로 가정하고
             this.chatContainer.nodes.ForEach(n =>
             {
@@ -94,14 +85,18 @@ namespace ChatVisual
                     ChatNode chatNode = c as ChatNode;      // 쳇팅 노드이면
                     if (chatNode != null)
                     {
-                        chatContainer.Chapters[nowChapterIndex].chat[nowChatIndex].state = chatNode.state;
-                        chatContainer.Chapters[nowChapterIndex].chat[nowChatIndex].text = chatNode.text;
-                        chatContainer.Chapters[nowChapterIndex].chat[nowChatIndex].face = chatNode.face;
-                        chatContainer.Chapters[nowChapterIndex].chat[nowChatIndex].textEvent = chatNode.textEvent;
+                        // 새로운 클래스 만들어줌.
+                        Chat chapter = new Chat();
+                        chatContainer.NowChapter.chat.Add(chapter);
+                        chatContainer.NowChapter.chat[nowChatIndex].state = chatNode.state;
+                        chatContainer.NowChapter.chat[nowChatIndex].text = chatNode.text;
+                        chatContainer.NowChapter.chat[nowChatIndex].face = chatNode.face;
+                        chatContainer.NowChapter.chat[nowChatIndex].textEvent = chatNode.textEvent;
                         nowChatIndex++;
                     }
                 });
             });
+            chatContainer.ChangeNewChpater();
         }
 
         public void PopulateView()
