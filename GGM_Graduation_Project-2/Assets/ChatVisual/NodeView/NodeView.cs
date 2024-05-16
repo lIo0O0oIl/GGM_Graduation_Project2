@@ -38,7 +38,7 @@ namespace ChatVisual
             //descLabel.Bind(new SerializedObject(node));      // node 라는 클래스에서 description 변수를 찾아서 넣어줌.
         }
 
-        private void CreateInputPorts()
+        private void CreateInputPorts()     // input. 위에꺼.
         {
             switch (node)
             {
@@ -65,7 +65,7 @@ namespace ChatVisual
             switch (node)
             {
                 case RootNode:
-                    output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
+                    output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
                     break;
                 case ChatNode:
                     output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));

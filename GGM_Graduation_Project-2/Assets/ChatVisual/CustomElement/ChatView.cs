@@ -18,8 +18,16 @@ namespace ChatVisual
 
         public Action<NodeView> OnNodeSelected;     // 내가 눌렸다고 알려줌.
 
+        private int firstChatEndIndex = 0;      // 처음으로 시작하는 쳇팅의 마지막. 질문이 시작되는 곳의 노드스에서 찾을 수 있는  인덱스
+        private int askAndReplysCount = 0;        // 질문에 대한 대답의 개수
+        private int lockAskAndReplysCount = 0;
+
         public ChatView()
         {
+            firstChatEndIndex = 0;
+            askAndReplysCount = 0;
+            lockAskAndReplysCount = 0;
+
             Insert(0, new GridBackground());        // 그리드 넣기
 
             this.AddManipulator(new ContentZoomer());       // 줌기능 조작 추가
@@ -33,28 +41,28 @@ namespace ChatVisual
             this.chatContainer = chatContainer;
 
             // 루트 노드가 없다면 에디터에서 다시 그리자
-            if (this.chatContainer.rootNode == null)     
+            if (this.chatContainer.nodes.Count == 0)
             {
-                this.chatContainer.rootNode = chatContainer.CreateNode(typeof(RootNode)) as RootNode;
-                Debug.Log(this.chatContainer.rootNode);
-                EditorUtility.SetDirty(this.chatContainer);    
+                RootNode rootNode = chatContainer.CreateNode(typeof(RootNode)) as RootNode;
+                EditorUtility.SetDirty(this.chatContainer);
                 AssetDatabase.SaveAssets();
             }
 
+            //Debug.Log($"채팅노드 개수 : {this.chatContainer.NowChapter.chat.Count}");
             // 채팅 노드 만들어주기
-            for (int i = 0; i < this.chatContainer.NowChapter.chat.Count; i++)
+            for (int i = 0; i < this.chatContainer.NowChapter.chat.Count; ++i)
             {
+                ++firstChatEndIndex;
                 if (this.chatContainer.nodes.Count() - 1 > i) continue;     // 카운트가 i보다 크면 노드가 있는 것임. - 1하는 이유는 루트노드가 존재하니까.
 
                 ChatNode chatNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
                 chatNode.state = this.chatContainer.NowChapter.chat[i].state;
                 chatNode.text = this.chatContainer.NowChapter.chat[i].text;
                 chatNode.face = this.chatContainer.NowChapter.chat[i].face;
-                chatNode.textEvent = this.chatContainer.NowChapter.chat[i].textEvent;
+                chatNode.textEvent = new List<EChatEvent>(this.chatContainer.NowChapter.chat[i].textEvent);
 
                 if (i == 0)     // 루트노드랑 연결해주기
                 {
-                    Debug.Log(this.chatContainer.nodes[0]);
                     RootNode rootNode = this.chatContainer.nodes[0] as RootNode;
                     rootNode.child = chatNode;
                 }
@@ -66,24 +74,114 @@ namespace ChatVisual
             }
 
             // 질문 노드 만들어주기
+            {
+                ChatNode firstChatEndNode = this.chatContainer.nodes[firstChatEndIndex] as ChatNode;
+                if (firstChatEndNode != null)
+                {
+                    //Debug.Log($"질문의 개수 : {this.chatContainer.NowChapter.askAndReply.Count}, 챗팅의 인덱스 {firstChatEndIndex}");
+                    // 그냥 질문 만들어주기
+                    for (int i = 0; i < this.chatContainer.NowChapter.askAndReply.Count; ++i)
+                    {
+                        if (this.chatContainer.nodes.Count() - 1 > i + firstChatEndIndex + askAndReplysCount) continue;
+                        ++askAndReplysCount;
 
+                        // 질문 노드 추가해주기
+                        AskNode askNode = chatContainer.CreateNode(typeof(AskNode)) as AskNode;
+                        askNode.ask = this.chatContainer.NowChapter.askAndReply[i].ask;
+                        askNode.reply = new List<Chat>(this.chatContainer.NowChapter.askAndReply[i].reply);        // 값 복사, 깊은 복사
+                        askNode.is_UseThis = this.chatContainer.NowChapter.askAndReply[i].is_UseThis;
 
+                        // 쳇팅 노드랑 연결해주기
+                        firstChatEndNode.child.Add(askNode);
+
+                        // 대답(쳇팅)노드 추가해주기
+                        for (int j = 0; j < this.chatContainer.NowChapter.askAndReply[i].reply.Count; ++j)
+                        {
+                            ChatNode replyNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
+                            replyNode.state = this.chatContainer.NowChapter.askAndReply[i].reply[j].state;
+                            replyNode.text = this.chatContainer.NowChapter.askAndReply[i].reply[j].text;
+                            replyNode.face = this.chatContainer.NowChapter.askAndReply[i].reply[j].face;
+                            replyNode.textEvent = new List<EChatEvent>(this.chatContainer.NowChapter.askAndReply[i].reply[j].textEvent);
+
+                            // 연결 해주기
+                            if (j == 0)     // 질문노드랑 연결해야 하는 경우
+                            {
+                                askNode.child = replyNode;
+                            }
+                            else
+                            {
+                                ChatNode chatParentNode = this.chatContainer.nodes[(j + firstChatEndIndex + askAndReplysCount) - 1] as ChatNode;        // 루트노드 빼고 넣어주기
+                                if (chatParentNode != null)
+                                {
+                                    chatParentNode.child.Add(replyNode);
+                                }
+                            }
+                            ++askAndReplysCount;
+                        }
+                    }
+
+                    // 잠김 질문 만들어주기
+                    for (int i = 0; i < this.chatContainer.NowChapter.lockAskAndReply.Count; i++)
+                    {
+                        if (this.chatContainer.nodes.Count() - 1 > i + firstChatEndIndex + askAndReplysCount + askAndReplysCount) continue;
+                        ++lockAskAndReplysCount;
+
+                        // 락질문 노드 추가해주기
+                        LockAskNode lockAskNode = chatContainer.CreateNode(typeof(LockAskNode)) as LockAskNode;
+                        lockAskNode.evidence = new List<string>(this.chatContainer.NowChapter.lockAskAndReply[i].evidence);
+                        lockAskNode.ask = this.chatContainer.NowChapter.lockAskAndReply[i].ask;
+                        lockAskNode.reply = new List<Chat>(this.chatContainer.NowChapter.lockAskAndReply[i].reply);        // 값 복사, 깊은 복사
+                        lockAskNode.is_UseThis = this.chatContainer.NowChapter.lockAskAndReply[i].is_UseThis;
+
+                        // 쳇팅 노드랑 연결해주기
+                        firstChatEndNode.child.Add(lockAskNode);
+
+                        // 대답(쳇팅)노드 추가해주기
+                        for (int j = 0; j < this.chatContainer.NowChapter.lockAskAndReply[i].reply.Count; ++j)
+                        {
+                            ChatNode replyNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
+                            replyNode.state = this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].state;
+                            replyNode.text = this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].text;
+                            replyNode.face = this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].face;
+                            replyNode.textEvent = new List<EChatEvent>(this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].textEvent);
+
+                            // 연결 해주기
+                            if (j == 0)     // 질문노드랑 연결해야 하는 경우
+                            {
+                                lockAskNode.child = replyNode;
+                            }
+                            else
+                            {
+                                ChatNode chatParentNode = this.chatContainer.nodes[(j + firstChatEndIndex + askAndReplysCount + lockAskAndReplysCount) - 1] as ChatNode;        // 루트노드 빼고 넣어주기
+                                if (chatParentNode != null)
+                                {
+                                    chatParentNode.child.Add(replyNode);
+                                }
+                            }
+                            ++lockAskAndReplysCount;
+                        }
+                    }
+                }
+            }
         }
 
         public void SaveChatSystem()
         {
-            Debug.Log("참조타입 빼고 도로 넣기. 저장해주기");
-
             chatContainer.NowChapter.chat.Clear();
+            chatContainer.NowChapter.askAndReply.Clear();
+            chatContainer.NowChapter.lockAskAndReply.Clear();
 
             int nowChatIndex = 0;       // 처음꺼로 가정하고
+            int askIndex = 0;
+            int lockAskIndex = 0;
+
             this.chatContainer.nodes.ForEach(n =>
             {
                 var children = this.chatContainer.GetChildren(n);       // 자식들 가져오기
                 children.ForEach(c =>
                 {
                     ChatNode chatNode = c as ChatNode;      // 쳇팅 노드이면
-                    if (chatNode != null)
+                    if (chatNode != null && firstChatEndIndex > nowChatIndex)
                     {
                         // 새로운 클래스 만들어줌.
                         Chat chapter = new Chat();
@@ -92,8 +190,23 @@ namespace ChatVisual
                         chatContainer.NowChapter.chat[nowChatIndex].text = chatNode.text;
                         chatContainer.NowChapter.chat[nowChatIndex].face = chatNode.face;
                         chatContainer.NowChapter.chat[nowChatIndex].textEvent = chatNode.textEvent;
-                        nowChatIndex++;
+                        ++nowChatIndex;
                     }
+
+/*                    AskNode askNode = c as AskNode;     // 질문 노드이면
+                    if (askNode != null)
+                    {
+                        AskAndReply askAndReply = new AskAndReply();
+                        chatContainer.NowChapter.askAndReply.Add(askAndReply);
+                        chatContainer.NowChapter.askAndReply[askIndex].ask = askNode.ask;
+                        chatContainer.NowChapter.askAndReply[askIndex].reply = askNode.reply;
+                        chatContainer.NowChapter.askAndReply[askIndex].is_UseThis = askNode.is_UseThis;
+                        ++askIndex;
+                    }
+
+                    LockAskNode lockAskNode = c as LockAskNode;*/
+
+
                 });
             });
             chatContainer.ChangeNewChpater();
@@ -101,8 +214,6 @@ namespace ChatVisual
 
         public void PopulateView()
         {
-            Debug.Log("새로고침");
-
             graphViewChanged -= OnGraphViewChanged;
 
             DeleteElements(graphElements);       // 기존에 그려졌던 애들 모두 삭제
@@ -145,7 +256,7 @@ namespace ChatVisual
                     {
                         chatContainer.DeleteNode(nodeView.node);        // 지워주기
                     }
-                    
+
                     var edge = elem as Edge;        // 연결선
                     if (edge != null)
                     {
@@ -155,7 +266,7 @@ namespace ChatVisual
                         chatContainer.RemoveChild(parent.node, child.node);
                     }
                 });
-            }    
+            }
 
             if (graphViewChange.edgesToCreate != null)      // 선 연결해주기
             {

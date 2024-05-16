@@ -260,19 +260,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowChaptersIndex: 0
-  nowChatIndex: 3
+  nowChatIndex: 10
   nowChapter:
     showName: Test
     saveLocation: 1
     chat:
-    - state: 1
-      text: sfsdfefs
+    - state: 0
+      text: 
       face: 0
-      textEvent: 01000000
-    - state: 1
-      text: "(\uB300\uD654 \uC815\uB9AC)"
+      textEvent: 
+    - state: 0
+      text: 
       face: 0
-      textEvent: 01000000
+      textEvent: 
+    - state: 0
+      text: 
+      face: 0
+      textEvent: 
     askAndReply:
     - ask: "\uB610 \uC804\uB2EC\uD560\uAC74?"
       reply:
@@ -281,21 +285,46 @@ MonoBehaviour:
         face: 0
         textEvent: 
       is_UseThis: 0
-    lockAskAndReply: []
+    - ask: "\uC774\uAC70\uD544\uC694"
+      reply:
+      - state: 0
+        text: "\uC5C6\uC5B4."
+        face: 0
+        textEvent: 
+      - state: 1
+        text: "\uC9C4\uC9DC?"
+        face: 2
+        textEvent: 01000000
+      is_UseThis: 0
+    lockAskAndReply:
+    - evidence:
+      - me
+      - you
+      ask: "\uADF8\uB7FC \uC774\uAC74 \uBB54\uB370?"
+      reply:
+      - state: 0
+        text: "\uC73C\uC544\uC544\uC545!"
+        face: 1
+        textEvent: 01000000
+      is_UseThis: 0
     round:
     - Call Error
   chapters:
   - showName: Test
     saveLocation: 1
     chat:
-    - state: 1
-      text: sfsdfefs
+    - state: 0
+      text: 
       face: 0
-      textEvent: 01000000
-    - state: 1
-      text: "(\uB300\uD654 \uC815\uB9AC)"
+      textEvent: 
+    - state: 0
+      text: 
       face: 0
-      textEvent: 01000000
+      textEvent: 
+    - state: 0
+      text: 
+      face: 0
+      textEvent: 
     askAndReply:
     - ask: "\uB610 \uC804\uB2EC\uD560\uAC74?"
       reply:
@@ -304,7 +333,28 @@ MonoBehaviour:
         face: 0
         textEvent: 
       is_UseThis: 0
-    lockAskAndReply: []
+    - ask: "\uC774\uAC70\uD544\uC694"
+      reply:
+      - state: 0
+        text: "\uC5C6\uC5B4."
+        face: 0
+        textEvent: 
+      - state: 1
+        text: "\uC9C4\uC9DC?"
+        face: 2
+        textEvent: 01000000
+      is_UseThis: 0
+    lockAskAndReply:
+    - evidence:
+      - me
+      - you
+      ask: "\uADF8\uB7FC \uC774\uAC74 \uBB54\uB370?"
+      reply:
+      - state: 0
+        text: "\uC73C\uC544\uC544\uC545!"
+        face: 1
+        textEvent: 01000000
+      is_UseThis: 0
     round:
     - Call Error
 --- !u!1 &1779873654

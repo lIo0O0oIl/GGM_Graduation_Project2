@@ -92,6 +92,8 @@ namespace ChatVisual
 
                             GUILayout.Label("Ask");
                             askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);     // Áú¹®
+                            EditorGUI.BeginDisabledGroup(true);
+                            EditorGUILayout.Toggle("is_UseThie", askNode.is_UseThis);
                         }
                         break;
                     case LockAskNode:

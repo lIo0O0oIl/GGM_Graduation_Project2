@@ -8,7 +8,6 @@ namespace ChatVisual
 {
     public class ChatContainer : MonoBehaviour
     {
-        public Node rootNode;
         public Hierarchy hierarchy = new Hierarchy();        // 노드가 생성되는 곳.
         public List<Node> nodes = new List<Node>();         // 노드 리스트
 
@@ -26,7 +25,6 @@ namespace ChatVisual
         public void ChangeNowChapter(int index)         // 깊은 복사
         {
             nowChaptersIndex = index;
-            //nowChapter = chapters[index];
             nowChapter.showName = chapters[index].showName;
             nowChapter.saveLocation = chapters[index].saveLocation;
             nowChapter.chat = new List<Chat>(chapters[index].chat);
@@ -37,7 +35,6 @@ namespace ChatVisual
 
         public void ChangeNewChpater()     // 깊은 복사
         {
-            Debug.Log("챕터 변경");
             chapters[nowChaptersIndex].showName = nowChapter.showName;
             chapters[nowChaptersIndex].saveLocation = nowChapter.saveLocation;
             chapters[nowChaptersIndex].chat = new List<Chat>(nowChapter.chat);
@@ -62,18 +59,6 @@ namespace ChatVisual
         public void DeleteNode(Node node)
         {
             nodes.Remove(node);
-            /*ChatNode chatNode = node as ChatNode;
-            if (chatNode != null)
-            {
-                foreach (var chat in nowChapter.chat)
-                {
-                    if (chat.text == chatNode.text)
-                    {
-                        nowChapter.chat.Remove(chat);
-                        break;
-                    }
-                }
-            }*/
             AssetDatabase.SaveAssets();
         }
 #endif

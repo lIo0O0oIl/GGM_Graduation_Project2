@@ -15,7 +15,7 @@ public class ChatEditor : EditorWindow
     private InspectorView inspectorView;        // 인스팩터 일 것임.
     private IMGUIContainer hierarchyView;      // 코드기반 GUI, 위에꺼 말하는 것. 하이어라키.
     private Button arrayAddBtn;
-    private Button nodeClearBtn;
+    private Button dangerBtn;
 
     private SerializedObject chatObject;        // 에디터에서 사용하기 위한 직렬화
     private SerializedProperty chatProperty;        // 위에꺼의 속성들 모음.
@@ -62,8 +62,8 @@ public class ChatEditor : EditorWindow
         };
         arrayAddBtn = root.Q<Button>("AddBtn");     // 버튼 가져오기
         arrayAddBtn.clickable.clicked += OnArrayAddBtn;
-        nodeClearBtn = root.Q<Button>("ClearBtn");
-        nodeClearBtn.clickable.clicked += OnClearNodes;
+        dangerBtn = root.Q<Button>("ClearBtn");
+        dangerBtn.clickable.clicked += OnClearNodes;
 
         chatView.OnNodeSelected += OnSelectionNodeChanged;      // 노드를 누른 것이 달라지면 이 이벤트 호출
 
@@ -80,11 +80,18 @@ public class ChatEditor : EditorWindow
 
     private void OnClearNodes()
     {
-        Debug.Log("Node Clear");
-        chatContainer.nodes.Clear();
-        chatContainer.rootNode = null;
-        chatContainer = null;
-        Close();
+        if (chatContainer != null)
+        {
+            /*  foreach (var node in chatContainer.nodes)
+              {
+                  if (node is AskNode)
+                  {
+                      chatContainer.nodes.Remove(node);
+                  }
+              }*/
+            Debug.Log("노드의 개수는 " + chatContainer.nodes.Count + "개 입니다.");
+            Close();
+        }
     }
 
     private void OnSelectionNodeChanged(NodeView nodeView)
@@ -94,21 +101,21 @@ public class ChatEditor : EditorWindow
 
     private void OnSelectionChange()        // 에디터를 킨 상태에서 무언가를 선택했을 때
     {
-        Debug.Log("변화가 일어남");
         if (Selection.activeGameObject != null)
         {
             if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))      // 하이어라키 창에서 가져오기
             {
+                //Debug.Log(chatContainer.nodes.Count + "개의 노드가 존재함.");
+
                 chatContainer.ChangeNowChapter(0);      // 일단 0으로 가정하고
 
                 chatView.LoadChatSystem(chatContainer);     // 로드 해주기
                 chatView.PopulateView();           // 채워줘라
 
-                Debug.Log($"{chatContainer.Chapters.Length}만큼 리스트가 생성되어야 함.");
+                //Debug.Log($"{chatContainer.Chapters.Length}만큼 리스트가 생성되어야 함.");
 
                 chatObject = new SerializedObject(chatContainer);       // 직렬화 해주기
                 chatProperty = chatObject.FindProperty("hierarchy");       // 속성 찾아서 넣어주기
-                //chatProperty = chatObject.FindProperty("chapters");       // 속성 찾아서 넣어주기
             }
         }
     }
