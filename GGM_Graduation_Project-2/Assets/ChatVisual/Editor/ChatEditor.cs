@@ -32,7 +32,7 @@ public class ChatEditor : EditorWindow
     {
         if (chatView != null)
         {
-            chatView.SaveChatSystem();
+            chatView.SaveChatSystem();      // 창을 끌 때 지금까지 해준 것 저장해주기
         }
     }
 
@@ -107,7 +107,7 @@ public class ChatEditor : EditorWindow
             {
                 //Debug.Log(chatContainer.nodes.Count + "개의 노드가 존재함.");
 
-                chatContainer.ChangeNowChapter(0);      // 일단 0으로 가정하고
+                chatContainer.ChangeNowChapter(0);      // 일단 0으로 가정하여 지금 편집할 대화를 불러와줌.
 
                 chatView.LoadChatSystem(chatContainer);     // 로드 해주기
                 chatView.PopulateView();           // 채워줘라

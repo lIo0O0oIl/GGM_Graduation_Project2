@@ -19,28 +19,32 @@ namespace ChatVisual
         public Chapter NowChapter { get { return nowChapter; } set { nowChapter = value; } }
 
         [SerializeField]
-        private Chapter[] chapters;     // √©≈ÕµÈ
-        public Chapter[] Chapters { get { return chapters; } set { chapters = value; } }
+        private List<Chapter> mainChapters = new List<Chapter>();     // √©≈ÕµÈ
+        public List<Chapter> MainChapters { get { return mainChapters; } set { mainChapters = value; } }
 
         public void ChangeNowChapter(int index)         // ±Ì¿∫ ∫πªÁ
         {
+            if (mainChapters.Count <= index)
+            {
+                mainChapters.Add(new Chapter());
+            }
             nowChaptersIndex = index;
-            nowChapter.showName = chapters[index].showName;
-            nowChapter.saveLocation = chapters[index].saveLocation;
-            nowChapter.chat = new List<Chat>(chapters[index].chat);
-            nowChapter.askAndReply = new List<AskAndReply>(chapters[index].askAndReply);
-            nowChapter.lockAskAndReply = new List<LockAskAndReply>(chapters[index].lockAskAndReply);
-            nowChapter.round = new List<string>(chapters[index].round);
+            nowChapter.showName = mainChapters[index].showName;
+            nowChapter.saveLocation = mainChapters[index].saveLocation;
+            nowChapter.chat = new List<Chat>(mainChapters[index].chat);
+            nowChapter.askAndReply = new List<AskAndReply>(mainChapters[index].askAndReply);
+            nowChapter.lockAskAndReply = new List<LockAskAndReply>(mainChapters[index].lockAskAndReply);
+            nowChapter.round = new List<string>(mainChapters[index].round);
         }
 
         public void ChangeNewChpater()     // ±Ì¿∫ ∫πªÁ
         {
-            chapters[nowChaptersIndex].showName = nowChapter.showName;
-            chapters[nowChaptersIndex].saveLocation = nowChapter.saveLocation;
-            chapters[nowChaptersIndex].chat = new List<Chat>(nowChapter.chat);
-            chapters[nowChaptersIndex].askAndReply = new List<AskAndReply>(nowChapter.askAndReply);
-            chapters[nowChaptersIndex].lockAskAndReply = new List<LockAskAndReply>(nowChapter.lockAskAndReply);
-            chapters[nowChaptersIndex].round = new List<string>(nowChapter.round);
+            mainChapters[nowChaptersIndex].showName = nowChapter.showName;
+            mainChapters[nowChaptersIndex].saveLocation = nowChapter.saveLocation;
+            mainChapters[nowChaptersIndex].chat = new List<Chat>(nowChapter.chat);
+            mainChapters[nowChaptersIndex].askAndReply = new List<AskAndReply>(nowChapter.askAndReply);
+            mainChapters[nowChaptersIndex].lockAskAndReply = new List<LockAskAndReply>(nowChapter.lockAskAndReply);
+            mainChapters[nowChaptersIndex].round = new List<string>(nowChapter.round);
         }
 
 #if UNITY_EDITOR
@@ -164,7 +168,7 @@ namespace ChatVisual
 
         public void SortIndex()     // ¿Œµ¶Ω∫∏¶ ¡§∑ƒ«—¥Ÿ.
         {
-            nowChatIndex = 0;
+            nowChatIndex = 1;
             nodes.ForEach(n =>
             {
                 var children = GetChildren(n);

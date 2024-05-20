@@ -8,6 +8,10 @@ namespace ChatVisual
     {
         public Node child;
 
+        public string showName;
+        public ESaveLocation saveLocation;
+        public List<string> roundList = new List<string>();
+
         protected override void OnStart()
         {
 
