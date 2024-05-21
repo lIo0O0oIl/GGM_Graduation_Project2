@@ -260,75 +260,137 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowChaptersIndex: 0
-  nowChatIndex: 8
+  nowChatIndex: 15
   nowChapter:
-    showName: you
-    saveLocation: 2
+    showName: "0\uC54C\uBC00"
+    saveLocation: 0
     chat:
-    - state: 0
-      text: "\u3161\u3153\u314F"
+    - state: 1
+      text: "\uC9C8\uBB38\uC744 \uC704\uD5DB"
       face: 0
       textEvent: 
     - state: 0
-      text: "\u3134\u3147\u3139\u3134\u3147"
+      text: 2
       face: 0
       textEvent: 
-    - state: 0
-      text: 
-      face: 0
-      textEvent: 
-    - state: 0
-      text: 
-      face: 0
-      textEvent: 
-    - state: 0
-      text: 
+    - state: 1
+      text: 3
       face: 0
       textEvent: 
     askAndReply:
-    - ask: 
-      reply: []
+    - ask: "\uC9C0\uB8F8\u3134"
+      reply:
+      - state: 1
+        text: "\uB2F51"
+        face: 0
+        textEvent: 
+      - state: 0
+        text: "\uB2F52"
+        face: 0
+        textEvent: 
+      - state: 1
+        text: "\uB2F53"
+        face: 0
+        textEvent: 
+      is_UseThis: 0
+    - ask: wof2
+      reply:
+      - state: 0
+        text: "\uB2F51"
+        face: 0
+        textEvent: 
+      - state: 0
+        text: "\uB2F52"
+        face: 0
+        textEvent: 
+      - state: 1
+        text: "\uB2F53"
+        face: 0
+        textEvent: 
       is_UseThis: 0
     lockAskAndReply:
-    - evidence: []
+    - evidence:
+      - 2
+      - 1
       ask: 
-      reply: []
+      reply:
+      - state: 1
+        text: gg
+        face: 0
+        textEvent: 
+      - state: 0
+        text: zz
+        face: 0
+        textEvent: 
       is_UseThis: 0
-    round: []
-  mainChapters:
-  - showName: you
-    saveLocation: 2
+    round:
+    - "\uB028"
+    - "\uB028\uB03D"
+  mainChapter:
+  - showName: "0\uC54C\uBC00"
+    saveLocation: 0
     chat:
-    - state: 0
-      text: "\u3161\u3153\u314F"
+    - state: 1
+      text: "\uC9C8\uBB38\uC744 \uC704\uD5DB"
       face: 0
       textEvent: 
     - state: 0
-      text: "\u3134\u3147\u3139\u3134\u3147"
+      text: 2
       face: 0
       textEvent: 
-    - state: 0
-      text: 
-      face: 0
-      textEvent: 
-    - state: 0
-      text: 
-      face: 0
-      textEvent: 
-    - state: 0
-      text: 
+    - state: 1
+      text: 3
       face: 0
       textEvent: 
     askAndReply:
-    - ask: 
-      reply: []
+    - ask: "\uC9C0\uB8F8\u3134"
+      reply:
+      - state: 1
+        text: "\uB2F51"
+        face: 0
+        textEvent: 
+      - state: 0
+        text: "\uB2F52"
+        face: 0
+        textEvent: 
+      - state: 1
+        text: "\uB2F53"
+        face: 0
+        textEvent: 
+      is_UseThis: 0
+    - ask: wof2
+      reply:
+      - state: 0
+        text: "\uB2F51"
+        face: 0
+        textEvent: 
+      - state: 0
+        text: "\uB2F52"
+        face: 0
+        textEvent: 
+      - state: 1
+        text: "\uB2F53"
+        face: 0
+        textEvent: 
       is_UseThis: 0
     lockAskAndReply:
-    - evidence: []
+    - evidence:
+      - 2
+      - 1
       ask: 
-      reply: []
+      reply:
+      - state: 1
+        text: gg
+        face: 0
+        textEvent: 
+      - state: 0
+        text: zz
+        face: 0
+        textEvent: 
       is_UseThis: 0
-    round: []
+    round:
+    - "\uB028"
+    - "\uB028\uB03D"
 --- !u!1 &1779873654
 GameObject:
   m_ObjectHideFlags: 0

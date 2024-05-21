@@ -57,7 +57,7 @@ namespace ChatVisual
                             rootNode.saveLocation = (ESaveLocation)EditorGUILayout.EnumPopup(rootNode.saveLocation);        // 이넘값 바꾸기
 
                             // round 추가
-                            roundList = new List<string>(roundList);
+                            roundList = new List<string>(rootNode.round);
                             GUIStyle boxStyle = EditorStyles.helpBox;
                             GUILayout.BeginVertical(boxStyle);
                             is_Expand = EditorGUILayout.BeginFoldoutHeaderGroup(is_Expand, "Round List", menuAction: ShowHeaderContextMenu);
@@ -72,6 +72,7 @@ namespace ChatVisual
                                     roundList.Add("");
                                 }
                             }
+                            rootNode.round = new List<string>(roundList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
                         }
@@ -108,6 +109,7 @@ namespace ChatVisual
                                     chatEventList.Add(EChatEvent.Vibration);
                                 }
                             }
+                            chatNode.textEvent = new List<EChatEvent>(chatEventList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
                         }
@@ -128,6 +130,9 @@ namespace ChatVisual
                             LockAskNode lockAskNode = node.node as LockAskNode;
                             if (lockAskNode.child != null) is_ChildExist = true;
 
+                            GUILayout.Label("Ask");
+                            lockAskNode.ask = EditorGUILayout.TextArea(lockAskNode.ask, EditorStyles.textArea);     // 질문
+
                             // 증거
                             evidenceList = new List<string>(lockAskNode.evidence);
                             GUIStyle boxStyle = EditorStyles.helpBox;
@@ -144,11 +149,9 @@ namespace ChatVisual
                                     evidenceList.Add(null);
                                 }
                             }
+                            lockAskNode.evidence = new List<string>(evidenceList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
-
-                            GUILayout.Label("Ask");
-                            lockAskNode.ask = EditorGUILayout.TextArea(lockAskNode.ask, EditorStyles.textArea);     // 질문
                         }
                         break;
                 }
@@ -168,6 +171,7 @@ namespace ChatVisual
             {
                 chatEventList.Clear();
                 evidenceList.Clear();
+                roundList.Clear();
             });
             menu.DropDown(position);
         }

@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using System;
 using System.Linq;
+using Codice.Client.Common;
 
 namespace ChatVisual
 {
@@ -32,33 +33,44 @@ namespace ChatVisual
         public void LoadChatSystem(ChatContainer _chatContainer)     // 로드해주기
         {
             chatContainer = _chatContainer;
+
+            chatContainer.nodes.Clear();
+
             int firstChatEndIndex = 0;      // 처음으로 시작하는 쳇팅의 마지막. 질문이 시작되는 곳의 노드스에서 찾을 수 있는  인덱스
-            int askAndReplysCount = 0;        // 질문에 대한 대답의 개수
+            int askAndReplysCount = 0;        // 질문에 대한 대답의 개수          // 이게 2개가 되고 있었음. 바꿔주기
             int lockAskAndReplysCount = 0;
 
-            // 루트 노드가 없다면 에디터에서 다시 그리자
-            if (chatContainer.nodes.Count == 0)
+            // 루트 노드부터 다시 그려주기
             {
                 RootNode rootNode = chatContainer.CreateNode(typeof(RootNode)) as RootNode;
                 rootNode.showName = chatContainer.NowChapter.showName;
                 rootNode.saveLocation = chatContainer.NowChapter.saveLocation;
-                rootNode.roundList = new List<string>(chatContainer.NowChapter.round);
+                rootNode.round = new List<string>(chatContainer.NowChapter.round);
                 EditorUtility.SetDirty(chatContainer);
                 AssetDatabase.SaveAssets();
             }
 
-            //Debug.Log($"채팅노드 개수 : {this.chatContainer.NowChapter.chat.Count}");
             // 채팅 노드 만들어주기
             for (int i = 0; i < chatContainer.NowChapter.chat.Count; ++i)
             {
                 ++firstChatEndIndex;
-                if (chatContainer.nodes.Count() - 1 > i) continue;     // 카운트가 i보다 크면 노드가 있는 것임. - 1하는 이유는 루트노드가 존재하니까.
 
+                // 데이터 연결해주기
                 ChatNode chatNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
                 chatNode.state = chatContainer.NowChapter.chat[i].state;
                 chatNode.text = chatContainer.NowChapter.chat[i].text;
                 chatNode.face = chatContainer.NowChapter.chat[i].face;
                 chatNode.textEvent = new List<EChatEvent>(chatContainer.NowChapter.chat[i].textEvent);
+
+                // 위치 잡아주기
+                if (chatNode.state == EChatState.Other)
+                {
+                    chatNode.position = new Vector2(-125, 150 * (i + 1));
+                }
+                else
+                {
+                    chatNode.position = new Vector2(125, 150 * (i + 1));
+                }
 
                 if (i == 0)     // 루트노드랑 연결해주기
                 {
@@ -72,19 +84,20 @@ namespace ChatVisual
                 }
             }
 
-            // 질문 노드 만들어주기
+            // 질문, 잠김 질문 노드 만들어주기
             {
                 ChatNode firstChatEndNode = chatContainer.nodes[firstChatEndIndex] as ChatNode;
                 if (firstChatEndNode != null)
                 {
+                    Vector2 endChatNodePosition = firstChatEndNode.position;
                     //Debug.Log($"질문의 개수 : {this.chatContainer.NowChapter.askAndReply.Count}, 챗팅의 인덱스 {firstChatEndIndex}");
+                    
                     // 그냥 질문 만들어주기
                     for (int i = 0; i < chatContainer.NowChapter.askAndReply.Count; ++i)
                     {
-                        if (this.chatContainer.nodes.Count() - 1 > i + firstChatEndIndex + askAndReplysCount) continue;
                         ++askAndReplysCount;
 
-                        // 질문 노드 추가해주기
+                        // 질문 노드 추가해서 데이터 추가
                         AskNode askNode = chatContainer.CreateNode(typeof(AskNode)) as AskNode;
                         askNode.ask = this.chatContainer.NowChapter.askAndReply[i].ask;
                         askNode.reply = new List<Chat>(this.chatContainer.NowChapter.askAndReply[i].reply);        // 값 복사, 깊은 복사
@@ -93,14 +106,28 @@ namespace ChatVisual
                         // 쳇팅 노드랑 연결해주기
                         firstChatEndNode.child.Add(askNode);
 
+                        // 위치 설정해주기
+                        askNode.position = new Vector2(endChatNodePosition.x + i * 400 , endChatNodePosition.y + 200);
+
                         // 대답(쳇팅)노드 추가해주기
-                        for (int j = 0; j < this.chatContainer.NowChapter.askAndReply[i].reply.Count; ++j)
+                        for (int j = 0; j < chatContainer.NowChapter.askAndReply[i].reply.Count; ++j)
                         {
+                            // 쳇팅 노드 추가해서 데이터 추가
                             ChatNode replyNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
                             replyNode.state = this.chatContainer.NowChapter.askAndReply[i].reply[j].state;
                             replyNode.text = this.chatContainer.NowChapter.askAndReply[i].reply[j].text;
                             replyNode.face = this.chatContainer.NowChapter.askAndReply[i].reply[j].face;
                             replyNode.textEvent = new List<EChatEvent>(this.chatContainer.NowChapter.askAndReply[i].reply[j].textEvent);
+
+                            // 위치 잡아주기
+                            if (replyNode.state == EChatState.Other)
+                            {
+                                replyNode.position = new Vector2(askNode.position.x -100, askNode.position.y + 140 * (j + 1));
+                            }
+                            else
+                            {
+                                replyNode.position = new Vector2(askNode.position.x + 100, askNode.position.y + 140 * (j + 1));
+                            }
 
                             // 연결 해주기
                             if (j == 0)     // 질문노드랑 연결해야 하는 경우
@@ -109,20 +136,22 @@ namespace ChatVisual
                             }
                             else
                             {
-                                ChatNode chatParentNode = this.chatContainer.nodes[(j + firstChatEndIndex + askAndReplysCount) - 1] as ChatNode;        // 루트노드 빼고 넣어주기
+                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount] as ChatNode;        // 루트노드 빼고 넣어주기
                                 if (chatParentNode != null)
                                 {
                                     chatParentNode.child.Add(replyNode);
                                 }
+                                if (j == chatContainer.NowChapter.askAndReply[i].reply.Count - 1)      // 이게 마지막 반복이면
+                                {
+                                    askAndReplysCount += j + 1;
+                                }
                             }
-                            ++askAndReplysCount;
                         }
                     }
 
                     // 잠김 질문 만들어주기
                     for (int i = 0; i < chatContainer.NowChapter.lockAskAndReply.Count; i++)
                     {
-                        if (this.chatContainer.nodes.Count() - 1 > i + firstChatEndIndex + askAndReplysCount + askAndReplysCount) continue;
                         ++lockAskAndReplysCount;
 
                         // 락질문 노드 추가해주기
@@ -135,6 +164,9 @@ namespace ChatVisual
                         // 쳇팅 노드랑 연결해주기
                         firstChatEndNode.child.Add(lockAskNode);
 
+                        // 위치 설정해주기
+                        lockAskNode.position = new Vector2(endChatNodePosition.x + (chatContainer.NowChapter.askAndReply.Count * 400) + (i * 400), endChatNodePosition.y + 200);
+
                         // 대답(쳇팅)노드 추가해주기
                         for (int j = 0; j < this.chatContainer.NowChapter.lockAskAndReply[i].reply.Count; ++j)
                         {
@@ -144,6 +176,16 @@ namespace ChatVisual
                             replyNode.face = this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].face;
                             replyNode.textEvent = new List<EChatEvent>(this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].textEvent);
 
+                            // 위치 잡아주기
+                            if (replyNode.state == EChatState.Other)
+                            {
+                                replyNode.position = new Vector2(lockAskNode.position.x - 100, lockAskNode.position.y + 140 * (j + 1));
+                            }
+                            else
+                            {
+                                replyNode.position = new Vector2(lockAskNode.position.x + 100, lockAskNode.position.y + 140 * (j + 1));
+                            }
+
                             // 연결 해주기
                             if (j == 0)     // 질문노드랑 연결해야 하는 경우
                             {
@@ -151,20 +193,23 @@ namespace ChatVisual
                             }
                             else
                             {
-                                ChatNode chatParentNode = this.chatContainer.nodes[(j + firstChatEndIndex + askAndReplysCount + lockAskAndReplysCount) - 1] as ChatNode;        // 루트노드 빼고 넣어주기
+                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount + lockAskAndReplysCount] as ChatNode;        // 루트노드 빼고 넣어주기
                                 if (chatParentNode != null)
                                 {
                                     chatParentNode.child.Add(replyNode);
                                 }
+                                if (j == chatContainer.NowChapter.lockAskAndReply[i].reply.Count - 1)      // 이게 마지막 반복이면
+                                {
+                                    lockAskAndReplysCount += j + 1;
+                                }
                             }
-                            ++lockAskAndReplysCount;
                         }
                     }
                 }
             }
         }
 
-        public void SaveChatSystem()        // 값들을 
+        /*public void SaveChatSystem()        // 값들을 
         {
             chatContainer.NowChapter.chat.Clear();
             chatContainer.NowChapter.askAndReply.Clear();
@@ -175,8 +220,8 @@ namespace ChatVisual
             int askIndex = 0;       // 다음 있을 질문들의 인덱스
             int lockAskIndex = 0;       // 질문 다음에 나올 잠김 질문들
 
-            List<int> replyChatCount = new List<int>();       // 그냥 질문들의 대답 개수들
-            List<int> lockReplyChatCount = new List<int>();     // 잠김 질문들의 대답 개수들. 필요없을 수도 있음
+            //List<int> replyChatCount = new List<int>();       // 그냥 질문들의 대답 개수들
+            //List<int> lockReplyChatCount = new List<int>();     // 잠김 질문들의 대답 개수들.
 
             if (chatContainer.nodes[0] != null)     // 루트노드가 있다면
             {
@@ -186,7 +231,7 @@ namespace ChatVisual
                     Debug.Log("루트 노드 저장");
                     chatContainer.NowChapter.showName = rootNode.showName;
                     chatContainer.NowChapter.saveLocation = rootNode.saveLocation;
-                    chatContainer.NowChapter.round = new List<string>(rootNode.roundList);
+                    chatContainer.NowChapter.round = new List<string>(rootNode.round);
                 }
             }
 
@@ -232,8 +277,7 @@ namespace ChatVisual
                     }
                 });
             });
-            chatContainer.ChangeNewChpater();
-        }
+        }*/
 
         public void PopulateView()
         {

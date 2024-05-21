@@ -14,37 +14,23 @@ namespace ChatVisual
         public int nowChaptersIndex;        // 챕터 인덱스
         public int nowChatIndex;            // 쳇팅 인덱스
 
-        [SerializeField]
+        [SerializeField]        // 그냥 지금 어떤 챕터인지 볼려고 있는 것. 참조 복사로 넣어줬음.
         private Chapter nowChapter;
         public Chapter NowChapter { get { return nowChapter; } set { nowChapter = value; } }
 
         [SerializeField]
-        private List<Chapter> mainChapters = new List<Chapter>();     // 챕터들
-        public List<Chapter> MainChapters { get { return mainChapters; } set { mainChapters = value; } }
+        private List<Chapter> mainChapter = new List<Chapter>();     // 챕터들
+        //public List<Chapter> MainChapter { get { return mainChapter; } set { mainChapter = value; } }
 
-        public void ChangeNowChapter(int index)         // 깊은 복사
+        public void ChangeNowChapter(int index)
         {
-            if (mainChapters.Count <= index)
+            if (mainChapter.Count <= index)
             {
-                mainChapters.Add(new Chapter());
+                Debug.Log("새로 만들어주기");
+                mainChapter.Add(new Chapter());
             }
             nowChaptersIndex = index;
-            nowChapter.showName = mainChapters[index].showName;
-            nowChapter.saveLocation = mainChapters[index].saveLocation;
-            nowChapter.chat = new List<Chat>(mainChapters[index].chat);
-            nowChapter.askAndReply = new List<AskAndReply>(mainChapters[index].askAndReply);
-            nowChapter.lockAskAndReply = new List<LockAskAndReply>(mainChapters[index].lockAskAndReply);
-            nowChapter.round = new List<string>(mainChapters[index].round);
-        }
-
-        public void ChangeNewChpater()     // 깊은 복사
-        {
-            mainChapters[nowChaptersIndex].showName = nowChapter.showName;
-            mainChapters[nowChaptersIndex].saveLocation = nowChapter.saveLocation;
-            mainChapters[nowChaptersIndex].chat = new List<Chat>(nowChapter.chat);
-            mainChapters[nowChaptersIndex].askAndReply = new List<AskAndReply>(nowChapter.askAndReply);
-            mainChapters[nowChaptersIndex].lockAskAndReply = new List<LockAskAndReply>(nowChapter.lockAskAndReply);
-            mainChapters[nowChaptersIndex].round = new List<string>(nowChapter.round);
+            nowChapter = mainChapter[index];        // 참조 복사
         }
 
 #if UNITY_EDITOR

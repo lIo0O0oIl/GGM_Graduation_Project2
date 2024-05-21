@@ -10,7 +10,7 @@ namespace ChatVisual
 
         public string showName;
         public ESaveLocation saveLocation;
-        public List<string> roundList = new List<string>();
+        public List<string> round = new List<string>();
 
         protected override void OnStart()
         {
