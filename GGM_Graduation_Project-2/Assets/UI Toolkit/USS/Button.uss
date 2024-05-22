@@ -46,3 +46,9 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+
+.FileSystemOn {
+    display: flex;
+    transition-duration: 1s;
+    transition-timing-function: ease-out-cubic;
+}

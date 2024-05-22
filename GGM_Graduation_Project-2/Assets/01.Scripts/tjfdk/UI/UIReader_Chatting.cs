@@ -19,6 +19,7 @@ public class MemberChat
 {
     public string name;
     public Sprite face;
+    public bool isOpen;
     public List<Chatting> chattings = new List<Chatting>();
     public List<Chatting> quetions = new List<Chatting>();
     public MemberChat(string name)
@@ -30,7 +31,9 @@ public class MemberChat
 public class UIReader_Chatting : UI_Reader
 {
     [SerializeField]
-    private List<MemberChat> memberChats;
+    private List<MemberChat> memberChats = new List<MemberChat>();
+    [SerializeField]
+    private Texture2D changeMemberBtnOn, changeMemberBtnOff;
 
     // UXLM
     VisualElement chatGround;
@@ -49,7 +52,6 @@ public class UIReader_Chatting : UI_Reader
     private void Awake()
     {
         base.Awake();
-        memberChats = new List<MemberChat>();
     }
 
     private void Update()
@@ -91,7 +93,7 @@ public class UIReader_Chatting : UI_Reader
     private void UXML_Load()
     {
         chatGround = root.Q<VisualElement>("ChatGround");
-        chattingFace = root.Q<VisualElement>("ChatFace");
+        chattingFace = root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
         changeMemberButton = root.Q<Button>("ChangeTarget");
         memberName = root.Q<Label>("TargetName");
         memberList = root.Q<VisualElement>("ChatMemberList");
@@ -109,6 +111,7 @@ public class UIReader_Chatting : UI_Reader
     private void Event_Load()
     {
         // 멤버 변경 버튼
+        ChangeMember();
         changeMemberButton.clicked += ChangeMember;
         // 채팅 스크롤뷰 속도 변경
         //Debug.Log(chatGround.Q<ScrollView>(chatGround.name));
@@ -150,7 +153,7 @@ public class UIReader_Chatting : UI_Reader
 
         // 지정 표정으로 바꿔주기
         if (face != null)
-            chattingFace.style.backgroundImage = new StyleBackground(face);
+            chattingFace.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(face);
         // 대사 변경
         chat.Q<Label>().text = msg;
         // 대화에 추가
@@ -197,8 +200,10 @@ public class UIReader_Chatting : UI_Reader
 
     public void AddMember(string memberName)
     {
-        if (FindMember(memberName) == null)
+        if (FindMember(memberName).isOpen == false)
         {
+            FindMember(memberName).isOpen = true;
+
             VisualElement newMember = RemoveContainer(ux_memberList.Instantiate());
             newMember.Q<Button>("ChatMember").text = memberName;
             newMember.Q<Button>("ChatMember").clicked += () =>
@@ -219,26 +224,29 @@ public class UIReader_Chatting : UI_Reader
     public void ChangeMember()
     {
         if (memberList.style.display.value == DisplayStyle.Flex)
+        {
+            changeMemberButton.style.backgroundImage = new StyleBackground(changeMemberBtnOn);
             memberList.style.display = DisplayStyle.None;
+        }
         else
+        {
+            changeMemberButton.style.backgroundImage = new StyleBackground(changeMemberBtnOff);
             memberList.style.display = DisplayStyle.Flex;
+        }
+    }
+
+    public void ChangeProfile(string name, Sprite face)
+    {
+        chattingFace.Q<Label>("Name").text = name;
+        chattingFace.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(face);
     }
 
     public void ChoiceMember(Button button)
     {
-        Debug.Log("드렁옴");
-        //foreach (MemberChat member in memberChats)
-        //{
-        //    if (member.name == button.text)
-        //    {
-        //        ChangeMember(); // 이름 목록 닫고
-        //        RemoveChatting(); // 채팅 날리고
-        //        RecallChatting(member); // 새로 쓰고
-        //    }
-        //}
         MemberChat member = FindMember(button.text);
         if (member != null)
         {
+            ChangeProfile(member.name, member.face);
             ChangeMember(); // 이름 목록 닫고
             RemoveChatting(); // 채팅 날리고
             RecallChatting(member); // 새로 쓰고
