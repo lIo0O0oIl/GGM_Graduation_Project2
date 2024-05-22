@@ -1,0 +1,29 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/ChatVisual/Editor/ChatEditor.uss?fileID=7433441132597879392&amp;guid=26d54c5307c4a3a4b92d81aa15fa5cb3&amp;type=3#ChatEditor" />
+    <ChatVisual.SplitView fixed-pane-initial-dimension="260">
+        <ui:VisualElement name="left-panel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ChatVisual.SplitView fixed-pane-initial-dimension="300" orientation="Vertical">
+                <ui:VisualElement name="hierarchy-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                    <ui:Label tabindex="-1" text="Hierarchy" display-tooltip-when-elided="true" name="hierarchy-label" class="title-label" style="flex-direction: row-reverse;">
+                        <ui:Button text="+" display-tooltip-when-elided="true" name="AddBtn" class="red" style="width: 21px; height: 17px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 9px; padding-bottom: 13px; font-size: 27px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(255, 255, 255, 0); justify-content: center;">
+                            <ui:VisualElement name="VisualElement" style="height: 31px; width: 100%; flex-grow: 1; flex-shrink: 0;" />
+                        </ui:Button>
+                    </ui:Label>
+                    <ui:IMGUIContainer name="hierarchy-view" style="flex-grow: 1;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="inspector-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                    <ui:Label tabindex="-1" text="Inspector" display-tooltip-when-elided="true" class="title-label" />
+                    <ChatVisual.InspectorView name="inspector-view" />
+                </ui:VisualElement>
+            </ChatVisual.SplitView>
+        </ui:VisualElement>
+        <ui:VisualElement name="right-panel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:Label tabindex="-1" text="ChatView" display-tooltip-when-elided="true" class="title-label" style="padding-top: 0; padding-bottom: 1px; flex-direction: row-reverse;">
+                <ui:Button text="※" display-tooltip-when-elided="true" name="ClearBtn" class="red" style="width: 21px; height: 17px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 9px; padding-bottom: 13px; font-size: 27px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(255, 255, 255, 0); justify-content: center; -unity-font-style: normal;">
+                    <ui:VisualElement name="VisualElement" style="height: 31px; width: 100%; flex-grow: 1; flex-shrink: 0;" />
+                </ui:Button>
+            </ui:Label>
+            <ChatVisual.ChatView focusable="true" name="chat-view" />
+        </ui:VisualElement>
+    </ChatVisual.SplitView>
+</ui:UXML>

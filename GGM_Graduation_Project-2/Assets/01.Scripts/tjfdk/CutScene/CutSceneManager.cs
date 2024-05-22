@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CutSceneManager : MonoBehaviour
 {
     UIReader_CutScene cutsceneUI;
+    public static CutSceneManager Instance;
 
     [Header("Object")]
     [SerializeField] private GameObject cutScene;
@@ -21,17 +22,13 @@ public class CutSceneManager : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         cutsceneUI = GetComponent<UIReader_CutScene>();
-    }
-
-    private void Start()
-    {
-        CutScene(true, "Start");
     }
 
     private void Update()
     {
-        //// Å×½ºÆ®¸¦ À§ÇØ ÀÛ¼º... ´ç¿¬ÇÏ°Ôµµ ¼Â¿¢Æ¼ºê ²¨Á® ÀÖÀ¸¸é ÀÔ·Â ¾È ¸Ô´Â´Ù...
+        //// ï¿½×½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½... ï¿½ç¿¬ï¿½Ï°Ôµï¿½ ï¿½Â¿ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ ï¿½Ô´Â´ï¿½...
         //if (Input.GetKeyDown(KeyCode.V))
         //{
         //    CutScene(true, "Start");
@@ -48,84 +45,85 @@ public class CutSceneManager : MonoBehaviour
         //}
     }
 
-    // ÄÆ ¾À È£Ãâ ÇÔ¼ö
+    // ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½ ï¿½Ô¼ï¿½
     public void CutScene(bool isOpen, string _chapterName = "")
     {
-        // ÄÆ ¾ÀÀ» Å°´Â °ÍÀÎÁö ²ô´Â °ÍÀÎÁö
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         cutScene.SetActive(isOpen);
 
-        // ÄÆ ¾ÀÀÇ ÀÌ¸§ ÇÔ¼ö È£Ãâ
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
         if (isOpen && _chapterName != "")
             PlayChapter(_chapterName);
 
-        // ÄÆ ¾À Á¾·áÁ¡
+        // ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (isOpen == false)
         {
-            ChattingManager.Instance.StartChatting(0);           // °¡Àå Ã³À½Àº 0À¸·Î ÇØµÎ±â
+            Debug.Log("ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+            ChattingManager.Instance.StartChatting(0);           // ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ØµÎ±ï¿½
         }
     }
 
-    // ÄÆ ¾À ¼¼ÆÃ ÇÔ¼ö
+    // ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     private void PlayChapter(string _chapterName)
     {
         currentCutScene = null;
 
-        // ÇöÀç Ã©ÅÍ Ã£¾ÆÁÖ±â
+        // ï¿½ï¿½ï¿½ï¿½ Ã©ï¿½ï¿½ Ã£ï¿½ï¿½ï¿½Ö±ï¿½
         foreach (CutSceneSO chapter in cutSceneChapters)
         {
             if (chapter.chapterName == _chapterName)
                 currentCutScene = chapter;
         }
 
-        // ÇöÀç Ã©ÅÍ SO ÃÊ±âÈ­
+        // ï¿½ï¿½ï¿½ï¿½ Ã©ï¿½ï¿½ SO ï¿½Ê±ï¿½È­
         foreach (CutSceneDialoges chapter in currentCutScene.cutScenes)
         {
             foreach (CutSceneText text in chapter.texts)
                 text.isEnd = false;
         }
 
-        // Ã©ÅÍ ÁøÇàÇÒ ÀÎµ¦½º ÃÊ±âÈ­
+        // Ã©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         currentCutNum = 0;
         currentTextNum = 0;
 
-        // ÄÆ ¾À ¼¼ÆÃ
+        // ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         CutSetting();
     }
 
-    // ±×¸² ¼¼ÆÃ
+    // ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void CutSetting()
     {
-        // ÀÌ¹ÌÁö ¼³Á¤
+        // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         cutsceneUI.ChangeCut(currentCutScene.cutScenes[currentCutNum].cut);
-        // ´ë»ç ÀÔ·Â ÇÔ¼ö È£Ãâ
+        // ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
         Texting(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum]);
     }
 
-    // ´ÙÀ½À¸·Î ³Ñ±â·Á ÇÒ ¶§ (¹öÆ°¿¡ ¿¬°áÇØµÒ)
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ (ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½)
     public void NextCut()
     {
         if (currentCutScene != null)
         {
             CutSceneText currentText = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum];
 
-            // Áö±Ý ÁøÇàÁßÀÎ ÄÆ¾ÀÀÇ ´ë»ç°¡ ´Ù ÀÛ¼ºµÇÁö ¾Ê¾Ò´Ù¸é
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ç°¡ ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò´Ù¸ï¿½
             if (currentText.isEnd == false)
             {
-                // ´ÙÆ®À© °­Á¦ ¼º°ø
+                // ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 cutsceneUI.EndText();
-                // ´ë»ç ÀÔ·Â ¿Ï·á
+                // ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ï·ï¿½
                 currentText.isEnd = true;
             }
-            // Áö±Ý ÁøÇàÁßÀÎ ÄÆ¾ÀÀÇ ´ë»ç°¡ ´Ù ÀÛ¼º µÆ´Ù¸é
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ç°¡ ï¿½ï¿½ ï¿½Û¼ï¿½ ï¿½Æ´Ù¸ï¿½
             else
             {
-                // ´ë»ç ÀÎµ¦½º Áõ°¡
+                // ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 currentTextNum++;
 
-                Debug.Log(currentTextNum);
-                Debug.Log(currentCutScene.cutScenes[currentCutNum].texts.Count);
+                //Debug.Log(currentTextNum);
+                //Debug.Log(currentCutScene.cutScenes[currentCutNum].texts.Count);
 
-                // ÇöÀç ÄÆÀÇ ¸ðµç ´ë»ç¸¦ ½ÇÇàÇß´Ù¸é
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ç¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ß´Ù¸ï¿½
                 if (currentTextNum >= currentCutScene.cutScenes[currentCutNum].texts.Count)
                 {
                     currentCutNum++;
@@ -139,22 +137,22 @@ public class CutSceneManager : MonoBehaviour
                         CutSetting();
                     }
                 }
-                // ÇöÀç ÄÆÀÇ ´ë»ç°¡ ³²¾ÆÀÖ´Ù¸é
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ç°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ù¸ï¿½
                 else
                 {
-                    // ´ë»ç º¯°æ
+                    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     currentText = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum];
-                    // ´ë»ç ÀÔ·Â ÇÔ¼ö È£Ãâ
+                    // ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
                     Texting(currentText);
                 }
             }
         }
     }
     
-    // ´ë»ç ÀÔ·Â ÇÔ¼ö (´ÙÆ®À©)
+    // ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ô¼ï¿½ (ï¿½ï¿½Æ®ï¿½ï¿½)
     private void Texting(CutSceneText temp)
     {
-        // »ç¿îµå Ãâ·Â
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (temp.sound != "")
             SoundManager.Instance.PlaySFX(temp.sound);
         else
@@ -162,12 +160,12 @@ public class CutSceneManager : MonoBehaviour
             SoundManager.Instance.PlaySFX("typing");
         }
 
-        // text ÀÔ·Â
+        // text ï¿½Ô·ï¿½
         float textDuring = temp.text.Length * 0.5f;
         cutsceneUI.ChangeText(temp.text, textDuring);
 
-        // toolkit reader·Î º¯°æ
-        ////´ÙÆ®À©À¸·Î ÅØ½ºÆ® ÀÛ¼º
+        // toolkit readerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        ////ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Û¼ï¿½
         //text.DOText(temp.text, 1.5f).OnComplete(() =>
         //{
         //    temp.isEnd = true;

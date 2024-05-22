@@ -673,6 +673,7 @@ MonoBehaviour:
   masterSlider: {fileID: 1172240726}
   bgmSlider: {fileID: 607024227}
   sfxSlider: {fileID: 1528286304}
+  speedSlider: {fileID: 0}
 --- !u!114 &85823089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2880,14 +2881,14 @@ RectTransform:
   m_GameObject: {fileID: 1223485829}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.3, z: 1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 61267566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -23, y: 227}
+  m_AnchoredPosition: {x: 0, y: 230}
   m_SizeDelta: {x: 700, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1223485831
@@ -3522,6 +3523,7 @@ MonoBehaviour:
   masterSlider: {fileID: 899995898}
   bgmSlider: {fileID: 904608798}
   sfxSlider: {fileID: 20463062}
+  speedSlider: {fileID: 0}
 --- !u!1 &1528286302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3670,6 +3672,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panels: []
   alarmIcon: {fileID: 0}
+  chatIndex: 0
+  connectionPanel: {fileID: 0}
+  connectionParent: {fileID: 0}
 --- !u!1 &1617085061
 GameObject:
   m_ObjectHideFlags: 0

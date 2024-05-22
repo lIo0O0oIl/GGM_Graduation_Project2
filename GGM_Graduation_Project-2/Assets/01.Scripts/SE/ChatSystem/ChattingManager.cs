@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using ChatVisual;       // 나중에 지우기
 
 public class ChattingManager : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class ChattingManager : MonoBehaviour
     public TMP_Text chattingHumanName;
     [HideInInspector]
     public List<GameObject> assistantChatList = new List<GameObject>();    // 조수와 나눈 대화는 저장해주기
-    [SerializeField] private Chapters[] chapters;      // 쳇팅 SO들을 넣어줌.
-    public Chapters[] Chapters {  get { return chapters; } set { chapters = value; } }
+    [SerializeField] private Chapter[] chapters;      // 쳇팅 SO들을 넣어줌.
+    public Chapter[] Chapters {  get { return chapters; } set { chapters = value; } }
 
     [Header("ChatDelay")]       // 쳇팅 딜레이 관련
     public float delayTime = 0.75f;
@@ -58,6 +59,7 @@ public class ChattingManager : MonoBehaviour
 
     public void StartChatting(int index)
     {
+        Debug.Log("체팅이 시작됨" + index);
         // 만약 내 쳇팅이 꺼져있으면 켜질 때까지는 대기 엑션으로??
         // 챗팅이 켜지면 액션으로 다시 이 함수를 부르게 한다?
         if (UIManager.Instance.panels[0].activeSelf == false)
@@ -73,7 +75,7 @@ public class ChattingManager : MonoBehaviour
         nowLevel = index;
 
         // 쳇팅창 정보 설정해주기
-        if (chattingHumanName.text != chapters[index].who)     // 다른 사람과 대화를 하는 것이라면
+       /* if (chattingHumanName.text != chapters[index].who)     // 다른 사람과 대화를 하는 것이라면
         {
             // 지금까지 있던 대화 다 지워주기
             for (int i = 0; i < chatContainer.transform.childCount; i++)
@@ -93,29 +95,29 @@ public class ChattingManager : MonoBehaviour
                 }
             }
 
-            chattingHumanName.text = chapters[index].who;      // 이름 넣어주기
-        }
+            //chattingHumanName.text = chapters[index].who;      // 이름 넣어주기
+        }*/
 
-        int chatLenght = chapters[index].chat.Length;       // 쳇팅들의 길이
-        askLenght = chapters[index].askAndReply.Length;      // 질문들의 개수
+        int chatLenght = chapters[index].chat.Count;       // 쳇팅들의 길이
+        askLenght = chapters[index].askAndReply.Count;      // 질문들의 개수
 
         is_Chatting = true;
     }
 
     private void Chapter()
     {
-        if (is_Choosing == false && nowChatIndex < chapters[nowLevel].chat.Length)        // 선택중이 아니라면
+        if (is_Choosing == false && nowChatIndex < chapters[nowLevel].chat.Count)        // 선택중이 아니라면
         {
             bool state = false;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
             switch (chapters[nowLevel].chat[nowChatIndex].state)
             {
-                case ChatState.Other:
+                /*case E_ChatState.Other:
                     state = false;
                     break;
-                case ChatState.Me:
+                case E_ChatState.Me:
                     state = true;
                     break;
-                case ChatState.Ask:
+                case E_ChatState.Ask:
                     notUseAskList.Clear();      // 전에 있던 것 모두 지워주기
                     for (int i = 0; i < askLenght; i++)
                     {
@@ -125,9 +127,9 @@ public class ChattingManager : MonoBehaviour
                     }
                     is_Choosing = true;
                     return;
-                case ChatState.LoadNext:
+                case E_ChatState.LoadNext:
                     Debug.LogError("아직 만들지 않는 LoadNext 예요.");
-                    return;     // 아예 돌려
+                    return;     // 아예 돌려*/
                 default:
                     Debug.LogError($"{chapters[nowLevel].chat[nowChatIndex].state} 는(은) 없는 유형이예요!");
                     break;
@@ -162,7 +164,7 @@ public class ChattingManager : MonoBehaviour
 
     private void AskChapter()
     {
-        if (nowAskChatIndex < chapters[nowLevel].askAndReply[nowAskLevel].reply.Length)
+        if (nowAskChatIndex < chapters[nowLevel].askAndReply[nowAskLevel].reply.Count)
         {
             //TextBox.Instance.InputText(false, chapters[nowLevel].askAndReply[nowAskLevel].reply[nowAskChatIndex]);
             nowAskChatIndex++;

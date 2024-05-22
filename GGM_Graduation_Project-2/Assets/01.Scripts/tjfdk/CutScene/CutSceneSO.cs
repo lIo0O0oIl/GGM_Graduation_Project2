@@ -21,7 +21,7 @@ public class CutSceneDialoges
 }
 
 [CreateAssetMenu(fileName = "curSceneSO", menuName = "SO/CutSceneSO")]
-public class CutSceneSO : ScriptableObject
+public class CutSceneSO : ScriptableObject                                           
 {
     public string chapterName;
     public List<CutSceneDialoges> cutScenes = new List<CutSceneDialoges>();
