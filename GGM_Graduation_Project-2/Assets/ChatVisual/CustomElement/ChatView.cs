@@ -19,7 +19,6 @@ namespace ChatVisual
 
         public Action<NodeView> OnNodeSelected;     // 내가 눌렸다고 알려줌.
 
-
         public ChatView()
         {
             Insert(0, new GridBackground());        // 그리드 넣기
@@ -91,7 +90,7 @@ namespace ChatVisual
                 {
                     Vector2 endChatNodePosition = firstChatEndNode.position;
                     //Debug.Log($"질문의 개수 : {this.chatContainer.NowChapter.askAndReply.Count}, 챗팅의 인덱스 {firstChatEndIndex}");
-                    
+
                     // 그냥 질문 만들어주기
                     for (int i = 0; i < chatContainer.NowChapter.askAndReply.Count; ++i)
                     {
@@ -107,7 +106,7 @@ namespace ChatVisual
                         firstChatEndNode.child.Add(askNode);
 
                         // 위치 설정해주기
-                        askNode.position = new Vector2(endChatNodePosition.x + i * 400 , endChatNodePosition.y + 200);
+                        askNode.position = new Vector2(endChatNodePosition.x + i * 400, endChatNodePosition.y + 200);
 
                         // 대답(쳇팅)노드 추가해주기
                         for (int j = 0; j < chatContainer.NowChapter.askAndReply[i].reply.Count; ++j)
@@ -122,7 +121,7 @@ namespace ChatVisual
                             // 위치 잡아주기
                             if (replyNode.state == EChatState.Other)
                             {
-                                replyNode.position = new Vector2(askNode.position.x -100, askNode.position.y + 140 * (j + 1));
+                                replyNode.position = new Vector2(askNode.position.x - 100, askNode.position.y + 140 * (j + 1));
                             }
                             else
                             {
@@ -209,26 +208,31 @@ namespace ChatVisual
             }
         }
 
-        /*public void SaveChatSystem()        // 값들을 
+        public void SaveChatSystem()        // 값들을 저장해줌.
         {
             chatContainer.NowChapter.chat.Clear();
             chatContainer.NowChapter.askAndReply.Clear();
             chatContainer.NowChapter.lockAskAndReply.Clear();
 
             // nodes 리스트에서 현재 인덱스를 표시해줄 것.
-            int nowChatIndex = 0;       // 가장처음에 있는 쳇팅들의 인덱스
+            int chatIndex = 0;       // 가장처음에 있는 쳇팅들의 인덱스
             int askIndex = 0;       // 다음 있을 질문들의 인덱스
             int lockAskIndex = 0;       // 질문 다음에 나올 잠김 질문들
+            bool firstChatEnd = false;
 
-            //List<int> replyChatCount = new List<int>();       // 그냥 질문들의 대답 개수들
-            //List<int> lockReplyChatCount = new List<int>();     // 잠김 질문들의 대답 개수들.
+            int nowAskIndex = 0;        // 지금 질문의 인덱스
+            int nowReplyIndex = 0;      // 지금 질문에 들어갈 대답 인덱스
+            int nowReplysCountIndex = 0;      // 지금 질문의 대답 개수 인덱스, 아래 리스트의 인덱스 값
+            bool lockAskStart = false;      // 잠김 질문이 시작되었다면
+
+            // 질문의 대답 개수를 저장해주는 리스트
+            List<int> replysCount = new List<int>();            // -1은 
 
             if (chatContainer.nodes[0] != null)     // 루트노드가 있다면
             {
                 RootNode rootNode = chatContainer.nodes[0] as RootNode;
                 if (rootNode != null)
                 {
-                    Debug.Log("루트 노드 저장");
                     chatContainer.NowChapter.showName = rootNode.showName;
                     chatContainer.NowChapter.saveLocation = rootNode.saveLocation;
                     chatContainer.NowChapter.round = new List<string>(rootNode.round);
@@ -243,14 +247,80 @@ namespace ChatVisual
                     ChatNode chatNode = c as ChatNode;      // 쳇팅 노드이면
                     if (chatNode != null)
                     {
-                        // 새로운 클래스 만들어줌.
-                        Chat chapter = new Chat();
-                        chatContainer.NowChapter.chat.Add(chapter);
-                        chatContainer.NowChapter.chat[nowChatIndex].state = chatNode.state;
-                        chatContainer.NowChapter.chat[nowChatIndex].text = chatNode.text;
-                        chatContainer.NowChapter.chat[nowChatIndex].face = chatNode.face;
-                        chatContainer.NowChapter.chat[nowChatIndex].textEvent = chatNode.textEvent;
-                        ++nowChatIndex;
+                        if (firstChatEnd == false)
+                        {
+                            // 새로운 클래스 만들어줌.
+                            Debug.Log("그냥쳇팅");
+                            Chat chat = new Chat();
+                            chatContainer.NowChapter.chat.Add(chat);
+                            chatContainer.NowChapter.chat[chatIndex].state = chatNode.state;
+                            chatContainer.NowChapter.chat[chatIndex].text = chatNode.text;
+                            chatContainer.NowChapter.chat[chatIndex].face = chatNode.face;
+                            chatContainer.NowChapter.chat[chatIndex].textEvent = chatNode.textEvent;
+                            ++chatIndex;
+                        }
+                        else
+                        {
+                            // 대답들 저장해주기
+                            if (lockAskStart == false)
+                            {
+                                if (replysCount[nowReplysCountIndex] == -1)
+                                {
+                                    Debug.Log("잠김 질문 시작");
+                                    /*nowReplysCountIndex++;
+
+                                    nowAskIndex = 0;
+                                    nowReplyIndex = 0;
+
+                                    Chat lockReply = new Chat();
+                                    chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply.Add(lockReply);
+                                    chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].state = chatNode.state;
+                                    chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].text = chatNode.text;
+                                    chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].face = chatNode.face;
+                                    chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].textEvent = chatNode.textEvent;
+                                    */
+                                    lockAskStart = true;
+                                }
+
+                                if (lockAskStart == false)
+                                {
+                                    Debug.Log("그냥질문대답쳇팅저장");
+                                    Chat reply = new Chat();
+                                    chatContainer.NowChapter.askAndReply[nowAskIndex].reply.Add(reply);
+                                    chatContainer.NowChapter.askAndReply[nowAskIndex].reply[nowReplyIndex].state = chatNode.state;
+                                    chatContainer.NowChapter.askAndReply[nowAskIndex].reply[nowReplyIndex].text = chatNode.text;
+                                    chatContainer.NowChapter.askAndReply[nowAskIndex].reply[nowReplyIndex].face = chatNode.face;
+                                    chatContainer.NowChapter.askAndReply[nowAskIndex].reply[nowReplyIndex].textEvent = chatNode.textEvent;
+                                    nowReplyIndex++;
+
+                                    if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // 대답 개수를 넘었다면
+                                    {
+                                        nowAskIndex++;
+                                        nowReplysCountIndex++;
+                                        nowReplyIndex = 0;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                /*Debug.Log("잠김 질문 2번째 대답");
+
+                                nowReplyIndex++;
+                                Chat chat = new Chat();
+                                chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply.Add(chat);
+                                chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].state = chatNode.state;
+                                chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].text = chatNode.text;
+                                chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].face = chatNode.face;
+                                chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].textEvent = chatNode.textEvent;
+
+                                if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // 대답 개수를 넘었다면
+                                {
+                                    nowAskIndex++;
+                                    nowReplysCountIndex++;
+                                    nowReplyIndex = 0;
+                                }*/
+                            }
+                        }
                     }
 
                     AskNode askNode = c as AskNode;     // 질문 노드이면
@@ -259,25 +329,33 @@ namespace ChatVisual
                         AskAndReply askAndReply = new AskAndReply();
                         chatContainer.NowChapter.askAndReply.Add(askAndReply);
                         chatContainer.NowChapter.askAndReply[askIndex].ask = askNode.ask;
-                        chatContainer.NowChapter.askAndReply[askIndex].reply = askNode.reply;
+                        replysCount.Add(askNode.reply.Count);
+                        Debug.Log($"내 자식 개수 : {askNode.reply.Count}");
                         chatContainer.NowChapter.askAndReply[askIndex].is_UseThis = askNode.is_UseThis;
                         ++askIndex;
+                        firstChatEnd = true;
                     }
 
                     LockAskNode lockAskNode = c as LockAskNode;
                     if (lockAskNode != null)
                     {
+                        if (replysCount.Find(n => n == -1) == 0)
+                        {
+                            replysCount.Add(-1);        // 락걸린 쳇팅이 시작했다고
+                        }
+
                         LockAskAndReply lockAskAndReply = new LockAskAndReply();
                         chatContainer.NowChapter.lockAskAndReply.Add(lockAskAndReply);
                         chatContainer.NowChapter.lockAskAndReply[lockAskIndex].evidence = lockAskNode.evidence;
                         chatContainer.NowChapter.lockAskAndReply[lockAskIndex].ask = lockAskNode.ask;
-                        chatContainer.NowChapter.lockAskAndReply[lockAskIndex].reply = lockAskNode.reply;
+                        replysCount.Add(lockAskNode.reply.Count);
                         chatContainer.NowChapter.lockAskAndReply[lockAskIndex].is_UseThis = lockAskNode.is_UseThis;
                         ++lockAskIndex;
+                        firstChatEnd = true;
                     }
                 });
             });
-        }*/
+        }
 
         public void PopulateView()
         {

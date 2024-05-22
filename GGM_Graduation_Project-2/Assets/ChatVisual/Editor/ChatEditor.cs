@@ -32,7 +32,7 @@ public class ChatEditor : EditorWindow
     {
         if (chatView != null)
         {
-            //chatView.SaveChatSystem();      // 창을 끌 때 지금까지 해준 것 저장해주기
+            chatView.SaveChatSystem();      // 창을 끌 때 지금까지 해준 것 저장해주기
         }
     }
 

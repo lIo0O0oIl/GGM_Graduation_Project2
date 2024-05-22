@@ -260,13 +260,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowChaptersIndex: 0
-  nowChatIndex: 15
+  nowChatIndex: 13
   nowChapter:
     showName: "0\uC54C\uBC00"
     saveLocation: 0
     chat:
     - state: 1
-      text: "\uC9C8\uBB38\uC744 \uC704\uD5DB"
+      text: "\u3147\u3134\u3139\u3134\u3147\u3139\u3134\u3147\u3139"
       face: 0
       textEvent: 
     - state: 0
@@ -278,33 +278,18 @@ MonoBehaviour:
       face: 0
       textEvent: 
     askAndReply:
-    - ask: "\uC9C0\uB8F8\u3134"
-      reply:
-      - state: 1
-        text: "\uB2F51"
-        face: 0
-        textEvent: 
-      - state: 0
-        text: "\uB2F52"
-        face: 0
-        textEvent: 
-      - state: 1
-        text: "\uB2F53"
-        face: 0
-        textEvent: 
-      is_UseThis: 0
-    - ask: wof2
+    - ask: "\uC9C8\uBB38"
       reply:
       - state: 0
-        text: "\uB2F51"
-        face: 0
-        textEvent: 
-      - state: 0
-        text: "\uB2F52"
+        text: "\u3134\u3139\u3134\u3147\u313B\u3139\u3137\u3148\u3141\u3139"
         face: 0
         textEvent: 
       - state: 1
-        text: "\uB2F53"
+        text: 2
+        face: 0
+        textEvent: 
+      - state: 0
+        text: 3
         face: 0
         textEvent: 
       is_UseThis: 0
@@ -315,11 +300,15 @@ MonoBehaviour:
       ask: 
       reply:
       - state: 1
-        text: gg
+        text: "\u3134\u3147\u3139\u3134\u3147\u3139\u3134\u3137\u3139\u3134\u3137\u3139\u3137\u3139\u3137\u3148\u3137\u3148\u3148\u3137\u3139\u3137\u3148\u3139"
+        face: 1
+        textEvent: 
+      - state: 1
+        text: 1
         face: 0
         textEvent: 
-      - state: 0
-        text: zz
+      - state: 1
+        text: 23232323
         face: 0
         textEvent: 
       is_UseThis: 0
@@ -331,7 +320,7 @@ MonoBehaviour:
     saveLocation: 0
     chat:
     - state: 1
-      text: "\uC9C8\uBB38\uC744 \uC704\uD5DB"
+      text: "\u3147\u3134\u3139\u3134\u3147\u3139\u3134\u3147\u3139"
       face: 0
       textEvent: 
     - state: 0
@@ -343,33 +332,18 @@ MonoBehaviour:
       face: 0
       textEvent: 
     askAndReply:
-    - ask: "\uC9C0\uB8F8\u3134"
-      reply:
-      - state: 1
-        text: "\uB2F51"
-        face: 0
-        textEvent: 
-      - state: 0
-        text: "\uB2F52"
-        face: 0
-        textEvent: 
-      - state: 1
-        text: "\uB2F53"
-        face: 0
-        textEvent: 
-      is_UseThis: 0
-    - ask: wof2
+    - ask: "\uC9C8\uBB38"
       reply:
       - state: 0
-        text: "\uB2F51"
-        face: 0
-        textEvent: 
-      - state: 0
-        text: "\uB2F52"
+        text: "\u3134\u3139\u3134\u3147\u313B\u3139\u3137\u3148\u3141\u3139"
         face: 0
         textEvent: 
       - state: 1
-        text: "\uB2F53"
+        text: 2
+        face: 0
+        textEvent: 
+      - state: 0
+        text: 3
         face: 0
         textEvent: 
       is_UseThis: 0
@@ -380,11 +354,15 @@ MonoBehaviour:
       ask: 
       reply:
       - state: 1
-        text: gg
+        text: "\u3134\u3147\u3139\u3134\u3147\u3139\u3134\u3137\u3139\u3134\u3137\u3139\u3137\u3139\u3137\u3148\u3137\u3148\u3148\u3137\u3139\u3137\u3148\u3139"
+        face: 1
+        textEvent: 
+      - state: 1
+        text: 1
         face: 0
         textEvent: 
-      - state: 0
-        text: zz
+      - state: 1
+        text: 23232323
         face: 0
         textEvent: 
       is_UseThis: 0
