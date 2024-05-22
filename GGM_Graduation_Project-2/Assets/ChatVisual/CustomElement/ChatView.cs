@@ -267,7 +267,7 @@ namespace ChatVisual
                                 if (replysCount[nowReplysCountIndex] == -1)
                                 {
                                     Debug.Log("잠김 질문 시작");
-                                    /*nowReplysCountIndex++;
+                                    nowReplysCountIndex++;
 
                                     nowAskIndex = 0;
                                     nowReplyIndex = 0;
@@ -278,7 +278,7 @@ namespace ChatVisual
                                     chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].text = chatNode.text;
                                     chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].face = chatNode.face;
                                     chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].textEvent = chatNode.textEvent;
-                                    */
+                                    
                                     lockAskStart = true;
                                 }
 
@@ -303,7 +303,7 @@ namespace ChatVisual
                             }
                             else
                             {
-                                /*Debug.Log("잠김 질문 2번째 대답");
+                                Debug.Log("잠김 질문 2번째 대답");
 
                                 nowReplyIndex++;
                                 Chat chat = new Chat();
@@ -318,7 +318,7 @@ namespace ChatVisual
                                     nowAskIndex++;
                                     nowReplysCountIndex++;
                                     nowReplyIndex = 0;
-                                }*/
+                                }
                             }
                         }
                     }

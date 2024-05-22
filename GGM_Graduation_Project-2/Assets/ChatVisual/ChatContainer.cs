@@ -155,18 +155,74 @@ namespace ChatVisual
         public void SortIndex()     // 인덱스를 정렬한다.
         {
             nowChatIndex = 1;
+
+            bool is_firstChatEnd = false;
+            List<Node> askNodes = new List<Node>();     // 질문 담은 곳
+            int askIndex = 0;
+
+
             nodes.ForEach(n =>
             {
                 var children = GetChildren(n);
+                if (children.Count == 0) askIndex++;
                 children.ForEach(c =>
                 {
+                    if (c is ChatNode == false)     // 챗팅노드가 아니면 첫번째챗팅은 끝남.
+                    {
+                        is_firstChatEnd = true;
+                        askNodes.Add(c);
+
+                        AskNode askNode = c as AskNode;
+                        if (askNode != null)
+                        {
+                            askNode.reply.Clear();
+                        }
+
+                        LockAskNode lockAskNode = c as LockAskNode;
+                        if (lockAskNode != null)
+                        {
+                            lockAskNode.reply.Clear();
+                        }
+                    }
+                    else if (c is ChatNode && is_firstChatEnd)
+                    {
+                        // 질문 대답 쳇팅들 나옴.
+                        AskNode askNode = askNodes[askIndex] as AskNode;
+                        if (askNode != null)
+                        {
+                            ChatNode chatNode = c as ChatNode;
+                            if (chatNode != null)
+                            {
+                                Chat chat = new Chat();
+                                chat.text = chatNode.text;
+                                chat.state = chatNode.state;
+                                chat.face = chatNode.face;
+                                chat.textEvent = chatNode.textEvent;
+                                askNode.reply.Add(chat);
+                            }
+                        }
+
+                        LockAskNode lockAskNode = askNodes[askIndex] as LockAskNode;
+                        if (lockAskNode != null)
+                        {
+                            ChatNode chatNode = c as ChatNode;
+                            if (chatNode != null)
+                            {
+                                Chat chat = new Chat();
+                                chat.text = chatNode.text;
+                                chat.state = chatNode.state;
+                                chat.face = chatNode.face;
+                                chat.textEvent = chatNode.textEvent;
+                                lockAskNode.reply.Add(chat);
+                            }
+                        }
+                    }
+
                     c.index = nowChatIndex;
                     c.indexLabel.text = nowChatIndex.ToString();
                     nowChatIndex++;
                 });
             });
         }
-
-
     }
 }
