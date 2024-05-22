@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -44,72 +45,79 @@ public class UIReader_ImageFinding : UI_Reader
 
     public void EventImage(VisualElement file)
     {
-        Debug.Log("ㅇㄹ뭘닝");
         // Image일 때
         foreach (ImageB image in imageManager.images)
         {
             // 해당 이미지를 찾았다면 배경 설정
             if (image.name == file.Q<Label>("FileName").text)
             {
-                VisualElement imageBackground = RemoveContainer(ux_imageGround.Instantiate());
-                imageBackground.style.backgroundImage = new StyleBackground(image.image);
-                imageGround.Add(imageBackground);
-
-                // 자식 단서들을 생성
-                // 이름으로 찾아주고
-                foreach (string evid in image.pngName)
+                if (image.isOpen)
+                    imageGround.Remove(imageGround.Q<VisualElement>(image.name));
+                else
                 {
-                    // 해당 단서를 찾았다면
-                    foreach (ImagePng png in imageManager.pngs)
+                    VisualElement imageBackground = RemoveContainer(ux_imageGround.Instantiate());
+                    imageBackground.name = image.name;
+                    imageBackground.style.backgroundImage = new StyleBackground(image.image);
+                    imageGround.Add(imageBackground);
+
+                    // 자식 단서들을 생성
+                    // 이름으로 찾아주고
+                    foreach (string evid in image.pngName)
                     {
-                        if (evid == png.name)
+                        // 해당 단서를 찾았다면
+                        foreach (ImagePng png in imageManager.pngs)
                         {
-                            // 생성
-                            VisualElement evidence = null;
-                            // 중요하다면
-                            if (png.importance)
+                            if (evid == png.name)
                             {
-                                // 메모장으로 표시
-                                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
-                                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
-                                evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
-                                evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = png.memo;
-                                evidence.Q<Button>("EvidenceImage").clicked += (() =>
+                                // 생성
+                                VisualElement evidence = null;
+                                // 중요하다면
+                                if (png.importance)
                                 {
-                                    VisualElement description = evidence.Q<VisualElement>("Descripte");
-                                    description.style.display = DisplayStyle.Flex;
-
-                                    if (png.isOpen == false)
+                                    // 메모장으로 표시
+                                    evidence = RemoveContainer(ux_imageEvidence.Instantiate());
+                                    evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
+                                    evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
+                                    evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = png.memo;
+                                    evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                     {
-                                        png.isOpen = true;
-                                        fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
-                                    }
-                                });
-                            }
-                            // 아니라면
-                            else
-                            {
-                                // 아래 글로만 표시
-                                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
-                                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
-                                evidence.Q<Button>("EvidenceImage").clicked += (() =>
-                                {
-                                    VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
-                                    imageGround.Add(evidenceDescription);
-                                    DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, 
-                                        () => { imageGround.Remove(evidenceDescription); });
-                                });
-                            }
+                                        VisualElement description = evidence.Q<VisualElement>("Descripte");
+                                        description.style.display = DisplayStyle.Flex;
 
-                            //단서 위치 설정
-                            evidence.style.position = Position.Absolute;
-                            evidence.style.left = png.pos.x;
-                            evidence.style.top = png.pos.y;
-                            // 단서를 이미지에 추가
-                            imageBackground.Add(evidence);
+                                        if (png.isOpen == false)
+                                        {
+                                            png.isOpen = true;
+                                            fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
+                                        }
+                                    });
+                                }
+                                // 아니라면
+                                else
+                                {
+                                    // 아래 글로만 표시
+                                    evidence = RemoveContainer(ux_imageEvidence.Instantiate());
+                                    evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
+                                    evidence.Q<Button>("EvidenceImage").clicked += (() =>
+                                    {
+                                        VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
+                                        imageGround.Add(evidenceDescription);
+                                        DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, 
+                                            () => { imageGround.Remove(evidenceDescription); });
+                                    });
+                                }
+
+                                //단서 위치 설정
+                                evidence.style.position = Position.Absolute;
+                                evidence.style.left = png.pos.x;
+                                evidence.style.top = png.pos.y;
+                                // 단서를 이미지에 추가
+                                imageBackground.Add(evidence);
+                            }
                         }
                     }
                 }
+
+                image.isOpen = !image.isOpen;
             }
         }
 

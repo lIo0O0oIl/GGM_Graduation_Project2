@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DG.Tweening;
+using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -33,11 +35,22 @@ public class FileFolder
 
 public class UIReader_FileSystem : UI_Reader
 {
+    [SerializeField]
+    private float fileAreaSizeOn, fileAreaSizeOff;
+    [SerializeField]
+    private Texture2D changeSizeBtnOn, changeSizeBtnOff;
+    [SerializeField]
+    private bool isFileSystemOpen;
+
+    Tween changeFileSystemSizeDOT;
+
     // UXML
+    VisualElement fileSystemArea;
     VisualElement fileGround;
     VisualElement filePathGround;
     VisualElement mainFilePath;
     VisualElement panelGround;
+    Button changeSizeButton;
 
     // Template
     VisualTreeAsset ux_filePath;
@@ -109,9 +122,11 @@ public class UIReader_FileSystem : UI_Reader
 
     private void UXML_Load()
     {
+        fileSystemArea = root.Q<VisualElement>("FileSystem");
         fileGround = root.Q<VisualElement>("FileGround");
         filePathGround = root.Q<VisualElement>("FilePath");
         panelGround = root.Q<VisualElement>("PanelGround");
+        changeSizeButton = root.Q<Button>("ChangeSize");
     }
 
     private void Template_Load()
@@ -131,6 +146,11 @@ public class UIReader_FileSystem : UI_Reader
     {
         //AddFolderGround("Main");
         //AddFilePath("Main", () => FolderPathEvent("Main"));
+
+        changeSizeButton.clicked += () =>
+        {
+            ChangeSize();
+        };
     }
 
     public void AddFile(FileType fileType, string fileName, string fileParentName)
@@ -333,6 +353,43 @@ public class UIReader_FileSystem : UI_Reader
     {
         string name = file.Q<Label>("FileName").text;
         OpenText(name, imageManager.memoDic[name]);
+    }
+
+    public void ChangeSize()
+    {
+        isFileSystemOpen = !isFileSystemOpen;
+
+        if (changeFileSystemSizeDOT != null)
+        {
+            changeFileSystemSizeDOT.Complete();
+            changeFileSystemSizeDOT = null;
+        }
+
+        if (isFileSystemOpen)
+        {
+            changeFileSystemSizeDOT = DOTween.To(() => fileSystemArea.style.flexBasis.value.value, x => 
+                fileSystemArea.style.flexBasis = x, fileAreaSizeOn, 0.5f);
+            changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOn);
+        }
+        else
+        {
+            changeFileSystemSizeDOT = DOTween.To(() => fileSystemArea.style.flexBasis.value.value, x => 
+                fileSystemArea.style.flexBasis = x, fileAreaSizeOff, 0.5f);
+            changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOff);
+        }
+
+        //// 정상적인 버전...
+        //fileSystemArea.
+        //if (memberList.style.display.value == DisplayStyle.Flex)
+        //{
+        //    changeMemberButton.style.backgroundImage = new StyleBackground(changeMemberBtnOn);
+        //    memberList.style.display = DisplayStyle.None;
+        //}
+        //else
+        //{
+        //    changeMemberButton.style.backgroundImage = new StyleBackground(changeMemberBtnOff);
+        //    memberList.style.display = DisplayStyle.Flex;
+        //}
     }
 }
 

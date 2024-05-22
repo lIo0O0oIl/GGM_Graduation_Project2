@@ -29,6 +29,7 @@ public class UI_Reader : MonoBehaviour
     protected Button connectionButton;
     protected Button settingButton;
         // Panel
+    protected VisualElement previousPanel;
     protected VisualElement chattingPanel;
     protected VisualElement connectionPanel;
     protected VisualElement imageFindingPanel;
