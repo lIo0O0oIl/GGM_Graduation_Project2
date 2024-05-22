@@ -1,8 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="OtherChat" src="project://database/Assets/UI%20Toolkit/Prefab/OtherChat.uxml?fileID=9197481963319205126&amp;guid=45c4e00784c9c114eb0edee2da4a8634&amp;type=3#OtherChat" />
-    <ui:Template name="AskChat" src="project://database/Assets/UI%20Toolkit/Prefab/AskChat.uxml?fileID=9197481963319205126&amp;guid=eca624ffc6976be4cbe63439f47c4452&amp;type=3#AskChat" />
-    <ui:Template name="HiddenAskChat" src="project://database/Assets/UI%20Toolkit/Prefab/HiddenAskChat.uxml?fileID=9197481963319205126&amp;guid=167b99bf43499a4418fb5d4f44cf9276&amp;type=3#HiddenAskChat" />
-    <ui:Template name="FileGround" src="project://database/Assets/UI%20Toolkit/Prefab/File/FileGround.uxml?fileID=9197481963319205126&amp;guid=686b642fd19029f439c65c71961710fb&amp;type=3#FileGround" />
     <Style src="project://database/Assets/UI%20Toolkit/USS/Button.uss?fileID=7433441132597879392&amp;guid=d28c6cf77bec8e54c92d108a96fd1e35&amp;type=3#Button" />
     <Style src="project://database/Assets/UI%20Toolkit/USS/Chat.uss?fileID=7433441132597879392&amp;guid=196e6005f5443d14a87a584d5b6e61e3&amp;type=3#Chat" />
     <Style src="project://database/Assets/UI%20Toolkit/USS/Panel.uss?fileID=7433441132597879392&amp;guid=e2332cba0dd6d4b4bb677ce53ccc3e33&amp;type=3#Panel" />
@@ -16,44 +12,26 @@
         </ui:VisualElement>
         <ui:VisualElement name="Main" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; width: 100%; height: 100%; display: flex;">
             <ui:VisualElement name="MainSystem" class="BackGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); border-left-width: 0; flex-direction: column;">
-                <ui:VisualElement name="Chatting" class="BackGround" style="display: flex; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;">
-                    <ui:VisualElement name="ChatNameBar" class="BackGround" style="flex-grow: 0; background-color: rgb(38, 38, 38); height: 5%; width: 100%; flex-direction: row; border-top-width: 0; border-right-width: 0;">
+                <ui:VisualElement name="Chatting" class="BackGround" style="display: none; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;">
+                    <ui:VisualElement name="ChatNameBar" class="BackGround" style="flex-grow: 0; background-color: rgb(38, 38, 38); height: 5%; width: 100%; flex-direction: row; border-top-width: 0; border-right-width: 0; display: flex;">
                         <ui:Button display-tooltip-when-elided="true" text="o" name="ChangeTarget" class="NoButtonBorder" style="font-size: 25px; -unity-font-style: normal; -unity-font: initial; width: 55px; height: 100%; align-items: flex-start; background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-1304905567622442630&amp;guid=a11d7050c806a0645944b38c8744ac70&amp;type=3#arrow-down@2x&apos;); background-color: rgba(0, 0, 0, 0);" />
                         <ui:Label tabindex="-1" text="name" display-tooltip-when-elided="true" name="TargetName" style="height: 100%; color: rgb(255, 255, 255); -unity-text-align: middle-left; font-size: 45px; -unity-font: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo.ttf?fileID=12800000&amp;guid=ac8392ea6f9e97949882302322851c02&amp;type=3#DungGeunMo&apos;); width: 10%; align-items: flex-start; flex-grow: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="Main" class="BackGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;">
-                        <ui:VisualElement name="FaceGround" class="BackGround" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-basis: 35%; min-width: auto; min-height: auto; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; width: auto; max-width: none; height: 100%;">
-                            <ui:VisualElement name="ChatFace" style="align-self: center; background-image: url(&apos;project://database/Assets/02.Sprites/Prefile/JH-normal.png?fileID=21300000&amp;guid=616697de6bf35974dbda66ac9e2b7b3b&amp;type=3#JH-normal&apos;); flex-grow: 1; margin-left: 25px; margin-right: 25px; margin-top: 25px; margin-bottom: 25px; height: 35%; width: 100%;" />
+                    <ui:VisualElement name="ChatMemberList" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: auto; height: auto; display: flex; visibility: visible; overflow: visible; position: absolute; top: 55px;" />
+                    <ui:VisualElement name="Main" picking-mode="Ignore" class="BackGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;">
+                        <ui:VisualElement name="FaceGround" picking-mode="Ignore" class="BackGround" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-basis: 25%; min-width: auto; min-height: auto; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; width: auto; max-width: none; height: 100%; align-self: auto;">
+                            <ui:VisualElement name="ChatFace" picking-mode="Ignore" style="align-self: flex-end; background-image: url(&apos;project://database/Assets/02.Sprites/Prefile/JH-normal.png?fileID=21300000&amp;guid=616697de6bf35974dbda66ac9e2b7b3b&amp;type=3#JH-normal&apos;); flex-grow: 1; margin-left: 25px; margin-right: 25px; margin-top: 25px; margin-bottom: 25px; height: 64%; width: 100%;" />
                         </ui:VisualElement>
                         <ui:VisualElement name="Chat" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; flex-direction: column; align-self: flex-start; height: 100%; display: flex; justify-content: center;">
-                            <ui:ScrollView name="ChatGround" vertical-scroller-visibility="Hidden" style="align-self: auto;">
-                                <ui:Instance template="OtherChat" name="OtherChat" />
-                                <ui:Instance template="AskChat" name="AskChat" />
-                                <ui:Instance template="HiddenAskChat" name="HiddenAskChat" />
-                            </ui:ScrollView>
-                        </ui:VisualElement>
-                        <ui:VisualElement name="FaceGround" class="BackGround" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-basis: 25%; min-width: 25%; min-height: auto; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; width: 25%; max-width: 25%; display: none;">
-                            <ui:VisualElement style="align-self: center; background-image: url(&apos;project://database/Assets/01.Scripts/tjfdk/UI/image.png?fileID=2800000&amp;guid=cbaa76d609d888045a6a3d99570bd4a3&amp;type=3#image&apos;); flex-grow: 1; margin-left: 25px; margin-right: 25px; margin-top: 25px; margin-bottom: 25px; height: 50%; width: 100%;" />
+                            <ui:ScrollView name="ChatGround" vertical-scroller-visibility="Hidden" elasticity="0.33" style="align-self: auto;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="ImageFinding" class="BackGround" style="align-items: center; align-self: center; justify-content: flex-start; display: none; border-left-width: 0; height: 100%; flex-grow: 1; width: 100%;">
-                    <ui:VisualElement name="Image" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 100%; width: 100%; background-image: url(&apos;project://database/Assets/02.Sprites/Minseo/Rooftop.png?fileID=2800000&amp;guid=b5a4a926e3a8dfc4a97ab32b8be7f5a2&amp;type=3#Rooftop&apos;);">
-                        <ui:VisualElement name="Evidence" style="position: absolute; left: 97px; top: 259px;">
-                            <ui:VisualElement name="Evidence" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: none; display: flex; width: auto; height: auto; position: absolute; left: 0; top: 0;">
-                                <ui:VisualElement name="Descripte" class="BackGround" style="width: 200px; height: 250px; background-color: rgb(118, 118, 118); left: 150px; top: -150px; flex-wrap: wrap; align-self: auto; justify-content: flex-start; align-items: center; flex-direction: column; border-left-width: 5px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); display: none; overflow: visible; visibility: visible; -unity-background-scale-mode: stretch-to-fill; position: absolute;">
-                                    <ui:Label tabindex="-1" display-tooltip-when-elided="true" name="EvidenceName" style="font-size: 30px;" />
-                                    <ui:Label tabindex="-1" display-tooltip-when-elided="true" name="Memo" style="align-items: auto; align-self: flex-start; font-size: 20px; flex-wrap: wrap; width: 100%; flex-direction: row; -unity-text-align: upper-left; white-space: normal; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; flex-shrink: 1; flex-grow: 1; transition-property: all, ignored, ignored; transition-duration: 0s, 0s, 0s; transition-timing-function: ease, ease, ease; transition-delay: 0s, 0s, 0s;" />
-                                </ui:VisualElement>
-                                <ui:Button display-tooltip-when-elided="true" name="EvidenceImage" class="NoButtonBorder test" style="background-image: url(&apos;project://database/Assets/02.Sprites/Prefile/JH-normal.png?fileID=2800000&amp;guid=616697de6bf35974dbda66ac9e2b7b3b&amp;type=3#JH-normal&apos;); color: rgba(27, 27, 27, 0); width: 250px; height: 250px; background-color: rgba(188, 188, 188, 0); left: 0; top: 0;" />
-                            </ui:VisualElement>
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                </ui:VisualElement>
+                <ui:VisualElement name="ImageFinding" class="BackGround" style="align-items: center; align-self: center; justify-content: flex-start; display: flex; border-left-width: 0; height: 100%; flex-grow: 0; width: 100%; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
                 <ui:VisualElement name="Connection" class="BackGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; display: none;">
                     <ui:ScrollView name="SuspectGround" style="flex-grow: 1; width: 100%; height: 100%; background-color: rgb(38, 38, 38);">
                         <ui:Button display-tooltip-when-elided="true" enable-rich-text="true" name="SuspectPanel" style="position: absolute; left: 697px; top: 487px; width: 200px; height: 150px; display: flex;" />
-                        <ui:Button display-tooltip-when-elided="true" enable-rich-text="false" name="SuspectPanel" class="NoButtonBorder" style="align-self: flex-start; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; color: rgb(255, 255, 255); background-color: rgb(164, 164, 164); position: absolute; left: 100px; top: 300px; width: auto; height: auto; flex-grow: 0; display: none;">
+                        <ui:Button display-tooltip-when-elided="true" enable-rich-text="false" name="SuspectPanel" class="NoButtonBorder" style="align-self: flex-start; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; color: rgb(255, 255, 255); background-color: rgb(164, 164, 164); position: absolute; left: 100px; top: 300px; width: auto; height: auto; flex-grow: 0; display: flex;">
                             <ui:VisualElement name="Profile" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; width: auto; align-self: center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 5px; display: flex; visibility: visible;">
                                 <ui:VisualElement name="Face" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/02.Sprites/Prefile/JH-normal.png?fileID=2800000&amp;guid=616697de6bf35974dbda66ac9e2b7b3b&amp;type=3#JH-normal&apos;); width: 100px; height: 100px;" />
                                 <ui:VisualElement name="Description" style="flex-grow: 0;">
@@ -79,13 +57,12 @@
                     </ui:ScrollView>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="FileSystem" class="BackGround" style="flex-wrap: wrap; flex-grow: 0; flex-direction: row; display: flex; flex-basis: 150px; min-width: 150px; max-width: 33%;">
+            <ui:VisualElement name="FileSystem" class="BackGround" style="flex-wrap: wrap; flex-grow: 0; flex-direction: row; display: flex; flex-basis: 33%; min-width: 150px; max-width: 33%; align-self: auto; justify-content: center;">
                 <ui:VisualElement name="SizeChange" style="flex-grow: 0; background-color: rgb(130, 130, 130); width: 2.5px; height: 100%; display: flex; visibility: visible; overflow: visible; opacity: 1; -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgb(203, 203, 203); border-right-color: rgb(203, 203, 203); border-top-color: rgb(203, 203, 203); border-bottom-color: rgb(203, 203, 203); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
-                <ui:VisualElement name="FileSystemGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                    <ui:VisualElement name="FilePath" style="flex-grow: 1; background-color: rgb(87, 87, 87); width: 100%; height: 2.5%; justify-content: flex-start; flex-direction: row; flex-wrap: nowrap; overflow: hidden; visibility: visible;" />
-                    <ui:VisualElement name="FileArea" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 97.5%; align-self: auto; align-items: flex-start; flex-direction: row; flex-wrap: wrap; justify-content: center;">
-                        <ui:Instance template="FileGround" name="FileGround_Main" />
-                    </ui:VisualElement>
+                <ui:VisualElement name="FileSystemGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: auto;">
+                    <ui:VisualElement name="FilePath" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 2.5%; align-self: auto; align-items: flex-start; flex-direction: row; flex-wrap: wrap; justify-content: flex-start;" />
+                    <ui:VisualElement name="FileGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 97.5%; align-self: auto; align-items: flex-start; flex-direction: row; flex-wrap: wrap; justify-content: flex-start;" />
+                    <ui:VisualElement name="PanelGround" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 100%; position: absolute; justify-content: center; align-items: center; display: flex; visibility: visible; overflow: visible;" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

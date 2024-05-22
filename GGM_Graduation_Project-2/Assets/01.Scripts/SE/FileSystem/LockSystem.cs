@@ -29,10 +29,10 @@ public class LockSystem : MonoBehaviour
     {
         if (password == inputField.text)
         {
-            Debug.Log("열림");
-            lockImage.gameObject.transform.parent.GetComponent<Folder>().is_Lock = false;
-            lockImage.gameObject.SetActive(false);
-            this.gameObject.SetActive(false);
+            //Debug.Log("열림");
+            //lockImage.gameObject.transform.parent.GetComponent<Folder>().is_Lock = false;
+            //lockImage.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
         }
         else
         {

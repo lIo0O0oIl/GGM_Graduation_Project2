@@ -4,12 +4,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
 
-public class UIReader_CutScene : MonoBehaviour
+public class UIReader_CutScene : UI_Reader
 {
-    CutSceneManager cutSceneManager;
-
-    UIDocument document;
-    VisualElement root;
+    
 
     Button scene;
     Label text;
@@ -18,10 +15,7 @@ public class UIReader_CutScene : MonoBehaviour
 
     private void OnEnable()
     {
-        cutSceneManager = GetComponent<CutSceneManager>(); 
-
-        document = GetComponent<UIDocument>();
-        root = document.rootVisualElement;
+        base.OnEnable();
 
         scene = root.Q<Button>("Scene");
         text = root.Q<Label>("Text");
@@ -33,7 +27,7 @@ public class UIReader_CutScene : MonoBehaviour
     {
         if  (Input.GetKeyDown(KeyCode.U))
         {
-            ChangeText("너무 어려워요 도와주세요", 4f);
+            DoText(text, "너무 어려워요 도와주세요", 4f, () => { });
         }
         if  (Input.GetKeyDown(KeyCode.I))
             EndText();
@@ -46,33 +40,11 @@ public class UIReader_CutScene : MonoBehaviour
 
     public void ChangeText(string msg, float writingDuring)
     {
-        int currentTextLength = 0;
-        int previousTextLength = -1;
-
-        currentTextTween = DOTween.To(() => currentTextLength, x => currentTextLength = x, msg.Length, writingDuring)
-            .SetEase(Ease.Linear)
-            .OnPlay(() => { text.text = ""; })
-            .OnUpdate(() =>
-            {
-                if (currentTextLength != previousTextLength)
-                {
-                    text.text += msg[currentTextLength];
-                    previousTextLength = currentTextLength;
-                }
-            })
-            .OnComplete(() => 
-            { 
-                text.text = msg;
-                currentTextLength = 0; 
-            });
+        DoText(text, msg, writingDuring, () => { });
     }
 
     public void EndText()
     {
-        if (currentTextTween != null)
-        {
-            currentTextTween.Complete();
-            currentTextTween = null;
-        }
+        base.EndText();
     }
 }

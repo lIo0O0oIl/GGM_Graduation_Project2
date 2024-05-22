@@ -1,7 +1,7 @@
-using System;
-using System.Collections;
+ï»¿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Data;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -14,255 +14,594 @@ public enum FileType
     TEXT
 }
 
-public class UIReader_FileSystem : MonoBehaviour
+[Serializable]
+public class FileFolder
 {
-    // other system
-    TestUI mainSystem;
-    UIReader_Chatting chatSystem;
-    UIReader_Connection connectionSystem;
+    public string folderName;
+    public List<VisualElement> folderFiles;
+    public List<VisualElement> textFiles;
+    public List<VisualElement> imageFiles;
 
-    // main
-    private UIDocument document;
-    private VisualElement root;
-    //private VisualElement fileRoot;
+    public FileFolder(string name)
+    {
+        folderName = name;
+        folderFiles = new List<VisualElement>();
+        textFiles = new List<VisualElement>();
+        imageFiles = new List<VisualElement>();
+    }
+}
 
+public class UIReader_FileSystem : UI_Reader
+{
     // UXML
-    VisualElement fileArea;
+    VisualElement fileGround;
     VisualElement filePathGround;
     VisualElement mainFilePath;
+    VisualElement panelGround;
 
     // Template
+    VisualTreeAsset ux_filePath;
+    VisualTreeAsset ux_fileGround;
     VisualTreeAsset ux_folderFile;
     VisualTreeAsset ux_imageFile;
     VisualTreeAsset ux_textFile;
-    VisualTreeAsset ux_filePath;
-    VisualTreeAsset ux_fileGround;
+    VisualTreeAsset ux_ImagePanel;
+    VisualTreeAsset ux_TextPanel;
 
     // test path
     public Stack<string> filePathLisk = new Stack<string>();
+    public List<FileFolder> fileFolders;
+    public FileFolder currentFileFolder;
+
+    public string text_currentFolderName;
 
     private void Awake()
     {
-        mainSystem = GetComponent<TestUI>();
-        chatSystem = GetComponent<UIReader_Chatting>();
-        connectionSystem = GetComponent<UIReader_Connection>();
-
-        //currentFileGround = fileDefaultGround;
+        base.Awake();
+        fileFolders = new List<FileFolder>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            AddFile(FileType.FOLDER, "Main", "ÇĞ±³");
+            AddFile(FileType.FOLDER, "í•™êµ", "Main");
+            DrawFile("Main");
         }
-
         if (Input.GetKeyDown(KeyCode.O))
         {
-            AddFile(FileType.IMAGE, "ÇĞ±³", "ÀÌÀ×");
+            AddFile(FileType.FOLDER, "ì •ê¸€", "í•™êµ");
+            //DrawFile("í•™êµ");
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            AddFile(FileType.FOLDER, "ì˜¥ìƒ", "Main");
+            //DrawFile("í•™êµ");
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            AddFile(FileType.IMAGE, "ì‹œë°œ", "ì •ê¸€");
+            //DrawFile("í•™êµ");
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            AddFile(FileType.IMAGE, "ì˜¥ìƒ", "ì •ê¸€");
+            //DrawFile("í•™êµ");
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            AddFile(FileType.TEXT, "ì‰¬ë°œ", "ì •ê¸€");
+            //DrawFile("í•™êµ");
         }
     }
 
     private void OnEnable()
     {
-        document = GetComponent<UIDocument>();
-        root = document.rootVisualElement;
-        //fileRoot = root.Q<VisualElement>("");
+        base.OnEnable();
 
         UXML_Load();
         Template_Load();
         Event_Load();
+
+        fileFolders.Add(new FileFolder("Main"));
+        AddFilePath("Main");
     }
 
     private void UXML_Load()
     {
-        fileArea = root.Q<VisualElement>("FileArea");
+        fileGround = root.Q<VisualElement>("FileGround");
         filePathGround = root.Q<VisualElement>("FilePath");
-
-        //mainFilePath = filePathGround.Q<VisualElement>("");
+        panelGround = root.Q<VisualElement>("PanelGround");
     }
 
     private void Template_Load()
     {
+        ux_fileGround = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FileGround.uxml");
+        ux_filePath = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FilePath.uxml");
+
         ux_folderFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FolderFile.uxml");
         ux_imageFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\ImageFile.uxml");
         ux_textFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\TextFile.uxml");
-        ux_fileGround = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FileGround.uxml");
-        ux_filePath = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FilePathText.uxml");
+
+        ux_ImagePanel = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\ImagePanel.uxml");
+        ux_TextPanel = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\TextPanel.uxml");
     }
 
     private void Event_Load()
     {
-        //filePathLisk.Push(mainFilePath.Q<Button>().text);
-        //mainFilePath.Q<Button>().clicked += () =>
-        //{
-        //    FolderPathEvent(mainFilePath.Q<Button>().text);
-        //};
-
-        AddFilePath("Main", () => FolderPathEvent("Main"));
+        //AddFolderGround("Main");
+        //AddFilePath("Main", () => FolderPathEvent("Main"));
     }
 
-    // Function
-    public void AddFile(FileType fieType, string fileGroundName, string fileName, bool isRock = false)
+    public void AddFile(FileType fileType, string fileName, string fileParentName)
     {
-        // »ı¼º
         VisualElement file = null;
 
-        // ÆÄÀÏ Å¸ÀÔ ³ª´©±â
-        switch (fieType)
+        switch (fileType)
         {
             case FileType.FOLDER:
-            {
-                // ÆÄÀÏ »ı¼º ¹× ÀÌº¥Æ® ¿¬°á
-                file = ux_folderFile.Instantiate();
-                file.Q<Button>().clicked += () => FolderEvent(file);
-
-                // Æú´õÀÇ ¿µ¿ªÀ» »ı¼º ÈÄ µî·Ï
-                VisualElement newFileGround = ux_fileGround.Instantiate();
-                newFileGround.name += "FileGround_" + fileName;
-                fileArea.Add(newFileGround); // FileGround_ÇĞ±³
-                break;
-            }
-            case FileType.IMAGE:
-                // ÆÄÀÏ »ı¼º ¹× ÀÌº¥Æ® ¿¬°á
-                file = ux_imageFile.Instantiate();
-                file.Q<Button>().clicked += () => ImageEvent(file);
-                break;
-            case FileType.TEXT:
-                // ÆÄÀÏ »ı¼º ¹× ÀÌº¥Æ® ¿¬°á
-                file = ux_textFile.Instantiate();
-                file.Q<Button>().clicked += () => NoteEvent(file);
-                break;
-        }
-
-        // ÆÄÀÏ ÀÌ¸§ º¯°æ
-        file.Q<Label>().text = fileName;
-
-        // ¸¸¾à Á¸ÀçÇÏ´Â ¿µ¿ªÀÌ¶ó¸é ÇØ´ç ¿µ¿ª¿¡ Ãß°¡
-        foreach (VisualElement fileGround in fileArea.Children())
-        {
-            int index = fileGround.name.IndexOf('_');
-            if (index != -1)
-            {
-                if (fileGround.name.Substring(index + 1) == fileGroundName)
                 {
-                    fileGround.Add(file);
-                    return;
+                    // ìƒì„±
+                    file = RemoveContainer(ux_folderFile.Instantiate());
+
+                    // ì´ë¦„ ë³€ê²½
+                    file.Q<Label>("FileName").text = fileName;
+                    // ì´ë²¤íŠ¸ ì—°ê²°
+                    file.Q<Button>("FileImage").clicked += () => 
+                    { 
+                        DrawFile(file.Q<Label>("FileName").text); 
+                        AddFilePath(fileName); 
+                    };
+                    // í´ë” ë¶€ëª¨ ì§€ì •
+                    bool addNew = false;
+                    foreach (FileFolder folder in fileFolders)
+                    {
+                        if (folder.folderName == fileParentName)
+                        {
+                            folder.folderFiles.Add(file);
+                            fileFolders.Add(new FileFolder(fileName));
+                            addNew = true;
+                            break;
+                        }
+                    }
+
+                    // í´ë” ìƒì„± ë° ì¶”ê°€
+                    if (addNew == false)
+                    {
+                        FileFolder folderParent = new FileFolder(fileParentName);
+                        fileFolders.Add(folderParent);
+                        fileFolders.Add(new FileFolder(fileName));
+                        folderParent.folderFiles.Add(file);
+                    }
+                    break;
                 }
-            }
+            case FileType.IMAGE:
+                {
+                    // ìƒì„±
+                    file = RemoveContainer(ux_imageFile.Instantiate());
+                    // ì´ë¦„ ë³€ê²½
+                    file.Q<Label>("FileName").text = fileName;
+                    // ì´ë²¤íŠ¸ ì—°ê²°
+                    file.Q<Button>().clicked += () => ImageEvent(file); // ì´ë¯¸ì§€ ë“±ë¡,,, ì´ë¯¸ì§€ ë“±ë¡í•  ìœ„ì¹˜....
+
+                    // íŒŒì¼ ë¶€ëª¨ ì§€ì •
+                    bool addNew = false;
+                    foreach (FileFolder folder in fileFolders)
+                    {
+                        if (folder.folderName == fileParentName)
+                        {
+                            folder.imageFiles.Add(file);
+                            addNew = true;
+                            break;
+                        }
+                    }
+
+                    // í´ë” ìƒì„± ë° ì¶”ê°€
+                    if (addNew == false)
+                    {
+                        FileFolder folderParent = new FileFolder(fileParentName);
+                        fileFolders.Add(folderParent);
+                        fileFolders.Add(new FileFolder(fileName));
+                        folderParent.folderFiles.Add(file);
+                    }
+                    break;
+                }
+            case FileType.TEXT:
+                {
+                    // ìƒì„±
+                    file = RemoveContainer(ux_textFile.Instantiate());
+                    // ì´ë¦„ ë³€ê²½
+                    file.Q<Label>("FileName").text = fileName;
+                    // ì´ë²¤íŠ¸ ì—°ê²°
+                    file.Q<Button>().clicked += () => TextEvent(file);
+
+                    // íŒŒì¼ ë¶€ëª¨ ì§€ì •
+                    bool addNew = false;
+                    foreach (FileFolder folder in fileFolders)
+                    {
+                        if (folder.folderName == fileParentName)
+                        {
+                            folder.textFiles.Add(file);
+                            addNew = true;
+                            break;
+                        }
+                    }
+
+                    // í´ë” ìƒì„± ë° ì¶”ê°€
+                    if (addNew == false)
+                    {
+                        FileFolder folderParent = new FileFolder(fileParentName);
+                        fileFolders.Add(folderParent);
+                        fileFolders.Add(new FileFolder(fileName));
+                        folderParent.folderFiles.Add(file);
+                    }
+                    break;
+                }
         }
 
-        // ¾Æ´Ï¶ó¸é ÇØ´ç ¿µ¿ªÀ» »ı¼º ÈÄ Ãß°¡
+        Debug.Log(fileParentName);
+        if (text_currentFolderName == "")
+            text_currentFolderName = fileParentName;
+        if (text_currentFolderName == fileParentName)
         {
-            VisualElement newFileGround = ux_fileGround.Instantiate();
-            newFileGround.name += "FileGround_" + fileGroundName;
-            newFileGround.style.display = DisplayStyle.None;
-            fileArea.Add(newFileGround);
-            newFileGround.Add(file);
+            Debug.Log("tlqkfjdlafjwe");
+            DrawFile(text_currentFolderName);
         }
     }
 
-    private void FolderEvent(VisualElement folder)
+    public void DrawFile(string folderName)
     {
-        // Æú´õ ÀÌ¸§ ÀúÀå
-        string folderName = folder.Q<Label>("FileName").text;
+        // fileGround - file ê·¸ë¦¬ëŠ” ê³³
+        // fileFolders - í˜„ì¬ ëª¨ë“  í´ë” ë°°ì—´
+        // folderName - í˜„ì¬ ì„ íƒëœ í´ë” ì´ë¦„
 
-        // ÇØ´ç Æú´õ ¿µ¿ª¸¸ È°¼ºÈ­
-        OpenFileGround(folderName);
-        // ÆÄÀÏ °æ·Î Ãß°¡
-        AddFilePath(folderName, () => FolderPathEvent(folderName));
-    }
+        text_currentFolderName = folderName;
 
-    private void ImageEvent(VisualElement image)
-    {
-        Debug.Log("ÀÌ¹ÌÁö ÆÄÀÏ È°¼ºÈ­");
-    }
+        // ì´ì „ì— ìˆë˜ ê²ƒë“¤ ë‹¤ ì§€ìš°ê³  (ì—­ìˆœìœ¼ë¡œ ì§€ì›Œì•¼ ì˜¤ë¥˜ ì•ˆ ë‚¨)
+        for (int i = fileGround.childCount - 1; i >= 0; i--)
+            fileGround.RemoveAt(i);
 
-    private void NoteEvent(VisualElement note)
-    {
-        Debug.Log("ÅØ½ºÆ® ÆÄÀÏ È°¼ºÈ­");
-    }
-
-    private void AddFilePath(string pathName, Action action)
-    {
-        // ÀÌ¹Ì Á¸ÀçÇÑ´Ù¸é È°¼ºÈ­
-        foreach(VisualElement filePath in filePathGround.Children())
+        // í˜„ì¬ í´ë” ë³€ê²½
+        foreach (FileFolder folder in fileFolders)
         {
-            if (StringSplit(filePath.name, '_') == pathName)
-            {
-                filePath.style.display = DisplayStyle.Flex;
-                filePathLisk.Push(filePath.name);
-                return;
-            }
+            if (folder.folderName == folderName)
+                currentFileFolder = folder;
         }
 
+        if (currentFileFolder != null)
         {
-            Debug.Log("°æ·Î »ı¼º");
-            // »ı¼º
-            VisualElement filePath = null;
-            filePath = ux_filePath.Instantiate();
-
-            // °æ·Î ÀÌ¸§ º¯°æ (UI ÀÌ¸§)
-            filePath.name += "FilePathText_" + pathName;
-            // °æ·Î ÀÌ¸§ º¯°æ
-            filePath.Q<Button>().text = pathName + " > ";
-            // °æ·Î ÀÌº¥Æ® ¿¬°á
-            filePath.Q<Button>().clicked += action;
-            // °æ·Î Ãß°¡
-            filePathGround.Add(filePath);
-
-            // Ãß°¡ÇÒ ¶§ ¸¶´Ù ¹è¿­ °°Àº °÷¿¡ ¼øÂ÷ÀûÀ¸·Î ÀúÀå ÈÄ Áö¿ö¾ß ÇÒ ¶§ ÀÎµ¦½º·Î Á¢±Ù, FIleManager GoFile Âü°í
-            filePathLisk.Push(filePath.name);
+            // ìƒˆë¡œ ê·¸ë¦¬ê¸°
+            foreach (VisualElement folder in currentFileFolder.folderFiles)
+                fileGround.Add(folder);
+            foreach (VisualElement image in currentFileFolder.imageFiles)
+                fileGround.Add(image);
+            foreach (VisualElement text in currentFileFolder.textFiles)
+                fileGround.Add(text);
         }
+    }
+
+    public void OpenImage(string name, Sprite sprite)
+    {
+        for (int i = panelGround.childCount - 1; i >= 0; i--)
+            panelGround.RemoveAt(i);
+
+        VisualElement panel = RemoveContainer(ux_ImagePanel.Instantiate());
+        panel.Q<Label>("Name").text = name + ".png";  
+        panel.Q<VisualElement>("Image").style.backgroundImage = new StyleBackground(sprite);
+        panel.Q<Button>("CloseBtn").clicked += () => { panelGround.Remove(panel); };
+        panelGround.Add(panel);
+    }
+
+    public void OpenText(string name, string text)
+    {
+        VisualElement panel = RemoveContainer(ux_TextPanel.Instantiate());
+        panel.Q<Label>("Name").text = name + ".text";
+        panel.Q<Label>("Text").text = text;
+        panel.Q<Button>("CloseBtn").clicked += () => { panelGround.Remove(panel); };
+        panelGround.Add(panel);
+    }
+
+    private void AddFilePath(string pathName)
+    {
+        VisualElement filePath = RemoveContainer(ux_filePath.Instantiate());
+        filePath.Q<Button>().text = pathName + "> ";
+        filePath.Q<Button>().clicked += () => { FolderPathEvent(pathName); };
+        filePathGround.Add(filePath);
+        filePathLisk.Push(pathName);
     }
 
     private void FolderPathEvent(string fileName)
     {
-        // fileNameº¸´Ù À§¿¡ ÀÖ´Â ¿µ¿ª ºñÈ°¼ºÈ­
         while (true)
         {
-            if (StringSplit(filePathLisk.Peek(), '_') == fileName)
+            if (filePathLisk.Peek() == fileName)
                 break;
-            Debug.Log(StringSplit(filePathLisk.Peek(), '_') + " " + " °æ·Î false");
-            filePathGround.Q<VisualElement>(filePathLisk.Peek()).style.display = DisplayStyle.None;
-            //filePathGround.Remove(filePathGround.Q<VisualElement>("FilePathText" + '_' + filePathLisk.Peek()));
-            // Ãß°¡ÇÒ ¶§´Â Add°í Áö¿ï ¶§´Â active false¶ó¼­ ¿À·ù³µ´ø °Í, µÑ ´Ù »ı¼º »èÁ¦·Î ¸ÂÃßµç È°¼ºÈ­ ºñÈ°¼ºÈ­·Î ¸ÂÃßµç ÅëÀÏ½ÃÄÑ¶ó
+            filePathGround.RemoveAt(filePathGround.childCount - 1);
             filePathLisk.Pop();
         }
 
-        OpenFileGround(StringSplit(filePathLisk.Peek(), '_'));
+        DrawFile(filePathLisk.Peek());
     }
 
-    private void OpenFileGround(string fileName)
+    public void ImageEvent(VisualElement file)
     {
-        // FileAreaÀÇ ¸ğµç Ground Áß
-        foreach (VisualElement fileGround in fileArea.Children())
-        {
-            // ÇØ´ç Æú´õÀÇ ¿µ¿ªÀ» 
-            //Debug.Log(StringSplit(fileGround.name, '_') + " " + fileName + " open");
-            if (StringSplit(fileGround.name, '_') == fileName)
-            {
-                fileGround.style.display = DisplayStyle.Flex;
-                Debug.Log(StringSplit(fileGround.name, '_') + " ¿µ¿ª true");
-            }
-            // ¾Æ´Ï¶ó¸é ²ö´Ù
-            else
-            {
-                fileGround.style.display = DisplayStyle.None;
-                Debug.Log(StringSplit(fileGround.name, '_') + " ¿µ¿ª false");
-            }
-        }
+        OpenPanel(imageFindingPanel);
+        imageSystem.EventImage(file);
     }
 
-    private string StringSplit(string str, char t)
+    public void TextEvent(VisualElement file)
     {
-        int index = str.IndexOf(t);
-        if (index != -1)
-            return str.Substring(index + 1);
-        else
-        {
-            Debug.LogError("String Split ¿¡·¯");
-            return null;
-        }
+        string name = file.Q<Label>("FileName").text;
+        OpenText(name, imageManager.memoDic[name]);
     }
 }
+
+// ì´ì „êº¼
+//using System;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.Linq.Expressions;
+//using Unity.VisualScripting;
+//using UnityEditor;
+//using UnityEngine;
+//using UnityEngine.UIElements;
+
+//public enum FileType
+//{
+//    FOLDER,
+//    IMAGE,
+//    TEXT
+//}
+
+//public class UIReader_FileSystem : MonoBehaviour
+//{
+//    // other system
+//    TestUI mainSystem;
+//    UIReader_Chatting chatSystem;
+//    UIReader_Connection connectionSystem;
+
+//    // main
+//    private UIDocument document;
+//    private VisualElement root;
+//    //private VisualElement fileRoot;
+
+//    // UXML
+//    VisualElement fileArea;
+//    VisualElement filePathGround;
+//    VisualElement mainFilePath;
+
+//    // Template
+//    VisualTreeAsset ux_folderFile;
+//    VisualTreeAsset ux_imageFile;
+//    VisualTreeAsset ux_textFile;
+//    VisualTreeAsset ux_filePath;
+//    VisualTreeAsset ux_fileGround;
+
+//    // test path
+//    public Stack<string> filePathLisk = new Stack<string>();
+
+//    private void Awake()
+//    {
+//        mainSystem = GetComponent<TestUI>();
+//        chatSystem = GetComponent<UIReader_Chatting>();
+//        connectionSystem = GetComponent<UIReader_Connection>();
+
+//        //currentFileGround = fileDefaultGround;
+//    }
+
+//    private void Update()
+//    {
+//        if (Input.GetKeyDown(KeyCode.I))
+//        {
+//            AddFile(FileType.FOLDER, "Main", "í•™êµ");
+//        }
+
+//        if (Input.GetKeyDown(KeyCode.O))
+//        {
+//            AddFile(FileType.IMAGE, "Main", "ì •ê¸€");
+//        }
+//    }
+
+//    private void OnEnable()
+//    {
+//        document = GetComponent<UIDocument>();
+//        root = document.rootVisualElement;
+//        //fileRoot = root.Q<VisualElement>("");
+
+//        UXML_Load();
+//        Template_Load();
+//        Event_Load();
+//    }
+
+//    private void UXML_Load()
+//    {
+//        fileArea = root.Q<VisualElement>("FileArea");
+//        filePathGround = root.Q<VisualElement>("FilePath");
+
+//        //mainFilePath = filePathGround.Q<VisualElement>("");
+//    }
+
+//    private void Template_Load()
+//    {
+//        ux_folderFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FolderFile.uxml");
+//        ux_imageFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\ImageFile.uxml");
+//        ux_textFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\TextFile.uxml");
+//        ux_fileGround = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FileGround.uxml");
+//        ux_filePath = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FilePath.uxml");
+//    }
+
+//    private void Event_Load()
+//    {
+//        //filePathLisk.Push(mainFilePath.Q<Button>().text);
+//        //mainFilePath.Q<Button>().clicked += () =>
+//        //{
+//        //    FolderPathEvent(mainFilePath.Q<Button>().text);
+//        //};
+
+//        AddFilePath("Main", () => FolderPathEvent("Main"));
+//    }
+
+//    // Function
+//    public void AddFile(FileType fieType, string fileGroundName, string fileName, bool isRock = false)
+//    {
+//        // ï¿½ï¿½ï¿½ï¿½
+//        VisualElement file = null;
+
+//        // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//        switch (fieType)
+//        {
+//            case FileType.FOLDER:
+//                {
+//                    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+//                    file = ux_folderFile.Instantiate();
+//                    file.Q<Button>().clicked += () => FolderEvent(file);
+
+//                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
+//                    VisualElement newFileGround = ux_fileGround.Instantiate();
+//                    newFileGround.name += "FileGround_" + fileName;
+//                    fileArea.Add(newFileGround); // FileGround_ï¿½Ğ±ï¿½
+//                    break;
+//                }
+//            case FileType.IMAGE:
+//                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+//                file = ux_imageFile.Instantiate();
+//                file.Q<Button>().clicked += () => ImageEvent(file);
+//                break;
+//            case FileType.TEXT:
+//                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+//                file = ux_textFile.Instantiate();
+//                file.Q<Button>().clicked += () => NoteEvent(file);
+//                break;
+//        }
+
+//        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+//        file.Q<Label>().text = fileName;
+
+//        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+//        foreach (VisualElement fileGround in fileArea.Children())
+//        {
+//            int index = fileGround.name.IndexOf('_');
+//            if (index != -1)
+//            {
+//                if (fileGround.name.Substring(index + 1) == fileGroundName)
+//                {
+//                    fileGround.Add(file);
+//                    return;
+//                }
+//            }
+//        }
+
+//        // ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½
+//        {
+//            VisualElement newFileGround = ux_fileGround.Instantiate();
+//            newFileGround.name += "FileGround_" + fileGroundName;
+//            newFileGround.style.display = DisplayStyle.None;
+//            fileArea.Add(newFileGround);
+//            newFileGround.Add(file);
+//        }
+//    }
+
+//    private void FolderEvent(VisualElement folder)
+//    {
+//        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+//        string folderName = folder.Q<Label>("FileName").text;
+
+//        // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
+//        OpenFileGround(folderName);
+//        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+//        AddFilePath(folderName, () => FolderPathEvent(folderName));
+//    }
+
+//    private void ImageEvent(VisualElement image)
+//    {
+//        Debug.Log("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­");
+//    }
+
+//    private void NoteEvent(VisualElement note)
+//    {
+//        Debug.Log("ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­");
+//    }
+
+//    private void AddFilePath(string pathName, Action action)
+//    {
+//        // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½ È°ï¿½ï¿½È­
+//        foreach (VisualElement filePath in filePathGround.Children())
+//        {
+//            if (StringSplit(filePath.name, '_') == pathName)
+//            {
+//                filePath.style.display = DisplayStyle.Flex;
+//                filePathLisk.Push(filePath.name);
+//                return;
+//            }
+//        }
+
+//        {
+//            Debug.Log("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+//            // ï¿½ï¿½ï¿½ï¿½
+//            VisualElement filePath = null;
+//            filePath = ux_filePath.Instantiate();
+
+//            // ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ (UI ï¿½Ì¸ï¿½)
+//            filePath.name += "FilePathText_" + pathName;
+//            // ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+//            filePath.Q<Button>().text = pathName + " > ";
+//            // ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+//            filePath.Q<Button>().clicked += action;
+//            // ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+//            filePathGround.Add(filePath);
+
+//            // ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, FIleManager GoFile ï¿½ï¿½ï¿½ï¿½
+//            filePathLisk.Push(filePath.name);
+//        }
+//    }
+
+//    private void FolderPathEvent(string fileName)
+//    {
+//        // fileNameï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+//        while (true)
+//        {
+//            if (StringSplit(filePathLisk.Peek(), '_') == fileName)
+//                break;
+//            Debug.Log(StringSplit(filePathLisk.Peek(), '_') + " " + " ï¿½ï¿½ï¿½ false");
+//            filePathGround.Q<VisualElement>(filePathLisk.Peek()).style.display = DisplayStyle.None;
+//            //filePathGround.Remove(filePathGround.Q<VisualElement>("FilePathText" + '_' + filePathLisk.Peek()));
+//            // ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Addï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ active falseï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ßµï¿½ È°ï¿½ï¿½È­ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ßµï¿½ ï¿½ï¿½ï¿½Ï½ï¿½ï¿½Ñ¶ï¿½
+//            filePathLisk.Pop();
+//        }
+
+//        OpenFileGround(StringSplit(filePathLisk.Peek(), '_'));
+//    }
+
+//    private void OpenFileGround(string fileName)
+//    {
+//        // FileAreaï¿½ï¿½ ï¿½ï¿½ï¿½ Ground ï¿½ï¿½
+//        foreach (VisualElement fileGround in fileArea.Children())
+//        {
+//            // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+//            //Debug.Log(StringSplit(fileGround.name, '_') + " " + fileName + " open");
+//            if (StringSplit(fileGround.name, '_') == fileName)
+//            {
+//                fileGround.style.display = DisplayStyle.Flex;
+//                Debug.Log(StringSplit(fileGround.name, '_') + " ï¿½ï¿½ï¿½ï¿½ true");
+//            }
+//            // ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//            else
+//            {
+//                fileGround.style.display = DisplayStyle.None;
+//                Debug.Log(StringSplit(fileGround.name, '_') + " ï¿½ï¿½ï¿½ï¿½ false");
+//            }
+//        }
+//    }
+
+//    private string StringSplit(string str, char t)
+//    {
+//        int index = str.IndexOf(t);
+//        if (index != -1)
+//            return str.Substring(index + 1);
+//        else
+//        {
+//            Debug.LogError("String Split ï¿½ï¿½ï¿½ï¿½");
+//            return null;
+//        }
+//    }
+//}

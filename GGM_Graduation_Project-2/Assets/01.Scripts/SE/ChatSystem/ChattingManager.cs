@@ -119,7 +119,7 @@ public class ChattingManager : MonoBehaviour
                     notUseAskList.Clear();      // 전에 있던 것 모두 지워주기
                     for (int i = 0; i < askLenght; i++)
                     {
-                        TextBox.Instance.InputText(true, chapters[nowLevel].chat[nowChatIndex].text, true);
+                        //TextBox.Instance.InputText(true, chapters[nowLevel].chat[nowChatIndex].text, true);
                         notUseAskList.Add(chapters[nowLevel].chat[nowChatIndex].text);            // 질문들 추가
                         nowChatIndex++;
                     }
@@ -132,7 +132,7 @@ public class ChattingManager : MonoBehaviour
                     Debug.LogError($"{chapters[nowLevel].chat[nowChatIndex].state} 는(은) 없는 유형이예요!");
                     break;
             }
-            TextBox.Instance.InputText(state, chapters[nowLevel].chat[nowChatIndex].text, false);
+            //TextBox.Instance.InputText(state, chapters[nowLevel].chat[nowChatIndex].text, false);
             nowChatIndex++;
         }
         else
@@ -144,27 +144,27 @@ public class ChattingManager : MonoBehaviour
 
     public void answer(string str)     // 버튼을 클릭했을 때
     {
-        Debug.Log(str);
-        TextBox.Instance.CurrentSpeechColorChange();
-        for (int i = 0; i < notUseAskList.Count; i++)
-        {
-            if (notUseAskList[i] == str)        // 이것의 숫자때문에 입력에서 하나의 대답만이 나오던 것임.
-            {
-                nowAskLevel = i;
-                nowAskChatIndex = 0;
-                notUseAskList[i] = "";
+        //Debug.Log(str);
+        //TextBox.Instance.CurrentSpeechColorChange();
+        //for (int i = 0; i < notUseAskList.Count; i++)
+        //{
+        //    if (notUseAskList[i] == str)        // 이것의 숫자때문에 입력에서 하나의 대답만이 나오던 것임.
+        //    {
+        //        nowAskLevel = i;
+        //        nowAskChatIndex = 0;
+        //        notUseAskList[i] = "";
 
-                is_AskChat = true;
-                is_Choosing = false;
-            }
-        }
+        //        is_AskChat = true;
+        //        is_Choosing = false;
+        //    }
+        //}
     }
 
     private void AskChapter()
     {
         if (nowAskChatIndex < chapters[nowLevel].askAndReply[nowAskLevel].reply.Length)
         {
-            TextBox.Instance.InputText(false, chapters[nowLevel].askAndReply[nowAskLevel].reply[nowAskChatIndex]);
+            //TextBox.Instance.InputText(false, chapters[nowLevel].askAndReply[nowAskLevel].reply[nowAskChatIndex]);
             nowAskChatIndex++;
         }
         else
@@ -177,10 +177,10 @@ public class ChattingManager : MonoBehaviour
                 return;
             }
 
-            for (int i = 0; i < notUseAskList.Count; i++)
-            {
-                TextBox.Instance.InputText(true, notUseAskList[i], true);
-            }
+            //for (int i = 0; i < notUseAskList.Count; i++)
+            //{
+            //    TextBox.Instance.InputText(true, notUseAskList[i], true);
+            //}
             is_Choosing = true;
         }
 

@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Button text="이름" display-tooltip-when-elided="true" enable-rich-text="true" name="ChatMember" style="width: 200px; height: 50px; flex-shrink: 1; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-font: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo.ttf?fileID=12800000&amp;guid=ac8392ea6f9e97949882302322851c02&amp;type=3#DungGeunMo&apos;); font-size: 30px; -unity-font-definition: initial; overflow: hidden;" />
+</ui:UXML>

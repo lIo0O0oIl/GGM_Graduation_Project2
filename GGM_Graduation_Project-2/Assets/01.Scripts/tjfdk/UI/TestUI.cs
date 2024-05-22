@@ -72,7 +72,7 @@ public class TestUI : MonoBehaviour
         root = document.rootVisualElement;
 
         Load();
-        AddEvent();
+        //AddEvent();
     }
 
     private void Load()
@@ -152,10 +152,10 @@ public class TestUI : MonoBehaviour
             settingPanel.SetActive(!settingPanel.activeSelf);
         };
 
-        testEvidence.Q<Button>("EvidenceImage").clickable.clicked += () =>
-        {
-            FindEvidence(testEvidence.Q<Button>());
-        };
+        //testEvidence.Q<Button>("EvidenceImage").clickable.clicked += () =>
+        //{
+        //    FindEvidence(testEvidence.Q<Button>());
+        //};
 
         //suspectPanel.RegisterCallback<PointerDownEvent>(OnMouseDown);
         //suspectPanel.RegisterCallback<MouseDownEvent>(OnMouseDown);
@@ -223,16 +223,16 @@ public class TestUI : MonoBehaviour
         // 일단 ㅍ리팹화 해둔 단서를 먼저 소환 .. 
     }
 
-    public void FindEvidence(Button button)
-    {
+    //public void FindEvidence(Button button)
+    //{
 
-        VisualElement description = button.parent.Q<VisualElement>("Descripte");
+    //    VisualElement description = button.parent.Q<VisualElement>("Descripte");
 
-        //Label title = button.parent.Q<Label>("EvidenceName");
-        //Label description = button.parent.Q<Label>("Memo");
+    //    //Label title = button.parent.Q<Label>("EvidenceName");
+    //    //Label description = button.parent.Q<Label>("Memo");
 
-        description.style.display = DisplayStyle.Flex;
-    }
+    //    description.style.display = DisplayStyle.Flex;
+    //}
 
     public void AddFile(FileType fieType, string fileName, Action action, bool isRock)
     {
