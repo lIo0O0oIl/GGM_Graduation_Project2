@@ -260,15 +260,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowChaptersIndex: 0
-  nowChatIndex: 7
+  nowChatIndex: 10
   nowChapter:
     showName: "0\uC54C\uBC00"
     saveLocation: 0
     chat:
     - state: 1
       text: 1
-      face: 0
-      textEvent: 
+      face: 1
+      textEvent: 000000000000000000000000000000000000000000000000
     - state: 0
       text: 2
       face: 0
@@ -280,20 +280,75 @@ MonoBehaviour:
     askAndReply:
     - ask: 
       reply:
+      - state: 0
+        text: "\uB300\uD6541"
+        face: 0
+        textEvent: 
       - state: 1
-        text: 2
+        text: "\uB300\uD6542"
         face: 0
         textEvent: 
       is_UseThis: 0
     lockAskAndReply:
     - evidence: []
       ask: 13123213123
-      reply: []
+      reply:
+      - state: 1
+        text: "\uC7A0\uAE40\uC9C8\uBB381"
+        face: 0
+        textEvent: 
+      - state: 0
+        text: "\uC7A0\uAE40\uC9C8\uBB382"
+        face: 0
+        textEvent: 
       is_UseThis: 0
     round:
     - "\uB028"
     - "\uB028\uB03D"
   mainChapter:
+  - showName: "0\uC54C\uBC00"
+    saveLocation: 0
+    chat:
+    - state: 1
+      text: 1
+      face: 1
+      textEvent: 000000000000000000000000000000000000000000000000
+    - state: 0
+      text: 2
+      face: 0
+      textEvent: 
+    - state: 1
+      text: 3
+      face: 0
+      textEvent: 
+    askAndReply:
+    - ask: 
+      reply:
+      - state: 0
+        text: "\uB300\uD6541"
+        face: 0
+        textEvent: 
+      - state: 1
+        text: "\uB300\uD6542"
+        face: 0
+        textEvent: 
+      is_UseThis: 0
+    lockAskAndReply:
+    - evidence: []
+      ask: 13123213123
+      reply:
+      - state: 1
+        text: "\uC7A0\uAE40\uC9C8\uBB381"
+        face: 0
+        textEvent: 
+      - state: 0
+        text: "\uC7A0\uAE40\uC9C8\uBB382"
+        face: 0
+        textEvent: 
+      is_UseThis: 0
+    round:
+    - "\uB028"
+    - "\uB028\uB03D"
   - showName: "0\uC54C\uBC00"
     saveLocation: 0
     chat:
@@ -313,7 +368,15 @@ MonoBehaviour:
     - ask: 
       reply:
       - state: 1
-        text: 2
+        text: "\uADF8\uB0E5\uC9C8\uBB381"
+        face: 0
+        textEvent: 
+      - state: 0
+        text: "\uADF8\uB0E5\uC9C8\uBB382"
+        face: 0
+        textEvent: 
+      - state: 0
+        text: "\uADF8\uB0E5\uC9C8\uBB383"
         face: 0
         textEvent: 
       is_UseThis: 0
@@ -393,6 +456,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1946618725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1946618727}
+  - component: {fileID: 1946618726}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1946618726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946618725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: bfe61f50c3e3ca64397389797d15b6ef, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 24cb73fc871fa674b8e9655cfd04916b, type: 3}
+  m_SortingOrder: 0
+--- !u!4 &1946618727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946618725}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -400,3 +511,4 @@ SceneRoots:
   - {fileID: 307410279}
   - {fileID: 1779873657}
   - {fileID: 1208371919}
+  - {fileID: 1946618727}

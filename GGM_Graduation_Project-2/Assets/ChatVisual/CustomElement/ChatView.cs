@@ -140,10 +140,10 @@ namespace ChatVisual
                                 {
                                     chatParentNode.child.Add(replyNode);
                                 }
-                                if (j == chatContainer.NowChapter.askAndReply[i].reply.Count - 1)      // 이게 마지막 반복이면
-                                {
-                                    askAndReplysCount += j + 1;
-                                }
+                            }
+                            if (j == chatContainer.NowChapter.askAndReply[i].reply.Count - 1)      // 이게 마지막 반복이면
+                            {
+                                askAndReplysCount += j + 1;
                             }
                         }
                     }
@@ -191,16 +191,16 @@ namespace ChatVisual
                                 lockAskNode.child = replyNode;
                             }
                             else
-                            {
+                           {
                                 ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount + lockAskAndReplysCount] as ChatNode;        // 루트노드 빼고 넣어주기
                                 if (chatParentNode != null)
                                 {
                                     chatParentNode.child.Add(replyNode);
                                 }
-                                if (j == chatContainer.NowChapter.lockAskAndReply[i].reply.Count - 1)      // 이게 마지막 반복이면
-                                {
-                                    lockAskAndReplysCount += j + 1;
-                                }
+                            }
+                            if (j == chatContainer.NowChapter.lockAskAndReply[i].reply.Count - 1)      // 이게 마지막 반복이면
+                            {
+                                lockAskAndReplysCount += j + 1;
                             }
                         }
                     }
@@ -250,7 +250,6 @@ namespace ChatVisual
                         if (firstChatEnd == false)
                         {
                             // 새로운 클래스 만들어줌.
-                            Debug.Log("그냥쳇팅");
                             Chat chat = new Chat();
                             chatContainer.NowChapter.chat.Add(chat);
                             chatContainer.NowChapter.chat[chatIndex].state = chatNode.state;
@@ -266,7 +265,6 @@ namespace ChatVisual
                             {
                                 if (replysCount[nowReplysCountIndex] == -1)
                                 {
-                                    Debug.Log("잠김 질문 시작");
                                     nowReplysCountIndex++;
 
                                     nowAskIndex = 0;
@@ -278,13 +276,12 @@ namespace ChatVisual
                                     chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].text = chatNode.text;
                                     chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].face = chatNode.face;
                                     chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].textEvent = chatNode.textEvent;
-                                    
+
                                     lockAskStart = true;
                                 }
 
                                 if (lockAskStart == false)
                                 {
-                                    Debug.Log("그냥질문대답쳇팅저장");
                                     Chat reply = new Chat();
                                     chatContainer.NowChapter.askAndReply[nowAskIndex].reply.Add(reply);
                                     chatContainer.NowChapter.askAndReply[nowAskIndex].reply[nowReplyIndex].state = chatNode.state;
@@ -303,8 +300,6 @@ namespace ChatVisual
                             }
                             else
                             {
-                                Debug.Log("잠김 질문 2번째 대답");
-
                                 nowReplyIndex++;
                                 Chat chat = new Chat();
                                 chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply.Add(chat);
@@ -330,7 +325,6 @@ namespace ChatVisual
                         chatContainer.NowChapter.askAndReply.Add(askAndReply);
                         chatContainer.NowChapter.askAndReply[askIndex].ask = askNode.ask;
                         replysCount.Add(askNode.reply.Count);
-                        Debug.Log($"내 자식 개수 : {askNode.reply.Count}");
                         chatContainer.NowChapter.askAndReply[askIndex].is_UseThis = askNode.is_UseThis;
                         ++askIndex;
                         firstChatEnd = true;
@@ -424,14 +418,14 @@ namespace ChatVisual
                 });
             }
 
-            if (graphViewChange.movedElements != null)      // 움직인 애들이 있으면 정렬해주기
+           /* if (graphViewChange.movedElements != null)      // 움직인 애들이 있으면 정렬해주기
             {
                 nodes.ForEach(n =>
                 {
                     var nodeView = n as NodeView;
                     nodeView?.SortChildren();
                 });
-            }
+            }*/
 
             return graphViewChange;
         }

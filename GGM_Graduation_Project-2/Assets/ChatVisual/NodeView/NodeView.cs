@@ -119,13 +119,13 @@ namespace ChatVisual
             OnNodeSelected.Invoke(this);
         }
 
-        public void SortChildren()
+    /*    public void SortChildren()
         {
             var chatNode = node as ChatNode;
             if (chatNode != null)
             {
                 chatNode.child.Sort((left, right) => left.position.x < right.position.x ? -1 : 1);
             }
-        }
+        }*/
     }
 }

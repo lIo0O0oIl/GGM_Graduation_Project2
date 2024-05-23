@@ -8,7 +8,6 @@ namespace ChatVisual
 {
     public class ChatContainer : MonoBehaviour
     {
-        public Hierarchy hierarchy = new Hierarchy();        // 노드가 생성되는 곳.
         public List<Node> nodes = new List<Node>();         // 노드 리스트
 
         public int nowChaptersIndex;        // 챕터 인덱스
@@ -20,7 +19,7 @@ namespace ChatVisual
 
         [SerializeField]
         private List<Chapter> mainChapter = new List<Chapter>();     // 챕터들
-        //public List<Chapter> MainChapter { get { return mainChapter; } set { mainChapter = value; } }
+        public List<Chapter> MainChapter { get { return mainChapter; } set { mainChapter = value; } }
 
         public void ChangeNowChapter(int index)
         {
@@ -50,6 +49,7 @@ namespace ChatVisual
         {
             nodes.Remove(node);
             AssetDatabase.SaveAssets();
+            SortIndex();
         }
 #endif
 
@@ -160,7 +160,6 @@ namespace ChatVisual
             List<Node> askNodes = new List<Node>();     // 질문 담은 곳
             int askIndex = 0;
 
-
             nodes.ForEach(n =>
             {
                 var children = GetChildren(n);
@@ -223,6 +222,11 @@ namespace ChatVisual
                     nowChatIndex++;
                 });
             });
+        }
+
+        private void SortChild(Node node)
+        {
+            // DFS 로 쭉 가다가 BFS 로 질문들 모두 받은 다음에 질문에 대답들에 대해서 DFS 로 쭉 해서 인덱스 밀어주기
         }
     }
 }

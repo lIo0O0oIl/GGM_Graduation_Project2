@@ -21,11 +21,6 @@ namespace ChatVisual
 
         private bool is_Expand = false;
 
-        //public InspectorView()
-        //{
-
-        //}
-
         public void UpdateSelection(NodeView node)      // 누른 노드가 다른거면
         {
             Clear();        // 엘리먼트 모두 없애고
@@ -38,9 +33,6 @@ namespace ChatVisual
                 GUIStyle style = new GUIStyle(GUI.skin.label);
                 style.fontSize = 20;
                 GUILayout.Label($"{node.node.GetType().Name}", style);
-                GUILayout.Label("Description");
-                node.node.description = EditorGUILayout.TextArea(node.node.description, EditorStyles.textArea);
-                GUILayout.Space(15);
 
                 bool is_ChildExist = false;
                 switch (node.node)
@@ -50,11 +42,17 @@ namespace ChatVisual
                             RootNode rootNode = node.node as RootNode;
                             if (rootNode.child != null) is_ChildExist = true;
 
+                            GUILayout.Label("Description");
+                            rootNode.description = EditorGUILayout.TextArea(rootNode.description, EditorStyles.textArea);
+                            GUILayout.Space(15);
+
                             GUILayout.Label("ShowName");
                             rootNode.showName = EditorGUILayout.TextArea(rootNode.showName, EditorStyles.textArea);     // 누군지
+                            GUILayout.Space(5);
 
                             GUILayout.Label("SaveLocation");
                             rootNode.saveLocation = (ESaveLocation)EditorGUILayout.EnumPopup(rootNode.saveLocation);        // 이넘값 바꾸기
+                            GUILayout.Space(10);
 
                             // round 추가
                             roundList = new List<string>(rootNode.round);
@@ -79,19 +77,23 @@ namespace ChatVisual
                         break;
                     case ChatNode:
                         {
+                            GUILayout.Space(15);
                             ChatNode chatNode = node.node as ChatNode;
                             if (chatNode.child.Count != 0) is_ChildExist = true;        // 자식이 하나라도 있으면 
 
                             enumValue = (int)chatNode.state;
                             enumValue = GUILayout.Toolbar(enumValue, System.Enum.GetNames(typeof(EChatState)));     // 말하는 것 타입
                             chatNode.state = (EChatState)enumValue;
-                            
+                            GUILayout.Space(5);
+
                             GUILayout.Label("Chat");
                             chatNode.text = EditorGUILayout.TextArea(chatNode.text, EditorStyles.textArea);     // 텍스트
-                            
+                            GUILayout.Space(10);
+
                             enumValue2 = (int)chatNode.face;
                             enumValue2 = GUILayout.Toolbar(enumValue2, System.Enum.GetNames(typeof(EFace)));        // 말할 때의 표정
                             chatNode.face = (EFace)enumValue2;
+                            GUILayout.Space(10);
 
                             // 쳇팅 이벤트 추가
                             chatEventList = new List<EChatEvent>(chatNode.textEvent);
@@ -100,6 +102,7 @@ namespace ChatVisual
                             is_Expand = EditorGUILayout.BeginFoldoutHeaderGroup(is_Expand, "Chat Event List", menuAction: ShowHeaderContextMenu);
                             if (is_Expand)
                             {
+                                Debug.Log($"이벤트 {chatEventList.Count}");
                                 for (int i = 0; i < chatEventList.Count; ++i)
                                 {
                                     chatEventList[i] = (EChatEvent)EditorGUILayout.EnumPopup(chatEventList[i]);
@@ -116,8 +119,10 @@ namespace ChatVisual
                         break;
                     case AskNode:
                         {
+                            GUILayout.Space(15);
                             AskNode askNode = node.node as AskNode;
                             if (askNode.child != null) is_ChildExist = true;
+                            GUILayout.Space(10);
 
                             GUILayout.Label("Ask");
                             askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);     // 질문
@@ -127,11 +132,13 @@ namespace ChatVisual
                         break;
                     case LockAskNode:
                         {
+                            GUILayout.Space(15);
                             LockAskNode lockAskNode = node.node as LockAskNode;
                             if (lockAskNode.child != null) is_ChildExist = true;
 
                             GUILayout.Label("Ask");
                             lockAskNode.ask = EditorGUILayout.TextArea(lockAskNode.ask, EditorStyles.textArea);     // 질문
+                            GUILayout.Space(10);
 
                             // 증거
                             evidenceList = new List<string>(lockAskNode.evidence);
@@ -156,6 +163,7 @@ namespace ChatVisual
                         break;
                 }
 
+                GUILayout.Space(5);
                 EditorGUI.BeginDisabledGroup(true);
                 EditorGUILayout.Toggle("child", is_ChildExist);
                 EditorGUI.EndDisabledGroup();
@@ -169,6 +177,7 @@ namespace ChatVisual
             GenericMenu menu = new GenericMenu();
             menu.AddItem(new GUIContent("Clear"), false, () =>
             {
+                Debug.Log("dl");
                 chatEventList.Clear();
                 evidenceList.Clear();
                 roundList.Clear();
