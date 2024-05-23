@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/USS/Chat.uss?fileID=7433441132597879392&amp;guid=196e6005f5443d14a87a584d5b6e61e3&amp;type=3#Chat" />
-    <ui:VisualElement name="MyChat" class="MyChat" style="align-self: flex-end; align-items: flex-end;">
+    <ui:VisualElement name="MyChat" class="MyChat" style="align-self: flex-end; align-items: flex-end; margin-right: 100px;">
         <ui:VisualElement name="Speech" class="Speech">
             <ui:Label text="Test" name="Text" class="ChatText" />
         </ui:VisualElement>

@@ -3442,10 +3442,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34011704b4b14504098dcfd848e9ebba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileAreaSizeOn: 300
+  fileAreaSizeOn: 285
   fileAreaSizeOff: 150
-  changeSizeBtnOn: {fileID: -4521532143779581420, guid: a11d7050c806a0645944b38c8744ac70, type: 3}
-  changeSizeBtnOff: {fileID: -3753015318093942961, guid: a11d7050c806a0645944b38c8744ac70, type: 3}
+  changeSizeBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
+  changeSizeBtnOff: {fileID: -3753015318093942961, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isFileSystemOpen: 0
   fileFolders: []
   currentFileFolder:
@@ -3474,7 +3474,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     quetions: []
-  changeMemberBtnOn: {fileID: -4521532143779581420, guid: a11d7050c806a0645944b38c8744ac70, type: 3}
+  changeMemberBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: 4154780841294389669, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
 --- !u!114 &150678881
 MonoBehaviour:
@@ -3493,26 +3493,29 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 9fd94bf5662d09942bf1554e56b79c86, type: 3}
     isOpen: 0
     pngName:
-    - "\uC2DC\uBC1C"
-    - "\uC2DC\uB304"
+    - "\uB2F4\uBC30"
+    - "\uC73C\uC545"
   pngs:
-  - name: "\uC2DC\uBC1C"
+  - name: "\uB2F4\uBC30"
     image: {fileID: 21300000, guid: 31cbfa8c1cd40404d9d4dffd2c5b2798, type: 3}
     isOpen: 0
-    memo: dmdkr
+    memo: "\uD5C9! \uB2F4\uBC30\uB2E4! \uAC04\uCCA9\uC2E0\uACE0\uB294 1388"
     importance: 1
     size: {x: 50, y: 50}
-    pos: {x: 100, y: 100}
-  - name: "\uC2DC\uB304"
+    pos: {x: 300, y: 300}
+  - name: "\uC73C\uC545"
     image: {fileID: 21300000, guid: 54e28833b3850e74e82f5b1e7a6c0b66, type: 3}
     isOpen: 0
-    memo: dmdkr
+    memo: "\uC6B0\uC640! \uB3C8 \uC9F1 \uB9CE\uB2E4! \uB098 \uC870\uAE08\uB9CC \uC92C\uC73C\uBA74..."
     importance: 0
     size: {x: 50, y: 50}
-    pos: {x: 300, y: 300}
+    pos: {x: 400, y: 800}
   memos:
-  - name: "\uC26C\uBC1C"
-    memo: "\uBC30\uC874\uB098\uACE0\uD504\uB2E4..."
+  - name: "\uC77C\uAE30"
+    memo: "I'm on a boat \uB208\uC5D0 \uBCF4\uC774\uB294 \uC0AC\uBC29\uC774 \uBC14\uB2E4\uC57C
+      \uAC13 \uC7A1\uC544 \uC62C\uB9B0 \uC0DD\uC120\uC744 \uD68C \uCCD0\uC11C \uBA39\uC5B4
+      I'm on a boat \uBA40\uC5B4\uC9C0\uB294 \uB3C4\uC2DC where going on \uC5B4\uB518\uAC00\uB85C
+      \uBA40\uB9AC\uBA40\uB9AC"
 --- !u!114 &150678882
 MonoBehaviour:
   m_ObjectHideFlags: 0

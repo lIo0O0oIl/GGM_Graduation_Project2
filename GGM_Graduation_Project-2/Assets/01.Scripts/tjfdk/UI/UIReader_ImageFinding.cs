@@ -87,6 +87,7 @@ public class UIReader_ImageFinding : UI_Reader
                                         if (png.isOpen == false)
                                         {
                                             png.isOpen = true;
+                                            Debug.Log(png.name + " " + image.name);
                                             fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
                                         }
                                     });

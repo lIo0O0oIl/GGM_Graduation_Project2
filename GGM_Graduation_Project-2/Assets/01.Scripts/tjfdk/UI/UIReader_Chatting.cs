@@ -61,13 +61,13 @@ public class UIReader_Chatting : UI_Reader
         if (Input.GetKeyDown(KeyCode.A))
             AddMember("이채민");
         if (Input.GetKeyDown(KeyCode.W))
-            InputChat(true, true, FindMember("강지현"), "Test");
+            InputChat(true, true, FindMember("강지현"), "지현아");
         if (Input.GetKeyDown(KeyCode.E))
-            InputChat(true, false, FindMember("강지현"), "Test1");
+            InputChat(true, false, FindMember("강지현"), "싫어");
         if (Input.GetKeyDown(KeyCode.S))
-            InputChat(true, true, FindMember("이채민"), "Test2");
+            InputChat(true, true, FindMember("이채민"), "채민아");
         if (Input.GetKeyDown(KeyCode.D))
-            InputChat(true, false, FindMember("이채민"), "Test3");
+            InputChat(true, false, FindMember("이채민"), "내 이름 부르지 마");
     }
 
     private MemberChat FindMember(string name)
@@ -205,7 +205,8 @@ public class UIReader_Chatting : UI_Reader
             FindMember(memberName).isOpen = true;
 
             VisualElement newMember = RemoveContainer(ux_memberList.Instantiate());
-            newMember.Q<Button>("ChatMember").text = memberName;
+            newMember.Q<Label>("Name").text = memberName;
+            newMember.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(FindMember(memberName).face);
             newMember.Q<Button>("ChatMember").clicked += () =>
             {
                 ChoiceMember(newMember.Q<Button>("ChatMember"));
@@ -243,7 +244,8 @@ public class UIReader_Chatting : UI_Reader
 
     public void ChoiceMember(Button button)
     {
-        MemberChat member = FindMember(button.text);
+        Debug.Log("dhktek");
+        MemberChat member = FindMember(button.Q<Label>("Name").text);
         if (member != null)
         {
             ChangeProfile(member.name, member.face);

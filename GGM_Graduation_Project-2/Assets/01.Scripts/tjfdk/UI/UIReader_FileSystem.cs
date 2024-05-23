@@ -93,7 +93,7 @@ public class UIReader_FileSystem : UI_Reader
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            AddFile(FileType.IMAGE, "시발", "정글");
+            AddFile(FileType.IMAGE, "담배", "정글");
             //DrawFile("학교");
         }
         if (Input.GetKeyDown(KeyCode.K))
@@ -103,7 +103,7 @@ public class UIReader_FileSystem : UI_Reader
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            AddFile(FileType.TEXT, "쉬발", "정글");
+            AddFile(FileType.TEXT, "일기", "정글");
             //DrawFile("학교");
         }
     }
@@ -124,7 +124,7 @@ public class UIReader_FileSystem : UI_Reader
     {
         fileSystemArea = root.Q<VisualElement>("FileSystem");
         fileGround = root.Q<VisualElement>("FileGround");
-        filePathGround = root.Q<VisualElement>("FilePath");
+        filePathGround = root.Q<VisualElement>("FilePathGround");
         panelGround = root.Q<VisualElement>("PanelGround");
         changeSizeButton = root.Q<Button>("ChangeSize");
     }
@@ -302,6 +302,8 @@ public class UIReader_FileSystem : UI_Reader
 
     public void OpenImage(string name, Sprite sprite)
     {
+        Debug.Log("dkd");
+
         for (int i = panelGround.childCount - 1; i >= 0; i--)
             panelGround.RemoveAt(i);
 
@@ -368,13 +370,13 @@ public class UIReader_FileSystem : UI_Reader
         if (isFileSystemOpen)
         {
             changeFileSystemSizeDOT = DOTween.To(() => fileSystemArea.style.flexBasis.value.value, x => 
-                fileSystemArea.style.flexBasis = x, fileAreaSizeOn, 0.5f);
+                fileSystemArea.style.flexBasis = x, fileAreaSizeOn, 0.25f);
             changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOn);
         }
         else
         {
             changeFileSystemSizeDOT = DOTween.To(() => fileSystemArea.style.flexBasis.value.value, x => 
-                fileSystemArea.style.flexBasis = x, fileAreaSizeOff, 0.5f);
+                fileSystemArea.style.flexBasis = x, fileAreaSizeOff, 0.25f);
             changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOff);
         }
 
