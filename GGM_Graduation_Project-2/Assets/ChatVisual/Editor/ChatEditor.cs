@@ -96,11 +96,12 @@ public class ChatEditor : EditorWindow
             {
                 //Debug.Log(chatContainer.nodes.Count + "개의 노드가 존재함.");
 
-                chatContainer.ChangeNowChapter(0);      // 일단 0으로 가정하여 지금 편집할 대화를 불러와줌.
+                chatContainer.ChangeNowChapter(0);      // 가장 처음은 0번째
 
+                hierarchyView.MakeHierarchy(chatContainer, chatView);      // 하이어라키 만들어주기
+                
                 chatView.LoadChatSystem(chatContainer);     // 데이터 로드 해주기
                 chatView.PopulateView();           // 데이터를 기반으로 보이는 것 만들어주기
-                hierarchyView.MakeHierarchy();      // 하이어라키 만들어주기
 
                 Debug.Log($"{chatContainer.MainChapter.Count}만큼 하이어라키가 생성되어야 함.");
             }

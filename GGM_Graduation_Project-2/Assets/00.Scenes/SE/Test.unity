@@ -349,10 +349,10 @@ MonoBehaviour:
     round:
     - "\uB028"
     - "\uB028\uB03D"
-  - showName: "0\uC54C\uBC00"
+  - showName: "\uC544\uB291\u3134\uB370"
     saveLocation: 0
     chat:
-    - state: 1
+    - state: 0
       text: 1
       face: 0
       textEvent: 
@@ -360,14 +360,14 @@ MonoBehaviour:
       text: 2
       face: 0
       textEvent: 
-    - state: 1
+    - state: 0
       text: 3
       face: 0
       textEvent: 
     askAndReply:
-    - ask: 
+    - ask: "\u314B\u314B"
       reply:
-      - state: 1
+      - state: 0
         text: "\uADF8\uB0E5\uC9C8\uBB381"
         face: 0
         textEvent: 
@@ -382,7 +382,7 @@ MonoBehaviour:
       is_UseThis: 0
     lockAskAndReply:
     - evidence: []
-      ask: 13123213123
+      ask: 22
       reply: []
       is_UseThis: 0
     round:

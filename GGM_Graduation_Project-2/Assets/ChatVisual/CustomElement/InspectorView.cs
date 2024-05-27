@@ -28,6 +28,7 @@ namespace ChatVisual
             is_Expand = false;
 
             var container = new IMGUIContainer();
+            Debug.Log(container);
             container.onGUIHandler = () =>
             {
                 GUIStyle style = new GUIStyle(GUI.skin.label);
