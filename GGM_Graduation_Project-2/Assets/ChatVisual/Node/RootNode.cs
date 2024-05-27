@@ -8,6 +8,8 @@ namespace ChatVisual
     {
         public Node child;
 
+        [TextArea] public string description;
+
         public string showName;
         public ESaveLocation saveLocation;
         public List<string> round = new List<string>();

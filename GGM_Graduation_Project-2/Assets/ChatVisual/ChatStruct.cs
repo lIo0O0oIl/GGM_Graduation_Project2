@@ -18,7 +18,7 @@ namespace ChatVisual
         Other = 0,      // 조수쪽이 말하는 것
         Me = 1,      // 형사가 말하는 것
         Ask = 2,        // 형사가 묻는 것임.
-        LoadNext        // 또 이어질 대화가 있다면. 다른 사람이면.
+        LoadNext        // 또 이어질 대화가 있다면. 다른 사람이면.      // Ask 랑 이건 사용안할 가능성이 있음 정리해주기 .
     }
 
     public enum EFace

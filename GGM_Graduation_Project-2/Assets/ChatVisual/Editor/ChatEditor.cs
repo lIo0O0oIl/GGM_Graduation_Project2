@@ -13,12 +13,9 @@ public class ChatEditor : EditorWindow
 
     private ChatView chatView;        // 챗팅들 들어가 있는 곳.
     private InspectorView inspectorView;        // 인스팩터 일 것임.
-    private IMGUIContainer hierarchyView;      // 코드기반 GUI, 위에꺼 말하는 것. 하이어라키.
+    private HierarchyView hierarchyView;      // 코드기반 GUI, 위에꺼 말하는 것. 하이어라키.
     private Button arrayAddBtn;
     private Button dangerBtn;
-
-    private SerializedObject chatObject;        // 에디터에서 사용하기 위한 직렬화
-    private SerializedProperty chatProperty;        // 위에꺼의 속성들 모음.
 
     private ChatContainer chatContainer;
 
@@ -30,7 +27,7 @@ public class ChatEditor : EditorWindow
 
     private void OnDestroy()
     {
-        if (chatView != null)
+        if (chatContainer != null)
         {
             chatView.SaveChatSystem();      // 창을 끌 때 지금까지 해준 것 저장해주기
         }
@@ -50,16 +47,8 @@ public class ChatEditor : EditorWindow
 
         chatView = root.Q<ChatView>("chat-view");
         inspectorView = root.Q<InspectorView>("inspector-view");        // 인스펙터 이름으로 가져오기.
-        hierarchyView = root.Q<IMGUIContainer>("hierarchy-view");       // 아래꺼 가져오기 hierarchy 임.
-        hierarchyView.onGUIHandler = () =>         // hierarchyView 뷰 갱신. 
-        {
-            if (chatObject != null && chatObject.targetObject != null)
-            {
-                chatObject.Update();        // 갱신해주기
-                EditorGUILayout.PropertyField(chatProperty);
-                chatObject.ApplyModifiedProperties();
-            }
-        };
+        hierarchyView = root.Q<HierarchyView>("hierarchy-view");       // 아래꺼 가져오기 hierarchy 임.
+       
         arrayAddBtn = root.Q<Button>("AddBtn");     // 버튼 가져오기
         arrayAddBtn.clickable.clicked += OnArrayAddBtn;
         dangerBtn = root.Q<Button>("ClearBtn");
@@ -107,15 +96,14 @@ public class ChatEditor : EditorWindow
             {
                 //Debug.Log(chatContainer.nodes.Count + "개의 노드가 존재함.");
 
-                chatContainer.ChangeNowChapter(0);      // 일단 0으로 가정하여 지금 편집할 대화를 불러와줌.
+                chatContainer.ChangeNowChapter(0);      // 가장 처음은 0번째
 
-                chatView.LoadChatSystem(chatContainer);     // 로드 해주기
-                chatView.PopulateView();           // 채워줘라
+                hierarchyView.MakeHierarchy(chatContainer, chatView);      // 하이어라키 만들어주기
+                
+                chatView.LoadChatSystem(chatContainer);     // 데이터 로드 해주기
+                chatView.PopulateView();           // 데이터를 기반으로 보이는 것 만들어주기
 
-                //Debug.Log($"{chatContainer.Chapters.Length}만큼 리스트가 생성되어야 함.");
-
-                chatObject = new SerializedObject(chatContainer);       // 직렬화 해주기
-                chatProperty = chatObject.FindProperty("hierarchy");       // 속성 찾아서 넣어주기
+                Debug.Log($"{chatContainer.MainChapter.Count}만큼 하이어라키가 생성되어야 함.");
             }
         }
     }
