@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/USS/Chat.uss?fileID=7433441132597879392&amp;guid=196e6005f5443d14a87a584d5b6e61e3&amp;type=3#Chat" />
-    <ui:VisualElement name="OtherChat" class="OtherChat" style="align-self: flex-start; align-items: flex-start; margin-left: 100px;">
-        <ui:VisualElement name="Speech" class="Speech" style="-unity-font: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo.ttf?fileID=12800000&amp;guid=ac8392ea6f9e97949882302322851c02&amp;type=3#DungGeunMo&apos;);">
-            <ui:Label text="Test" name="Text" class="ChatText" style="-unity-font-definition: initial; flex-grow: 0; flex-shrink: 0;" />
-        </ui:VisualElement>
-    </ui:VisualElement>
-</ui:UXML>

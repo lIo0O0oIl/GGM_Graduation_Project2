@@ -44,8 +44,7 @@ public class UIReader_Chatting : UI_Reader
     VisualElement memberList;
 
     // template
-    VisualTreeAsset ux_myChat;
-    VisualTreeAsset ux_otherChat;
+    VisualTreeAsset ux_chat;
     VisualTreeAsset ux_askChat;
     VisualTreeAsset ux_hiddenAskChat;
     VisualTreeAsset ux_memberList;
@@ -70,7 +69,7 @@ public class UIReader_Chatting : UI_Reader
         if (Input.GetKeyDown(KeyCode.D))
             InputChat(true, false, FindMember("이채민"), "내 이름 부르지 마");
 
-        EndToScroll();
+        //EndToScroll();
     }
 
     public MemberChat FindMember(string name)
@@ -91,6 +90,8 @@ public class UIReader_Chatting : UI_Reader
         Template_Load();
         UXML_Load();
         Event_Load();
+
+        chatGround.Q<ScrollView>("ChatGround").scrollDecelerationRate = 0.01f;
     }
 
     private void UXML_Load()
@@ -105,8 +106,7 @@ public class UIReader_Chatting : UI_Reader
 
     private void Template_Load()
     {
-        ux_myChat = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\MyChat.uxml");
-        ux_otherChat = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\OtherChat.uxml");
+        ux_chat = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\Chat.uxml");
         ux_askChat = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\AskChat.uxml");
         ux_hiddenAskChat = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\HiddenAskChat.uxml");
         ux_memberList = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\ChatMember.uxml");
@@ -144,16 +144,54 @@ public class UIReader_Chatting : UI_Reader
     }
 
     // Function
-    public void InputChat(bool isRecord, bool isUser, MemberChat other, string msg, Sprite face = null)
+
+    public enum ChatType
     {
-        // 생성
+        String,
+        Question,
+        Image,
+        CutScene
+    }
+
+    public void InputChatting(bool isUser, bool isChat, ChatType chatType, string msg)
+    {
         VisualElement chat = null;
+
+        switch (chatType)
+        {
+            case ChatType.String:
+                chat = ux_chat.Instantiate();
+                chat.Q<Label>().text = msg;
+                break;
+            case ChatType.Image:
+                chat = new VisualElement();
+                chat.style.backgroundImage = new StyleBackground(imageManager.FindPNG(msg).image);
+                break;
+            case ChatType.CutScene:
+                chat = new Button();
+                chat.style.backgroundImage = new StyleBackground(imageManager.FindPNG(msg).image);
+                break;
+        }
 
         // 유저의 대사라면
         if (isUser)
-            chat = RemoveContainer(ux_myChat.Instantiate());
+            chat.AddToClassList("MyChat");
         else
-            chat = RemoveContainer(ux_otherChat.Instantiate());
+            chat.AddToClassList("OtherChat");
+
+
+    }
+
+    public void InputChat(bool isRecord, bool isUser, MemberChat other, string msg, Sprite face = null)
+    {
+        // 생성
+        VisualElement chat = RemoveContainer(ux_chat.Instantiate());
+
+        // 유저의 대사라면
+        if (isUser)
+            chat.AddToClassList("MyChat");
+        else
+            chat.AddToClassList("OtherChat");
 
         // 지정 표정으로 바꿔주기
         if (face != null)

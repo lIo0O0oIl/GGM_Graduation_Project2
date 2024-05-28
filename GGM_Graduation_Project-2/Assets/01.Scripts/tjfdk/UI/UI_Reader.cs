@@ -29,6 +29,9 @@ public class UI_Reader : MonoBehaviour
     protected Button connectionButton;
     protected Button settingButton;
         // Panel
+    public VisualElement cutScenePanel;
+    public VisualElement mainPanel;
+
     protected VisualElement previousPanel;
     protected VisualElement chattingPanel;
     protected VisualElement connectionPanel;
@@ -59,6 +62,7 @@ public class UI_Reader : MonoBehaviour
 
         Load();
 
+        //panels.Add(cutScenePanel);
         panels.Add(chattingPanel);
         panels.Add(connectionPanel);
         panels.Add(imageFindingPanel);
@@ -72,6 +76,9 @@ public class UI_Reader : MonoBehaviour
         settingButton = root.Q<Button>("SoundSettingBtn");
 
         // Panel
+        cutScenePanel = root.Q<VisualElement>("CutScene");
+        mainPanel = root.Q<VisualElement>("MainGame");
+
         chattingPanel = root.Q<VisualElement>("Chatting");
         connectionPanel = root.Q<VisualElement>("Connection");
         imageFindingPanel = root.Q<VisualElement>("ImageFinding");

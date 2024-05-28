@@ -37,11 +37,11 @@ public class ChatManager : MonoBehaviour
         //InvokeRepeating(nameof(AddChat), chatDelay, chatDelay);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-            AddChat();
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.H))
+    //        AddChat();
+    //}
 
     private void AddChat()
     {

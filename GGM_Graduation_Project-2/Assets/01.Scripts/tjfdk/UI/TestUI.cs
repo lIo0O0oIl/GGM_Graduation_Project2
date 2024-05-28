@@ -99,7 +99,7 @@ public class TestUI : MonoBehaviour
 
         // connection
         conncectionPanel = root.Q<VisualElement>("SuspectGround");
-        suspectPanel = conncectionPanel.Q<Button>("SuspectPanel");
+        //suspectPanel = conncectionPanel.Q<Button>("Connection");
 
         //DragAndDropManipulator manipulator =
         //    new DragAndDropManipulator(suspectPanel);

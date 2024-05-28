@@ -6,8 +6,6 @@ using DG.Tweening;
 
 public class UIReader_CutScene : UI_Reader
 {
-    
-
     Button scene;
     Label text;
 

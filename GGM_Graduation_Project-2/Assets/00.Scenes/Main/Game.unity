@@ -205,7 +205,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 594023515}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: Panel_Popup
         m_Mode: 2
@@ -3360,12 +3360,14 @@ GameObject:
   - component: {fileID: 150678876}
   - component: {fileID: 150678875}
   - component: {fileID: 150678877}
+  - component: {fileID: 150678884}
+  - component: {fileID: 150678885}
   - component: {fileID: 150678880}
+  - component: {fileID: 150678883}
   - component: {fileID: 150678879}
   - component: {fileID: 150678878}
   - component: {fileID: 150678882}
   - component: {fileID: 150678881}
-  - component: {fileID: 150678883}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -3668,6 +3670,36 @@ MonoBehaviour:
         - how: "\uC870\uC218"
           msg: "\uD53C\uD574\uC790\uC758 \uBC18"
           answers: []
+--- !u!114 &150678884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150678874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b80d74f0e210ffe4a83059ff8df2b6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &150678885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150678874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20c022a4e0a16448b58b29f96dcbbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCutScene: {fileID: 0}
+  currentCutNum: 0
+  currentTextNum: 0
+  cutSceneChapters:
+  - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
+  - {fileID: 11400000, guid: 72d10a1d28d6b0342ad49ae8c2313967, type: 2}
 --- !u!1 &155637819
 GameObject:
   m_ObjectHideFlags: 0
@@ -4536,7 +4568,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 594023515}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: Panel_Popup
         m_Mode: 2
@@ -5673,7 +5705,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 594023515}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: Panel_Popup
         m_Mode: 2
@@ -6414,7 +6446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20c022a4e0a16448b58b29f96dcbbf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutScene: {fileID: 287244342}
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
@@ -8154,7 +8185,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 594023515}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: Panle_OnOff
         m_Mode: 2
@@ -9877,7 +9908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20c022a4e0a16448b58b29f96dcbbf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutScene: {fileID: 479266165}
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
@@ -12099,8 +12129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 594023516}
-  - component: {fileID: 594023515}
-  - component: {fileID: 594023514}
+  - component: {fileID: 594023517}
   m_Layer: 0
   m_Name: ChatManager
   m_TagString: Untagged
@@ -12108,44 +12137,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &594023514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 594023513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d0ffcb21753f5a418c8b46f89bb1f35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chatContainer: {fileID: 1949353845}
-  chattingHumanName: {fileID: 1979682079}
-  assistantChatList: []
-  chapters: []
-  delayTime: 1.5
-  nowLevel: 0
---- !u!114 &594023515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 594023513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53288ef873a0d6c42b1a5d8c0cc51938, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panels:
-  - {fileID: 1045875628}
-  - {fileID: 408797297}
-  - {fileID: 1387507946}
-  alarmIcon: {fileID: 1045675692}
-  chatIndex: 0
-  connectionPanel: {fileID: 1110626581}
-  connectionParent: {fileID: 1165626332}
 --- !u!4 &594023516
 Transform:
   m_ObjectHideFlags: 0
@@ -12161,6 +12152,121 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &594023517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594023513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nowChaptersIndex: 0
+  nowChatIndex: 8
+  nowChapter:
+    showName: 
+    saveLocation: 0
+    chat:
+    - state: 0
+      text: eoeiso
+      face: 0
+      textEvent: 
+    - state: 0
+      text: 
+      face: 0
+      textEvent: 
+    - state: 1
+      text: ddd
+      face: 0
+      textEvent: 
+    - state: 0
+      text: aaa
+      face: 0
+      textEvent: 
+    askAndReply:
+    - ask: jdjl
+      reply: []
+      is_UseThis: 0
+    - ask: dpdpd
+      reply: []
+      is_UseThis: 0
+    lockAskAndReply:
+    - evidence:
+      - glgl
+      ask: zmzmz
+      reply: []
+      is_UseThis: 0
+    round: []
+  mainChapter:
+  - showName: 
+    saveLocation: 0
+    chat:
+    - state: 0
+      text: eoeiso
+      face: 0
+      textEvent: 
+    - state: 0
+      text: 
+      face: 0
+      textEvent: 
+    - state: 1
+      text: ddd
+      face: 0
+      textEvent: 
+    - state: 0
+      text: aaa
+      face: 0
+      textEvent: 
+    askAndReply:
+    - ask: jdjl
+      reply: []
+      is_UseThis: 0
+    - ask: dpdpd
+      reply: []
+      is_UseThis: 0
+    lockAskAndReply:
+    - evidence:
+      - glgl
+      ask: zmzmz
+      reply: []
+      is_UseThis: 0
+    round: []
+  - showName: 
+    saveLocation: 0
+    chat:
+    - state: 0
+      text: eoeiso
+      face: 0
+      textEvent: 
+    - state: 0
+      text: 
+      face: 0
+      textEvent: 
+    - state: 1
+      text: ddd
+      face: 0
+      textEvent: 
+    - state: 0
+      text: aaa
+      face: 0
+      textEvent: 
+    askAndReply:
+    - ask: jdjl
+      reply: []
+      is_UseThis: 0
+    - ask: dpdpd
+      reply: []
+      is_UseThis: 0
+    lockAskAndReply:
+    - evidence:
+      - glgl
+      ask: zmzmz
+      reply: []
+      is_UseThis: 0
+    round: []
 --- !u!1 &596220497
 GameObject:
   m_ObjectHideFlags: 0
@@ -17239,7 +17345,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 594023515}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: Panle_OnOff
         m_Mode: 2
@@ -22651,7 +22757,7 @@ PrefabInstance:
     - target: {fileID: 6235620209599100529, guid: e9a095e8b8725bc45a599528903d4904, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 594023515}
+      objectReference: {fileID: 0}
     - target: {fileID: 6235620209599100529, guid: e9a095e8b8725bc45a599528903d4904, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeParent
@@ -23294,11 +23400,6 @@ PrefabInstance:
 --- !u!224 &1110626580 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2030027026309122686, guid: e9a095e8b8725bc45a599528903d4904, type: 3}
-  m_PrefabInstance: {fileID: 1110626579}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1110626581 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3956162505501039471, guid: e9a095e8b8725bc45a599528903d4904, type: 3}
   m_PrefabInstance: {fileID: 1110626579}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1110626582 stripped
@@ -32376,7 +32477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20c022a4e0a16448b58b29f96dcbbf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutScene: {fileID: 287244342}
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
@@ -41449,7 +41549,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 594023514}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChattingManager, Assembly-CSharp
         m_MethodName: ChangeDelaySpeed
         m_Mode: 0
@@ -42446,7 +42546,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 594023514}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChattingManager, Assembly-CSharp
         m_MethodName: NextChat
         m_Mode: 1
