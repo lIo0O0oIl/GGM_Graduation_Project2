@@ -52,3 +52,15 @@
     transition-duration: 1s;
     transition-timing-function: ease-out-cubic;
 }
+
+.test_idle {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    left: 756px;
+    top: 437px;
+}
+
+.test-down {
+    translate: 0 50px;
+}

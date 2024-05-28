@@ -153,6 +153,17 @@ public class UIReader_FileSystem : UI_Reader
         };
     }
 
+    private FileFolder FindMember(string name)
+    {
+        foreach (FileFolder folder in fileFolders)
+        {
+            if (folder.folderName == name)
+                return folder;
+        }
+
+        return null;
+    }
+
     public void AddFile(FileType fileType, string fileName, string fileParentName)
     {
         VisualElement file = null;
@@ -161,6 +172,7 @@ public class UIReader_FileSystem : UI_Reader
         {
             case FileType.FOLDER:
                 {
+                    Debug.Log(fileName + " " + fileParentName);
                     // 생성
                     file = RemoveContainer(ux_folderFile.Instantiate());
 
@@ -174,20 +186,19 @@ public class UIReader_FileSystem : UI_Reader
                     };
                     // 폴더 부모 지정
                     bool addNew = false;
-                    foreach (FileFolder folder in fileFolders)
+                    FileFolder parentFolder = FindMember(fileParentName);
+                    if (parentFolder != null)
                     {
-                        if (folder.folderName == fileParentName)
-                        {
-                            folder.folderFiles.Add(file);
-                            fileFolders.Add(new FileFolder(fileName));
-                            addNew = true;
-                            break;
-                        }
+                        Debug.Log("찾음");
+                        parentFolder.folderFiles.Add(file);
+                        fileFolders.Add(new FileFolder(fileName));
+                        addNew = true;
                     }
 
                     // 폴더 생성 및 추가
                     if (addNew == false)
                     {
+                        Debug.Log("못 찾음");
                         FileFolder folderParent = new FileFolder(fileParentName);
                         fileFolders.Add(folderParent);
                         fileFolders.Add(new FileFolder(fileName));
@@ -259,7 +270,6 @@ public class UIReader_FileSystem : UI_Reader
                 }
         }
 
-        Debug.Log(fileParentName);
         if (text_currentFolderName == "")
             text_currentFolderName = fileParentName;
         if (text_currentFolderName == fileParentName)
