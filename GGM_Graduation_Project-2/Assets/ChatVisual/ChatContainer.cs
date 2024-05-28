@@ -13,6 +13,8 @@ namespace ChatVisual
         public int nowChaptersIndex;        // 챕터 인덱스
         public int nowChatIndex;            // 쳇팅 인덱스
 
+        [Space(30)]
+
         [SerializeField]        // 그냥 지금 어떤 챕터인지 볼려고 있는 것. 참조 복사로 넣어줬음.
         private Chapter nowChapter;
         public Chapter NowChapter { get { return nowChapter; } set { nowChapter = value; } }
