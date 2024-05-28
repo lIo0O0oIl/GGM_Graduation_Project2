@@ -1,11 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/USS/Chat.uss?fileID=7433441132597879392&amp;guid=196e6005f5443d14a87a584d5b6e61e3&amp;type=3#Chat" />
-    <Style src="project://database/Assets/UI%20Toolkit/USS/Button.uss?fileID=7433441132597879392&amp;guid=d28c6cf77bec8e54c92d108a96fd1e35&amp;type=3#Button" />
-    <ui:VisualElement name="AskChat">
-        <ui:Button text="Button" display-tooltip-when-elided="true" name="AskChat" class="MyChat NoButtonBorder" style="align-self: flex-end; align-items: flex-end; margin-left: 20px; margin-right: 20px; margin-top: 20px; margin-bottom: 20px;">
-            <ui:VisualElement name="Speech" class="Speech" style="background-color: rgb(120, 120, 120);">
-                <ui:Label text="Test" name="Text" class="ChatText" />
-            </ui:VisualElement>
-        </ui:Button>
-    </ui:VisualElement>
+    <ui:Button text="Button" display-tooltip-when-elided="true" name="AskChat" class="MyChat NoButtonBorder" style="align-self: center; align-items: center; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; justify-content: center; width: 100%; background-color: rgba(56, 56, 56, 0); flex-grow: 0; flex-shrink: 1;">
+        <ui:VisualElement name="Speech" class="Speech" style="background-color: rgb(120, 120, 120); align-items: center; justify-content: center; flex-grow: 1; width: 100%;">
+            <ui:Label text="피해자 물품 조사" name="Text" class="ChatText" style="margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+        </ui:VisualElement>
+    </ui:Button>
 </ui:UXML>

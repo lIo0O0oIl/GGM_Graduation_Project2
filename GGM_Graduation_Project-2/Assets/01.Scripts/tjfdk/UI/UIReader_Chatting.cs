@@ -37,6 +37,7 @@ public class UIReader_Chatting : UI_Reader
 
     // UXLM
     VisualElement chatGround;
+    VisualElement questionGround;
     VisualElement chattingFace;
     Button changeMemberButton;
     Label memberName;
@@ -68,9 +69,11 @@ public class UIReader_Chatting : UI_Reader
             InputChat(true, true, FindMember("이채민"), "채민아");
         if (Input.GetKeyDown(KeyCode.D))
             InputChat(true, false, FindMember("이채민"), "내 이름 부르지 마");
+
+        EndToScroll();
     }
 
-    private MemberChat FindMember(string name)
+    public MemberChat FindMember(string name)
     {
         foreach(MemberChat member in memberChats)
         {
@@ -93,6 +96,7 @@ public class UIReader_Chatting : UI_Reader
     private void UXML_Load()
     {
         chatGround = root.Q<VisualElement>("ChatGround");
+        questionGround = root.Q<VisualElement>("QuestionGround");
         chattingFace = root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
         changeMemberButton = root.Q<Button>("ChangeTarget");
         memberName = root.Q<Label>("TargetName");
@@ -167,6 +171,8 @@ public class UIReader_Chatting : UI_Reader
             chatting.msg = msg;
             other.chattings.Add(chatting);
         }
+
+        EndToScroll();
     }
 
     public void InputQuestion(bool isRecord, bool isOpen, MemberChat other, string msg, Action action)
@@ -182,12 +188,14 @@ public class UIReader_Chatting : UI_Reader
             chat.Q<Label>().text = msg;
             // 대사 이벤트 연결
             chat.Q<Button>().clicked += action;
+            chat.Q<Button>().clicked += (() => { chat.parent.Remove(chat); });
         }
         else
             chat = RemoveContainer(ux_hiddenAskChat.Instantiate());
 
         // 대화에 추가
-        chatGround.Add(chat);
+        questionGround.Add(chat);
+        EndToScroll();
 
         if (isRecord)
         {
@@ -196,6 +204,20 @@ public class UIReader_Chatting : UI_Reader
             chatting.msg = msg;
             other.chattings.Add(chatting);
         }
+
+    }
+
+    private void EndToScroll()
+    {
+        ScrollView scrollView = chatGround.Q<ScrollView>("ChatGround");
+
+        scrollView.schedule.Execute(() =>
+        {
+            float contentHeight = scrollView.contentContainer.layout.height;
+            float viewportHeight = scrollView.contentViewport.layout.height;
+
+            scrollView.scrollOffset = new Vector2(0, contentHeight - viewportHeight);
+        });
     }
 
     public void AddMember(string memberName)
