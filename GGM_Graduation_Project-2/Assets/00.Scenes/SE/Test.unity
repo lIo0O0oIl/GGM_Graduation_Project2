@@ -261,13 +261,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowChaptersIndex: 0
-  nowChatIndex: 8
+  nowChatIndex: 9
   nowChapter:
     showName: "\uC870\uC218"
     saveLocation: 1
     chat:
     - state: 0
-      text: hi
+      text: dsfsf
       face: 0
       textEvent: 
     - state: 1
@@ -295,15 +295,21 @@ MonoBehaviour:
         text: yes. my sir
         face: 0
         textEvent: 01000000
+      - state: 0
+        text: 
+        face: 0
+        textEvent: 
       is_UseThis: 0
     round:
     - love
+    is_nextChapter: 0
+    nextChapterIndex: 0
   mainChapter:
   - showName: "\uC870\uC218"
     saveLocation: 1
     chat:
     - state: 0
-      text: hi
+      text: dsfsf
       face: 0
       textEvent: 
     - state: 1
@@ -331,9 +337,15 @@ MonoBehaviour:
         text: yes. my sir
         face: 0
         textEvent: 01000000
+      - state: 0
+        text: 
+        face: 0
+        textEvent: 
       is_UseThis: 0
     round:
     - love
+    is_nextChapter: 0
+    nextChapterIndex: 0
   - showName: "\uC120\uC0DD"
     saveLocation: 0
     chat:
@@ -359,12 +371,16 @@ MonoBehaviour:
       is_UseThis: 0
     lockAskAndReply: []
     round: []
-  - showName: "\uC544\uB2DD"
+    is_nextChapter: 0
+    nextChapterIndex: 0
+  - showName: 
     saveLocation: 0
     chat: []
     askAndReply: []
     lockAskAndReply: []
     round: []
+    is_nextChapter: 0
+    nextChapterIndex: 0
 --- !u!114 &1208371921
 MonoBehaviour:
   m_ObjectHideFlags: 0

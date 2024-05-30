@@ -14,6 +14,9 @@ namespace ChatVisual
         public ESaveLocation saveLocation;
         public List<string> round = new List<string>();
 
+        public bool is_nextChapter;
+        public int nextChapterIndex;
+
         protected override void OnStart()
         {
 

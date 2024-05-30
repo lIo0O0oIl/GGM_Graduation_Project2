@@ -50,8 +50,10 @@ public class ChatEditor : EditorWindow
         hierarchyView = root.Q<HierarchyView>("hierarchy-view");       // 아래꺼 가져오기 hierarchy 임.
        
         arrayAddBtn = root.Q<Button>("AddBtn");     // 버튼 가져오기
+        arrayAddBtn.tooltip = "Chapter Add";
         arrayAddBtn.clickable.clicked += OnArrayAddBtn;
         dangerBtn = root.Q<Button>("ClearBtn");
+        dangerBtn.tooltip = "All Nodes Delete";
         dangerBtn.clickable.clicked += OnClearNodes;
 
         chatView.OnNodeSelected += OnSelectionNodeChanged;      // 노드를 누른 것이 달라지면 이 이벤트 호출

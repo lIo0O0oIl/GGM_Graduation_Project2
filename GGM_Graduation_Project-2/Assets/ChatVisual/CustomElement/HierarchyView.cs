@@ -23,6 +23,7 @@ namespace ChatVisual
             Clear();
 
             ScrollView scrollView = new ScrollView(ScrollViewMode.Vertical);
+            scrollView.style.marginBottom = 5;
             scrollView.Add(new Label("Chapters :"));
             for (int i = 0; i < chatContainer.MainChapter.Count; ++i)
             {
@@ -30,7 +31,7 @@ namespace ChatVisual
                 string name = "";
                 if (chatContainer.MainChapter[i].showName == null || chatContainer.MainChapter[i].showName == "")
                 {
-                    name = "루트 노드에서 이름을 추가해주세요.";
+                    name = "???";
                 }
                 else
                 {
@@ -38,19 +39,34 @@ namespace ChatVisual
                 }
                 var button = new Button(() => ChangeChapter(index))
                 {
-                    text = name + " - " + (index + 1).ToString()
+                    text = name + " - " + index.ToString()
                 };
-                scrollView.Add(button);
+                button.style.flexGrow = 1;
+                var deleteButton = new Button(() => DeleteChapter(index))
+                {
+                    text = "Delete"
+                };
+                var set = new VisualElement();
+                set.style.flexDirection = FlexDirection.Row;
+                set.Add(button);
+                set.Add(deleteButton);
+                scrollView.Add(set);
             }
             Add(scrollView);
         }
 
         private void ChangeChapter(int index)
         {
-            chatView.SaveChatSystem();
-            chatContainer.ChangeNowChapter(index);
-            chatView.LoadChatSystem(chatContainer); 
-            chatView.PopulateView();
+            chatView.SaveChatSystem();      // 지금 챕터 저장해주기 
+            chatContainer.ChangeNowChapter(index);      // 챕터 넘기기
+            chatView.LoadChatSystem(chatContainer);         // 챕터 로드해주기
+            chatView.PopulateView();        // 보이는 것 그려주기
+        }
+
+        private void DeleteChapter(int index)
+        {
+            chatContainer.MainChapter.RemoveAt(index);
+            UpdateHierarchy(chatContainer, chatView);
         }
     }
 }

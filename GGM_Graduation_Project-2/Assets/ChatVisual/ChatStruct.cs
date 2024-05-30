@@ -70,6 +70,9 @@ namespace ChatVisual
         public List<AskAndReply> askAndReply = new List<AskAndReply>();           // 질문들
         public List<LockAskAndReply> lockAskAndReply = new List<LockAskAndReply>();       // 잠긴 질문들
         public List<string> round = new List<string>();           // 증거로 사용되어
+
+        public bool is_nextChapter;     // 다음챕터로 넘어가는지
+        public int nextChapterIndex;         // 다음 챕터로 넘어간다면 챕터의 인덱스 가 필요함
     }
 
     public class ChatStruct : MonoBehaviour { }
