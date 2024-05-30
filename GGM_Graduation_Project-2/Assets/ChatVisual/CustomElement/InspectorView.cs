@@ -48,12 +48,14 @@ namespace ChatVisual
                             rootNode.description = EditorGUILayout.TextArea(rootNode.description, EditorStyles.textArea);
                             GUILayout.Space(15);
 
-                            GUILayout.Label("ShowName");
-                            rootNode.showName = EditorGUILayout.TextArea(rootNode.showName, EditorStyles.textArea);     // 누군지
+                            rootNode.showName = EditorGUILayout.TextField("ShowName", rootNode.showName, EditorStyles.textArea);     // 누군지
                             GUILayout.Space(5);
 
+                            GUILayout.BeginHorizontal();
                             GUILayout.Label("SaveLocation");
+                            GUILayout.Space(50);
                             rootNode.saveLocation = (ESaveLocation)EditorGUILayout.EnumPopup(rootNode.saveLocation);        // 이넘값 바꾸기
+                            GUILayout.EndHorizontal();
                             GUILayout.Space(10);
 
                             // round 추가

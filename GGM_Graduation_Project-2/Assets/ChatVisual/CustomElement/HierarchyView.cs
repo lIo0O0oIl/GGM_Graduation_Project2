@@ -37,11 +37,21 @@ namespace ChatVisual
                 {
                     name = chatContainer.MainChapter[i].showName;
                 }
-                var button = new Button(() => ChangeChapter(index))
-                {
-                    text = name + " - " + index.ToString()
-                };
+
+                Button button = new Button(() => ChangeChapter(index));
+                button.style.flexDirection = FlexDirection.Row;
+                button.style.justifyContent = Justify.Center;
                 button.style.flexGrow = 1;
+
+                TextElement nameText = new TextElement();
+                nameText.text = name;
+                button.Add(nameText);
+
+                TextElement indexText = new TextElement();
+                indexText.text = " - " + index.ToString();
+                indexText.style.color = Color.gray;
+                button.Add(indexText);
+
                 var deleteButton = new Button(() => DeleteChapter(index))
                 {
                     text = "Delete"
