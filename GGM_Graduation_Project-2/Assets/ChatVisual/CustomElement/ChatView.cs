@@ -376,7 +376,7 @@ namespace ChatVisual
             });
 
             // 숫자 만들어주기
-            this.chatContainer.SortIndex();
+            this.chatContainer.SortChildAndIndex();
         }
 
         private NodeView FindNodeView(Node node)

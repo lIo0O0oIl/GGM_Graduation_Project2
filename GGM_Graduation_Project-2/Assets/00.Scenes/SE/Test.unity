@@ -225,6 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1208371919}
   - component: {fileID: 1208371920}
+  - component: {fileID: 1208371921}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -260,134 +261,145 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowChaptersIndex: 0
-  nowChatIndex: 10
+  nowChatIndex: 9
   nowChapter:
-    showName: "0\uC54C\uBC00"
-    saveLocation: 0
+    showName: "\uC870\uC218"
+    saveLocation: 2
     chat:
-    - state: 1
-      text: 1
-      face: 1
-      textEvent: 000000000000000000000000000000000000000000000000
     - state: 0
-      text: 2
+      text: dsfsf
       face: 0
       textEvent: 
     - state: 1
-      text: 3
+      text: okok
       face: 0
       textEvent: 
     askAndReply:
-    - ask: 
+    - ask: give me
       reply:
       - state: 0
-        text: "\uB300\uD6541"
-        face: 0
+        text: ok...
+        face: 2
         textEvent: 
-      - state: 1
-        text: "\uB300\uD6542"
+      - state: 0
+        text: you bad..!
         face: 0
-        textEvent: 
+        textEvent: 00000000
       is_UseThis: 0
     lockAskAndReply:
-    - evidence: []
-      ask: 13123213123
+    - evidence:
+      - your love
+      ask: you love me?
       reply:
-      - state: 1
-        text: "\uC7A0\uAE40\uC9C8\uBB381"
-        face: 0
-        textEvent: 
       - state: 0
-        text: "\uC7A0\uAE40\uC9C8\uBB382"
+        text: yes. my sir
+        face: 0
+        textEvent: 01000000
+      - state: 0
+        text: 
         face: 0
         textEvent: 
       is_UseThis: 0
     round:
-    - "\uB028"
-    - "\uB028\uB03D"
+    - love
+    is_nextChapter: 0
+    nextChapterIndex: 0
   mainChapter:
-  - showName: "0\uC54C\uBC00"
-    saveLocation: 0
+  - showName: "\uC870\uC218"
+    saveLocation: 2
     chat:
-    - state: 1
-      text: 1
-      face: 1
-      textEvent: 000000000000000000000000000000000000000000000000
     - state: 0
-      text: 2
+      text: dsfsf
       face: 0
       textEvent: 
     - state: 1
-      text: 3
+      text: okok
       face: 0
       textEvent: 
     askAndReply:
-    - ask: 
+    - ask: give me
       reply:
       - state: 0
-        text: "\uB300\uD6541"
-        face: 0
+        text: ok...
+        face: 2
         textEvent: 
-      - state: 1
-        text: "\uB300\uD6542"
+      - state: 0
+        text: you bad..!
         face: 0
-        textEvent: 
+        textEvent: 00000000
       is_UseThis: 0
     lockAskAndReply:
-    - evidence: []
-      ask: 13123213123
+    - evidence:
+      - your love
+      ask: you love me?
       reply:
-      - state: 1
-        text: "\uC7A0\uAE40\uC9C8\uBB381"
-        face: 0
-        textEvent: 
       - state: 0
-        text: "\uC7A0\uAE40\uC9C8\uBB382"
+        text: yes. my sir
+        face: 0
+        textEvent: 01000000
+      - state: 0
+        text: 
         face: 0
         textEvent: 
       is_UseThis: 0
     round:
-    - "\uB028"
-    - "\uB028\uB03D"
-  - showName: "\uC544\uB291\u3134\uB370"
+    - love
+    is_nextChapter: 0
+    nextChapterIndex: 0
+  - showName: "\uC120\uC0DD"
     saveLocation: 0
     chat:
-    - state: 0
-      text: 1
+    - state: 1
+      text: "you \uC120\uC0DD?"
       face: 0
       textEvent: 
     - state: 0
-      text: 2
-      face: 0
-      textEvent: 
-    - state: 0
-      text: 3
+      text: yes yes
       face: 0
       textEvent: 
     askAndReply:
-    - ask: "\u314B\u314B"
+    - ask: "you \uBC14\uBCF4?"
       reply:
       - state: 0
-        text: "\uADF8\uB0E5\uC9C8\uBB381"
-        face: 0
-        textEvent: 
-      - state: 0
-        text: "\uADF8\uB0E5\uC9C8\uBB382"
-        face: 0
-        textEvent: 
-      - state: 0
-        text: "\uADF8\uB0E5\uC9C8\uBB383"
+        text: "yes...... I'm \uBC14\uBCF4"
+        face: 2
+        textEvent: 00000000
+      - state: 1
+        text: hahaha good!
         face: 0
         textEvent: 
       is_UseThis: 0
-    lockAskAndReply:
-    - evidence: []
-      ask: 22
-      reply: []
-      is_UseThis: 0
-    round:
-    - "\uB028"
-    - "\uB028\uB03D"
+    lockAskAndReply: []
+    round: []
+    is_nextChapter: 0
+    nextChapterIndex: 0
+  - showName: 
+    saveLocation: 0
+    chat: []
+    askAndReply: []
+    lockAskAndReply: []
+    round: []
+    is_nextChapter: 0
+    nextChapterIndex: 0
+--- !u!114 &1208371921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208371918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cd18f64cf12764788f0a74c005923b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: []
+  child:
+    text: dkssud
+    id: 54
+  child2:
+    text: good
+    pi: 3.141592
 --- !u!1 &1779873654
 GameObject:
   m_ObjectHideFlags: 0

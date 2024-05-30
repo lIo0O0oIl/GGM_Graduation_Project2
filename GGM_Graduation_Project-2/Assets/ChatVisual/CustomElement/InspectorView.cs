@@ -20,15 +20,16 @@ namespace ChatVisual
         private List<string> roundList = new List<string>();        // 보여질 라운드(파일모음이름)
 
         private bool is_Expand = false;
+        private bool is_LoadList = false;
 
-        public void UpdateSelection(NodeView node)      // 누른 노드가 다른거면
+        public void UpdateInspector(NodeView node)      // 누른 노드가 다른거면
         {
             Clear();        // 엘리먼트 모두 없애고
 
             is_Expand = false;
+            is_LoadList = false;
 
             var container = new IMGUIContainer();
-            Debug.Log(container);
             container.onGUIHandler = () =>
             {
                 GUIStyle style = new GUIStyle(GUI.skin.label);
@@ -47,16 +48,22 @@ namespace ChatVisual
                             rootNode.description = EditorGUILayout.TextArea(rootNode.description, EditorStyles.textArea);
                             GUILayout.Space(15);
 
-                            GUILayout.Label("ShowName");
-                            rootNode.showName = EditorGUILayout.TextArea(rootNode.showName, EditorStyles.textArea);     // 누군지
+                            rootNode.showName = EditorGUILayout.TextField("ShowName", rootNode.showName, EditorStyles.textArea);     // 누군지
                             GUILayout.Space(5);
 
+                            GUILayout.BeginHorizontal();
                             GUILayout.Label("SaveLocation");
+                            GUILayout.Space(50);
                             rootNode.saveLocation = (ESaveLocation)EditorGUILayout.EnumPopup(rootNode.saveLocation);        // 이넘값 바꾸기
+                            GUILayout.EndHorizontal();
                             GUILayout.Space(10);
 
                             // round 추가
-                            roundList = new List<string>(rootNode.round);
+                            if (!is_LoadList)
+                            {
+                                roundList = new List<string>(rootNode.round);
+                                is_LoadList = true;
+                            }
                             GUIStyle boxStyle = EditorStyles.helpBox;
                             GUILayout.BeginVertical(boxStyle);
                             is_Expand = EditorGUILayout.BeginFoldoutHeaderGroup(is_Expand, "Round List", menuAction: ShowHeaderContextMenu);
@@ -74,6 +81,14 @@ namespace ChatVisual
                             rootNode.round = new List<string>(roundList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
+                            GUILayout.Space(5);
+
+                            // 이 챕터가 끝나면 다음 챕터로 이동하게 하는 것이 있냐
+                            rootNode.is_nextChapter = EditorGUILayout.Toggle("is_nextChapter", rootNode.is_nextChapter);
+                            if (rootNode.is_nextChapter)
+                            {
+                                rootNode.nextChapterIndex = EditorGUILayout.IntField("nextChapterIndex", rootNode.nextChapterIndex);     // 다음으로 넘어갈 쳇팅
+                            }
                         }
                         break;
                     case ChatNode:
@@ -97,13 +112,16 @@ namespace ChatVisual
                             GUILayout.Space(10);
 
                             // 쳇팅 이벤트 추가
-                            chatEventList = new List<EChatEvent>(chatNode.textEvent);
+                            if (!is_LoadList)
+                            {
+                                chatEventList = new List<EChatEvent>(chatNode.textEvent);
+                                is_LoadList = true;
+                            }
                             GUIStyle boxStyle = EditorStyles.helpBox;
                             GUILayout.BeginVertical(boxStyle);
                             is_Expand = EditorGUILayout.BeginFoldoutHeaderGroup(is_Expand, "Chat Event List", menuAction: ShowHeaderContextMenu);
                             if (is_Expand)
                             {
-                                Debug.Log($"이벤트 {chatEventList.Count}");
                                 for (int i = 0; i < chatEventList.Count; ++i)
                                 {
                                     chatEventList[i] = (EChatEvent)EditorGUILayout.EnumPopup(chatEventList[i]);
@@ -142,7 +160,11 @@ namespace ChatVisual
                             GUILayout.Space(10);
 
                             // 증거
-                            evidenceList = new List<string>(lockAskNode.evidence);
+                            if (!is_LoadList)
+                            {
+                                evidenceList = new List<string>(lockAskNode.evidence);
+                                is_LoadList = true;
+                            }
                             GUIStyle boxStyle = EditorStyles.helpBox;
                             GUILayout.BeginVertical(boxStyle);
                             is_Expand = EditorGUILayout.BeginFoldoutHeaderGroup(is_Expand, "Evidence List", menuAction: ShowHeaderContextMenu);

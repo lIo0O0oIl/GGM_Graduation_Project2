@@ -13,6 +13,8 @@ namespace ChatVisual
         public int nowChaptersIndex;        // 챕터 인덱스
         public int nowChatIndex;            // 쳇팅 인덱스
 
+        [Space(30)]
+
         [SerializeField]        // 그냥 지금 어떤 챕터인지 볼려고 있는 것. 참조 복사로 넣어줬음.
         private Chapter nowChapter;
         public Chapter NowChapter { get { return nowChapter; } set { nowChapter = value; } }
@@ -20,6 +22,8 @@ namespace ChatVisual
         [SerializeField]
         private List<Chapter> mainChapter = new List<Chapter>();     // 챕터들
         public List<Chapter> MainChapter { get { return mainChapter; } set { mainChapter = value; } }
+
+        private Node askParentNode;
 
         public void ChangeNowChapter(int index)
         {
@@ -49,7 +53,7 @@ namespace ChatVisual
         {
             nodes.Remove(node);
             AssetDatabase.SaveAssets();
-            SortIndex();
+            SortChildAndIndex();
         }
 #endif
 
@@ -60,7 +64,7 @@ namespace ChatVisual
             if (rootNode != null)
             {
                 rootNode.child = child;
-                SortIndex();
+                SortChildAndIndex();
                 return;
             }
 
@@ -68,7 +72,7 @@ namespace ChatVisual
             if (chatNode != null)
             {
                 chatNode.child.Add(child);
-                SortIndex();
+                SortChildAndIndex();
                 return;
             }
 
@@ -76,7 +80,7 @@ namespace ChatVisual
             if (askNode != null)
             {
                 askNode.child = child;
-                SortIndex();
+                SortChildAndIndex();
                 return;
             }
 
@@ -84,7 +88,7 @@ namespace ChatVisual
             if (lockAskNode != null)
             {
                 lockAskNode.child = child;
-                SortIndex();
+                SortChildAndIndex();
             }
         }
 
@@ -152,81 +156,89 @@ namespace ChatVisual
             return children;
         }
 
-        public void SortIndex()     // 인덱스를 정렬한다.
+        public void SortChildAndIndex()        // 노드를 정렬하고 질문 노드 아래 챗팅이라면 질문 노드의 자식으로 넣어줌. 
         {
             nowChatIndex = 1;
 
-            bool is_firstChatEnd = false;
-            List<Node> askNodes = new List<Node>();     // 질문 담은 곳
-            int askIndex = 0;
+            Queue<Node> askQueue = new Queue<Node>();    // 질문, 잠김질문 담은 곳
+            Node nowNode = nodes[0];
 
-            nodes.ForEach(n =>
+            // DFS 로 쭉 가다가 BFS 로 질문들 모두 받은 다음에 질문에 대답들에 대해서 DFS 로 쭉 해서 인덱스 만들어주기
+            while (nowNode != null)
             {
-                var children = GetChildren(n);
-                if (children.Count == 0) askIndex++;
-                children.ForEach(c =>
+                var children = GetChildren(nowNode);
+                if (children.Count == 1)        // 그냥 쳇팅노드이면
                 {
-                    if (c is ChatNode == false)     // 챗팅노드가 아니면 첫번째챗팅은 끝남.
+                    children[0].index = nowChatIndex;
+                    children[0].indexLabel.text = nowChatIndex.ToString();
+                    nowChatIndex++;
+                    nowNode = children[0];
+                }
+                else
+                {
+                    for (int i = 0; i < children.Count; i++)
                     {
-                        is_firstChatEnd = true;
-                        askNodes.Add(c);
+                        askQueue.Enqueue(children[i]);
 
-                        AskNode askNode = c as AskNode;
-                        if (askNode != null)
+                        if (children[i] is AskNode askNode)
                         {
                             askNode.reply.Clear();
                         }
 
-                        LockAskNode lockAskNode = c as LockAskNode;
-                        if (lockAskNode != null)
+                        if (children[i] is LockAskNode lockAskNode)
                         {
                             lockAskNode.reply.Clear();
                         }
-                    }
-                    else if (c is ChatNode && is_firstChatEnd)
-                    {
-                        // 질문 대답 쳇팅들 나옴.
-                        AskNode askNode = askNodes[askIndex] as AskNode;
-                        if (askNode != null)
-                        {
-                            ChatNode chatNode = c as ChatNode;
-                            if (chatNode != null)
-                            {
-                                Chat chat = new Chat();
-                                chat.text = chatNode.text;
-                                chat.state = chatNode.state;
-                                chat.face = chatNode.face;
-                                chat.textEvent = chatNode.textEvent;
-                                askNode.reply.Add(chat);
-                            }
-                        }
 
-                        LockAskNode lockAskNode = askNodes[askIndex] as LockAskNode;
-                        if (lockAskNode != null)
-                        {
-                            ChatNode chatNode = c as ChatNode;
-                            if (chatNode != null)
-                            {
-                                Chat chat = new Chat();
-                                chat.text = chatNode.text;
-                                chat.state = chatNode.state;
-                                chat.face = chatNode.face;
-                                chat.textEvent = chatNode.textEvent;
-                                lockAskNode.reply.Add(chat);
-                            }
-                        }
+                        children[i].index = nowChatIndex;
+                        children[i].indexLabel.text = nowChatIndex.ToString();
+                        nowChatIndex++;
                     }
+                    break;
+                }
+            }
 
-                    c.index = nowChatIndex;
-                    c.indexLabel.text = nowChatIndex.ToString();
-                    nowChatIndex++;
-                });
-            });
+            while (askQueue.Count > 0)
+            {
+                Debug.Log(askQueue.Peek());
+                askParentNode = askQueue.Peek();
+                var children = GetChildren(askQueue.Peek());
+                if (children.Count > 0) AskChatSort(children[0] as ChatNode);
+                askQueue.Dequeue();
+            }
         }
 
-        private void SortChild(Node node)
+        private void AskChatSort(ChatNode chatNode)      // 질문이 있고 난 후 해당 질문의 자식들을 정렬하기 정렬하면서 부모 것도 넣어줘야함.
         {
-            // DFS 로 쭉 가다가 BFS 로 질문들 모두 받은 다음에 질문에 대답들에 대해서 DFS 로 쭉 해서 인덱스 밀어주기
+            if (chatNode == null) return;
+
+            if (askParentNode is  AskNode askNode)
+            {
+                Chat chat = new Chat();
+                chat.text = chatNode.text;
+                chat.state = chatNode.state;
+                chat.face = chatNode.face;
+                chat.textEvent = chatNode.textEvent;
+                askNode.reply.Add(chat);
+            }
+
+            if (askParentNode is LockAskNode lockAskNode)
+            {
+                Chat chat = new Chat();
+                chat.text = chatNode.text;
+                chat.state = chatNode.state;
+                chat.face = chatNode.face;
+                chat.textEvent = chatNode.textEvent;
+                lockAskNode.reply.Add(chat);
+            }
+
+            chatNode.index = nowChatIndex;
+            chatNode.indexLabel.text = nowChatIndex.ToString();
+            nowChatIndex++;
+
+            Debug.Log(chatNode.child.Count);
+            var next = GetChildren(chatNode);
+            if (next.Count > 0) AskChatSort(next[0] as ChatNode);
         }
     }
 }
