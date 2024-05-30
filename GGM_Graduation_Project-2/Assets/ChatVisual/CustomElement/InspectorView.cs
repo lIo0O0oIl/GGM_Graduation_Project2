@@ -21,14 +21,13 @@ namespace ChatVisual
 
         private bool is_Expand = false;
 
-        public void UpdateSelection(NodeView node)      // 누른 노드가 다른거면
+        public void UpdateInspector(NodeView node)      // 누른 노드가 다른거면
         {
             Clear();        // 엘리먼트 모두 없애고
 
             is_Expand = false;
 
             var container = new IMGUIContainer();
-            Debug.Log(container);
             container.onGUIHandler = () =>
             {
                 GUIStyle style = new GUIStyle(GUI.skin.label);

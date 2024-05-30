@@ -32383,6 +32383,139 @@ MonoBehaviour:
   cutSceneChapters:
   - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
   - {fileID: 11400000, guid: 72d10a1d28d6b0342ad49ae8c2313967, type: 2}
+--- !u!1 &1581868097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1581868099}
+  - component: {fileID: 1581868098}
+  m_Layer: 0
+  m_Name: ChatManagerSE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1581868098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581868097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nowChaptersIndex: 1
+  nowChatIndex: 6
+  nowChapter:
+    showName: "\uC120\uC0DD"
+    saveLocation: 0
+    chat:
+    - state: 1
+      text: "you \uC120\uC0DD?"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: yes yes
+      face: 0
+      textEvent: 
+    askAndReply:
+    - ask: "you \uBC14\uBCF4?"
+      reply:
+      - state: 0
+        text: "yes...... I'm \uBC14\uBCF4"
+        face: 2
+        textEvent: 00000000
+      - state: 1
+        text: hahaha good!
+        face: 0
+        textEvent: 
+      is_UseThis: 0
+    lockAskAndReply: []
+    round: []
+  mainChapter:
+  - showName: "\uC870\uC218"
+    saveLocation: 1
+    chat:
+    - state: 0
+      text: hi
+      face: 0
+      textEvent: 
+    - state: 1
+      text: okok
+      face: 0
+      textEvent: 
+    askAndReply:
+    - ask: give me
+      reply:
+      - state: 0
+        text: ok...
+        face: 2
+        textEvent: 
+      - state: 0
+        text: you bad..!
+        face: 0
+        textEvent: 
+      is_UseThis: 0
+    lockAskAndReply:
+    - evidence:
+      - your love
+      ask: you love me?
+      reply:
+      - state: 0
+        text: yes. my sir
+        face: 0
+        textEvent: 01000000
+      is_UseThis: 0
+    round:
+    - love
+  - showName: "\uC120\uC0DD"
+    saveLocation: 0
+    chat:
+    - state: 1
+      text: "you \uC120\uC0DD?"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: yes yes
+      face: 0
+      textEvent: 
+    askAndReply:
+    - ask: "you \uBC14\uBCF4?"
+      reply:
+      - state: 0
+        text: "yes...... I'm \uBC14\uBCF4"
+        face: 2
+        textEvent: 00000000
+      - state: 1
+        text: hahaha good!
+        face: 0
+        textEvent: 
+      is_UseThis: 0
+    lockAskAndReply: []
+    round: []
+--- !u!4 &1581868099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581868097}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1583076964
 GameObject:
   m_ObjectHideFlags: 0
@@ -45969,3 +46102,4 @@ SceneRoots:
   - {fileID: 150678876}
   - {fileID: 489658200}
   - {fileID: 479266167}
+  - {fileID: 1581868099}

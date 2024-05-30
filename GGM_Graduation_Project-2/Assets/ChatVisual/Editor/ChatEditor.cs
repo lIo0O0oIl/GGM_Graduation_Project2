@@ -64,6 +64,8 @@ public class ChatEditor : EditorWindow
         if (chatContainer != null)
         {
             Debug.Log("배열 추가해주기");
+            chatContainer.MainChapter.Add(new Chapter());
+            hierarchyView.UpdateHierarchy(chatContainer, chatView);
         }
     }
 
@@ -85,7 +87,7 @@ public class ChatEditor : EditorWindow
 
     private void OnSelectionNodeChanged(NodeView nodeView)
     {
-        inspectorView.UpdateSelection(nodeView);        // 이 노드를 눌렀다고 인스펙터에 알려줌.
+        inspectorView.UpdateInspector(nodeView);        // 이 노드를 눌렀다고 인스펙터에 알려줌.
     }
 
     private void OnSelectionChange()        // 에디터를 킨 상태에서 무언가를 선택했을 때
@@ -98,7 +100,7 @@ public class ChatEditor : EditorWindow
 
                 chatContainer.ChangeNowChapter(0);      // 가장 처음은 0번째
 
-                hierarchyView.MakeHierarchy(chatContainer, chatView);      // 하이어라키 만들어주기
+                hierarchyView.UpdateHierarchy(chatContainer, chatView);      // 하이어라키 만들어주기
                 
                 chatView.LoadChatSystem(chatContainer);     // 데이터 로드 해주기
                 chatView.PopulateView();           // 데이터를 기반으로 보이는 것 만들어주기

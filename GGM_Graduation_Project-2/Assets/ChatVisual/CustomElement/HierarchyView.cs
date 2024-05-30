@@ -14,7 +14,7 @@ namespace ChatVisual
         private ChatContainer chatContainer;
         private ChatView chatView;
 
-        public void MakeHierarchy(ChatContainer _chatContainer, ChatView _chatView)
+        public void UpdateHierarchy(ChatContainer _chatContainer, ChatView _chatView)
         {
             chatContainer = _chatContainer;
             chatView = _chatView;
@@ -27,9 +27,18 @@ namespace ChatVisual
             for (int i = 0; i < chatContainer.MainChapter.Count; ++i)
             {
                 int index = i;
+                string name = "";
+                if (chatContainer.MainChapter[i].showName == null || chatContainer.MainChapter[i].showName == "")
+                {
+                    name = "루트 노드에서 이름을 추가해주세요.";
+                }
+                else
+                {
+                    name = chatContainer.MainChapter[i].showName;
+                }
                 var button = new Button(() => ChangeChapter(index))
                 {
-                    text = chatContainer.MainChapter[i].showName
+                    text = name + " - " + (index + 1).ToString()
                 };
                 scrollView.Add(button);
             }

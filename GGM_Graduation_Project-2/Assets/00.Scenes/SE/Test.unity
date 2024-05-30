@@ -261,95 +261,110 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowChaptersIndex: 0
-  nowChatIndex: 10
+  nowChatIndex: 8
   nowChapter:
-    showName: "0\uC54C\uBC00"
-    saveLocation: 0
+    showName: "\uC870\uC218"
+    saveLocation: 1
     chat:
-    - state: 1
-      text: 1
-      face: 1
-      textEvent: 000000000000000000000000
     - state: 0
-      text: 2
+      text: hi
       face: 0
       textEvent: 
     - state: 1
-      text: 3
+      text: okok
       face: 0
       textEvent: 
     askAndReply:
-    - ask: aa
+    - ask: give me
       reply:
       - state: 0
-        text: "\uB300\uD6541"
-        face: 0
+        text: ok...
+        face: 2
         textEvent: 
-      - state: 1
-        text: "\uB300\uD6542"
+      - state: 0
+        text: you bad..!
         face: 0
-        textEvent: 
+        textEvent: 00000000
       is_UseThis: 0
     lockAskAndReply:
-    - evidence: []
-      ask: 13123213123
+    - evidence:
+      - your love
+      ask: you love me?
       reply:
-      - state: 1
-        text: "\uC7A0\uAE40\uC9C8\uBB381"
-        face: 0
-        textEvent: 
       - state: 0
-        text: "\uC7A0\uAE40\uC9C8\uBB382"
+        text: yes. my sir
         face: 0
-        textEvent: 
+        textEvent: 01000000
       is_UseThis: 0
     round:
-    - "\uB028"
-    - "\uB028\uB03D"
+    - love
   mainChapter:
-  - showName: "0\uC54C\uBC00"
-    saveLocation: 0
+  - showName: "\uC870\uC218"
+    saveLocation: 1
     chat:
-    - state: 1
-      text: 1
-      face: 1
-      textEvent: 000000000000000000000000
     - state: 0
-      text: 2
+      text: hi
       face: 0
       textEvent: 
     - state: 1
-      text: 3
+      text: okok
       face: 0
       textEvent: 
     askAndReply:
-    - ask: aa
+    - ask: give me
       reply:
       - state: 0
-        text: "\uB300\uD6541"
-        face: 0
+        text: ok...
+        face: 2
         textEvent: 
-      - state: 1
-        text: "\uB300\uD6542"
+      - state: 0
+        text: you bad..!
         face: 0
-        textEvent: 
+        textEvent: 00000000
       is_UseThis: 0
     lockAskAndReply:
-    - evidence: []
-      ask: 13123213123
+    - evidence:
+      - your love
+      ask: you love me?
       reply:
-      - state: 1
-        text: "\uC7A0\uAE40\uC9C8\uBB381"
-        face: 0
-        textEvent: 
       - state: 0
-        text: "\uC7A0\uAE40\uC9C8\uBB382"
+        text: yes. my sir
+        face: 0
+        textEvent: 01000000
+      is_UseThis: 0
+    round:
+    - love
+  - showName: "\uC120\uC0DD"
+    saveLocation: 0
+    chat:
+    - state: 1
+      text: "you \uC120\uC0DD?"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: yes yes
+      face: 0
+      textEvent: 
+    askAndReply:
+    - ask: "you \uBC14\uBCF4?"
+      reply:
+      - state: 0
+        text: "yes...... I'm \uBC14\uBCF4"
+        face: 2
+        textEvent: 00000000
+      - state: 1
+        text: hahaha good!
         face: 0
         textEvent: 
       is_UseThis: 0
-    round:
-    - "\uB028"
-    - "\uB028\uB03D"
+    lockAskAndReply: []
+    round: []
+  - showName: "\uC544\uB2DD"
+    saveLocation: 0
+    chat: []
+    askAndReply: []
+    lockAskAndReply: []
+    round: []
 --- !u!114 &1208371921
 MonoBehaviour:
   m_ObjectHideFlags: 0
