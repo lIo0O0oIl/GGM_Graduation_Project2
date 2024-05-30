@@ -62,13 +62,13 @@ public class ChattingManager : MonoBehaviour
         Debug.Log("체팅이 시작됨" + index);
         // 만약 내 쳇팅이 꺼져있으면 켜질 때까지는 대기 엑션으로??
         // 챗팅이 켜지면 액션으로 다시 이 함수를 부르게 한다?
-        if (UIManager.Instance.panels[0].activeSelf == false)
-        {
-            UIManager.Instance.alarmIcon.SetActive(true);
-            UIManager.Instance.chatIndex = index;
-            UIManager.Instance.startChatEvent += (chatIndex) => StartChatting(chatIndex);
-            return; 
-        }
+        //if (UIManager.Instance.panels[0].activeSelf == false)
+        //{
+        //    UIManager.Instance.alarmIcon.SetActive(true);
+        //    UIManager.Instance.chatIndex = index;
+        //    UIManager.Instance.startChatEvent += (chatIndex) => StartChatting(chatIndex);
+        //    return; 
+        //}
 
         nowChatIndex = 0;
         nowAskChatIndex = 0;

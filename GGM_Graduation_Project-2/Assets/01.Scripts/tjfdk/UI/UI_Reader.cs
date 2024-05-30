@@ -14,6 +14,7 @@ public class UI_Reader : MonoBehaviour
     protected UIReader_Connection connectionSystem;
     protected UIReader_FileSystem fileSystem;
     protected UIReader_ImageFinding imageSystem;
+    protected UIReader_CutScene cutSceneSystem;
         // Manager
     protected CutSceneManager cutSceneManager;
     protected ImageManager imageManager;
@@ -29,6 +30,9 @@ public class UI_Reader : MonoBehaviour
     protected Button connectionButton;
     protected Button settingButton;
         // Panel
+    public VisualElement cutScenePanel;
+    public VisualElement mainPanel;
+
     protected VisualElement previousPanel;
     protected VisualElement chattingPanel;
     protected VisualElement connectionPanel;
@@ -39,13 +43,14 @@ public class UI_Reader : MonoBehaviour
 
     protected void Awake()
     {
-        // º≠∑Œ ¬¸¡∂∂Û ø¿∑˘≥Ø ºˆµµ ¿÷¿Ω
+        // ÏÑúÎ°ú Ï∞∏Ï°∞Îùº Ïò§Î•òÎÇ† ÏàòÎèÑ ÏûàÏùå
         // UI Reader
         mainSystem = GetComponent<TestUI>();
         chatSystem = GetComponent<UIReader_Chatting>();
         connectionSystem = GetComponent<UIReader_Connection>();
         fileSystem = GetComponent<UIReader_FileSystem>();
         imageSystem = GetComponent<UIReader_ImageFinding>();
+        cutSceneSystem = GetComponent<UIReader_CutScene>();
 
         // Manager
         cutSceneManager = GetComponent<CutSceneManager>();
@@ -59,6 +64,7 @@ public class UI_Reader : MonoBehaviour
 
         Load();
 
+        //panels.Add(cutScenePanel);
         panels.Add(chattingPanel);
         panels.Add(connectionPanel);
         panels.Add(imageFindingPanel);
@@ -72,6 +78,9 @@ public class UI_Reader : MonoBehaviour
         settingButton = root.Q<Button>("SoundSettingBtn");
 
         // Panel
+        cutScenePanel = root.Q<VisualElement>("CutScene");
+        mainPanel = root.Q<VisualElement>("MainGame");
+
         chattingPanel = root.Q<VisualElement>("Chatting");
         connectionPanel = root.Q<VisualElement>("Connection");
         imageFindingPanel = root.Q<VisualElement>("ImageFinding");
@@ -100,14 +109,28 @@ public class UI_Reader : MonoBehaviour
         }
     }
 
-    public void DoText(Label ui, string text, float during, Action action)
+    public void OpenCutScene(bool isOpen)
+    {
+        if (isOpen)
+        {
+            cutScenePanel.style.display = DisplayStyle.Flex;
+            mainPanel.style.display= DisplayStyle.None;
+        }
+        else
+        {
+            cutScenePanel.style.display = DisplayStyle.None;
+            mainPanel.style.display = DisplayStyle.Flex;
+        }
+    }
+
+    public void DoText(Label ui, string text, float during, bool isErase, Action action)
     {
         int currentTextLength = 0;
         int previousTextLength = -1;
 
         currentTextTween = DOTween.To(() => currentTextLength, x => currentTextLength = x, text.Length, during)
             .SetEase(Ease.Linear)
-            //.OnPlay(() => { ui.text = ""; })
+            .OnPlay(() => { ui.text = ""; })
             .OnUpdate(() =>
             {
                 if (currentTextLength != previousTextLength)
@@ -118,7 +141,8 @@ public class UI_Reader : MonoBehaviour
             })
             .OnComplete(() =>
             {
-                ui.text = "";
+                if (isErase)
+                    ui.text = "";
                 currentTextLength = 0;
                 action();
             });

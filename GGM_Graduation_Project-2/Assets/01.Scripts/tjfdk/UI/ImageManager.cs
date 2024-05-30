@@ -86,4 +86,15 @@ public class ImageManager : MonoBehaviour
     //        imageDic[png.name] = png;
     //    }
     //}
+
+    public ImagePng FindPNG(string name)
+    {
+        foreach (ImagePng png in  pngs)
+        {
+            if (png.name == name) 
+                return png;
+        }
+
+        return null;
+    }
 }

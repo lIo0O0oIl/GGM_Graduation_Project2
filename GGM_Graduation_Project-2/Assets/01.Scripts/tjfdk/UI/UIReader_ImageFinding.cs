@@ -45,10 +45,10 @@ public class UIReader_ImageFinding : UI_Reader
 
     public void EventImage(VisualElement file)
     {
-        // ImageÀÏ ¶§
+        // Imageì¼ ë•Œ
         foreach (ImageB image in imageManager.images)
         {
-            // ÇØ´ç ÀÌ¹ÌÁö¸¦ Ã£¾Ò´Ù¸é ¹è°æ ¼³Á¤
+            // í•´ë‹¹ ì´ë¯¸ì§€ë¥¼ ì°¾ì•˜ë‹¤ë©´ ë°°ê²½ ì„¤ì •
             if (image.name == file.Q<Label>("FileName").text)
             {
                 if (image.isOpen)
@@ -60,21 +60,21 @@ public class UIReader_ImageFinding : UI_Reader
                     imageBackground.style.backgroundImage = new StyleBackground(image.image);
                     imageGround.Add(imageBackground);
 
-                    // ÀÚ½Ä ´Ü¼­µéÀ» »ı¼º
-                    // ÀÌ¸§À¸·Î Ã£¾ÆÁÖ°í
+                    // ìì‹ ë‹¨ì„œë“¤ì„ ìƒì„±
+                    // ì´ë¦„ìœ¼ë¡œ ì°¾ì•„ì£¼ê³ 
                     foreach (string evid in image.pngName)
                     {
-                        // ÇØ´ç ´Ü¼­¸¦ Ã£¾Ò´Ù¸é
+                        // í•´ë‹¹ ë‹¨ì„œë¥¼ ì°¾ì•˜ë‹¤ë©´
                         foreach (ImagePng png in imageManager.pngs)
                         {
                             if (evid == png.name)
                             {
-                                // »ı¼º
+                                // ìƒì„±
                                 VisualElement evidence = null;
-                                // Áß¿äÇÏ´Ù¸é
+                                // ì¤‘ìš”í•˜ë‹¤ë©´
                                 if (png.importance)
                                 {
-                                    // ¸Ş¸ğÀåÀ¸·Î Ç¥½Ã
+                                    // ë©”ëª¨ì¥ìœ¼ë¡œ í‘œì‹œ
                                     evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                                     evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                     evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
@@ -92,26 +92,26 @@ public class UIReader_ImageFinding : UI_Reader
                                         }
                                     });
                                 }
-                                // ¾Æ´Ï¶ó¸é
+                                // ì•„ë‹ˆë¼ë©´
                                 else
                                 {
-                                    // ¾Æ·¡ ±Û·Î¸¸ Ç¥½Ã
+                                    // ì•„ë˜ ê¸€ë¡œë§Œ í‘œì‹œ
                                     evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                                     evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                     evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                     {
                                         VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
                                         imageGround.Add(evidenceDescription);
-                                        DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, 
+                                        DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, true,
                                             () => { imageGround.Remove(evidenceDescription); });
                                     });
                                 }
 
-                                //´Ü¼­ À§Ä¡ ¼³Á¤
+                                //ë‹¨ì„œ ìœ„ì¹˜ ì„¤ì •
                                 evidence.style.position = Position.Absolute;
                                 evidence.style.left = png.pos.x;
                                 evidence.style.top = png.pos.y;
-                                // ´Ü¼­¸¦ ÀÌ¹ÌÁö¿¡ Ãß°¡
+                                // ë‹¨ì„œë¥¼ ì´ë¯¸ì§€ì— ì¶”ê°€
                                 imageBackground.Add(evidence);
                             }
                         }
@@ -122,7 +122,7 @@ public class UIReader_ImageFinding : UI_Reader
             }
         }
 
-        // PngÀÏ ¶§
+        // Pngì¼ ë•Œ
         foreach (ImagePng png in imageManager.pngs)
         {
             if (png.name == file.Q<Label>("FileName").text)
@@ -137,31 +137,31 @@ public class UIReader_ImageFinding : UI_Reader
             //{
             //    if (image.name == file.Q<Label>("FileName").text)
             //    {
-            //        // ÀÌ¹ÌÁö¸¦ ÄÑ. Ã¤ÆÃÀÌµç ¹¹µç ²ô°í
-            //        // for¹® µ¹¸é¼­? ÀÚ½Ä ±î°í? - evidence ÅÛÇÃ¸´À» °¡Á®¿Í!
-            //        // ±¸ºĞÀ» ÇØ. ¸¸¾à¿¡ Áß¿äÇÑ°Å¸é ÅÛÇÃ¸´ ¾²°í, ¾Æ´Ï¸é ±×³É ÀÌ¹ÌÁö¸¸...
+            //        // ì´ë¯¸ì§€ë¥¼ ì¼œ. ì±„íŒ…ì´ë“  ë­ë“  ë„ê³ 
+            //        // forë¬¸ ëŒë©´ì„œ? ìì‹ ê¹Œê³ ? - evidence í…œí”Œë¦¿ì„ ê°€ì ¸ì™€!
+            //        // êµ¬ë¶„ì„ í•´. ë§Œì•½ì— ì¤‘ìš”í•œê±°ë©´ í…œí”Œë¦¿ ì“°ê³ , ì•„ë‹ˆë©´ ê·¸ëƒ¥ ì´ë¯¸ì§€ë§Œ...
 
-            //        // visualelement·Î ¹è°æ ±ò°í?
+            //        // visualelementë¡œ ë°°ê²½ ê¹”ê³ ?
             //        VisualElement imageBackground = RemoveContainer(ux_imageGround.Instantiate());
-            //        // ÀÌ¹ÌÁö¸¦ ¼¼ÆÃÇØ.
+            //        // ì´ë¯¸ì§€ë¥¼ ì„¸íŒ…í•´.
             //        imageBackground.style.backgroundImage = new StyleBackground(image.image);
-            //        // ÀÌ¹ÌÁö¸¦ Ãß°¡
+            //        // ì´ë¯¸ì§€ë¥¼ ì¶”ê°€
             //        imageGround.Add(imageBackground);
 
-            //        // ÇØ´ç ÀÌ¹ÌÁöÀÇ ´Ü¼­µé ¹èÄ¡
+            //        // í•´ë‹¹ ì´ë¯¸ì§€ì˜ ë‹¨ì„œë“¤ ë°°ì¹˜
             //        foreach (ImagePng evid in image.)
             //        {
             //            VisualElement evidence = null;
-            //            // Áß¿äÇÑ ´Ü¼­¶ó¸é
+            //            // ì¤‘ìš”í•œ ë‹¨ì„œë¼ë©´
             //            if (evid.importance)
             //            {
-            //                // »ı¼º ¹× ÀÌ¹ÌÁö »ı¼º
+            //                // ìƒì„± ë° ì´ë¯¸ì§€ ìƒì„±
             //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
             //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(evid.evidenceImage);
-            //                // ´Ü¼­ ÀÚ·á Ãß°¡
+            //                // ë‹¨ì„œ ìë£Œ ì¶”ê°€
             //                evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = evid.evidenceName;
             //                evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = evid.evidenceMemo;
-            //                // ÀÌº¥Æ® ¿¬°á - ¸Ş¸ğÀå ÄÑÁö´Â ÀÌº¥Æ®
+            //                // ì´ë²¤íŠ¸ ì—°ê²° - ë©”ëª¨ì¥ ì¼œì§€ëŠ” ì´ë²¤íŠ¸
             //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
             //                {
             //                    VisualElement description = evidence.Q<VisualElement>("Descripte");
@@ -170,24 +170,24 @@ public class UIReader_ImageFinding : UI_Reader
             //            }
             //            else
             //            {
-            //                // »ı¼º ¹× ÀÌ¹ÌÁö »ı¼º
+            //                // ìƒì„± ë° ì´ë¯¸ì§€ ìƒì„±
             //                evidence = RemoveContainer(ux_imageGround.Instantiate());
             //                evidence.style.backgroundImage = new StyleBackground(evid.evidenceImage);
-            //                // ÀÌº¥Æ® ¿¬°á - ¾Æ·¡ »ı°¢¸¸ ÄÑÁö´Â ÀÌº¥Æ®
+            //                // ì´ë²¤íŠ¸ ì—°ê²° - ì•„ë˜ ìƒê°ë§Œ ì¼œì§€ëŠ” ì´ë²¤íŠ¸
             //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
             //                {
-            //                    // ¼öÁ¤ ÇÊ¿äÇÔ...
+            //                    // ìˆ˜ì • í•„ìš”í•¨...
             //                    evidenceExplanation.style.display = DisplayStyle.Flex;
             //                    DoText(evidenceExplanation.Q<Label>("Text"), evid.evidenceMemo,
             //                        3f, () => { });
             //                });
             //            }
 
-            //            // ´Ü¼­ À§Ä¡ ¼³Á¤
+            //            // ë‹¨ì„œ ìœ„ì¹˜ ì„¤ì •
             //            evidence.style.position = Position.Absolute;
             //            evidence.style.left = evid.evidencePos.x;
             //            evidence.style.top = evid.evidencePos.y;
-            //            // ´Ü¼­¸¦ ÀÌ¹ÌÁö¿¡ Ãß°¡
+            //            // ë‹¨ì„œë¥¼ ì´ë¯¸ì§€ì— ì¶”ê°€
             //            imageBackground.Add(evidence);
             //        }
             //    }
