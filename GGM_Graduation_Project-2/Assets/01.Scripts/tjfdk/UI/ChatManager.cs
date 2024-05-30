@@ -45,29 +45,29 @@ public class ChatManager : MonoBehaviour
 
     private void AddChat()
     {
-        Dialog dialog = dialogs[chatIndex];
+        //Dialog dialog = dialogs[chatIndex];
 
-        chatIndex++;
+        //chatIndex++;
 
-        if (dialog.msg != "")
-        {
-            chatting.InputChat(true, dialog.isUser, chatting.FindMember(dialog.how), dialog.msg);
+        //if (dialog.msg != "")
+        //{
+        //    chatting.InputChat(true, dialog.isUser, chatting.FindMember(dialog.how), dialog.msg);
 
-            if (dialog.isQuestion)
-            {
-                foreach (Question q in dialog.questions)
-                {
-                    chatting.InputQuestion(true, true, chatting.FindMember(dialog.how), q.msg,
-                        (() => 
-                        { 
-                            // Áú¹® ´©¸£¸é °Á ´ëÈ­·Î ³Ñ°ÜÁÖ°í
-                            chatting.InputChat(true, !dialog.isUser, chatting.FindMember(dialog.how), q.msg);
-                            // ´ë´ä Ãâ·ÂÇÏ±â
-                            foreach (Dialog answer in q.answers)
-                                chatting.InputChat(true, dialog.isUser, chatting.FindMember(dialog.how), answer.msg);
-                        }));
-                }
-            }
-        }
+        //    if (dialog.isQuestion)
+        //    {
+        //        foreach (Question q in dialog.questions)
+        //        {
+        //            chatting.InputQuestion(true, true, chatting.FindMember(dialog.how), q.msg,
+        //                (() => 
+        //                { 
+        //                    // ì§ˆë¬¸ ëˆ„ë¥´ë©´ ê± ëŒ€í™”ë¡œ ë„˜ê²¨ì£¼ê³ 
+        //                    chatting.InputChat(true, !dialog.isUser, chatting.FindMember(dialog.how), q.msg);
+        //                    // ëŒ€ë‹µ ì¶œë ¥í•˜ê¸°
+        //                    foreach (Dialog answer in q.answers)
+        //                        chatting.InputChat(true, dialog.isUser, chatting.FindMember(dialog.how), answer.msg);
+        //                }));
+        //        }
+        //    }
+        //}
     }
 }

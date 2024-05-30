@@ -8,28 +8,28 @@ namespace ChatVisual
 {
     public class ChatContainer : MonoBehaviour
     {
-        public List<Node> nodes = new List<Node>();         // ³ëµå ¸®½ºÆ®
+        public List<Node> nodes = new List<Node>();         // ë…¸ë“œ ë¦¬ìŠ¤íŠ¸
 
-        public int nowChaptersIndex;        // Ã©ÅÍ ÀÎµ¦½º
-        public int nowChatIndex;            // ÃÂÆÃ ÀÎµ¦½º
+        public int nowChaptersIndex;        // ì±•í„° ì¸ë±ìŠ¤
+        public int nowChatIndex;            // ì³‡íŒ… ì¸ë±ìŠ¤
 
-        [SerializeField]        // ±×³É Áö±İ ¾î¶² Ã©ÅÍÀÎÁö º¼·Á°í ÀÖ´Â °Í. ÂüÁ¶ º¹»ç·Î ³Ö¾îÁáÀ½.
+        [SerializeField]        // ê·¸ëƒ¥ ì§€ê¸ˆ ì–´ë–¤ ì±•í„°ì¸ì§€ ë³¼ë ¤ê³  ìˆëŠ” ê²ƒ. ì°¸ì¡° ë³µì‚¬ë¡œ ë„£ì–´ì¤¬ìŒ.
         private Chapter nowChapter;
         public Chapter NowChapter { get { return nowChapter; } set { nowChapter = value; } }
 
         [SerializeField]
-        private List<Chapter> mainChapter = new List<Chapter>();     // Ã©ÅÍµé
+        private List<Chapter> mainChapter = new List<Chapter>();     // ì±•í„°ë“¤
         public List<Chapter> MainChapter { get { return mainChapter; } set { mainChapter = value; } }
 
         public void ChangeNowChapter(int index)
         {
             if (mainChapter.Count <= index)
             {
-                Debug.Log("»õ·Î ¸¸µé¾îÁÖ±â");
+                Debug.Log("ìƒˆë¡œ ë§Œë“¤ì–´ì£¼ê¸°");
                 mainChapter.Add(new Chapter());
             }
             nowChaptersIndex = index;
-            nowChapter = mainChapter[index];        // ÂüÁ¶ º¹»ç
+            nowChapter = mainChapter[index];        // ì°¸ì¡° ë³µì‚¬
         }
 
 #if UNITY_EDITOR
@@ -38,7 +38,7 @@ namespace ChatVisual
             var node = Activator.CreateInstance(type) as Node;
             node.guid = GUID.Generate().ToString();
 
-            nodes.Add(node);        // ¸®½ºÆ®¿¡ Ãß°¡
+            nodes.Add(node);        // ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
 
             AssetDatabase.SaveAssets();
 
@@ -55,8 +55,8 @@ namespace ChatVisual
 
         public void AddChild(Node parent, Node child)
         {
-            Debug.Log($"¼± ¿¬°á, parent : {parent}, child : {child}");
-            var rootNode = parent as RootNode;      //ºÎ¸ğ°¡ ·çÆ®ÀÌ¸é
+            Debug.Log($"ì„  ì—°ê²°, parent : {parent}, child : {child}");
+            var rootNode = parent as RootNode;      //ë¶€ëª¨ê°€ ë£¨íŠ¸ì´ë©´
             if (rootNode != null)
             {
                 rootNode.child = child;
@@ -90,7 +90,7 @@ namespace ChatVisual
 
         public void RemoveChild(Node parent, Node child)
         {
-            var rootNode = parent as RootNode;      //ºÎ¸ğ°¡ ·çÆ®ÀÌ¸é
+            var rootNode = parent as RootNode;      //ë¶€ëª¨ê°€ ë£¨íŠ¸ì´ë©´
             if (rootNode != null)
             {
                 rootNode.child = null;
@@ -152,12 +152,12 @@ namespace ChatVisual
             return children;
         }
 
-        public void SortIndex()     // ÀÎµ¦½º¸¦ Á¤·ÄÇÑ´Ù.
+        public void SortIndex()     // ì¸ë±ìŠ¤ë¥¼ ì •ë ¬í•œë‹¤.
         {
             nowChatIndex = 1;
 
             bool is_firstChatEnd = false;
-            List<Node> askNodes = new List<Node>();     // Áú¹® ´ãÀº °÷
+            List<Node> askNodes = new List<Node>();     // ì§ˆë¬¸ ë‹´ì€ ê³³
             int askIndex = 0;
 
             nodes.ForEach(n =>
@@ -166,7 +166,7 @@ namespace ChatVisual
                 if (children.Count == 0) askIndex++;
                 children.ForEach(c =>
                 {
-                    if (c is ChatNode == false)     // ÃªÆÃ³ëµå°¡ ¾Æ´Ï¸é Ã¹¹øÂ°ÃªÆÃÀº ³¡³².
+                    if (c is ChatNode == false)     // ì±—íŒ…ë…¸ë“œê°€ ì•„ë‹ˆë©´ ì²«ë²ˆì§¸ì±—íŒ…ì€ ëë‚¨.
                     {
                         is_firstChatEnd = true;
                         askNodes.Add(c);
@@ -185,7 +185,7 @@ namespace ChatVisual
                     }
                     else if (c is ChatNode && is_firstChatEnd)
                     {
-                        // Áú¹® ´ë´ä ÃÂÆÃµé ³ª¿È.
+                        // ì§ˆë¬¸ ëŒ€ë‹µ ì³‡íŒ…ë“¤ ë‚˜ì˜´.
                         AskNode askNode = askNodes[askIndex] as AskNode;
                         if (askNode != null)
                         {
@@ -226,7 +226,7 @@ namespace ChatVisual
 
         private void SortChild(Node node)
         {
-            // DFS ·Î Âß °¡´Ù°¡ BFS ·Î Áú¹®µé ¸ğµÎ ¹ŞÀº ´ÙÀ½¿¡ Áú¹®¿¡ ´ë´äµé¿¡ ´ëÇØ¼­ DFS ·Î Âß ÇØ¼­ ÀÎµ¦½º ¹Ğ¾îÁÖ±â
+            // DFS ë¡œ ì­‰ ê°€ë‹¤ê°€ BFS ë¡œ ì§ˆë¬¸ë“¤ ëª¨ë‘ ë°›ì€ ë‹¤ìŒì— ì§ˆë¬¸ì— ëŒ€ë‹µë“¤ì— ëŒ€í•´ì„œ DFS ë¡œ ì­‰ í•´ì„œ ì¸ë±ìŠ¤ ë°€ì–´ì£¼ê¸°
         }
     }
 }

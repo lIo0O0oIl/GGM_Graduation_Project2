@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class UIReader_CutScene : UI_Reader
 {
+    CutSceneManager cutSceneManager;
+
     Button scene;
     Label text;
 
@@ -15,20 +17,36 @@ public class UIReader_CutScene : UI_Reader
     {
         base.OnEnable();
 
+        cutSceneManager = GetComponent<CutSceneManager>();  
+
         scene = root.Q<Button>("Scene");
         text = root.Q<Label>("Text");
 
-        scene.clicked += cutSceneManager.NextCut;
+        scene.clicked += (() => { cutSceneManager.Next(); });
     }
 
     private void Update()
     {
-        if  (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            DoText(text, "너무 어려워요 도와주세요", 4f, () => { });
+            PlayCutScene("Start");
         }
-        if  (Input.GetKeyDown(KeyCode.I))
-            EndText();
+
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    CutScene(true, "End");
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    CutScene(false);
+        //}
+    }
+
+    public void PlayCutScene(string name)
+    {
+        cutSceneManager.CutScene(true, name);
+        OpenCutScene(true);
     }
 
     public void ChangeCut(Sprite cut)
@@ -38,11 +56,6 @@ public class UIReader_CutScene : UI_Reader
 
     public void ChangeText(string msg, float writingDuring)
     {
-        DoText(text, msg, writingDuring, () => { });
-    }
-
-    public void EndText()
-    {
-        base.EndText();
+        DoText(text, msg, writingDuring, false, () => { });
     }
 }

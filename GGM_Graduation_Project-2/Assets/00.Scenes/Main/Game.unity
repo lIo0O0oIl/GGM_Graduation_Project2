@@ -3468,18 +3468,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   memberChats:
   - name: "\uAC15\uC9C0\uD604"
-    face: {fileID: 978320747, guid: 7b2d9aa4745b2bd48a08fcb53c3f8751, type: 3}
+    nickName: JiHyeon
+    face: 0
+    faces:
+    - {fileID: 21300000, guid: 616697de6bf35974dbda66ac9e2b7b3b, type: 3}
+    - {fileID: 21300000, guid: f98ec2994b010a7449f27041c13061fb, type: 3}
+    - {fileID: 1295484366, guid: 229c80446b89fa349afc352657a5a5e2, type: 3}
     isOpen: 0
+    chapter:
+      showName: 
+      saveLocation: 0
+      chat: []
+      askAndReply: []
+      lockAskAndReply: []
+      round: []
     chattings: []
     quetions: []
   - name: "\uC774\uCC44\uBBFC"
-    face: {fileID: -1183895723, guid: 7b2d9aa4745b2bd48a08fcb53c3f8751, type: 3}
+    nickName: 
+    face: 0
+    faces:
+    - {fileID: -1183895723, guid: 7b2d9aa4745b2bd48a08fcb53c3f8751, type: 3}
     isOpen: 0
+    chapter:
+      showName: 
+      saveLocation: 0
+      chat: []
+      askAndReply: []
+      lockAskAndReply: []
+      round: []
+    chattings: []
+    quetions: []
+  - name: "\uD669\uC900\uC6D0"
+    nickName: JunWon
+    face: 0
+    faces:
+    - {fileID: 1136064797, guid: 7b2d9aa4745b2bd48a08fcb53c3f8751, type: 3}
+    isOpen: 0
+    chapter:
+      showName: 
+      saveLocation: 0
+      chat: []
+      askAndReply: []
+      lockAskAndReply: []
+      round: []
     chattings: []
     quetions: []
   - name: "\uC870\uC218"
-    face: {fileID: 21300000, guid: c4ffb857c0d42d745893a418cb76eaf7, type: 3}
-    isOpen: 1
+    nickName: 
+    face: 0
+    faces: []
+    isOpen: 0
+    chapter:
+      showName: 
+      saveLocation: 0
+      chat: []
+      askAndReply: []
+      lockAskAndReply: []
+      round: []
     chattings: []
     quetions: []
   changeMemberBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
