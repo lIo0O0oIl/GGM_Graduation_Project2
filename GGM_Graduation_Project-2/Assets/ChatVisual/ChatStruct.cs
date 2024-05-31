@@ -7,72 +7,82 @@ namespace ChatVisual
     public enum ESaveLocation
     {
         NotSave,
-        Assistant,      // Á¶¼ö
-        HyeonSeok,      // Çö¼®
-        JiHyeon,        // ÁöÇö
-        JunWon,         // ÁØ¿ø
+        Assistant,      // ì¡°ìˆ˜
+        HyeonSeok,      // í˜„ì„
+        JiHyeon,        // ì§€í˜„
+        JunWon,         // ì¤€ì›
     }
 
     public enum EChatState
     {
-        Other = 0,      // Á¶¼öÂÊÀÌ ¸»ÇÏ´Â °Í
-        Me = 1,      // Çü»ç°¡ ¸»ÇÏ´Â °Í
-        Ask = 2,        // Çü»ç°¡ ¹¯´Â °ÍÀÓ.
-        LoadNext        // ¶Ç ÀÌ¾îÁú ´ëÈ­°¡ ÀÖ´Ù¸é. ´Ù¸¥ »ç¶÷ÀÌ¸é.      // Ask ¶û ÀÌ°Ç »ç¿ë¾ÈÇÒ °¡´É¼ºÀÌ ÀÖÀ½ Á¤¸®ÇØÁÖ±â .
+        Other = 0,      // ì¡°ìˆ˜ìª½ì´ ë§í•˜ëŠ” ê²ƒ
+        Me = 1,      // í˜•ì‚¬ê°€ ë§í•˜ëŠ” ê²ƒ
+        Ask = 2,        // í˜•ì‚¬ê°€ ë¬»ëŠ” ê²ƒì„.
+        LoadNext        // ë˜ ì´ì–´ì§ˆ ëŒ€í™”ê°€ ìˆë‹¤ë©´. ë‹¤ë¥¸ ì‚¬ëŒì´ë©´.      // Ask ë‘ ì´ê±´ ì‚¬ìš©ì•ˆí•  ê°€ëŠ¥ì„±ì´ ìˆìŒ ì •ë¦¬í•´ì£¼ê¸° .
+    }
+
+    public enum EChatType
+    {
+        Text,
+        Image,
+        CutScene,
+        Question,
+        LockQuestion
     }
 
     public enum EFace
     {
-        Default,        // ¹«Ç¥Á¤
-        Blush,          // ´çÈ² (¾ó±¼»¡°³Áü.)
-        Difficult       // ºñÇùÁ¶ÀûÀÎ, °ï¶õÇÑ
+        Default,        // ë¬´í‘œì •
+        Blush,          // ë‹¹í™© (ì–¼êµ´ë¹¨ê°œì§.)
+        Difficult       // ë¹„í˜‘ì¡°ì ì¸, ê³¤ë€í•œ
     }
 
     public enum EChatEvent
     {
-        Vibration,      // ÅØ½ºÆ® Áøµ¿
-        Round,      // ÆÄÀÏ Ãß°¡ÇØÁÖ±â      
-        Camera,     // Ä«¸Ş¶ó È¿°ú ³Ö¾îÁÖ±â
+        Default,
+        Vibration,      // í…ìŠ¤íŠ¸ ì§„ë™
+        Round,      // íŒŒì¼ ì¶”ê°€í•´ì£¼ê¸°      
+        Camera,     // ì¹´ë©”ë¼ íš¨ê³¼ ë„£ì–´ì£¼ê¸°
     }
 
     [Serializable]
-    public class Chat      // ´©°¡ ¾î¶² ¸»À» ÇÏ´Â°¡
+    public class Chat      // ëˆ„ê°€ ì–´ë–¤ ë§ì„ í•˜ëŠ”ê°€
     {
-        public EChatState state;     // ¸»ÇÏ´Â °ÍÀÇ Å¸ÀÔ
-        public string text;        // ¸» ÇÏ´Â °Í.
-        public EFace face;       // ¸» ÇÒ ¶§ÀÇ Ç¥Á¤
+        public EChatState state;     // ë§í•˜ëŠ” ê²ƒì˜ íƒ€ì…
+        public string text;        // ë§ í•˜ëŠ” ê²ƒ.
+        public EFace face;       // ë§ í•  ë•Œì˜ í‘œì •
         public List<EChatEvent> textEvent = new List<EChatEvent>();
     }
 
     [Serializable]
     public class AskAndReply
     {
-        public string ask;        // ¹°À» ¼ö ÀÖ´Â ¼±ÅÃÁö
-        public List<Chat> reply = new List<Chat>();     // ±×¿¡ ´ëÇÑ ´ë´äµé
-        public bool is_UseThis;     // »ç¿ëÇß´ÂÁö
+        public string ask;        // ë¬¼ì„ ìˆ˜ ìˆëŠ” ì„ íƒì§€
+        public List<Chat> reply = new List<Chat>();     // ê·¸ì— ëŒ€í•œ ëŒ€ë‹µë“¤
+        public bool is_UseThis;     // ì‚¬ìš©í–ˆëŠ”ì§€
     }
 
     [Serializable]
     public class LockAskAndReply
     {
         public List<string> evidence = new List<string>();
-        public string ask;        // ¹°À» ¼ö ÀÖ´Â ¼±ÅÃÁö
-        public List<Chat> reply = new List<Chat>();     // ±×¿¡ ´ëÇÑ ´ë´äµé
-        public bool is_UseThis;     // »ç¿ëÇß´ÂÁö
+        public string ask;        // ë¬¼ì„ ìˆ˜ ìˆëŠ” ì„ íƒì§€
+        public List<Chat> reply = new List<Chat>();     // ê·¸ì— ëŒ€í•œ ëŒ€ë‹µë“¤
+        public bool is_UseThis;     // ì‚¬ìš©í–ˆëŠ”ì§€
     }
 
     [Serializable]
     public class Chapter
     {
-        public string showName;     // º¸¿©Áú ÀÌ¸§
-        public ESaveLocation saveLocation;     // ´©±ºÁö
-        public List<Chat> chat = new List<Chat>();         // ÃªÆÃ
-        public List<AskAndReply> askAndReply = new List<AskAndReply>();           // Áú¹®µé
-        public List<LockAskAndReply> lockAskAndReply = new List<LockAskAndReply>();       // Àá±ä Áú¹®µé
-        public List<string> round = new List<string>();           // Áõ°Å·Î »ç¿ëµÇ¾î
+        public string showName;     // ë³´ì—¬ì§ˆ ì´ë¦„
+        public ESaveLocation saveLocation;     // ëˆ„êµ°ì§€
+        public List<Chat> chat = new List<Chat>();         // ì±—íŒ…
+        public List<AskAndReply> askAndReply = new List<AskAndReply>();           // ì§ˆë¬¸ë“¤
+        public List<LockAskAndReply> lockAskAndReply = new List<LockAskAndReply>();       // ì ê¸´ ì§ˆë¬¸ë“¤
+        public List<string> round = new List<string>();           // ì¦ê±°ë¡œ ì‚¬ìš©ë˜ì–´
 
-        public bool is_nextChapter;     // ´ÙÀ½Ã©ÅÍ·Î ³Ñ¾î°¡´ÂÁö
-        public int nextChapterIndex;         // ´ÙÀ½ Ã©ÅÍ·Î ³Ñ¾î°£´Ù¸é Ã©ÅÍÀÇ ÀÎµ¦½º °¡ ÇÊ¿äÇÔ
+        public bool is_nextChapter;     // ë‹¤ìŒì±•í„°ë¡œ ë„˜ì–´ê°€ëŠ”ì§€
+        public int nextChapterIndex;         // ë‹¤ìŒ ì±•í„°ë¡œ ë„˜ì–´ê°„ë‹¤ë©´ ì±•í„°ì˜ ì¸ë±ìŠ¤ ê°€ í•„ìš”í•¨
     }
 
     public class ChatStruct : MonoBehaviour { }
