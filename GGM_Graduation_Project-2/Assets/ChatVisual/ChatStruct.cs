@@ -7,10 +7,12 @@ namespace ChatVisual
     public enum ESaveLocation
     {
         NotSave,
-        Assistant,      // 조수
-        HyeonSeok,      // 현석
-        JiHyeon,        // 지현
-        JunWon,         // 준원
+        박현규,      // 조수
+        곽현석,      // 현석
+        강지현,        // 지현
+        황준원,         // 준원
+        이채민,
+        강대양
     }
 
     public enum EChatState
@@ -82,7 +84,7 @@ namespace ChatVisual
         public List<string> round = new List<string>();           // 증거로 사용되어
 
         public bool is_nextChapter;     // 다음챕터로 넘어가는지
-        public int nextChapterIndex;         // 다음 챕터로 넘어간다면 챕터의 인덱스 가 필요함
+        public string nextChapterName;         // 다음 챕터로 넘어간다면 챕터의 인덱스 가 필요함
     }
 
     public class ChatStruct : MonoBehaviour { }
