@@ -71,18 +71,18 @@ public class UIReader_Chatting : UI_Reader
         if (Input.GetKeyDown(KeyCode.A))
             AddMember("JunWon");
         if (Input.GetKeyDown(KeyCode.W))
-            InputChat(EChatState.Me, ESaveLocation.JiHyeon, EChatType.Text, EFace.Default, EChatEvent.Default, "지현아");
+            InputChat(EChatState.Me, ESaveLocation.강지현, EChatType.Text, EFace.Default, EChatEvent.Default, "지현아");
         if (Input.GetKeyDown(KeyCode.E))
-            InputChat(EChatState.Other, ESaveLocation.JiHyeon, EChatType.Image, EFace.Blush, EChatEvent.Default, "담배");
+            InputChat(EChatState.Other, ESaveLocation.강지현, EChatType.Image, EFace.Blush, EChatEvent.Default, "담배");
         if (Input.GetKeyDown(KeyCode.G))
-            InputChat(EChatState.Other, ESaveLocation.JiHyeon, EChatType.Text, EFace.Difficult, EChatEvent.Default, "담배");
+            InputChat(EChatState.Other, ESaveLocation.강지현, EChatType.Text, EFace.Difficult, EChatEvent.Default, "담배");
         if (Input.GetKeyDown(KeyCode.S))
-            InputChat(EChatState.Me, ESaveLocation.JunWon, EChatType.Text, EFace.Default, EChatEvent.Default, "준원아");
+            InputChat(EChatState.Me, ESaveLocation.황준원, EChatType.Text, EFace.Default, EChatEvent.Default, "준원아");
         if (Input.GetKeyDown(KeyCode.D))
-            InputChat(EChatState.Other, ESaveLocation.JiHyeon, EChatType.CutScene, EFace.Default, EChatEvent.Default, "Start");
+            InputChat(EChatState.Other, ESaveLocation.강지현, EChatType.CutScene, EFace.Default, EChatEvent.Default, "Start");
 
         if (Input.GetKeyDown(KeyCode.R))
-            InputQuestion(ESaveLocation.JiHyeon, EChatType.Question, EFace.Default, EChatEvent.Default, "점심 메뉴 뭐야?");
+            InputQuestion(ESaveLocation.강지현, EChatType.Question, EFace.Default, EChatEvent.Default, "점심 메뉴 뭐야?");
 
         //if (Input.GetKeyDown(KeyCode.T))
         //    InputChatting(true, ChatType.Image, "담배");
@@ -184,23 +184,31 @@ public class UIReader_Chatting : UI_Reader
         chat.style.height = sprite.rect.height * size;
     }
 
+    Chapter t;
+
     public void Chapter(string name)
     {
         // 챕터를... 멤버한테 붙여주고...
         // 유저가 멤버를 이동할 때 마다
         // 붙어있는 챕터를 보고 챕터가 있다면 실행해주고...
-        //
-        //MemberChat member = FindMember(name);
-        //if (member.chapterName != "")
+
+        MemberChat member = FindMember(name);
+        //foreach (string chapter in member.chapters)
         //{
-        //    foreach (Chapter chapter in chatContainer.MainChapter)
-        //    {
-        //        if (chapter.showName == member.chapterName)
-        //        {
-        //            chapter.chat[0].
-        //        }
-        //    }
+
         //}
+        //if (member.chapters.Count > 0)
+        // 설아야 여기댜
+        if (member.chapterName != "")
+        {
+            foreach (Chapter chapter in chatContainer.MainChapter)
+            {
+                if (chapter.showName == member.chapterName)
+                {
+                    t = chapter;
+                }
+            }
+        }
     }
 
     public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, EChatEvent evt, string msg, bool isRecord = true)

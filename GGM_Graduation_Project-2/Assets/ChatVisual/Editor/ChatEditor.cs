@@ -9,11 +9,11 @@ using System;
 public class ChatEditor : EditorWindow
 {
     [SerializeField]
-    private VisualTreeAsset treeAsset = null;           // UI ÆÄÀÏ ³Ö¾îÁÖ±â
+    private VisualTreeAsset treeAsset = null;           // UI íŒŒì¼ ë„£ì–´ì£¼ê¸°
 
-    private ChatView chatView;        // ÃªÆÃµé µé¾î°¡ ÀÖ´Â °÷.
-    private InspectorView inspectorView;        // ÀÎ½ºÆÑÅÍ ÀÏ °ÍÀÓ.
-    private HierarchyView hierarchyView;      // ÄÚµå±â¹İ GUI, À§¿¡²¨ ¸»ÇÏ´Â °Í. ÇÏÀÌ¾î¶óÅ°.
+    private ChatView chatView;        // ì±—íŒ…ë“¤ ë“¤ì–´ê°€ ìˆëŠ” ê³³.
+    private InspectorView inspectorView;        // ì¸ìŠ¤íŒ©í„° ì¼ ê²ƒì„.
+    private HierarchyView hierarchyView;      // ì½”ë“œê¸°ë°˜ GUI, ìœ„ì—êº¼ ë§í•˜ëŠ” ê²ƒ. í•˜ì´ì–´ë¼í‚¤.
     private Button arrayAddBtn;
     private Button dangerBtn;
 
@@ -27,36 +27,36 @@ public class ChatEditor : EditorWindow
 
     private void OnDestroy()
     {
-        if (chatContainer != null)
+        //if (chatContainer != null)
         {
-            chatView.SaveChatSystem();      // Ã¢À» ²ø ¶§ Áö±İ±îÁö ÇØÁØ °Í ÀúÀåÇØÁÖ±â
+            chatView.SaveChatSystem();      // ì°½ì„ ëŒ ë•Œ ì§€ê¸ˆê¹Œì§€ í•´ì¤€ ê²ƒ ì €ì¥í•´ì£¼ê¸°
         }
     }
 
     public void CreateGUI()
     {
-        VisualElement root = rootVisualElement;     // ·çÆ®·Î ¼³Á¤ÇØÁÜ.
+        VisualElement root = rootVisualElement;     // ë£¨íŠ¸ë¡œ ì„¤ì •í•´ì¤Œ.
 
-        // UXML ¸¸µé¾îÁÖ±â
+        // UXML ë§Œë“¤ì–´ì£¼ê¸°
         VisualElement template = treeAsset.Instantiate();
-        template.style.flexGrow = 1;        // ¿ä¼Ò ¾È¿¡ ³Ö¾úÀ» ¶§ ¾ó¸¶³ª Ä¿Áú °Í ÀÎ°¡
+        template.style.flexGrow = 1;        // ìš”ì†Œ ì•ˆì— ë„£ì—ˆì„ ë•Œ ì–¼ë§ˆë‚˜ ì»¤ì§ˆ ê²ƒ ì¸ê°€
         root.Add(template);
 
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/ChatVisual/Editor/ChatEditor.uss");
-        root.styleSheets.Add(styleSheet);       // ÀÌ ½ºÅ¸ÀÏÀ» °¡Á®¿ÍÁÜ.
+        root.styleSheets.Add(styleSheet);       // ì´ ìŠ¤íƒ€ì¼ì„ ê°€ì ¸ì™€ì¤Œ.
 
         chatView = root.Q<ChatView>("chat-view");
-        inspectorView = root.Q<InspectorView>("inspector-view");        // ÀÎ½ºÆåÅÍ ÀÌ¸§À¸·Î °¡Á®¿À±â.
-        hierarchyView = root.Q<HierarchyView>("hierarchy-view");       // ¾Æ·¡²¨ °¡Á®¿À±â hierarchy ÀÓ.
+        inspectorView = root.Q<InspectorView>("inspector-view");        // ì¸ìŠ¤í™í„° ì´ë¦„ìœ¼ë¡œ ê°€ì ¸ì˜¤ê¸°.
+        hierarchyView = root.Q<HierarchyView>("hierarchy-view");       // ì•„ë˜êº¼ ê°€ì ¸ì˜¤ê¸° hierarchy ì„.
        
-        arrayAddBtn = root.Q<Button>("AddBtn");     // ¹öÆ° °¡Á®¿À±â
+        arrayAddBtn = root.Q<Button>("AddBtn");     // ë²„íŠ¼ ê°€ì ¸ì˜¤ê¸°
         arrayAddBtn.tooltip = "Chapter Add";
         arrayAddBtn.clickable.clicked += OnArrayAddBtn;
         dangerBtn = root.Q<Button>("ClearBtn");
         dangerBtn.tooltip = "All Nodes Delete";
         dangerBtn.clickable.clicked += OnClearNodes;
 
-        chatView.OnNodeSelected += OnSelectionNodeChanged;      // ³ëµå¸¦ ´©¸¥ °ÍÀÌ ´Ş¶óÁö¸é ÀÌ ÀÌº¥Æ® È£Ãâ
+        chatView.OnNodeSelected += OnSelectionNodeChanged;      // ë…¸ë“œë¥¼ ëˆ„ë¥¸ ê²ƒì´ ë‹¬ë¼ì§€ë©´ ì´ ì´ë²¤íŠ¸ í˜¸ì¶œ
 
         OnSelectionChange();
     }
@@ -65,7 +65,7 @@ public class ChatEditor : EditorWindow
     {
         if (chatContainer != null)
         {
-            Debug.Log("¹è¿­ Ãß°¡ÇØÁÖ±â");
+            Debug.Log("ë°°ì—´ ì¶”ê°€í•´ì£¼ê¸°");
             chatContainer.MainChapter.Add(new Chapter());
             hierarchyView.UpdateHierarchy(chatContainer, chatView);
         }
@@ -82,32 +82,32 @@ public class ChatEditor : EditorWindow
                       chatContainer.nodes.Remove(node);
                   }
               }*/
-            Debug.Log("³ëµåÀÇ °³¼ö´Â " + chatContainer.nodes.Count + "°³ ÀÔ´Ï´Ù.");
+            Debug.Log("ë…¸ë“œì˜ ê°œìˆ˜ëŠ” " + chatContainer.nodes.Count + "ê°œ ì…ë‹ˆë‹¤.");
             Close();
         }
     }
 
     private void OnSelectionNodeChanged(NodeView nodeView)
     {
-        inspectorView.UpdateInspector(nodeView);        // ÀÌ ³ëµå¸¦ ´­·¶´Ù°í ÀÎ½ºÆåÅÍ¿¡ ¾Ë·ÁÁÜ.
+        inspectorView.UpdateInspector(nodeView);        // ì´ ë…¸ë“œë¥¼ ëˆŒë €ë‹¤ê³  ì¸ìŠ¤í™í„°ì— ì•Œë ¤ì¤Œ.
     }
 
-    private void OnSelectionChange()        // ¿¡µğÅÍ¸¦ Å² »óÅÂ¿¡¼­ ¹«¾ğ°¡¸¦ ¼±ÅÃÇßÀ» ¶§
+    private void OnSelectionChange()        // ì—ë””í„°ë¥¼ í‚¨ ìƒíƒœì—ì„œ ë¬´ì–¸ê°€ë¥¼ ì„ íƒí–ˆì„ ë•Œ
     {
         if (Selection.activeGameObject != null)
         {
-            if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))      // ÇÏÀÌ¾î¶óÅ° Ã¢¿¡¼­ °¡Á®¿À±â
+            if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))      // í•˜ì´ì–´ë¼í‚¤ ì°½ì—ì„œ ê°€ì ¸ì˜¤ê¸°
             {
-                //Debug.Log(chatContainer.nodes.Count + "°³ÀÇ ³ëµå°¡ Á¸ÀçÇÔ.");
+                //Debug.Log(chatContainer.nodes.Count + "ê°œì˜ ë…¸ë“œê°€ ì¡´ì¬í•¨.");
 
-                chatContainer.ChangeNowChapter(0);      // °¡Àå Ã³À½Àº 0¹øÂ°
+                chatContainer.ChangeNowChapter(0);      // ê°€ì¥ ì²˜ìŒì€ 0ë²ˆì§¸
 
-                hierarchyView.UpdateHierarchy(chatContainer, chatView);      // ÇÏÀÌ¾î¶óÅ° ¸¸µé¾îÁÖ±â
+                hierarchyView.UpdateHierarchy(chatContainer, chatView);      // í•˜ì´ì–´ë¼í‚¤ ë§Œë“¤ì–´ì£¼ê¸°
                 
-                chatView.LoadChatSystem(chatContainer);     // µ¥ÀÌÅÍ ·Îµå ÇØÁÖ±â
-                chatView.PopulateView();           // µ¥ÀÌÅÍ¸¦ ±â¹İÀ¸·Î º¸ÀÌ´Â °Í ¸¸µé¾îÁÖ±â
+                chatView.LoadChatSystem(chatContainer);     // ë°ì´í„° ë¡œë“œ í•´ì£¼ê¸°
+                chatView.PopulateView();           // ë°ì´í„°ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë³´ì´ëŠ” ê²ƒ ë§Œë“¤ì–´ì£¼ê¸°
 
-                Debug.Log($"{chatContainer.MainChapter.Count}¸¸Å­ ÇÏÀÌ¾î¶óÅ°°¡ »ı¼ºµÇ¾î¾ß ÇÔ.");
+                Debug.Log($"{chatContainer.MainChapter.Count}ë§Œí¼ í•˜ì´ì–´ë¼í‚¤ê°€ ìƒì„±ë˜ì–´ì•¼ í•¨.");
             }
         }
     }
