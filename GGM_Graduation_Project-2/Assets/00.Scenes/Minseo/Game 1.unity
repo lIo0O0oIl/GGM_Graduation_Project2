@@ -3269,8 +3269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutScene: {fileID: 287244342}
-  screen: {fileID: 2147319652}
-  text: {fileID: 565488931}
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
@@ -5944,6 +5942,9 @@ MonoBehaviour:
   - {fileID: 1045875628}
   - {fileID: 1569950624}
   alarmIcon: {fileID: 1045675692}
+  chatIndex: 0
+  connectionPanel: {fileID: 0}
+  connectionParent: {fileID: 0}
 --- !u!4 &594023516
 Transform:
   m_ObjectHideFlags: 0
@@ -14232,7 +14233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 216.6278
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -16887,8 +16888,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutScene: {fileID: 287244342}
-  screen: {fileID: 2147319652}
-  text: {fileID: 565488931}
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
@@ -17997,7 +17996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 461.64783
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -24606,7 +24605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 339.13782
       objectReference: {fileID: 0}
     - target: {fileID: 2608156165718820136, guid: 697f07aa351041049863729d928958a4, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -17,4 +17,6 @@ public class IconsAtlas : MonoBehaviour
     {
         //image = iconAtlas[0]; 
     }
+
+
 }
