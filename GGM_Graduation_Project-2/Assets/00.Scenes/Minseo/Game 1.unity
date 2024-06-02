@@ -3269,8 +3269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutScene: {fileID: 287244342}
-  screen: {fileID: 2147319652}
-  text: {fileID: 565488931}
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
@@ -5925,67 +5923,9 @@ MonoBehaviour:
   chatContainer: {fileID: 1949353845}
   chattingHumanName: {fileID: 1979682079}
   assistantChatList: []
-  chats:
-  - chatSO: {fileID: 11400000, guid: ef0e561ee8d66a8419a38489b3ddebee, type: 2}
-    askAndReplySO:
-    - {fileID: 11400000, guid: 91b65c038f554274d93719c9b1c34745, type: 2}
-    - {fileID: 11400000, guid: aae8753189ba1504cb37bfd5c34e818d, type: 2}
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 8001a9f6478e47945a6aa6eef8062fae, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: fee085853d1089046a076c372c8c0c6e, type: 2}
-    askAndReplySO:
-    - {fileID: 11400000, guid: 8c0d56c3d7bb3014f951e8d4d38a60eb, type: 2}
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 04c3a4d9186a4a74680f01029b74e253, type: 2}
-    askAndReplySO:
-    - {fileID: 11400000, guid: 51940ee5d174d16469ec97b246a6ca14, type: 2}
-    - {fileID: 11400000, guid: 8e86abe819d89274d834a0cf6b266acc, type: 2}
-    - {fileID: 11400000, guid: 588e759679fff7748aca8276eb2fdee2, type: 2}
-    whoSO: {fileID: 11400000, guid: 443dcfb4c765f1045a65572cc6bec59f, type: 2}
-  - chatSO: {fileID: 11400000, guid: 7f17983ac5e07644095453639163b299, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 443dcfb4c765f1045a65572cc6bec59f, type: 2}
-  - chatSO: {fileID: 11400000, guid: c82b6d022a9ea4345825f20b03bbaa3c, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 065d2da3aa94baa468a4be84ea01215d, type: 2}
-    askAndReplySO:
-    - {fileID: 11400000, guid: 2a8e2bc5e481d1d468e79cf2138a1761, type: 2}
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 01456519459627d42818765a9287ba60, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: f944d3b96e4a57740a863365df2d75dd, type: 2}
-  - chatSO: {fileID: 11400000, guid: f79c26b6434bc334f96d63dd8167bc7e, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 4e2ee2ea886f9404ba78be72847e94ce, type: 2}
-    askAndReplySO:
-    - {fileID: 11400000, guid: b5432073313d7de48ac5da0b769e7ebb, type: 2}
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 6f857286cd0ea234798b8ae3469e0201, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 465bb856cda12004cb9f510b36a3f752, type: 2}
-  - chatSO: {fileID: 11400000, guid: 7e537df77b94048489c600039be8f52f, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 5a24dcf6c95baec49a3b77cc0cc3917f, type: 2}
-    askAndReplySO:
-    - {fileID: 11400000, guid: d920c3ba2e5f34549b9dfc28c9d046d3, type: 2}
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 94518bc04c369894e8a89ec0efb32b40, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 41a5754c6e3ffb04890d25a6fa6afd2b, type: 2}
-  - chatSO: {fileID: 11400000, guid: 8b4aae9cd766adf4293a70b1348be08d, type: 2}
-    askAndReplySO:
-    - {fileID: 11400000, guid: 9316223749cef2d41ba9e9e3084f6e6e, type: 2}
-    whoSO: {fileID: 11400000, guid: 5f1723f0851e3ff4f93f565e6b4c53b5, type: 2}
-  - chatSO: {fileID: 11400000, guid: 23d12ffc38883764c8ade08df789fa0b, type: 2}
-    askAndReplySO: []
-    whoSO: {fileID: 11400000, guid: 837295fd4a3747c42adddf91d0f33550, type: 2}
-  nowLevel: 0
+  chapters: []
   delayTime: 3
+  nowLevel: 0
 --- !u!114 &594023515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6002,6 +5942,9 @@ MonoBehaviour:
   - {fileID: 1045875628}
   - {fileID: 1569950624}
   alarmIcon: {fileID: 1045675692}
+  chatIndex: 0
+  connectionPanel: {fileID: 0}
+  connectionParent: {fileID: 0}
 --- !u!4 &594023516
 Transform:
   m_ObjectHideFlags: 0
@@ -8387,8 +8330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae516a8da240c74459d9f817e5e8f375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatso: {fileID: 0}
-  ask: {fileID: 0}
 --- !u!4 &841014630
 Transform:
   m_ObjectHideFlags: 0
@@ -10747,9 +10688,13 @@ MonoBehaviour:
   currentSpeech: {fileID: 0}
   speechBalloon_left: {fileID: 4903433361932425577, guid: ed6eea51be478e243bf2784780b363ab, type: 3}
   speechBalloon_right: {fileID: 4903433361932425577, guid: ab77d2494a3a2794bab1b04e379295e9, type: 3}
+  imageBackground: {fileID: 0}
+  dataBackground: {fileID: 0}
   choiceBalloon: {fileID: 4903433361932425577, guid: 3321b91516d83ea4c82e72f2069c482a, type: 3}
   myChatBox: {fileID: 8390185438283045102, guid: cd727a238f5a6b540b3f9c564fb59927, type: 3}
   otherChatBox: {fileID: 5648370456781731131, guid: 9468c0f2ad6a43445a3774d8422200c4, type: 3}
+  sprite: {fileID: 0}
+  msg: {fileID: 0}
   isCurrentUser: 0
 --- !u!222 &1045875632
 CanvasRenderer:
@@ -16943,8 +16888,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutScene: {fileID: 287244342}
-  screen: {fileID: 2147319652}
-  text: {fileID: 565488931}
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
@@ -25046,9 +24989,13 @@ MonoBehaviour:
   currentSpeech: {fileID: 0}
   speechBalloon_left: {fileID: 4903433361932425577, guid: ed6eea51be478e243bf2784780b363ab, type: 3}
   speechBalloon_right: {fileID: 4903433361932425577, guid: ab77d2494a3a2794bab1b04e379295e9, type: 3}
+  imageBackground: {fileID: 0}
+  dataBackground: {fileID: 0}
   choiceBalloon: {fileID: 4903433361932425577, guid: 3321b91516d83ea4c82e72f2069c482a, type: 3}
   myChatBox: {fileID: 8390185438283045102, guid: cd727a238f5a6b540b3f9c564fb59927, type: 3}
   otherChatBox: {fileID: 5648370456781731131, guid: 9468c0f2ad6a43445a3774d8422200c4, type: 3}
+  sprite: {fileID: 0}
+  msg: {fileID: 0}
   isCurrentUser: 0
 --- !u!222 &1954532825
 CanvasRenderer:
