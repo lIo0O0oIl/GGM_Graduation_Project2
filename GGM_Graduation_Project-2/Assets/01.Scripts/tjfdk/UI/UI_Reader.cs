@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using ChatVisual;
 
 public class UI_Reader : MonoBehaviour
 {
@@ -16,9 +17,11 @@ public class UI_Reader : MonoBehaviour
     protected UIReader_ImageFinding imageSystem;
     protected UIReader_CutScene cutSceneSystem;
         // Manager
+    protected ChatContainer chatContainer;
     protected CutSceneManager cutSceneManager;
     protected FileManager fileManager;
     protected ImageManager imageManager;
+    protected ChapterManager chapterManager;
 
     // main
     protected UIDocument document;
@@ -54,9 +57,11 @@ public class UI_Reader : MonoBehaviour
         cutSceneSystem = GetComponent<UIReader_CutScene>();
 
         // Manager
+        chatContainer = GameObject.Find("ChatManager").GetComponent<ChatContainer>();
         cutSceneManager = GetComponent<CutSceneManager>();
         fileManager = GetComponent<FileManager>();
         imageManager = GetComponent<ImageManager>();
+        chapterManager = GetComponent<ChapterManager>();
     }
 
     protected void OnEnable()
