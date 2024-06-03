@@ -15,7 +15,7 @@ public class Folder : MonoBehaviour, IPointerClickHandler
     private string goPath;
     private string fileName;
 
-    public bool is_puzzle = false;      // ∆€¡Ò¿Ã∂Û∏È
+    public bool is_puzzle = false;      // ÌçºÏ¶êÏù¥ÎùºÎ©¥
 
     private void Start()
     {
@@ -35,16 +35,16 @@ public class Folder : MonoBehaviour, IPointerClickHandler
             {
                 if (is_Lock)
                 {
-                    FileManager.instance.OpenLock(fileName, password, lockImage);
+                    //FileManager.instance.OpenLock(fileName, password, lockImage);
                 }
                 else
                 {
-                    FileManager.instance.GoFile(myPath, goPath);
+                    //FileManager.instance.GoFile(myPath, goPath);
                 }
             }
             else
             {
-                // ∆€¡Ò¿Ã∂Û∏È
+                // ÌçºÏ¶êÏù¥ÎùºÎ©¥
                 GetComponent<PuzzleFolder>().OpenPuzzle();
             }
         }

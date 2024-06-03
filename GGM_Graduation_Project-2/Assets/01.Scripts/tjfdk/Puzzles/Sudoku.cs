@@ -69,7 +69,7 @@ public class Sudoku : MonoBehaviour
 
     public void Setting()
     {
-        Debug.Log("½ºµµÄí ÁøÀÔ");
+        Debug.Log("ìŠ¤ë„ì¿  ì§„ì…");
 
         puzzleAmount = hiddingAmount;
 
@@ -94,9 +94,9 @@ public class Sudoku : MonoBehaviour
 
         if (puzzleAmount <= 0)
         {
-            Debug.Log("½ºµµÄí Å¬¸®¾î");
-            FileManager.instance.PuzzleLockBackClick();     // ÆÛÁñÆÇ³Ú ²¨ÁÖ±â
-            lockFolder.PuzzleClear();       // ÆÛÁñ Å¬¸®¾îµÊ
+            Debug.Log("ìŠ¤ë„ì¿  í´ë¦¬ì–´");
+            //FileManager.instance.PuzzleLockBackClick();     // í¼ì¦íŒë„¬ êº¼ì£¼ê¸°
+            lockFolder.PuzzleClear();       // í¼ì¦ í´ë¦¬ì–´ë¨
         }
     }
 

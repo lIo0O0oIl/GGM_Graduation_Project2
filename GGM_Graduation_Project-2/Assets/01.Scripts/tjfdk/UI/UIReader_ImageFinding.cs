@@ -52,13 +52,17 @@ public class UIReader_ImageFinding : UI_Reader
             if (image.name == file.Q<Label>("FileName").text)
             {
                 if (image.isOpen)
-                    imageGround.Remove(imageGround.Q<VisualElement>(image.name));
+                    imageGround.style.display = DisplayStyle.None;
+                    //imageGround.Remove(imageGround.Q<VisualElement>(image.name));
                 else
                 {
-                    VisualElement imageBackground = RemoveContainer(ux_imageGround.Instantiate());
-                    imageBackground.name = image.name;
-                    imageBackground.style.backgroundImage = new StyleBackground(image.image);
-                    imageGround.Add(imageBackground);
+                    //VisualElement imageBackground = RemoveContainer(ux_imageGround.Instantiate());
+                    //imageBackground.name = image.name;
+                    //imageBackground.style.backgroundImage = new StyleBackground(image.image);
+                    //imageGround.Add(imageBackground);
+
+                    imageGround.style.display = DisplayStyle.Flex;
+                    imageGround.style.backgroundImage = new StyleBackground(image.image);
 
                     // 자식 단서들을 생성
                     // 이름으로 찾아주고
@@ -88,6 +92,8 @@ public class UIReader_ImageFinding : UI_Reader
                                         {
                                             png.isOpen = true;
                                             Debug.Log(png.name + " " + image.name);
+                                            //FileT fileT = fileSystem.FindFile(png.name);
+                                            //fileSystem.AddFile(FileType.IMAGE, fileT.fileName, fileT.fileParentName);
                                             fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
                                         }
                                     });
@@ -112,7 +118,8 @@ public class UIReader_ImageFinding : UI_Reader
                                 evidence.style.left = png.pos.x;
                                 evidence.style.top = png.pos.y;
                                 // 단서를 이미지에 추가
-                                imageBackground.Add(evidence);
+                                imageGround.Add(evidence);
+                                //imageBackground.Add(evidence);
                             }
                         }
                     }
@@ -126,9 +133,7 @@ public class UIReader_ImageFinding : UI_Reader
         foreach (ImagePng png in imageManager.pngs)
         {
             if (png.name == file.Q<Label>("FileName").text)
-            {
-                fileSystem.OpenImage(png.name, png.image);
-            }
+                fileSystem.OpenImage(png.name, png.saveImage);
         }
     }
 }

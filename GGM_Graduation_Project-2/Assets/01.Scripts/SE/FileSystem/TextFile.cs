@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class TextFile : MonoBehaviour, IPointerClickHandler
 {
     [TextArea(3, 10)]
-    public string text;        // º¸¿©Áú ÅØ½ºÆ®
+    public string text;        // ë³´ì—¬ì§ˆ í…ìŠ¤íŠ¸
     private string fileName;
 
     public int index = -1;
@@ -21,7 +21,7 @@ public class TextFile : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.clickCount == 2)
         {
-            FileManager.instance.OpenTextFile(text, fileName, index);
+            //FileManager.instance.OpenTextFile(text, fileName, index);
         }
     }
 }

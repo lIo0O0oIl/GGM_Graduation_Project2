@@ -17,6 +17,7 @@ public class UI_Reader : MonoBehaviour
     protected UIReader_CutScene cutSceneSystem;
         // Manager
     protected CutSceneManager cutSceneManager;
+    protected FileManager fileManager;
     protected ImageManager imageManager;
 
     // main
@@ -54,6 +55,7 @@ public class UI_Reader : MonoBehaviour
 
         // Manager
         cutSceneManager = GetComponent<CutSceneManager>();
+        fileManager = GetComponent<FileManager>();
         imageManager = GetComponent<ImageManager>();
     }
 

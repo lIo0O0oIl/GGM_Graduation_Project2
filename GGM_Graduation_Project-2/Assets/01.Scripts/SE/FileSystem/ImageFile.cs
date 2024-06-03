@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 
 public class ImageFile : MonoBehaviour, IPointerClickHandler
 {
-    public Sprite image;        // º¸¿©Áú ÀÌ¹ÌÁö ½ºÇÁ¶óÀÌÆ®
-    public Vector2 showScale = new Vector2(500, 500);       // º¸¿©Áú Å©±â
+    public Sprite image;        // ë³´ì—¬ì§ˆ ì´ë¯¸ì§€ ìŠ¤í”„ë¼ì´íŠ¸
+    public Vector2 showScale = new Vector2(500, 500);       // ë³´ì—¬ì§ˆ í¬ê¸°
     private string fileName;
 
-    public int index = -1;      // ±âº»ÀûÀ¸·Î -1, ¹¹°¡ ÀÖ´Â ¾Öµé¸¸ ¹Ù²ãÁÖ±â
+    public int index = -1;      // ê¸°ë³¸ì ìœ¼ë¡œ -1, ë­ê°€ ìˆëŠ” ì• ë“¤ë§Œ ë°”ê¿”ì£¼ê¸°
 
-    //public bool userKnowThis = false;       // À¯Á®°¡ ÀÌ°É ÇÑ¹øÀÌ¶óµµ ¿­¾îºÃÀ¸¸é
+    //public bool userKnowThis = false;       // ìœ ì ¸ê°€ ì´ê±¸ í•œë²ˆì´ë¼ë„ ì—´ì–´ë´¤ìœ¼ë©´
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class ImageFile : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.clickCount == 2)
         {
-            FileManager.instance.OpenImageFile(image, showScale, fileName, index);
+            //FileManager.instance.OpenImageFile(image, showScale, fileName, index);
         }
     }
 }

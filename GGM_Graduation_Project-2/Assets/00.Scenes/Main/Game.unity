@@ -3365,9 +3365,10 @@ GameObject:
   - component: {fileID: 150678880}
   - component: {fileID: 150678883}
   - component: {fileID: 150678879}
-  - component: {fileID: 150678878}
+  - component: {fileID: 150678886}
   - component: {fileID: 150678882}
   - component: {fileID: 150678881}
+  - component: {fileID: 150678878}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -3528,6 +3529,7 @@ MonoBehaviour:
     isOpen: 0
     memo: "\uD5C9! \uB2F4\uBC30\uB2E4! \uAC04\uCCA9\uC2E0\uACE0\uB294 1388"
     importance: 1
+    saveImage: {fileID: 21300000, guid: d744bf085158a20488f78ecd163330c5, type: 3}
     size: {x: 50, y: 50}
     pos: {x: 300, y: 300}
   - name: "\uC73C\uC545"
@@ -3535,6 +3537,7 @@ MonoBehaviour:
     isOpen: 0
     memo: "\uC6B0\uC640! \uB3C8 \uC9F1 \uB9CE\uB2E4! \uB098 \uC870\uAE08\uB9CC \uC92C\uC73C\uBA74..."
     importance: 0
+    saveImage: {fileID: 21300000, guid: c8e28694317a70a4cafd48af217e0b53, type: 3}
     size: {x: 50, y: 50}
     pos: {x: 400, y: 800}
   memos:
@@ -3719,6 +3722,43 @@ MonoBehaviour:
   cutSceneChapters:
   - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
   - {fileID: 11400000, guid: 72d10a1d28d6b0342ad49ae8c2313967, type: 2}
+--- !u!114 &150678886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150678874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f5303acd3d13e4a8b4b3c46a8f059c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderFiles:
+  - fileName: "\uD559\uAD50"
+    fileParentName: Main
+    isCheck: 0
+    fileType: 0
+  - fileName: "\uC815\uAE00"
+    fileParentName: "\uD559\uAD50"
+    isCheck: 0
+    fileType: 0
+  - fileName: "\uC625\uC0C1"
+    fileParentName: Main
+    isCheck: 0
+    fileType: 0
+  - fileName: "\uB2F4\uBC30"
+    fileParentName: "\uC815\uAE00"
+    isCheck: 0
+    fileType: 1
+  - fileName: "\uC625\uC0C1"
+    fileParentName: "\uC815\uAE00"
+    isCheck: 0
+    fileType: 1
+  - fileName: "\uC77C\uAE30"
+    fileParentName: "\uC815\uAE00"
+    isCheck: 0
+    fileType: 1
 --- !u!1 &155637819
 GameObject:
   m_ObjectHideFlags: 0
@@ -16402,18 +16442,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backBtn: {fileID: 110786206}
+  nowPath: 
+  upLinePathText: []
   upLinePathBtn:
   - {fileID: 1323384375}
   - {fileID: 1946492749}
   - {fileID: 1696250945}
   UpLineSizeFitter: {fileID: 791726882}
+  upLineRectFitter: []
   imagePanel: {fileID: 1984862292}
   imageName: {fileID: 893613195}
   showImage: {fileID: 1689609267}
+  imageSize: {fileID: 0}
   textNotePanel: {fileID: 1061181241}
   textName: {fileID: 666346249}
   showText: {fileID: 1104291071}
   lockPanel: {fileID: 747651170}
+  lockSystem: {fileID: 0}
   puzzlePanel: {fileID: 1910179936}
   fileTrees:
   - path: "\uBA54\uC778"
@@ -16488,6 +16533,7 @@ MonoBehaviour:
     - {fileID: 877756415}
     - {fileID: 1917222833}
     - {fileID: 1508675833}
+  chatIndex: -1
 --- !u!114 &841014629
 MonoBehaviour:
   m_ObjectHideFlags: 0

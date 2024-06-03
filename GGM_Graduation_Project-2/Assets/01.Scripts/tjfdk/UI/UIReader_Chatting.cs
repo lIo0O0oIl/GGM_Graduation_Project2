@@ -92,17 +92,6 @@ public class UIReader_Chatting : UI_Reader
         //EndToScroll();
     }
 
-    public MemberChat FindMember(string name)
-    {
-        foreach(MemberChat member in memberChats)
-        {
-            if (member.name == name)
-                return member;
-        }
-
-        return null;
-    }
-
     private void OnEnable()
     {
         base.OnEnable();
@@ -140,6 +129,36 @@ public class UIReader_Chatting : UI_Reader
         // 채팅 스크롤뷰 속도 변경
         //Debug.Log(chatGround.Q<ScrollView>(chatGround.name));
         //chatGround.Q<ScrollView>(chatGround.name).scrollDecelerationRate = 5f;
+    }
+
+    public void AddChapter(string who, string name)
+    {
+        Debug.Log("챕터 붙여줌 : " + who + " " + name);
+        FindMember(who).chapterName = FindChapter(name).showName;
+        // AddChapter 불러주는 기준이 트리거 확인이 됐을 때... Chapter는 인물 옮기면 불러주는 거
+    }
+
+    public Chapter FindChapter(string name)
+    {
+        foreach (Chapter chapter in chatContainer.MainChapter)
+        {
+            if (chapter.showName == name)
+                return chapter;
+        }
+
+        Debug.Log("챕터 찾기 실패");
+        return null;
+    }
+
+    public MemberChat FindMember(string name)
+    {
+        foreach(MemberChat member in memberChats)
+        {
+            if (member.name == name)
+                return member;
+        }
+
+        return null;
     }
 
     private void RemoveChatting()
@@ -184,10 +203,9 @@ public class UIReader_Chatting : UI_Reader
         chat.style.height = sprite.rect.height * size;
     }
 
-    Chapter t;
-
     public void Chapter(string name)
     {
+        Debug.Log("챕터 읽어!!!!");
         // 챕터를... 멤버한테 붙여주고...
         // 유저가 멤버를 이동할 때 마다
         // 붙어있는 챕터를 보고 챕터가 있다면 실행해주고...
@@ -198,15 +216,15 @@ public class UIReader_Chatting : UI_Reader
 
         //}
         //if (member.chapters.Count > 0)
-        // 설아야 여기댜
+        FindChapter(name);
+        //설아야 여기댜
+        // 일단 뭐가 있긴 하면
         if (member.chapterName != "")
         {
-            foreach (Chapter chapter in chatContainer.MainChapter)
+            // 
+            Chapter chapter = FindChapter(member.chapterName);
             {
-                if (chapter.showName == member.chapterName)
-                {
-                    t = chapter;
-                }
+
             }
         }
     }
@@ -501,6 +519,9 @@ public class UIReader_Chatting : UI_Reader
             ChangeMember(); // 이름 목록 닫고
             RemoveChatting(); // 채팅 날리고
             RecallChatting(member); // 새로 쓰고
+
+            // 해당 인물에게 챕터를 읽자
+            Chapter(member.name);
         }
     }
 }
