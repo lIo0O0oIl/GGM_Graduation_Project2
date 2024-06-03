@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
@@ -17,14 +17,14 @@ public enum FileType
 }
 
 [Serializable]
-public class FileFolder
+public class FileTT
 {
     public string folderName;
     public List<VisualElement> folderFiles;
     public List<VisualElement> textFiles;
     public List<VisualElement> imageFiles;
 
-    public FileFolder(string name)
+    public FileTT(string name)
     {
         folderName = name;
         folderFiles = new List<VisualElement>();
@@ -63,15 +63,15 @@ public class UIReader_FileSystem : UI_Reader
 
     // test path
     public Stack<string> filePathLisk = new Stack<string>();
-    public List<FileFolder> fileFolders;
-    public FileFolder currentFileFolder;
+    public List<FileTT> fileFolders;
+    public FileTT currentFileFolder;
 
     public string text_currentFolderName;
 
     private void Awake()
     {
         base.Awake();
-        fileFolders = new List<FileFolder>();
+        fileFolders = new List<FileTT>();
     }
 
     private void Update()
@@ -79,32 +79,26 @@ public class UIReader_FileSystem : UI_Reader
         if (Input.GetKeyDown(KeyCode.I))
         {
             AddFile(FileType.FOLDER, "학교", "Main");
-            DrawFile("Main");
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
             AddFile(FileType.FOLDER, "정글", "학교");
-            //DrawFile("학교");
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
             AddFile(FileType.FOLDER, "옥상", "Main");
-            //DrawFile("학교");
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
             AddFile(FileType.IMAGE, "담배", "정글");
-            //DrawFile("학교");
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
             AddFile(FileType.IMAGE, "옥상", "정글");
-            //DrawFile("학교");
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
             AddFile(FileType.TEXT, "일기", "정글");
-            //DrawFile("학교");
         }
     }
 
@@ -116,7 +110,7 @@ public class UIReader_FileSystem : UI_Reader
         Template_Load();
         Event_Load();
 
-        fileFolders.Add(new FileFolder("Main"));
+        fileFolders.Add(new FileTT("Main"));
         AddFilePath("Main");
     }
 
@@ -153,14 +147,26 @@ public class UIReader_FileSystem : UI_Reader
         };
     }
 
-    private FileFolder FindMember(string name)
+    private FileTT FindMember(string name)
     {
-        foreach (FileFolder folder in fileFolders)
+        foreach (FileTT folder in fileFolders)
         {
             if (folder.folderName == name)
                 return folder;
         }
 
+        return null;
+    }
+
+    public FileT FindFile(string name)
+    {
+        foreach (FileT file in fileManager.folderFiles)
+        {
+            if (file.fileName == name)
+                return file;
+        }
+
+        Debug.Log("File을 찾지 못 함");
         return null;
     }
 
@@ -186,12 +192,12 @@ public class UIReader_FileSystem : UI_Reader
                     };
                     // 폴더 부모 지정
                     bool addNew = false;
-                    FileFolder parentFolder = FindMember(fileParentName);
+                    FileTT parentFolder = FindMember(fileParentName);
                     if (parentFolder != null)
                     {
                         Debug.Log("찾음");
                         parentFolder.folderFiles.Add(file);
-                        fileFolders.Add(new FileFolder(fileName));
+                        fileFolders.Add(new FileTT(fileName));
                         addNew = true;
                     }
 
@@ -199,9 +205,9 @@ public class UIReader_FileSystem : UI_Reader
                     if (addNew == false)
                     {
                         Debug.Log("못 찾음");
-                        FileFolder folderParent = new FileFolder(fileParentName);
+                        FileTT folderParent = new FileTT(fileParentName);
                         fileFolders.Add(folderParent);
-                        fileFolders.Add(new FileFolder(fileName));
+                        fileFolders.Add(new FileTT(fileName));
                         folderParent.folderFiles.Add(file);
                     }
                     break;
@@ -217,7 +223,7 @@ public class UIReader_FileSystem : UI_Reader
 
                     // 파일 부모 지정
                     bool addNew = false;
-                    foreach (FileFolder folder in fileFolders)
+                    foreach (FileTT folder in fileFolders)
                     {
                         if (folder.folderName == fileParentName)
                         {
@@ -230,9 +236,9 @@ public class UIReader_FileSystem : UI_Reader
                     // 폴더 생성 및 추가
                     if (addNew == false)
                     {
-                        FileFolder folderParent = new FileFolder(fileParentName);
+                        FileTT folderParent = new FileTT(fileParentName);
                         fileFolders.Add(folderParent);
-                        fileFolders.Add(new FileFolder(fileName));
+                        fileFolders.Add(new FileTT(fileName));
                         folderParent.folderFiles.Add(file);
                     }
                     break;
@@ -248,7 +254,7 @@ public class UIReader_FileSystem : UI_Reader
 
                     // 파일 부모 지정
                     bool addNew = false;
-                    foreach (FileFolder folder in fileFolders)
+                    foreach (FileTT folder in fileFolders)
                     {
                         if (folder.folderName == fileParentName)
                         {
@@ -261,9 +267,9 @@ public class UIReader_FileSystem : UI_Reader
                     // 폴더 생성 및 추가
                     if (addNew == false)
                     {
-                        FileFolder folderParent = new FileFolder(fileParentName);
+                        FileTT folderParent = new FileTT(fileParentName);
                         fileFolders.Add(folderParent);
-                        fileFolders.Add(new FileFolder(fileName));
+                        fileFolders.Add(new FileTT(fileName));
                         folderParent.folderFiles.Add(file);
                     }
                     break;
@@ -292,7 +298,7 @@ public class UIReader_FileSystem : UI_Reader
             fileGround.RemoveAt(i);
 
         // 현재 폴더 변경
-        foreach (FileFolder folder in fileFolders)
+        foreach (FileTT folder in fileFolders)
         {
             if (folder.folderName == folderName)
                 currentFileFolder = folder;
@@ -322,6 +328,9 @@ public class UIReader_FileSystem : UI_Reader
         panel.Q<VisualElement>("Image").style.backgroundImage = new StyleBackground(sprite);
         panel.Q<Button>("CloseBtn").clicked += () => { panelGround.Remove(panel); };
         panelGround.Add(panel);
+
+        FileT file = FindFile(name);
+        file.isCheck = true;
     }
 
     public void OpenText(string name, string text)
@@ -331,6 +340,9 @@ public class UIReader_FileSystem : UI_Reader
         panel.Q<Label>("Text").text = text;
         panel.Q<Button>("CloseBtn").clicked += () => { panelGround.Remove(panel); };
         panelGround.Add(panel);
+
+        FileT file = FindFile(name);
+        file.isCheck = true;
     }
 
     private void AddFilePath(string pathName)
@@ -357,7 +369,7 @@ public class UIReader_FileSystem : UI_Reader
 
     public void ImageEvent(VisualElement file)
     {
-        OpenPanel(imageFindingPanel);
+        //OpenPanel(imageFindingPanel);
         imageSystem.EventImage(file);
     }
 

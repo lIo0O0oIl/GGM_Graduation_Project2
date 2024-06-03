@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -167,7 +167,7 @@ public class Board : MonoBehaviour
         if (tiles.Count == puzzleSize * puzzleSize - 1 || Input.GetKeyDown(KeyCode.L))
         {
             Debug.Log("진입");
-            FileManager.instance.PuzzleLockBackClick();     // 퍼즐판넬 꺼주기
+            //FileManager.instance.PuzzleLockBackClick();     // 퍼즐판넬 꺼주기
             lockFolder.PuzzleClear();       // 퍼즐 클리어됨
 
             passwordUI.SetActive(true);

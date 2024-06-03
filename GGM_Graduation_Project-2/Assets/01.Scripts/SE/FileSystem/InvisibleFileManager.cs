@@ -14,7 +14,7 @@ public class InvisibleFileManager : MonoBehaviour
 {
     public static InvisibleFileManager Instance;
 
-    public RoundFile[] roundFile;        // ¶ó¿îµå ¸¶´Ù º¸¿©Áú °Í
+    public RoundFile[] roundFile;        // ë¼ìš´ë“œ ë§ˆë‹¤ ë³´ì—¬ì§ˆ ê²ƒ
     HashSet<string> ShowRoundSet = new HashSet<string>();
 
     private void Awake()
@@ -38,12 +38,12 @@ public class InvisibleFileManager : MonoBehaviour
                 foreach(var rountFile in file.Files)
                 {
                     rountFile.SetActive(true);
-                    FileManager.instance.NowFilePathIncludeFileCheck(rountFile);     // Å°·Á´Â °ÍÀÌ Áö±İ °æ·Î¿¡ ÀÖ¾î¾ß¸¸ÇÔ.
+                    //FileManager.instance.NowFilePathIncludeFileCheck(rountFile);     // í‚¤ë ¤ëŠ” ê²ƒì´ ì§€ê¸ˆ ê²½ë¡œì— ìˆì–´ì•¼ë§Œí•¨.
                 }
                 is_Exsist = true;
             }
         }
-        if (is_Exsist == false) Debug.LogError($"{round} ´Â(Àº) ¾ø´Â ¶ó¿îµå ÀÔ´Ï´Ù.");
+        if (is_Exsist == false) Debug.LogError($"{round} ëŠ”(ì€) ì—†ëŠ” ë¼ìš´ë“œ ì…ë‹ˆë‹¤.");
         ShowRoundSet.Add(round);
     }
 
@@ -51,7 +51,7 @@ public class InvisibleFileManager : MonoBehaviour
     {
         foreach (var file in roundFile)
         {
-            if (ShowRoundSet.Contains(file.round) == false)      // Æ÷ÇÔµÇ¾îÀÖÁö ¾ÊÀ¸¸é ²¨ÁÖ°í ÇöÀç ÆÄÀÏ °æ·Î¿¡ ¾øÀ¸¸é Áö¿öÁà¾ßÇØ.
+            if (ShowRoundSet.Contains(file.round) == false)      // í¬í•¨ë˜ì–´ìˆì§€ ì•Šìœ¼ë©´ êº¼ì£¼ê³  í˜„ì¬ íŒŒì¼ ê²½ë¡œì— ì—†ìœ¼ë©´ ì§€ì›Œì¤˜ì•¼í•´.
             {
                 foreach (var obj in file.Files)
                 {

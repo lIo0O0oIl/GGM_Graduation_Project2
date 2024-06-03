@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PuzzleFolder : MonoBehaviour
 {
-    public int myPuzzleNum;     // 1¹øÀÌ ½ºÅäÄí, 2¹øÀÌ 8ÆÛÁñ
+    public int myPuzzleNum;     // 1ë²ˆì´ ìŠ¤í† ì¿ , 2ë²ˆì´ 8í¼ì¦
     
     [SerializeField]
     private Transform board;
@@ -22,7 +22,7 @@ public class PuzzleFolder : MonoBehaviour
         {
             Instantiate(puzzlePrefab, board);
         }
-        FileManager.instance.OpenPuzzleLock(myPuzzleNum);
+        //FileManager.instance.OpenPuzzleLock(myPuzzleNum);
         if (myPuzzleNum == 1)
         {
             Sudoku.Instance.Setting();

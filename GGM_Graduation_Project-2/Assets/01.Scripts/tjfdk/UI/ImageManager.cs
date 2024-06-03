@@ -42,6 +42,7 @@ public class ImagePng : ImageDefualt
 {
     public string memo;
     public bool importance;
+    public Sprite saveImage;
     public Vector2 size;
     public Vector2 pos;
 }
