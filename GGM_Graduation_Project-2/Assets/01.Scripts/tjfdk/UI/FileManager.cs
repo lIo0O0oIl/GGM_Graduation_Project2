@@ -10,6 +10,8 @@ public class FileT
     public string fileParentName;
     public bool isCheck;
     public FileType fileType;
+
+    public void IsCheck() { isCheck = true; }
 }
 
 public class FileManager : MonoBehaviour

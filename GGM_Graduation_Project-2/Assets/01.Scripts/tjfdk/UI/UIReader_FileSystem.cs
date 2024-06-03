@@ -330,7 +330,7 @@ public class UIReader_FileSystem : UI_Reader
         panelGround.Add(panel);
 
         FileT file = FindFile(name);
-        file.isCheck = true;
+        file.IsCheck();
     }
 
     public void OpenText(string name, string text)
@@ -342,7 +342,7 @@ public class UIReader_FileSystem : UI_Reader
         panelGround.Add(panel);
 
         FileT file = FindFile(name);
-        file.isCheck = true;
+        file.IsCheck();
     }
 
     private void AddFilePath(string pathName)

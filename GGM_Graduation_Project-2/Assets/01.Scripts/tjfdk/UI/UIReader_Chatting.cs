@@ -1,5 +1,6 @@
 using ChatVisual;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
@@ -23,7 +24,7 @@ public struct Chatting
 public class MemberChat
 {
     public string name;
-    //public string nickName;
+    public string nickName;
     public EFace face;
     public Sprite[] faces;
     public bool isOpen;
@@ -42,8 +43,6 @@ public class UIReader_Chatting : UI_Reader
     private List<MemberChat> memberChats = new List<MemberChat>();
     [SerializeField]
     private Texture2D changeMemberBtnOn, changeMemberBtnOff;
-    [SerializeField]
-    private ChatContainer chatContainer;
 
     // UXLM
     VisualElement chatGround;
@@ -59,17 +58,25 @@ public class UIReader_Chatting : UI_Reader
     VisualTreeAsset ux_hiddenAskChat;
     VisualTreeAsset ux_memberList;
 
+    bool isChapterProcessing;
+
     private void Awake()
     {
         base.Awake();
     }
 
+    private void Start()
+    {
+        AddChapter("HG", "시체 조사");
+        ChoiceMember(FindMember("HG"));
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-            AddMember("JiHyeon");
+            AddMember("JH");
         if (Input.GetKeyDown(KeyCode.A))
-            AddMember("JunWon");
+            AddMember("JW");
         if (Input.GetKeyDown(KeyCode.W))
             InputChat(EChatState.Me, ESaveLocation.JH, EChatType.Text, EFace.Default, EChatEvent.Default, "지현아");
         if (Input.GetKeyDown(KeyCode.E))
@@ -134,8 +141,10 @@ public class UIReader_Chatting : UI_Reader
     public void AddChapter(string who, string name)
     {
         Debug.Log("챕터 붙여줌 : " + who + " " + name);
-        FindMember(who).chapterName = FindChapter(name).showName;
-        // AddChapter 불러주는 기준이 트리거 확인이 됐을 때... Chapter는 인물 옮기면 불러주는 거
+        if (FindMember(who).chapterName == "")
+            FindMember(who).chapterName = FindChapter(name).showName;
+        else
+            Debug.Log("이미 챕터가 있어서 추가할 수 없음");
     }
 
     public Chapter FindChapter(string name)
@@ -150,11 +159,40 @@ public class UIReader_Chatting : UI_Reader
         return null;
     }
 
+    public void NextChapter()
+    {
+        AddChapter(FindChapter(chatContainer.NowChapter.nextChapterName).saveLocation.ToString(),
+            FindChapter(chatContainer.NowChapter.nextChapterName).showName);
+        ;
+    }
+
+    // 현재 뭐가 됐든 챕터가 진행중이라면? 이거 여기 말고 nowchapter쪽에 박아둬도 괜찮을듯
+    IEnumerator Chapter(string name)
+    {
+        Debug.Log("챕터 코루틴 진입");
+        isChapterProcessing = true;
+
+        Chapter chapter = FindChapter(name);
+        var chats = chapter.chat;
+
+        foreach (var chat in chats)
+        {
+            //InputChat(chat.state, chapter.saveLocation, chat.type, chat.face, chat.textEvent, chat.text);
+            // 이거 chatType 나오기 전까지 실행 못 함... 이성은에게 문의할 것
+            Debug.Log("Chapter Debug : " + chat.text);
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        // 다음 챕터 달아주기... 상대 이름 + 챕터 이름
+        AddChapter(FindChapter(chapter.nextChapterName).saveLocation.ToString(), chapter.nextChapterName);
+        isChapterProcessing = false;
+    }
+
     public MemberChat FindMember(string name)
     {
         foreach(MemberChat member in memberChats)
         {
-            if (member.name == name)
+            if (member.nickName == name || member.name == name)
                 return member;
         }
 
@@ -201,32 +239,6 @@ public class UIReader_Chatting : UI_Reader
 
         chat.style.width = sprite.rect.width * size;
         chat.style.height = sprite.rect.height * size;
-    }
-
-    public void Chapter(string name)
-    {
-        Debug.Log("챕터 읽어!!!!");
-        // 챕터를... 멤버한테 붙여주고...
-        // 유저가 멤버를 이동할 때 마다
-        // 붙어있는 챕터를 보고 챕터가 있다면 실행해주고...
-
-        MemberChat member = FindMember(name);
-        //foreach (string chapter in member.chapters)
-        //{
-
-        //}
-        //if (member.chapters.Count > 0)
-        FindChapter(name);
-        //설아야 여기댜
-        // 일단 뭐가 있긴 하면
-        if (member.chapterName != "")
-        {
-            // 
-            Chapter chapter = FindChapter(member.chapterName);
-            {
-
-            }
-        }
     }
 
     public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, EChatEvent evt, string msg, bool isRecord = true)
@@ -346,111 +358,6 @@ public class UIReader_Chatting : UI_Reader
         }
     }
 
-    //public void InputChatting(bool isUser, ChatType chatType, string msg)
-    //{
-    //    VisualElement chat = null;
-    //    VisualElement parent = null;
-
-    //    switch (chatType)
-    //    {
-    //        case ChatType.String:
-    //            chat = ux_chat.Instantiate();
-    //            chat.Q<Label>().text = msg;
-    //            parent = chatGround;
-    //            break;
-    //        case ChatType.Question:
-    //            chat = ux_askChat.Instantiate();
-    //            chat.Q<Label>().text = msg;
-    //            parent = questionGround;
-    //            break;
-    //        case ChatType.Image:
-    //            chat = new VisualElement();
-    //            Te(chat, imageManager.FindPNG(msg).image);
-    //            parent = chatGround;
-    //            break;
-    //        case ChatType.CutScene:
-    //            chat = new Button();
-    //            chat.AddToClassList("FileChatSize");
-    //            chat.AddToClassList("NoButtonBorder");
-    //            Sprite sprite = cutSceneManager.FindCutScene(msg).cutScenes[0].cut;
-    //            chat.style.backgroundImage = new StyleBackground(sprite);
-    //            chat.Q<Button>().clicked += (() => { cutSceneSystem.PlayCutScene(msg); });
-    //            parent = chatGround;
-    //            break;
-    //    }
-    //    Debug.Log(chat.name);
-    //    // 유저의 대사라면
-    //    if (isUser)
-    //        chat.AddToClassList("MyChat");
-    //    else
-    //        chat.AddToClassList("OtherChat");
-
-    //    // question이라면 생성 위치 다르게
-    //}
-
-    //public void InputChat(bool isRecord, bool isUser, MemberChat other, string msg, Sprite face = null)
-    //{
-    //    // 생성
-    //    VisualElement chat = RemoveContainer(ux_chat.Instantiate());
-
-    //    // 유저의 대사라면
-    //    if (isUser)
-    //        chat.AddToClassList("MyChat");
-    //    else
-    //        chat.AddToClassList("OtherChat");
-
-    //    // 지정 표정으로 바꿔주기
-    //    if (face != null)
-    //        chattingFace.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(face);
-    //    // 대사 변경
-    //    chat.Q<Label>().text = msg;
-    //    // 대화에 추가
-    //    chatGround.Add(chat);
-
-    //    if (isRecord)
-    //    {
-    //        Debug.Log("기록함");
-    //        Chatting chatting = new Chatting();
-    //        chatting.isBool = isUser;
-    //        chatting.msg = msg;
-    //        other.chattings.Add(chatting);
-    //    }
-
-    //    EndToScroll();
-    //}
-
-    //public void InputQuestion(bool isRecord, bool isOpen, MemberChat other, string msg, Action action)
-    //{
-    //    // 생성
-    //    VisualElement chat;
-
-    //    // 잠금이 풀린 대사라면
-    //    if (isOpen)
-    //    {
-    //        chat = RemoveContainer(ux_askChat.Instantiate());
-    //        // 대사 변경
-    //        chat.Q<Label>().text = msg;
-    //        // 대사 이벤트 연결
-    //        chat.Q<Button>().clicked += action;
-    //        chat.Q<Button>().clicked += (() => { chat.parent.Remove(chat); });
-    //    }
-    //    else
-    //        chat = RemoveContainer(ux_hiddenAskChat.Instantiate());
-
-    //    // 대화에 추가
-    //    questionGround.Add(chat);
-    //    EndToScroll();
-
-    //    if (isRecord)
-    //    {
-    //        Chatting chatting = new Chatting();
-    //        chatting.isBool = isOpen;
-    //        chatting.msg = msg;
-    //        other.chattings.Add(chatting);
-    //    }
-
-    //}
-
     private void EndToScroll()
     {
         ScrollView scrollView = chatGround.Q<ScrollView>("ChatGround");
@@ -485,11 +392,6 @@ public class UIReader_Chatting : UI_Reader
         }
     }
 
-    private void Test()
-    {
-        Debug.Log("이이");
-    }
-
     public void ChangeMember()
     {
         if (memberList.style.display.value == DisplayStyle.Flex)
@@ -521,7 +423,15 @@ public class UIReader_Chatting : UI_Reader
             RecallChatting(member); // 새로 쓰고
 
             // 해당 인물에게 챕터를 읽자
-            Chapter(member.name);
+            if (member.chapterName != "")
+            {
+                // 챕터 불러주고
+                StartCoroutine(Chapter(member.chapterName));
+                // 끝났으면 현재 챕터 초기화
+                member.chapterName = "";
+            }
+            else
+                Debug.Log("챕터가 비어있음");
         }
     }
 }
