@@ -73,23 +73,23 @@ public class UIReader_Chatting : UI_Reader
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-            AddMember("JH");
-        if (Input.GetKeyDown(KeyCode.A))
-            AddMember("JW");
-        if (Input.GetKeyDown(KeyCode.W))
-            InputChat(EChatState.Me, ESaveLocation.JH, EChatType.Text, EFace.Default, EChatEvent.Default, "지현아");
-        if (Input.GetKeyDown(KeyCode.E))
-            InputChat(EChatState.Other, ESaveLocation.JH, EChatType.Image, EFace.Blush, EChatEvent.Default, "담배");
-        if (Input.GetKeyDown(KeyCode.G))
-            InputChat(EChatState.Other, ESaveLocation.JH, EChatType.Text, EFace.Difficult, EChatEvent.Default, "담배");
-        if (Input.GetKeyDown(KeyCode.S))
-            InputChat(EChatState.Me, ESaveLocation.JW, EChatType.Text, EFace.Default, EChatEvent.Default, "준원아");
-        if (Input.GetKeyDown(KeyCode.D))
-            InputChat(EChatState.Other, ESaveLocation.JH, EChatType.CutScene, EFace.Default, EChatEvent.Default, "Start");
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //    AddMember("JH");
+        //if (Input.GetKeyDown(KeyCode.A))
+        //    AddMember("JW");
+        //if (Input.GetKeyDown(KeyCode.W))
+        //    InputChat(EChatState.Me, ESaveLocation.JH, EChatType.Text, EFace.Default, EChatEvent.Default, "지현아");
+        //if (Input.GetKeyDown(KeyCode.E))
+        //    InputChat(EChatState.Other, ESaveLocation.JH, EChatType.Image, EFace.Blush, EChatEvent.Default, "담배");
+        //if (Input.GetKeyDown(KeyCode.G))
+        //    InputChat(EChatState.Other, ESaveLocation.JH, EChatType.Text, EFace.Difficult, EChatEvent.Default, "담배");
+        //if (Input.GetKeyDown(KeyCode.S))
+        //    InputChat(EChatState.Me, ESaveLocation.JW, EChatType.Text, EFace.Default, EChatEvent.Default, "준원아");
+        //if (Input.GetKeyDown(KeyCode.D))
+        //    InputChat(EChatState.Other, ESaveLocation.JH, EChatType.CutScene, EFace.Default, EChatEvent.Default, "Start");
 
-        if (Input.GetKeyDown(KeyCode.R))
-            InputQuestion(ESaveLocation.JH, EChatType.Question, EFace.Default, EChatEvent.Default, "점심 메뉴 뭐야?");
+        //if (Input.GetKeyDown(KeyCode.R))
+        //    InputQuestion(ESaveLocation.JH, EChatType.Question, EFace.Default, EChatEvent.Default, "점심 메뉴 뭐야?");
 
         //if (Input.GetKeyDown(KeyCode.T))
         //    InputChatting(true, ChatType.Image, "담배");
@@ -177,8 +177,7 @@ public class UIReader_Chatting : UI_Reader
 
         foreach (var chat in chats)
         {
-            //InputChat(chat.state, chapter.saveLocation, chat.type, chat.face, chat.textEvent, chat.text);
-            // 이거 chatType 나오기 전까지 실행 못 함... 이성은에게 문의할 것
+            InputChat(chat.state, chapter.saveLocation, chat.type, chat.face, chat.text, true);
             Debug.Log("Chapter Debug : " + chat.text);
             yield return new WaitForSeconds(1.5f);
         }
@@ -210,10 +209,10 @@ public class UIReader_Chatting : UI_Reader
         memberName.text = otherName.name;
 
         foreach (Chatting chat in otherName.chattings)
-            InputChat(chat.who, chat.toWho, chat.chatType, otherName.face, EChatEvent.Default, chat.text, false);
+            InputChat(chat.who, chat.toWho, chat.chatType, otherName.face, chat.text, false);
 
         foreach (Chatting chat in otherName.quetions)
-            InputQuestion(chat.toWho, chat.chatType, otherName.face, EChatEvent.Default, chat.text, false);
+            InputQuestion(chat.toWho, chat.chatType, otherName.face, chat.text, false);
 
         ////스크롤바 맨 아래로 내리기
         //chatGround.Q<ScrollView>(chatGround.name).verticalScroller.value
@@ -241,7 +240,7 @@ public class UIReader_Chatting : UI_Reader
         chat.style.height = sprite.rect.height * size;
     }
 
-    public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, EChatEvent evt, string msg, bool isRecord = true)
+    public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
     {
         // 생성
         VisualElement chat = null;
@@ -283,7 +282,7 @@ public class UIReader_Chatting : UI_Reader
         chatGround.Add(chat);
     }
 
-    public void InputQuestion(ESaveLocation toWho, EChatType type, EFace face, EChatEvent evt, string msg, bool isRecord = true)
+    public void InputQuestion(ESaveLocation toWho, EChatType type, EFace face, string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
     {
         // 생성
         VisualElement chat = null ;
