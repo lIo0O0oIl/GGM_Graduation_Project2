@@ -10,17 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3058b5b5e71149549b1773c6fa0b9cae, type: 3}
-  m_Name: Start
+  m_Name: DieFall
   m_EditorClassIdentifier: 
-  chapterName: Start
+  chapterName: DieFall
   cutScenes:
   - cut: {fileID: 21300000, guid: 4fed63953deba9f4b8edfdcbe9a63dbb, type: 3}
     texts:
     - sound: 
       text: ...
       isEnd: 0
-  - cut: {fileID: 21300000, guid: f6befe3053210c244ace7a5083625541, type: 3}
+  - cut: {fileID: 21300000, guid: e3977c1adde0a5040b3b5b373c6228a3, type: 3}
     texts:
     - sound: 
       text: "\uCFF5!"
+      isEnd: 0
+  - cut: {fileID: 21300000, guid: f6befe3053210c244ace7a5083625541, type: 3}
+    texts:
+    - sound: 
+      text: ...
       isEnd: 0
