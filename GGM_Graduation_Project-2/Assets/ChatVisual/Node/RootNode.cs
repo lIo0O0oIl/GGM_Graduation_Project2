@@ -15,7 +15,7 @@ namespace ChatVisual
         public List<string> round = new List<string>();
 
         public bool is_nextChapter;
-        public int nextChapterIndex;
+        public string nextChapterIndex;
 
         protected override void OnStart()
         {

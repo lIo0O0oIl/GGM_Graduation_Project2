@@ -3529,7 +3529,6 @@ MonoBehaviour:
     isOpen: 0
     memo: "\uD5C9! \uB2F4\uBC30\uB2E4! \uAC04\uCCA9\uC2E0\uACE0\uB294 1388"
     importance: 1
-    saveImage: {fileID: 21300000, guid: d744bf085158a20488f78ecd163330c5, type: 3}
     size: {x: 50, y: 50}
     pos: {x: 300, y: 300}
   - name: "\uC73C\uC545"
@@ -3537,7 +3536,6 @@ MonoBehaviour:
     isOpen: 0
     memo: "\uC6B0\uC640! \uB3C8 \uC9F1 \uB9CE\uB2E4! \uB098 \uC870\uAE08\uB9CC \uC92C\uC73C\uBA74..."
     importance: 0
-    saveImage: {fileID: 21300000, guid: c8e28694317a70a4cafd48af217e0b53, type: 3}
     size: {x: 50, y: 50}
     pos: {x: 400, y: 800}
   memos:
@@ -12223,17 +12221,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowChaptersIndex: 19
-  nowChatIndex: 5
+  nowChaptersIndex: 0
+  nowChatIndex: 6
   nowChapter:
-    showName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4 \uD6C4 "
-    saveLocation: 0
-    chat: []
+    showName: "\uC0AC\uAC74 \uC2DC\uC791"
+    saveLocation: 1
+    chat:
+    - state: 0
+      text: "\uC800\uB294 \uC774\uBC88 \uC218\uC0AC\uB97C \uB3D5\uAC8C \uB41C \uBC15\uD604\uADDC
+        \uACBD\uC0AC\uC785\uB2C8\uB2E4."
+      face: 0
+      textEvent: 
+    - state: 1
+      text: "\uADF8\uB798, \uC798 \uBD80\uD0C1\uD558\uB124"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uC740\uC131 \uACE0\uB4F1\uD559\uAD50\uC5D0\uC11C \uC790\uC0B4 \uC2E0\uACE0\uAC00
+        \uB4E4\uC5B4\uC654\uC2B5\uB2C8\uB2E4."
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uC81C\uAC00 \uC0AC\uAC74\uACFC \uAD00\uB828\uB41C \uC790\uB8CC\uB97C
+        \uD30C\uC77C\uD654 \uD558\uC5EC \uD615\uC0AC\uB2D8\uAED8 \uBCF4\uB0B4\uB4DC\uB9B4\uD14C\uB2C8"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uD615\uC0AC\uB2D8\uAED8\uC11C\uB294 \uC774 \uCEF4\uD4E8\uD130\uB97C
+        \uD1B5\uD574 \uC0AC\uAC74\uC744 \uC870\uC0AC\uD574\uC8FC\uC2DC\uBA74 \uB429\uB2C8\uB2E4."
+      face: 0
+      textEvent: 
     askAndReply: []
     lockAskAndReply: []
-    round: []
-    is_nextChapter: 0
-    nextChapterName: 
+    round:
+    - "\uC2DC\uCCB4"
+    - "\uC625\uC0C1"
+    is_nextChapter: 1
+    nextChapterName: "\uC0AC\uAC74 \uC2DC\uC791"
   mainChapter:
   - showName: "\uC0AC\uAC74 \uC2DC\uC791"
     saveLocation: 1
@@ -12268,7 +12292,7 @@ MonoBehaviour:
     - "\uC2DC\uCCB4"
     - "\uC625\uC0C1"
     is_nextChapter: 1
-    nextChapterName: "\uD53C\uD574\uC790 \uC8FC\uBCC0 \uD0D0\uBB38 \uC870\uC0AC"
+    nextChapterName: "\uC0AC\uAC74 \uC2DC\uC791"
   - showName: "\uC2DC\uCCB4 \uC870\uC0AC"
     saveLocation: 0
     chat:
@@ -12303,7 +12327,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uC625\uC0C1 \uC870\uC0AC"
   - showName: "\uC625\uC0C1 \uC870\uC0AC"
     saveLocation: 0
     chat:
@@ -12419,7 +12443,7 @@ MonoBehaviour:
     - "\uC218\uC5F0 \uC0AC\uBB3C\uD568"
     - "cctv \uD30C\uC77C "
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uC8FC\uBCC0\uC778 \uBA74\uB2F4 \uC120\uD0DD"
   - showName: "\uC8FC\uBCC0\uC778 \uBA74\uB2F4 \uC120\uD0DD"
     saveLocation: 0
     chat:
@@ -12500,7 +12524,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uB2F4\uC784 \uC120\uC0DD\uB2D8 \uBA74\uB2F4 \uD6C4"
   - showName: "\uB2F4\uC784 \uC120\uC0DD\uB2D8 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 0
     chat:
@@ -12618,7 +12642,7 @@ MonoBehaviour:
     round:
     - "\uC218\uC5F0\uC774 \uBC29 "
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uBD80\uBAA8\uB2D8 \uBA74\uB2F4 \uD6C4"
   - showName: "\uBD80\uBAA8\uB2D8 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 0
     chat:
@@ -12824,7 +12848,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uBC18 \uCE5C\uAD6C\uB4E4 \uBA74\uB2F4 \uD6C4"
   - showName: "\uBC18 \uCE5C\uAD6C\uB4E4 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 0
     chat:
@@ -12842,7 +12866,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4"
   - showName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4"
     saveLocation: 0
     chat:
@@ -12904,7 +12928,7 @@ MonoBehaviour:
       is_UseThis: 0
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4 \uD6C4"
   - showName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4 \uD6C4"
     saveLocation: 0
     chat:
@@ -12924,7 +12948,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uAC15\uC9C0\uD604 \uC790\uB9AC \uC870\uC0AC \uD6C4"
   - showName: "\uAC15\uC9C0\uD604 \uC790\uB9AC \uC870\uC0AC \uD6C4"
     saveLocation: 0
     chat:
@@ -12941,7 +12965,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4"
   - showName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4"
     saveLocation: 0
     chat:
@@ -13017,7 +13041,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4 \uD6C4"
   - showName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4 \uD6C4"
     saveLocation: 0
     chat:
@@ -13043,7 +13067,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4"
   - showName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4"
     saveLocation: 0
     chat:
@@ -13095,7 +13119,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 0
-    nextChapterName: 
+    nextChapterName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4 \uD6C4"
   - showName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 0
     chat: []
