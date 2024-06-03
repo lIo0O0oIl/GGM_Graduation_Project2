@@ -1,3 +1,4 @@
+using ChatVisual;
 using DG.Tweening;
 using JetBrains.Annotations;
 using System;
@@ -61,45 +62,22 @@ public class UIReader_FileSystem : UI_Reader
     VisualTreeAsset ux_ImagePanel;
     VisualTreeAsset ux_TextPanel;
 
-    // test path
+    // foulder
+    public string currentFolderName;
+
+    // path
     public Stack<string> filePathLisk = new Stack<string>();
     public List<FileTT> fileFolders;
     public FileTT currentFileFolder;
 
-    public string text_currentFolderName;
+    // file dran and drop
+    private VisualElement fileDefaultArea;
+    private List<VisualElement> lockQuestions;
 
     private void Awake()
     {
         base.Awake();
         fileFolders = new List<FileTT>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            AddFile(FileType.FOLDER, "학교", "Main");
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            AddFile(FileType.FOLDER, "정글", "학교");
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            AddFile(FileType.FOLDER, "옥상", "Main");
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            AddFile(FileType.IMAGE, "담배", "정글");
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            AddFile(FileType.IMAGE, "옥상", "정글");
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            AddFile(FileType.TEXT, "일기", "정글");
-        }
     }
 
     private void OnEnable()
@@ -147,7 +125,49 @@ public class UIReader_FileSystem : UI_Reader
         };
     }
 
-    private FileTT FindMember(string name)
+    private void FindLockQuestion()
+    {
+        MemberChat member = chatSystem.FindMember(chatSystem.currentMemberName);
+        for (int i = 0; i < member.quetions.Count; ++i)
+        {
+            if (member.quetions[i].chatType == EChatType.LockQuestion)
+                lockQuestions.Add(chatSystem.questionGround.ElementAt(i));
+        }
+    }
+
+    private VisualElement FindMoveArea(Vector2 position)
+    {
+        FindLockQuestion();
+
+        //모든 슬롯을 찾아서 그중에서 worldBound 에 position이 속하는 녀석을 찾아오면
+        foreach (VisualElement moveArea in lockQuestions)
+        {
+            if (moveArea.worldBound.Contains(position)) //해당 RECT안에 포지션이 있는지 검사해
+            {
+                return moveArea;
+            }
+        }
+        return null;
+    }
+
+    private void LoadDragAndDrop(VisualElement file)
+    {
+        // 드래그 앤 드롭 기능 추가
+        file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
+        {
+            var area = FindMoveArea(evt.mousePosition);
+
+            target.RemoveFromHierarchy();
+            if (area == null)
+            {
+                beforeSlot.Add(target);
+            }
+            else
+                Debug.Log("잠긴 질문과 부딪힘");
+        }));
+    }
+
+    private FileTT FindFolder(string name)
     {
         foreach (FileTT folder in fileFolders)
         {
@@ -192,7 +212,7 @@ public class UIReader_FileSystem : UI_Reader
                     };
                     // 폴더 부모 지정
                     bool addNew = false;
-                    FileTT parentFolder = FindMember(fileParentName);
+                    FileTT parentFolder = FindFolder(fileParentName);
                     if (parentFolder != null)
                     {
                         Debug.Log("찾음");
@@ -220,6 +240,8 @@ public class UIReader_FileSystem : UI_Reader
                     file.Q<Label>("FileName").text = fileName;
                     // 이벤트 연결
                     file.Q<Button>().clicked += () => ImageEvent(file); // 이미지 등록,,, 이미지 등록할 위치....
+                    // 드래그 앤 드롭 기능 추가
+                    LoadDragAndDrop(file);
 
                     // 파일 부모 지정
                     bool addNew = false;
@@ -251,6 +273,8 @@ public class UIReader_FileSystem : UI_Reader
                     file.Q<Label>("FileName").text = fileName;
                     // 이벤트 연결
                     file.Q<Button>().clicked += () => TextEvent(file);
+                    // 드래그 앤 드롭 기능 추가
+                    LoadDragAndDrop(file);
 
                     // 파일 부모 지정
                     bool addNew = false;
@@ -276,12 +300,12 @@ public class UIReader_FileSystem : UI_Reader
                 }
         }
 
-        if (text_currentFolderName == "")
-            text_currentFolderName = fileParentName;
-        if (text_currentFolderName == fileParentName)
+        if (currentFolderName == "")
+            currentFolderName = fileParentName;
+        if (currentFolderName == fileParentName)
         {
             Debug.Log("tlqkfjdlafjwe");
-            DrawFile(text_currentFolderName);
+            DrawFile(currentFolderName);
         }
     }
 
@@ -291,7 +315,7 @@ public class UIReader_FileSystem : UI_Reader
         // fileFolders - 현재 모든 폴더 배열
         // folderName - 현재 선택된 폴더 이름
 
-        text_currentFolderName = folderName;
+        currentFolderName = folderName;
 
         // 이전에 있던 것들 다 지우고 (역순으로 지워야 오류 안 남)
         for (int i = fileGround.childCount - 1; i >= 0; i--)

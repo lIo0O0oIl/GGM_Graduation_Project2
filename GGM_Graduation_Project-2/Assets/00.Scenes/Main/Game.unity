@@ -3355,6 +3355,7 @@ GameObject:
   - component: {fileID: 150678876}
   - component: {fileID: 150678875}
   - component: {fileID: 150678877}
+  - component: {fileID: 150678887}
   - component: {fileID: 150678884}
   - component: {fileID: 150678885}
   - component: {fileID: 150678880}
@@ -3414,9 +3415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bbbd968b924444191c81e323af6906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingPanel: {fileID: 489658198}
-  sp_speechrSprite: {fileID: 21300000, guid: f98ec2994b010a7449f27041c13061fb, type: 3}
-  s_speechrSprite: {fileID: 21300000, guid: 616697de6bf35974dbda66ac9e2b7b3b, type: 3}
 --- !u!114 &150678878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3446,10 +3444,10 @@ MonoBehaviour:
   changeSizeBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeSizeBtnOff: {fileID: -3753015318093942961, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isFileSystemOpen: 0
+  currentFolderName: 
   fileFolders: []
   currentFileFolder:
     folderName: 
-  text_currentFolderName: 
 --- !u!114 &150678880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3495,13 +3493,16 @@ MonoBehaviour:
   - name: "\uBC15\uD604\uADDC"
     nickName: HG
     face: 0
-    faces: []
+    faces:
+    - {fileID: 21300000, guid: c4ffb857c0d42d745893a418cb76eaf7, type: 3}
     isOpen: 0
     chapterName: 
     chattings: []
     quetions: []
   changeMemberBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: 4154780841294389669, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
+  isChapterProcessing: 0
+  currentMemberName: 
 --- !u!114 &150678881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3876,6 +3877,18 @@ MonoBehaviour:
     fileParentName: "\uCC44\uD305 \uB0B4\uC5ED"
     isCheck: 0
     fileType: 2
+--- !u!114 &150678887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150678874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce46f699b261d24c9ed59bd3dd1a949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &155637819
 GameObject:
   m_ObjectHideFlags: 0
@@ -12330,104 +12343,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowChaptersIndex: 5
-  nowChatIndex: 18
+  nowChaptersIndex: 0
+  nowChatIndex: 6
   nowChapter:
-    showName: "\uCD08\uAE30 \uC218\uC0AC \uC120\uD0DD"
-    saveLocation: 0
+    showName: "\uC0AC\uAC74 \uC2DC\uC791"
+    saveLocation: 1
     chat:
     - state: 0
       type: 0
-      text: "\uC5B4\uB5A4 \uAC78 \uBA3C\uC800 \uC870\uC0AC\uD574 \uBCF4\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+      text: "\uC800\uB294 \uC774\uBC88 \uC218\uC0AC\uB97C \uB3D5\uAC8C \uB41C \uBC15\uD604\uADDC
+        \uACBD\uC0AC\uC785\uB2C8\uB2E4."
       face: 0
       textEvent: 
-    askAndReply:
-    - ask: "\uD53C\uD574\uC790 \uBB3C\uD488 \uC870\uC0AC "
-      reply:
-      - state: 0
-        type: 0
-        text: "\uC774\uC218\uC5F0 \uD559\uC0DD\uC758 \uC0AC\uBB3C\uD568\uC744 \uBCF4\uB0B4\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4 "
-        face: 0
-        textEvent: 02000000
-      - state: 0
-        type: 0
-        text: "\uD589\uC815\uC2E4\uC5D0 CCTV\uC5D0 \uAD00\uD574 \uBB38\uC758\uD574\uBCF4\uB2C8\n\uAD50\uBB38
-          \uC55E\uC5D0 \uD55C \uAC1C\uAC00 \uC804\uBD80\uB77C\uACE0 \uD558\uB124\uC694"
-        face: 0
-        textEvent: 02000000
-      - state: 0
-        type: 0
-        text: "CCTV\uB97C \uC870\uD68C\uD574\uBCF4\uB2C8 \uC57C\uC790\uAC00 \uB05D\uB09C
-          \uD559\uC0DD\uB4E4\uC774 \uB098\uAC00\uACE0"
-        face: 0
-        textEvent: 
-      - state: 0
-        type: 0
-        text: "\uCD1D \uC138 \uBA85\uC774 \uD53C\uD574\uC790\uC758 \uC0AC\uB9DD \uCD94\uC815
-          \uC2DC\uAC04\uC5D0 \uB4A4\uB2A6\uAC8C \uD559\uAD50\uB97C \uB098\uAC14\uC2B5\uB2C8\uB2E4."
-        face: 0
-        textEvent: 
-      - state: 1
-        type: 0
-        text: "\uADF8 \uC138 \uBA85\uC758 \uC2E0\uC6D0\uC740 \uD30C\uC545\uB410\uB098?"
-        face: 0
-        textEvent: 
-      - state: 0
-        type: 0
-        text: "\uC544\uBB34\uB798\uB3C4 \uC138 \uBA85\uC758 \uC2E0\uC6D0\uC744 \uD655\uC778\uD558\uAE30
-          \uC704\uD574\uC120\n\uC2DC\uAC04\uC774 \uC870\uAE08 \uD544\uC694\uD560
-          \uAC83 \uAC19\uC2B5\uB2C8\uB2E4."
-        face: 0
-        textEvent: 
-      is_UseThis: 0
-    - ask: "cctv \uC870\uC0AC "
-      reply:
-      - state: 1
-        type: 0
-        text: "\uC2E0\uC6D0\uC774 \uD655\uC778\uB418\uB294 \uB300\uB85C \uC804\uB2EC
-          \uBD80\uD0C1\uD558\uB124"
-        face: 0
-        textEvent: 
-      - state: 0
-        type: 0
-        text: "\uB124 \uC54C\uACA0\uC2B5\uB2C8\uB2E4!"
-        face: 0
-        textEvent: 
-      - state: 1
-        type: 0
-        text: "\uACE0\uB9D9\uB124 "
-        face: 0
-        textEvent: 
-      - state: 0
-        type: 0
-        text: "\uB300\uBD80\uBD84 \uAD50\uACFC\uC11C\uC640 \uBB38\uC81C\uC9D1 \uC774\uAD70\uC694..."
-        face: 0
-        textEvent: 
-      - state: 0
-        type: 0
-        text: "\uC0AC\uBB3C\uD568\uC5D0\uB3C4 \uD734\uB300\uD3F0\uC774 \uC5C6\uB124\uC694"
-        face: 0
-        textEvent: 
-      - state: 0
-        type: 0
-        text: "\uD734\uB300\uD3F0\uC740 \uC5B4\uB514\uC788\uB294\uAC78\uAE4C\uC694?"
-        face: 0
-        textEvent: 
-      - state: 1
-        type: 0
-        text: "\uCC3E\uC544\uBD10\uC57C\uACA0\uAD70 "
-        face: 0
-        textEvent: 
-      is_UseThis: 0
-    - ask: "\uC8FC\uBCC0\uC778 \uD0D0\uBB38 "
-      reply: []
-      is_UseThis: 0
+    - state: 1
+      type: 0
+      text: "\uADF8\uB798, \uC798 \uBD80\uD0C1\uD558\uB124"
+      face: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: "\uC740\uC131 \uACE0\uB4F1\uD559\uAD50\uC5D0\uC11C \uC790\uC0B4 \uC2E0\uACE0\uAC00
+        \uB4E4\uC5B4\uC654\uC2B5\uB2C8\uB2E4."
+      face: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: "\uC81C\uAC00 \uC0AC\uAC74\uACFC \uAD00\uB828\uB41C \uC790\uB8CC\uB97C
+        \uD30C\uC77C\uD654 \uD558\uC5EC \uD615\uC0AC\uB2D8\uAED8 \uBCF4\uB0B4\uB4DC\uB9B4\uD14C\uB2C8"
+      face: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: "\uD615\uC0AC\uB2D8\uAED8\uC11C\uB294 \uC774 \uCEF4\uD4E8\uD130\uB97C
+        \uD1B5\uD574 \uC0AC\uAC74\uC744 \uC870\uC0AC\uD574\uC8FC\uC2DC\uBA74 \uB429\uB2C8\uB2E4."
+      face: 0
+      textEvent: 
+    askAndReply: []
     lockAskAndReply: []
     round:
-    - "\uC218\uC5F0 \uC0AC\uBB3C\uD568"
-    - "cctv \uD30C\uC77C "
-    is_nextChapter: 0
-    nextChapterName: 
+    - "\uC2DC\uCCB4"
+    - "\uC625\uC0C1"
+    is_nextChapter: 1
+    nextChapterName: "\uC0AC\uAC74 \uC2DC\uC791"
   mainChapter:
   - showName: "\uC0AC\uAC74 \uC2DC\uC791"
     saveLocation: 1

@@ -14,7 +14,7 @@ public class FileT
     public void IsCheck() { isCheck = true; }
 }
 
-public class FileManager : MonoBehaviour
+public class FileManager : UI_Reader
 {
     public List<FileT> folderFiles = new List<FileT>();
     //    public List<FileImage> imageFiles = new List<FileImage>();

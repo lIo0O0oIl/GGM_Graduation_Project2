@@ -3,32 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[Serializable]
-//public class ImageDefualt
-//{
-//    public string imageName;
-//    public Sprite image;
-//}
-
-//[Serializable]
-//public class ImageEvidence
-//{
-//    public Sprite evidenceImage;
-//    public string evidenceName;
-//    public string evidenceMemo;
-
-//    public Vector2 evidenceSize;
-//    public Vector2 evidencePos;
-
-//    public bool importance;
-//}
-
-//[Serializable]
-//public class ImageFile1 : ImageDefualt
-//{
-//    public List<ImageEvidence> evidences = new List<ImageEvidence>();
-//}
-
 [Serializable]
 public class ImageDefualt
 {
@@ -60,7 +34,7 @@ public class Memo
     public string memo;
 }
 
-public class ImageManager : MonoBehaviour
+public class ImageManager : UI_Reader
 {
     public List<ImageB> images = new List<ImageB>();
     public List<ImagePng> pngs = new List<ImagePng>();
@@ -73,20 +47,6 @@ public class ImageManager : MonoBehaviour
         foreach (Memo memo in memos)
             memoDic.Add(memo.name, memo.memo);
     }
-
-    //public Dictionary<string, ImageDefualt> imageDic = new Dictionary<string, ImageDefualt>();
-
-    //private void Start()
-    //{
-    //    foreach (var image in images)
-    //    {
-    //        imageDic[image.name] = image;
-    //    }
-    //    foreach (var png in pngs)
-    //    {
-    //        imageDic[png.name] = png;
-    //    }
-    //}
 
     public ImagePng FindPNG(string name)
     {

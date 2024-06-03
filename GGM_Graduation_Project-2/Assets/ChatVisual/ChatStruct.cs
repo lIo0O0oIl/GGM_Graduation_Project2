@@ -7,10 +7,12 @@ namespace ChatVisual
     public enum ESaveLocation
     {
         NotSave,
-        JH,
-        JW,
-        HS,
-        CM
+        JH, // Jihyen
+        JW, // Junwon
+        HS, // Hyensuck
+        CM, // Cheamin
+        HG, // HyenGue
+        DY // Deayang
     }
 
     public enum EChatState
