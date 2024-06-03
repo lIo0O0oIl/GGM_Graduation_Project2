@@ -224,8 +224,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1208371919}
-  - component: {fileID: 1208371920}
-  - component: {fileID: 1208371921}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -248,158 +246,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1208371920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208371918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nowChaptersIndex: 0
-  nowChatIndex: 9
-  nowChapter:
-    showName: "\uC870\uC218"
-    saveLocation: 2
-    chat:
-    - state: 0
-      text: dsfsf
-      face: 0
-      textEvent: 
-    - state: 1
-      text: okok
-      face: 0
-      textEvent: 
-    askAndReply:
-    - ask: give me
-      reply:
-      - state: 0
-        text: ok...
-        face: 2
-        textEvent: 
-      - state: 0
-        text: you bad..!
-        face: 0
-        textEvent: 00000000
-      is_UseThis: 0
-    lockAskAndReply:
-    - evidence:
-      - your love
-      ask: you love me?
-      reply:
-      - state: 0
-        text: yes. my sir
-        face: 0
-        textEvent: 01000000
-      - state: 0
-        text: 
-        face: 0
-        textEvent: 
-      is_UseThis: 0
-    round:
-    - love
-    is_nextChapter: 0
-    nextChapterIndex: 0
-  mainChapter:
-  - showName: "\uC870\uC218"
-    saveLocation: 2
-    chat:
-    - state: 0
-      text: dsfsf
-      face: 0
-      textEvent: 
-    - state: 1
-      text: okok
-      face: 0
-      textEvent: 
-    askAndReply:
-    - ask: give me
-      reply:
-      - state: 0
-        text: ok...
-        face: 2
-        textEvent: 
-      - state: 0
-        text: you bad..!
-        face: 0
-        textEvent: 00000000
-      is_UseThis: 0
-    lockAskAndReply:
-    - evidence:
-      - your love
-      ask: you love me?
-      reply:
-      - state: 0
-        text: yes. my sir
-        face: 0
-        textEvent: 01000000
-      - state: 0
-        text: 
-        face: 0
-        textEvent: 
-      is_UseThis: 0
-    round:
-    - love
-    is_nextChapter: 0
-    nextChapterIndex: 0
-  - showName: "\uC120\uC0DD"
-    saveLocation: 0
-    chat:
-    - state: 1
-      text: "you \uC120\uC0DD?"
-      face: 0
-      textEvent: 
-    - state: 0
-      text: yes yes
-      face: 0
-      textEvent: 
-    askAndReply:
-    - ask: "you \uBC14\uBCF4?"
-      reply:
-      - state: 0
-        text: "yes...... I'm \uBC14\uBCF4"
-        face: 2
-        textEvent: 00000000
-      - state: 1
-        text: hahaha good!
-        face: 0
-        textEvent: 
-      is_UseThis: 0
-    lockAskAndReply: []
-    round: []
-    is_nextChapter: 0
-    nextChapterIndex: 0
-  - showName: 
-    saveLocation: 0
-    chat: []
-    askAndReply: []
-    lockAskAndReply: []
-    round: []
-    is_nextChapter: 0
-    nextChapterIndex: 0
---- !u!114 &1208371921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208371918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11cd18f64cf12764788f0a74c005923b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: []
-  child:
-    text: dkssud
-    id: 54
-  child2:
-    text: good
-    pi: 3.141592
 --- !u!1 &1779873654
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,8 +324,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1946618727}
   - component: {fileID: 1946618726}
+  - component: {fileID: 1946618728}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: UIDocument
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -516,6 +363,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1946618728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946618725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4892970bd20b2b43b1795322b432cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 9197481963319205126, guid: 9da18e6cb6c8c8946964a96dccceeba9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

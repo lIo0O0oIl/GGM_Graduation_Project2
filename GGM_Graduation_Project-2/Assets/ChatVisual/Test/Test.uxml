@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/ChatVisual/Test/Test.uss?fileID=7433441132597879392&amp;guid=753eb97c7bdc2d646b7ad1a71c5d46ae&amp;type=3#Test" />
+    <ui:VisualElement name="Inventory" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="MoveArea" class="slot" style="flex-grow: 1; background-color: rgba(56, 161, 178, 0.56); position: absolute; height: 508px; width: 432px; top: 300px; left: 200px;" />
+        <ui:VisualElement name="BaseArea" class="slot" style="flex-grow: 1; background-color: rgba(56, 161, 178, 0.56); position: absolute; height: 508px; width: 432px; top: 300px; left: 1000px;" />
+    </ui:VisualElement>
+</ui:UXML>
