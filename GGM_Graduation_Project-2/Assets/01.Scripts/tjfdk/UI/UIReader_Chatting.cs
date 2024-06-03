@@ -71,18 +71,18 @@ public class UIReader_Chatting : UI_Reader
         if (Input.GetKeyDown(KeyCode.A))
             AddMember("JunWon");
         if (Input.GetKeyDown(KeyCode.W))
-            InputChat(EChatState.Me, ESaveLocation.강지현, EChatType.Text, EFace.Default, EChatEvent.Default, "지현아");
+            InputChat(EChatState.Me, ESaveLocation.JH, EChatType.Text, EFace.Default, EChatEvent.Default, "지현아");
         if (Input.GetKeyDown(KeyCode.E))
-            InputChat(EChatState.Other, ESaveLocation.강지현, EChatType.Image, EFace.Blush, EChatEvent.Default, "담배");
+            InputChat(EChatState.Other, ESaveLocation.JH, EChatType.Image, EFace.Blush, EChatEvent.Default, "담배");
         if (Input.GetKeyDown(KeyCode.G))
-            InputChat(EChatState.Other, ESaveLocation.강지현, EChatType.Text, EFace.Difficult, EChatEvent.Default, "담배");
+            InputChat(EChatState.Other, ESaveLocation.JH, EChatType.Text, EFace.Difficult, EChatEvent.Default, "담배");
         if (Input.GetKeyDown(KeyCode.S))
-            InputChat(EChatState.Me, ESaveLocation.황준원, EChatType.Text, EFace.Default, EChatEvent.Default, "준원아");
+            InputChat(EChatState.Me, ESaveLocation.JW, EChatType.Text, EFace.Default, EChatEvent.Default, "준원아");
         if (Input.GetKeyDown(KeyCode.D))
-            InputChat(EChatState.Other, ESaveLocation.강지현, EChatType.CutScene, EFace.Default, EChatEvent.Default, "Start");
+            InputChat(EChatState.Other, ESaveLocation.JH, EChatType.CutScene, EFace.Default, EChatEvent.Default, "Start");
 
         if (Input.GetKeyDown(KeyCode.R))
-            InputQuestion(ESaveLocation.강지현, EChatType.Question, EFace.Default, EChatEvent.Default, "점심 메뉴 뭐야?");
+            InputQuestion(ESaveLocation.JH, EChatType.Question, EFace.Default, EChatEvent.Default, "점심 메뉴 뭐야?");
 
         //if (Input.GetKeyDown(KeyCode.T))
         //    InputChatting(true, ChatType.Image, "담배");

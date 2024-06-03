@@ -7,12 +7,10 @@ namespace ChatVisual
     public enum ESaveLocation
     {
         NotSave,
-        /*獄쏅벤?썸뉩?      // 鈺곌퀣??
-        ?⑥????      // ?袁⑷퐤
-        揶쏅벡???        // 筌왖??
-        ?????         // 餓Β??
-        ??곸퐟沃?
-        揶쏅베???*/
+        JH,
+        JW,
+        HS,
+        CM
     }
 
     public enum EChatState
