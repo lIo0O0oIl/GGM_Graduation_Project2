@@ -8,19 +8,19 @@ namespace ChatVisual
 {
     public class ChatContainer : MonoBehaviour
     {
-        public List<Node> nodes = new List<Node>();         // 노드 리스트
+        public List<Node> nodes = new List<Node>();         // ?몃뱶 由ъ뒪??
 
-        public int nowChaptersIndex;        // 챕터 인덱스
-        public int nowChatIndex;            // 쳇팅 인덱스
+        public int nowChaptersIndex;        // 梨뺥꽣 ?몃뜳??
+        public int nowChatIndex;            // 爾뉙똿 ?몃뜳??
 
         [Space(30)]
 
-        [SerializeField]        // 그냥 지금 어떤 챕터인지 볼려고 있는 것. 참조 복사로 넣어줬음.
+        [SerializeField]        // 洹몃깷 吏湲??대뼡 梨뺥꽣?몄? 蹂쇰젮怨??덈뒗 寃? 李몄“ 蹂듭궗濡??ｌ뼱以ъ쓬.
         private Chapter nowChapter;
         public Chapter NowChapter { get { return nowChapter; } set { nowChapter = value; } }
 
         [SerializeField]
-        private List<Chapter> mainChapter = new List<Chapter>();     // 챕터들
+        private List<Chapter> mainChapter = new List<Chapter>();     // 梨뺥꽣??
         public List<Chapter> MainChapter { get { return mainChapter; } set { mainChapter = value; } }
 
         private Node askParentNode;
@@ -29,11 +29,11 @@ namespace ChatVisual
         {
             if (mainChapter.Count <= index)
             {
-                Debug.Log("새로 만들어주기");
+                Debug.Log("?덈줈 留뚮뱾?댁＜湲?");
                 mainChapter.Add(new Chapter());
             }
             nowChaptersIndex = index;
-            nowChapter = mainChapter[index];        // 참조 복사
+            nowChapter = mainChapter[index];        // 李몄“ 蹂듭궗
         }
 
 #if UNITY_EDITOR
@@ -42,7 +42,7 @@ namespace ChatVisual
             var node = Activator.CreateInstance(type) as Node;
             node.guid = GUID.Generate().ToString();
 
-            nodes.Add(node);        // 리스트에 추가
+            nodes.Add(node);        // 由ъ뒪?몄뿉 異붽?
 
             AssetDatabase.SaveAssets();
 
@@ -59,8 +59,8 @@ namespace ChatVisual
 
         public void AddChild(Node parent, Node child)
         {
-            Debug.Log($"선 연결, parent : {parent}, child : {child}");
-            var rootNode = parent as RootNode;      //부모가 루트이면
+            Debug.Log($"???곌껐, parent : {parent}, child : {child}");
+            var rootNode = parent as RootNode;      //遺紐④? 猷⑦듃?대㈃
             if (rootNode != null)
             {
                 rootNode.child = child;
@@ -94,7 +94,7 @@ namespace ChatVisual
 
         public void RemoveChild(Node parent, Node child)
         {
-            var rootNode = parent as RootNode;      //부모가 루트이면
+            var rootNode = parent as RootNode;      //遺紐④? 猷⑦듃?대㈃
             if (rootNode != null)
             {
                 rootNode.child = null;
@@ -156,18 +156,18 @@ namespace ChatVisual
             return children;
         }
 
-        public void SortChildAndIndex()        // 노드를 정렬하고 질문 노드 아래 챗팅이라면 질문 노드의 자식으로 넣어줌. 
+        public void SortChildAndIndex()        // ?몃뱶瑜??뺣젹?섍퀬 吏덈Ц ?몃뱶 ?꾨옒 梨쀭똿?대씪硫?吏덈Ц ?몃뱶???먯떇?쇰줈 ?ｌ뼱以? 
         {
             nowChatIndex = 1;
 
-            Queue<Node> askQueue = new Queue<Node>();    // 질문, 잠김질문 담은 곳
+            Queue<Node> askQueue = new Queue<Node>();    // 吏덈Ц, ?좉?吏덈Ц ?댁? 怨?
             Node nowNode = nodes[0];
 
-            // DFS 로 쭉 가다가 BFS 로 질문들 모두 받은 다음에 질문에 대답들에 대해서 DFS 로 쭉 해서 인덱스 만들어주기
+            // DFS 濡?彛?媛?ㅺ? BFS 濡?吏덈Ц??紐⑤몢 諛쏆? ?ㅼ쓬??吏덈Ц????듬뱾????댁꽌 DFS 濡?彛??댁꽌 ?몃뜳??留뚮뱾?댁＜湲?
             while (nowNode != null)
             {
                 var children = GetChildren(nowNode);
-                if (children.Count == 1)        // 그냥 쳇팅노드이면
+                if (children.Count == 1)        // 洹몃깷 爾뉙똿?몃뱶?대㈃
                 {
                     children[0].index = nowChatIndex;
                     children[0].indexLabel.text = nowChatIndex.ToString();
@@ -208,7 +208,7 @@ namespace ChatVisual
             }
         }
 
-        private void AskChatSort(ChatNode chatNode)      // 질문이 있고 난 후 해당 질문의 자식들을 정렬하기 정렬하면서 부모 것도 넣어줘야함.
+        private void AskChatSort(ChatNode chatNode)      // 吏덈Ц???덇퀬 ?????대떦 吏덈Ц???먯떇?ㅼ쓣 ?뺣젹?섍린 ?뺣젹?섎㈃??遺紐?寃껊룄 ?ｌ뼱以섏빞??
         {
             if (chatNode == null) return;
 

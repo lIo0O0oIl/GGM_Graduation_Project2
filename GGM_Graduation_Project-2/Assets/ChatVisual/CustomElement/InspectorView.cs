@@ -14,17 +14,18 @@ namespace ChatVisual
 
         private int enumValue;
         private int enumValue2;
+        private int enumValue3;
 
-        private List<EChatEvent> chatEventList = new List<EChatEvent>();     // ÃÂÆÃµé
-        private List<string> evidenceList = new List<string>();     // Áõ°Åµé
-        private List<string> roundList = new List<string>();        // º¸¿©Áú ¶ó¿îµå(ÆÄÀÏ¸ğÀ½ÀÌ¸§)
+        private List<EChatEvent> chatEventList = new List<EChatEvent>();     // ì³‡íŒ…ë“¤
+        private List<string> evidenceList = new List<string>();     // ì¦ê±°ë“¤
+        private List<string> roundList = new List<string>();        // ë³´ì—¬ì§ˆ ë¼ìš´ë“œ(íŒŒì¼ëª¨ìŒì´ë¦„)
 
         private bool is_Expand = false;
         private bool is_LoadList = false;
 
-        public void UpdateInspector(NodeView node)      // ´©¸¥ ³ëµå°¡ ´Ù¸¥°Å¸é
+        public void UpdateInspector(NodeView node)      // ëˆ„ë¥¸ ë…¸ë“œê°€ ë‹¤ë¥¸ê±°ë©´
         {
-            Clear();        // ¿¤¸®¸ÕÆ® ¸ğµÎ ¾ø¾Ö°í
+            Clear();        // ì—˜ë¦¬ë¨¼íŠ¸ ëª¨ë‘ ì—†ì• ê³ 
 
             is_Expand = false;
             is_LoadList = false;
@@ -48,17 +49,17 @@ namespace ChatVisual
                             rootNode.description = EditorGUILayout.TextArea(rootNode.description, EditorStyles.textArea);
                             GUILayout.Space(15);
 
-                            rootNode.showName = EditorGUILayout.TextField("ShowName", rootNode.showName, EditorStyles.textArea);     // ´©±ºÁö
+                            rootNode.showName = EditorGUILayout.TextField("ShowName", rootNode.showName, EditorStyles.textArea);     // ëˆ„êµ°ì§€
                             GUILayout.Space(5);
 
                             GUILayout.BeginHorizontal();
                             GUILayout.Label("SaveLocation");
                             GUILayout.Space(50);
-                            rootNode.saveLocation = (ESaveLocation)EditorGUILayout.EnumPopup(rootNode.saveLocation);        // ÀÌ³Ñ°ª ¹Ù²Ù±â
+                            rootNode.saveLocation = (ESaveLocation)EditorGUILayout.EnumPopup(rootNode.saveLocation);        // ì´ë„˜ê°’ ë°”ê¾¸ê¸°
                             GUILayout.EndHorizontal();
                             GUILayout.Space(10);
 
-                            // round Ãß°¡
+                            // round ì¶”ê°€
                             if (!is_LoadList)
                             {
                                 roundList = new List<string>(rootNode.round);
@@ -83,11 +84,11 @@ namespace ChatVisual
                             GUILayout.EndVertical();
                             GUILayout.Space(5);
 
-                            // ÀÌ Ã©ÅÍ°¡ ³¡³ª¸é ´ÙÀ½ Ã©ÅÍ·Î ÀÌµ¿ÇÏ°Ô ÇÏ´Â °ÍÀÌ ÀÖ³Ä
+                            // ì´ ì±•í„°ê°€ ëë‚˜ë©´ ë‹¤ìŒ ì±•í„°ë¡œ ì´ë™í•˜ê²Œ í•˜ëŠ” ê²ƒì´ ìˆëƒ
                             rootNode.is_nextChapter = EditorGUILayout.Toggle("is_nextChapter", rootNode.is_nextChapter);
                             if (rootNode.is_nextChapter)
                             {
-                                rootNode.nextChapterIndex = EditorGUILayout.IntField("nextChapterIndex", rootNode.nextChapterIndex);     // ´ÙÀ½À¸·Î ³Ñ¾î°¥ ÃÂÆÃ
+                                rootNode.nextChapterIndex = EditorGUILayout.IntField("nextChapterIndex", rootNode.nextChapterIndex);     // ë‹¤ìŒìœ¼ë¡œ ë„˜ì–´ê°ˆ ì³‡íŒ…
                             }
                         }
                         break;
@@ -95,23 +96,26 @@ namespace ChatVisual
                         {
                             GUILayout.Space(15);
                             ChatNode chatNode = node.node as ChatNode;
-                            if (chatNode.child.Count != 0) is_ChildExist = true;        // ÀÚ½ÄÀÌ ÇÏ³ª¶óµµ ÀÖÀ¸¸é 
+                            if (chatNode.child.Count != 0) is_ChildExist = true;        // ìì‹ì´ í•˜ë‚˜ë¼ë„ ìˆìœ¼ë©´ 
 
                             enumValue = (int)chatNode.state;
-                            enumValue = GUILayout.Toolbar(enumValue, System.Enum.GetNames(typeof(EChatState)));     // ¸»ÇÏ´Â °Í Å¸ÀÔ
+                            enumValue = GUILayout.Toolbar(enumValue, System.Enum.GetNames(typeof(EChatState)));     // ë§í•˜ëŠ” ê²ƒ íƒ€ì…
                             chatNode.state = (EChatState)enumValue;
                             GUILayout.Space(5);
 
+                            chatNode.type = (EChatType)EditorGUILayout.EnumPopup(chatNode.type);   // ë§í•˜ëŠ” ê²ƒ íƒ€ì…
+                            GUILayout.Space(5);
+
                             GUILayout.Label("Chat");
-                            chatNode.text = EditorGUILayout.TextArea(chatNode.text, EditorStyles.textArea);     // ÅØ½ºÆ®
+                            chatNode.text = EditorGUILayout.TextArea(chatNode.text, EditorStyles.textArea);     // í…ìŠ¤íŠ¸
                             GUILayout.Space(10);
 
                             enumValue2 = (int)chatNode.face;
-                            enumValue2 = GUILayout.Toolbar(enumValue2, System.Enum.GetNames(typeof(EFace)));        // ¸»ÇÒ ¶§ÀÇ Ç¥Á¤
+                            enumValue2 = GUILayout.Toolbar(enumValue2, System.Enum.GetNames(typeof(EFace)));        // ë§í•  ë•Œì˜ í‘œì •
                             chatNode.face = (EFace)enumValue2;
                             GUILayout.Space(10);
 
-                            // ÃÂÆÃ ÀÌº¥Æ® Ãß°¡
+                            // ì³‡íŒ… ì´ë²¤íŠ¸ ì¶”ê°€
                             if (!is_LoadList)
                             {
                                 chatEventList = new List<EChatEvent>(chatNode.textEvent);
@@ -144,7 +148,7 @@ namespace ChatVisual
                             GUILayout.Space(10);
 
                             GUILayout.Label("Ask");
-                            askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);     // Áú¹®
+                            askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);     // ì§ˆë¬¸
                             EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", askNode.is_UseThis);
                         }
@@ -156,10 +160,10 @@ namespace ChatVisual
                             if (lockAskNode.child != null) is_ChildExist = true;
 
                             GUILayout.Label("Ask");
-                            lockAskNode.ask = EditorGUILayout.TextArea(lockAskNode.ask, EditorStyles.textArea);     // Áú¹®
+                            lockAskNode.ask = EditorGUILayout.TextArea(lockAskNode.ask, EditorStyles.textArea);     // ì§ˆë¬¸
                             GUILayout.Space(10);
 
-                            // Áõ°Å
+                            // ì¦ê±°
                             if (!is_LoadList)
                             {
                                 evidenceList = new List<string>(lockAskNode.evidence);
@@ -192,10 +196,10 @@ namespace ChatVisual
                 EditorGUI.EndDisabledGroup();
             };
 
-            Add(container);     // UI ÄÁÅ×ÀÌ³Ê¿¡ ³Ö¾îÁÜ, ½ÇÁ¦·Î º¸ÀÌ°Ô ÇØÁÜ.
+            Add(container);     // UI ì»¨í…Œì´ë„ˆì— ë„£ì–´ì¤Œ, ì‹¤ì œë¡œ ë³´ì´ê²Œ í•´ì¤Œ.
         }
 
-        private void ShowHeaderContextMenu(Rect position)       // ¸Ş´º ¿·¿¡ Å¬¸®¾î ¸¸µé¾îÁÖ±â
+        private void ShowHeaderContextMenu(Rect position)       // ë©”ë‰´ ì˜†ì— í´ë¦¬ì–´ ë§Œë“¤ì–´ì£¼ê¸°
         {
             GenericMenu menu = new GenericMenu();
             menu.AddItem(new GUIContent("Clear"), false, () =>
