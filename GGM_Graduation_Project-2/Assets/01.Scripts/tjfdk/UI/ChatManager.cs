@@ -34,7 +34,7 @@ public class ChatManager : MonoBehaviour
     private void Start()
     {
         chatting = GetComponent<UIReader_Chatting>();
-        //InvokeRepeating(nameof(AddChat), chatDelay, chatDelay);
+        InvokeRepeating(nameof(AddChat), chatDelay, chatDelay);
     }
 
     //private void Update()

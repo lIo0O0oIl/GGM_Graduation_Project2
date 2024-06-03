@@ -53,14 +53,8 @@ public class UIReader_ImageFinding : UI_Reader
             {
                 if (image.isOpen)
                     imageGround.style.display = DisplayStyle.None;
-                    //imageGround.Remove(imageGround.Q<VisualElement>(image.name));
                 else
                 {
-                    //VisualElement imageBackground = RemoveContainer(ux_imageGround.Instantiate());
-                    //imageBackground.name = image.name;
-                    //imageBackground.style.backgroundImage = new StyleBackground(image.image);
-                    //imageGround.Add(imageBackground);
-
                     imageGround.style.display = DisplayStyle.Flex;
                     imageGround.style.backgroundImage = new StyleBackground(image.image);
 
@@ -92,8 +86,6 @@ public class UIReader_ImageFinding : UI_Reader
                                         {
                                             png.isOpen = true;
                                             Debug.Log(png.name + " " + image.name);
-                                            //FileT fileT = fileSystem.FindFile(png.name);
-                                            //fileSystem.AddFile(FileType.IMAGE, fileT.fileName, fileT.fileParentName);
                                             fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
                                         }
                                     });
@@ -119,7 +111,6 @@ public class UIReader_ImageFinding : UI_Reader
                                 evidence.style.top = png.pos.y;
                                 // 단서를 이미지에 추가
                                 imageGround.Add(evidence);
-                                //imageBackground.Add(evidence);
                             }
                         }
                     }
@@ -137,63 +128,3 @@ public class UIReader_ImageFinding : UI_Reader
         }
     }
 }
-        
-            //foreach (ImageDefualt image in imageManager.images)
-            //{
-            //    if (image.name == file.Q<Label>("FileName").text)
-            //    {
-            //        // 이미지를 켜. 채팅이든 뭐든 끄고
-            //        // for문 돌면서? 자식 까고? - evidence 템플릿을 가져와!
-            //        // 구분을 해. 만약에 중요한거면 템플릿 쓰고, 아니면 그냥 이미지만...
-
-            //        // visualelement로 배경 깔고?
-            //        VisualElement imageBackground = RemoveContainer(ux_imageGround.Instantiate());
-            //        // 이미지를 세팅해.
-            //        imageBackground.style.backgroundImage = new StyleBackground(image.image);
-            //        // 이미지를 추가
-            //        imageGround.Add(imageBackground);
-
-            //        // 해당 이미지의 단서들 배치
-            //        foreach (ImagePng evid in image.)
-            //        {
-            //            VisualElement evidence = null;
-            //            // 중요한 단서라면
-            //            if (evid.importance)
-            //            {
-            //                // 생성 및 이미지 생성
-            //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
-            //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(evid.evidenceImage);
-            //                // 단서 자료 추가
-            //                evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = evid.evidenceName;
-            //                evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = evid.evidenceMemo;
-            //                // 이벤트 연결 - 메모장 켜지는 이벤트
-            //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
-            //                {
-            //                    VisualElement description = evidence.Q<VisualElement>("Descripte");
-            //                    description.style.display = DisplayStyle.Flex;
-            //                });
-            //            }
-            //            else
-            //            {
-            //                // 생성 및 이미지 생성
-            //                evidence = RemoveContainer(ux_imageGround.Instantiate());
-            //                evidence.style.backgroundImage = new StyleBackground(evid.evidenceImage);
-            //                // 이벤트 연결 - 아래 생각만 켜지는 이벤트
-            //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
-            //                {
-            //                    // 수정 필요함...
-            //                    evidenceExplanation.style.display = DisplayStyle.Flex;
-            //                    DoText(evidenceExplanation.Q<Label>("Text"), evid.evidenceMemo,
-            //                        3f, () => { });
-            //                });
-            //            }
-
-            //            // 단서 위치 설정
-            //            evidence.style.position = Position.Absolute;
-            //            evidence.style.left = evid.evidencePos.x;
-            //            evidence.style.top = evid.evidencePos.y;
-            //            // 단서를 이미지에 추가
-            //            imageBackground.Add(evidence);
-            //        }
-            //    }
-            //}
