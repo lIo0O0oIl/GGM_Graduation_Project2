@@ -9,11 +9,11 @@ using System;
 public class ChatEditor : EditorWindow
 {
     [SerializeField]
-    private VisualTreeAsset treeAsset = null;           // UI 파일 넣어주기
+    private VisualTreeAsset treeAsset = null;           // UI ?뚯씪 ?ｌ뼱二쇨린
 
-    private ChatView chatView;        // 챗팅들 들어가 있는 곳.
-    private InspectorView inspectorView;        // 인스팩터 일 것임.
-    private HierarchyView hierarchyView;      // 코드기반 GUI, 위에꺼 말하는 것. 하이어라키.
+    private ChatView chatView;        // 梨쀭똿???ㅼ뼱媛 ?덈뒗 怨?
+    private InspectorView inspectorView;        // ?몄뒪?⑺꽣 ??寃껋엫.
+    private HierarchyView hierarchyView;      // 肄붾뱶湲곕컲 GUI, ?꾩뿉爰?留먰븯??寃? ?섏씠?대씪??
     private Button arrayAddBtn;
     private Button dangerBtn;
 
@@ -29,34 +29,34 @@ public class ChatEditor : EditorWindow
     {
         //if (chatContainer != null)
         {
-            chatView.SaveChatSystem();      // 창을 끌 때 지금까지 해준 것 저장해주기
+            chatView.SaveChatSystem();      // 李쎌쓣 ????吏湲덇퉴吏 ?댁? 寃???ν빐二쇨린
         }
     }
 
     public void CreateGUI()
     {
-        VisualElement root = rootVisualElement;     // 루트로 설정해줌.
+        VisualElement root = rootVisualElement;     // 猷⑦듃濡??ㅼ젙?댁쨲.
 
-        // UXML 만들어주기
+        // UXML 留뚮뱾?댁＜湲?
         VisualElement template = treeAsset.Instantiate();
-        template.style.flexGrow = 1;        // 요소 안에 넣었을 때 얼마나 커질 것 인가
+        template.style.flexGrow = 1;        // ?붿냼 ?덉뿉 ?ｌ뿀?????쇰쭏??而ㅼ쭏 寃??멸?
         root.Add(template);
 
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/ChatVisual/Editor/ChatEditor.uss");
-        root.styleSheets.Add(styleSheet);       // 이 스타일을 가져와줌.
+        root.styleSheets.Add(styleSheet);       // ???ㅽ??쇱쓣 媛?몄?以?
 
         chatView = root.Q<ChatView>("chat-view");
-        inspectorView = root.Q<InspectorView>("inspector-view");        // 인스펙터 이름으로 가져오기.
-        hierarchyView = root.Q<HierarchyView>("hierarchy-view");       // 아래꺼 가져오기 hierarchy 임.
+        inspectorView = root.Q<InspectorView>("inspector-view");        // ?몄뒪?숉꽣 ?대쫫?쇰줈 媛?몄삤湲?
+        hierarchyView = root.Q<HierarchyView>("hierarchy-view");       // ?꾨옒爰?媛?몄삤湲?hierarchy ??
        
-        arrayAddBtn = root.Q<Button>("AddBtn");     // 버튼 가져오기
+        arrayAddBtn = root.Q<Button>("AddBtn");     // 踰꾪듉 媛?몄삤湲?
         arrayAddBtn.tooltip = "Chapter Add";
         arrayAddBtn.clickable.clicked += OnArrayAddBtn;
         dangerBtn = root.Q<Button>("ClearBtn");
         dangerBtn.tooltip = "All Nodes Delete";
         dangerBtn.clickable.clicked += OnClearNodes;
 
-        chatView.OnNodeSelected += OnSelectionNodeChanged;      // 노드를 누른 것이 달라지면 이 이벤트 호출
+        chatView.OnNodeSelected += OnSelectionNodeChanged;      // ?몃뱶瑜??꾨Ⅸ 寃껋씠 ?щ씪吏硫????대깽???몄텧
 
         OnSelectionChange();
     }
@@ -65,7 +65,7 @@ public class ChatEditor : EditorWindow
     {
         if (chatContainer != null)
         {
-            Debug.Log("배열 추가해주기");
+            Debug.Log("諛곗뿴 異붽??댁＜湲?");
             chatContainer.MainChapter.Add(new Chapter());
             hierarchyView.UpdateHierarchy(chatContainer, chatView);
         }
@@ -82,32 +82,32 @@ public class ChatEditor : EditorWindow
                       chatContainer.nodes.Remove(node);
                   }
               }*/
-            Debug.Log("노드의 개수는 " + chatContainer.nodes.Count + "개 입니다.");
+            Debug.Log("?몃뱶??媛쒖닔??" + chatContainer.nodes.Count + "媛??낅땲??");
             Close();
         }
     }
 
     private void OnSelectionNodeChanged(NodeView nodeView)
     {
-        inspectorView.UpdateInspector(nodeView);        // 이 노드를 눌렀다고 인스펙터에 알려줌.
+        inspectorView.UpdateInspector(nodeView);        // ???몃뱶瑜??뚮??ㅺ퀬 ?몄뒪?숉꽣???뚮젮以?
     }
 
-    private void OnSelectionChange()        // 에디터를 킨 상태에서 무언가를 선택했을 때
+    private void OnSelectionChange()        // ?먮뵒?곕? ???곹깭?먯꽌 臾댁뼵媛瑜??좏깮?덉쓣 ??
     {
         if (Selection.activeGameObject != null)
         {
-            if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))      // 하이어라키 창에서 가져오기
+            if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))      // ?섏씠?대씪??李쎌뿉??媛?몄삤湲?
             {
-                //Debug.Log(chatContainer.nodes.Count + "개의 노드가 존재함.");
+                //Debug.Log(chatContainer.nodes.Count + "媛쒖쓽 ?몃뱶媛 議댁옱??");
 
-                chatContainer.ChangeNowChapter(0);      // 가장 처음은 0번째
+                chatContainer.ChangeNowChapter(0);      // 媛??泥섏쓬? 0踰덉㎏
 
-                hierarchyView.UpdateHierarchy(chatContainer, chatView);      // 하이어라키 만들어주기
+                hierarchyView.UpdateHierarchy(chatContainer, chatView);      // ?섏씠?대씪??留뚮뱾?댁＜湲?
                 
-                chatView.LoadChatSystem(chatContainer);     // 데이터 로드 해주기
-                chatView.PopulateView();           // 데이터를 기반으로 보이는 것 만들어주기
+                chatView.LoadChatSystem(chatContainer);     // ?곗씠??濡쒕뱶 ?댁＜湲?
+                chatView.PopulateView();           // ?곗씠?곕? 湲곕컲?쇰줈 蹂댁씠??寃?留뚮뱾?댁＜湲?
 
-                Debug.Log($"{chatContainer.MainChapter.Count}만큼 하이어라키가 생성되어야 함.");
+                Debug.Log($"{chatContainer.MainChapter.Count}留뚰겮 ?섏씠?대씪?ㅺ? ?앹꽦?섏뼱????");
             }
         }
     }

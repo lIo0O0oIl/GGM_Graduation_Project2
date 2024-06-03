@@ -15,31 +15,31 @@ namespace ChatVisual
         public new class UxmlFactory : UxmlFactory<ChatView, UxmlTraits> { }
         public class UmalTraits : GraphView.UxmlTraits { }
 
-        private ChatContainer chatContainer;        // ÃÂÆÃµé ´ã°ÜÀÖ´Â °÷.
+        private ChatContainer chatContainer;        // ì³‡íŒ…ë“¤ ë‹´ê²¨ìˆëŠ” ê³³.
 
-        public Action<NodeView> OnNodeSelected;     // ³»°¡ ´­·È´Ù°í ¾Ë·ÁÁÜ.
+        public Action<NodeView> OnNodeSelected;     // ë‚´ê°€ ëˆŒë ¸ë‹¤ê³  ì•Œë ¤ì¤Œ.
 
         public ChatView()
         {
-            Insert(0, new GridBackground());        // ±×¸®µå ³Ö±â
+            Insert(0, new GridBackground());        // ê·¸ë¦¬ë“œ ë„£ê¸°
 
-            this.AddManipulator(new ContentZoomer());       // ÁÜ±â´É Á¶ÀÛ Ãß°¡
-            this.AddManipulator(new ContentDragger());  // ÄÁÅÄÃ÷ µå·¡±× °¡´É
-            this.AddManipulator(new SelectionDragger());    // ¼±ÅÃÇØÁØ°Å ¿òÁ÷ÀÌ±â
-            this.AddManipulator(new RectangleSelector());   // ³×¸ğ ¸¸µé¾îÁÖ±â  Á¶ÀÛµé Ãß°¡
+            this.AddManipulator(new ContentZoomer());       // ì¤Œê¸°ëŠ¥ ì¡°ì‘ ì¶”ê°€
+            this.AddManipulator(new ContentDragger());  // ì»¨íƒ ì¸  ë“œë˜ê·¸ ê°€ëŠ¥
+            this.AddManipulator(new SelectionDragger());    // ì„ íƒí•´ì¤€ê±° ì›€ì§ì´ê¸°
+            this.AddManipulator(new RectangleSelector());   // ë„¤ëª¨ ë§Œë“¤ì–´ì£¼ê¸°  ì¡°ì‘ë“¤ ì¶”ê°€
         }
 
-        public void LoadChatSystem(ChatContainer _chatContainer)     // ·ÎµåÇØÁÖ±â
+        public void LoadChatSystem(ChatContainer _chatContainer)     // ë¡œë“œí•´ì£¼ê¸°
         {
             chatContainer = _chatContainer;
 
             chatContainer.nodes.Clear();
 
-            int firstChatEndIndex = 0;      // Ã³À½À¸·Î ½ÃÀÛÇÏ´Â ÃÂÆÃÀÇ ¸¶Áö¸·. Áú¹®ÀÌ ½ÃÀÛµÇ´Â °÷ÀÇ ³ëµå½º¿¡¼­ Ã£À» ¼ö ÀÖ´Â  ÀÎµ¦½º
-            int askAndReplysCount = 0;        // Áú¹®¿¡ ´ëÇÑ ´ë´äÀÇ °³¼ö          // ÀÌ°Ô 2°³°¡ µÇ°í ÀÖ¾úÀ½. ¹Ù²ãÁÖ±â
+            int firstChatEndIndex = 0;      // ì²˜ìŒìœ¼ë¡œ ì‹œì‘í•˜ëŠ” ì³‡íŒ…ì˜ ë§ˆì§€ë§‰. ì§ˆë¬¸ì´ ì‹œì‘ë˜ëŠ” ê³³ì˜ ë…¸ë“œìŠ¤ì—ì„œ ì°¾ì„ ìˆ˜ ìˆëŠ”  ì¸ë±ìŠ¤
+            int askAndReplysCount = 0;        // ì§ˆë¬¸ì— ëŒ€í•œ ëŒ€ë‹µì˜ ê°œìˆ˜          // ì´ê²Œ 2ê°œê°€ ë˜ê³  ìˆì—ˆìŒ. ë°”ê¿”ì£¼ê¸°
             int lockAskAndReplysCount = 0;
 
-            // ·çÆ® ³ëµåºÎÅÍ ´Ù½Ã ±×·ÁÁÖ±â
+            // ë£¨íŠ¸ ë…¸ë“œë¶€í„° ë‹¤ì‹œ ê·¸ë ¤ì£¼ê¸°
             {
                 RootNode rootNode = chatContainer.CreateNode(typeof(RootNode)) as RootNode;
                 rootNode.showName = chatContainer.NowChapter.showName;
@@ -49,19 +49,20 @@ namespace ChatVisual
                 AssetDatabase.SaveAssets();
             }
 
-            // Ã¤ÆÃ ³ëµå ¸¸µé¾îÁÖ±â
+            // ì±„íŒ… ë…¸ë“œ ë§Œë“¤ì–´ì£¼ê¸°
             for (int i = 0; i < chatContainer.NowChapter.chat.Count; ++i)
             {
                 ++firstChatEndIndex;
 
-                // µ¥ÀÌÅÍ ¿¬°áÇØÁÖ±â
+                // ë°ì´í„° ì—°ê²°í•´ì£¼ê¸°
                 ChatNode chatNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
                 chatNode.state = chatContainer.NowChapter.chat[i].state;
+                chatNode.type = chatContainer.NowChapter.chat[i].type;
                 chatNode.text = chatContainer.NowChapter.chat[i].text;
                 chatNode.face = chatContainer.NowChapter.chat[i].face;
                 chatNode.textEvent = new List<EChatEvent>(chatContainer.NowChapter.chat[i].textEvent);
 
-                // À§Ä¡ Àâ¾ÆÁÖ±â
+                // ìœ„ì¹˜ ì¡ì•„ì£¼ê¸°
                 if (chatNode.state == EChatState.Other)
                 {
                     chatNode.position = new Vector2(-125, 150 * (i + 1));
@@ -71,54 +72,55 @@ namespace ChatVisual
                     chatNode.position = new Vector2(125, 150 * (i + 1));
                 }
 
-                if (i == 0)     // ·çÆ®³ëµå¶û ¿¬°áÇØÁÖ±â
+                if (i == 0)     // ë£¨íŠ¸ë…¸ë“œë‘ ì—°ê²°í•´ì£¼ê¸°
                 {
                     RootNode rootNode = chatContainer.nodes[0] as RootNode;
                     rootNode.child = chatNode;
                 }
-                else        // Àü²¨¶û ¿¬°áÇØÁÖ±â
+                else        // ì „êº¼ë‘ ì—°ê²°í•´ì£¼ê¸°
                 {
                     ChatNode chatParentNode = chatContainer.nodes[i] as ChatNode;
                     chatParentNode.child.Add(chatNode);
                 }
             }
 
-            // Áú¹®, Àá±è Áú¹® ³ëµå ¸¸µé¾îÁÖ±â
+            // ì§ˆë¬¸, ì ê¹€ ì§ˆë¬¸ ë…¸ë“œ ë§Œë“¤ì–´ì£¼ê¸°
             {
                 ChatNode firstChatEndNode = chatContainer.nodes[firstChatEndIndex] as ChatNode;
                 if (firstChatEndNode != null)
                 {
                     Vector2 endChatNodePosition = firstChatEndNode.position;
-                    //Debug.Log($"Áú¹®ÀÇ °³¼ö : {this.chatContainer.NowChapter.askAndReply.Count}, ÃªÆÃÀÇ ÀÎµ¦½º {firstChatEndIndex}");
+                    //Debug.Log($"ì§ˆë¬¸ì˜ ê°œìˆ˜ : {this.chatContainer.NowChapter.askAndReply.Count}, ì±—íŒ…ì˜ ì¸ë±ìŠ¤ {firstChatEndIndex}");
 
-                    // ±×³É Áú¹® ¸¸µé¾îÁÖ±â
+                    // ê·¸ëƒ¥ ì§ˆë¬¸ ë§Œë“¤ì–´ì£¼ê¸°
                     for (int i = 0; i < chatContainer.NowChapter.askAndReply.Count; ++i)
                     {
                         ++askAndReplysCount;
 
-                        // Áú¹® ³ëµå Ãß°¡ÇØ¼­ µ¥ÀÌÅÍ Ãß°¡
+                        // ì§ˆë¬¸ ë…¸ë“œ ì¶”ê°€í•´ì„œ ë°ì´í„° ì¶”ê°€
                         AskNode askNode = chatContainer.CreateNode(typeof(AskNode)) as AskNode;
                         askNode.ask = this.chatContainer.NowChapter.askAndReply[i].ask;
-                        askNode.reply = new List<Chat>(this.chatContainer.NowChapter.askAndReply[i].reply);        // °ª º¹»ç, ±íÀº º¹»ç
+                        askNode.reply = new List<Chat>(this.chatContainer.NowChapter.askAndReply[i].reply);        // ê°’ ë³µì‚¬, ê¹Šì€ ë³µì‚¬
                         askNode.is_UseThis = this.chatContainer.NowChapter.askAndReply[i].is_UseThis;
 
-                        // ÃÂÆÃ ³ëµå¶û ¿¬°áÇØÁÖ±â
+                        // ì³‡íŒ… ë…¸ë“œë‘ ì—°ê²°í•´ì£¼ê¸°
                         firstChatEndNode.child.Add(askNode);
 
-                        // À§Ä¡ ¼³Á¤ÇØÁÖ±â
+                        // ìœ„ì¹˜ ì„¤ì •í•´ì£¼ê¸°
                         askNode.position = new Vector2(endChatNodePosition.x + i * 400, endChatNodePosition.y + 200);
 
-                        // ´ë´ä(ÃÂÆÃ)³ëµå Ãß°¡ÇØÁÖ±â
+                        // ëŒ€ë‹µ(ì³‡íŒ…)ë…¸ë“œ ì¶”ê°€í•´ì£¼ê¸°
                         for (int j = 0; j < chatContainer.NowChapter.askAndReply[i].reply.Count; ++j)
                         {
-                            // ÃÂÆÃ ³ëµå Ãß°¡ÇØ¼­ µ¥ÀÌÅÍ Ãß°¡
+                            // ì³‡íŒ… ë…¸ë“œ ì¶”ê°€í•´ì„œ ë°ì´í„° ì¶”ê°€
                             ChatNode replyNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
                             replyNode.state = this.chatContainer.NowChapter.askAndReply[i].reply[j].state;
+                            replyNode.type = this.chatContainer.NowChapter.askAndReply[i].reply[j].type;
                             replyNode.text = this.chatContainer.NowChapter.askAndReply[i].reply[j].text;
                             replyNode.face = this.chatContainer.NowChapter.askAndReply[i].reply[j].face;
                             replyNode.textEvent = new List<EChatEvent>(this.chatContainer.NowChapter.askAndReply[i].reply[j].textEvent);
 
-                            // À§Ä¡ Àâ¾ÆÁÖ±â
+                            // ìœ„ì¹˜ ì¡ì•„ì£¼ê¸°
                             if (replyNode.state == EChatState.Other)
                             {
                                 replyNode.position = new Vector2(askNode.position.x - 100, askNode.position.y + 140 * (j + 1));
@@ -128,54 +130,55 @@ namespace ChatVisual
                                 replyNode.position = new Vector2(askNode.position.x + 100, askNode.position.y + 140 * (j + 1));
                             }
 
-                            // ¿¬°á ÇØÁÖ±â
-                            if (j == 0)     // Áú¹®³ëµå¶û ¿¬°áÇØ¾ß ÇÏ´Â °æ¿ì
+                            // ì—°ê²° í•´ì£¼ê¸°
+                            if (j == 0)     // ì§ˆë¬¸ë…¸ë“œë‘ ì—°ê²°í•´ì•¼ í•˜ëŠ” ê²½ìš°
                             {
                                 askNode.child = replyNode;
                             }
                             else
                             {
-                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount] as ChatNode;        // ·çÆ®³ëµå »©°í ³Ö¾îÁÖ±â
+                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount] as ChatNode;        // ë£¨íŠ¸ë…¸ë“œ ë¹¼ê³  ë„£ì–´ì£¼ê¸°
                                 if (chatParentNode != null)
                                 {
                                     chatParentNode.child.Add(replyNode);
                                 }
                             }
-                            if (j == chatContainer.NowChapter.askAndReply[i].reply.Count - 1)      // ÀÌ°Ô ¸¶Áö¸· ¹İº¹ÀÌ¸é
+                            if (j == chatContainer.NowChapter.askAndReply[i].reply.Count - 1)      // ì´ê²Œ ë§ˆì§€ë§‰ ë°˜ë³µì´ë©´
                             {
                                 askAndReplysCount += j + 1;
                             }
                         }
                     }
 
-                    // Àá±è Áú¹® ¸¸µé¾îÁÖ±â
+                    // ì ê¹€ ì§ˆë¬¸ ë§Œë“¤ì–´ì£¼ê¸°
                     for (int i = 0; i < chatContainer.NowChapter.lockAskAndReply.Count; i++)
                     {
                         ++lockAskAndReplysCount;
 
-                        // ¶ôÁú¹® ³ëµå Ãß°¡ÇØÁÖ±â
+                        // ë½ì§ˆë¬¸ ë…¸ë“œ ì¶”ê°€í•´ì£¼ê¸°
                         LockAskNode lockAskNode = chatContainer.CreateNode(typeof(LockAskNode)) as LockAskNode;
                         lockAskNode.evidence = new List<string>(this.chatContainer.NowChapter.lockAskAndReply[i].evidence);
                         lockAskNode.ask = this.chatContainer.NowChapter.lockAskAndReply[i].ask;
-                        lockAskNode.reply = new List<Chat>(this.chatContainer.NowChapter.lockAskAndReply[i].reply);        // °ª º¹»ç, ±íÀº º¹»ç
+                        lockAskNode.reply = new List<Chat>(this.chatContainer.NowChapter.lockAskAndReply[i].reply);        // ê°’ ë³µì‚¬, ê¹Šì€ ë³µì‚¬
                         lockAskNode.is_UseThis = this.chatContainer.NowChapter.lockAskAndReply[i].is_UseThis;
 
-                        // ÃÂÆÃ ³ëµå¶û ¿¬°áÇØÁÖ±â
+                        // ì³‡íŒ… ë…¸ë“œë‘ ì—°ê²°í•´ì£¼ê¸°
                         firstChatEndNode.child.Add(lockAskNode);
 
-                        // À§Ä¡ ¼³Á¤ÇØÁÖ±â
+                        // ìœ„ì¹˜ ì„¤ì •í•´ì£¼ê¸°
                         lockAskNode.position = new Vector2(endChatNodePosition.x + (chatContainer.NowChapter.askAndReply.Count * 400) + (i * 400), endChatNodePosition.y + 200);
 
-                        // ´ë´ä(ÃÂÆÃ)³ëµå Ãß°¡ÇØÁÖ±â
+                        // ëŒ€ë‹µ(ì³‡íŒ…)ë…¸ë“œ ì¶”ê°€í•´ì£¼ê¸°
                         for (int j = 0; j < this.chatContainer.NowChapter.lockAskAndReply[i].reply.Count; ++j)
                         {
                             ChatNode replyNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
                             replyNode.state = this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].state;
+                            replyNode.type = this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].type;
                             replyNode.text = this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].text;
                             replyNode.face = this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].face;
                             replyNode.textEvent = new List<EChatEvent>(this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].textEvent);
 
-                            // À§Ä¡ Àâ¾ÆÁÖ±â
+                            // ìœ„ì¹˜ ì¡ì•„ì£¼ê¸°
                             if (replyNode.state == EChatState.Other)
                             {
                                 replyNode.position = new Vector2(lockAskNode.position.x - 100, lockAskNode.position.y + 140 * (j + 1));
@@ -185,20 +188,20 @@ namespace ChatVisual
                                 replyNode.position = new Vector2(lockAskNode.position.x + 100, lockAskNode.position.y + 140 * (j + 1));
                             }
 
-                            // ¿¬°á ÇØÁÖ±â
-                            if (j == 0)     // Áú¹®³ëµå¶û ¿¬°áÇØ¾ß ÇÏ´Â °æ¿ì
+                            // ì—°ê²° í•´ì£¼ê¸°
+                            if (j == 0)     // ì§ˆë¬¸ë…¸ë“œë‘ ì—°ê²°í•´ì•¼ í•˜ëŠ” ê²½ìš°
                             {
                                 lockAskNode.child = replyNode;
                             }
                             else
                            {
-                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount + lockAskAndReplysCount] as ChatNode;        // ·çÆ®³ëµå »©°í ³Ö¾îÁÖ±â
+                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount + lockAskAndReplysCount] as ChatNode;        // ë£¨íŠ¸ë…¸ë“œ ë¹¼ê³  ë„£ì–´ì£¼ê¸°
                                 if (chatParentNode != null)
                                 {
                                     chatParentNode.child.Add(replyNode);
                                 }
                             }
-                            if (j == chatContainer.NowChapter.lockAskAndReply[i].reply.Count - 1)      // ÀÌ°Ô ¸¶Áö¸· ¹İº¹ÀÌ¸é
+                            if (j == chatContainer.NowChapter.lockAskAndReply[i].reply.Count - 1)      // ì´ê²Œ ë§ˆì§€ë§‰ ë°˜ë³µì´ë©´
                             {
                                 lockAskAndReplysCount += j + 1;
                             }
@@ -208,27 +211,27 @@ namespace ChatVisual
             }
         }
 
-        public void SaveChatSystem()        // °ªµéÀ» ÀúÀåÇØÁÜ.
+        public void SaveChatSystem()        // ê°’ë“¤ì„ ì €ì¥í•´ì¤Œ.
         {
             chatContainer.NowChapter.chat.Clear();
             chatContainer.NowChapter.askAndReply.Clear();
             chatContainer.NowChapter.lockAskAndReply.Clear();
 
-            // nodes ¸®½ºÆ®¿¡¼­ ÇöÀç ÀÎµ¦½º¸¦ Ç¥½ÃÇØÁÙ °Í.
-            int chatIndex = 0;       // °¡ÀåÃ³À½¿¡ ÀÖ´Â ÃÂÆÃµéÀÇ ÀÎµ¦½º
-            int askIndex = 0;       // ´ÙÀ½ ÀÖÀ» Áú¹®µéÀÇ ÀÎµ¦½º
-            int lockAskIndex = 0;       // Áú¹® ´ÙÀ½¿¡ ³ª¿Ã Àá±è Áú¹®µé
+            // nodes ë¦¬ìŠ¤íŠ¸ì—ì„œ í˜„ì¬ ì¸ë±ìŠ¤ë¥¼ í‘œì‹œí•´ì¤„ ê²ƒ.
+            int chatIndex = 0;       // ê°€ì¥ì²˜ìŒì— ìˆëŠ” ì³‡íŒ…ë“¤ì˜ ì¸ë±ìŠ¤
+            int askIndex = 0;       // ë‹¤ìŒ ìˆì„ ì§ˆë¬¸ë“¤ì˜ ì¸ë±ìŠ¤
+            int lockAskIndex = 0;       // ì§ˆë¬¸ ë‹¤ìŒì— ë‚˜ì˜¬ ì ê¹€ ì§ˆë¬¸ë“¤
             bool firstChatEnd = false;
 
-            int nowAskIndex = 0;        // Áö±İ Áú¹®ÀÇ ÀÎµ¦½º
-            int nowReplyIndex = 0;      // Áö±İ Áú¹®¿¡ µé¾î°¥ ´ë´ä ÀÎµ¦½º
-            int nowReplysCountIndex = 0;      // Áö±İ Áú¹®ÀÇ ´ë´ä °³¼ö ÀÎµ¦½º, ¾Æ·¡ ¸®½ºÆ®ÀÇ ÀÎµ¦½º °ª
-            bool lockAskStart = false;      // Àá±è Áú¹®ÀÌ ½ÃÀÛµÇ¾ú´Ù¸é
+            int nowAskIndex = 0;        // ì§€ê¸ˆ ì§ˆë¬¸ì˜ ì¸ë±ìŠ¤
+            int nowReplyIndex = 0;      // ì§€ê¸ˆ ì§ˆë¬¸ì— ë“¤ì–´ê°ˆ ëŒ€ë‹µ ì¸ë±ìŠ¤
+            int nowReplysCountIndex = 0;      // ì§€ê¸ˆ ì§ˆë¬¸ì˜ ëŒ€ë‹µ ê°œìˆ˜ ì¸ë±ìŠ¤, ì•„ë˜ ë¦¬ìŠ¤íŠ¸ì˜ ì¸ë±ìŠ¤ ê°’
+            bool lockAskStart = false;      // ì ê¹€ ì§ˆë¬¸ì´ ì‹œì‘ë˜ì—ˆë‹¤ë©´
 
-            // Áú¹®ÀÇ ´ë´ä °³¼ö¸¦ ÀúÀåÇØÁÖ´Â ¸®½ºÆ®
-            List<int> replysCount = new List<int>();            // -1Àº 
+            // ì§ˆë¬¸ì˜ ëŒ€ë‹µ ê°œìˆ˜ë¥¼ ì €ì¥í•´ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸
+            List<int> replysCount = new List<int>();            // -1ì€ 
 
-            if (chatContainer.nodes[0] != null)     // ·çÆ®³ëµå°¡ ÀÖ´Ù¸é
+            if (chatContainer.nodes[0] != null)     // ë£¨íŠ¸ë…¸ë“œê°€ ìˆë‹¤ë©´
             {
                 RootNode rootNode = chatContainer.nodes[0] as RootNode;
                 if (rootNode != null)
@@ -241,15 +244,15 @@ namespace ChatVisual
 
             chatContainer.nodes.ForEach(n =>
             {
-                var children = chatContainer.GetChildren(n);       // ÀÚ½Äµé °¡Á®¿À±â
+                var children = chatContainer.GetChildren(n);       // ìì‹ë“¤ ê°€ì ¸ì˜¤ê¸°
                 children.ForEach(c =>
                 {
-                    ChatNode chatNode = c as ChatNode;      // ÃÂÆÃ ³ëµåÀÌ¸é
+                    ChatNode chatNode = c as ChatNode;      // ì³‡íŒ… ë…¸ë“œì´ë©´
                     if (chatNode != null)
                     {
                         if (firstChatEnd == false)
                         {
-                            // »õ·Î¿î Å¬·¡½º ¸¸µé¾îÁÜ.
+                            // ìƒˆë¡œìš´ í´ë˜ìŠ¤ ë§Œë“¤ì–´ì¤Œ.
                             Chat chat = new Chat();
                             chatContainer.NowChapter.chat.Add(chat);
                             chatContainer.NowChapter.chat[chatIndex].state = chatNode.state;
@@ -260,7 +263,7 @@ namespace ChatVisual
                         }
                         else
                         {
-                            // ´ë´äµé ÀúÀåÇØÁÖ±â
+                            // ëŒ€ë‹µë“¤ ì €ì¥í•´ì£¼ê¸°
                             if (lockAskStart == false)
                             {
                                 if (replysCount[nowReplysCountIndex] == -1)
@@ -290,7 +293,7 @@ namespace ChatVisual
                                     chatContainer.NowChapter.askAndReply[nowAskIndex].reply[nowReplyIndex].textEvent = chatNode.textEvent;
                                     nowReplyIndex++;
 
-                                    if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // ´ë´ä °³¼ö¸¦ ³Ñ¾ú´Ù¸é
+                                    if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // ëŒ€ë‹µ ê°œìˆ˜ë¥¼ ë„˜ì—ˆë‹¤ë©´
                                     {
                                         nowAskIndex++;
                                         nowReplysCountIndex++;
@@ -308,7 +311,7 @@ namespace ChatVisual
                                 chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].face = chatNode.face;
                                 chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].textEvent = chatNode.textEvent;
 
-                                if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // ´ë´ä °³¼ö¸¦ ³Ñ¾ú´Ù¸é
+                                if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // ëŒ€ë‹µ ê°œìˆ˜ë¥¼ ë„˜ì—ˆë‹¤ë©´
                                 {
                                     nowAskIndex++;
                                     nowReplysCountIndex++;
@@ -318,7 +321,7 @@ namespace ChatVisual
                         }
                     }
 
-                    AskNode askNode = c as AskNode;     // Áú¹® ³ëµåÀÌ¸é
+                    AskNode askNode = c as AskNode;     // ì§ˆë¬¸ ë…¸ë“œì´ë©´
                     if (askNode != null)
                     {
                         AskAndReply askAndReply = new AskAndReply();
@@ -335,7 +338,7 @@ namespace ChatVisual
                     {
                         if (replysCount.Find(n => n == -1) == 0)
                         {
-                            replysCount.Add(-1);        // ¶ô°É¸° ÃÂÆÃÀÌ ½ÃÀÛÇß´Ù°í
+                            replysCount.Add(-1);        // ë½ê±¸ë¦° ì³‡íŒ…ì´ ì‹œì‘í–ˆë‹¤ê³ 
                         }
 
                         LockAskAndReply lockAskAndReply = new LockAskAndReply();
@@ -355,14 +358,14 @@ namespace ChatVisual
         {
             graphViewChanged -= OnGraphViewChanged;
 
-            DeleteElements(graphElements);       // ±âÁ¸¿¡ ±×·ÁÁ³´ø ¾Öµé ¸ğµÎ »èÁ¦
+            DeleteElements(graphElements);       // ê¸°ì¡´ì— ê·¸ë ¤ì¡Œë˜ ì• ë“¤ ëª¨ë‘ ì‚­ì œ
 
             graphViewChanged += OnGraphViewChanged;
 
-            // ³ëµåµé ±×·ÁÁÖ±â
+            // ë…¸ë“œë“¤ ê·¸ë ¤ì£¼ê¸°
             this.chatContainer.nodes.ForEach(n => CreateNodeView(n));
 
-            // ¿§Áö ±×·ÁÁÖ±â
+            // ì—£ì§€ ê·¸ë ¤ì£¼ê¸°
             this.chatContainer.nodes.ForEach(n =>
             {
                 var children = this.chatContainer.GetChildren(n);
@@ -375,7 +378,7 @@ namespace ChatVisual
                 });
             });
 
-            // ¼ıÀÚ ¸¸µé¾îÁÖ±â
+            // ìˆ«ì ë§Œë“¤ì–´ì£¼ê¸°
             this.chatContainer.SortChildAndIndex();
         }
 
@@ -386,17 +389,17 @@ namespace ChatVisual
 
         private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
         {
-            if (graphViewChange.elementsToRemove != null)       // Áö¿öÁø ¾ÖµéÀÌ ÀÖÀ¸¸é
+            if (graphViewChange.elementsToRemove != null)       // ì§€ì›Œì§„ ì• ë“¤ì´ ìˆìœ¼ë©´
             {
                 graphViewChange.elementsToRemove.ForEach(elem =>
                 {
                     var nodeView = elem as NodeView;
                     if (nodeView != null)
                     {
-                        chatContainer.DeleteNode(nodeView.node);        // Áö¿öÁÖ±â
+                        chatContainer.DeleteNode(nodeView.node);        // ì§€ì›Œì£¼ê¸°
                     }
 
-                    var edge = elem as Edge;        // ¿¬°á¼±
+                    var edge = elem as Edge;        // ì—°ê²°ì„ 
                     if (edge != null)
                     {
                         NodeView parent = edge.output.node as NodeView;
@@ -407,7 +410,7 @@ namespace ChatVisual
                 });
             }
 
-            if (graphViewChange.edgesToCreate != null)      // ¼± ¿¬°áÇØÁÖ±â
+            if (graphViewChange.edgesToCreate != null)      // ì„  ì—°ê²°í•´ì£¼ê¸°
             {
                 graphViewChange.edgesToCreate.ForEach(edge =>
                 {
@@ -418,7 +421,7 @@ namespace ChatVisual
                 });
             }
 
-           /* if (graphViewChange.movedElements != null)      // ¿òÁ÷ÀÎ ¾ÖµéÀÌ ÀÖÀ¸¸é Á¤·ÄÇØÁÖ±â
+           /* if (graphViewChange.movedElements != null)      // ì›€ì§ì¸ ì• ë“¤ì´ ìˆìœ¼ë©´ ì •ë ¬í•´ì£¼ê¸°
             {
                 nodes.ForEach(n =>
                 {
@@ -432,9 +435,9 @@ namespace ChatVisual
 
         private void CreateNode(Type type, Vector2 position)
         {
-            Node node = chatContainer.CreateNode(type);      // ³ëµå »ı¼º
+            Node node = chatContainer.CreateNode(type);      // ë…¸ë“œ ìƒì„±
             node.position = position;
-            CreateNodeView(node);       // º¸ÀÌ´Â °É ½ÇÁ¦·Î Ãß°¡ÇØÁÜ.
+            CreateNodeView(node);       // ë³´ì´ëŠ” ê±¸ ì‹¤ì œë¡œ ì¶”ê°€í•´ì¤Œ.
         }
 
         private void CreateNodeView(Node n)
@@ -444,18 +447,18 @@ namespace ChatVisual
             AddElement(nodeView);
         }
 
-        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)       // ¿ìÅ¬¸¯ ÇßÀ» ¶§ ³ª¿Ã ¸Ş´ºµé
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)       // ìš°í´ë¦­ í–ˆì„ ë•Œ ë‚˜ì˜¬ ë©”ë‰´ë“¤
         {
-            if (chatContainer == null)      // Áö±İ ´­·¯ÁØ. Æ®¸®°¡ ¾øÀ¸¸é
+            if (chatContainer == null)      // ì§€ê¸ˆ ëˆŒëŸ¬ì¤€. íŠ¸ë¦¬ê°€ ì—†ìœ¼ë©´
             {
-                Debug.Log("ÄÁÅ×ÀÌ³Ê ¾ø¾î¿ä!");
-                evt.StopPropagation();      // ÀÌº¥Æ® ÀüÆÄ ±İÁö
+                Debug.Log("ì»¨í…Œì´ë„ˆ ì—†ì–´ìš”!");
+                evt.StopPropagation();      // ì´ë²¤íŠ¸ ì „íŒŒ ê¸ˆì§€
                 return;
             }
 
-            Vector2 nodePosition = this.ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition);      // ¿ìÅ¬¸¯ÇÑ À§Ä¡ °¡Á®¿À±â, ±× À§Ä¡¿¡ ³ëµå »ı¼º ¿¹Á¤
+            Vector2 nodePosition = this.ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition);      // ìš°í´ë¦­í•œ ìœ„ì¹˜ ê°€ì ¸ì˜¤ê¸°, ê·¸ ìœ„ì¹˜ì— ë…¸ë“œ ìƒì„± ì˜ˆì •
 
-            var types = TypeCache.GetTypesDerivedFrom<Node>();      // »ó¼Ó¹ŞÀº ¾Öµé ¸ğµÎ °¡Áö°í ¿À±â
+            var types = TypeCache.GetTypesDerivedFrom<Node>();      // ìƒì†ë°›ì€ ì• ë“¤ ëª¨ë‘ ê°€ì§€ê³  ì˜¤ê¸°
             foreach (var type in types)
             {
                 if (type.Name == "RootNode") continue;
@@ -463,10 +466,10 @@ namespace ChatVisual
             }
         }
 
-        // µå·¡±ëÀÌ ½ÃÀÛµÉ ¶§ ¿¬°á°¡´ÉÇÑ Æ÷Æ®¸¦ °¡Á®¿À´Â ÇÔ¼ö
+        // ë“œë˜ê¹…ì´ ì‹œì‘ë  ë•Œ ì—°ê²°ê°€ëŠ¥í•œ í¬íŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
-            return ports.ToList().Where(x => x.direction != startPort.direction).ToList();      // input outputÀÌ ´Ù¸£¸é ¿¬°á °¡´É
+            return ports.ToList().Where(x => x.direction != startPort.direction).ToList();      // input outputì´ ë‹¤ë¥´ë©´ ì—°ê²° ê°€ëŠ¥
         }
     }
 }

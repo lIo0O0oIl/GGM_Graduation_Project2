@@ -8,9 +8,10 @@ namespace ChatVisual
     {
         public List<Node> child = new List<Node>();
 
-        public EChatState state;     // ¸»ÇÏ´Â °ÍÀÇ Å¸ÀÔ
-        public string text;        // ¸» ÇÏ´Â °Í.
-        public EFace face;       // ¸» ÇÒ ¶§ÀÇ Ç¥Á¤
+        public EChatState state;     // ë§í•˜ëŠ” ê²ƒì˜ íƒ€ì…
+        public EChatType type;
+        public string text;        // ë§ í•˜ëŠ” ê²ƒ.
+        public EFace face;       // ë§ í•  ë•Œì˜ í‘œì •
         public List<EChatEvent> textEvent = new List<EChatEvent>();
 
         protected override void OnStart()
