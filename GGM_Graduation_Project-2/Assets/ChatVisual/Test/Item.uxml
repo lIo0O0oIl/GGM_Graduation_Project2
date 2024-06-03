@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/ChatVisual/Test/Test.uss?fileID=7433441132597879392&amp;guid=753eb97c7bdc2d646b7ad1a71c5d46ae&amp;type=3#Test" />
+    <ui:VisualElement name="Item" class="item" style="background-color: rgb(248, 255, 0);" />
+</ui:UXML>
