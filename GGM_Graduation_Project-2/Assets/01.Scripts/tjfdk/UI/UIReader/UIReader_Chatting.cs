@@ -24,7 +24,7 @@ public struct Chatting
 public class MemberChat
 {
     public string name;
-    public string nickName;
+    public ESaveLocation nickName;
     public EFace face;
     public Sprite[] faces;
     public bool isOpen;
@@ -112,7 +112,7 @@ public class UIReader_Chatting : UI_Reader
     {
         foreach(MemberChat member in memberChats)
         {
-            if (member.nickName == name || member.name == name)
+            if (member.nickName.ToString() == name || member.name == name)
                 return member;
         }
 
