@@ -12223,10 +12223,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowChaptersIndex: 17
+  nowChaptersIndex: 19
   nowChatIndex: 5
   nowChapter:
-    showName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4 \uD6C4"
+    showName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 0
     chat: []
     askAndReply: []
@@ -13019,6 +13019,84 @@ MonoBehaviour:
     is_nextChapter: 0
     nextChapterName: 
   - showName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4 \uD6C4"
+    saveLocation: 0
+    chat:
+    - state: 0
+      text: "\uC800 \uB9D0\uC774 \uC0AC\uC2E4\uC774\uB77C\uBA74 \uCD0C\uC9C0\uD558\uB294
+        \uACFC\uC815\uC5D0\uC11C "
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uC774\uC218\uC5F0\uACFC \uB9C8\uC8FC\uCCE4\uC744 \uAC00\uB2A5\uC131\uB3C4
+        \uC788\uACA0\uC5B4\uC694!"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uAD50\uAC10 \uC120\uC0DD\uC744 \uBA3C\uC800 \uC870\uC0AC\uD574\uBCFC\uAE4C\uC694?"
+      face: 0
+      textEvent: 
+    - state: 1
+      text: "\uADF8\uB7EC\uB3C4\uB85D\uD558\uC9C0"
+      face: 0
+      textEvent: 
+    askAndReply: []
+    lockAskAndReply: []
+    round: []
+    is_nextChapter: 0
+    nextChapterName: 
+  - showName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4"
+    saveLocation: 0
+    chat:
+    - state: 1
+      text: "\uC548\uB155\uD558\uC138\uC694 \uC120\uC0DD\uB2D8"
+      face: 0
+      textEvent: 
+    - state: 1
+      text: "\uC120\uC0DD\uB2D8\uAED8\uC11C \uC5B4\uB5A4 \uD559\uC0DD\uACFC \uCD0C\uC9C0\uB97C
+        \uD558\uACE0 \uC788\uACE0"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uC0AC\uAC74 \uB2F9\uC77C \uC625\uC0C1\uC5D0\uC11C \uCD0C\uC9C0 \uAC70\uB798\uB97C
+        \uD588\uB2E4\uACE0 \uC81C\uBCF4\uB97C \uBC1B\uC558\uC2B5\uB2C8\uB2E4"
+      face: 0
+      textEvent: 
+    - state: 1
+      text: "\uC0AC\uC2E4\uC778\uAC00\uC694?"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uB124? "
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uB204\uAC00 \uADF8\uB7F0 \uB9D0\uB3C4 \uC548 \uB418\uB294 \uC18C\uB9AC\uB97C
+        \uD558\uB294 \uAC81\uB2C8\uAE4C?"
+      face: 0
+      textEvent: 
+    - state: 1
+      text: "\uC544\uB2C8\uB77C\uB294 \uB9D0\uC500\uC774\uC2E0\uAC70\uC8E0?"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uADF8\uB7F0 \uC801 \uC5C6\uC2B5\uB2C8\uB2E4."
+      face: 0
+      textEvent: 
+    - state: 1
+      text: "\uADF8\uB7FC \uC120\uC0DD\uB2D8 \uD578\uB4DC\uD3F0\uC744 \uC7A0\uAE50
+        \uBCFC \uC218 \uC788\uC744\uAE4C\uC694?"
+      face: 0
+      textEvent: 
+    - state: 0
+      text: "\uB124 \uC5EC\uAE30\uC694"
+      face: 0
+      textEvent: 
+    askAndReply: []
+    lockAskAndReply: []
+    round: []
+    is_nextChapter: 0
+    nextChapterName: 
+  - showName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 0
     chat: []
     askAndReply: []
