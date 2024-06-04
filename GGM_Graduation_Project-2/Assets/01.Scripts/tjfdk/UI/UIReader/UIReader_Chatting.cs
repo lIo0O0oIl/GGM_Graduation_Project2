@@ -207,6 +207,7 @@ public class UIReader_Chatting : UI_Reader
         {
             case EChatType.Question:
                 chat = RemoveContainer(ux_askChat.Instantiate());
+                chat.name = msg;
                 //chat.name = msg;
                 chat.Q<Label>().text = msg;
                 //chat.Q<Button>().clicked += action; // 대답 나오게
@@ -219,6 +220,7 @@ public class UIReader_Chatting : UI_Reader
                 break;
             case EChatType.LockQuestion:
                 chat = RemoveContainer(ux_hiddenAskChat.Instantiate());
+                chat.name = msg;
                 //chat.name = msg;
                 break;
         }
