@@ -137,13 +137,17 @@ public class UIReader_FileSystem : UI_Reader
 
     private VisualElement FindMoveArea(Vector2 position)
     {
+        // 안 불려지는듯 
+        Debug.Log("힝");
         FindLockQuestion();
+        Debug.Log(lockQuestions.Count);
 
         //모든 슬롯을 찾아서 그중에서 worldBound 에 position이 속하는 녀석을 찾아오면
         foreach (VisualElement moveArea in lockQuestions)
         {
             if (moveArea.worldBound.Contains(position)) //해당 RECT안에 포지션이 있는지 검사해
             {
+                Debug.Log(moveArea.Q<Label>().text);
                 return moveArea;
             }
         }
@@ -241,6 +245,7 @@ public class UIReader_FileSystem : UI_Reader
                     // 이벤트 연결
                     file.Q<Button>().clicked += () => ImageEvent(file); // 이미지 등록,,, 이미지 등록할 위치....
                     // 드래그 앤 드롭 기능 추가
+                    Debug.Log(fileName);
                     LoadDragAndDrop(file);
 
                     // 파일 부모 지정
@@ -342,8 +347,6 @@ public class UIReader_FileSystem : UI_Reader
 
     public void OpenImage(string name, Sprite sprite)
     {
-        Debug.Log("dkd");
-
         for (int i = panelGround.childCount - 1; i >= 0; i--)
             panelGround.RemoveAt(i);
 

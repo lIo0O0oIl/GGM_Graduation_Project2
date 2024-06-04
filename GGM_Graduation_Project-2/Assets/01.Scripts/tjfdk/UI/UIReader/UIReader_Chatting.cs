@@ -39,6 +39,7 @@ public class MemberChat
 
 public class UIReader_Chatting : UI_Reader
 {
+    public string currentMemberName;
     [SerializeField]
     private List<MemberChat> memberChats = new List<MemberChat>();
     [SerializeField]
@@ -60,7 +61,6 @@ public class UIReader_Chatting : UI_Reader
 
     public bool isChapterProcessing;
 
-    public string currentMemberName;
 
     private void Awake()
     {
@@ -133,11 +133,7 @@ public class UIReader_Chatting : UI_Reader
             InputChat(chat.who, chat.toWho, chat.chatType, otherName.face, chat.text, false);
 
         foreach (Chatting chat in otherName.quetions)
-            InputQuestion(chat.toWho, chat.chatType, chat.text, false);
-
-        ////스크롤바 맨 아래로 내리기
-        //chatGround.Q<ScrollView>(chatGround.name).verticalScroller.value
-        //    = chatGround.Q<ScrollView>(chatGround.name).verticalScroller.highValue;
+            InputQuestion(chat.toWho, chat.chatType, chat.text, false, null);
     }
 
     private void Te(VisualElement chat, Sprite sprite)
@@ -165,7 +161,6 @@ public class UIReader_Chatting : UI_Reader
     {
         // 생성
         VisualElement chat = null;
-        Debug.Log((toWho.ToString()));
         MemberChat suspect = FindMember(toWho.ToString());
 
         // 대화 정의
@@ -191,7 +186,6 @@ public class UIReader_Chatting : UI_Reader
 
         if (isRecord)
             RecordChat(suspect, who, toWho, type, msg);
-        Debug.Log("여기까지 옴!!!!!!@");
 
         if (who == EChatState.Me)
             chat.AddToClassList("MyChat");
@@ -202,7 +196,7 @@ public class UIReader_Chatting : UI_Reader
         chatGround.Add(chat);
     }
 
-    public void InputQuestion(ESaveLocation toWho, EChatType type, string msg, bool isRecord)
+    public void InputQuestion(ESaveLocation toWho, EChatType type, string msg, bool isRecord, IEnumerator reply)
     {
         // 생성
         VisualElement chat = null ;
@@ -216,7 +210,12 @@ public class UIReader_Chatting : UI_Reader
                 //chat.name = msg;
                 chat.Q<Label>().text = msg;
                 //chat.Q<Button>().clicked += action; // 대답 나오게
-                chat.Q<Button>().clicked += (() => { chat.parent.Remove(chat); });
+                chat.Q<Button>().clicked += (() => 
+                { 
+                    chat.parent.Remove(chat);
+                    // reply 출력
+                    StartCoroutine(reply);
+                });
                 break;
             case EChatType.LockQuestion:
                 chat = RemoveContainer(ux_hiddenAskChat.Instantiate());
@@ -231,7 +230,6 @@ public class UIReader_Chatting : UI_Reader
 
         // 대화에 추가
         questionGround.Add(chat);
-        EndToScroll();
     }
 
     private void RecordChat(MemberChat member, EChatState who, ESaveLocation toWho, EChatType type, string msg)
@@ -291,17 +289,21 @@ public class UIReader_Chatting : UI_Reader
     ////////    }
     ////////}
 
-    private void EndToScroll()
+    public void EndToScroll()
     {
-        ScrollView scrollView = chatGround.Q<ScrollView>("ChatGround");
+        //Debug.Log("줄내림 입력");
+        //ScrollView scrollView = chatGround.Q<ScrollView>("ChatGround");
 
-        scrollView.schedule.Execute(() =>
-        {
-            float contentHeight = scrollView.contentContainer.layout.height;
-            float viewportHeight = scrollView.contentViewport.layout.height;
+        //scrollView.schedule.Execute(() =>
+        //{
+        //    float contentHeight = scrollView.contentContainer.layout.height;
+        //    float viewportHeight = scrollView.contentViewport.layout.height;
 
-            scrollView.scrollOffset = new Vector2(0, contentHeight - viewportHeight);
-        });
+        //    scrollView.scrollOffset = new Vector2(0, contentHeight - viewportHeight);
+        //});
+
+        chatGround.Q<ScrollView>(chatGround.name).verticalScroller.value
+            = chatGround.Q<ScrollView>(chatGround.name).verticalScroller.highValue;
     }
 
     public void AddMember(string memberName)
@@ -347,7 +349,6 @@ public class UIReader_Chatting : UI_Reader
 
     public void ChoiceMember(MemberChat member)
     {
-        Debug.Log("dhktek");
         currentMemberName = member.name;
 
         if (member != null)
@@ -361,8 +362,7 @@ public class UIReader_Chatting : UI_Reader
             if (member.chapterName != "")
             {
                 // 챕터 불러주고
-                Debug.Log(member.chapterName);
-                chapterManager.Chapter(member.chapterName);
+                chapterManager.Chapter(member.name, member.chapterName);
                 // 끝났으면 현재 챕터 초기화
                 //member.chapterName = "";
             }
