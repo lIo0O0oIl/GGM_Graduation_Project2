@@ -10,6 +10,7 @@ public class FileT
     public string fileParentName;
     public bool isCheck;
     public FileType fileType;
+    public string lockQuestionName;
 
     public void IsCheck() { isCheck = true; }
 }

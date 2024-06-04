@@ -2,7 +2,6 @@ using ChatVisual;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -272,13 +271,15 @@ public class UIReader_FileSystem : UI_Reader
                         }
                         else
                         {
-                            Debug.Log(area + " 질문과 부딪힘");
-                            // 이거만 해결하면 됨
-                            area.parent.Remove(area);
-                            LockAskAndReply question = FindQuestion(area);
-                            Debug.Log(question.ask + " 맞게 찾아 왔냐?");
-                            chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName), 
-                                EChatType.Question, question.ask, true, chapterManager.InputCChat(true, question.reply));
+                            LockAskAndReply lockQuestion = FindQuestion(area);
+                            if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
+                            {
+                                area.parent.Remove(area);
+                                chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
+                                    EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
+                            }
+                            else
+                                beforeSlot.Add(target);
                         }
                     }));
                     //
