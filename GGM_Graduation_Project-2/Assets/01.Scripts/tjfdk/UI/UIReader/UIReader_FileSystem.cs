@@ -1,10 +1,7 @@
 using ChatVisual;
 using DG.Tweening;
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -72,7 +69,7 @@ public class UIReader_FileSystem : UI_Reader
 
     // file dran and drop
     private VisualElement fileDefaultArea;
-    private List<VisualElement> lockQuestions;
+    private List<VisualElement> lockQuestions = new List<VisualElement>();
 
     private void Awake()
     {
@@ -128,6 +125,7 @@ public class UIReader_FileSystem : UI_Reader
     private void FindLockQuestion()
     {
         MemberChat member = chatSystem.FindMember(chatSystem.currentMemberName);
+        Debug.Log(member.name);
         for (int i = 0; i < member.quetions.Count; ++i)
         {
             if (member.quetions[i].chatType == EChatType.LockQuestion)
@@ -135,12 +133,25 @@ public class UIReader_FileSystem : UI_Reader
         }
     }
 
+    private LockAskAndReply FindQuestion(VisualElement ask)
+    {
+        Chapter chapter = chapterManager.FindChapter(chatSystem.FindMember(chatSystem.currentMemberName).chapterName);
+        List<LockAskAndReply> asks = chapter.lockAskAndReply;
+        for (int i = 0; i < chapter.lockAskAndReply.Count; ++i)
+        {
+            if (chapter.lockAskAndReply[i].ask == ask.name)
+                return chapter.lockAskAndReply[i];
+        }
+
+        return new LockAskAndReply();
+    }
+
     private VisualElement FindMoveArea(Vector2 position)
     {
         // 안 불려지는듯 
         Debug.Log("힝");
         FindLockQuestion();
-        Debug.Log(lockQuestions.Count);
+        //Debug.Log(lockQuestions.Count);
 
         //모든 슬롯을 찾아서 그중에서 worldBound 에 position이 속하는 녀석을 찾아오면
         foreach (VisualElement moveArea in lockQuestions)
@@ -159,8 +170,9 @@ public class UIReader_FileSystem : UI_Reader
         // 드래그 앤 드롭 기능 추가
         file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         {
+            Debug.Log("힝g힝");
             var area = FindMoveArea(evt.mousePosition);
-
+            Debug.Log(area.name + " area 이름");
             target.RemoveFromHierarchy();
             if (area == null)
             {
@@ -243,10 +255,33 @@ public class UIReader_FileSystem : UI_Reader
                     // 이름 변경
                     file.Q<Label>("FileName").text = fileName;
                     // 이벤트 연결
-                    file.Q<Button>().clicked += () => ImageEvent(file); // 이미지 등록,,, 이미지 등록할 위치....
+                    //file.Q<Button>().clicked += () => ImageEvent(file); // 이미지 등록,,, 이미지 등록할 위치....
                     // 드래그 앤 드롭 기능 추가
                     Debug.Log(fileName);
-                    LoadDragAndDrop(file);
+                    //LoadDragAndDrop(file);
+
+                    //
+                    // 드래그 앤 드롭 기능 추가
+                    file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
+                    {
+                        var area = FindMoveArea(evt.mousePosition);
+                        target.RemoveFromHierarchy();
+                        if (area == null)
+                        {
+                            beforeSlot.Add(target);
+                        }
+                        else
+                        {
+                            Debug.Log(area + " 질문과 부딪힘");
+                            // 이거만 해결하면 됨
+                            area.parent.Remove(area);
+                            LockAskAndReply question = FindQuestion(area);
+                            Debug.Log(question.ask + " 맞게 찾아 왔냐?");
+                            chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName), 
+                                EChatType.Question, question.ask, true, chapterManager.InputCChat(true, question.reply));
+                        }
+                    }));
+                    //
 
                     // 파일 부모 지정
                     bool addNew = false;

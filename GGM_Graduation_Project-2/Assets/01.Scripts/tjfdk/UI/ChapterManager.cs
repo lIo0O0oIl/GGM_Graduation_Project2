@@ -19,10 +19,10 @@ public class ChapterManager : UI_Reader
 
     public void AddChapter(string who, string name)
     {
-        if (chatSystem.FindMember(who).chapterName == "")
+        //if (chatSystem.FindMember(who).chapterName == "")
             chatSystem.FindMember(who).chapterName = FindChapter(name).showName;
-        else
-            Debug.Log("이미 챕터가 있어서 추가할 수 없음");
+        //else
+        //    Debug.Log("이미 챕터가 있어서 추가할 수 없음");
     }
 
     public Chapter FindChapter(string name)
@@ -69,8 +69,7 @@ public class ChapterManager : UI_Reader
 
     public void EndChapter()
     {
-        Debug.Log("챕터 끝남요1!");
-        chatSystem.FindMember(nowChapter.saveLocation.ToString()).chapterName = "";
+        //chatSystem.FindMember(nowChapter.saveLocation.ToString()).chapterName = "";
 
         if (nowChapter.is_nextChapter)
             NextChapter(nowChapter.nextChapterName);
@@ -105,7 +104,7 @@ public class ChapterManager : UI_Reader
     //    }
     //}
 
-    private IEnumerator InputCChat(bool isReply, List<Chat> chats)
+    public IEnumerator InputCChat(bool isReply, List<Chat> chats)
     {
         int i = 0;
         while (i != chats.Count)
@@ -132,7 +131,6 @@ public class ChapterManager : UI_Reader
         {
             while (i != asks.Count)
             {
-                Debug.Log(asks[i].ask + " 질문");
                 chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
                     EChatType.Question, asks[i].ask, true, InputCChat(true, asks[i].reply));                                            
                 i++;
@@ -150,9 +148,8 @@ public class ChapterManager : UI_Reader
         {
             while (i != locks.Count)
             {
-                Debug.Log(locks[i].ask + " 질문");
                 chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
-                    EChatType.Question, locks[i].ask, true, null);
+                    EChatType.LockQuestion, locks[i].ask, true, null);
                 i++;
             }
         }

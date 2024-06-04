@@ -35,6 +35,7 @@ namespace ChatVisual
 
         protected void OnMouseDown(MouseDownEvent evt)
         {
+            Debug.Log("아무거나");
             if (CanStartManipulation(evt))
             {
                 var x = target.layout.x;
