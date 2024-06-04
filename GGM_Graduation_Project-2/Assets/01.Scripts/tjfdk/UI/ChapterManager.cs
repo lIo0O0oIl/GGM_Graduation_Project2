@@ -9,7 +9,8 @@ using UnityEngine.UIElements;
 public class ChapterManager : UI_Reader
 {
     public Chapter nowChapter;
-    public int index;
+    public int chatIndex;
+    public int roundIndex;
 
     public Chat FindChat(string text)
     {
@@ -40,10 +41,7 @@ public class ChapterManager : UI_Reader
 
     public void AddChapter(string who, string name)
     {
-        //if (chatSystem.FindMember(who).chapterName == "")
-            chatSystem.FindMember(who).chapterName = FindChapter(name).showName;
-        //else
-        //    Debug.Log("이미 챕터가 있어서 추가할 수 없음");
+        chatSystem.FindMember(who).chapterName = FindChapter(name).showName;
     }
 
     public Chapter FindChapter(string name)
@@ -81,11 +79,9 @@ public class ChapterManager : UI_Reader
         nowChapter  = FindChapter(name);
         chatContainer.NowChapter = nowChapter;
         chatContainer.nowChaptersIndex = 0;
+        roundIndex = 0;
 
-        //if (nowChapter.askAndReply.Count > 0 || nowChapter.lockAskAndReply.Count > 0)
-        //    StartCoroutine(InputCChat(true, nowChapter.chat));
-        //else
-            StartCoroutine(InputCChat(false, nowChapter.chat));
+        StartCoroutine(InputCChat(false, nowChapter.chat));
     }
 
     public void EndChapter()
@@ -100,23 +96,42 @@ public class ChapterManager : UI_Reader
 
     public IEnumerator InputCChat(bool isReply, List<Chat> chats)
     {
-        index = 0;
-        while (index != chats.Count)
+        chatIndex = 0;
+        while (chatIndex != chats.Count)
         {
-            if (index < chats.Count)
+            if (chatIndex < chats.Count)
             {
-                if (chats[index].isCan == false)
+                if (chats[chatIndex].isCan == false)
                 {
-                    chatSystem.InputChat(chats[index].state, nowChapter.saveLocation,
-                        chats[index].type, chats[index].face, chats[index].text, true);
-                    index++;
+                    chatSystem.InputChat(chats[chatIndex].state, nowChapter.saveLocation,
+                        chats[chatIndex].type, chats[chatIndex].face, chats[chatIndex].text, true);
+                    if (chats[chatIndex].textEvent.Count > 0)
+                    {
+                        foreach (EChatEvent evt in chats[chatIndex].textEvent)
+                        {
+                            switch (evt)
+                            {
+                                case EChatEvent.Vibration:
+                                    break;
+                                case EChatEvent.Round:
+                                    {
+                                        string fileName = nowChapter.round[roundIndex];
+                                        FileT file = fileSystem.FindFile(fileName);
+                                        fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
+                                        break;
+                                    }
+                                case EChatEvent.Camera:
+                                    break;
+                            }
+
+                            roundIndex++;
+                        }
+                    }
+                    chatIndex++;
                     yield return new WaitForSeconds(1.5f);
                 }
                 else
-                {
                     yield return null;
-                    Debug.Log("아직 활성화되지 않음 " + chats[index].text);
-                }
             }
         }
 
@@ -130,14 +145,14 @@ public class ChapterManager : UI_Reader
 
     public void InputQQuestion(List<AskAndReply> asks)
     {
-        index = 0;
+        chatIndex = 0;
         if (asks != null)
         {
-            while (index != asks.Count)
+            while (chatIndex != asks.Count)
             {
                 chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
-                    EChatType.Question, asks[index].ask, true, InputCChat(true, asks[index].reply));                                            
-                index++;
+                    EChatType.Question, asks[chatIndex].ask, true, InputCChat(true, asks[chatIndex].reply));                                            
+                chatIndex++;
             }
         }
 
@@ -147,14 +162,14 @@ public class ChapterManager : UI_Reader
 
     public void InputLockQuestion(List<LockAskAndReply> locks)
     {
-        index = 0;
+        chatIndex = 0;
         if (locks != null)
         {
-            while (index != locks.Count)
+            while (chatIndex != locks.Count)
             {
                 chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
-                    EChatType.LockQuestion, locks[index].ask, true, null);
-                index++;
+                    EChatType.LockQuestion, locks[chatIndex].ask, true, null);
+                chatIndex++;
             }
         }
     }

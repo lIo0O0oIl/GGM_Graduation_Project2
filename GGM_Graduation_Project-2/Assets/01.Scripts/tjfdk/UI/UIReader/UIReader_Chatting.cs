@@ -157,7 +157,8 @@ public class UIReader_Chatting : UI_Reader
         chat.style.height = sprite.rect.height * size;
     }
 
-    public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
+    public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, 
+        string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
     {
         // 생성
         VisualElement chat = null;
