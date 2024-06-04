@@ -8,18 +8,11 @@ namespace ChatVisual
     {
         public Node child;
 
-        [TextArea] public string description;
-
         public string showName;
         public ESaveLocation saveLocation;
         public List<string> round = new List<string>();
 
         public bool is_nextChapter;
         public string nextChapterIndex;
-
-        protected override void OnStart()
-        {
-
-        }
     }
 }

@@ -13,8 +13,8 @@ namespace ChatVisual
     {
         public Node node;
 
-        public Port input;      // ÀÔ·Â
-        public Port output;     // Ãâ·Â
+        public Port input;      // ?ë‚…ì °
+        public Port output;     // ç•°ì’•ì °
 
         public Action<NodeView> OnNodeSelected;
 
@@ -33,12 +33,12 @@ namespace ChatVisual
             CreateOutputPorts();
             SetUpClasses();
 
-            Label descLabel = this.Q<Label>("description");
+            Label descLabel = this.Q<Label>("description");     // Element Label Change
             descLabel.bindingPath = "description";
-            //descLabel.Bind(new SerializedObject(node));      // node ¶ó´Â Å¬·¡½º¿¡¼­ description º¯¼ö¸¦ Ã£¾Æ¼­ ³Ö¾îÁÜ.
+            //descLabel.Bind(new SerializedObject(node));      // node ?ì‡°ë’— ?ëŒ€ì˜’?ã…¼ë¿‰??description è¹‚Â€?ì„? ï§¡ì– ë¸˜???ï½Œë¼±ä»¥?
         }
 
-        private void CreateInputPorts()     // input. À§¿¡²¨.
+        private void CreateInputPorts()     // input. ?ê¾©ë¿‰çˆ°?
         {
             switch (node)
             {
@@ -50,6 +50,9 @@ namespace ChatVisual
                     break;
                 case LockAskNode:
                     input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
+                    break;
+                case ConditionNode:
+                    input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Multi, typeof(bool));
                     break;
             }
 
@@ -76,6 +79,9 @@ namespace ChatVisual
                 case LockAskNode:
                     output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
                     break;
+                case ConditionNode:
+                    output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
+                    break;
             }
 
             if (output != null)
@@ -91,21 +97,24 @@ namespace ChatVisual
             switch(node)
             {
                 case RootNode:
-                    AddToClassList("root");     // »¡°­
+                    AddToClassList("root");     // é®â‘£ì»¯
                     break;
                 case ChatNode:
-                    AddToClassList("chat");     // ¿¬µÎ
+                    AddToClassList("chat");     // ç¥ëˆì¤‰
                     break;
                 case AskNode:
-                    AddToClassList("ask");      // ÇÏ´Ã
+                    AddToClassList("ask");      // ?ì„ë’›
                     break;
                 case LockAskNode:
-                    AddToClassList("lockAsk");      // È¸»ö
+                    AddToClassList("lockAsk");      // ?ëš¯ê¹‹
+                    break;
+                case ConditionNode:
+                    AddToClassList("condition");     // condition node
                     break;
             }
         }
 
-        public override void SetPosition(Rect newPos)       // ³ëµå°¡ ¿òÁ÷¿´´Ù¸é
+        public override void SetPosition(Rect newPos)       // ?ëªƒë±¶åª›Â€ ?Â€ï§ê³¸??ã…»ãˆƒ
         {
             base.SetPosition(newPos);
 
@@ -113,7 +122,7 @@ namespace ChatVisual
             node.position.y = newPos.yMin;
         }
 
-        public override void OnSelected()       // ³ëµå°¡ ´­·È´Ù¸é
+        public override void OnSelected()       // ?ëªƒë±¶åª›Â€ ?ëš®ì¡‡?ã…»ãˆƒ
         {
             base.OnSelected();
             OnNodeSelected.Invoke(this);

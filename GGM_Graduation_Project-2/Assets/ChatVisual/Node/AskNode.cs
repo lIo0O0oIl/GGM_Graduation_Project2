@@ -8,12 +8,8 @@ namespace ChatVisual
     {
         public Node child;
 
-        public string ask;        // ¹°À» ¼ö ÀÖ´Â ¼±ÅÃÁö
-        public List<Chat> reply = new List<Chat>();     // ±×¿¡ ´ëÇÑ ´ë´äµé
-        public bool is_UseThis;     // »ç¿ëÇß´ÂÁö
-
-        protected override void OnStart()
-        {
-        }
+        public string ask;        // ë¬¼ì„ ìˆ˜ ìˆëŠ” ì„ íƒì§€
+        public List<Chat> reply = new List<Chat>();     // ê·¸ì— ëŒ€í•œ ëŒ€ë‹µë“¤
+        public bool is_UseThis;     // ì‚¬ìš©í–ˆëŠ”ì§€
     }
 }

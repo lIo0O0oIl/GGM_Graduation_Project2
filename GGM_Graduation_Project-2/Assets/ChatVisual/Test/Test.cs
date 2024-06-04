@@ -26,8 +26,9 @@ namespace ChatVisual
             baseArea = root.Q<VisualElement>("BaseArea");
             
             VisualElement invenElem = item.Instantiate().Q<VisualElement>("Item");
+            Button button = invenElem.Q<Button>();
             baseArea.Add(invenElem);
-            invenElem.AddManipulator(new Dragger((evt, target, beforeSlot) =>
+            button.AddManipulator(new Dragger((evt, target, beforeSlot) =>
             {
                 var area = FindMoveArea(evt.mousePosition);
 
@@ -46,8 +47,8 @@ namespace ChatVisual
 
         private VisualElement FindMoveArea(Vector2 position)
         {
-            //모든 슬롯을 찾아서 그중에서 worldBound 에 position이 속하는 녀석을 찾아오면 
-            if (moveArea.worldBound.Contains(position)) //해당 RECT안에 포지션이 있는지 검사해
+            //筌뤴뫀諭??????筌≪뼚釉??域밸챷夷?癒?퐣 worldBound ??position????곷릭??????뱀뱽 筌≪뼚釉??삠늺 
+            if (moveArea.worldBound.Contains(position)) //????RECT??됰퓠 ?????륁뵠 ??덈뮉筌왖 野꺜??鍮?
             {
                 return moveArea;
             }

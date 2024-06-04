@@ -9,12 +9,8 @@ namespace ChatVisual
         public Node child;
 
         public List<string> evidence = new List<string>();
-        public string ask;        // ¹°À» ¼ö ÀÖ´Â ¼±ÅÃÁö
-        public List<Chat> reply = new List<Chat>();     // ±×¿¡ ´ëÇÑ ´ë´äµé
-        public bool is_UseThis;     // »ç¿ëÇß´ÂÁö
-
-        protected override void OnStart()
-        {
-        }
+        public string ask;        // è‡¾ì‡±ì“£ ???ëˆë’— ?ì¢ê¹®ï§Â€
+        public List<Chat> reply = new List<Chat>();     // æ´¹ëª„ë¿‰ ?Â€???Â€?ë“¬ë±¾
+        public bool is_UseThis;     // ?ÑŠìŠœ?ëˆë’—ï§Â€
     }
 }

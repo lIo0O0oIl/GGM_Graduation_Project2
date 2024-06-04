@@ -224,6 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1208371919}
+  - component: {fileID: 1208371920}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -246,6 +247,132 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1208371920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208371918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nowChaptersIndex: 0
+  nowChatIndex: 10
+  nowChapter:
+    showName: "\uC870\uC218"
+    saveLocation: 0
+    chat:
+    - state: 0
+      type: 0
+      text: 
+      face: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: 
+      face: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: 
+      face: 0
+      textEvent: 
+    askAndReply: []
+    lockAskAndReply:
+    - evidence: []
+      ask: 
+      reply:
+      - state: 0
+        type: 0
+        text: 
+        face: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: 
+        face: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: 
+        face: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: 
+        face: 0
+        textEvent: 
+      is_UseThis: 0
+    - evidence: []
+      ask: 
+      reply: []
+      is_UseThis: 0
+    round: []
+    is_nextChapter: 0
+    nextChapterName: 
+  mainChapter:
+  - showName: "\uC870\uC218"
+    saveLocation: 0
+    chat:
+    - state: 0
+      type: 0
+      text: 
+      face: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: 
+      face: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: 
+      face: 0
+      textEvent: 
+    askAndReply: []
+    lockAskAndReply:
+    - evidence: []
+      ask: 
+      reply:
+      - state: 0
+        type: 0
+        text: 
+        face: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: 
+        face: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: 
+        face: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: 
+        face: 0
+        textEvent: 
+      is_UseThis: 0
+    - evidence: []
+      ask: 
+      reply: []
+      is_UseThis: 0
+    round: []
+    is_nextChapter: 0
+    nextChapterName: 
+  - showName: "\uB204\uAD70\uAC00"
+    saveLocation: 0
+    chat: []
+    askAndReply: []
+    lockAskAndReply: []
+    round: []
+    is_nextChapter: 0
+    nextChapterName: 
 --- !u!1 &1779873654
 GameObject:
   m_ObjectHideFlags: 0

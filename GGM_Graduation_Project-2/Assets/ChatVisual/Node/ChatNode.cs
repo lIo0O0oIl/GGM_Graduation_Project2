@@ -8,14 +8,10 @@ namespace ChatVisual
     {
         public List<Node> child = new List<Node>();
 
-        public EChatState state;     // 말하는 것의 타입
+        public EChatState state;     // 留먰븯??寃껋쓽 ???
         public EChatType type;
-        public string text;        // 말 하는 것.
-        public EFace face;       // 말 할 때의 표정
+        public string text;        // 留??섎뒗 寃?
+        public EFace face;       // 留????뚯쓽 ?쒖젙
         public List<EChatEvent> textEvent = new List<EChatEvent>();
-
-        protected override void OnStart()
-        {
-        }
     }
 }

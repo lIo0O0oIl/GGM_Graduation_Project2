@@ -15,31 +15,31 @@ namespace ChatVisual
         public new class UxmlFactory : UxmlFactory<ChatView, UxmlTraits> { }
         public class UmalTraits : GraphView.UxmlTraits { }
 
-        private ChatContainer chatContainer;        // 쳇팅들 담겨있는 곳.
+        private ChatContainer chatContainer;        // ??쒕룊??????㏓낵???덈츎 ??
 
-        public Action<NodeView> OnNodeSelected;     // 내가 눌렸다고 알려줌.
+        public Action<NodeView> OnNodeSelected;     // ??? ???二??釉붋?????삯쨹?
 
         public ChatView()
         {
-            Insert(0, new GridBackground());        // 그리드 넣기
+            Insert(0, new GridBackground());        // ?잙갭梨????影?끸뵛
 
-            this.AddManipulator(new ContentZoomer());       // 줌기능 조작 추가
-            this.AddManipulator(new ContentDragger());  // 컨탠츠 드래그 가능
-            this.AddManipulator(new SelectionDragger());    // 선택해준거 움직이기
-            this.AddManipulator(new RectangleSelector());   // 네모 만들어주기  조작들 추가
+            this.AddManipulator(new ContentZoomer());       // 繞벿살뒦????브퀗????怨뺣뼺?
+            this.AddManipulator(new ContentDragger());  // ???쳜繹먮먦럹???類ㅼ굥???띠럾???
+            this.AddManipulator(new SelectionDragger());    // ??ルㅎ臾???濾???嶺뚯쉳??議용Ь?
+            this.AddManipulator(new RectangleSelector());   // ???좉콫 嶺뚮씭??キ??怨삵룖?? ?브퀗?????怨뺣뼺?
         }
 
-        public void LoadChatSystem(ChatContainer _chatContainer)     // 로드해주기
+        public void LoadChatSystem(ChatContainer _chatContainer)     // ?β돦裕녻キ??怨삵룖??
         {
             chatContainer = _chatContainer;
 
             chatContainer.nodes.Clear();
 
-            int firstChatEndIndex = 0;      // 처음으로 시작하는 쳇팅의 마지막. 질문이 시작되는 곳의 노드스에서 찾을 수 있는  인덱스
-            int askAndReplysCount = 0;        // 질문에 대한 대답의 개수          // 이게 2개가 되고 있었음. 바꿔주기
+            int firstChatEndIndex = 0;      // 嶺뚳퐣瑗???怨쀬Ŧ ??戮곗굚??濡ル츎 ??쒕룊???嶺뚮씭??嶺? 嶺뚯쉶?꾣룇????戮곗굚??濡ル츎 ??ㅻ걙???筌뤾퍓援???고뱺??嶺뚢돦堉???????덈츎  ?筌뤾퍓???
+            int askAndReplysCount = 0;        // 嶺뚯쉶?꾣룇???????????踰??띠룇裕??         // ???곗벟 2?띠룇裕? ???겶??????? ?꾩룆??????ㅲ뵛
             int lockAskAndReplysCount = 0;
 
-            // 루트 노드부터 다시 그려주기
+            // ?猷먮쳜???筌뤾퍓援?遊붋?????곕뻣 ?잙갭梨?????ㅲ뵛
             {
                 RootNode rootNode = chatContainer.CreateNode(typeof(RootNode)) as RootNode;
                 rootNode.showName = chatContainer.NowChapter.showName;
@@ -49,12 +49,12 @@ namespace ChatVisual
                 AssetDatabase.SaveAssets();
             }
 
-            // 채팅 노드 만들어주기
+            // 嶺?????筌뤾퍓援?嶺뚮씭??キ??怨삵룖??
             for (int i = 0; i < chatContainer.NowChapter.chat.Count; ++i)
             {
                 ++firstChatEndIndex;
 
-                // 데이터 연결해주기
+                // ??⑥щ턄????⑤슡???怨삵룖??
                 ChatNode chatNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
                 chatNode.state = chatContainer.NowChapter.chat[i].state;
                 chatNode.type = chatContainer.NowChapter.chat[i].type;
@@ -62,7 +62,7 @@ namespace ChatVisual
                 chatNode.face = chatContainer.NowChapter.chat[i].face;
                 chatNode.textEvent = new List<EChatEvent>(chatContainer.NowChapter.chat[i].textEvent);
 
-                // 위치 잡아주기
+                // ?熬곣뫚?????뗮닡?낅슣?딁뵳?
                 if (chatNode.state == EChatState.Other)
                 {
                     chatNode.position = new Vector2(-125, 150 * (i + 1));
@@ -72,47 +72,47 @@ namespace ChatVisual
                     chatNode.position = new Vector2(125, 150 * (i + 1));
                 }
 
-                if (i == 0)     // 루트노드랑 연결해주기
+                if (i == 0)     // ?猷먮쳜??筌뤾퍓援????⑤슡???怨삵룖??
                 {
                     RootNode rootNode = chatContainer.nodes[0] as RootNode;
                     rootNode.child = chatNode;
                 }
-                else        // 전꺼랑 연결해주기
+                else        // ?熬곥룗?????⑤슡???怨삵룖??
                 {
                     ChatNode chatParentNode = chatContainer.nodes[i] as ChatNode;
                     chatParentNode.child.Add(chatNode);
                 }
             }
 
-            // 질문, 잠김 질문 노드 만들어주기
+            // 嶺뚯쉶?꾣룇, ??? 嶺뚯쉶?꾣룇 ?筌뤾퍓援?嶺뚮씭??キ??怨삵룖??
             {
                 ChatNode firstChatEndNode = chatContainer.nodes[firstChatEndIndex] as ChatNode;
                 if (firstChatEndNode != null)
                 {
                     Vector2 endChatNodePosition = firstChatEndNode.position;
-                    //Debug.Log($"질문의 개수 : {this.chatContainer.NowChapter.askAndReply.Count}, 챗팅의 인덱스 {firstChatEndIndex}");
+                    //Debug.Log($"嶺뚯쉶?꾣룇???띠룇裕??: {this.chatContainer.NowChapter.askAndReply.Count}, 嶺???????筌뤾퍓???{firstChatEndIndex}");
 
-                    // 그냥 질문 만들어주기
+                    // ?잙갭梨뜻틦?嶺뚯쉶?꾣룇 嶺뚮씭??キ??怨삵룖??
                     for (int i = 0; i < chatContainer.NowChapter.askAndReply.Count; ++i)
                     {
                         ++askAndReplysCount;
 
-                        // 질문 노드 추가해서 데이터 추가
+                        // 嶺뚯쉶?꾣룇 ?筌뤾퍓援??怨뺣뼺???怨댄맋 ??⑥щ턄???怨뺣뼺?
                         AskNode askNode = chatContainer.CreateNode(typeof(AskNode)) as AskNode;
                         askNode.ask = this.chatContainer.NowChapter.askAndReply[i].ask;
-                        askNode.reply = new List<Chat>(this.chatContainer.NowChapter.askAndReply[i].reply);        // 값 복사, 깊은 복사
+                        askNode.reply = new List<Chat>(this.chatContainer.NowChapter.askAndReply[i].reply);        // ???곌랜踰딀쾮? 濚밸Ŧ遊? ?곌랜踰딀쾮?
                         askNode.is_UseThis = this.chatContainer.NowChapter.askAndReply[i].is_UseThis;
 
-                        // 쳇팅 노드랑 연결해주기
+                        // ??쒕룊???筌뤾퍓援????⑤슡???怨삵룖??
                         firstChatEndNode.child.Add(askNode);
 
-                        // 위치 설정해주기
+                        // ?熬곣뫚?????깆젧??怨삵룖??
                         askNode.position = new Vector2(endChatNodePosition.x + i * 400, endChatNodePosition.y + 200);
 
-                        // 대답(쳇팅)노드 추가해주기
+                        // ??????쒕룊???筌뤾퍓援??怨뺣뼺???怨삵룖??
                         for (int j = 0; j < chatContainer.NowChapter.askAndReply[i].reply.Count; ++j)
                         {
-                            // 쳇팅 노드 추가해서 데이터 추가
+                            // ??쒕룊???筌뤾퍓援??怨뺣뼺???怨댄맋 ??⑥щ턄???怨뺣뼺?
                             ChatNode replyNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
                             replyNode.state = this.chatContainer.NowChapter.askAndReply[i].reply[j].state;
                             replyNode.type = this.chatContainer.NowChapter.askAndReply[i].reply[j].type;
@@ -120,7 +120,7 @@ namespace ChatVisual
                             replyNode.face = this.chatContainer.NowChapter.askAndReply[i].reply[j].face;
                             replyNode.textEvent = new List<EChatEvent>(this.chatContainer.NowChapter.askAndReply[i].reply[j].textEvent);
 
-                            // 위치 잡아주기
+                            // ?熬곣뫚?????뗮닡?낅슣?딁뵳?
                             if (replyNode.state == EChatState.Other)
                             {
                                 replyNode.position = new Vector2(askNode.position.x - 100, askNode.position.y + 140 * (j + 1));
@@ -130,45 +130,45 @@ namespace ChatVisual
                                 replyNode.position = new Vector2(askNode.position.x + 100, askNode.position.y + 140 * (j + 1));
                             }
 
-                            // 연결 해주기
-                            if (j == 0)     // 질문노드랑 연결해야 하는 경우
+                            // ??⑤슡????怨삵룖??
+                            if (j == 0)     // 嶺뚯쉶?꾣룇?筌뤾퍓援????⑤슡???怨룻뒍 ??濡ル츎 ?롪퍔???
                             {
                                 askNode.child = replyNode;
                             }
                             else
                             {
-                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount] as ChatNode;        // 루트노드 빼고 넣어주기
+                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount] as ChatNode;        // ?猷먮쳜??筌뤾퍓援???????影??꽑?낅슣?딁뵳?
                                 if (chatParentNode != null)
                                 {
                                     chatParentNode.child.Add(replyNode);
                                 }
                             }
-                            if (j == chatContainer.NowChapter.askAndReply[i].reply.Count - 1)      // 이게 마지막 반복이면
+                            if (j == chatContainer.NowChapter.askAndReply[i].reply.Count - 1)      // ???곗벟 嶺뚮씭??嶺??꾩룇瑗??????
                             {
                                 askAndReplysCount += j + 1;
                             }
                         }
                     }
 
-                    // 잠김 질문 만들어주기
+                    // ??? 嶺뚯쉶?꾣룇 嶺뚮씭??キ??怨삵룖??
                     for (int i = 0; i < chatContainer.NowChapter.lockAskAndReply.Count; i++)
                     {
                         ++lockAskAndReplysCount;
 
-                        // 락질문 노드 추가해주기
+                        // ????떨???筌뤾퍓援??怨뺣뼺???怨삵룖??
                         LockAskNode lockAskNode = chatContainer.CreateNode(typeof(LockAskNode)) as LockAskNode;
                         lockAskNode.evidence = new List<string>(this.chatContainer.NowChapter.lockAskAndReply[i].evidence);
                         lockAskNode.ask = this.chatContainer.NowChapter.lockAskAndReply[i].ask;
-                        lockAskNode.reply = new List<Chat>(this.chatContainer.NowChapter.lockAskAndReply[i].reply);        // 값 복사, 깊은 복사
+                        lockAskNode.reply = new List<Chat>(this.chatContainer.NowChapter.lockAskAndReply[i].reply);        // ???곌랜踰딀쾮? 濚밸Ŧ遊? ?곌랜踰딀쾮?
                         lockAskNode.is_UseThis = this.chatContainer.NowChapter.lockAskAndReply[i].is_UseThis;
 
-                        // 쳇팅 노드랑 연결해주기
+                        // ??쒕룊???筌뤾퍓援????⑤슡???怨삵룖??
                         firstChatEndNode.child.Add(lockAskNode);
 
-                        // 위치 설정해주기
+                        // ?熬곣뫚?????깆젧??怨삵룖??
                         lockAskNode.position = new Vector2(endChatNodePosition.x + (chatContainer.NowChapter.askAndReply.Count * 400) + (i * 400), endChatNodePosition.y + 200);
 
-                        // 대답(쳇팅)노드 추가해주기
+                        // ??????쒕룊???筌뤾퍓援??怨뺣뼺???怨삵룖??
                         for (int j = 0; j < this.chatContainer.NowChapter.lockAskAndReply[i].reply.Count; ++j)
                         {
                             ChatNode replyNode = chatContainer.CreateNode(typeof(ChatNode)) as ChatNode;
@@ -178,7 +178,7 @@ namespace ChatVisual
                             replyNode.face = this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].face;
                             replyNode.textEvent = new List<EChatEvent>(this.chatContainer.NowChapter.lockAskAndReply[i].reply[j].textEvent);
 
-                            // 위치 잡아주기
+                            // ?熬곣뫚?????뗮닡?낅슣?딁뵳?
                             if (replyNode.state == EChatState.Other)
                             {
                                 replyNode.position = new Vector2(lockAskNode.position.x - 100, lockAskNode.position.y + 140 * (j + 1));
@@ -188,20 +188,20 @@ namespace ChatVisual
                                 replyNode.position = new Vector2(lockAskNode.position.x + 100, lockAskNode.position.y + 140 * (j + 1));
                             }
 
-                            // 연결 해주기
-                            if (j == 0)     // 질문노드랑 연결해야 하는 경우
+                            // ??⑤슡????怨삵룖??
+                            if (j == 0)     // 嶺뚯쉶?꾣룇?筌뤾퍓援????⑤슡???怨룻뒍 ??濡ル츎 ?롪퍔???
                             {
                                 lockAskNode.child = replyNode;
                             }
                             else
                            {
-                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount + lockAskAndReplysCount] as ChatNode;        // 루트노드 빼고 넣어주기
+                                ChatNode chatParentNode = this.chatContainer.nodes[j + firstChatEndIndex + askAndReplysCount + lockAskAndReplysCount] as ChatNode;        // ?猷먮쳜??筌뤾퍓援???????影??꽑?낅슣?딁뵳?
                                 if (chatParentNode != null)
                                 {
                                     chatParentNode.child.Add(replyNode);
                                 }
                             }
-                            if (j == chatContainer.NowChapter.lockAskAndReply[i].reply.Count - 1)      // 이게 마지막 반복이면
+                            if (j == chatContainer.NowChapter.lockAskAndReply[i].reply.Count - 1)      // ???곗벟 嶺뚮씭??嶺??꾩룇瑗??????
                             {
                                 lockAskAndReplysCount += j + 1;
                             }
@@ -211,27 +211,27 @@ namespace ChatVisual
             }
         }
 
-        public void SaveChatSystem()        // 값들을 저장해줌.
+        public void SaveChatSystem()        // ?띠룆?獄?????繞③뜮癒㏓뭄?
         {
             chatContainer.NowChapter.chat.Clear();
             chatContainer.NowChapter.askAndReply.Clear();
             chatContainer.NowChapter.lockAskAndReply.Clear();
 
-            // nodes 리스트에서 현재 인덱스를 표시해줄 것.
-            int chatIndex = 0;       // 가장처음에 있는 쳇팅들의 인덱스
-            int askIndex = 0;       // 다음 있을 질문들의 인덱스
-            int lockAskIndex = 0;       // 질문 다음에 나올 잠김 질문들
+            // nodes ?洹먮봾裕?筌뤾쑬????熬곣뫗???筌뤾퍓???? ??戮?뻣??怨맡???
+            int chatIndex = 0;       // ?띠럾???쒑뜎????????덈츎 ??쒕룊????깅꺄 ?筌뤾퍓???
+            int askIndex = 0;       // ???깅쾳 ???깅굵 嶺뚯쉶?꾣룇???깅꺄 ?筌뤾퍓???
+            int lockAskIndex = 0;       // 嶺뚯쉶?꾣룇 ???깅쾳????瑜곴텪 ??? 嶺뚯쉶?꾣룇??
             bool firstChatEnd = false;
 
-            int nowAskIndex = 0;        // 지금 질문의 인덱스
-            int nowReplyIndex = 0;      // 지금 질문에 들어갈 대답 인덱스
-            int nowReplysCountIndex = 0;      // 지금 질문의 대답 개수 인덱스, 아래 리스트의 인덱스 값
-            bool lockAskStart = false;      // 잠김 질문이 시작되었다면
+            int nowAskIndex = 0;        // 嶺뚯솘???嶺뚯쉶?꾣룇???筌뤾퍓???
+            int nowReplyIndex = 0;      // 嶺뚯솘???嶺뚯쉶?꾣룇?????곗꽑???????筌뤾퍓???
+            int nowReplysCountIndex = 0;      // 嶺뚯솘???嶺뚯쉶?꾣룇???????띠룇裕???筌뤾퍓??? ?熬곣뫁???洹먮봾裕?筌뤾쑴踰??筌뤾퍓?????
+            bool lockAskStart = false;      // ??? 嶺뚯쉶?꾣룇????戮곗굚??琉????좊듆
 
-            // 질문의 대답 개수를 저장해주는 리스트
-            List<int> replysCount = new List<int>();            // -1은 
+            // 嶺뚯쉶?꾣룇???????띠룇裕?遺븍ご????繞③뜮癒㏉떊?怨뺣츎 ?洹먮봾裕??
+            List<int> replysCount = new List<int>();            // -1?? 
 
-            if (chatContainer.nodes[0] != null)     // 루트노드가 있다면
+            if (chatContainer.nodes[0] != null)     // ?猷먮쳜??筌뤾퍓援→뤆?쎛 ???덈펲嶺?
             {
                 RootNode rootNode = chatContainer.nodes[0] as RootNode;
                 if (rootNode != null)
@@ -244,15 +244,15 @@ namespace ChatVisual
 
             chatContainer.nodes.ForEach(n =>
             {
-                var children = chatContainer.GetChildren(n);       // 자식들 가져오기
+                var children = chatContainer.GetChildren(n);       // ???六???띠럾??筌뤾쑴沅롧뼨?
                 children.ForEach(c =>
                 {
-                    ChatNode chatNode = c as ChatNode;      // 쳇팅 노드이면
+                    ChatNode chatNode = c as ChatNode;      // ??쒕룊???筌뤾퍓援?????
                     if (chatNode != null)
                     {
                         if (firstChatEnd == false)
                         {
-                            // 새로운 클래스 만들어줌.
+                            // ???됱Ŧ????????嶺뚮씭??キ??怨멥돘.
                             Chat chat = new Chat();
                             chatContainer.NowChapter.chat.Add(chat);
                             chatContainer.NowChapter.chat[chatIndex].state = chatNode.state;
@@ -263,7 +263,7 @@ namespace ChatVisual
                         }
                         else
                         {
-                            // 대답들 저장해주기
+                            // ?????援????繞③뜮癒㏉떊??ㅲ뵛
                             if (lockAskStart == false)
                             {
                                 if (replysCount[nowReplysCountIndex] == -1)
@@ -293,7 +293,7 @@ namespace ChatVisual
                                     chatContainer.NowChapter.askAndReply[nowAskIndex].reply[nowReplyIndex].textEvent = chatNode.textEvent;
                                     nowReplyIndex++;
 
-                                    if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // 대답 개수를 넘었다면
+                                    if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // ?????띠룇裕?遺븍ご???琉????좊듆
                                     {
                                         nowAskIndex++;
                                         nowReplysCountIndex++;
@@ -311,7 +311,7 @@ namespace ChatVisual
                                 chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].face = chatNode.face;
                                 chatContainer.NowChapter.lockAskAndReply[nowAskIndex].reply[nowReplyIndex].textEvent = chatNode.textEvent;
 
-                                if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // 대답 개수를 넘었다면
+                                if (nowReplyIndex + 1 > replysCount[nowReplysCountIndex])      // ?????띠룇裕?遺븍ご???琉????좊듆
                                 {
                                     nowAskIndex++;
                                     nowReplysCountIndex++;
@@ -321,7 +321,7 @@ namespace ChatVisual
                         }
                     }
 
-                    AskNode askNode = c as AskNode;     // 질문 노드이면
+                    AskNode askNode = c as AskNode;     // 嶺뚯쉶?꾣룇 ?筌뤾퍓援?????
                     if (askNode != null)
                     {
                         AskAndReply askAndReply = new AskAndReply();
@@ -338,7 +338,7 @@ namespace ChatVisual
                     {
                         if (replysCount.Find(n => n == -1) == 0)
                         {
-                            replysCount.Add(-1);        // 락걸린 쳇팅이 시작했다고
+                            replysCount.Add(-1);        // ??袁㏓럡????쒕룊?????戮곗굚???덈펲??
                         }
 
                         LockAskAndReply lockAskAndReply = new LockAskAndReply();
@@ -358,14 +358,14 @@ namespace ChatVisual
         {
             graphViewChanged -= OnGraphViewChanged;
 
-            DeleteElements(graphElements);       // 기존에 그려졌던 애들 모두 삭제
+            DeleteElements(graphElements);       // ?リ옇?????잙갭梨?????????ル봾援?嶺뚮ㅄ維筌?????
 
             graphViewChanged += OnGraphViewChanged;
 
-            // 노드들 그려주기
+            // ?筌뤾퍓援???잙갭梨?????ㅲ뵛
             this.chatContainer.nodes.ForEach(n => CreateNodeView(n));
 
-            // 엣지 그려주기
+            // ?影? ?잙갭梨?????ㅲ뵛
             this.chatContainer.nodes.ForEach(n =>
             {
                 var children = this.chatContainer.GetChildren(n);
@@ -378,7 +378,7 @@ namespace ChatVisual
                 });
             });
 
-            // 숫자 만들어주기
+            // ?????嶺뚮씭??キ??怨삵룖??
             this.chatContainer.SortChildAndIndex();
         }
 
@@ -389,17 +389,17 @@ namespace ChatVisual
 
         private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
         {
-            if (graphViewChange.elementsToRemove != null)       // 지워진 애들이 있으면
+            if (graphViewChange.elementsToRemove != null)       // 嶺뚯솘????異???ル봾援?????깅さ嶺?
             {
                 graphViewChange.elementsToRemove.ForEach(elem =>
                 {
                     var nodeView = elem as NodeView;
                     if (nodeView != null)
                     {
-                        chatContainer.DeleteNode(nodeView.node);        // 지워주기
+                        chatContainer.DeleteNode(nodeView.node);        // 嶺뚯솘?????믥뼨?
                     }
 
-                    var edge = elem as Edge;        // 연결선
+                    var edge = elem as Edge;        // ??⑤슡???
                     if (edge != null)
                     {
                         NodeView parent = edge.output.node as NodeView;
@@ -410,7 +410,7 @@ namespace ChatVisual
                 });
             }
 
-            if (graphViewChange.edgesToCreate != null)      // 선 연결해주기
+            if (graphViewChange.edgesToCreate != null)      // ????⑤슡???怨삵룖??
             {
                 graphViewChange.edgesToCreate.ForEach(edge =>
                 {
@@ -421,7 +421,7 @@ namespace ChatVisual
                 });
             }
 
-           /* if (graphViewChange.movedElements != null)      // 움직인 애들이 있으면 정렬해주기
+           /* if (graphViewChange.movedElements != null)      // ??嶺뚯쉳?????ル봾援?????깅さ嶺??筌먲퐣議??怨삵룖??
             {
                 nodes.ForEach(n =>
                 {
@@ -435,9 +435,9 @@ namespace ChatVisual
 
         private void CreateNode(Type type, Vector2 position)
         {
-            Node node = chatContainer.CreateNode(type);      // 노드 생성
+            Node node = chatContainer.CreateNode(type);      // ?筌뤾퍓援???諛댁뎽
             node.position = position;
-            CreateNodeView(node);       // 보이는 걸 실제로 추가해줌.
+            CreateNodeView(node);       // ?곌랜????濾????깆젷???怨뺣뼺???怨멥돘.
         }
 
         private void CreateNodeView(Node n)
@@ -447,18 +447,18 @@ namespace ChatVisual
             AddElement(nodeView);
         }
 
-        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)       // 우클릭 했을 때 나올 메뉴들
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)       // Mouse Button(0) Click
         {
-            if (chatContainer == null)      // 지금 눌러준. 트리가 없으면
+            if (chatContainer == null)
             {
-                Debug.Log("컨테이너 없어요!");
-                evt.StopPropagation();      // 이벤트 전파 금지
+                Debug.Log("???쳜????????怨룹꽑??");
+                evt.StopPropagation();      // event Stop;
                 return;
             }
 
-            Vector2 nodePosition = this.ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition);      // 우클릭한 위치 가져오기, 그 위치에 노드 생성 예정
+            Vector2 nodePosition = this.ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition);      // Get Mouse Position
 
-            var types = TypeCache.GetTypesDerivedFrom<Node>();      // 상속받은 애들 모두 가지고 오기
+            var types = TypeCache.GetTypesDerivedFrom<Node>();      // Get All Child Name
             foreach (var type in types)
             {
                 if (type.Name == "RootNode") continue;
@@ -466,10 +466,10 @@ namespace ChatVisual
             }
         }
 
-        // 드래깅이 시작될 때 연결가능한 포트를 가져오는 함수
+        // Get All Connectable
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
-            return ports.ToList().Where(x => x.direction != startPort.direction).ToList();      // input output이 다르면 연결 가능
+            return ports.ToList().Where(x => x.direction != startPort.direction).ToList();      // input output?????섎?춯???⑤슡???띠럾???
         }
     }
 }

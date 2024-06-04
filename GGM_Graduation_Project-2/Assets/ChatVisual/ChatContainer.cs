@@ -8,19 +8,19 @@ namespace ChatVisual
 {
     public class ChatContainer : MonoBehaviour
     {
-        public List<Node> nodes = new List<Node>();         // ?몃뱶 由ъ뒪??
+        public List<Node> nodes = new List<Node>();         // ?紐껊굡 ?귐딅뮞??
 
-        public int nowChaptersIndex;        // 梨뺥꽣 ?몃뜳??
-        public int nowChatIndex;            // 爾뉙똿 ?몃뜳??
+        public int nowChaptersIndex;        // 筌?벤苑??紐껊쑔??
+        public int nowChatIndex;            // ?얜돉???紐껊쑔??
 
         [Space(30)]
 
-        [SerializeField]        // 洹몃깷 吏湲??대뼡 梨뺥꽣?몄? 蹂쇰젮怨??덈뒗 寃? 李몄“ 蹂듭궗濡??ｌ뼱以ъ쓬.
+        [SerializeField]        // 域밸챶源?筌왖疫???堉?筌?벤苑?紐? 癰귥눖?????덈뮉 野? 筌〓챷??癰귣벊沅쀦에??節뚮선餓Ρ딆벉.
         private Chapter nowChapter;
         public Chapter NowChapter { get { return nowChapter; } set { nowChapter = value; } }
 
         [SerializeField]
-        private List<Chapter> mainChapter = new List<Chapter>();     // 梨뺥꽣??
+        private List<Chapter> mainChapter = new List<Chapter>();     // 筌?벤苑??
         public List<Chapter> MainChapter { get { return mainChapter; } set { mainChapter = value; } }
 
         private Node askParentNode;
@@ -29,11 +29,11 @@ namespace ChatVisual
         {
             if (mainChapter.Count <= index)
             {
-                Debug.Log("?덈줈 留뚮뱾?댁＜湲?");
+                Debug.Log("??덉쨮 筌띾슢諭??곻폒疫?");
                 mainChapter.Add(new Chapter());
             }
             nowChaptersIndex = index;
-            nowChapter = mainChapter[index];        // 李몄“ 蹂듭궗
+            nowChapter = mainChapter[index];        // 筌〓챷??癰귣벊沅?
         }
 
 #if UNITY_EDITOR
@@ -42,7 +42,7 @@ namespace ChatVisual
             var node = Activator.CreateInstance(type) as Node;
             node.guid = GUID.Generate().ToString();
 
-            nodes.Add(node);        // 由ъ뒪?몄뿉 異붽?
+            nodes.Add(node);        // ?귐딅뮞?紐꾨퓠 ?곕떽?
 
             AssetDatabase.SaveAssets();
 
@@ -59,8 +59,8 @@ namespace ChatVisual
 
         public void AddChild(Node parent, Node child)
         {
-            Debug.Log($"???곌껐, parent : {parent}, child : {child}");
-            var rootNode = parent as RootNode;      //遺紐④? 猷⑦듃?대㈃
+            Debug.Log($"???怨뚭퍙, parent : {parent}, child : {child}");
+            var rootNode = parent as RootNode;      //?봔筌뤴몿? ?룐뫂?????
             if (rootNode != null)
             {
                 rootNode.child = child;
@@ -94,7 +94,7 @@ namespace ChatVisual
 
         public void RemoveChild(Node parent, Node child)
         {
-            var rootNode = parent as RootNode;      //遺紐④? 猷⑦듃?대㈃
+            var rootNode = parent as RootNode;      //?봔筌뤴몿? ?룐뫂?????
             if (rootNode != null)
             {
                 rootNode.child = null;
@@ -156,18 +156,18 @@ namespace ChatVisual
             return children;
         }
 
-        public void SortChildAndIndex()        // ?몃뱶瑜??뺣젹?섍퀬 吏덈Ц ?몃뱶 ?꾨옒 梨쀭똿?대씪硫?吏덈Ц ?몃뱶???먯떇?쇰줈 ?ｌ뼱以? 
+        public void SortChildAndIndex()        // ?紐껊굡???類ｌ졊??랁?筌욌뜄揆 ?紐껊굡 ?袁⑥삋 筌??샒???わ쭖?筌욌뜄揆 ?紐껊굡???癒?뻼??곗쨮 ?節뚮선餓? 
         {
             nowChatIndex = 1;
 
-            Queue<Node> askQueue = new Queue<Node>();    // 吏덈Ц, ?좉?吏덈Ц ?댁? 怨?
+            Queue<Node> askQueue = new Queue<Node>();    // 筌욌뜄揆, ?醫?筌욌뜄揆 ??? ??
             Node nowNode = nodes[0];
 
-            // DFS 濡?彛?媛?ㅺ? BFS 濡?吏덈Ц??紐⑤몢 諛쏆? ?ㅼ쓬??吏덈Ц????듬뱾????댁꽌 DFS 濡?彛??댁꽌 ?몃뜳??留뚮뱾?댁＜湲?
+            // DFS 嚥?壤?揶쎛??? BFS 嚥?筌욌뜄揆??筌뤴뫀紐?獄쏆룇? ??쇱벉??筌욌뜄揆??????щ굶??????곴퐣 DFS 嚥?壤???곴퐣 ?紐껊쑔??筌띾슢諭??곻폒疫?
             while (nowNode != null)
             {
                 var children = GetChildren(nowNode);
-                if (children.Count == 1)        // 洹몃깷 爾뉙똿?몃뱶?대㈃
+                if (children.Count == 1)        // 域밸챶源??얜돉??紐껊굡????
                 {
                     children[0].index = nowChatIndex;
                     children[0].indexLabel.text = nowChatIndex.ToString();
@@ -208,7 +208,7 @@ namespace ChatVisual
             }
         }
 
-        private void AskChatSort(ChatNode chatNode)      // 吏덈Ц???덇퀬 ?????대떦 吏덈Ц???먯떇?ㅼ쓣 ?뺣젹?섍린 ?뺣젹?섎㈃??遺紐?寃껊룄 ?ｌ뼱以섏빞??
+        private void AskChatSort(ChatNode chatNode)      // 筌욌뜄揆????뉙?????????筌욌뜄揆???癒?뻼??쇱뱽 ?類ｌ졊??띾┛ ?類ｌ졊??롢늺???봔筌?野껉퍓猷??節뚮선餓μ꼷鍮??
         {
             if (chatNode == null) return;
 
