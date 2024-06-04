@@ -2,13 +2,23 @@ using ChatVisual;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ChapterManager : UI_Reader
 {
+    public Chapter nowChapter;
+    //Button chatButton;
+
+    //private void OnEnable()
+    //{
+    //    chatButton = root.Q<Button>("ABC");
+    //    chatButton.clicked += () => { Input(); };
+    //}
+
     public void AddChapter(string who, string name)
     {
-        Debug.Log("챕터 붙여줌 : " + who + " " + name);
         if (chatSystem.FindMember(who).chapterName == "")
             chatSystem.FindMember(who).chapterName = FindChapter(name).showName;
         else
@@ -27,61 +37,142 @@ public class ChapterManager : UI_Reader
         return null;
     }
 
-    public void NextChapter()
+    public void NextChapter(string name)
     {
-        //AddChapter(FindChapter(chatContainer.NowChapter.nextChapterName).saveLocation.ToString(),
+        AddChapter(FindChapter(name).saveLocation.ToString(), name);
+
+        MemberChat member = chatSystem.FindMember(FindChapter(name).saveLocation.ToString());
+        // 해당 인물에게 챕터를 읽자
+        if (member.chapterName != "")
+        {
+            //Debug.Log("담 챕터 레츠고");
+            chapterManager.Chapter(member.name, member.chapterName);
+        }
+        else
+            Debug.Log("챕터가 비어있음");
+
+        // 만약... 전 챕터랑 같은 인물이면... 그냥 choice어쩌고 들릴 필요 없이 chapter 불러주기
         //FindChapter(chatContainer.NowChapter.nextChapterName).showName);
     }
 
-    public void Chapter(string name)
+    public void Chapter(string who, string name)
     {
-        Chapter chapter = FindChapter(name);
-        var chats = chapter.chat;
+        nowChapter  = FindChapter(name);
+        chatContainer.NowChapter = nowChapter;
+        chatContainer.nowChaptersIndex = 0;
 
-        //AddChapter(FindChapter(chapter.nextChapterName).saveLocation.ToString(), chapter.nextChapterName);
-        StartCoroutine(Chatda(chats, chapter.askAndReply, chapter.lockAskAndReply, chapter));
+        //if (nowChapter.askAndReply.Count > 0 || nowChapter.lockAskAndReply.Count > 0)
+        //    StartCoroutine(InputCChat(true, nowChapter.chat));
+        //else
+            StartCoroutine(InputCChat(false, nowChapter.chat));
     }
 
-    int i;
-    private IEnumerator Chatda(List<Chat> chats, List<AskAndReply> asks, List<LockAskAndReply> lockasks, Chapter chapter)
+    public void EndChapter()
     {
-        Debug.Log("코루틴 진입 " + chats.Count);
-        i = 0;
-        //for (int i = 0; i < chats.Count; i++)
+        Debug.Log("챕터 끝남요1!");
+        chatSystem.FindMember(nowChapter.saveLocation.ToString()).chapterName = "";
+
+        if (nowChapter.is_nextChapter)
+            NextChapter(nowChapter.nextChapterName);
+        else
+            Debug.Log("다음 챕터 없담!");
+    }
+
+    //public void Input()
+    //{
+    //    Chapter now = chatContainer.NowChapter;
+
+    //    if (now != null)
+    //    {
+    //        if (chatContainer.nowChaptersIndex < now.chat.Count)
+    //        {
+    //            chatSystem.InputChat(now.chat[chatContainer.nowChatIndex].state, now.saveLocation, now.chat[chatContainer.nowChatIndex].type,
+    //                now.chat[chatContainer.nowChatIndex].face, now.chat[chatContainer.nowChaptersIndex].text, true);
+    //            chatContainer.nowChaptersIndex++;
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("챕터 끝남");
+    //            chatButton.style.display = DisplayStyle.None;
+    //            chatContainer.NowChapter = null;
+    //            chatSystem.FindMember(now.saveLocation.ToString()).chapterName = "";
+
+    //            if (now.is_nextChapter)
+    //                NextChapter(now.nextChapterName);
+    //            else
+    //                Debug.Log("다음 챕터 없담!");
+    //        }
+    //    }
+    //}
+
+    private IEnumerator InputCChat(bool isReply, List<Chat> chats)
+    {
+        int i = 0;
         while (i != chats.Count)
         {
             if (i < chats.Count)
             {
-                Debug.Log(chats[i].text + " 대사");
-
-                // 여기서 StartCoroutine(Chatda(chats, chapter.askAndReply, chapter.lockAskAndReply, chapter)); 이거 널 띄움
-                chatSystem.InputChat(chats[i].state, chapter.saveLocation,
+                chatSystem.InputChat(chats[i].state, nowChapter.saveLocation,
                     chats[i].type, chats[i].face, chats[i].text, true);
                 i++;
                 yield return new WaitForSeconds(1.5f);
             }
         }
 
-        //i = 0;
-        ////for (int i = 0; i < asks.Count; i++)
-        //while (i != asks.Count)
-        //{
-        //    Debug.Log(asks[i].ask + " 질문");
-        //    chatSystem.InputQuestion(chapter.saveLocation, 
-        //        EChatType.Question, asks[i].ask, true);
-        //    yield return new WaitForSeconds(1.5f);
-        //}
-
-        //i = 0;
-        ////for (int i = 0; i < lockasks.Count; i++)
-        //while (i != lockasks.Count)
-        //{
-        //    Debug.Log(lockasks[i].ask + " 잠긴질문");
-        //    chatSystem.InputQuestion(chapter.saveLocation,
-        //        EChatType.LockQuestion, lockasks[i].ask, true);
-        //    yield return new WaitForSeconds(1.5f);
-        //}
-
-        //yield break;
+        if (isReply == false && nowChapter.askAndReply.Count > 0)
+            InputQQuestion(nowChapter.askAndReply);
+        else
+            EndChapter();
     }
+
+    public void InputQQuestion(List<AskAndReply> asks)
+    {
+        int i = 0;
+        if (asks != null)
+        {
+            while (i != asks.Count)
+            {
+                Debug.Log(asks[i].ask + " 질문");
+                chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
+                    EChatType.Question, asks[i].ask, true, InputCChat(true, asks[i].reply));                                            
+                i++;
+            }
+        }
+
+        if (nowChapter.lockAskAndReply.Count > 0)
+            InputLockQuestion(nowChapter.lockAskAndReply);
+    }
+
+    public void InputLockQuestion(List<LockAskAndReply> locks)
+    {
+        int i = 0;
+        if (locks != null)
+        {
+            while (i != locks.Count)
+            {
+                Debug.Log(locks[i].ask + " 질문");
+                chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
+                    EChatType.Question, locks[i].ask, true, null);
+                i++;
+            }
+        }
+    }
+
+    //public IEnumerator InputReply(List<Chat> replies)
+    //{
+    //    int i = 0;
+    //    if (replies != null)
+    //    {
+    //        while (i != replies.Count)
+    //        {
+    //            Debug.Log(replies[i].ask + " 질문");
+    //            chatSystem.InputChat(chatContainer.NowChapter.saveLocation,
+    //                EChatType.Text, replies[i].ask, true, InputReply(replies[i]));
+    //            i++;
+    //            yield return null;
+    //        }
+    //    }
+
+    //    yield return null;
+    //}
 }
