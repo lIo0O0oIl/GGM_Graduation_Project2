@@ -254,34 +254,34 @@ public class UIReader_FileSystem : UI_Reader
                     // 이름 변경
                     file.Q<Label>("FileName").text = fileName;
                     // 이벤트 연결
-                    //file.Q<Button>().clicked += () => ImageEvent(file); // 이미지 등록,,, 이미지 등록할 위치....
+                    file.Q<Button>().clicked += () => ImageEvent(file); // 이미지 등록,,, 이미지 등록할 위치....
                     // 드래그 앤 드롭 기능 추가
                     Debug.Log(fileName);
                     //LoadDragAndDrop(file);
 
                     //
                     // 드래그 앤 드롭 기능 추가
-                    file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
-                    {
-                        var area = FindMoveArea(evt.mousePosition);
-                        target.RemoveFromHierarchy();
-                        if (area == null)
-                        {
-                            beforeSlot.Add(target);
-                        }
-                        else
-                        {
-                            LockAskAndReply lockQuestion = FindQuestion(area);
-                            if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
-                            {
-                                area.parent.Remove(area);
-                                chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
-                                    EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
-                            }
-                            else
-                                beforeSlot.Add(target);
-                        }
-                    }));
+                    //file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
+                    //{
+                    //    var area = FindMoveArea(evt.mousePosition);
+                    //    target.RemoveFromHierarchy();
+                    //    if (area == null)
+                    //    {
+                    //        beforeSlot.Add(target);
+                    //    }
+                    //    else
+                    //    {
+                    //        LockAskAndReply lockQuestion = FindQuestion(area);
+                    //        if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
+                    //        {
+                    //            area.parent.Remove(area);
+                    //            chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
+                    //                EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
+                    //        }
+                    //        else
+                    //            beforeSlot.Add(target);
+                    //    }
+                    //}));
                     //
 
                     // 파일 부모 지정
@@ -393,7 +393,7 @@ public class UIReader_FileSystem : UI_Reader
         panelGround.Add(panel);
 
         FileT file = FindFile(name);
-        file.IsCheck();
+        fileManager.MakeCan(file);
     }
 
     public void OpenText(string name, string text)
@@ -405,7 +405,7 @@ public class UIReader_FileSystem : UI_Reader
         panelGround.Add(panel);
 
         FileT file = FindFile(name);
-        file.IsCheck();
+        fileManager.MakeCan(file);
     }
 
     private void AddFilePath(string pathName)

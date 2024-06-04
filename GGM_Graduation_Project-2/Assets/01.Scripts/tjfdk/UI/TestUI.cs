@@ -6,11 +6,11 @@ public class TestUI : UI_Reader
 {
     private void Start()
     {
-        chatSystem.AddMember("HG");
-        chapterManager.AddChapter("HG", "초기 수사 선택");
-        chatSystem.ChoiceMember(chatSystem.FindMember("HG"));
+        //chatSystem.AddMember("HG");
+        //chapterManager.AddChapter("HG", "사건 시작");
+        //chatSystem.ChoiceMember(chatSystem.FindMember("HG"));
 
-        fileSystem.AddFile(FileType.IMAGE, "신발", "Main");
+        //fileSystem.AddFile(FileType.IMAGE, "신발", "Main");
     }
 
     private void Update()

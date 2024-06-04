@@ -54,6 +54,7 @@ namespace ChatVisual
         public EChatType type;
         public string text;        // 嶺???濡ル츎 ??
         public EFace face;       // 嶺??????踰???戮곗젧
+        public bool isCan;
         public List<EChatEvent> textEvent = new List<EChatEvent>();
     }
 
