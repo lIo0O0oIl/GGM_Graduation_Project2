@@ -52,7 +52,14 @@ public class UIReader_ImageFinding : UI_Reader
             if (image.name == file.Q<Label>("FileName").text)
             {
                 if (image.isOpen)
+                {
                     imageGround.style.display = DisplayStyle.None;
+
+                    Debug.Log("dfojasflasildfkjaoijskdvnoajsdfovnialsjdfonwajs");
+                    FileT fileT = fileSystem.FindFile(file.Q<Label>("FileName").text);
+                    fileManager.UnlockChat(fileT);
+                    fileManager.UnlockChapter(fileT);
+                }
                 else
                 {
                     imageGround.style.display = DisplayStyle.Flex;

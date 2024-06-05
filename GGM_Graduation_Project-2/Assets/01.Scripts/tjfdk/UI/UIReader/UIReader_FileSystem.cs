@@ -14,16 +14,18 @@ public enum FileType
 }
 
 [Serializable]
-public class FileTT
+public class FolderFile
 {
     public string folderName;
+    public string parentFolderName;
     public List<VisualElement> folderFiles;
     public List<VisualElement> textFiles;
     public List<VisualElement> imageFiles;
 
-    public FileTT(string name)
+    public FolderFile(string name)
     {
         folderName = name;
+        parentFolderName = "Main";
         folderFiles = new List<VisualElement>();
         textFiles = new List<VisualElement>();
         imageFiles = new List<VisualElement>();
@@ -63,8 +65,8 @@ public class UIReader_FileSystem : UI_Reader
 
     // path
     public Stack<string> filePathLisk = new Stack<string>();
-    public List<FileTT> fileFolders;
-    public FileTT currentFileFolder;
+    public List<FolderFile> fileFolders;
+    public FolderFile currentFileFolder;
 
     // file dran and drop
     private VisualElement fileDefaultArea;
@@ -73,7 +75,7 @@ public class UIReader_FileSystem : UI_Reader
     private void Awake()
     {
         base.Awake();
-        fileFolders = new List<FileTT>();
+        fileFolders = new List<FolderFile>();
     }
 
     private void OnEnable()
@@ -84,7 +86,7 @@ public class UIReader_FileSystem : UI_Reader
         Template_Load();
         Event_Load();
 
-        fileFolders.Add(new FileTT("Main"));
+        fileFolders.Add(new FolderFile("Main"));
         AddFilePath("Main");
     }
 
@@ -182,9 +184,9 @@ public class UIReader_FileSystem : UI_Reader
         }));
     }
 
-    private FileTT FindFolder(string name)
+    private FolderFile FindFolder(string name)
     {
-        foreach (FileTT folder in fileFolders)
+        foreach (FolderFile folder in fileFolders)
         {
             if (folder.folderName == name)
                 return folder;
@@ -208,6 +210,7 @@ public class UIReader_FileSystem : UI_Reader
     public void AddFile(FileType fileType, string fileName, string fileParentName)
     {
         VisualElement file = null;
+        Debug.Log(fileName + " " + fileParentName);
 
         switch (fileType)
         {
@@ -227,12 +230,12 @@ public class UIReader_FileSystem : UI_Reader
                     };
                     // 폴더 부모 지정
                     bool addNew = false;
-                    FileTT parentFolder = FindFolder(fileParentName);
+                    FolderFile parentFolder = FindFolder(fileParentName);
                     if (parentFolder != null)
                     {
                         Debug.Log("찾음");
                         parentFolder.folderFiles.Add(file);
-                        fileFolders.Add(new FileTT(fileName));
+                        fileFolders.Add(new FolderFile(fileName));
                         addNew = true;
                     }
 
@@ -240,9 +243,9 @@ public class UIReader_FileSystem : UI_Reader
                     if (addNew == false)
                     {
                         Debug.Log("못 찾음");
-                        FileTT folderParent = new FileTT(fileParentName);
+                        FolderFile folderParent = new FolderFile(fileParentName);
                         fileFolders.Add(folderParent);
-                        fileFolders.Add(new FileTT(fileName));
+                        fileFolders.Add(new FolderFile(fileName));
                         folderParent.folderFiles.Add(file);
                     }
                     break;
@@ -256,7 +259,6 @@ public class UIReader_FileSystem : UI_Reader
                     // 이벤트 연결
                     file.Q<Button>().clicked += () => ImageEvent(file); // 이미지 등록,,, 이미지 등록할 위치....
                     // 드래그 앤 드롭 기능 추가
-                    Debug.Log(fileName);
                     //LoadDragAndDrop(file);
 
                     //
@@ -286,8 +288,9 @@ public class UIReader_FileSystem : UI_Reader
 
                     // 파일 부모 지정
                     bool addNew = false;
-                    foreach (FileTT folder in fileFolders)
+                    foreach (FolderFile folder in fileFolders)
                     {
+                        // if you discover parent folder
                         if (folder.folderName == fileParentName)
                         {
                             folder.imageFiles.Add(file);
@@ -297,12 +300,11 @@ public class UIReader_FileSystem : UI_Reader
                     }
 
                     // 폴더 생성 및 추가
+                    // if parentfolder not exist? new add
                     if (addNew == false)
                     {
-                        FileTT folderParent = new FileTT(fileParentName);
-                        fileFolders.Add(folderParent);
-                        fileFolders.Add(new FileTT(fileName));
-                        folderParent.folderFiles.Add(file);
+                        AddFile(FileType.FOLDER, fileParentName, "Main");
+                        AddFile(fileType, fileName, fileParentName);
                     }
                     break;
                 }
@@ -319,7 +321,7 @@ public class UIReader_FileSystem : UI_Reader
 
                     // 파일 부모 지정
                     bool addNew = false;
-                    foreach (FileTT folder in fileFolders)
+                    foreach (FolderFile folder in fileFolders)
                     {
                         if (folder.folderName == fileParentName)
                         {
@@ -332,10 +334,13 @@ public class UIReader_FileSystem : UI_Reader
                     // 폴더 생성 및 추가
                     if (addNew == false)
                     {
-                        FileTT folderParent = new FileTT(fileParentName);
-                        fileFolders.Add(folderParent);
-                        fileFolders.Add(new FileTT(fileName));
-                        folderParent.folderFiles.Add(file);
+                        //FolderFile folderParent = new FolderFile(fileParentName);
+                        //fileFolders.Add(folderParent);
+                        //fileFolders.Add(new FolderFile(fileName));
+                        //folderParent.folderFiles.Add(file);
+
+                        AddFile(FileType.FOLDER, fileParentName, "Main");
+                        AddFile(fileType, fileName, fileParentName);
                     }
                     break;
                 }
@@ -363,7 +368,7 @@ public class UIReader_FileSystem : UI_Reader
             fileGround.RemoveAt(i);
 
         // 현재 폴더 변경
-        foreach (FileTT folder in fileFolders)
+        foreach (FolderFile folder in fileFolders)
         {
             if (folder.folderName == folderName)
                 currentFileFolder = folder;
@@ -389,11 +394,16 @@ public class UIReader_FileSystem : UI_Reader
         VisualElement panel = RemoveContainer(ux_ImagePanel.Instantiate());
         panel.Q<Label>("Name").text = name + ".png";  
         panel.Q<VisualElement>("Image").style.backgroundImage = new StyleBackground(sprite);
-        panel.Q<Button>("CloseBtn").clicked += () => { panelGround.Remove(panel); };
-        panelGround.Add(panel);
+        panel.Q<Button>("CloseBtn").clicked += () => 
+        { 
+            panelGround.Remove(panel);
+        
+            FileT file = FindFile(name);
+            fileManager.UnlockChat(file);
+            fileManager.UnlockChapter(file);
+        };
 
-        FileT file = FindFile(name);
-        fileManager.MakeCan(file);
+        panelGround.Add(panel);
     }
 
     public void OpenText(string name, string text)
@@ -401,11 +411,16 @@ public class UIReader_FileSystem : UI_Reader
         VisualElement panel = RemoveContainer(ux_TextPanel.Instantiate());
         panel.Q<Label>("Name").text = name + ".text";
         panel.Q<Label>("Text").text = text;
-        panel.Q<Button>("CloseBtn").clicked += () => { panelGround.Remove(panel); };
-        panelGround.Add(panel);
+        panel.Q<Button>("CloseBtn").clicked += () => 
+        { 
+            panelGround.Remove(panel);
 
-        FileT file = FindFile(name);
-        fileManager.MakeCan(file);
+            FileT file = FindFile(name);
+            fileManager.UnlockChat(file);
+            fileManager.UnlockChapter(file);
+        };
+
+        panelGround.Add(panel);
     }
 
     private void AddFilePath(string pathName)

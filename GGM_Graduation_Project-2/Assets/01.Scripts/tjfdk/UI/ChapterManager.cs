@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class ChapterManager : UI_Reader
 {
+    public Chapter previousChapter;
     public Chapter nowChapter;
     public int chatIndex;
     public int roundIndex;
@@ -41,7 +42,16 @@ public class ChapterManager : UI_Reader
 
     public void AddChapter(string who, string name)
     {
+        Debug.Log(chatSystem.FindMember(who).name + " " + FindChapter(name).showName);
         chatSystem.FindMember(who).chapterName = FindChapter(name).showName;
+        if (previousChapter.saveLocation != ESaveLocation.NotSave)
+        {
+            if (chatSystem.FindMember(who).name == chatSystem.FindMember(previousChapter.saveLocation.ToString()).name)
+            {
+                Debug.Log("인물 변동 없어서 바로 진행");
+                Chapter(name);
+            }
+        }
     }
 
     public Chapter FindChapter(string name)
@@ -60,36 +70,43 @@ public class ChapterManager : UI_Reader
     {
         AddChapter(FindChapter(name).saveLocation.ToString(), name);
 
-        MemberChat member = chatSystem.FindMember(FindChapter(name).saveLocation.ToString());
-        // 해당 인물에게 챕터를 읽자
-        if (member.chapterName != "")
-        {
-            //Debug.Log("담 챕터 레츠고");
-            chapterManager.Chapter(member.name, member.chapterName);
-        }
-        else
-            Debug.Log("챕터가 비어있음");
+        //MemberChat member = chatSystem.FindMember(FindChapter(name).saveLocation.ToString());
+        //chapterManager.Chapter(member.name, member.chapterName);
 
         // 만약... 전 챕터랑 같은 인물이면... 그냥 choice어쩌고 들릴 필요 없이 chapter 불러주기
         //FindChapter(chatContainer.NowChapter.nextChapterName).showName);
     }
 
-    public void Chapter(string who, string name)
+    public void Chapter(string name)
     {
-        nowChapter  = FindChapter(name);
-        chatContainer.NowChapter = nowChapter;
-        chatContainer.nowChaptersIndex = 0;
-        roundIndex = 0;
+        nowChapter = FindChapter(name);
 
-        StartCoroutine(InputCChat(false, nowChapter.chat));
+        Debug.Log(chatSystem.FindMember(nowChapter.saveLocation.ToString()).name + " " + chatSystem.currentMemberName);
+        if (chatSystem.FindMember(nowChapter.saveLocation.ToString()).name == chatSystem.currentMemberName)
+        {
+            if (nowChapter.isCan == false)
+            {
+                chatContainer.NowChapter = nowChapter;
+                chatContainer.NowChapter.isChapterEnd = false;
+                roundIndex = 0;
+
+                StartCoroutine(InputCChat(false, nowChapter.chat));
+            }
+        }
+        else
+            Debug.Log("현재 챕터 주인과 채팅창의 주인이 다름");
     }
 
     public void EndChapter()
     {
         //chatSystem.FindMember(nowChapter.saveLocation.ToString()).chapterName = "";
+        nowChapter.isChapterEnd = true;
+        previousChapter = nowChapter;
 
         if (nowChapter.is_nextChapter)
+        {
             NextChapter(nowChapter.nextChapterName);
+        }
         else
             Debug.Log("다음 챕터 없담!");
     }
@@ -150,8 +167,13 @@ public class ChapterManager : UI_Reader
         {
             while (chatIndex != asks.Count)
             {
-                chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
-                    EChatType.Question, asks[chatIndex].ask, true, InputCChat(true, asks[chatIndex].reply));                                            
+                if (asks[chatIndex].isChange)
+                    chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
+                        EChatType.Question, asks[chatIndex].ask, true, InputCChat(true, asks[chatIndex].reply), 
+                        (() => { AddChapter(asks[chatIndex].ask, asks[chatIndex].changeName); }));
+                else
+                    chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
+                        EChatType.Question, asks[chatIndex].ask, true, InputCChat(true, asks[chatIndex].reply));                                            
                 chatIndex++;
             }
         }

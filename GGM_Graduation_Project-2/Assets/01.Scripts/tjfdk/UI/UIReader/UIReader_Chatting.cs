@@ -197,7 +197,7 @@ public class UIReader_Chatting : UI_Reader
         chatGround.Add(chat);
     }
 
-    public void InputQuestion(ESaveLocation toWho, EChatType type, string msg, bool isRecord, IEnumerator reply)
+    public void InputQuestion(ESaveLocation toWho, EChatType type, string msg, bool isRecord, IEnumerator reply, Action action = null)
     {
         // 생성
         VisualElement chat = null ;
@@ -217,6 +217,7 @@ public class UIReader_Chatting : UI_Reader
                     chat.parent.Remove(chat);
                     // reply 출력
                     StartCoroutine(reply);
+                    action?.Invoke();
                 });
                 break;
             case EChatType.LockQuestion:
@@ -326,7 +327,7 @@ public class UIReader_Chatting : UI_Reader
             };
 
             memberList.Add(newMember);
-            memberChats.Add(new MemberChat(memberName));
+            //memberChats.Add(new MemberChat(memberName));
         }
     }
 
@@ -365,7 +366,7 @@ public class UIReader_Chatting : UI_Reader
             if (member.chapterName != "")
             {
                 // 챕터 불러주고
-                chapterManager.Chapter(member.name, member.chapterName);
+                chapterManager.Chapter(/*member.name, */member.chapterName);
                 // 끝났으면 현재 챕터 초기화
                 //member.chapterName = "";
             }
