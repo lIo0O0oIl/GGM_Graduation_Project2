@@ -13,10 +13,10 @@ namespace ChatVisual
     {
         public Node node;
 
-        public Port input;      // ?낅젰
-        public Port output;     // 異쒕젰
+        public Port input;
+        public Port output;     // Connecting Nodes
 
-        public Action<NodeView> OnNodeSelected;
+        public Action<NodeView> OnNodeSelected;     // Node Click Events
 
         public NodeView(Node node) : base("Assets/ChatVisual/NodeView/NodeView.uxml")
         {
@@ -35,10 +35,9 @@ namespace ChatVisual
 
             Label descLabel = this.Q<Label>("description");     // Element Label Change
             descLabel.bindingPath = "description";
-            //descLabel.Bind(new SerializedObject(node));      // node ?쇰뒗 ?대옒?ㅼ뿉??description 蹂?섎? 李얠븘???ｌ뼱以?
         }
 
-        private void CreateInputPorts()     // input. ?꾩뿉爰?
+        private void CreateInputPorts()
         {
             switch (node)
             {
@@ -94,27 +93,27 @@ namespace ChatVisual
 
         private void SetUpClasses()
         {
-            switch(node)
+            switch (node)
             {
                 case RootNode:
-                    AddToClassList("root");     // 鍮④컯
+                    AddToClassList("root");     // red
                     break;
                 case ChatNode:
-                    AddToClassList("chat");     // 珥덈줉
+                    AddToClassList("chat");     // Green
                     break;
                 case AskNode:
-                    AddToClassList("ask");      // ?섎뒛
+                    AddToClassList("ask");      // blue
                     break;
                 case LockAskNode:
-                    AddToClassList("lockAsk");      // ?뚯깋
+                    AddToClassList("lockAsk");      // gray
                     break;
                 case ConditionNode:
-                    AddToClassList("condition");     // condition node
+                    AddToClassList("condition");     // yellow
                     break;
             }
         }
 
-        public override void SetPosition(Rect newPos)       // ?몃뱶媛 ?吏곸??ㅻ㈃
+        public override void SetPosition(Rect newPos)       // Node moves
         {
             base.SetPosition(newPos);
 
@@ -122,19 +121,19 @@ namespace ChatVisual
             node.position.y = newPos.yMin;
         }
 
-        public override void OnSelected()       // ?몃뱶媛 ?뚮졇?ㅻ㈃
+        public override void OnSelected()       // Node Click
         {
             base.OnSelected();
             OnNodeSelected.Invoke(this);
         }
 
-    /*    public void SortChildren()
-        {
-            var chatNode = node as ChatNode;
-            if (chatNode != null)
+        /*    public void SortChildren()        // Align horizontally
             {
-                chatNode.child.Sort((left, right) => left.position.x < right.position.x ? -1 : 1);
-            }
-        }*/
+                var chatNode = node as ChatNode;
+                if (chatNode != null)
+                {
+                    chatNode.child.Sort((left, right) => left.position.x < right.position.x ? -1 : 1);
+                }
+            }*/
     }
 }

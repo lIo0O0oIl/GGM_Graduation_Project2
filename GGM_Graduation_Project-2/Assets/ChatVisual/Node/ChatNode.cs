@@ -6,12 +6,12 @@ namespace ChatVisual
 {
     public class ChatNode : Node
     {
-        public List<Node> child = new List<Node>();
+        public List<Node> childList = new List<Node>();
 
-        public EChatState state;     // 留먰븯??寃껋쓽 ???
+        public EChatState state; 
         public EChatType type;
-        public string text;        // 留??섎뒗 寃?
-        public EFace face;       // 留????뚯쓽 ?쒖젙
+        public string text;    
+        public EFace face; 
         public List<EChatEvent> textEvent = new List<EChatEvent>();
     }
 }

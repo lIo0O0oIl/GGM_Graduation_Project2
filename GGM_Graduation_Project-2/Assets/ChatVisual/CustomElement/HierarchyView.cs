@@ -19,7 +19,7 @@ namespace ChatVisual
             chatContainer = _chatContainer;
             chatView = _chatView;
 
-            // IMGUI »ç¿ëÇØ¼­ ÇÏÀÌ¾î¶óÅ°Ã¢ ¸¸µé¾îÁÖ±â
+            // IMGUI ì‚¬ìš©í•´ì„œ í•˜ì´ì–´ë¼í‚¤ì°½ ë§Œë“¤ì–´ì£¼ê¸°
             Clear();
 
             ScrollView scrollView = new ScrollView(ScrollViewMode.Vertical);
@@ -67,10 +67,10 @@ namespace ChatVisual
 
         private void ChangeChapter(int index)
         {
-            chatView.SaveChatSystem();      // Áö±İ Ã©ÅÍ ÀúÀåÇØÁÖ±â 
-            chatContainer.ChangeNowChapter(index);      // Ã©ÅÍ ³Ñ±â±â
-            chatView.LoadChatSystem(chatContainer);         // Ã©ÅÍ ·ÎµåÇØÁÖ±â
-            chatView.PopulateView();        // º¸ÀÌ´Â °Í ±×·ÁÁÖ±â
+            //chatView.SaveChatSystem();      // ì§€ê¸ˆ ì±•í„° ì €ì¥í•´ì£¼ê¸° 
+            chatContainer.ChangeNowChapter(index);      // ì±•í„° ë„˜ê¸°ê¸°
+            //chatView.LoadChatSystem(chatContainer);         // ì±•í„° ë¡œë“œí•´ì£¼ê¸°
+            chatView.PopulateView();        // ë³´ì´ëŠ” ê²ƒ ê·¸ë ¤ì£¼ê¸°
         }
 
         private void DeleteChapter(int index)
