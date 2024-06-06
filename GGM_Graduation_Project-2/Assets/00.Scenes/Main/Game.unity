@@ -3892,7 +3892,7 @@ MonoBehaviour:
   - fileName: "\uD559\uAD50"
     fileParentName: Main
     fileType: 0
-    eventName: 
+    eventName: "\uC0AC\uAC74 \uD604\uC7A5\uC744 \uBA3C\uC800 \uBCF4\uC5EC\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4"
     lockQuestionName: 
   - fileName: "\uBC18 "
     fileParentName: "\uD559\uAD50"
@@ -3907,7 +3907,7 @@ MonoBehaviour:
   - fileName: "\uC625\uC0C1"
     fileParentName: "\uD559\uAD50"
     fileType: 1
-    eventName: 
+    eventName: "\uC804\uC1A1\uD574\uB4DC\uB838\uC2B5\uB2C8\uB2E4!"
     lockQuestionName: 
   - fileName: "\uC0AC\uAC74 \uD604\uC7A5"
     fileParentName: "\uD559\uAD50"
@@ -12542,43 +12542,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowChaptersIndex: 0
-  nowChatIndex: 6
+  nowChaptersIndex: 4
+  nowChatIndex: 4
   nowChapter:
     showName: "\uC0AC\uAC74 \uC2DC\uC791"
     saveLocation: 5
     chat:
     - state: 0
       type: 0
-      text: "\uC800\uB294 \uC774\uBC88 \uC218\uC0AC\uB97C \uB3D5\uAC8C \uB41C \uBC15\uD604\uADDC
-        \uACBD\uC0AC\uC785\uB2C8\uB2E4"
+      text: "\uC804\uC1A1\uD574\uB4DC\uB838\uC2B5\uB2C8\uB2E4!"
       face: 0
+      isCan: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: "\uD53C\uD574\uC790\uC5D0\uAC8C \uC548 \uBCF4\uC774\uB358 \uC2E0\uBC1C\uC774
+        \uC625\uC0C1\uC5D0 \uC788\uB124\uC694 \uC790\uC0B4 \uC0AC\uAC74\uC77C\uAE4C\uC694?"
+      face: 1
       isCan: 0
       textEvent: 
     - state: 1
       type: 0
-      text: "\uADF8\uB798, \uC798 \uBD80\uD0C1\uD558\uB124"
-      face: 0
-      isCan: 0
-      textEvent: 
-    - state: 0
-      type: 0
-      text: "\uC740\uC131 \uACE0\uB4F1\uD559\uAD50\uC5D0\uC11C \uC790\uC0B4 \uC2E0\uACE0\uAC00
-        \uB4E4\uC5B4\uC654\uC2B5\uB2C8\uB2E4"
-      face: 1
-      isCan: 0
-      textEvent: 
-    - state: 0
-      type: 0
-      text: "\uC81C\uAC00 \uC0AC\uAC74\uACFC \uAD00\uB828\uB41C \uC790\uB8CC\uB97C
-        \uD30C\uC77C\uD654 \uD558\uC5EC \uD615\uC0AC\uB2D8\uAED8 \uBCF4\uB0B4\uB4DC\uB9B4\uD14C\uB2C8"
-      face: 1
-      isCan: 0
-      textEvent: 
-    - state: 0
-      type: 0
-      text: "\uD615\uC0AC\uB2D8\uAED8\uC11C\uB294 \uC774 \uCEF4\uD4E8\uD130\uB97C
-        \uD1B5\uD574 \uC0AC\uAC74\uC744 \uC870\uC0AC\uD574\uC8FC\uC2DC\uBA74 \uB429\uB2C8\uB2E4"
+      text: "\uC544\uC9C1 \uD655\uC2E4\uD558\uC9C0 \uC54A\uC73C\uB2C8 \uB354 \uC870\uC0AC\uD574\uBCF4\uB3C4\uB85D
+        \uD558\uC9C0"
       face: 0
       isCan: 0
       textEvent: 
@@ -12586,7 +12572,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     is_nextChapter: 1
-    nextChapterName: "\uC0AC\uAC74 \uC2DC\uC791"
+    nextChapterName: "\uCD08\uAE30 \uC218\uC0AC \uC120\uD0DD"
   mainChapter:
   - showName: "\uC0AC\uAC74 \uC2DC\uC791"
     saveLocation: 5
@@ -12677,7 +12663,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uC625\uC0C1 \uC870\uC0AC"
   - showName: "\uC625\uC0C1 \uC870\uC0AC"
     saveLocation: 5
@@ -12698,11 +12684,17 @@ MonoBehaviour:
     lockAskAndReply: []
     round:
     - "\uC625\uC0C1"
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uC625\uC0C1 \uC870\uC0AC \uACB0\uACFC"
   - showName: "\uC625\uC0C1 \uC870\uC0AC \uACB0\uACFC"
     saveLocation: 5
     chat:
+    - state: 0
+      type: 0
+      text: "\uC804\uC1A1\uD574\uB4DC\uB838\uC2B5\uB2C8\uB2E4!"
+      face: 0
+      isCan: 0
+      textEvent: 
     - state: 0
       type: 0
       text: "\uD53C\uD574\uC790\uC5D0\uAC8C \uC548 \uBCF4\uC774\uB358 \uC2E0\uBC1C\uC774
@@ -12720,7 +12712,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uCD08\uAE30 \uC218\uC0AC \uC120\uD0DD"
   - showName: "\uCD08\uAE30 \uC218\uC0AC \uC120\uD0DD"
     saveLocation: 5
@@ -12829,7 +12821,7 @@ MonoBehaviour:
     round:
     - "\uC218\uC5F0 \uC0AC\uBB3C\uD568"
     - "cctv \uD30C\uC77C "
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: 
   - showName: "\uC8FC\uBCC0\uC778 \uBA74\uB2F4 \uC120\uD0DD"
     saveLocation: 5
@@ -12853,7 +12845,7 @@ MonoBehaviour:
       reply: []
       is_UseThis: 0
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: 
   - showName: "\uB2F4\uC784 \uC120\uC0DD\uB2D8"
     saveLocation: 0
@@ -12947,7 +12939,7 @@ MonoBehaviour:
       is_UseThis: 0
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uB2F4\uC784 \uC120\uC0DD\uB2D8 \uBA74\uB2F4 \uD6C4"
   - showName: "\uB2F4\uC784 \uC120\uC0DD\uB2D8 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 5
@@ -12968,7 +12960,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: 
   - showName: "\uBD80\uBAA8\uB2D8"
     saveLocation: 0
@@ -13107,7 +13099,7 @@ MonoBehaviour:
     lockAskAndReply: []
     round:
     - "\uC218\uC5F0\uC774 \uBC29 "
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uBD80\uBAA8\uB2D8 \uBA74\uB2F4 \uD6C4"
   - showName: "\uBD80\uBAA8\uB2D8 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 5
@@ -13150,7 +13142,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: 
   - showName: "\uBC18 \uCE5C\uAD6C\uB4E4 "
     saveLocation: 0
@@ -13393,7 +13385,7 @@ MonoBehaviour:
       is_UseThis: 0
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uBC18 \uCE5C\uAD6C\uB4E4 \uBA74\uB2F4 \uD6C4"
   - showName: "\uBC18 \uCE5C\uAD6C\uB4E4 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 5
@@ -13415,7 +13407,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4"
   - showName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4"
     saveLocation: 1
@@ -13499,7 +13491,7 @@ MonoBehaviour:
         textEvent: 
       is_UseThis: 0
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4 \uD6C4"
   - showName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4 \uD6C4"
     saveLocation: 0
@@ -13525,7 +13517,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uAC15\uC9C0\uD604 \uC790\uB9AC \uC870\uC0AC \uD6C4"
   - showName: "\uAC15\uC9C0\uD604 \uC790\uB9AC \uC870\uC0AC \uD6C4"
     saveLocation: 5
@@ -13546,7 +13538,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4"
   - showName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4"
     saveLocation: 1
@@ -13652,7 +13644,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4 \uD6C4"
   - showName: "\uAC15\uC9C0\uD604 2\uCC28 \uBA74\uB2F4 \uD6C4"
     saveLocation: 5
@@ -13686,7 +13678,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4"
   - showName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4"
     saveLocation: 3
@@ -13758,7 +13750,7 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round: []
-    is_nextChapter: 0
+    is_nextChapter: 1
     nextChapterName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4 \uD6C4"
   - showName: "\uACFD\uD604\uC11D 1\uCC28 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 5
