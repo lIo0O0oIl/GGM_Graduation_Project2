@@ -6,6 +6,8 @@ public class TestUI : UI_Reader
 {
     private void Start()
     {
+        cutSceneSystem.PlayCutScene("DieFall");
+
         //chatSystem.AddMember("HG");
         chapterManager.AddChapter("HG", "사건 시작");
         //chatSystem.ChoiceMember(chatSystem.FindMember("HG"));

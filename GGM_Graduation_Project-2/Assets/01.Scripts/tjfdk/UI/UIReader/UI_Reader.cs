@@ -127,6 +127,8 @@ public class UI_Reader : MonoBehaviour
         {
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
+
+            chatSystem.ChoiceMember(chatSystem.FindMember("HG"));
         }
     }
 

@@ -3555,7 +3555,6 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 9fd94bf5662d09942bf1554e56b79c86, type: 3}
     isOpen: 0
     pngName:
-    - "\uB09C\uAC04"
     - "\uC2E0\uBC1C"
   - name: "\uC774\uC218\uC5F0\uC758 \uC9D1"
     image: {fileID: 21300000, guid: ed6b96a2dd0953a47ad0ba48463f402c, type: 3}
@@ -12572,58 +12571,181 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowChaptersIndex: 0
-  nowChatIndex: 6
+  nowChaptersIndex: 5
+  nowChatIndex: 22
   nowChapter:
-    showName: "\uC0AC\uAC74 \uC2DC\uC791"
+    showName: "\uCD08\uAE30 \uC218\uC0AC \uC120\uD0DD"
     saveLocation: 5
     chat:
     - state: 0
       type: 0
-      text: "\uC800\uB294 \uC774\uBC88 \uC218\uC0AC\uB97C \uB3D5\uAC8C \uB41C \uBC15\uD604\uADDC
-        \uACBD\uC0AC\uC785\uB2C8\uB2E4"
+      text: "\uC5B4\uB5A4 \uAC78 \uBA3C\uC800 \uC870\uC0AC\uD574 \uBCF4\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
       is_UseThis: 0
       face: 0
       isCan: 0
       textEvent: 
-    - state: 1
-      type: 0
-      text: "\uADF8\uB798, \uC798 \uBD80\uD0C1\uD558\uB124"
+    askAndReply:
+    - ask: "\uD53C\uD574\uC790 \uBB3C\uD488 \uC870\uC0AC "
+      reply:
+      - state: 0
+        type: 0
+        text: "\uC774\uC218\uC5F0 \uD559\uC0DD\uC758 \uC0AC\uBB3C\uD568\uC744 \uBCF4\uB0B4\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4 "
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 02000000020000000200000002000000
+      - state: 1
+        type: 0
+        text: "\uB300\uBD80\uBD84 \uAD50\uACFC\uC11C\uC640 \uBB38\uC81C\uC9D1\uC774\uAD70 "
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uC0AC\uBB3C\uD568\uC5D0\uB3C4 \uD734\uB300\uD3F0\uC774 \uC5C6\uB124\uC694"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uD734\uB300\uD3F0\uC740 \uC5B4\uB514\uC788\uB294\uAC78\uAE4C\uC694?"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 1
+        type: 0
+        text: "\uCC3E\uC544\uBD10\uC57C\uACA0\uC5B4"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
       is_UseThis: 0
-      face: 0
-      isCan: 0
-      textEvent: 
-    - state: 0
-      type: 0
-      text: "\uC740\uC131 \uACE0\uB4F1\uD559\uAD50\uC5D0\uC11C \uC790\uC0B4 \uC2E0\uACE0\uAC00
-        \uB4E4\uC5B4\uC654\uC2B5\uB2C8\uB2E4"
+      changeWhoName: 0
+      isChange: 0
+      changeName: 
+    - ask: "cctv \uC870\uC0AC "
+      reply:
+      - state: 0
+        type: 0
+        text: "\uD589\uC815\uC2E4\uC5D0 CCTV\uC5D0 \uAD00\uD574 \uBB38\uC758\uD574\uBCF4\uB2C8\n\uAD50\uBB38
+          \uC55E\uC5D0 \uD55C \uAC1C\uAC00 \uC804\uBD80\uB77C\uACE0 \uD558\uB124\uC694"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 0200000002000000020000000200000002000000
+      - state: 0
+        type: 0
+        text: "CCTV\uB97C \uC870\uD68C\uD574\uBCF4\uB2C8 \uC57C\uC790\uAC00 \uB05D\uB09C
+          \uD559\uC0DD\uB4E4\uC774 \uB098\uAC00\uACE0"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uCD1D \uC138 \uBA85\uC774 \uD53C\uD574\uC790\uC758 \uC0AC\uB9DD \uCD94\uC815
+          \uC2DC\uAC04\uC5D0 \uB4A4\uB2A6\uAC8C \uD559\uAD50\uB97C \uB098\uAC14\uC2B5\uB2C8\uB2E4."
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 1
+        type: 0
+        text: "\uADF8 \uC138 \uBA85\uC758 \uC2E0\uC6D0\uC740 \uD30C\uC545\uB410\uB098?"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uC544\uBB34\uB798\uB3C4 \uC138 \uBA85\uC758 \uC2E0\uC6D0\uC744 \uD655\uC778\uD558\uAE30
+          \uC704\uD574\uC120\n\uC2DC\uAC04\uC774 \uC870\uAE08 \uD544\uC694\uD560
+          \uAC83 \uAC19\uC2B5\uB2C8\uB2E4."
+        is_UseThis: 0
+        face: 1
+        isCan: 0
+        textEvent: 
+      - state: 1
+        type: 0
+        text: "\uC2E0\uC6D0\uC774 \uD655\uC778\uB418\uB294 \uB300\uB85C \uC804\uB2EC
+          \uBD80\uD0C1\uD558\uB124"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uB124 \uC54C\uACA0\uC2B5\uB2C8\uB2E4!"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 1
+        type: 0
+        text: "\uACE0\uB9D9\uB124 "
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
       is_UseThis: 0
-      face: 1
-      isCan: 0
-      textEvent: 
-    - state: 0
-      type: 0
-      text: "\uC81C\uAC00 \uC0AC\uAC74\uACFC \uAD00\uB828\uB41C \uC790\uB8CC\uB97C
-        \uD30C\uC77C\uD654 \uD558\uC5EC \uD615\uC0AC\uB2D8\uAED8 \uBCF4\uB0B4\uB4DC\uB9B4\uD14C\uB2C8"
+      changeWhoName: 0
+      isChange: 0
+      changeName: 
+    - ask: "\uC8FC\uBCC0\uC778 \uD0D0\uBB38 "
+      reply:
+      - state: 1
+        type: 0
+        text: "UI \uC5F0\uB3D9 \uBB38\uC81C\uB85C \uB370\uBAA8\uB294 \uC5EC\uAE30\uAE4C\uC9C0
+          \uC785\uB2C8\uB2E4."
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uD234\uD0B7\uC73C\uB85C \uBC14\uAFB8\uB294 \uACFC\uC815\uC5D0\uC11C
+          \uC624\uB958\uAC00 \uBC1C\uC0DD\uD558\uC5EC"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uC900\uBE44\uD55C \uACFC\uC815\uC744 \uB2E4 \uBCF4\uC5EC\uB4DC\uB9AC\uC9C0
+          \uBABB \uD558\uAC8C \uB418\uC5C8\uC2B5\uB2C8\uB2E4.."
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uD50C\uB808\uC774 \uD574\uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
       is_UseThis: 0
-      face: 1
-      isCan: 0
-      textEvent: 
-    - state: 0
-      type: 0
-      text: "\uD615\uC0AC\uB2D8\uAED8\uC11C\uB294 \uC774 \uCEF4\uD4E8\uD130\uB97C
-        \uD1B5\uD574 \uC0AC\uAC74\uC744 \uC870\uC0AC\uD574\uC8FC\uC2DC\uBA74 \uB429\uB2C8\uB2E4"
-      is_UseThis: 0
-      face: 0
-      isCan: 0
-      textEvent: 
-    askAndReply: []
+      changeWhoName: 0
+      isChange: 0
+      changeName: 
     lockAskAndReply: []
-    round: []
+    round:
+    - "\uBC18"
+    - "\uC774\uC218\uC5F0 \uC0AC\uBB3C\uD568"
+    - "\uC774\uC218\uC5F0 \uAD50\uACFC\uC11C"
+    - "\uC774\uC218\uC5F0 \uBB38\uC81C\uC9D1"
+    - CCTV
+    - CCTV1
+    - CCTV2
+    - CCTV3
+    - CCTV4
     isChapterEnd: 0
     isCan: 0
     is_nextChapter: 1
-    nextChapterName: "\uC2DC\uCCB4 \uC870\uC0AC"
+    nextChapterName: 
   mainChapter:
   - showName: "\uC0AC\uAC74 \uC2DC\uC791"
     saveLocation: 5
@@ -12810,7 +12932,7 @@ MonoBehaviour:
         text: "\uC774\uC218\uC5F0 \uD559\uC0DD\uC758 \uC0AC\uBB3C\uD568\uC744 \uBCF4\uB0B4\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4 "
         is_UseThis: 0
         face: 0
-        isCan: 1
+        isCan: 0
         textEvent: 02000000020000000200000002000000
       - state: 1
         type: 0
@@ -12852,7 +12974,7 @@ MonoBehaviour:
           \uC55E\uC5D0 \uD55C \uAC1C\uAC00 \uC804\uBD80\uB77C\uACE0 \uD558\uB124\uC694"
         is_UseThis: 0
         face: 0
-        isCan: 1
+        isCan: 0
         textEvent: 0200000002000000020000000200000002000000
       - state: 0
         type: 0
@@ -12913,7 +13035,38 @@ MonoBehaviour:
       isChange: 0
       changeName: 
     - ask: "\uC8FC\uBCC0\uC778 \uD0D0\uBB38 "
-      reply: []
+      reply:
+      - state: 1
+        type: 0
+        text: "UI \uC5F0\uB3D9 \uBB38\uC81C\uB85C \uB370\uBAA8\uB294 \uC5EC\uAE30\uAE4C\uC9C0
+          \uC785\uB2C8\uB2E4."
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uD234\uD0B7\uC73C\uB85C \uBC14\uAFB8\uB294 \uACFC\uC815\uC5D0\uC11C
+          \uC624\uB958\uAC00 \uBC1C\uC0DD\uD558\uC5EC"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uC900\uBE44\uD55C \uACFC\uC815\uC744 \uB2E4 \uBCF4\uC5EC\uB4DC\uB9AC\uC9C0
+          \uBABB \uD558\uAC8C \uB418\uC5C8\uC2B5\uB2C8\uB2E4.."
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
+      - state: 0
+        type: 0
+        text: "\uD50C\uB808\uC774 \uD574\uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
+        is_UseThis: 0
+        face: 0
+        isCan: 0
+        textEvent: 
       is_UseThis: 0
       changeWhoName: 0
       isChange: 0
@@ -12965,8 +13118,46 @@ MonoBehaviour:
     lockAskAndReply: []
     round: []
     isChapterEnd: 0
-    isCan: 0
+    isCan: 1
     is_nextChapter: 1
+    nextChapterName: "\uB370\uBAA8"
+  - showName: "\uB370\uBAA8"
+    saveLocation: 5
+    chat:
+    - state: 1
+      type: 0
+      text: 
+      is_UseThis: 0
+      face: 1
+      isCan: 0
+      textEvent: 
+    - state: 1
+      type: 0
+      text: 
+      is_UseThis: 0
+      face: 1
+      isCan: 0
+      textEvent: 
+    - state: 1
+      type: 0
+      text: 
+      is_UseThis: 0
+      face: 1
+      isCan: 0
+      textEvent: 
+    - state: 1
+      type: 0
+      text: 
+      is_UseThis: 0
+      face: 1
+      isCan: 0
+      textEvent: 
+    askAndReply: []
+    lockAskAndReply: []
+    round: []
+    isChapterEnd: 0
+    isCan: 0
+    is_nextChapter: 0
     nextChapterName: 
   - showName: "\uB2F4\uC784 \uC120\uC0DD\uB2D8"
     saveLocation: 0
