@@ -57,6 +57,7 @@ namespace ChatVisual
         public EChatState state;     // 嶺뚮씭?????롪퍒???????
         public EChatType type;
         public string text;        // 嶺???濡ル츎 ??
+        public bool is_UseThis;     // ??????덈츎嶺뚯솘?
         public EFace face;       // 嶺??????踰???戮곗젧
         public bool isCan;
         public List<EChatEvent> textEvent = new List<EChatEvent>();
@@ -68,6 +69,8 @@ namespace ChatVisual
         public string ask;        // ??좊닔???????덈츎 ??ルㅎ臾며춯?뼿
         public List<Chat> reply = new List<Chat>();     // ?잙갭梨룩굢??????????援?
         public bool is_UseThis;     // ??????덈츎嶺뚯솘?
+
+        public ESaveLocation changeWhoName;
         public bool isChange;
         public string changeName;
     }

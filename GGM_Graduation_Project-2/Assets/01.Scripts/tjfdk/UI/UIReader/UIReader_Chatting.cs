@@ -123,6 +123,9 @@ public class UIReader_Chatting : UI_Reader
     {
         for (int i = chatGround.childCount - 1; i >= 0; i--)
             chatGround.RemoveAt(i);
+
+        for (int i = questionGround.childCount - 1; i >= 0; i--)
+            questionGround.RemoveAt(i);
     }
 
     private void RecallChatting(MemberChat otherName)
@@ -215,8 +218,17 @@ public class UIReader_Chatting : UI_Reader
                 chat.Q<Button>().clicked += (() => 
                 { 
                     chat.parent.Remove(chat);
+                    for (int i = 0; i < suspect.quetions.Count - 1; ++i)
+                    {
+                        if (suspect.quetions[i].text == msg)
+                        {
+                            Debug.Log("질문 삭제됨");
+                            suspect.quetions.Remove(suspect.quetions[i]);
+                        }
+                    }
                     // reply 출력
-                    StartCoroutine(reply);
+                    if (reply != null)
+                        StartCoroutine(reply);
                     action?.Invoke();
                 });
                 break;

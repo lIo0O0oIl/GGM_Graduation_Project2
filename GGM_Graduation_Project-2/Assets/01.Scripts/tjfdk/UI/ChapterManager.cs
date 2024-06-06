@@ -19,7 +19,6 @@ public class ChapterManager : UI_Reader
 
         foreach (Chat chat in nowChapter.chat)
         {
-            Debug.Log(chat.text);
             if (chat.text == text)
                 eventChat = chat;
         }
@@ -31,7 +30,6 @@ public class ChapterManager : UI_Reader
         {
             foreach (Chat chat in ask.reply)
             {
-                Debug.Log(chat.text);
                 if (chat.text == text)
                     eventChat = chat;
             }
@@ -42,8 +40,9 @@ public class ChapterManager : UI_Reader
 
     public void AddChapter(string who, string name)
     {
-        Debug.Log(chatSystem.FindMember(who).name + " " + FindChapter(name).showName);
+        chatSystem.AddMember(who);
         chatSystem.FindMember(who).chapterName = FindChapter(name).showName;
+
         if (previousChapter.saveLocation != ESaveLocation.NotSave)
         {
             if (chatSystem.FindMember(who).name == chatSystem.FindMember(previousChapter.saveLocation.ToString()).name)
@@ -68,7 +67,7 @@ public class ChapterManager : UI_Reader
 
     public void NextChapter(string name)
     {
-        AddChapter(FindChapter(name).saveLocation.ToString(), name);
+        AddChapter(FindChapter(name).saveLocation.ToString(), name); //
 
         //MemberChat member = chatSystem.FindMember(FindChapter(name).saveLocation.ToString());
         //chapterManager.Chapter(member.name, member.chapterName);
@@ -81,7 +80,6 @@ public class ChapterManager : UI_Reader
     {
         nowChapter = FindChapter(name);
 
-        Debug.Log(chatSystem.FindMember(nowChapter.saveLocation.ToString()).name + " " + chatSystem.currentMemberName);
         if (chatSystem.FindMember(nowChapter.saveLocation.ToString()).name == chatSystem.currentMemberName)
         {
             if (nowChapter.isCan == false)
@@ -99,7 +97,8 @@ public class ChapterManager : UI_Reader
 
     public void EndChapter()
     {
-        //chatSystem.FindMember(nowChapter.saveLocation.ToString()).chapterName = "";
+        Debug.Log("챕터 끝");
+
         nowChapter.isChapterEnd = true;
         previousChapter = nowChapter;
 
@@ -114,38 +113,42 @@ public class ChapterManager : UI_Reader
     public IEnumerator InputCChat(bool isReply, List<Chat> chats)
     {
         chatIndex = 0;
-        while (chatIndex != chats.Count)
+        while (chatIndex != chats.Count && chats != null)
         {
             if (chatIndex < chats.Count)
             {
                 if (chats[chatIndex].isCan == false)
                 {
-                    chatSystem.InputChat(chats[chatIndex].state, nowChapter.saveLocation,
-                        chats[chatIndex].type, chats[chatIndex].face, chats[chatIndex].text, true);
-                    if (chats[chatIndex].textEvent.Count > 0)
+                    if (chats[chatIndex].is_UseThis == false)
                     {
-                        foreach (EChatEvent evt in chats[chatIndex].textEvent)
+                        chatSystem.InputChat(chats[chatIndex].state, nowChapter.saveLocation,
+                            chats[chatIndex].type, chats[chatIndex].face, chats[chatIndex].text, true);
+                        if (chats[chatIndex].textEvent.Count > 0)
                         {
-                            switch (evt)
+                            foreach (EChatEvent evt in chats[chatIndex].textEvent)
                             {
-                                case EChatEvent.Vibration:
-                                    break;
-                                case EChatEvent.Round:
-                                    {
-                                        string fileName = nowChapter.round[roundIndex];
-                                        FileT file = fileSystem.FindFile(fileName);
-                                        fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
+                                switch (evt)
+                                {
+                                    case EChatEvent.Vibration:
                                         break;
-                                    }
-                                case EChatEvent.Camera:
-                                    break;
-                            }
+                                    case EChatEvent.Round:
+                                        {
+                                            string fileName = nowChapter.round[roundIndex];
+                                            FileT file = fileSystem.FindFile(fileName);
+                                            fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
+                                            break;
+                                        }
+                                    case EChatEvent.Camera:
+                                        break;
+                                }
 
-                            roundIndex++;
+                                roundIndex++;
+                            }
                         }
+                        chats[chatIndex].is_UseThis = true;
+                        chatIndex++;
+                        yield return new WaitForSeconds(1.5f);
                     }
-                    chatIndex++;
-                    yield return new WaitForSeconds(1.5f);
                 }
                 else
                     yield return null;
@@ -167,13 +170,28 @@ public class ChapterManager : UI_Reader
         {
             while (chatIndex != asks.Count)
             {
-                if (asks[chatIndex].isChange)
-                    chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
-                        EChatType.Question, asks[chatIndex].ask, true, InputCChat(true, asks[chatIndex].reply), 
-                        (() => { AddChapter(asks[chatIndex].ask, asks[chatIndex].changeName); }));
-                else
-                    chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
-                        EChatType.Question, asks[chatIndex].ask, true, InputCChat(true, asks[chatIndex].reply));                                            
+                if (asks[chatIndex].is_UseThis == false)
+                {
+                    int questionIndex = chatIndex;
+
+                    if (asks[chatIndex].isChange)
+                    {
+                        string who = asks[chatIndex].changeWhoName.ToString();
+                        string chapterName = asks[chatIndex].changeName;
+
+                        chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
+                            EChatType.Question, asks[chatIndex].ask, true, InputCChat(true, asks[chatIndex].reply),
+                            (() => { AddChapter(who, chapterName); asks[questionIndex].is_UseThis = true; }));
+                    }
+                    else
+                    {
+                        Debug.Log(asks[chatIndex].changeWhoName.ToString());
+                        chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
+                            EChatType.Question, asks[chatIndex].ask, true, InputCChat(true, asks[chatIndex].reply),
+                            (() => { asks[questionIndex].is_UseThis = true; }));
+                    }
+                }
+
                 chatIndex++;
             }
         }
@@ -189,9 +207,12 @@ public class ChapterManager : UI_Reader
         {
             while (chatIndex != locks.Count)
             {
-                chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
-                    EChatType.LockQuestion, locks[chatIndex].ask, true, null);
-                chatIndex++;
+                if (locks[chatIndex].is_UseThis == false)
+                {
+                    chatSystem.InputQuestion(chatContainer.NowChapter.saveLocation,
+                        EChatType.LockQuestion, locks[chatIndex].ask, true, null);
+                    chatIndex++;
+                }
             }
         }
     }
