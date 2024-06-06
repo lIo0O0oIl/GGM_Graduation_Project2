@@ -114,10 +114,10 @@ public class UIReader_ImageFinding : UI_Reader
 
                                 //단서 위치 설정
                                 evidence.style.position = Position.Absolute;
-                                evidence.style.left = png.pos.x;
-                                evidence.style.top = png.pos.y;
-                                evidence.style.width = png.size.x;
-                                evidence.style.height = png.size.y;
+                                evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
+                                evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
+                                evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
+                                evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
                                 // 단서를 이미지에 추가
                                 imageGround.Add(evidence);
                             }
