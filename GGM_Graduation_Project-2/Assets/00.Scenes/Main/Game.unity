@@ -12556,22 +12556,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowChaptersIndex: 1
+  nowChaptersIndex: 12
   nowChatIndex: 3
   nowChapter:
-    showName: "\uC2DC\uCCB4 \uC870\uC0AC"
+    showName: "\uBC18 \uCE5C\uAD6C\uB4E4 \uBA74\uB2F4 \uD6C4 "
     saveLocation: 5
     chat:
     - state: 0
       type: 0
-      text: "\uC0AC\uAC74 \uD604\uC7A5\uC744 \uBA3C\uC800 \uBCF4\uC5EC\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4"
+      text: "\uC218\uC5F0\uC774\uB97C \uAD34\uB86D\uD78C \uCE5C\uAD6C \uB54C\uBB38\uC5D0
+        \uADF9\uB2E8\uC801 \uC120\uD0DD\uC744 \uD55C \uAC78\uAE4C\uC694?"
       is_UseThis: 0
       face: 0
       isCan: 0
-      textEvent: 0200000002000000
+      textEvent: 02000000
     - state: 1
       type: 0
-      text: "\uACE0\uB9C8\uC6CC. \uD55C \uBC88 \uC0B4\uD3B4\uBCF4\uC9C0"
+      text: "\uAC15\uC9C0\uD604 \uD559\uC0DD\uC744 \uC870\uC0AC\uD574 \uBD10\uC57C
+        \uD560 \uAC70 \uAC19\uC544"
       is_UseThis: 0
       face: 0
       isCan: 0
@@ -12579,12 +12581,11 @@ MonoBehaviour:
     askAndReply: []
     lockAskAndReply: []
     round:
-    - "\uD559\uAD50"
-    - "\uC0AC\uAC74 \uD604\uC7A5"
+    - "\uBC18 \uCE5C\uAD6C\uB4E4 \uC99D\uC5B8"
     isChapterEnd: 0
     isCan: 0
     is_nextChapter: 1
-    nextChapterName: "\uC2DC\uCCB4 \uC870\uC0AC \uACB0\uACFC"
+    nextChapterName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4"
   mainChapter:
   - showName: "\uC0AC\uAC74 \uC2DC\uC791"
     saveLocation: 5
@@ -13056,7 +13057,7 @@ MonoBehaviour:
       is_UseThis: 0
       face: 0
       isCan: 0
-      textEvent: 02000000
+      textEvent: 
     - state: 1
       type: 0
       text: "\uADF8\uB7F0 \uAC70 \uAC19\uB124 "
@@ -13066,8 +13067,7 @@ MonoBehaviour:
       textEvent: 
     askAndReply: []
     lockAskAndReply: []
-    round:
-    - "\uB2F4\uC784 \uC120\uC0DD\uB2D8 \uC99D\uC5B8"
+    round: []
     isChapterEnd: 0
     isCan: 0
     is_nextChapter: 1
@@ -13250,7 +13250,7 @@ MonoBehaviour:
       text: "\uD558..."
       is_UseThis: 0
       face: 0
-      isCan: 1
+      isCan: 0
       textEvent: 
     - state: 0
       type: 0
@@ -13259,7 +13259,7 @@ MonoBehaviour:
       is_UseThis: 0
       face: 0
       isCan: 0
-      textEvent: 02000000
+      textEvent: 
     - state: 0
       type: 0
       text: "\uADF8\uB098\uC800\uB098 \uC0AC\uC9C4 \uC18D \uCE5C\uAD6C\uB4E4\uC740
@@ -13294,8 +13294,7 @@ MonoBehaviour:
       textEvent: 01000000
     askAndReply: []
     lockAskAndReply: []
-    round:
-    - "\uC774\uC218\uC5F0 \uD559\uC0DD \uBD80\uBAA8 \uC99D\uC5B8"
+    round: []
     isChapterEnd: 0
     isCan: 0
     is_nextChapter: 1
