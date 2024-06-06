@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
 using UnityEngine;
@@ -56,6 +57,8 @@ public class UIReader_ImageFinding : UI_Reader
                     // filesystem 사이즈 변환 버튼 켜기
                     fileSystem.changeSizeButton.pickingMode = PickingMode.Position;
                     imageGround.style.display = DisplayStyle.None;
+                    for (int i = 0; i < imageGround.childCount - 1; i++)
+                        imageGround.Remove(imageGround.Children().ElementAt(i));
 
                     Debug.Log("dfojasflasildfkjaoijskdvnoajsdfovnialsjdfonwajs");
                     FileT fileT = fileSystem.FindFile(file.Q<Label>("FileName").text);
