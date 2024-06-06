@@ -53,6 +53,8 @@ public class UIReader_ImageFinding : UI_Reader
             {
                 if (image.isOpen)
                 {
+                    // filesystem 사이즈 변환 버튼 켜기
+                    fileSystem.changeSizeButton.pickingMode = PickingMode.Position;
                     imageGround.style.display = DisplayStyle.None;
 
                     Debug.Log("dfojasflasildfkjaoijskdvnoajsdfovnialsjdfonwajs");
@@ -62,6 +64,12 @@ public class UIReader_ImageFinding : UI_Reader
                 }
                 else
                 {
+                    // filesystem 사이즈 변환 버튼 끄기
+                    fileSystem.changeSizeButton.pickingMode = PickingMode.Ignore;
+                    // filesystem 사이즈 작게 만들기
+                    fileSystem.isFileSystemOpen = true;
+                    fileSystem.ChangeSize(0f);
+
                     imageGround.style.display = DisplayStyle.Flex;
                     imageGround.style.backgroundImage = new StyleBackground(image.image);
 
@@ -114,10 +122,10 @@ public class UIReader_ImageFinding : UI_Reader
 
                                 //단서 위치 설정
                                 evidence.style.position = Position.Absolute;
-                                evidence.style.left = png.pos.x;
-                                evidence.style.top = png.pos.y;
-                                evidence.style.width = png.size.x;
-                                evidence.style.height = png.size.y;
+                                evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
+                                evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
+                                evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
+                                evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
                                 // 단서를 이미지에 추가
                                 imageGround.Add(evidence);
                             }
