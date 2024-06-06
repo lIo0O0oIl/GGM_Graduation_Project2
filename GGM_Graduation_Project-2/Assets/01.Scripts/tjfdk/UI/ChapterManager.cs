@@ -88,6 +88,9 @@ public class ChapterManager : UI_Reader
                 chatContainer.NowChapter.isChapterEnd = false;
                 roundIndex = 0;
 
+                chatSystem.changeMemberButton.pickingMode = PickingMode.Ignore;
+                chatSystem.memberList.style.display = DisplayStyle.None;
+
                 StartCoroutine(InputCChat(false, nowChapter.chat));
             }
         }
@@ -101,6 +104,10 @@ public class ChapterManager : UI_Reader
 
         nowChapter.isChapterEnd = true;
         previousChapter = nowChapter;
+
+        chatSystem.changeMemberButton.pickingMode = PickingMode.Position;
+        chatSystem.isMemberListOpen = false;
+        chatSystem.ChangeMember();
 
         if (nowChapter.is_nextChapter)
         {

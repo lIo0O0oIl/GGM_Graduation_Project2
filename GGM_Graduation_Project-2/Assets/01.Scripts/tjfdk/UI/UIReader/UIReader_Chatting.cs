@@ -49,9 +49,10 @@ public class UIReader_Chatting : UI_Reader
     VisualElement chatGround;
     public VisualElement questionGround;
     VisualElement chattingFace;
-    Button changeMemberButton;
+    public Button changeMemberButton;
+    public bool isMemberListOpen;
+    public VisualElement memberList;
     Label memberName;
-    VisualElement memberList;
 
     // template
     VisualTreeAsset ux_chat;
@@ -345,7 +346,9 @@ public class UIReader_Chatting : UI_Reader
 
     public void ChangeMember()
     {
-        if (memberList.style.display.value == DisplayStyle.Flex)
+        isMemberListOpen = !isMemberListOpen;
+
+        if (isMemberListOpen)
         {
             changeMemberButton.style.backgroundImage = new StyleBackground(changeMemberBtnOn);
             memberList.style.display = DisplayStyle.None;

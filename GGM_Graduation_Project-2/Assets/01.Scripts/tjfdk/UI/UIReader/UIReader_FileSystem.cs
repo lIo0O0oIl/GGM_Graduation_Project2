@@ -38,8 +38,7 @@ public class UIReader_FileSystem : UI_Reader
     private float fileAreaSizeOn, fileAreaSizeOff;
     [SerializeField]
     private Texture2D changeSizeBtnOn, changeSizeBtnOff;
-    [SerializeField]
-    private bool isFileSystemOpen;
+    public bool isFileSystemOpen;
 
     Tween changeFileSystemSizeDOT;
 
@@ -49,7 +48,7 @@ public class UIReader_FileSystem : UI_Reader
     VisualElement filePathGround;
     VisualElement mainFilePath;
     VisualElement panelGround;
-    Button changeSizeButton;
+    public Button changeSizeButton;
 
     // Template
     VisualTreeAsset ux_filePath;
@@ -119,7 +118,7 @@ public class UIReader_FileSystem : UI_Reader
 
         changeSizeButton.clicked += () =>
         {
-            ChangeSize();
+            ChangeSize(0.25f);
         };
     }
 
@@ -456,7 +455,7 @@ public class UIReader_FileSystem : UI_Reader
         OpenText(name, imageManager.memoDic[name]);
     }
 
-    public void ChangeSize()
+    public void ChangeSize(float during)
     {
         isFileSystemOpen = !isFileSystemOpen;
 
@@ -469,13 +468,13 @@ public class UIReader_FileSystem : UI_Reader
         if (isFileSystemOpen)
         {
             changeFileSystemSizeDOT = DOTween.To(() => fileSystemArea.style.flexBasis.value.value, x => 
-                fileSystemArea.style.flexBasis = x, fileAreaSizeOn, 0.25f);
+                fileSystemArea.style.flexBasis = x, fileAreaSizeOn, during);
             changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOn);
         }
         else
         {
             changeFileSystemSizeDOT = DOTween.To(() => fileSystemArea.style.flexBasis.value.value, x => 
-                fileSystemArea.style.flexBasis = x, fileAreaSizeOff, 0.25f);
+                fileSystemArea.style.flexBasis = x, fileAreaSizeOff, during);
             changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOff);
         }
 

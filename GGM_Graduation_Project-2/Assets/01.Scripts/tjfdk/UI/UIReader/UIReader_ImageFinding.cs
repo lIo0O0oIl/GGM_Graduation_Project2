@@ -53,6 +53,8 @@ public class UIReader_ImageFinding : UI_Reader
             {
                 if (image.isOpen)
                 {
+                    // filesystem 사이즈 변환 버튼 켜기
+                    fileSystem.changeSizeButton.pickingMode = PickingMode.Position;
                     imageGround.style.display = DisplayStyle.None;
 
                     Debug.Log("dfojasflasildfkjaoijskdvnoajsdfovnialsjdfonwajs");
@@ -62,6 +64,12 @@ public class UIReader_ImageFinding : UI_Reader
                 }
                 else
                 {
+                    // filesystem 사이즈 변환 버튼 끄기
+                    fileSystem.changeSizeButton.pickingMode = PickingMode.Ignore;
+                    // filesystem 사이즈 작게 만들기
+                    fileSystem.isFileSystemOpen = true;
+                    fileSystem.ChangeSize(0f);
+
                     imageGround.style.display = DisplayStyle.Flex;
                     imageGround.style.backgroundImage = new StyleBackground(image.image);
 
