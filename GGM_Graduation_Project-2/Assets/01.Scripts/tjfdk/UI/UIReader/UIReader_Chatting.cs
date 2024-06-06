@@ -24,7 +24,7 @@ public struct Chatting
 public class MemberChat
 {
     public string name;
-    public string nickName;
+    public ESaveLocation nickName;
     public EFace face;
     public Sprite[] faces;
     public bool isOpen;
@@ -39,6 +39,7 @@ public class MemberChat
 
 public class UIReader_Chatting : UI_Reader
 {
+    public string currentMemberName;
     [SerializeField]
     private List<MemberChat> memberChats = new List<MemberChat>();
     [SerializeField]
@@ -46,11 +47,12 @@ public class UIReader_Chatting : UI_Reader
 
     // UXLM
     VisualElement chatGround;
-    VisualElement questionGround;
+    public VisualElement questionGround;
     VisualElement chattingFace;
-    Button changeMemberButton;
+    public Button changeMemberButton;
+    public bool isMemberListOpen;
+    public VisualElement memberList;
     Label memberName;
-    VisualElement memberList;
 
     // template
     VisualTreeAsset ux_chat;
@@ -58,45 +60,12 @@ public class UIReader_Chatting : UI_Reader
     VisualTreeAsset ux_hiddenAskChat;
     VisualTreeAsset ux_memberList;
 
-    bool isChapterProcessing;
+    public bool isChapterProcessing;
+
 
     private void Awake()
     {
         base.Awake();
-    }
-
-    private void Start()
-    {
-        AddChapter("HG", "시체 조사");
-        ChoiceMember(FindMember("HG"));
-    }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //    AddMember("JH");
-        //if (Input.GetKeyDown(KeyCode.A))
-        //    AddMember("JW");
-        //if (Input.GetKeyDown(KeyCode.W))
-        //    InputChat(EChatState.Me, ESaveLocation.JH, EChatType.Text, EFace.Default, EChatEvent.Default, "지현아");
-        //if (Input.GetKeyDown(KeyCode.E))
-        //    InputChat(EChatState.Other, ESaveLocation.JH, EChatType.Image, EFace.Blush, EChatEvent.Default, "담배");
-        //if (Input.GetKeyDown(KeyCode.G))
-        //    InputChat(EChatState.Other, ESaveLocation.JH, EChatType.Text, EFace.Difficult, EChatEvent.Default, "담배");
-        //if (Input.GetKeyDown(KeyCode.S))
-        //    InputChat(EChatState.Me, ESaveLocation.JW, EChatType.Text, EFace.Default, EChatEvent.Default, "준원아");
-        //if (Input.GetKeyDown(KeyCode.D))
-        //    InputChat(EChatState.Other, ESaveLocation.JH, EChatType.CutScene, EFace.Default, EChatEvent.Default, "Start");
-
-        //if (Input.GetKeyDown(KeyCode.R))
-        //    InputQuestion(ESaveLocation.JH, EChatType.Question, EFace.Default, EChatEvent.Default, "점심 메뉴 뭐야?");
-
-        //if (Input.GetKeyDown(KeyCode.T))
-        //    InputChatting(true, ChatType.Image, "담배");
-        //if (Input.GetKeyDown(KeyCode.Y))
-        //    InputChatting(true, ChatType.CutScene, "Start");
-
-        //EndToScroll();
     }
 
     private void OnEnable()
@@ -138,60 +107,13 @@ public class UIReader_Chatting : UI_Reader
         //chatGround.Q<ScrollView>(chatGround.name).scrollDecelerationRate = 5f;
     }
 
-    public void AddChapter(string who, string name)
-    {
-        Debug.Log("챕터 붙여줌 : " + who + " " + name);
-        if (FindMember(who).chapterName == "")
-            FindMember(who).chapterName = FindChapter(name).showName;
-        else
-            Debug.Log("이미 챕터가 있어서 추가할 수 없음");
-    }
-
-    public Chapter FindChapter(string name)
-    {
-        foreach (Chapter chapter in chatContainer.MainChapter)
-        {
-            if (chapter.showName == name)
-                return chapter;
-        }
-
-        Debug.Log("챕터 찾기 실패");
-        return null;
-    }
-
-    public void NextChapter()
-    {
-        AddChapter(FindChapter(chatContainer.NowChapter.nextChapterName).saveLocation.ToString(),
-            FindChapter(chatContainer.NowChapter.nextChapterName).showName);
-        ;
-    }
-
-    // 현재 뭐가 됐든 챕터가 진행중이라면? 이거 여기 말고 nowchapter쪽에 박아둬도 괜찮을듯
-    IEnumerator Chapter(string name)
-    {
-        Debug.Log("챕터 코루틴 진입");
-        isChapterProcessing = true;
-
-        Chapter chapter = FindChapter(name);
-        var chats = chapter.chat;
-
-        foreach (var chat in chats)
-        {
-            InputChat(chat.state, chapter.saveLocation, chat.type, chat.face, chat.text, true);
-            Debug.Log("Chapter Debug : " + chat.text);
-            yield return new WaitForSeconds(1.5f);
-        }
-
-        // 다음 챕터 달아주기... 상대 이름 + 챕터 이름
-        AddChapter(FindChapter(chapter.nextChapterName).saveLocation.ToString(), chapter.nextChapterName);
-        isChapterProcessing = false;
-    }
+    
 
     public MemberChat FindMember(string name)
     {
         foreach(MemberChat member in memberChats)
         {
-            if (member.nickName == name || member.name == name)
+            if (member.nickName.ToString() == name || member.name == name)
                 return member;
         }
 
@@ -202,6 +124,9 @@ public class UIReader_Chatting : UI_Reader
     {
         for (int i = chatGround.childCount - 1; i >= 0; i--)
             chatGround.RemoveAt(i);
+
+        for (int i = questionGround.childCount - 1; i >= 0; i--)
+            questionGround.RemoveAt(i);
     }
 
     private void RecallChatting(MemberChat otherName)
@@ -212,11 +137,7 @@ public class UIReader_Chatting : UI_Reader
             InputChat(chat.who, chat.toWho, chat.chatType, otherName.face, chat.text, false);
 
         foreach (Chatting chat in otherName.quetions)
-            InputQuestion(chat.toWho, chat.chatType, otherName.face, chat.text, false);
-
-        ////스크롤바 맨 아래로 내리기
-        //chatGround.Q<ScrollView>(chatGround.name).verticalScroller.value
-        //    = chatGround.Q<ScrollView>(chatGround.name).verticalScroller.highValue;
+            InputQuestion(chat.toWho, chat.chatType, chat.text, false, null);
     }
 
     private void Te(VisualElement chat, Sprite sprite)
@@ -240,7 +161,8 @@ public class UIReader_Chatting : UI_Reader
         chat.style.height = sprite.rect.height * size;
     }
 
-    public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
+    public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, 
+        string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
     {
         // 생성
         VisualElement chat = null;
@@ -270,9 +192,6 @@ public class UIReader_Chatting : UI_Reader
         if (isRecord)
             RecordChat(suspect, who, toWho, type, msg);
 
-        ChangeT(suspect, evt, face, msg);
-
-        // 말하는 게 누구인지
         if (who == EChatState.Me)
             chat.AddToClassList("MyChat");
         else
@@ -282,7 +201,7 @@ public class UIReader_Chatting : UI_Reader
         chatGround.Add(chat);
     }
 
-    public void InputQuestion(ESaveLocation toWho, EChatType type, EFace face, string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
+    public void InputQuestion(ESaveLocation toWho, EChatType type, string msg, bool isRecord, IEnumerator reply, Action action = null)
     {
         // 생성
         VisualElement chat = null ;
@@ -293,23 +212,41 @@ public class UIReader_Chatting : UI_Reader
         {
             case EChatType.Question:
                 chat = RemoveContainer(ux_askChat.Instantiate());
+                chat.name = msg;
+                //chat.name = msg;
                 chat.Q<Label>().text = msg;
                 //chat.Q<Button>().clicked += action; // 대답 나오게
-                chat.Q<Button>().clicked += (() => { chat.parent.Remove(chat); });
+                chat.Q<Button>().clicked += (() => 
+                { 
+                    chat.parent.Remove(chat);
+                    for (int i = 0; i < suspect.quetions.Count - 1; ++i)
+                    {
+                        if (suspect.quetions[i].text == msg)
+                        {
+                            Debug.Log("질문 삭제됨");
+                            suspect.quetions.Remove(suspect.quetions[i]);
+                        }
+                    }
+                    // reply 출력
+                    if (reply != null)
+                        StartCoroutine(reply);
+                    action?.Invoke();
+                });
                 break;
             case EChatType.LockQuestion:
                 chat = RemoveContainer(ux_hiddenAskChat.Instantiate());
+                chat.name = msg;
+                //chat.name = msg;
                 break;
         }
 
         if (isRecord)
             RecordChat(suspect, EChatState.Me, toWho, type, msg);
 
-        ChangeT(suspect, evt, face, msg);
+        //ChangeT(suspect, msg);
 
         // 대화에 추가
         questionGround.Add(chat);
-        EndToScroll();
     }
 
     private void RecordChat(MemberChat member, EChatState who, ESaveLocation toWho, EChatType type, string msg)
@@ -320,54 +257,70 @@ public class UIReader_Chatting : UI_Reader
         chatting.toWho = toWho;
         chatting.chatType = type;
         chatting.text = msg;
-        member.chattings.Add(chatting);
-    }
 
-    private void ChangeT(MemberChat member, EChatEvent evt, EFace face, string msg)
-    {
-        // 표정 변화
-        if (member.face != face)
+        switch (type)
         {
-            VisualElement suspectFace = chattingFace.Q<VisualElement>("Face");
-            switch (face)
-            {
-                case EFace.Default:
-                    suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default]);
-                    break;
-                case EFace.Blush:
-                    suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush]);
-                    break;
-                case EFace.Difficult:
-                    suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Difficult]);
-                    break;
-            }
-
-            member.face = face;
-        }
-
-        // 이벤트
-        switch (evt)
-        {
-            case EChatEvent.Vibration:
+            case EChatType.Text:
+            case EChatType.Image:
+            case EChatType.CutScene:
+                member.chattings.Add(chatting);
                 break;
-            case EChatEvent.Round:
-                break;
-            case EChatEvent.Camera:
+            case EChatType.Question:
+            case EChatType.LockQuestion:
+                member.quetions.Add(chatting);
                 break;
         }
     }
 
-    private void EndToScroll()
+    ////////private void ChangeT(MemberChat member, string msg)
+    ////////{
+    ////////    표정 변화
+    ////////    if (member.face != face)
+    ////////    {
+    ////////        VisualElement suspectFace = chattingFace.Q<VisualElement>("Face");
+    ////////        switch (face)
+    ////////        {
+    ////////            case EFace.Default:
+    ////////                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default]);
+    ////////                break;
+    ////////            case EFace.Blush:
+    ////////                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush]);
+    ////////                break;
+    ////////            case EFace.Difficult:
+    ////////                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Difficult]);
+    ////////                break;
+    ////////        }
+
+    ////////        member.face = face;
+    ////////    }
+
+    ////////    이벤트
+    ////////    switch (evt)
+    ////////    {
+    ////////        case EChatEvent.Vibration:
+    ////////            break;
+    ////////        case EChatEvent.Round:
+    ////////            break;
+    ////////        case EChatEvent.Camera:
+    ////////            break;
+    ////////    }
+    ////////}
+
+    public void EndToScroll()
     {
-        ScrollView scrollView = chatGround.Q<ScrollView>("ChatGround");
+        //Debug.Log("줄내림 입력");
+        //ScrollView scrollView = chatGround.Q<ScrollView>("ChatGround");
 
-        scrollView.schedule.Execute(() =>
-        {
-            float contentHeight = scrollView.contentContainer.layout.height;
-            float viewportHeight = scrollView.contentViewport.layout.height;
+        //scrollView.schedule.Execute(() =>
+        //{
+        //    float contentHeight = scrollView.contentContainer.layout.height;
+        //    float viewportHeight = scrollView.contentViewport.layout.height;
 
-            scrollView.scrollOffset = new Vector2(0, contentHeight - viewportHeight);
-        });
+        //    scrollView.scrollOffset = new Vector2(0, contentHeight - viewportHeight);
+        //});
+
+        chatGround.Q<ScrollView>(chatGround.name).verticalScroller.value
+            = chatGround.Q<ScrollView>(chatGround.name).verticalScroller.highValue;
     }
 
     public void AddMember(string memberName)
@@ -387,13 +340,15 @@ public class UIReader_Chatting : UI_Reader
             };
 
             memberList.Add(newMember);
-            memberChats.Add(new MemberChat(memberName));
+            //memberChats.Add(new MemberChat(memberName));
         }
     }
 
     public void ChangeMember()
     {
-        if (memberList.style.display.value == DisplayStyle.Flex)
+        isMemberListOpen = !isMemberListOpen;
+
+        if (isMemberListOpen)
         {
             changeMemberButton.style.backgroundImage = new StyleBackground(changeMemberBtnOn);
             memberList.style.display = DisplayStyle.None;
@@ -413,7 +368,8 @@ public class UIReader_Chatting : UI_Reader
 
     public void ChoiceMember(MemberChat member)
     {
-        Debug.Log("dhktek");
+        currentMemberName = member.name;
+
         if (member != null)
         {
             ChangeProfile(member.name, member.faces[(int)member.face]);
@@ -425,9 +381,9 @@ public class UIReader_Chatting : UI_Reader
             if (member.chapterName != "")
             {
                 // 챕터 불러주고
-                StartCoroutine(Chapter(member.chapterName));
+                chapterManager.Chapter(/*member.name, */member.chapterName);
                 // 끝났으면 현재 챕터 초기화
-                member.chapterName = "";
+                //member.chapterName = "";
             }
             else
                 Debug.Log("챕터가 비어있음");

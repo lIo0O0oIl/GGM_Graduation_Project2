@@ -6,8 +6,6 @@ using DG.Tweening;
 
 public class UIReader_CutScene : UI_Reader
 {
-    CutSceneManager cutSceneManager;
-
     Button scene;
     Label text;
 
@@ -17,30 +15,10 @@ public class UIReader_CutScene : UI_Reader
     {
         base.OnEnable();
 
-        cutSceneManager = GetComponent<CutSceneManager>();  
-
         scene = root.Q<Button>("Scene");
         text = root.Q<Label>("Text");
 
         scene.clicked += (() => { cutSceneManager.Next(); });
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            PlayCutScene("Start");
-        }
-
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-        //    CutScene(true, "End");
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    CutScene(false);
-        //}
     }
 
     public void PlayCutScene(string name)

@@ -7,10 +7,16 @@ namespace ChatVisual
     public enum ESaveLocation
     {
         NotSave,
-        JH,
-        JW,
-        HS,
-        CM
+        JH, // Jihyen
+        JW, // Junwon
+        HS, // Hyensuck
+        CM, // Cheamin
+        HG, // HyenGue
+        DY, // Deayang
+
+        Teacher,
+        Friend,
+        Home
     }
 
     public enum EChatState
@@ -42,7 +48,7 @@ namespace ChatVisual
         Default,
         Vibration,      // ???⑸츩??嶺뚯쉳?х뙴?
         Round,      // ???逾??怨뺣뼺???怨삵룖??     
-        Camera,     // ?곸궠?筌????節뗪땁 ?影??꽑?낅슣?딁뵳?
+        Camera     // ?곸궠?筌????節뗪땁 ?影??꽑?낅슣?딁뵳?
     }
 
     [Serializable]
@@ -51,7 +57,9 @@ namespace ChatVisual
         public EChatState state;     // 嶺뚮씭?????롪퍒???????
         public EChatType type;
         public string text;        // 嶺???濡ル츎 ??
+        public bool is_UseThis;     // ??????덈츎嶺뚯솘?
         public EFace face;       // 嶺??????踰???戮곗젧
+        public bool isCan;
         public List<EChatEvent> textEvent = new List<EChatEvent>();
     }
 
@@ -61,6 +69,10 @@ namespace ChatVisual
         public string ask;        // ??좊닔???????덈츎 ??ルㅎ臾며춯?뼿
         public List<Chat> reply = new List<Chat>();     // ?잙갭梨룩굢??????????援?
         public bool is_UseThis;     // ??????덈츎嶺뚯솘?
+
+        public ESaveLocation changeWhoName;
+        public bool isChange;
+        public string changeName;
     }
 
     [Serializable]
@@ -82,8 +94,10 @@ namespace ChatVisual
         public List<LockAskAndReply> lockAskAndReply = new List<LockAskAndReply>();       // ??ル맧??嶺뚯쉶?꾣룇??
         public List<string> round = new List<string>();           // 嶺뚯빘鍮볠뤃?얠뿉??????琉우꽑
 
-        public bool is_nextChapter;     // ???깅쾳嶺?踰ㅸ땻節놁뿉???琉우꽑?띠럾????
-        public string nextChapterName;         // ???깅쾳 嶺?踰ㅸ땻節놁뿉???琉우꽑?띠룄??濡녹춺?嶺?踰ㅸ땻???筌뤾퍓????띠럾? ?熬곣뫗???
+        public bool isChapterEnd;     // is this chapter ended?
+        public bool isCan;            // can this chapter play?
+        public bool is_nextChapter;     // is this chapter have next chapter?
+        public string nextChapterName;         // next chapter name
     }
 
     public class ChatStruct : MonoBehaviour { }
