@@ -7,10 +7,6 @@ namespace ChatVisual
     public class RootNode : Node
     {
         public string showName;
-        public ESaveLocation saveLocation;
-        public List<string> round = new List<string>();
-
-        public bool is_nextChapter;
-        public string nextChapterIndex;
+        public List<string> loadFileNameList = new List<string>();
     }
 }

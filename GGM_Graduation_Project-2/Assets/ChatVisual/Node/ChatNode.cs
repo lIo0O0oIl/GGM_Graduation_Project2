@@ -12,6 +12,8 @@ namespace ChatVisual
         public EChatType type;
         public string text;    
         public EFace face; 
+
         public List<EChatEvent> textEvent = new List<EChatEvent>();
+        public string LoadNextDialog;
     }
 }

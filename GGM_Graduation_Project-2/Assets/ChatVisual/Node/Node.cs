@@ -7,8 +7,9 @@ namespace ChatVisual
 {
     public abstract class Node
     {
-        [HideInInspector] public string guid;       // Unity Object Unique identifiers
-        [HideInInspector] public Vector2 position;
+        public string guid;       // Unity Object Unique identifiers
+        public Vector2 position;
+
         public int index;
         public Label indexLabel;
 

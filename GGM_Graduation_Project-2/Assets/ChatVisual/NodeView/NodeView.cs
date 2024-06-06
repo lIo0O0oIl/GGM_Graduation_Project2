@@ -47,9 +47,6 @@ namespace ChatVisual
                 case AskNode:
                     input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
                     break;
-                case LockAskNode:
-                    input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
-                    break;
                 case ConditionNode:
                     input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Multi, typeof(bool));
                     break;
@@ -73,9 +70,6 @@ namespace ChatVisual
                     output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
                     break;
                 case AskNode:
-                    output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
-                    break;
-                case LockAskNode:
                     output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
                     break;
                 case ConditionNode:
@@ -103,9 +97,6 @@ namespace ChatVisual
                     break;
                 case AskNode:
                     AddToClassList("ask");      // blue
-                    break;
-                case LockAskNode:
-                    AddToClassList("lockAsk");      // gray
                     break;
                 case ConditionNode:
                     AddToClassList("condition");     // yellow

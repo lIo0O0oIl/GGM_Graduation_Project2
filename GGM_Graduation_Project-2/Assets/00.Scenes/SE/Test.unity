@@ -259,34 +259,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowChaptersIndex: 0
-  nowChatIndex: 2
-  nowChapter:
-    showName: "\uC870\uC218"
-    saveLocation: 0
-    chat: []
-    askAndReply: []
-    lockAskAndReply: []
-    round: []
-    is_nextChapter: 0
-    nextChapterName: 
-  mainChapter:
-  - showName: "\uC870\uC218"
-    saveLocation: 0
-    chat: []
-    askAndReply: []
-    lockAskAndReply: []
-    round: []
-    is_nextChapter: 0
-    nextChapterName: 
-  - showName: "\uB204\uAD70\uAC00"
-    saveLocation: 0
-    chat: []
-    askAndReply: []
-    lockAskAndReply: []
-    round: []
-    is_nextChapter: 0
-    nextChapterName: 
+  nowHumanName: 
+  testList:
+  - state: 1
+    type: 1
+    text: "\uB300\uD654"
+    face: 1
+    textEvent: 0200000003000000
+  - state: 0
+    type: 0
+    text: "\uC544\uB2C8\uC57C"
+    face: 0
+    textEvent: 
 --- !u!1 &1779873654
 GameObject:
   m_ObjectHideFlags: 0

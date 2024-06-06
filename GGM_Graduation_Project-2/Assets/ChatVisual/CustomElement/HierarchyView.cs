@@ -19,13 +19,13 @@ namespace ChatVisual
             chatContainer = _chatContainer;
             chatView = _chatView;
 
-            // IMGUI 사용해서 하이어라키창 만들어주기
+            // IMGUI ?????곴퐣 ??륁뵠?????쇨갯 筌띾슢諭??곻폒疫?
             Clear();
 
             ScrollView scrollView = new ScrollView(ScrollViewMode.Vertical);
             scrollView.style.marginBottom = 5;
             scrollView.Add(new Label("Chapters :"));
-            for (int i = 0; i < chatContainer.MainChapter.Count; ++i)
+            /*for (int i = 0; i < chatContainer.MainChapter.Count; ++i)
             {
                 int index = i;
                 string name = "";
@@ -62,21 +62,21 @@ namespace ChatVisual
                 set.Add(deleteButton);
                 scrollView.Add(set);
             }
-            Add(scrollView);
+            Add(scrollView);*/
         }
 
-        private void ChangeChapter(int index)
+/*        private void ChangeChapter(int index)
         {
-            //chatView.SaveChatSystem();      // 지금 챕터 저장해주기 
-            chatContainer.ChangeNowChapter(index);      // 챕터 넘기기
-            //chatView.LoadChatSystem(chatContainer);         // 챕터 로드해주기
-            chatView.PopulateView();        // 보이는 것 그려주기
+            //chatView.SaveChatSystem();      // 筌왖疫?筌?벤苑????館鍮먧틠?⑤┛ 
+            chatContainer.ChangeNowChapter(index);      // 筌?벤苑???띾┛疫?
+            //chatView.LoadChatSystem(chatContainer);         // 筌?벤苑?嚥≪뮆諭??곻폒疫?
+            chatView.PopulateView();        // 癰귣똻???野?域밸챶??틠?⑤┛
         }
 
         private void DeleteChapter(int index)
         {
             chatContainer.MainChapter.RemoveAt(index);
             UpdateHierarchy(chatContainer, chatView);
-        }
+        }*/
     }
 }
