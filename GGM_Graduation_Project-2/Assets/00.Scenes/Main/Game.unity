@@ -3928,7 +3928,8 @@ MonoBehaviour:
   - fileName: "\uC0AC\uAC74 \uD604\uC7A5"
     fileParentName: "\uD559\uAD50"
     fileType: 1
-    eventName: 
+    eventName: "\uC0AC\uB9DD \uCD94\uC815 \uC2DC\uAC04\uC740 9\uC2DC\uC5D0\uC11C
+      12\uC2DC \uC0AC\uC774\uB77C\uACE0 \uD569\uB2C8\uB2E4"
     lockQuestionName: 
   - fileName: "\uC2DC\uCCB4"
     fileParentName: "\uD559\uAD50"
@@ -12571,36 +12572,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowChaptersIndex: 12
-  nowChatIndex: 3
+  nowChaptersIndex: 0
+  nowChatIndex: 6
   nowChapter:
-    showName: "\uBC18 \uCE5C\uAD6C\uB4E4 \uBA74\uB2F4 \uD6C4 "
+    showName: "\uC0AC\uAC74 \uC2DC\uC791"
     saveLocation: 5
     chat:
     - state: 0
       type: 0
-      text: "\uC218\uC5F0\uC774\uB97C \uAD34\uB86D\uD78C \uCE5C\uAD6C \uB54C\uBB38\uC5D0
-        \uADF9\uB2E8\uC801 \uC120\uD0DD\uC744 \uD55C \uAC78\uAE4C\uC694?"
+      text: "\uC800\uB294 \uC774\uBC88 \uC218\uC0AC\uB97C \uB3D5\uAC8C \uB41C \uBC15\uD604\uADDC
+        \uACBD\uC0AC\uC785\uB2C8\uB2E4"
       is_UseThis: 0
       face: 0
       isCan: 0
-      textEvent: 02000000
+      textEvent: 
     - state: 1
       type: 0
-      text: "\uAC15\uC9C0\uD604 \uD559\uC0DD\uC744 \uC870\uC0AC\uD574 \uBD10\uC57C
-        \uD560 \uAC70 \uAC19\uC544"
+      text: "\uADF8\uB798, \uC798 \uBD80\uD0C1\uD558\uB124"
+      is_UseThis: 0
+      face: 0
+      isCan: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: "\uC740\uC131 \uACE0\uB4F1\uD559\uAD50\uC5D0\uC11C \uC790\uC0B4 \uC2E0\uACE0\uAC00
+        \uB4E4\uC5B4\uC654\uC2B5\uB2C8\uB2E4"
+      is_UseThis: 0
+      face: 1
+      isCan: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: "\uC81C\uAC00 \uC0AC\uAC74\uACFC \uAD00\uB828\uB41C \uC790\uB8CC\uB97C
+        \uD30C\uC77C\uD654 \uD558\uC5EC \uD615\uC0AC\uB2D8\uAED8 \uBCF4\uB0B4\uB4DC\uB9B4\uD14C\uB2C8"
+      is_UseThis: 0
+      face: 1
+      isCan: 0
+      textEvent: 
+    - state: 0
+      type: 0
+      text: "\uD615\uC0AC\uB2D8\uAED8\uC11C\uB294 \uC774 \uCEF4\uD4E8\uD130\uB97C
+        \uD1B5\uD574 \uC0AC\uAC74\uC744 \uC870\uC0AC\uD574\uC8FC\uC2DC\uBA74 \uB429\uB2C8\uB2E4"
       is_UseThis: 0
       face: 0
       isCan: 0
       textEvent: 
     askAndReply: []
     lockAskAndReply: []
-    round:
-    - "\uBC18 \uCE5C\uAD6C\uB4E4 \uC99D\uC5B8"
+    round: []
     isChapterEnd: 0
     isCan: 0
     is_nextChapter: 1
-    nextChapterName: "\uAC15\uC9C0\uD604 1\uCC28 \uBA74\uB2F4"
+    nextChapterName: "\uC2DC\uCCB4 \uC870\uC0AC"
   mainChapter:
   - showName: "\uC0AC\uAC74 \uC2DC\uC791"
     saveLocation: 5
@@ -12686,7 +12709,7 @@ MonoBehaviour:
         \uC0AC\uC774\uB77C\uACE0 \uD569\uB2C8\uB2E4"
       is_UseThis: 0
       face: 1
-      isCan: 0
+      isCan: 1
       textEvent: 
     - state: 0
       type: 0
