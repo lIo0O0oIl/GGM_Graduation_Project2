@@ -18,6 +18,8 @@ public class UIReader_ImageFinding : UI_Reader
     VisualTreeAsset ux_imageEvidence;
     VisualTreeAsset ux_evidenceExplanation;
 
+    bool isImageOpen;
+
     private void Awake()
     {
         base.Awake();
@@ -52,13 +54,17 @@ public class UIReader_ImageFinding : UI_Reader
             // 해당 이미지를 찾았다면 배경 설정
             if (image.name == file.Q<Label>("FileName").text)
             {
-                if (image.isOpen)
+                if (isImageOpen)
                 {
                     // filesystem 사이즈 변환 버튼 켜기
                     fileSystem.changeSizeButton.pickingMode = PickingMode.Position;
                     imageGround.style.display = DisplayStyle.None;
-                    for (int i = 0; i < imageGround.childCount - 1; i++)
-                        imageGround.Remove(imageGround.Children().ElementAt(i));
+
+                    for (int i = imageGround.childCount - 1; i >= 0; i--)
+                        imageGround.RemoveAt(i);
+
+                    //for (int i = 0; i < imageGround.childCount - 1; i++)
+                    //    imageGround.Remove(imageGround.Children().ElementAt(i));
 
                     Debug.Log("dfojasflasildfkjaoijskdvnoajsdfovnialsjdfonwajs");
                     FileT fileT = fileSystem.FindFile(file.Q<Label>("FileName").text);
@@ -74,7 +80,10 @@ public class UIReader_ImageFinding : UI_Reader
                     fileSystem.ChangeSize(0f);
 
                     imageGround.style.display = DisplayStyle.Flex;
-                    imageGround.style.backgroundImage = new StyleBackground(image.image);
+                    //imageGround.style.backgroundImage = new StyleBackground(image.image);
+                    
+                    VisualElement textImage = RemoveContainer(ux_imageGround.Instantiate());
+                    textImage.style.backgroundImage = new StyleBackground(image.image);
 
                     // 자식 단서들을 생성
                     // 이름으로 찾아주고
@@ -97,8 +106,12 @@ public class UIReader_ImageFinding : UI_Reader
                                     evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = png.memo;
                                     evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                     {
-                                        VisualElement description = evidence.Q<VisualElement>("Descripte");
-                                        description.style.display = DisplayStyle.Flex;
+                                        //VisualElement description = evidence.Q<VisualElement>("Descripte");
+                                        //description.style.display = DisplayStyle.Flex;
+
+                                        evidence.Q<VisualElement>("Descripte").style.display = DisplayStyle.Flex;
+                                        evidence.Q<VisualElement>("Descripte").style.left = png.descriptePos.x;
+                                        evidence.Q<VisualElement>("Descripte").style.top = png.descriptePos.y;
 
                                         if (png.isOpen == false)
                                         {
@@ -116,10 +129,16 @@ public class UIReader_ImageFinding : UI_Reader
                                     evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                     evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                     {
+                                        for (int i = textImage.childCount - 1; i >= 0; i--)
+                                        {
+                                            if (textImage.Children().ElementAt(i).name == "descriptionLabel")
+                                                textImage.RemoveAt(i);
+                                        }
                                         VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
-                                        imageGround.Add(evidenceDescription);
+                                        evidenceDescription.name = "descriptionLabel";
+                                        textImage.Add(evidenceDescription);
                                         DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, true,
-                                            () => { imageGround.Remove(evidenceDescription); });
+                                            () => { textImage.Remove(evidenceDescription); });
                                     });
                                 }
 
@@ -130,13 +149,15 @@ public class UIReader_ImageFinding : UI_Reader
                                 evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
                                 evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
                                 // 단서를 이미지에 추가
-                                imageGround.Add(evidence);
+                                textImage.Add(evidence);
                             }
                         }
                     }
+
+                    imageGround.Add(textImage);
                 }
 
-                image.isOpen = !image.isOpen;
+                isImageOpen = !isImageOpen;
             }
         }
 

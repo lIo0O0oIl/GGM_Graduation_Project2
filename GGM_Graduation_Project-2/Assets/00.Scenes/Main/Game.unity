@@ -3531,6 +3531,7 @@ MonoBehaviour:
     quetions: []
   changeMemberBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: 4154780841294389669, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
+  isMemberListOpen: 0
   isChapterProcessing: 0
 --- !u!114 &150678881
 MonoBehaviour:
@@ -3588,6 +3589,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: e3977c1adde0a5040b3b5b373c6228a3, type: 3}
     size: {x: 1639, y: 1123}
     pos: {x: 24, y: -33}
+    descriptePos: {x: 500, y: 250}
   - name: "\uC2E0\uBC1C"
     image: {fileID: 21300000, guid: 00531fa989e55b748b68d2ade13982ec, type: 3}
     isOpen: 0
@@ -3597,6 +3599,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: 00531fa989e55b748b68d2ade13982ec, type: 3}
     size: {x: 130, y: 130}
     pos: {x: 70, y: 714}
+    descriptePos: {x: 250, y: 350}
   - name: "\uB09C\uAC04"
     image: {fileID: 21300000, guid: 2325df0c405ce814ca108b5ce80070a7, type: 3}
     isOpen: 0
@@ -3605,6 +3608,7 @@ MonoBehaviour:
     saveImage: {fileID: 0}
     size: {x: 50, y: 50}
     pos: {x: 400, y: 800}
+    descriptePos: {x: 0, y: 0}
   - name: "\uCC45"
     image: {fileID: 21300000, guid: 29102b5770e74e447b528dcf2a5e9c5c, type: 3}
     isOpen: 0
@@ -3613,6 +3617,7 @@ MonoBehaviour:
     saveImage: {fileID: 0}
     size: {x: 103, y: 118}
     pos: {x: 491, y: 323}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC77C\uAE301"
     image: {fileID: 21300000, guid: 76c169f72c7e29e48850db89dcd78fe9, type: 3}
     isOpen: 0
@@ -3622,6 +3627,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     size: {x: 103, y: 114}
     pos: {x: 308, y: 536}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC0AC\uC9C4"
     image: {fileID: 21300000, guid: 575d251884039934b95c8aa23fd6a389, type: 3}
     isOpen: 0
@@ -3632,6 +3638,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: 575d251884039934b95c8aa23fd6a389, type: 3}
     size: {x: 103, y: 114}
     pos: {x: 1060, y: 362}
+    descriptePos: {x: 0, y: 0}
   - name: "\uB18D\uAD6C \uD3EC\uC2A4\uD130"
     image: {fileID: 21300000, guid: b221297afd4bdb545bf11a8386b94712, type: 3}
     isOpen: 0
@@ -3641,6 +3648,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: 575d251884039934b95c8aa23fd6a389, type: 3}
     size: {x: 213, y: 251}
     pos: {x: 299, y: 79}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC57C\uAD6C\uBC29\uB9DD\uC774"
     image: {fileID: 21300000, guid: d3b555cf975a5e2478214d27a348fd20, type: 3}
     isOpen: 0
@@ -3649,6 +3657,7 @@ MonoBehaviour:
     saveImage: {fileID: 0}
     size: {x: 213, y: 251}
     pos: {x: 1462, y: 753}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC774\uC218\uC5F0\uC758 \uD578\uB4DC\uD3F0"
     image: {fileID: 21300000, guid: e6198f6d75181094dac5fd527d9294ff, type: 3}
     isOpen: 0
@@ -3657,6 +3666,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: e6198f6d75181094dac5fd527d9294ff, type: 3}
     size: {x: 198, y: 213}
     pos: {x: 72, y: 584}
+    descriptePos: {x: 0, y: 0}
   - name: "\uB18D\uAD6C \uD53C\uADDC\uC5B4"
     image: {fileID: 21300000, guid: 029f93eda14d9ee41afdc816f87aeca5, type: 3}
     isOpen: 0
@@ -3666,6 +3676,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: e6198f6d75181094dac5fd527d9294ff, type: 3}
     size: {x: 209, y: 238}
     pos: {x: 59, y: 204}
+    descriptePos: {x: 0, y: 0}
   - name: "\uBCA0\uAC1C"
     image: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     isOpen: 0
@@ -3674,6 +3685,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     size: {x: 213, y: 251}
     pos: {x: 1161, y: 445}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC4F0\uB808\uAE30\uD1B5"
     image: {fileID: 21300000, guid: 9a1b909b4fbe9bb4ea7113ffec736df6, type: 3}
     isOpen: 0
@@ -3682,6 +3694,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     size: {x: 211, y: 251}
     pos: {x: 110, y: 529}
+    descriptePos: {x: 0, y: 0}
   - name: "\uCEF4\uD4E8\uD130"
     image: {fileID: 21300000, guid: e7502d889cb3d1543b3d96db99b32410, type: 3}
     isOpen: 0
@@ -3690,6 +3703,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     size: {x: 211, y: 251}
     pos: {x: 490, y: 162}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC11C\uB78D"
     image: {fileID: 21300000, guid: fe5672c7dca4c4544943c38def302d51, type: 3}
     isOpen: 1
@@ -3698,6 +3712,7 @@ MonoBehaviour:
     saveImage: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     size: {x: 211, y: 251}
     pos: {x: 404, y: 316}
+    descriptePos: {x: 0, y: 0}
   memos:
   - name: "\uC77C\uAE301"
     memo: 
