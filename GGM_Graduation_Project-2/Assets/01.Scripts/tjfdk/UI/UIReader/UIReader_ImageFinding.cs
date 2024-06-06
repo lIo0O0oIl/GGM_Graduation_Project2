@@ -110,8 +110,8 @@ public class UIReader_ImageFinding : UI_Reader
                                         //description.style.display = DisplayStyle.Flex;
 
                                         evidence.Q<VisualElement>("Descripte").style.display = DisplayStyle.Flex;
-                                        evidence.Q<VisualElement>("Descripte").style.left = png.descriptePos.x;
-                                        evidence.Q<VisualElement>("Descripte").style.top = png.descriptePos.y;
+                                        evidence.Q<VisualElement>("Descripte").style.left = png.pos.x + png.size.x;
+                                        evidence.Q<VisualElement>("Descripte").style.top = png.pos.y - 250;
 
                                         if (png.isOpen == false)
                                         {
