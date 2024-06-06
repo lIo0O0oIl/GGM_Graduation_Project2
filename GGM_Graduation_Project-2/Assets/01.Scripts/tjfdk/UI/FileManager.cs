@@ -24,32 +24,38 @@ public class FileManager : UI_Reader
 
     public void UnlockChapter(FileT file)
     {
-        Chapter chapter = chapterManager.FindChapter(file.eventName);
-        if (chapter != null)
+        if (file.eventName != "")
         {
-            if (chapter.isCan == true)
+            Chapter chapter = chapterManager.FindChapter(file.eventName);
+            if (chapter != null)
             {
-                chapter.isCan = false;
-                if (chapterManager.previousChapter.isChapterEnd)
+                if (chapter.isCan == true)
                 {
-                    chapterManager.NextChapter(chapter.showName);
-                    Debug.Log("ddakakakkakakakakak");
+                    chapter.isCan = false;
+                    if (chapterManager.previousChapter.isChapterEnd)
+                    {
+                        chapterManager.NextChapter(chapter.showName);
+                        Debug.Log("ddakakakkakakakakak");
 
+                    }
                 }
             }
+            else
+                Debug.Log("chat 트리거 엿음!!");
         }
-        else
-            Debug.Log("chat 트리거 엿음!!");
     }
 
     public void UnlockChat(FileT file)
     {
-        if (chapterManager.FindChat(file.eventName) != null)
+        if (file.eventName != "")
         {
-            if (chapterManager.FindChat(file.eventName).isCan == true)
-                chapterManager.FindChat(file.eventName).isCan = false;
+            if (chapterManager.FindChat(file.eventName) != null)
+            {
+                if (chapterManager.FindChat(file.eventName).isCan == true)
+                    chapterManager.FindChat(file.eventName).isCan = false;
+            }
+            else
+                Debug.Log("챕터 트리거 엿음!");
         }
-        else
-            Debug.Log("챕터 트리거 엿음!");
     }
 }

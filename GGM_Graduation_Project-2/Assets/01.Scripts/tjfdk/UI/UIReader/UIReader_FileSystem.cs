@@ -216,7 +216,6 @@ public class UIReader_FileSystem : UI_Reader
         {
             case FileType.FOLDER:
                 {
-                    Debug.Log(fileName + " " + fileParentName);
                     // 생성
                     file = RemoveContainer(ux_folderFile.Instantiate());
 
