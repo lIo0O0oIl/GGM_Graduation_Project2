@@ -6,6 +6,7 @@ namespace ChatVisual
 {
     public class ChatNode : Node
     {
+        public Node parent;
         public List<Node> childList = new List<Node>();
 
         public EChatState state; 

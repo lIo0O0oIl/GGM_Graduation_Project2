@@ -15,22 +15,22 @@ namespace ChatVisual
         private int enumValue;
         private int enumValue2;
 
-        private List<EChatEvent> chatEventList = new List<EChatEvent>();     // ???類ｌ┯???
-        private List<string> evidenceList = new List<string>();     // ?꿔꺂?ｉ뜮?뚮쑏癰귥쥓夷??
-        private List<string> roundList = new List<string>();        // ??⑤슢??????鶯???濚밸Ŧ?뤺짆???????쀫굞?←춯?????????
+        private List<EChatEvent> chatEventList = new List<EChatEvent>();     // ???筌먲퐣????
+        private List<string> evidenceList = new List<string>();     // ?轅붽틓?節됰쑏???몡?곌램伊볟ㅇ??
+        private List<string> roundList = new List<string>();        // ???ㅼ뒧??????傭???嚥싲갭큔?琉븐쭍????????リ턂??먯땡?????????
 
         private bool is_Expand = false;
         private bool is_LoadList = false;
 
-        public void UpdateInspector(NodeView node)      // ????썼キ???癲ル슢??蹂좊쨨?誘⑹º???쎛 ?????봔饔끸뮧??ш낄猷???
+        public void UpdateInspector(NodeView node)      // ?????쇈궘????꿔꺂???癰귥쥓夷?沃섃뫗쨘????쎛 ?????遊붋耀붾겦裕????꾤뙴???
         {
-            Clear();        // ???β뼯?蹂λ뤀?亦껋꼨援????꿔꺂??袁ㅻ븶?癲?????ㅿ폍壤??
+            Clear();        // Delete all existing children
 
             is_Expand = false;
             is_LoadList = false;
 
             var container = new IMGUIContainer();
-           /* container.onGUIHandler = () =>
+            container.onGUIHandler = () =>
             {
                 GUIStyle style = new GUIStyle(GUI.skin.label);
                 style.fontSize = 20;
@@ -45,20 +45,13 @@ namespace ChatVisual
                             if (rootNode.child != null) is_ChildExist = true;
                             GUILayout.Space(15);
 
-                            rootNode.showName = EditorGUILayout.TextField("ShowName", rootNode.showName, EditorStyles.textArea);     // ????꾤뙴??醫롫븸??됱삩?
-                            GUILayout.Space(5);
-
-                            GUILayout.BeginHorizontal();
-                            GUILayout.Label("SaveLocation");
-                            GUILayout.Space(50);
-                            rootNode.saveLocation = (ESaveLocation)EditorGUILayout.EnumPopup(rootNode.saveLocation);        // ?????얜Ŧ?嶺??熬곣뫖利?????
-                            GUILayout.EndHorizontal();
+                            rootNode.showName = EditorGUILayout.TextField("ShowName", rootNode.showName, EditorStyles.textArea);
                             GUILayout.Space(10);
 
-                            // round ???ㅻ쿋??
+                            // round
                             if (!is_LoadList)
                             {
-                                roundList = new List<string>(rootNode.round);
+                                roundList = new List<string>(rootNode.loadFileNameList);
                                 is_LoadList = true;
                             }
                             GUIStyle boxStyle = EditorStyles.helpBox;
@@ -75,40 +68,31 @@ namespace ChatVisual
                                     roundList.Add("");
                                 }
                             }
-                            rootNode.round = new List<string>(roundList);
+                            rootNode.loadFileNameList = new List<string>(roundList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
-                            GUILayout.Space(5);
-
-                            // ?????뺢껸??????곸?? ??嶺뚮∥梨띄뙴濡년뵾????繹먮굞?????뺢껸?????怨룻뱺?????????怨뺤퓡 ???β뼯爰귨㎘??嚥▲굧?????????뉖?
-                            rootNode.is_nextChapter = EditorGUILayout.Toggle("is_nextChapter", rootNode.is_nextChapter);
-                            if (rootNode.is_nextChapter)
-                            {
-                                rootNode.nextChapterIndex = EditorGUILayout.TextField("nextChapterIndex", rootNode.nextChapterIndex);     // ???繹먮굞?????Β????嶺뚮슣??땻?????類ｌ┯??
-                            }
                         }
                         break;
                     case ChatNode:
                         {
                             GUILayout.Space(15);
                             ChatNode chatNode = node.node as ChatNode;
-                            if (chatNode.child.Count != 0) is_ChildExist = true;        // ???嶺?????β뼯援η뙴????ㅻ깹?????繹먮겧嫄х솾?
+                            if (chatNode.childList.Count != 0) is_ChildExist = true;      
 
                             enumValue = (int)chatNode.state;
-                            enumValue = GUILayout.Toolbar(enumValue, System.Enum.GetNames(typeof(EChatState)));     // ?꿔꺂????????????
+                            enumValue = GUILayout.Toolbar(enumValue, System.Enum.GetNames(typeof(EChatState))); 
                             chatNode.state = (EChatState)enumValue;
                             GUILayout.Space(5);
 
                             GUILayout.Label("Chat");
-                            chatNode.text = EditorGUILayout.TextArea(chatNode.text, EditorStyles.textArea);     // ????紐꾨쫯??
+                            chatNode.text = EditorGUILayout.TextArea(chatNode.text, EditorStyles.textArea);
                             GUILayout.Space(10);
 
                             enumValue2 = (int)chatNode.face;
-                            enumValue2 = GUILayout.Toolbar(enumValue2, System.Enum.GetNames(typeof(EFace)));        // ?꿔꺂????????????嶺뚮????
+                            enumValue2 = GUILayout.Toolbar(enumValue2, System.Enum.GetNames(typeof(EFace)));     
                             chatNode.face = (EFace)enumValue2;
                             GUILayout.Space(10);
 
-                            // ???類ｌ┯?????嚥?????ㅻ쿋??
                             if (!is_LoadList)
                             {
                                 chatEventList = new List<EChatEvent>(chatNode.textEvent);
@@ -141,44 +125,9 @@ namespace ChatVisual
                             GUILayout.Space(10);
 
                             GUILayout.Label("Ask");
-                            askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);     // ?꿔꺂???熬곻퐢利?
+                            askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);  
                             EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", askNode.is_UseThis);
-                        }
-                        break;
-                    case LockAskNode:
-                        {
-                            GUILayout.Space(15);
-                            LockAskNode lockAskNode = node.node as LockAskNode;
-                            if (lockAskNode.child != null) is_ChildExist = true;
-
-                            GUILayout.Label("Ask");
-                            lockAskNode.ask = EditorGUILayout.TextArea(lockAskNode.ask, EditorStyles.textArea);     // ?꿔꺂???熬곻퐢利?
-                            GUILayout.Space(10);
-
-                            // ?꿔꺂?ｉ뜮?뚮쑏癰귥쥓夷?
-                            if (!is_LoadList)
-                            {
-                                evidenceList = new List<string>(lockAskNode.evidence);
-                                is_LoadList = true;
-                            }
-                            GUIStyle boxStyle = EditorStyles.helpBox;
-                            GUILayout.BeginVertical(boxStyle);
-                            is_Expand = EditorGUILayout.BeginFoldoutHeaderGroup(is_Expand, "Evidence List", menuAction: ShowHeaderContextMenu);
-                            if (is_Expand)
-                            {
-                                for (int i = 0; i < evidenceList.Count; ++i)
-                                {
-                                    evidenceList[i] = GUILayout.TextField(evidenceList[i]);
-                                }
-                                if (GUILayout.Button("Add Evidence"))
-                                {
-                                    evidenceList.Add(null);
-                                }
-                            }
-                            lockAskNode.evidence = new List<string>(evidenceList);
-                            EditorGUILayout.EndFoldoutHeaderGroup();
-                            GUILayout.EndVertical();
                         }
                         break;
                 }
@@ -188,11 +137,11 @@ namespace ChatVisual
                 EditorGUILayout.Toggle("child", is_ChildExist);
                 EditorGUI.EndDisabledGroup();
             };
-*/
-            Add(container);     // UI ????????????鶯ㅺ동????묐쵈?? ???繹먮냱議????⑤슢????브퀣堉싪눧?????ㅔ??
+
+            Add(container);     // UI ????????????傭?끆?????臾먯탦?? ???濚밸Ŧ?김??????ㅼ뒧????釉뚰ｅ젆?る닱????????
         }
 
-        private void ShowHeaderContextMenu(Rect position)       // ?꿔꺂??????????ㅿ폑獄????????꿔꺂?????????κ땁???
+        private void ShowHeaderContextMenu(Rect position)       // ?轅붽틓???????????욱룕?????????轅붽틓?????????觀????
         {
             GenericMenu menu = new GenericMenu();
             menu.AddItem(new GUIContent("Clear"), false, () =>

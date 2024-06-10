@@ -13,9 +13,6 @@ namespace ChatVisual
         public int index;
         public Label indexLabel;
 
-        public Node parent;
-        public Node child;
-
         public bool is_UseThis;
     }
 }

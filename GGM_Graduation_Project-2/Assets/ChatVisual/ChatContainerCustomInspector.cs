@@ -10,7 +10,6 @@ namespace ChatVisual
     public class ChatContainerCustomInspector : Editor
     {
         private bool is_Open;
-        private List<bool> is_OpenList = new List<bool>();
 
         public override void OnInspectorGUI()
         {
@@ -25,37 +24,21 @@ namespace ChatVisual
                 GUIStyle boxStyle = EditorStyles.helpBox;
                 GUILayout.BeginVertical(boxStyle);
 
-                is_OpenList.Add(false);
                 foreach (var key in chatContainer.HumanAndChatDictionary)
                 {
-                    is_OpenList[0] = EditorGUILayout.BeginFoldoutHeaderGroup(is_OpenList[0], key.Key);
-                    GUILayout.Label(key.Key);
-                    foreach (var value in key.Value)
-                    {
-                        if (value is RootNode root)
-                        {
-                            GUILayout.Label(root.showName);
-                        }
-                    }
-                    EditorGUILayout.EndFoldoutHeaderGroup(); 
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label($"{key.Key}");
+                    GUILayout.FlexibleSpace();
+                    GUILayout.Label($"{key.Value.Count}");
+                    GUILayout.EndHorizontal();
                 }
-
                 GUILayout.EndVertical();
             }
-
             EditorGUILayout.EndFoldoutHeaderGroup();
-
-
-            GUILayout.Label(chatContainer.HumanAndChatDictionary.Count.ToString());
 
             if (GUILayout.Button("Dic Add"))
             {
                 chatContainer.HumanAndChatDictionary.Add("Assistant", new List<Node>());
-            }
-
-            if (chatContainer.HumanAndChatDictionary.ContainsKey("Assistant"))
-            {
-                GUILayout.Label(chatContainer.HumanAndChatDictionary["Assistant"].Count.ToString());
             }
         }
 
