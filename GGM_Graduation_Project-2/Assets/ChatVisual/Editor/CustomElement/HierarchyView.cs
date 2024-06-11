@@ -13,14 +13,19 @@ namespace ChatVisual
 
         private ChatContainer chatContainer;
         private ChatView chatView;
+        private InspectorView inspectorView;
 
-        int index = 0;
+        private int index = 0;
 
-        public void UpdateHierarchy(ChatContainer _chatContainer, ChatView _chatView)
+        public void InitHierarchy(ChatContainer _chatContainer, ChatView _chatView, InspectorView _inspectorView)
         {
             chatContainer = _chatContainer;
             chatView = _chatView;
+            inspectorView = _inspectorView;
+        }
 
+        public void UpdateHierarchy()
+        {
             // IMGUI
             Clear();
 
@@ -31,14 +36,6 @@ namespace ChatVisual
             scrollView.Add(new Label("Chapters :"));
             foreach(string name in chatContainer.HumanAndChatDictionary.Keys)
             {
-                /*if (chatContainer.MainChapter[i].showName == null || chatContainer.MainChapter[i].showName == "")
-                {
-                    name = "???";
-                }
-                else
-                {
-                    name = chatContainer.MainChapter[i].showName;
-                }*/
 
                 Button button = new Button(() => ChangeChapter(name));
                 button.style.flexDirection = FlexDirection.Row;
@@ -71,16 +68,17 @@ namespace ChatVisual
 
         private void ChangeChapter(string key)
         {
-            //chatView.SaveChatSystem();      // 嶺뚯솘???嶺?踰ㅸ땻????繞③뜮癒㏉떊??ㅲ뵛 
-            chatContainer.ChangeNowChapter(key);      // 嶺?踰ㅸ땻????얄뵛??
-            //chatView.LoadChatSystem(chatContainer);         // 嶺?踰ㅸ땻??β돦裕녻キ??怨삵룖??
-            chatView.PopulateView();        // ?곌랜???????잙갭梨?????ㅲ뵛
+            chatView.SaveChatName();   
+            chatContainer.ChangeNowChapter(key);    
+            chatView.LoadChatData(chatContainer);       
+            chatView.PopulateView();
+            inspectorView.Clear();
         }
 
         private void DeleteChapter(string key)
         {
             chatContainer.HumanAndChatDictionary.Remove(key);
-            UpdateHierarchy(chatContainer, chatView);
+            UpdateHierarchy();
         }
     }
 }

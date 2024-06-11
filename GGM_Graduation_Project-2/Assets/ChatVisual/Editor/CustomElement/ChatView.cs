@@ -16,6 +16,7 @@ namespace ChatVisual
         public class UmalTraits : GraphView.UxmlTraits { }
 
         private ChatContainer chatContainer;
+        private Label whoLabel;
 
         public Action<NodeView> OnNodeSelected;
 
@@ -29,14 +30,25 @@ namespace ChatVisual
             this.AddManipulator(new RectangleSelector());   // Add RectangleSelector
         }
 
+        public void InitChatView(Label label)
+        {
+            whoLabel = label;
+        }
+
         public void LoadChatData(ChatContainer _chatContainer)
         {
             chatContainer = _chatContainer;
+            whoLabel.text = "ChatView" + $" - {chatContainer.nowHumanName}";
 
             // Unconditional root nodes exist
             if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName].Count == 0)
             {
                 chatContainer.CreateNode(typeof(RootNode));
+            }
+
+            if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName][0] is RootNode rootNode)
+            {
+                rootNode.showName = chatContainer.nowHumanName;
             }
         }
 
@@ -44,7 +56,12 @@ namespace ChatVisual
         {
             if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName][0] is RootNode rootNode)
             {
-
+                if (chatContainer.nowHumanName != rootNode.showName)
+                {
+                    List<Node> tempNodeList = new List<Node>(chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName]);
+                    chatContainer.HumanAndChatDictionary.Remove(chatContainer.nowHumanName);
+                    chatContainer.HumanAndChatDictionary.Add(rootNode.showName, tempNodeList);
+                }
             }
         }
 

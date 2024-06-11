@@ -15,7 +15,7 @@ public class ChatEditor : EditorWindow
     private InspectorView inspectorView;        
     private HierarchyView hierarchyView;  
     private Button arrayAddBtn;
-    private Button dangerBtn;
+    private Button sortBtn;
 
     private ChatContainer chatContainer;
 
@@ -25,7 +25,14 @@ public class ChatEditor : EditorWindow
         GetWindow<ChatEditor>("ChatEditor");
     }
 
-    // private void OnDestroy() {  }
+    private void OnDestroy() 
+    {
+        if (chatContainer != null)
+        {
+            chatView.SaveChatName();
+            Debug.Log("Close and save");
+        }
+    }
 
     public void CreateGUI()
     {
@@ -39,15 +46,16 @@ public class ChatEditor : EditorWindow
         root.styleSheets.Add(styleSheet);     
 
         chatView = root.Q<ChatView>("chat-view");
+        chatView.InitChatView(root.Q<Label>("ChatViewLabel"));
         inspectorView = root.Q<InspectorView>("inspector-view");        
-        hierarchyView = root.Q<HierarchyView>("hierarchy-view");     
-       
+        hierarchyView = root.Q<HierarchyView>("hierarchy-view");
+
         arrayAddBtn = root.Q<Button>("AddBtn");  
-        arrayAddBtn.tooltip = "Chapter Add";
+        arrayAddBtn.tooltip = "Add Human";
         arrayAddBtn.clickable.clicked += OnArrayAddBtn;
-        dangerBtn = root.Q<Button>("ClearBtn");
-        dangerBtn.tooltip = "All Nodes Delete";
-        dangerBtn.clickable.clicked += OnClearNodes;
+        sortBtn = root.Q<Button>("SortBtn");
+        sortBtn.tooltip = "Delete All Nodes";
+        sortBtn.clickable.clicked += OnSortNodes;
 
         chatView.OnNodeSelected += OnSelectionNodeChanged;
 
@@ -59,14 +67,16 @@ public class ChatEditor : EditorWindow
         if (chatContainer != null)
         {
             Debug.Log("Add human");
+            chatContainer.HumanAndChatDictionary.Add("???", new List<Node>());
+            hierarchyView.UpdateHierarchy();
         }
     }
-
-    private void OnClearNodes()
+    
+    private void OnSortNodes()
     {
         if (chatContainer != null)
         {
-            Debug.Log("Delete all nodes");
+            Debug.Log("Sort all nodes!");
         }
     }
 
@@ -85,12 +95,12 @@ public class ChatEditor : EditorWindow
                 // The current chat is an assistant's chat
                 chatContainer.nowHumanName = "Assistant";
 
+                hierarchyView.InitHierarchy(chatContainer, chatView, inspectorView);
+                hierarchyView.UpdateHierarchy();      
+                
+                chatView.LoadChatData(chatContainer);
 
-                hierarchyView.UpdateHierarchy(chatContainer, chatView);      
-                chatView.LoadChatData(chatContainer);    
-                chatView.PopulateView();          
-
-                //Debug.Log($"Human count : {chatContainer.HumanAndChatDictionary.Count}");
+                chatView.PopulateView();
             }
         }
     }

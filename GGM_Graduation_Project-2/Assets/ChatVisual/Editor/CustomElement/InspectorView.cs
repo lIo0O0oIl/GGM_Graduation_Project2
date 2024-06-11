@@ -171,6 +171,6 @@ namespace ChatVisual
                 LoadFileList.Clear();
             });
             menu.DropDown(position);
-        }
+        } 
     }
 }
