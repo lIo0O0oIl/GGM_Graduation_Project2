@@ -14,31 +14,33 @@ namespace ChatVisual
         private ChatContainer chatContainer;
         private ChatView chatView;
 
+        int index = 0;
+
         public void UpdateHierarchy(ChatContainer _chatContainer, ChatView _chatView)
         {
             chatContainer = _chatContainer;
             chatView = _chatView;
 
-            // IMGUI ?????곴퐣 ??륁뵠?????쇨갯 筌띾슢諭??곻폒疫?
+            // IMGUI
             Clear();
+
+            Debug.Log("Update Hierarchy");
 
             ScrollView scrollView = new ScrollView(ScrollViewMode.Vertical);
             scrollView.style.marginBottom = 5;
             scrollView.Add(new Label("Chapters :"));
-            /*for (int i = 0; i < chatContainer.MainChapter.Count; ++i)
+            foreach(string name in chatContainer.HumanAndChatDictionary.Keys)
             {
-                int index = i;
-                string name = "";
-                if (chatContainer.MainChapter[i].showName == null || chatContainer.MainChapter[i].showName == "")
+                /*if (chatContainer.MainChapter[i].showName == null || chatContainer.MainChapter[i].showName == "")
                 {
                     name = "???";
                 }
                 else
                 {
                     name = chatContainer.MainChapter[i].showName;
-                }
+                }*/
 
-                Button button = new Button(() => ChangeChapter(index));
+                Button button = new Button(() => ChangeChapter(name));
                 button.style.flexDirection = FlexDirection.Row;
                 button.style.justifyContent = Justify.Center;
                 button.style.flexGrow = 1;
@@ -52,7 +54,7 @@ namespace ChatVisual
                 indexText.style.color = Color.gray;
                 button.Add(indexText);
 
-                var deleteButton = new Button(() => DeleteChapter(index))
+                var deleteButton = new Button(() => DeleteChapter(name))
                 {
                     text = "Delete"
                 };
@@ -61,22 +63,24 @@ namespace ChatVisual
                 set.Add(button);
                 set.Add(deleteButton);
                 scrollView.Add(set);
+
+                index++;
             }
-            Add(scrollView);*/
+            Add(scrollView);
         }
 
-/*        private void ChangeChapter(int index)
+        private void ChangeChapter(string key)
         {
-            //chatView.SaveChatSystem();      // 筌왖疫?筌?벤苑????館鍮먧틠?⑤┛ 
-            chatContainer.ChangeNowChapter(index);      // 筌?벤苑???띾┛疫?
-            //chatView.LoadChatSystem(chatContainer);         // 筌?벤苑?嚥≪뮆諭??곻폒疫?
-            chatView.PopulateView();        // 癰귣똻???野?域밸챶??틠?⑤┛
+            //chatView.SaveChatSystem();      // 嶺뚯솘???嶺?踰ㅸ땻????繞③뜮癒㏉떊??ㅲ뵛 
+            chatContainer.ChangeNowChapter(key);      // 嶺?踰ㅸ땻????얄뵛??
+            //chatView.LoadChatSystem(chatContainer);         // 嶺?踰ㅸ땻??β돦裕녻キ??怨삵룖??
+            chatView.PopulateView();        // ?곌랜???????잙갭梨?????ㅲ뵛
         }
 
-        private void DeleteChapter(int index)
+        private void DeleteChapter(string key)
         {
-            chatContainer.MainChapter.RemoveAt(index);
+            chatContainer.HumanAndChatDictionary.Remove(key);
             UpdateHierarchy(chatContainer, chatView);
-        }*/
+        }
     }
 }

@@ -40,6 +40,10 @@ namespace ChatVisual
             {
                 chatContainer.HumanAndChatDictionary.Add("Assistant", new List<Node>());
             }
+            if (GUILayout.Button("Dic Del"))
+            {
+                chatContainer.HumanAndChatDictionary.Clear();
+            }
         }
 
         private void ShowHeaderContextMenu(Rect position)

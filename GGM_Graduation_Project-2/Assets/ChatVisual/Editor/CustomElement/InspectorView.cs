@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-using UnityEditorInternal;
-using Codice.Client.Common;
 
 namespace ChatVisual
 {
@@ -15,14 +13,13 @@ namespace ChatVisual
         private int enumValue;
         private int enumValue2;
 
-        private List<EChatEvent> chatEventList = new List<EChatEvent>();     // ???筌먲퐣????
-        private List<string> evidenceList = new List<string>();     // ?轅붽틓?節됰쑏???몡?곌램伊볟ㅇ??
-        private List<string> roundList = new List<string>();        // ???ㅼ뒧??????傭???嚥싲갭큔?琉븐쭍????????リ턂??먯땡?????????
+        private List<EChatEvent> chatEventList = new List<EChatEvent>();
+        private List<string> LoadFileList = new List<string>();     
 
         private bool is_Expand = false;
         private bool is_LoadList = false;
 
-        public void UpdateInspector(NodeView node)      // ?????쇈궘????꿔꺂???癰귥쥓夷?沃섃뫗쨘????쎛 ?????遊붋耀붾겦裕????꾤뙴???
+        public void UpdateInspector(NodeView node)   
         {
             Clear();        // Delete all existing children
 
@@ -51,7 +48,7 @@ namespace ChatVisual
                             // round
                             if (!is_LoadList)
                             {
-                                roundList = new List<string>(rootNode.loadFileNameList);
+                                LoadFileList = new List<string>(rootNode.loadFileNameList);
                                 is_LoadList = true;
                             }
                             GUIStyle boxStyle = EditorStyles.helpBox;
@@ -59,23 +56,23 @@ namespace ChatVisual
                             is_Expand = EditorGUILayout.BeginFoldoutHeaderGroup(is_Expand, "Round List", menuAction: ShowHeaderContextMenu);
                             if (is_Expand)
                             {
-                                for (int i = 0; i < roundList.Count; ++i)
+                                for (int i = 0; i < LoadFileList.Count; ++i)
                                 {
-                                    roundList[i] = EditorGUILayout.TextArea(roundList[i]);
+                                    LoadFileList[i] = EditorGUILayout.TextArea(LoadFileList[i]);
                                 }
                                 if (GUILayout.Button("Add Round"))
                                 {
-                                    roundList.Add("");
+                                    LoadFileList.Add("");
                                 }
                             }
-                            rootNode.loadFileNameList = new List<string>(roundList);
+                            rootNode.loadFileNameList = new List<string>(LoadFileList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
                         }
                         break;
                     case ChatNode:
                         {
-                            GUILayout.Space(15);
+                            GUILayout.Space(10);
                             ChatNode chatNode = node.node as ChatNode;
                             if (chatNode.childList.Count != 0) is_ChildExist = true;      
 
@@ -119,13 +116,36 @@ namespace ChatVisual
                         break;
                     case AskNode:
                         {
-                            GUILayout.Space(15);
+                            GUILayout.Space(10);
                             AskNode askNode = node.node as AskNode;
                             if (askNode.child != null) is_ChildExist = true;
-                            GUILayout.Space(10);
 
                             GUILayout.Label("Ask");
-                            askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);  
+                            askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);
+
+                            if (!is_LoadList)
+                            {
+                                chatEventList = new List<EChatEvent>(askNode.textEvent);
+                                is_LoadList = true;
+                            }
+                            GUIStyle boxStyle = EditorStyles.helpBox;
+                            GUILayout.BeginVertical(boxStyle);
+                            is_Expand = EditorGUILayout.BeginFoldoutHeaderGroup(is_Expand, "Chat Event List", menuAction: ShowHeaderContextMenu);
+                            if (is_Expand)
+                            {
+                                for (int i = 0; i < chatEventList.Count; ++i)
+                                {
+                                    chatEventList[i] = (EChatEvent)EditorGUILayout.EnumPopup(chatEventList[i]);
+                                }
+                                if (GUILayout.Button("Add Chat Event"))
+                                {
+                                    chatEventList.Add(EChatEvent.Vibration);
+                                }
+                            }
+                            askNode.textEvent = new List<EChatEvent>(chatEventList);
+                            EditorGUILayout.EndFoldoutHeaderGroup();
+                            GUILayout.EndVertical();
+
                             EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", askNode.is_UseThis);
                         }
@@ -138,18 +158,17 @@ namespace ChatVisual
                 EditorGUI.EndDisabledGroup();
             };
 
-            Add(container);     // UI ????????????傭?끆?????臾먯탦?? ???濚밸Ŧ?김??????ㅼ뒧????釉뚰ｅ젆?る닱????????
+            Add(container);
         }
 
-        private void ShowHeaderContextMenu(Rect position)       // ?轅붽틓???????????욱룕?????????轅붽틓?????????觀????
+        private void ShowHeaderContextMenu(Rect position)
         {
             GenericMenu menu = new GenericMenu();
             menu.AddItem(new GUIContent("Clear"), false, () =>
             {
-                Debug.Log("dl");
+                Debug.Log("Clear");
                 chatEventList.Clear();
-                evidenceList.Clear();
-                roundList.Clear();
+                LoadFileList.Clear();
             });
             menu.DropDown(position);
         }

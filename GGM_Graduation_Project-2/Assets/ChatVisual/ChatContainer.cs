@@ -11,7 +11,6 @@ namespace ChatVisual
         public Dictionary<string, List<Node>> HumanAndChatDictionary = new Dictionary<string, List<Node>>();        // Nodes connected to each other
 
         public string nowHumanName;
-        public List<Node> nowChatNodeList = new List<Node>();       // Now drawn
 
 #if UNITY_EDITOR
         public Node CreateNode(Type type)
@@ -30,7 +29,12 @@ namespace ChatVisual
         }
 #endif
 
-        /*public void AddChild(Node parent, Node child)
+        public void ChangeNowChapter(string key)
+        {
+            nowHumanName = key;
+        }
+
+        public void AddChild(Node parent, Node child)
         {
             Debug.Log($"Connect! parent : {parent}, child : {child}");
             var rootNode = parent as RootNode;
@@ -44,7 +48,7 @@ namespace ChatVisual
             var chatNode = parent as ChatNode;
             if (chatNode != null)
             {
-                chatNode.child.Add(child);
+                chatNode.childList.Add(child);
                 SortChildAndIndex();
                 return;
             }
@@ -53,14 +57,6 @@ namespace ChatVisual
             if (askNode != null)
             {
                 askNode.child = child;
-                SortChildAndIndex();
-                return;
-            }
-
-            var lockAskNode = parent as LockAskNode;
-            if (lockAskNode != null)
-            {
-                lockAskNode.child = child;
                 SortChildAndIndex();
                 return;
             }
@@ -75,7 +71,7 @@ namespace ChatVisual
 
         public void RemoveChild(Node parent, Node child)
         {
-            var rootNode = parent as RootNode;      //?????堉온??耀붾굝?????????용섯? ????룸ħ瑗????????
+            var rootNode = parent as RootNode;
             if (rootNode != null)
             {
                 rootNode.child = null;
@@ -85,7 +81,7 @@ namespace ChatVisual
             var chatNode = parent as ChatNode;
             if (chatNode != null)
             {
-                chatNode.child.Remove(child);
+                chatNode.childList.Remove(child);
                 return;
             }
 
@@ -94,12 +90,6 @@ namespace ChatVisual
             {
                 askNode.child = null;
                 return;
-            }
-
-            var lockAskNode = parent as LockAskNode;
-            if (lockAskNode != null)
-            {
-                lockAskNode.child = null;
             }
 
             var conditionNode = parent as ConditionNode;
@@ -127,34 +117,27 @@ namespace ChatVisual
                 return children;
             }
 
-            var lockAskNode = parent as LockAskNode;
-            if (lockAskNode != null && lockAskNode.child != null)
-            {
-                children.Add(lockAskNode.child);
-                return children;
-            }
-
             var chatNode = parent as ChatNode;
-            if (chatNode != null && chatNode.child.Count != 0)
+            if (chatNode != null && chatNode.childList.Count != 0)
             {
-                children = chatNode.child;
+                children = chatNode.childList;
             }
 
             return children;
         }
 
-        public void SortChildAndIndex()        // ??饔낅떽?????怨뚮옩鴉딅퀫?????饔낅떽????鶯ㅺ동??????嚥▲굧?????耀붾굝??????????壤???饔낅떽?????怨뚮옩鴉딅퀫???????獄쏅챶留??????????????癰궽블뀯???耀붾굝??????????壤???饔낅떽?????怨뚮옩鴉딅퀫??????????????????????????쑩??? 
+        public void SortChildAndIndex()    
         {
-            nowChatIndex = 1;
+            /*nowChatIndex = 1;
 
-            Queue<Node> askQueue = new Queue<Node>();    // ?耀붾굝??????????壤? ????耀붾굝??????????壤???? ??
+            Queue<Node> askQueue = new Queue<Node>();   
             Node nowNode = nodes[0];
 
-            // DFS ?????????ル뒌????? BFS ???耀붾굝??????????壤???耀붾굝?????????붾눀????????밸븶筌믩끃??? ????μ떜媛?걫?????耀붾굝??????????壤???????????????????욱뒅??DFS ???????????욱뒅????饔낅떽????????耀붾굝???????????欲꼲????
+            // DFS BFS 
             while (nowNode != null)
             {
                 var children = GetChild(nowNode);
-                if (children.Count == 1)        // ?????醫딇떍????????癲ル슢??????饔낅떽?????怨뚮옩鴉딅퀫??????
+                if (children.Count == 1)    
                 {
                     children[0].index = nowChatIndex;
                     children[0].indexLabel.text = nowChatIndex.ToString();
@@ -192,10 +175,10 @@ namespace ChatVisual
                 var children = GetChild(askQueue.Peek());
                 if (children.Count > 0) AskChatSort(children[0] as ChatNode);
                 askQueue.Dequeue();
-            }
+            }*/
         }
-
-        private void AskChatSort(ChatNode chatNode)      // ?耀붾굝??????????壤??????癲??됀????????????耀붾굝??????????壤??????????μ떜媛?걫?????饔낅떽????鶯ㅺ동?????????썹땟洹욌뙀???饔낅떽????鶯ㅺ동??????????????堉온?????汝뷴젆?琉????⑤슦????????????????쑩???域뱄퐘逾???ㅻ쿋?????
+/*
+        private void AskChatSort(ChatNode chatNode)  
         {
             if (chatNode == null) return;
 
@@ -227,6 +210,6 @@ namespace ChatVisual
             var next = GetChild(chatNode);
             if (next.Count > 0) AskChatSort(next[0] as ChatNode);
         }
-    }*/
+*/
     }
 }

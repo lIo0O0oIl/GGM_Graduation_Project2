@@ -13,6 +13,7 @@ namespace ChatVisual
         private bool _isDrag = false;
         private Vector2 _startPos;
         private VisualElement _beforeSlot;
+
         public Dragger(Action<MouseUpEvent, VisualElement, VisualElement> DropCallback)
         {
             activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
@@ -40,7 +41,7 @@ namespace ChatVisual
                 var x = target.layout.x;
                 var y = target.layout.y;
                 _beforeSlot = target.parent;
-                var container = target.parent.parent; //백그라운드
+                var container = target.parent.parent;
 
                 target.RemoveFromHierarchy();
                 container.Add(target);
@@ -82,7 +83,6 @@ namespace ChatVisual
             target.style.left = 0;
             target.style.top = 0;
 
-            //이벤트, 드래그하고있는 녀석, 이전 부모
             _dropCallback?.Invoke(evt, target, _beforeSlot);
         }
     }
