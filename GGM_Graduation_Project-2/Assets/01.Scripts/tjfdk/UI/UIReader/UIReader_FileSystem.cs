@@ -67,9 +67,15 @@ public class UIReader_FileSystem : UI_Reader
     public List<FolderFile> fileFolders;
     public FolderFile currentFileFolder;
 
-    // file dran and drop
+    // file drag and drop
     private VisualElement fileDefaultArea;
     private List<VisualElement> lockQuestions = new List<VisualElement>();
+
+    // image size standard
+    private const float MinWidth = 500f;
+    private const float MinHeight = 500f;
+    private const float MaxWidth = 1800f;
+    private const float MaxHeight = 980f;
 
     private void Awake()
     {
@@ -409,6 +415,7 @@ public class UIReader_FileSystem : UI_Reader
         VisualElement panel = RemoveContainer(ux_ImagePanel.Instantiate());
         panel.Q<Label>("Name").text = name + ".png";  
         panel.Q<VisualElement>("Image").style.backgroundImage = new StyleBackground(sprite);
+        ReSizeImage(panel.Q<VisualElement>("Image"), sprite);
         panel.Q<Button>("CloseBtn").clicked += () => 
         { 
             panelGround.Remove(panel);
@@ -419,6 +426,62 @@ public class UIReader_FileSystem : UI_Reader
         };
 
         panelGround.Add(panel);
+    }
+
+    public void ReSizeImage(VisualElement visualElement, Sprite sprite)
+    {
+        // 이미지 원본 크기
+        float originalWidth = sprite.rect.width;
+        float originalHeight = sprite.rect.height;
+
+        // 비율 유지하면서 크기 조정
+        Vector2 adjustedSize = ChangeSize(originalWidth, originalHeight);
+
+        // VisualElement 크기 설정
+        visualElement.style.width = adjustedSize.x;
+        visualElement.style.height = adjustedSize.y;
+
+        // Sprite 설정
+        visualElement.style.backgroundImage = new StyleBackground(sprite);
+    }
+
+    private Vector2 ChangeSize(float originalWidth, float originalHeight)
+    {
+        float aspectRatio = originalWidth / originalHeight;
+        float adjustedWidth = originalWidth;
+        float adjustedHeight = originalHeight;
+
+        // 크기가 너무 큰 경우
+        if (originalWidth > MaxWidth || originalHeight > MaxHeight)
+        {
+            if (aspectRatio > 1)
+            {
+                adjustedWidth = MaxWidth;
+                adjustedHeight = MaxWidth / aspectRatio;
+            }
+            else
+            {
+                adjustedHeight = MaxHeight;
+                adjustedWidth = MaxHeight * aspectRatio;
+            }
+        }
+
+        // 크기가 너무 작은 경우
+        if (adjustedWidth < MinWidth || adjustedHeight < MinHeight)
+        {
+            if (aspectRatio > 1)
+            {
+                adjustedWidth = MinWidth;
+                adjustedHeight = MinWidth / aspectRatio;
+            }
+            else
+            {
+                adjustedHeight = MinHeight;
+                adjustedWidth = MinHeight * aspectRatio;
+            }
+        }
+
+        return new Vector2(adjustedWidth, adjustedHeight);
     }
 
     public void OpenText(string name, string text)

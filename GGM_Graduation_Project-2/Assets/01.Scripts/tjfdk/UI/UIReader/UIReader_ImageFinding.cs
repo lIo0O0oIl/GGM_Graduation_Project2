@@ -63,10 +63,6 @@ public class UIReader_ImageFinding : UI_Reader
                     for (int i = imageGround.childCount - 1; i >= 0; i--)
                         imageGround.RemoveAt(i);
 
-                    //for (int i = 0; i < imageGround.childCount - 1; i++)
-                    //    imageGround.Remove(imageGround.Children().ElementAt(i));
-
-                    Debug.Log("dfojasflasildfkjaoijskdvnoajsdfovnialsjdfonwajs");
                     FileT fileT = fileSystem.FindFile(file.Q<Label>("FileName").text);
                     fileManager.UnlockChat(fileT);
                     fileManager.UnlockChapter(fileT);
@@ -80,7 +76,6 @@ public class UIReader_ImageFinding : UI_Reader
                     fileSystem.ChangeSize(0f);
 
                     imageGround.style.display = DisplayStyle.Flex;
-                    //imageGround.style.backgroundImage = new StyleBackground(image.image);
                     
                     VisualElement textImage = RemoveContainer(ux_imageGround.Instantiate());
                     textImage.style.backgroundImage = new StyleBackground(image.image);
