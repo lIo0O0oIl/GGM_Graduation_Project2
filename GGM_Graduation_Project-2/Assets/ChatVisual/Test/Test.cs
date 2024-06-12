@@ -41,7 +41,9 @@ namespace ChatVisual
                 {
                     moveArea.Add(target);
                 }
-            }));
+            },
+            () => { }
+            ));
 
         }
 

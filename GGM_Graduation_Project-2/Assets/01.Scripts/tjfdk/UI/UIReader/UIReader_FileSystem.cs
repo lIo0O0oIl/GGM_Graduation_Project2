@@ -165,7 +165,7 @@ public class UIReader_FileSystem : UI_Reader
         return null;
     }
 
-    private void LoadDragAndDrop(VisualElement file)
+    private void LoadDragAndDrop(VisualElement file, Action action)
     {
         // 드래그 앤 드롭 기능 추가
         file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
@@ -180,7 +180,9 @@ public class UIReader_FileSystem : UI_Reader
             }
             else
                 Debug.Log("잠긴 질문과 부딪힘");
-        }));
+        },
+        () => { action(); }
+        ));
     }
 
     private FolderFile FindFolder(string name)
@@ -254,35 +256,30 @@ public class UIReader_FileSystem : UI_Reader
                     file = RemoveContainer(ux_imageFile.Instantiate());
                     // 이름 변경
                     file.Q<Label>("FileName").text = fileName;
-                    // 이벤트 연결
-                    file.Q<Button>().clicked += () => ImageEvent(file); // 이미지 등록,,, 이미지 등록할 위치....
                     // 드래그 앤 드롭 기능 추가
-                    //LoadDragAndDrop(file);
-
-                    //
-                    // 드래그 앤 드롭 기능 추가
-                    //file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
-                    //{
-                    //    var area = FindMoveArea(evt.mousePosition);
-                    //    target.RemoveFromHierarchy();
-                    //    if (area == null)
-                    //    {
-                    //        beforeSlot.Add(target);
-                    //    }
-                    //    else
-                    //    {
-                    //        LockAskAndReply lockQuestion = FindQuestion(area);
-                    //        if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
-                    //        {
-                    //            area.parent.Remove(area);
-                    //            chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
-                    //                EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
-                    //        }
-                    //        else
-                    //            beforeSlot.Add(target);
-                    //    }
-                    //}));
-                    //
+                    file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
+                    {
+                        var area = FindMoveArea(evt.mousePosition);
+                        target.RemoveFromHierarchy();
+                        if (area == null)
+                        {
+                            beforeSlot.Add(target);
+                        }
+                        else
+                        {
+                            LockAskAndReply lockQuestion = FindQuestion(area);
+                            if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
+                            {
+                                area.parent.Remove(area);
+                                chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
+                                    EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
+                            }
+                            else
+                                beforeSlot.Add(target);
+                        }
+                    },
+                    () => { ImageEvent(file); }
+                    ));
 
                     // 파일 부모 지정
                     bool addNew = false;
@@ -312,10 +309,30 @@ public class UIReader_FileSystem : UI_Reader
                     file = RemoveContainer(ux_textFile.Instantiate());
                     // 이름 변경
                     file.Q<Label>("FileName").text = fileName;
-                    // 이벤트 연결
-                    file.Q<Button>().clicked += () => TextEvent(file);
                     // 드래그 앤 드롭 기능 추가
-                    LoadDragAndDrop(file);
+                    file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
+                    {
+                        var area = FindMoveArea(evt.mousePosition);
+                        target.RemoveFromHierarchy();
+                        if (area == null)
+                        {
+                            beforeSlot.Add(target);
+                        }
+                        else
+                        {
+                            LockAskAndReply lockQuestion = FindQuestion(area);
+                            if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
+                            {
+                                area.parent.Remove(area);
+                                chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
+                                    EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
+                            }
+                            else
+                                beforeSlot.Add(target);
+                        }
+                    },
+                    () => { TextEvent(file); }
+                    ));
 
                     // 파일 부모 지정
                     bool addNew = false;
