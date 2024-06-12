@@ -10,13 +10,13 @@ public class CutSceneText
 {
     public string sound;
     public string text;
-    public bool isEnd;
 }
 
 [Serializable]
 public class CutSceneDialoges
 {
-    public Sprite cut;
+    public bool isAnim;
+    public Sprite[] cut;
     public List<CutSceneText> texts = new List<CutSceneText>();
 }
 

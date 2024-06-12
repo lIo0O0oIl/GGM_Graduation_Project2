@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using System.Linq;
 
 public class UIReader_CutScene : UI_Reader
 {
@@ -27,13 +28,25 @@ public class UIReader_CutScene : UI_Reader
         OpenCutScene(true);
     }
 
-    public void ChangeCut(Sprite cut)
+    public void ChangeCut(bool isAnim, Sprite[] cuts)
     {
-        scene.style.backgroundImage = new StyleBackground(cut);
+        if (isAnim)
+            StartCoroutine(CutAnimation(cuts));
+        else
+            scene.style.backgroundImage = new StyleBackground(cuts[0]);
     }
 
     public void ChangeText(string msg, float writingDuring)
     {
         DoText(text, msg, writingDuring, false, () => { });
+    }
+
+    IEnumerator CutAnimation(Sprite[] cuts)
+    {
+        foreach (Sprite cut in cuts)
+        {
+            scene.style.backgroundImage = new StyleBackground(cut);
+            yield return new WaitForSeconds(0.75f);
+        }
     }
 }

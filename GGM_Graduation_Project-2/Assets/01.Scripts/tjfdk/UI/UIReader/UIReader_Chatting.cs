@@ -183,7 +183,7 @@ public class UIReader_Chatting : UI_Reader
                 chat = new Button();
                 chat.AddToClassList("FileChatSize");
                 chat.AddToClassList("NoButtonBorder");
-                Sprite sprite = cutSceneManager.FindCutScene(msg).cutScenes[0].cut;
+                Sprite sprite = cutSceneManager.FindCutScene(msg).cutScenes[0].cut[0];
                 chat.style.backgroundImage = new StyleBackground(sprite);
                 chat.Q<Button>().clicked += (() => { cutSceneSystem.PlayCutScene(msg); });
                 break;
