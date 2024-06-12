@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using Codice.Client.Common;
 
 namespace ChatVisual
 {
@@ -45,7 +46,7 @@ namespace ChatVisual
                             rootNode.showName = EditorGUILayout.TextField("ShowName", rootNode.showName, EditorStyles.textArea);
                             GUILayout.Space(10);
 
-                            // round
+                            // LoadFileName
                             if (!is_LoadList)
                             {
                                 LoadFileList = new List<string>(rootNode.loadFileNameList);
@@ -68,6 +69,9 @@ namespace ChatVisual
                             rootNode.loadFileNameList = new List<string>(LoadFileList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
+
+                            EditorGUI.BeginDisabledGroup(true);
+                            EditorGUILayout.IntField("NowIndex", rootNode.nowIndex);
                         }
                         break;
                     case ChatNode:
@@ -112,6 +116,9 @@ namespace ChatVisual
                             chatNode.textEvent = new List<EChatEvent>(chatEventList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
+
+                            EditorGUI.BeginDisabledGroup(true);
+                            EditorGUILayout.Toggle("is_UseThie", chatNode.is_UseThis);
                         }
                         break;
                     case AskNode:
@@ -150,10 +157,19 @@ namespace ChatVisual
                             EditorGUILayout.Toggle("is_UseThie", askNode.is_UseThis);
                         }
                         break;
+                    case ConditionNode:
+                        {
+                            ConditionNode conditionNode = node.node as ConditionNode;
+                            if (conditionNode.child != null) is_ChildExist = true;
+                            GUILayout.Space(15);
+
+                            EditorGUI.BeginDisabledGroup(true);
+                            EditorGUILayout.Toggle("is_UseThie", conditionNode.is_UseThis);
+                        }
+                        break;
                 }
 
                 GUILayout.Space(5);
-                EditorGUI.BeginDisabledGroup(true);
                 EditorGUILayout.Toggle("child", is_ChildExist);
                 EditorGUI.EndDisabledGroup();
             };

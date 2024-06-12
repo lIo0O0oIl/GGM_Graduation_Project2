@@ -11,6 +11,9 @@ namespace ChatVisual
         public Dictionary<string, List<Node>> HumanAndChatDictionary = new Dictionary<string, List<Node>>();        // Nodes connected to each other
 
         public string nowHumanName;
+        
+        private bool is_ConditionNowOk = false;
+        private int nowChatIndex = 1;       // index for Sort
 
 #if UNITY_EDITOR
         public Node CreateNode(Type type)
@@ -41,7 +44,7 @@ namespace ChatVisual
             if (rootNode != null)
             {
                 rootNode.child = child;
-                SortChildAndIndex();
+                SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
                 return;
             }
 
@@ -49,7 +52,7 @@ namespace ChatVisual
             if (chatNode != null)
             {
                 chatNode.childList.Add(child);
-                SortChildAndIndex();
+                SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
                 return;
             }
 
@@ -57,7 +60,7 @@ namespace ChatVisual
             if (askNode != null)
             {
                 askNode.child = child;
-                SortChildAndIndex();
+                SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
                 return;
             }
 
@@ -65,7 +68,7 @@ namespace ChatVisual
             if (conditionNode != null)
             {
                 conditionNode.child = child;
-                SortChildAndIndex();
+                SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
             }
         }
 
@@ -125,91 +128,62 @@ namespace ChatVisual
 
             return children;
         }
-
-        public void SortChildAndIndex()    
+        
+        public void SortChildAndIndex(Node startNode, int startIndex)    
         {
-            /*nowChatIndex = 1;
+            Node nowNode = startNode;         // RootNode
+            Queue<Node> askChatNode = new Queue<Node>();
+            List<Node> children = new List<Node>();
+            nowChatIndex = startIndex;
 
-            Queue<Node> askQueue = new Queue<Node>();   
-            Node nowNode = nodes[0];
+            Debug.Log("nono");
+            children = GetChild(nowNode);
 
             // DFS BFS 
-            while (nowNode != null)
+            while (children.Count > 0)
             {
-                var children = GetChild(nowNode);
-                if (children.Count == 1)    
+                children = GetChild(nowNode);
+                Debug.Log(children.Count);
+
+                if (children.Count == 1 && children[0] is ChatNode)            // When a child is a ChatNode
                 {
+                    if (is_ConditionNowOk)
+                    {
+                        if (children[0] is ConditionNode condition)
+                        {
+                            /*children[0].index = nowChatIndex;
+                            children[0].indexLabel.text = nowChatIndex.ToString();
+                            nowChatIndex++;
+                            nowNode = children[0];
+                            continue;*/
+                            Debug.Log(condition);
+                        }
+                    }
                     children[0].index = nowChatIndex;
                     children[0].indexLabel.text = nowChatIndex.ToString();
                     nowChatIndex++;
                     nowNode = children[0];
+                    Debug.Log("ho");
                 }
-                else
+                else        // When child is not a ChatNode
                 {
+                    Debug.Log(children.Count);
                     for (int i = 0; i < children.Count; i++)
                     {
-                        askQueue.Enqueue(children[i]);
-
-                        if (children[i] is AskNode askNode)
-                        {
-                            askNode.reply.Clear();
-                        }
-
-                        if (children[i] is LockAskNode lockAskNode)
-                        {
-                            lockAskNode.reply.Clear();
-                        }
-
                         children[i].index = nowChatIndex;
                         children[i].indexLabel.text = nowChatIndex.ToString();
                         nowChatIndex++;
+                        askChatNode.Enqueue(children[i]);
+                    }
+                    while (askChatNode.Count > 0)
+                    {
+                        if (askChatNode.Count == 0) is_ConditionNowOk = true;
+                        SortChildAndIndex(askChatNode.Peek(), nowChatIndex);
+                        askChatNode.Dequeue();
                     }
                     break;
                 }
             }
-
-            while (askQueue.Count > 0)
-            {
-                Debug.Log(askQueue.Peek());
-                askParentNode = askQueue.Peek();
-                var children = GetChild(askQueue.Peek());
-                if (children.Count > 0) AskChatSort(children[0] as ChatNode);
-                askQueue.Dequeue();
-            }*/
         }
-/*
-        private void AskChatSort(ChatNode chatNode)  
-        {
-            if (chatNode == null) return;
-
-            if (askParentNode is  AskNode askNode)
-            {
-                Chat chat = new Chat();
-                chat.text = chatNode.text;
-                chat.state = chatNode.state;
-                chat.face = chatNode.face;
-                chat.textEvent = chatNode.textEvent;
-                askNode.reply.Add(chat);
-            }
-
-            if (askParentNode is LockAskNode lockAskNode)
-            {
-                Chat chat = new Chat();
-                chat.text = chatNode.text;
-                chat.state = chatNode.state;
-                chat.face = chatNode.face;
-                chat.textEvent = chatNode.textEvent;
-                lockAskNode.reply.Add(chat);
-            }
-
-            chatNode.index = nowChatIndex;
-            chatNode.indexLabel.text = nowChatIndex.ToString();
-            nowChatIndex++;
-
-            Debug.Log(chatNode.child.Count);
-            var next = GetChild(chatNode);
-            if (next.Count > 0) AskChatSort(next[0] as ChatNode);
-        }
-*/
     }
 }

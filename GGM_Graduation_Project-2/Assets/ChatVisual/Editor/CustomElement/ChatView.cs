@@ -90,7 +90,7 @@ namespace ChatVisual
             });
 
             // Sort
-            this.chatContainer.SortChildAndIndex();
+            this.chatContainer.SortChildAndIndex(chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName][0], 1);
         }
 
 
