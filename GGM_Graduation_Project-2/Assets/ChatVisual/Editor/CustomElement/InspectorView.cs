@@ -163,6 +163,42 @@ namespace ChatVisual
                             if (conditionNode.child != null) is_ChildExist = true;
                             GUILayout.Space(15);
 
+                            if (conditionNode.is_SpecificFile == false)
+                            {
+                                conditionNode.is_AllQuestion = EditorGUILayout.Toggle("AllQuestion", conditionNode.is_AllQuestion);
+                            }
+                            if (conditionNode.is_AllQuestion == false)
+                            {
+                                conditionNode.is_SpecificFile = EditorGUILayout.Toggle("SpecificFile", conditionNode.is_SpecificFile);
+                            }
+
+                            if (conditionNode.is_AllQuestion)
+                            {
+                                conditionNode.InitConditionNode();
+                                if (conditionNode.checkClass is AllQuestion allQuestion)
+                                {
+                                    ++EditorGUI.indentLevel;
+                                    allQuestion.Init(conditionNode);
+                                    Debug.Log(allQuestion);
+                                    GUILayout.BeginHorizontal();
+                                    GUILayout.Label($"AskCount");
+                                    GUILayout.FlexibleSpace();
+                                    GUILayout.Label($"{allQuestion.asks.Count}");
+                                    GUILayout.EndHorizontal();
+                                    --EditorGUI.indentLevel;
+                                }
+                            }
+                            if (conditionNode.is_SpecificFile)
+                            {
+                                conditionNode.InitConditionNode();
+                                if (conditionNode.checkClass is SpecificFile specificFile)
+                                {
+                                    ++EditorGUI.indentLevel;
+                                    specificFile.fileName = EditorGUILayout.TextField("FileName", specificFile.fileName);
+                                    --EditorGUI.indentLevel;
+                                }
+                            }
+
                             EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", conditionNode.is_UseThis);
                         }

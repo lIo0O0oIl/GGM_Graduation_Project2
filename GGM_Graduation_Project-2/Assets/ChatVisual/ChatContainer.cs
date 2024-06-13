@@ -40,6 +40,7 @@ namespace ChatVisual
         public void AddChild(Node parent, Node child)
         {
             Debug.Log($"Connect! parent : {parent}, child : {child}");
+
             var rootNode = parent as RootNode;
             if (rootNode != null)
             {
@@ -70,6 +71,11 @@ namespace ChatVisual
                 conditionNode.child = child;
                 SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
             }
+        }
+
+        public void AddParent(Node parent, Node child)
+        {
+
         }
 
         public void RemoveChild(Node parent, Node child)
@@ -131,7 +137,7 @@ namespace ChatVisual
         
         public void SortChildAndIndex(Node startNode, int startIndex)    
         {
-            Node nowNode = startNode;         // RootNode
+            /*Node nowNode = startNode;         // RootNode
             Queue<Node> askChatNode = new Queue<Node>();
             List<Node> children = new List<Node>();
             nowChatIndex = startIndex;
@@ -151,11 +157,11 @@ namespace ChatVisual
                     {
                         if (children[0] is ConditionNode condition)
                         {
-                            /*children[0].index = nowChatIndex;
+                            *//*children[0].index = nowChatIndex;
                             children[0].indexLabel.text = nowChatIndex.ToString();
                             nowChatIndex++;
                             nowNode = children[0];
-                            continue;*/
+                            continue;*//*
                             Debug.Log(condition);
                         }
                     }
@@ -183,7 +189,7 @@ namespace ChatVisual
                     }
                     break;
                 }
-            }
+            }*/
         }
     }
 }
