@@ -61,11 +61,22 @@ public class UIReader_Chatting : UI_Reader
     VisualTreeAsset ux_memberList;
 
     public bool isChapterProcessing;
-
+    ScrollView scrollView;
 
     private void Awake()
     {
         base.Awake();
+
+        MinWidth = 100;
+        MinHeight = 100f;
+        MaxWidth = 500;
+        MaxHeight = 500;
+    }
+
+    private void Update()
+    {
+        //Debug.Log(scrollView.verticalScroller.highValue + " h");
+        //Debug.Log(scrollView.verticalScroller.value);
     }
 
     private void OnEnable()
@@ -75,6 +86,7 @@ public class UIReader_Chatting : UI_Reader
         Template_Load();
         UXML_Load();
         Event_Load();
+        scrollView = chatGround.Q<ScrollView>(chatGround.name);
 
         chatGround.Q<ScrollView>("ChatGround").scrollDecelerationRate = 0.01f;
     }
@@ -102,7 +114,13 @@ public class UIReader_Chatting : UI_Reader
         // 멤버 변경 버튼
         ChangeMember();
         changeMemberButton.clicked += ChangeMember;
+
         // 채팅 스크롤뷰 속도 변경
+        //ScrollView scrollView = chatGround.Q<ScrollView>(chatGround.name);
+        //scrollView.RegisterCallback<GeometryChangedEvent>(evt => EndToScroll());
+        //Debug.Log(chatGround.Q<ScrollView>(chatGround.name).verticalPageSize);
+        //chatGround.Q<ScrollView>(chatGround.name).verticalPageSize = 500f;
+        //Debug.Log(chatGround.Q<ScrollView>(chatGround.name).verticalPageSize);
         //Debug.Log(chatGround.Q<ScrollView>(chatGround.name));
         //chatGround.Q<ScrollView>(chatGround.name).scrollDecelerationRate = 5f;
     }
@@ -138,28 +156,31 @@ public class UIReader_Chatting : UI_Reader
 
         foreach (Chatting chat in otherName.quetions)
             InputQuestion(chat.toWho, chat.chatType, chat.text, false, null);
+
+        Invoke("EndToScroll", 0.5f);
     }
 
-    private void Te(VisualElement chat, Sprite sprite)
-    {
-        chat.style.backgroundImage = new StyleBackground(sprite);
-        float size = 0;
+    // 그그 누구시냐 그그 ㅇ어디냐 그 파일쪽에 사이즈 비율 맞추는 함수 긁어다가 써라...
+    //private void Te(VisualElement chat, Sprite sprite)
+    //{
+    //    chat.style.backgroundImage = new StyleBackground(sprite);
+    //    float size = 0;
 
-        if (sprite.rect.width >= sprite.rect.height)
-            size = sprite.rect.width;
-        else
-            size = sprite.rect.height;
+    //    if (sprite.rect.width >= sprite.rect.height)
+    //        size = sprite.rect.width;
+    //    else
+    //        size = sprite.rect.height;
 
-        if (size < 100)
-            size = 3;
-        else if (size < 150)
-            size = 2;
-        else
-            size = 1;
+    //    if (size < 100)
+    //        size = 3;
+    //    else if (size < 150)
+    //        size = 2;
+    //    else
+    //        size = 1;
 
-        chat.style.width = sprite.rect.width * size;
-        chat.style.height = sprite.rect.height * size;
-    }
+    //    chat.style.width = sprite.rect.width * size;
+    //    chat.style.height = sprite.rect.height * size;
+    //}
 
     public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, 
         string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
@@ -177,7 +198,7 @@ public class UIReader_Chatting : UI_Reader
                 break;
             case EChatType.Image:
                 chat = new VisualElement();
-                Te(chat, imageManager.FindPNG(msg).image);
+                ReSizeImage(chat, imageManager.FindPNG(msg).image);
                 break;
             case EChatType.CutScene:
                 chat = new Button();
@@ -199,6 +220,7 @@ public class UIReader_Chatting : UI_Reader
 
         // 대화 업로드
         chatGround.Add(chat);
+        Invoke("EndToScroll", 0.5f);
     }
 
     public void InputQuestion(ESaveLocation toWho, EChatType type, string msg, bool isRecord, IEnumerator reply, Action action = null)
@@ -272,55 +294,44 @@ public class UIReader_Chatting : UI_Reader
         }
     }
 
-    ////////private void ChangeT(MemberChat member, string msg)
-    ////////{
-    ////////    표정 변화
-    ////////    if (member.face != face)
-    ////////    {
-    ////////        VisualElement suspectFace = chattingFace.Q<VisualElement>("Face");
-    ////////        switch (face)
-    ////////        {
-    ////////            case EFace.Default:
-    ////////                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default]);
-    ////////                break;
-    ////////            case EFace.Blush:
-    ////////                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush]);
-    ////////                break;
-    ////////            case EFace.Difficult:
-    ////////                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Difficult]);
-    ////////                break;
-    ////////        }
+    //private void ChangeT(MemberChat member, string msg)
+    //{
+    //    표정 변화
+    //    if (member.face != face)
+    //    {
+    //        VisualElement suspectFace = chattingFace.Q<VisualElement>("Face");
+    //        switch (face)
+    //        {
+    //            case EFace.Default:
+    //                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default]);
+    //                break;
+    //            case EFace.Blush:
+    //                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush]);
+    //                break;
+    //            case EFace.Difficult:
+    //                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Difficult]);
+    //                break;
+    //        }
 
-    ////////        member.face = face;
-    ////////    }
+    //        member.face = face;
+    //    }
 
-    ////////    이벤트
-    ////////    switch (evt)
-    ////////    {
-    ////////        case EChatEvent.Vibration:
-    ////////            break;
-    ////////        case EChatEvent.Round:
-    ////////            break;
-    ////////        case EChatEvent.Camera:
-    ////////            break;
-    ////////    }
-    ////////}
-
+    //    이벤트
+    //    switch (evt)
+    //    {
+    //        case EChatEvent.Vibration:
+    //            break;
+    //        case EChatEvent.Round:
+    //            break;
+    //        case EChatEvent.Camera:
+    //            break;
+    //    }
+    //}
     public void EndToScroll()
     {
-        //Debug.Log("줄내림 입력");
-        //ScrollView scrollView = chatGround.Q<ScrollView>("ChatGround");
-
-        //scrollView.schedule.Execute(() =>
-        //{
-        //    float contentHeight = scrollView.contentContainer.layout.height;
-        //    float viewportHeight = scrollView.contentViewport.layout.height;
-
-        //    scrollView.scrollOffset = new Vector2(0, contentHeight - viewportHeight);
-        //});
-
-        chatGround.Q<ScrollView>(chatGround.name).verticalScroller.value
-            = chatGround.Q<ScrollView>(chatGround.name).verticalScroller.highValue;
+        Debug.Log(scrollView.verticalScroller.highValue);
+        scrollView.verticalScroller.value = scrollView.verticalScroller.highValue;
+        Debug.Log(scrollView.verticalScroller.value + " c");
     }
 
     public void AddMember(string memberName)

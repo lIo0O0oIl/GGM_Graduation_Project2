@@ -17,6 +17,6 @@ public class TestUI : UI_Reader
 
     private void Update()
     {
-        chatSystem.EndToScroll();
+        //chatSystem.EndToScroll();
     }
 }
