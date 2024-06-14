@@ -75,8 +75,6 @@ public class UIReader_Chatting : UI_Reader
 
     private void Update()
     {
-        //Debug.Log(scrollView.verticalScroller.highValue + " h");
-        //Debug.Log(scrollView.verticalScroller.value);
     }
 
     private void OnEnable()
@@ -86,9 +84,20 @@ public class UIReader_Chatting : UI_Reader
         Template_Load();
         UXML_Load();
         Event_Load();
-        scrollView = chatGround.Q<ScrollView>(chatGround.name);
+    }
 
-        chatGround.Q<ScrollView>("ChatGround").scrollDecelerationRate = 0.01f;
+    void OnMouseWheel(WheelEvent evt)
+    {
+        Debug.Log("휠 이벤트 들어옴");
+
+        // 기본 스크롤 이벤트 처리 방지
+        evt.StopPropagation();
+
+        // 휠 델타 값에 스크롤 속도 적용
+        float delta = evt.delta.y * 500f;
+
+        // 스크롤 위치 조정
+        scrollView.scrollOffset += new Vector2(0, delta);
     }
 
     private void UXML_Load()
@@ -111,11 +120,15 @@ public class UIReader_Chatting : UI_Reader
 
     private void Event_Load()
     {
+        scrollView = chatGround.Q<ScrollView>(chatGround.name);
+
         // 멤버 변경 버튼
         ChangeMember();
         changeMemberButton.clicked += ChangeMember;
 
         // 채팅 스크롤뷰 속도 변경
+        scrollView.RegisterCallback<WheelEvent>(OnMouseWheel);
+
         //ScrollView scrollView = chatGround.Q<ScrollView>(chatGround.name);
         //scrollView.RegisterCallback<GeometryChangedEvent>(evt => EndToScroll());
         //Debug.Log(chatGround.Q<ScrollView>(chatGround.name).verticalPageSize);
@@ -329,9 +342,7 @@ public class UIReader_Chatting : UI_Reader
     //}
     public void EndToScroll()
     {
-        Debug.Log(scrollView.verticalScroller.highValue);
         scrollView.verticalScroller.value = scrollView.verticalScroller.highValue;
-        Debug.Log(scrollView.verticalScroller.value + " c");
     }
 
     public void AddMember(string memberName)
