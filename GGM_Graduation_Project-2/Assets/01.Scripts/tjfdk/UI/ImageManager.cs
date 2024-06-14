@@ -19,6 +19,7 @@ public class ImagePng : ImageDefualt
     public Sprite saveImage;
     public Vector2 size;
     public Vector2 pos;
+    public Vector2 descriptePos;
 }
 
 [Serializable]

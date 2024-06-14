@@ -12,7 +12,11 @@ namespace ChatVisual
         HS, // Hyensuck
         CM, // Cheamin
         HG, // HyenGue
-        DY // Deayang
+        DY, // Deayang
+
+        Teacher,
+        Friend,
+        Home
     }
 
     public enum EChatState
@@ -51,17 +55,23 @@ namespace ChatVisual
     {
         public EChatState state; 
         public EChatType type;
-        public string text;  
-        public EFace face;  
+        public string text;        // 嶺???濡ル츎 ??
+        public bool is_UseThis;     // ??????덈츎嶺뚯솘?
+        public EFace face;       // 嶺??????踰???戮곗젧
+        public bool isCan;
         public List<EChatEvent> textEvent = new List<EChatEvent>();
     }
 
     [Serializable]
     public class AskAndReply
     {
-        public string ask;     
-        public List<Chat> reply = new List<Chat>(); 
-        public bool is_UseThis;  
+        public string ask;        // ??좊닔???????덈츎 ??ルㅎ臾며춯?뼿
+        public List<Chat> reply = new List<Chat>();     // ?잙갭梨룩굢??????????援?
+        public bool is_UseThis;     // ??????덈츎嶺뚯솘?
+
+        public ESaveLocation changeWhoName;
+        public bool isChange;
+        public string changeName;
     }
 
     [Serializable]
@@ -85,6 +95,11 @@ namespace ChatVisual
 
         public bool is_nextChapter;    
         public string nextChapterName;    
+      
+        public bool isChapterEnd;     // is this chapter ended?
+        public bool isCan;            // can this chapter play?
+        public bool is_nextChapter;     // is this chapter have next chapter?
+        public string nextChapterName;         // next chapter name
     }
 
     public class ChatStruct : MonoBehaviour { }

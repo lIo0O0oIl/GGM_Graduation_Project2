@@ -45,6 +45,11 @@ public class UI_Reader : MonoBehaviour
 
     Tween currentTextTween;
 
+    protected float MinWidth = 500f;
+    protected float MinHeight = 500f;
+    protected float MaxWidth = 1800f;
+    protected float MaxHeight = 980f;
+
     protected void Awake()
     {
         // 서로 참조라 오류날 수도 있음
@@ -127,6 +132,8 @@ public class UI_Reader : MonoBehaviour
         {
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
+
+            chatSystem.ChoiceMember(chatSystem.FindMember("HG"));
         }
     }
 
@@ -162,5 +169,61 @@ public class UI_Reader : MonoBehaviour
             currentTextTween.Complete();
             currentTextTween = null;
         }
+    }
+
+    protected void ReSizeImage(VisualElement visualElement, Sprite sprite)
+    {
+        // 이미지 원본 크기
+        float originalWidth = sprite.rect.width;
+        float originalHeight = sprite.rect.height;
+
+        // 비율 유지하면서 크기 조정
+        Vector2 adjustedSize = ChangeSize(originalWidth, originalHeight);
+
+        // VisualElement 크기 설정
+        visualElement.style.width = adjustedSize.x;
+        visualElement.style.height = adjustedSize.y;
+
+        // Sprite 설정
+        visualElement.style.backgroundImage = new StyleBackground(sprite);
+    }
+
+    protected Vector2 ChangeSize(float originalWidth, float originalHeight)
+    {
+        float aspectRatio = originalWidth / originalHeight;
+        float adjustedWidth = originalWidth;
+        float adjustedHeight = originalHeight;
+
+        // 크기가 너무 큰 경우
+        if (originalWidth > MaxWidth || originalHeight > MaxHeight)
+        {
+            if (aspectRatio > 1)
+            {
+                adjustedWidth = MaxWidth;
+                adjustedHeight = MaxWidth / aspectRatio;
+            }
+            else
+            {
+                adjustedHeight = MaxHeight;
+                adjustedWidth = MaxHeight * aspectRatio;
+            }
+        }
+
+        // 크기가 너무 작은 경우
+        if (adjustedWidth < MinWidth || adjustedHeight < MinHeight)
+        {
+            if (aspectRatio > 1)
+            {
+                adjustedWidth = MinWidth;
+                adjustedHeight = MinWidth / aspectRatio;
+            }
+            else
+            {
+                adjustedHeight = MinHeight;
+                adjustedWidth = MinHeight * aspectRatio;
+            }
+        }
+
+        return new Vector2(adjustedWidth, adjustedHeight);
     }
 }

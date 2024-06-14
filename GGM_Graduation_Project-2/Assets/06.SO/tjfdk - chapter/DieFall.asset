@@ -14,18 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chapterName: DieFall
   cutScenes:
-  - cut: {fileID: 21300000, guid: 4fed63953deba9f4b8edfdcbe9a63dbb, type: 3}
+  - isAnim: 0
+    cut:
+    - {fileID: 21300000, guid: 33fe52c30c5a5874c9b3250e3730e87d, type: 3}
     texts:
     - sound: 
       text: ...
-      isEnd: 0
-  - cut: {fileID: 21300000, guid: e3977c1adde0a5040b3b5b373c6228a3, type: 3}
+  - isAnim: 0
+    cut:
+    - {fileID: 21300000, guid: 51d0034176d0097488c96dd6b20a8675, type: 3}
     texts:
     - sound: 
       text: "\uCFF5!"
-      isEnd: 0
-  - cut: {fileID: 21300000, guid: f6befe3053210c244ace7a5083625541, type: 3}
+  - isAnim: 1
+    cut:
+    - {fileID: 21300000, guid: 90ea67e0e4ee5c046a46ad04e2121b87, type: 3}
+    - {fileID: 21300000, guid: 9bcc364723dccef48a8538880918ff78, type: 3}
+    - {fileID: 21300000, guid: d1bd1c2e3fb02e14b9d405ce7164a6c6, type: 3}
     texts:
     - sound: 
       text: ...
-      isEnd: 0
