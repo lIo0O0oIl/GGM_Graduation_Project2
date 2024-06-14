@@ -49,7 +49,11 @@ public class CutSceneManager : MonoBehaviour
         if (currentCutScene != null)
         {
             if (currentCutScene.cutScenes.Count == currentCutNum)
+            {
+                UI_Reader.Instance.chatSystem.ChoiceMember(UI_Reader.Instance.chatSystem.FindMember(currentCutScene.nextMemberName));
                 cutsceneUI.OpenCutScene(false);
+            }
+
             else
             {
                 if (currentCutScene.cutScenes[currentCutNum].texts.Count > currentTextNum)

@@ -6,16 +6,16 @@ using UnityEngine.UIElements;
 using DG.Tweening;
 using ChatVisual;
 
-public class UI_Reader : MonoBehaviour
+public class UI_Reader : Singleton<UI_Reader>
 {
     // System
         // UI Reader
-    protected TestUI mainSystem;
-    protected UIReader_Chatting chatSystem;
-    protected UIReader_Connection connectionSystem;
-    protected UIReader_FileSystem fileSystem;
-    protected UIReader_ImageFinding imageSystem;
-    protected UIReader_CutScene cutSceneSystem;
+    public GameManager mainSystem;
+    public UIReader_Chatting chatSystem;
+    public UIReader_Connection connectionSystem;
+    public UIReader_FileSystem fileSystem;
+    public UIReader_ImageFinding imageSystem;
+    public UIReader_CutScene cutSceneSystem;
         // Manager
     protected ChatContainer chatContainer;
     protected CutSceneManager cutSceneManager;
@@ -52,9 +52,9 @@ public class UI_Reader : MonoBehaviour
 
     protected void Awake()
     {
-        // 서로 참조라 오류날 수도 있음
+        // ??類ㅼŦ 嶺뚣볦굣??????댁쾼????濡レ┣ ???깅쾳
         // UI Reader
-        mainSystem = GetComponent<TestUI>();
+        mainSystem = GetComponent<GameManager>();
         chatSystem = GetComponent<UIReader_Chatting>();
         connectionSystem = GetComponent<UIReader_Connection>();
         fileSystem = GetComponent<UIReader_FileSystem>();
@@ -132,8 +132,6 @@ public class UI_Reader : MonoBehaviour
         {
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
-
-            chatSystem.ChoiceMember(chatSystem.FindMember("HG"));
         }
     }
 
@@ -173,18 +171,18 @@ public class UI_Reader : MonoBehaviour
 
     protected void ReSizeImage(VisualElement visualElement, Sprite sprite)
     {
-        // 이미지 원본 크기
+        // ????嶺뚯솘? ???沅?????
         float originalWidth = sprite.rect.width;
         float originalHeight = sprite.rect.height;
 
-        // 비율 유지하면서 크기 조정
+        // ??????????濡?듆???????브퀗???
         Vector2 adjustedSize = ChangeSize(originalWidth, originalHeight);
 
-        // VisualElement 크기 설정
+        // VisualElement ???????깆젧
         visualElement.style.width = adjustedSize.x;
         visualElement.style.height = adjustedSize.y;
 
-        // Sprite 설정
+        // Sprite ???깆젧
         visualElement.style.backgroundImage = new StyleBackground(sprite);
     }
 
@@ -194,7 +192,7 @@ public class UI_Reader : MonoBehaviour
         float adjustedWidth = originalWidth;
         float adjustedHeight = originalHeight;
 
-        // 크기가 너무 큰 경우
+        // ???깃꼈泥? ???????롪퍔???
         if (originalWidth > MaxWidth || originalHeight > MaxHeight)
         {
             if (aspectRatio > 1)
@@ -209,7 +207,7 @@ public class UI_Reader : MonoBehaviour
             }
         }
 
-        // 크기가 너무 작은 경우
+        // ???깃꼈泥? ??????? ?롪퍔???
         if (adjustedWidth < MinWidth || adjustedHeight < MinHeight)
         {
             if (aspectRatio > 1)

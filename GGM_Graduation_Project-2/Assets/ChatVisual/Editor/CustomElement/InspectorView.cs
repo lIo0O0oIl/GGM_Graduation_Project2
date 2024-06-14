@@ -34,13 +34,11 @@ namespace ChatVisual
                 style.fontSize = 20;
                 GUILayout.Label($"{node.node.GetType().Name}", style);
 
-                bool is_ChildExist = false;
                 switch (node.node)
                 {
                     case RootNode:
                         {
                             RootNode rootNode = node.node as RootNode;
-                            if (rootNode.child != null) is_ChildExist = true;
                             GUILayout.Space(15);
 
                             rootNode.showName = EditorGUILayout.TextField("ShowName", rootNode.showName, EditorStyles.textArea);
@@ -78,7 +76,6 @@ namespace ChatVisual
                         {
                             GUILayout.Space(10);
                             ChatNode chatNode = node.node as ChatNode;
-                            if (chatNode.childList.Count != 0) is_ChildExist = true;      
 
                             enumValue = (int)chatNode.state;
                             enumValue = GUILayout.Toolbar(enumValue, System.Enum.GetNames(typeof(EChatState))); 
@@ -125,7 +122,6 @@ namespace ChatVisual
                         {
                             GUILayout.Space(10);
                             AskNode askNode = node.node as AskNode;
-                            if (askNode.child != null) is_ChildExist = true;
 
                             GUILayout.Label("Ask");
                             askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);
@@ -160,7 +156,6 @@ namespace ChatVisual
                     case ConditionNode:
                         {
                             ConditionNode conditionNode = node.node as ConditionNode;
-                            if (conditionNode.child != null) is_ChildExist = true;
                             GUILayout.Space(15);
 
                             if (conditionNode.is_SpecificFile == false)
@@ -179,7 +174,6 @@ namespace ChatVisual
                                 {
                                     ++EditorGUI.indentLevel;
                                     allQuestion.Init(conditionNode);
-                                    Debug.Log(allQuestion);
                                     GUILayout.BeginHorizontal();
                                     GUILayout.Label($"AskCount");
                                     GUILayout.FlexibleSpace();

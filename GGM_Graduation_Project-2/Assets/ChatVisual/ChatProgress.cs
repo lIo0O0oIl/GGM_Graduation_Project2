@@ -27,6 +27,11 @@ namespace ChatVisual
             nowNodes = chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName];
         }
 
+        private void Update()
+        {
+            
+        }
+
         // Change human
         public void ChangeHuman(string _changeHumanName)
         {
@@ -44,11 +49,11 @@ namespace ChatVisual
 
             if (children.Count == 1 && children[0] is ChatNode)            // When a child is a ChatNode
             {
-                // 대사 출력
+                // Outputting Metabolism
 
-                // 감정 변화
+                // Emotion Changes
 
-                // 대사 이벤트 처리 (카메라, 진동, 파일로드(아마 다 함수로 뺄 예정))
+                // Handing Chat Event (Camera, vibration, fileLoad)
 
                 currentIndex++;
             }
@@ -59,7 +64,7 @@ namespace ChatVisual
                 {
                     if (children[i] is AskNode askNode)
                     {
-                        // 질문 처리
+                        // Handling questions
                         currentIndex++;
                     }
                     else if (children[i] is ConditionNode conditionNode)

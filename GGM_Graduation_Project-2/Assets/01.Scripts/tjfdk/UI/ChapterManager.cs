@@ -8,12 +8,12 @@ using UnityEngine.UIElements;
 
 public class ChapterManager : UI_Reader
 {
-    public Chapter previousChapter;
-    public Chapter nowChapter;
+   // public Chapter previousChapter;
+    //public Chapter nowChapter;
     public int chatIndex;
     public int roundIndex;
 
-    public Chat FindChat(string text)
+/*    public Chat FindChat(string text)
     {
         Chat eventChat = null;
 
@@ -36,73 +36,71 @@ public class ChapterManager : UI_Reader
         }
 
         return eventChat;
-    }
+    }*/
 
     public void AddChapter(string who, string name)
     {
         chatSystem.AddMember(who);
-        chatSystem.FindMember(who).chapterName = FindChapter(name).showName;
+        //chatSystem.FindMember(who).chapterName = FindChapter(name).showName;
 
-        if (previousChapter.saveLocation != ESaveLocation.NotSave)
+/*        if (previousChapter.saveLocation != ESaveLocation.NotSave)
         {
             if (chatSystem.FindMember(who).name == chatSystem.FindMember(previousChapter.saveLocation.ToString()).name)
             {
-                Debug.Log("인물 변동 없어서 바로 진행");
+                Debug.Log("?筌뤾벳??곌떠?????怨룹꽑???꾩룆?餓?嶺뚯쉳?듸쭛?);
                 Chapter(name);
             }
-        }
+        }*/
     }
 
-    public Chapter FindChapter(string name)
+/*    public Chapter FindChapter(string name)
     {
-/*        foreach (Chapter chapter in chatContainer.MainChapter)
+        foreach (Chapter chapter in chatContainer.MainChapter)
         {
             if (chapter.showName == name)
                 return chapter;
-        }*/
+        }
 
-        Debug.Log("梨뺥꽣 李얘린 ?ㅽ뙣");
+        Debug.Log("癲?甕겹끂??癲ル슓??젆癒る뎨?????됰꽡");
         return null;
-    }
+    }*/
 
     public void NextChapter(string name)
     {
-        AddChapter(FindChapter(name).saveLocation.ToString(), name); //
+       // AddChapter(FindChapter(name).saveLocation.ToString(), name); //
 
         //MemberChat member = chatSystem.FindMember(FindChapter(name).saveLocation.ToString());
         //chapterManager.Chapter(member.name, member.chapterName);
 
-        // 만약... 전 챕터랑 같은 인물이면... 그냥 choice어쩌고 들릴 필요 없이 chapter 불러주기
+        // 嶺뚮씭?ｉ뜮?.. ??嶺?踰ㅸ땻???띠룇?? ?筌뤾벳?????.. ?잙갭梨뜻틦?choice??怨몄퍦?????섎뎅 ?熬곣뫗????怨몃턄 chapter ?釉띾쐞?????ㅲ뵛
         //FindChapter(chatContainer.NowChapter.nextChapterName).showName);
     }
 
     public void Chapter(string name)
     {
-        nowChapter = FindChapter(name);
+/*        nowChapter = FindChapter(name);
 
         if (chatSystem.FindMember(nowChapter.saveLocation.ToString()).name == chatSystem.currentMemberName)
         {
             if (nowChapter.isCan == false)
             {
-                chatContainer.NowChapter = nowChapter;
-                chatContainer.NowChapter.isChapterEnd = false;
+                //chatContainer.NowChapter = nowChapter;
+               // chatContainer.NowChapter.isChapterEnd = false;
                 roundIndex = 0;
 
                 chatSystem.changeMemberButton.pickingMode = PickingMode.Ignore;
                 chatSystem.memberList.style.display = DisplayStyle.None;
 
-                StartCoroutine(InputCChat(false, nowChapter.chat));
+                //StartCoroutine(InputCChat(false, nowChapter.chat));
             }
         }
         else
-            Debug.Log("현재 챕터 주인과 채팅창의 주인이 다름");
+            Debug.Log("?熬곣뫗??嶺?踰ㅸ땻??낅슣???뗏?嶺????멥럶???꺄 ?낅슣???????담궖");*/
     }
 
     public void EndChapter()
     {
-        Debug.Log("챕터 끝");
-
-        nowChapter.isChapterEnd = true;
+/*        nowChapter.isChapterEnd = true;
         previousChapter = nowChapter;
 
         chatSystem.changeMemberButton.pickingMode = PickingMode.Position;
@@ -114,10 +112,10 @@ public class ChapterManager : UI_Reader
             NextChapter(nowChapter.nextChapterName);
         }
         else
-            Debug.Log("다음 챕터 없담!");
+            Debug.Log("???깅쾳 嶺?踰ㅸ땻????⑸폋!");*/
     }
 
-    public IEnumerator InputCChat(bool isReply, List<Chat> chats)
+/*    public IEnumerator InputCChat(bool isReply, List<Chat> chats)
     {
         chatIndex = 0;
         while (chatIndex != chats.Count && chats != null)
@@ -162,15 +160,15 @@ public class ChapterManager : UI_Reader
             }
         }
 
-        // 채팅 용도로 들어온거면 위에 다 해주고 질문 있으면 질문 넣어주기
+        // 嶺??????紐껋┣?????곗꽑??節딇깴嶺??熬곣뫖??????怨삵룖??嶺뚯쉶?꾣룇 ???깅さ嶺?嶺뚯쉶?꾣룇 ?影??꽑?낅슣?딁뵳?
         if (isReply == false && nowChapter.askAndReply.Count > 0)
             InputQQuestion(nowChapter.askAndReply);
-        // 질문에 대한 대답 용도로 들어온거면 대답 다 해주고 챕터 끝내주기
+        // 嶺뚯쉶?꾣룇????????????紐껋┣?????곗꽑??節딇깴嶺?????????怨삵룖??嶺?踰ㅸ땻???硫몃??낅슣?딁뵳?
         else
             EndChapter();
-    }
+    }*/
 
-    public void InputQQuestion(List<AskAndReply> asks)
+    /*public void InputQQuestion(List<AskAndReply> asks)
     {
         chatIndex = 0;
         if (asks != null)
@@ -205,9 +203,9 @@ public class ChapterManager : UI_Reader
 
         if (nowChapter.lockAskAndReply.Count > 0)
             InputLockQuestion(nowChapter.lockAskAndReply);
-    }
+    }*/
 
-    public void InputLockQuestion(List<LockAskAndReply> locks)
+   /* public void InputLockQuestion(List<LockAskAndReply> locks)
     {
         chatIndex = 0;
         if (locks != null)
@@ -222,7 +220,7 @@ public class ChapterManager : UI_Reader
                 }
             }
         }
-    }
+    }*/
 
     //public IEnumerator InputReply(List<Chat> replies)
     //{
@@ -231,7 +229,7 @@ public class ChapterManager : UI_Reader
     //    {
     //        while (i != replies.Count)
     //        {
-    //            Debug.Log(replies[i].ask + " 질문");
+    //            Debug.Log(replies[i].ask + " 嶺뚯쉶?꾣룇");
     //            chatSystem.InputChat(chatContainer.NowChapter.saveLocation,
     //                EChatType.Text, replies[i].ask, true, InputReply(replies[i]));
     //            i++;

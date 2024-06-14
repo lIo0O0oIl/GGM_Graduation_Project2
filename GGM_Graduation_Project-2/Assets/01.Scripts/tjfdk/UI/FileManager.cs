@@ -26,7 +26,7 @@ public class FileManager : UI_Reader
     {
         if (file.eventName != "")
         {
-            Chapter chapter = chapterManager.FindChapter(file.eventName);
+/*            Chapter chapter = chapterManager.FindChapter(file.eventName);
             if (chapter != null)
             {
                 if (chapter.isCan == true)
@@ -41,7 +41,7 @@ public class FileManager : UI_Reader
                 }
             }
             else
-                Debug.Log("chat 트리거 엿음!!");
+                Debug.Log("chat ?몃━嫄??우쓬!!");*/
         }
     }
 
@@ -49,13 +49,13 @@ public class FileManager : UI_Reader
     {
         if (file.eventName != "")
         {
-            if (chapterManager.FindChat(file.eventName) != null)
+/*            if (chapterManager.FindChat(file.eventName) != null)
             {
                 if (chapterManager.FindChat(file.eventName).isCan == true)
                     chapterManager.FindChat(file.eventName).isCan = false;
             }
             else
-                Debug.Log("챕터 트리거 엿음!");
+                Debug.Log("梨뺥꽣 ?몃━嫄??우쓬!");*/
         }
     }
 }

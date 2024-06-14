@@ -88,15 +88,15 @@ public class UIReader_Chatting : UI_Reader
 
     void OnMouseWheel(WheelEvent evt)
     {
-        Debug.Log("휠 이벤트 들어옴");
+        Debug.Log("???대깽???ㅼ뼱??");
 
-        // 기본 스크롤 이벤트 처리 방지
+        // 湲곕낯 ?ㅽ겕濡??대깽??泥섎━ 諛⑹?
         evt.StopPropagation();
 
-        // 휠 델타 값에 스크롤 속도 적용
+        // ???명? 媛믪뿉 ?ㅽ겕濡??띾룄 ?곸슜
         float delta = evt.delta.y * 500f;
 
-        // 스크롤 위치 조정
+        // ?ㅽ겕濡??꾩튂 議곗젙
         scrollView.scrollOffset += new Vector2(0, delta);
     }
 
@@ -122,11 +122,11 @@ public class UIReader_Chatting : UI_Reader
     {
         scrollView = chatGround.Q<ScrollView>(chatGround.name);
 
-        // 멤버 변경 버튼
+        // 硫ㅻ쾭 蹂寃?踰꾪듉
         ChangeMember();
         changeMemberButton.clicked += ChangeMember;
 
-        // 채팅 스크롤뷰 속도 변경
+        // 梨꾪똿 ?ㅽ겕濡ㅻ럭 ?띾룄 蹂寃?
         scrollView.RegisterCallback<WheelEvent>(OnMouseWheel);
 
         //ScrollView scrollView = chatGround.Q<ScrollView>(chatGround.name);
@@ -173,7 +173,7 @@ public class UIReader_Chatting : UI_Reader
         Invoke("EndToScroll", 0.5f);
     }
 
-    // 그그 누구시냐 그그 ㅇ어디냐 그 파일쪽에 사이즈 비율 맞추는 함수 긁어다가 써라...
+    // 洹멸렇 ?꾧뎄?쒕깘 洹멸렇 ?뉗뼱?붾깘 洹??뚯씪履쎌뿉 ?ъ씠利?鍮꾩쑉 留욎텛???⑥닔 湲곸뼱?ㅺ? ?⑤씪...
     //private void Te(VisualElement chat, Sprite sprite)
     //{
     //    chat.style.backgroundImage = new StyleBackground(sprite);
@@ -198,11 +198,11 @@ public class UIReader_Chatting : UI_Reader
     public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, 
         string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
     {
-        // 생성
+        // ?앹꽦
         VisualElement chat = null;
         MemberChat suspect = FindMember(toWho.ToString());
 
-        // 대화 정의
+        // ????뺤쓽
         switch (type)
         {
             case EChatType.Text:
@@ -231,18 +231,18 @@ public class UIReader_Chatting : UI_Reader
         else
             chat.AddToClassList("OtherChat");
 
-        // 대화 업로드
+        // ????낅줈??
         chatGround.Add(chat);
         Invoke("EndToScroll", 0.5f);
     }
 
     public void InputQuestion(ESaveLocation toWho, EChatType type, string msg, bool isRecord, IEnumerator reply, Action action = null)
     {
-        // 생성
+        // ?앹꽦
         VisualElement chat = null ;
         MemberChat suspect = FindMember(toWho.ToString());
 
-        // 대화 정의
+        // ????뺤쓽
         switch (type)
         {
             case EChatType.Question:
@@ -250,7 +250,7 @@ public class UIReader_Chatting : UI_Reader
                 chat.name = msg;
                 //chat.name = msg;
                 chat.Q<Label>().text = msg;
-                //chat.Q<Button>().clicked += action; // 대답 나오게
+                //chat.Q<Button>().clicked += action; // ????섏삤寃?
                 chat.Q<Button>().clicked += (() => 
                 { 
                     chat.parent.Remove(chat);
@@ -258,11 +258,11 @@ public class UIReader_Chatting : UI_Reader
                     {
                         if (suspect.quetions[i].text == msg)
                         {
-                            Debug.Log("질문 삭제됨");
+                            Debug.Log("吏덈Ц ??젣??");
                             suspect.quetions.Remove(suspect.quetions[i]);
                         }
                     }
-                    // reply 출력
+                    // reply 異쒕젰
                     if (reply != null)
                         StartCoroutine(reply);
                     action?.Invoke();
@@ -280,13 +280,13 @@ public class UIReader_Chatting : UI_Reader
 
         //ChangeT(suspect, msg);
 
-        // 대화에 추가
+        // ??붿뿉 異붽?
         questionGround.Add(chat);
     }
 
     private void RecordChat(MemberChat member, EChatState who, ESaveLocation toWho, EChatType type, string msg)
     {
-        // 기록
+        // 湲곕줉
         Chatting chatting = new Chatting();
         chatting.who = who;
         chatting.toWho = toWho;
@@ -309,7 +309,7 @@ public class UIReader_Chatting : UI_Reader
 
     //private void ChangeT(MemberChat member, string msg)
     //{
-    //    표정 변화
+    //    ?쒖젙 蹂??
     //    if (member.face != face)
     //    {
     //        VisualElement suspectFace = chattingFace.Q<VisualElement>("Face");
@@ -329,7 +329,7 @@ public class UIReader_Chatting : UI_Reader
     //        member.face = face;
     //    }
 
-    //    이벤트
+    //    ?대깽??
     //    switch (evt)
     //    {
     //        case EChatEvent.Vibration:
@@ -395,20 +395,20 @@ public class UIReader_Chatting : UI_Reader
         if (member != null)
         {
             ChangeProfile(member.name, member.faces[(int)member.face]);
-            ChangeMember(); // 이름 목록 닫고
-            RemoveChatting(); // 채팅 날리고
-            RecallChatting(member); // 새로 쓰고
+            ChangeMember(); // ?대쫫 紐⑸줉 ?リ퀬
+            RemoveChatting(); // 梨꾪똿 ?좊━怨?
+            RecallChatting(member); // ?덈줈 ?곌퀬
 
-            // 해당 인물에게 챕터를 읽자
+            // ?대떦 ?몃Ъ?먭쾶 梨뺥꽣瑜??쎌옄
             if (member.chapterName != "")
             {
-                // 챕터 불러주고
+                // 梨뺥꽣 遺덈윭二쇨퀬
                 chapterManager.Chapter(/*member.name, */member.chapterName);
-                // 끝났으면 현재 챕터 초기화
+                // ?앸궗?쇰㈃ ?꾩옱 梨뺥꽣 珥덇린??
                 //member.chapterName = "";
             }
             else
-                Debug.Log("챕터가 비어있음");
+                Debug.Log("梨뺥꽣媛 鍮꾩뼱?덉쓬");
         }
     }
 }

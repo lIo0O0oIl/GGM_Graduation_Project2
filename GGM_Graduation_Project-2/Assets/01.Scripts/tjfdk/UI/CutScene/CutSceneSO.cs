@@ -24,5 +24,6 @@ public class CutSceneDialoges
 public class CutSceneSO : ScriptableObject                                           
 {
     public string chapterName;
+    public string nextMemberName;
     public List<CutSceneDialoges> cutScenes = new List<CutSceneDialoges>();
 }
