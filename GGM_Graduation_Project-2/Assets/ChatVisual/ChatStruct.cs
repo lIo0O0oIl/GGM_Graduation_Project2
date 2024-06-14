@@ -21,10 +21,8 @@ namespace ChatVisual
 
     public enum EChatState
     {
-        Other = 0,      // ?브퀗??酉귥????턄 嶺뚮씭??????
-        Me = 1,      // ?筌먦끆?€뤆?쎛 嶺뚮씭??????
-        Ask = 2,        // ?筌먦끆?€뤆?쎛 ??좉텭???롪퍒???
-        LoadNext        // ????怨룹꽑嶺?????? ???덈펲嶺? ???섎?????????      // Ask ?????㏉꺑 ??????낅쭑 ?띠럾???쒑땻?????깅쾳 ?筌먲퐘遊??怨삵룖??.
+        Other = 0,
+        Me = 1,
     }
 
     public enum EChatType
@@ -38,23 +36,24 @@ namespace ChatVisual
 
     public enum EFace
     {
-        Default,        // ??쒕샑筌??
-        Blush,          // ?獄?낯??(???ㅻ젛??紐욤뚯궪彛?)
-        Difficult       // ???????⑥ъ쓤?? ???걞???
+        Default,       
+        Blush,      
+        Difficult   
     }
 
     public enum EChatEvent
     {
         Default,
-        Vibration,      // ???⑸츩??嶺뚯쉳?х뙴?
-        Round,      // ???逾??怨뺣뼺???怨삵룖??     
-        Camera     // ?곸궠?筌????節뗪땁 ?影??꽑?낅슣?딁뵳?
+        Vibration,
+        Camera,
+        LoadFile,
+        LoadNextDialog
     }
 
     [Serializable]
-    public class Chat      // ?熬? ?????嶺뚮씭흮????濡ル츎?띠럾?
+    public class Chat 
     {
-        public EChatState state;     // 嶺뚮씭?????롪퍒???????
+        public EChatState state; 
         public EChatType type;
         public string text;        // 嶺???濡ル츎 ??
         public bool is_UseThis;     // ??????덈츎嶺뚯솘?
@@ -79,21 +78,24 @@ namespace ChatVisual
     public class LockAskAndReply
     {
         public List<string> evidence = new List<string>();
-        public string ask;        // ??좊닔???????덈츎 ??ルㅎ臾며춯?뼿
-        public List<Chat> reply = new List<Chat>();     // ?잙갭梨룩굢??????????援?
-        public bool is_UseThis;     // ??????덈츎嶺뚯솘?
+        public string ask;       
+        public List<Chat> reply = new List<Chat>();  
+        public bool is_UseThis; 
     }
 
     [Serializable]
     public class Chapter
     {
-        public string showName;     // ?곌랜?삭굢?彛????藥?
-        public ESaveLocation saveLocation;     // ?熬곥룗?든춯?뼿
-        public List<Chat> chat = new List<Chat>();         // 嶺?????
-        public List<AskAndReply> askAndReply = new List<AskAndReply>();           // 嶺뚯쉶?꾣룇??
-        public List<LockAskAndReply> lockAskAndReply = new List<LockAskAndReply>();       // ??ル맧??嶺뚯쉶?꾣룇??
-        public List<string> round = new List<string>();           // 嶺뚯빘鍮볠뤃?얠뿉??????琉우꽑
+        public string showName;    
+        public ESaveLocation saveLocation;   
+        public List<Chat> chat = new List<Chat>();      
+        public List<AskAndReply> askAndReply = new List<AskAndReply>();   
+        public List<LockAskAndReply> lockAskAndReply = new List<LockAskAndReply>();      
+        public List<string> round = new List<string>();       
 
+        public bool is_nextChapter;    
+        public string nextChapterName;    
+      
         public bool isChapterEnd;     // is this chapter ended?
         public bool isCan;            // can this chapter play?
         public bool is_nextChapter;     // is this chapter have next chapter?

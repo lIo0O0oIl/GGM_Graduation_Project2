@@ -8,18 +8,9 @@ namespace ChatVisual
     {
         public Node child;
 
-        [TextArea] public string description;
-
         public string showName;
-        public ESaveLocation saveLocation;
-        public List<string> round = new List<string>();
+        public List<string> loadFileNameList = new List<string>();
 
-        public bool is_nextChapter;
-        public string nextChapterIndex;
-
-        protected override void OnStart()
-        {
-
-        }
+        public int nowIndex;        // Indexes to continue chatting
     }
 }

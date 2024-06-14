@@ -55,13 +55,13 @@ public class ChapterManager : UI_Reader
 
     public Chapter FindChapter(string name)
     {
-        foreach (Chapter chapter in chatContainer.MainChapter)
+/*        foreach (Chapter chapter in chatContainer.MainChapter)
         {
             if (chapter.showName == name)
                 return chapter;
-        }
+        }*/
 
-        Debug.Log("챕터 찾기 실패");
+        Debug.Log("梨뺥꽣 李얘린 ?ㅽ뙣");
         return null;
     }
 

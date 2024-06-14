@@ -9,13 +9,13 @@ using System;
 public class ChatEditor : EditorWindow
 {
     [SerializeField]
-    private VisualTreeAsset treeAsset = null;           // UI ?뚯씪 ?ｌ뼱二쇨린
+    private VisualTreeAsset treeAsset = null;           // UI
 
-    private ChatView chatView;        // 梨쀭똿???ㅼ뼱媛 ?덈뒗 怨?
-    private InspectorView inspectorView;        // ?몄뒪?⑺꽣 ??寃껋엫.
-    private HierarchyView hierarchyView;      // 肄붾뱶湲곕컲 GUI, ?꾩뿉爰?留먰븯??寃? ?섏씠?대씪??
+    private ChatView chatView;   
+    private InspectorView inspectorView;        
+    private HierarchyView hierarchyView;  
     private Button arrayAddBtn;
-    private Button dangerBtn;
+    private Button sortBtn;
 
     private ChatContainer chatContainer;
 
@@ -25,38 +25,39 @@ public class ChatEditor : EditorWindow
         GetWindow<ChatEditor>("ChatEditor");
     }
 
-    private void OnDestroy()
+    private void OnDestroy() 
     {
-        //if (chatContainer != null)
+        if (chatContainer != null)
         {
-            chatView.SaveChatSystem();      // 李쎌쓣 ????吏湲덇퉴吏 ?댁? 寃???ν빐二쇨린
+            chatView.SaveChatName();
+            Debug.Log("Close and save");
         }
     }
 
     public void CreateGUI()
     {
-        VisualElement root = rootVisualElement;     // 猷⑦듃濡??ㅼ젙?댁쨲.
+        VisualElement root = rootVisualElement; 
 
-        // UXML 留뚮뱾?댁＜湲?
         VisualElement template = treeAsset.Instantiate();
-        template.style.flexGrow = 1;        // ?붿냼 ?덉뿉 ?ｌ뿀?????쇰쭏??而ㅼ쭏 寃??멸?
+        template.style.flexGrow = 1;      
         root.Add(template);
 
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/ChatVisual/Editor/ChatEditor.uss");
-        root.styleSheets.Add(styleSheet);       // ???ㅽ??쇱쓣 媛?몄?以?
+        root.styleSheets.Add(styleSheet);     
 
         chatView = root.Q<ChatView>("chat-view");
-        inspectorView = root.Q<InspectorView>("inspector-view");        // ?몄뒪?숉꽣 ?대쫫?쇰줈 媛?몄삤湲?
-        hierarchyView = root.Q<HierarchyView>("hierarchy-view");       // ?꾨옒爰?媛?몄삤湲?hierarchy ??
-       
-        arrayAddBtn = root.Q<Button>("AddBtn");     // 踰꾪듉 媛?몄삤湲?
-        arrayAddBtn.tooltip = "Chapter Add";
-        arrayAddBtn.clickable.clicked += OnArrayAddBtn;
-        dangerBtn = root.Q<Button>("ClearBtn");
-        dangerBtn.tooltip = "All Nodes Delete";
-        dangerBtn.clickable.clicked += OnClearNodes;
+        chatView.InitChatView(root.Q<Label>("ChatViewLabel"));
+        inspectorView = root.Q<InspectorView>("inspector-view");        
+        hierarchyView = root.Q<HierarchyView>("hierarchy-view");
 
-        chatView.OnNodeSelected += OnSelectionNodeChanged;      // ?몃뱶瑜??꾨Ⅸ 寃껋씠 ?щ씪吏硫????대깽???몄텧
+        arrayAddBtn = root.Q<Button>("AddBtn");  
+        arrayAddBtn.tooltip = "Add Human";
+        arrayAddBtn.clickable.clicked += OnArrayAddBtn;
+        sortBtn = root.Q<Button>("SortBtn");
+        sortBtn.tooltip = "Delete All Nodes";
+        sortBtn.clickable.clicked += OnSortNodes;
+
+        chatView.OnNodeSelected += OnSelectionNodeChanged;
 
         OnSelectionChange();
     }
@@ -65,49 +66,41 @@ public class ChatEditor : EditorWindow
     {
         if (chatContainer != null)
         {
-            Debug.Log("諛곗뿴 異붽??댁＜湲?");
-            chatContainer.MainChapter.Add(new Chapter());
-            hierarchyView.UpdateHierarchy(chatContainer, chatView);
+            Debug.Log("Add human");
+            chatContainer.HumanAndChatDictionary.Add("???", new List<Node>());
+            hierarchyView.UpdateHierarchy();
         }
     }
-
-    private void OnClearNodes()
+    
+    private void OnSortNodes()
     {
         if (chatContainer != null)
         {
-            /*  foreach (var node in chatContainer.nodes)
-              {
-                  if (node is AskNode)
-                  {
-                      chatContainer.nodes.Remove(node);
-                  }
-              }*/
-            Debug.Log("?몃뱶??媛쒖닔??" + chatContainer.nodes.Count + "媛??낅땲??");
-            Close();
+            Debug.Log("Sort all nodes!");
         }
     }
 
     private void OnSelectionNodeChanged(NodeView nodeView)
     {
-        inspectorView.UpdateInspector(nodeView);        // ???몃뱶瑜??뚮??ㅺ퀬 ?몄뒪?숉꽣???뚮젮以?
+        //chatView.SaveChatSystem();
+        inspectorView.UpdateInspector(nodeView); 
     }
 
-    private void OnSelectionChange()        // ?먮뵒?곕? ???곹깭?먯꽌 臾댁뼵媛瑜??좏깮?덉쓣 ??
+    private void OnSelectionChange()
     {
         if (Selection.activeGameObject != null)
         {
-            if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))      // ?섏씠?대씪??李쎌뿉??媛?몄삤湲?
+            if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))    
             {
-                //Debug.Log(chatContainer.nodes.Count + "媛쒖쓽 ?몃뱶媛 議댁옱??");
+                // The current chat is an assistant's chat
+                chatContainer.nowHumanName = "Assistant";
 
-                chatContainer.ChangeNowChapter(0);      // 媛??泥섏쓬? 0踰덉㎏
-
-                hierarchyView.UpdateHierarchy(chatContainer, chatView);      // ?섏씠?대씪??留뚮뱾?댁＜湲?
+                hierarchyView.InitHierarchy(chatContainer, chatView, inspectorView);
+                hierarchyView.UpdateHierarchy();      
                 
-                chatView.LoadChatSystem(chatContainer);     // ?곗씠??濡쒕뱶 ?댁＜湲?
-                chatView.PopulateView();           // ?곗씠?곕? 湲곕컲?쇰줈 蹂댁씠??寃?留뚮뱾?댁＜湲?
+                chatView.LoadChatData(chatContainer);
 
-                Debug.Log($"{chatContainer.MainChapter.Count}留뚰겮 ?섏씠?대씪?ㅺ? ?앹꽦?섏뼱????");
+                chatView.PopulateView();
             }
         }
     }

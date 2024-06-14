@@ -6,16 +6,15 @@ namespace ChatVisual
 {
     public class ChatNode : Node
     {
-        public List<Node> child = new List<Node>();
+        public Node parent;
+        public List<Node> childList = new List<Node>();
 
-        public EChatState state;     // 말하는 것의 타입
+        public EChatState state; 
         public EChatType type;
-        public string text;        // 말 하는 것.
-        public EFace face;       // 말 할 때의 표정
-        public List<EChatEvent> textEvent = new List<EChatEvent>();
+        public string text;    
+        public EFace face; 
 
-        protected override void OnStart()
-        {
-        }
+        public List<EChatEvent> textEvent = new List<EChatEvent>();
+        public string LoadNextDialog;
     }
 }

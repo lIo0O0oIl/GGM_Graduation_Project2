@@ -18,8 +18,8 @@
             </ChatVisual.SplitView>
         </ui:VisualElement>
         <ui:VisualElement name="right-panel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-            <ui:Label tabindex="-1" text="ChatView" display-tooltip-when-elided="true" class="title-label" style="padding-top: 0; padding-bottom: 1px; flex-direction: row-reverse;">
-                <ui:Button text="※" display-tooltip-when-elided="true" name="ClearBtn" class="red" style="width: 21px; height: 17px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 9px; padding-bottom: 13px; font-size: 27px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(255, 255, 255, 0); justify-content: center; -unity-font-style: normal;">
+            <ui:Label tabindex="-1" text="ChatView" display-tooltip-when-elided="true" name="ChatViewLabel" class="title-label" style="padding-top: 0; padding-bottom: 1px; flex-direction: row-reverse;">
+                <ui:Button text="⁜" display-tooltip-when-elided="true" name="SortBtn" class="red" style="width: 21px; height: 17px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 1px; padding-right: 0; padding-top: 8px; padding-bottom: 13px; font-size: 27px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(255, 255, 255, 0); justify-content: center; -unity-font-style: normal;">
                     <ui:VisualElement name="VisualElement" style="height: 31px; width: 100%; flex-grow: 1; flex-shrink: 0;" />
                 </ui:Button>
             </ui:Label>

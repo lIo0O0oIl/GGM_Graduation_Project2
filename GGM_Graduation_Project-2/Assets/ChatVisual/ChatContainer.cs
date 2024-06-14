@@ -8,33 +8,12 @@ namespace ChatVisual
 {
     public class ChatContainer : MonoBehaviour
     {
-        public List<Node> nodes = new List<Node>();         // ?몃뱶 由ъ뒪??
+        public Dictionary<string, List<Node>> HumanAndChatDictionary = new Dictionary<string, List<Node>>();        // Nodes connected to each other
 
-        public int nowChaptersIndex;        // 梨뺥꽣 ?몃뜳??
-        public int nowChatIndex;            // 爾뉙똿 ?몃뜳??
-
-        [Space(30)]
-
-        [SerializeField]        // 洹몃깷 吏湲??대뼡 梨뺥꽣?몄? 蹂쇰젮怨??덈뒗 寃? 李몄“ 蹂듭궗濡??ｌ뼱以ъ쓬.
-        private Chapter nowChapter;
-        public Chapter NowChapter { get { return nowChapter; } set { nowChapter = value; } }
-
-        [SerializeField]
-        private List<Chapter> mainChapter = new List<Chapter>();     // 梨뺥꽣??
-        public List<Chapter> MainChapter { get { return mainChapter; } set { mainChapter = value; } }
-
-        private Node askParentNode;
-
-        public void ChangeNowChapter(int index)
-        {
-            if (mainChapter.Count <= index)
-            {
-                Debug.Log("?덈줈 留뚮뱾?댁＜湲?");
-                mainChapter.Add(new Chapter());
-            }
-            nowChaptersIndex = index;
-            nowChapter = mainChapter[index];        // 李몄“ 蹂듭궗
-        }
+        public string nowHumanName;
+        
+        private bool is_ConditionNowOk = false;
+        private int nowChatIndex = 1;       // index for Sort
 
 #if UNITY_EDITOR
         public Node CreateNode(Type type)
@@ -42,37 +21,40 @@ namespace ChatVisual
             var node = Activator.CreateInstance(type) as Node;
             node.guid = GUID.Generate().ToString();
 
-            nodes.Add(node);        // 由ъ뒪?몄뿉 異붽?
-
-            AssetDatabase.SaveAssets();
+            HumanAndChatDictionary[nowHumanName].Add(node);
 
             return node;
         }
 
         public void DeleteNode(Node node)
         {
-            nodes.Remove(node);
-            AssetDatabase.SaveAssets();
-            SortChildAndIndex();
+            HumanAndChatDictionary[nowHumanName].Remove(node);
         }
 #endif
 
+        public void ChangeNowChapter(string key)
+        {
+            nowHumanName = key;
+        }
+
         public void AddChild(Node parent, Node child)
         {
-            Debug.Log($"???곌껐, parent : {parent}, child : {child}");
-            var rootNode = parent as RootNode;      //遺紐④? 猷⑦듃?대㈃
+            Debug.Log($"Connect! parent : {parent}, child : {child}");
+
+            var rootNode = parent as RootNode;
             if (rootNode != null)
             {
                 rootNode.child = child;
-                SortChildAndIndex();
+                SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
                 return;
             }
 
             var chatNode = parent as ChatNode;
             if (chatNode != null)
             {
-                chatNode.child.Add(child);
-                SortChildAndIndex();
+                chatNode.childList.Add(child);
+                AddParent(parent, child);
+                SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
                 return;
             }
 
@@ -80,21 +62,46 @@ namespace ChatVisual
             if (askNode != null)
             {
                 askNode.child = child;
-                SortChildAndIndex();
+                AddParent(parent, child);
+                SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
                 return;
             }
 
-            var lockAskNode = parent as LockAskNode;
-            if (lockAskNode != null)
+            var conditionNode = parent as ConditionNode;
+            if (conditionNode != null)
             {
-                lockAskNode.child = child;
-                SortChildAndIndex();
+                conditionNode.child = child;
+                AddParent(parent, child);
+                SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
+            }
+        }
+
+        public void AddParent(Node parent, Node child)
+        {
+            var chatNode = child as ChatNode;
+            if (chatNode != null)
+            {
+                chatNode.parent = parent;
+                return;
+            }
+
+            var askNode = child as AskNode;
+            if (askNode != null)
+            {
+                askNode.parent = parent;
+                return;
+            }
+
+            var conditionNode = child as ConditionNode;
+            if (conditionNode != null)
+            {
+                conditionNode.parentList.Add(child);
             }
         }
 
         public void RemoveChild(Node parent, Node child)
         {
-            var rootNode = parent as RootNode;      //遺紐④? 猷⑦듃?대㈃
+            var rootNode = parent as RootNode;
             if (rootNode != null)
             {
                 rootNode.child = null;
@@ -104,7 +111,7 @@ namespace ChatVisual
             var chatNode = parent as ChatNode;
             if (chatNode != null)
             {
-                chatNode.child.Remove(child);
+                chatNode.childList.Remove(child);
                 return;
             }
 
@@ -115,14 +122,14 @@ namespace ChatVisual
                 return;
             }
 
-            var lockAskNode = parent as LockAskNode;
-            if (lockAskNode != null)
+            var conditionNode = parent as ConditionNode;
+            if (conditionNode != null)
             {
-                lockAskNode.child = null;
+                conditionNode.child = null;
             }
         }
 
-        public List<Node> GetChildren(Node parent)
+        public List<Node> GetChild(Node parent)
         {
             List<Node> children = new List<Node>();
 
@@ -140,105 +147,70 @@ namespace ChatVisual
                 return children;
             }
 
-            var lockAskNode = parent as LockAskNode;
-            if (lockAskNode != null && lockAskNode.child != null)
-            {
-                children.Add(lockAskNode.child);
-                return children;
-            }
-
             var chatNode = parent as ChatNode;
-            if (chatNode != null && chatNode.child.Count != 0)
+            if (chatNode != null && chatNode.childList.Count != 0)
             {
-                children = chatNode.child;
+                children = chatNode.childList;
             }
 
             return children;
         }
-
-        public void SortChildAndIndex()        // ?몃뱶瑜??뺣젹?섍퀬 吏덈Ц ?몃뱶 ?꾨옒 梨쀭똿?대씪硫?吏덈Ц ?몃뱶???먯떇?쇰줈 ?ｌ뼱以? 
+        
+        public void SortChildAndIndex(Node startNode, int startIndex)    
         {
-            nowChatIndex = 1;
+            /*Node nowNode = startNode;         // RootNode
+            Queue<Node> askChatNode = new Queue<Node>();
+            List<Node> children = new List<Node>();
+            nowChatIndex = startIndex;
 
-            Queue<Node> askQueue = new Queue<Node>();    // 吏덈Ц, ?좉?吏덈Ц ?댁? 怨?
-            Node nowNode = nodes[0];
+            Debug.Log("nono");
+            children = GetChild(nowNode);
 
-            // DFS 濡?彛?媛?ㅺ? BFS 濡?吏덈Ц??紐⑤몢 諛쏆? ?ㅼ쓬??吏덈Ц????듬뱾????댁꽌 DFS 濡?彛??댁꽌 ?몃뜳??留뚮뱾?댁＜湲?
-            while (nowNode != null)
+            // DFS BFS 
+            while (children.Count > 0)
             {
-                var children = GetChildren(nowNode);
-                if (children.Count == 1)        // 洹몃깷 爾뉙똿?몃뱶?대㈃
+                children = GetChild(nowNode);
+                Debug.Log(children.Count);
+
+                if (children.Count == 1 && children[0] is ChatNode)            // When a child is a ChatNode
                 {
+                    if (is_ConditionNowOk)
+                    {
+                        if (children[0] is ConditionNode condition)
+                        {
+                            *//*children[0].index = nowChatIndex;
+                            children[0].indexLabel.text = nowChatIndex.ToString();
+                            nowChatIndex++;
+                            nowNode = children[0];
+                            continue;*//*
+                            Debug.Log(condition);
+                        }
+                    }
                     children[0].index = nowChatIndex;
                     children[0].indexLabel.text = nowChatIndex.ToString();
                     nowChatIndex++;
                     nowNode = children[0];
+                    Debug.Log("ho");
                 }
-                else
+                else        // When child is not a ChatNode
                 {
+                    Debug.Log(children.Count);
                     for (int i = 0; i < children.Count; i++)
                     {
-                        askQueue.Enqueue(children[i]);
-
-                        if (children[i] is AskNode askNode)
-                        {
-                            askNode.reply.Clear();
-                        }
-
-                        if (children[i] is LockAskNode lockAskNode)
-                        {
-                            lockAskNode.reply.Clear();
-                        }
-
                         children[i].index = nowChatIndex;
                         children[i].indexLabel.text = nowChatIndex.ToString();
                         nowChatIndex++;
+                        askChatNode.Enqueue(children[i]);
+                    }
+                    while (askChatNode.Count > 0)
+                    {
+                        if (askChatNode.Count == 0) is_ConditionNowOk = true;
+                        SortChildAndIndex(askChatNode.Peek(), nowChatIndex);
+                        askChatNode.Dequeue();
                     }
                     break;
                 }
-            }
-
-            while (askQueue.Count > 0)
-            {
-                Debug.Log(askQueue.Peek());
-                askParentNode = askQueue.Peek();
-                var children = GetChildren(askQueue.Peek());
-                if (children.Count > 0) AskChatSort(children[0] as ChatNode);
-                askQueue.Dequeue();
-            }
-        }
-
-        private void AskChatSort(ChatNode chatNode)      // 吏덈Ц???덇퀬 ?????대떦 吏덈Ц???먯떇?ㅼ쓣 ?뺣젹?섍린 ?뺣젹?섎㈃??遺紐?寃껊룄 ?ｌ뼱以섏빞??
-        {
-            if (chatNode == null) return;
-
-            if (askParentNode is  AskNode askNode)
-            {
-                Chat chat = new Chat();
-                chat.text = chatNode.text;
-                chat.state = chatNode.state;
-                chat.face = chatNode.face;
-                chat.textEvent = chatNode.textEvent;
-                askNode.reply.Add(chat);
-            }
-
-            if (askParentNode is LockAskNode lockAskNode)
-            {
-                Chat chat = new Chat();
-                chat.text = chatNode.text;
-                chat.state = chatNode.state;
-                chat.face = chatNode.face;
-                chat.textEvent = chatNode.textEvent;
-                lockAskNode.reply.Add(chat);
-            }
-
-            chatNode.index = nowChatIndex;
-            chatNode.indexLabel.text = nowChatIndex.ToString();
-            nowChatIndex++;
-
-            Debug.Log(chatNode.child.Count);
-            var next = GetChildren(chatNode);
-            if (next.Count > 0) AskChatSort(next[0] as ChatNode);
+            }*/
         }
     }
 }
