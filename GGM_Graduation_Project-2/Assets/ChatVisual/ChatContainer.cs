@@ -53,6 +53,7 @@ namespace ChatVisual
             if (chatNode != null)
             {
                 chatNode.childList.Add(child);
+                AddParent(parent, child);
                 SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
                 return;
             }
@@ -61,6 +62,7 @@ namespace ChatVisual
             if (askNode != null)
             {
                 askNode.child = child;
+                AddParent(parent, child);
                 SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
                 return;
             }
@@ -69,13 +71,32 @@ namespace ChatVisual
             if (conditionNode != null)
             {
                 conditionNode.child = child;
+                AddParent(parent, child);
                 SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
             }
         }
 
         public void AddParent(Node parent, Node child)
         {
+            var chatNode = child as ChatNode;
+            if (chatNode != null)
+            {
+                chatNode.parent = parent;
+                return;
+            }
 
+            var askNode = child as AskNode;
+            if (askNode != null)
+            {
+                askNode.parent = parent;
+                return;
+            }
+
+            var conditionNode = child as ConditionNode;
+            if (conditionNode != null)
+            {
+                conditionNode.parentList.Add(child);
+            }
         }
 
         public void RemoveChild(Node parent, Node child)

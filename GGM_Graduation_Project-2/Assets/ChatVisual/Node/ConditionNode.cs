@@ -49,11 +49,13 @@ namespace ChatVisual
             for (int i = 0; i < myNode.parentList.Count; i++)
             {
                 Node nowNode = myNode.parentList[i];
-                while(!(nowNode is AskNode))
+                int repetition = 0;
+                while (++repetition < 50 || !(nowNode is AskNode))
                 {
                     if (nowNode is ChatNode chatNode)
                     {
                         nowNode = chatNode.parent;
+                        Debug.Log(nowNode);
                     }
                 }
                 asks.Add(nowNode as AskNode);
@@ -79,7 +81,7 @@ namespace ChatVisual
 
         public bool Check()
         {
-            // 액션 혹은 딕셔너리로 만들기
+            // Use Action or Dictionary
             /*if (dictionary[fileName] == true)
             {
                 return true;

@@ -205,8 +205,8 @@ namespace ChatVisual
                         break;
                 }
 
-                GUILayout.Space(5);
-                EditorGUILayout.Toggle("child", is_ChildExist);
+                //GUILayout.Space(5);
+                //EditorGUILayout.Toggle("child", is_ChildExist);
                 EditorGUI.EndDisabledGroup();
             };
 

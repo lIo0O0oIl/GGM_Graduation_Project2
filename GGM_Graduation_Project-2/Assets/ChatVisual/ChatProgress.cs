@@ -54,7 +54,7 @@ namespace ChatVisual
             }
             else        // When child is not a ChatNode
             {
-                // 질문이나 조건이 담겨있을 때 담겨있을 때
+                // // 질문이나 조건이 담겨있을 때 담겨있을 때
                 for (int i = 0; i < children.Count; i++)
                 {
                     if (children[i] is AskNode askNode)
