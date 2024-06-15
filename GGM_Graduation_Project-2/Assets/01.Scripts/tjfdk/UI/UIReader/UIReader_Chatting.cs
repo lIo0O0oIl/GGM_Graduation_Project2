@@ -10,24 +10,27 @@ using UnityEngine.UIElements;
 public struct Chatting
 {
     public EChatState who;
-    public ESaveLocation toWho;
+    public string toWho;
+    //public ESaveLocation toWho;
     public EChatType chatType;
     //public EFace currentFace;
     public string text;
 }
 
 [Serializable]
-public class MemberChat
+public class MemberProfile
 {
     public string name;
     public ESaveLocation nickName;
-    public EFace face;
+    public EFace currentFace;
     public Sprite[] faces;
+
     public bool isOpen;
-    public string chapterName;
+
     public List<Chatting> chattings = new List<Chatting>();
     public List<Chatting> quetions = new List<Chatting>();
-    public MemberChat(string name)
+
+    public MemberProfile(string name)
     {
         this.name = name;
     }
@@ -35,29 +38,41 @@ public class MemberChat
 
 public class UIReader_Chatting : UI_Reader
 {
+    // current member name
     public string currentMemberName;
-    [SerializeField]
-    private List<MemberChat> memberChats = new List<MemberChat>();
+
+    // member profile
+    [SerializeField] List<MemberProfile> members;
+    public Dictionary<string, MemberProfile> memberList;
+
+    // memberList arrow sprite
     [SerializeField]
     private Texture2D changeMemberBtnOn, changeMemberBtnOff;
 
+
+
     // UXLM
-    VisualElement chatGround;
-    public VisualElement questionGround;
-    VisualElement chattingFace;
-    public Button changeMemberButton;
-    public bool isMemberListOpen;
-    public VisualElement memberList;
-    Label memberName;
+        // chat and question ground
+    ScrollView ui_chatGround;
+    [HideInInspector] public VisualElement ui_questionGround;
+
+        // member list
+    [HideInInspector] public VisualElement ui_memberListGround;
+    [HideInInspector] public Button ui_memberListButton;
+    [HideInInspector] public bool isMemberListOpen;
+
+        // other member profile
+    VisualElement ui_otherFace;
+    Label ui_otherMemberName;
+
+
 
     // template
-    VisualTreeAsset ux_chat;
-    VisualTreeAsset ux_askChat;
-    VisualTreeAsset ux_hiddenAskChat;
-    VisualTreeAsset ux_memberList;
+    [SerializeField] VisualTreeAsset ux_chat;
+    [SerializeField] VisualTreeAsset ux_askChat;
+    [SerializeField] VisualTreeAsset ux_hiddenAskChat;
+    [SerializeField] VisualTreeAsset ux_memberList;
 
-    public bool isChapterProcessing;
-    ScrollView scrollView;
 
     private void Awake()
     {
@@ -67,6 +82,16 @@ public class UIReader_Chatting : UI_Reader
         MinHeight = 100f;
         MaxWidth = 500;
         MaxHeight = 500;
+
+        members = new List<MemberProfile>();
+        memberList = new Dictionary<string, MemberProfile>();
+    }
+
+    private void Start()
+    {
+        // move member profile to member dictionary
+        foreach (MemberProfile member in members)
+            memberList.Add(member.name, member);
     }
 
     private void Update()
@@ -77,218 +102,215 @@ public class UIReader_Chatting : UI_Reader
     {
         base.OnEnable();
 
-        Template_Load();
         UXML_Load();
         Event_Load();
     }
 
-    void OnMouseWheel(WheelEvent evt)
-    {
-        Debug.Log("?????濚?????怨쀪퐨??");
-
-        // ??れ삀??????袁⑹뵫?????濚??癲ル슪?ｇ몭???袁⑸젻泳?
-        evt.StopPropagation();
-
-        // ???嶺? ??좊즴??????袁⑹뵫??????뽦뵣 ???ㅼ굣??
-        float delta = evt.delta.y * 500f;
-
-        // ???袁⑹뵫????ш끽維???釉뚰???
-        scrollView.scrollOffset += new Vector2(0, delta);
-    }
-
     private void UXML_Load()
     {
-        chatGround = root.Q<VisualElement>("ChatGround");
-        questionGround = root.Q<VisualElement>("QuestionGround");
-        chattingFace = root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
-        changeMemberButton = root.Q<Button>("ChangeTarget");
-        memberName = root.Q<Label>("TargetName");
-        memberList = root.Q<VisualElement>("ChatMemberList");
-    }
-
-    private void Template_Load()
-    {
-        ux_chat = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\Chat.uxml");
-        ux_askChat = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\AskChat.uxml");
-        ux_hiddenAskChat = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\HiddenAskChat.uxml");
-        ux_memberList = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Chat\\ChatMember.uxml");
+        ui_chatGround = root.Q<ScrollView>("ChatGround");
+        ui_questionGround = root.Q<VisualElement>("QuestionGround");
+        ui_otherFace = root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
+        ui_memberListButton = root.Q<Button>("ChangeTarget");
+        ui_otherMemberName = root.Q<Label>("TargetName");
+        ui_memberListGround = root.Q<VisualElement>("ChatMemberList");
     }
 
     private void Event_Load()
     {
-        scrollView = chatGround.Q<ScrollView>(chatGround.name);
+        // scrollview find, and wheel speed setting
+        ui_chatGround = ui_chatGround.Q<ScrollView>(ui_chatGround.name);
+        ui_chatGround.RegisterCallback<WheelEvent>(OnMouseWheel);
 
-        // 癲ル슢???볥뼀??怨뚮뼚????類????
-        ChangeMember();
-        changeMemberButton.clicked += ChangeMember;
-
-        // 癲???????袁⑹뵫?棺堉???????뽦뵣 ?怨뚮뼚???
-        scrollView.RegisterCallback<WheelEvent>(OnMouseWheel);
-
-        //ScrollView scrollView = chatGround.Q<ScrollView>(chatGround.name);
-        //scrollView.RegisterCallback<GeometryChangedEvent>(evt => EndToScroll());
-        //Debug.Log(chatGround.Q<ScrollView>(chatGround.name).verticalPageSize);
-        //chatGround.Q<ScrollView>(chatGround.name).verticalPageSize = 500f;
-        //Debug.Log(chatGround.Q<ScrollView>(chatGround.name).verticalPageSize);
-        //Debug.Log(chatGround.Q<ScrollView>(chatGround.name));
-        //chatGround.Q<ScrollView>(chatGround.name).scrollDecelerationRate = 5f;
+        // member list hidden
+        OnOffMemberList();
+        ui_memberListButton.clicked += OnOffMemberList;
     }
-
     
-
-    public MemberChat FindMember(string name)
+    // find member
+    public MemberProfile FindMember(string name)
     {
-        foreach(MemberChat member in memberChats)
-        {
-            if (member.nickName.ToString() == name || member.name == name)
-                return member;
-        }
+        //foreach(MemberProfile member in members)
+        //{
+        //    if (member.nickName.ToString() == name || member.name == name)
+        //        return member;
+        //}
 
-        return null;
+        return memberList[name];
     }
 
+    // remove all chat and question
     private void RemoveChatting()
     {
-        for (int i = chatGround.childCount - 1; i >= 0; i--)
-            chatGround.RemoveAt(i);
+        for (int i = ui_chatGround.childCount - 1; i >= 0; i--)
+            ui_chatGround.RemoveAt(i);
 
-        for (int i = questionGround.childCount - 1; i >= 0; i--)
-            questionGround.RemoveAt(i);
+        for (int i = ui_questionGround.childCount - 1; i >= 0; i--)
+            ui_questionGround.RemoveAt(i);
     }
 
-    private void RecallChatting(MemberChat otherName)
+    // recall member chat and question
+    private void RecallChatting(MemberProfile otherName)
     {
-        memberName.text = otherName.name;
+        ui_otherMemberName.text = otherName.name;
 
         foreach (Chatting chat in otherName.chattings)
-            InputChat(chat.who, chat.toWho, chat.chatType, otherName.face, chat.text, false);
+            InputChat(chat.toWho, chat.who, chat.chatType, otherName.currentFace, chat.text, null, false);
 
         foreach (Chatting chat in otherName.quetions)
-            InputQuestion(chat.toWho, chat.chatType, chat.text, false, null);
+            InputQuestion(otherName.name, true, chat.text, null, null, false);
 
         Invoke("EndToScroll", 0.5f);
     }
 
-    // ??숆강?????ш낄猷???筌?????숆강???????ш퐨??釉먮폁????????앗낆땡??낆쑋??????ル쵐???????癲ル슢???????縕????れ삀?????? ????곕럡...
-    //private void Te(VisualElement chat, Sprite sprite)
-    //{
-    //    chat.style.backgroundImage = new StyleBackground(sprite);
-    //    float size = 0;
-
-    //    if (sprite.rect.width >= sprite.rect.height)
-    //        size = sprite.rect.width;
-    //    else
-    //        size = sprite.rect.height;
-
-    //    if (size < 100)
-    //        size = 3;
-    //    else if (size < 150)
-    //        size = 2;
-    //    else
-    //        size = 1;
-
-    //    chat.style.width = sprite.rect.width * size;
-    //    chat.style.height = sprite.rect.height * size;
-    //}
-
-    public void InputChat(EChatState who, ESaveLocation toWho, EChatType type, EFace face, 
-        string msg, bool isRecord, EChatEvent evt = EChatEvent.Default)
+    // input chat
+    public void InputChat(string toWho, EChatState who, EChatType type,
+        EFace face, string text, List<EChatEvent> chatEvt = null, bool isRecord = true)
     {
-        // ??獄쏅똻??
+        // create chat
         VisualElement chat = null;
-        MemberChat suspect = FindMember(toWho.ToString());
+        // find member
+        MemberProfile member = FindMember(toWho);
 
-        // ?????嶺뚮Ĳ?됭린?
+        // chat type
         switch (type)
         {
+            // if Text
             case EChatType.Text:
+                // create uxml
                 chat = ux_chat.Instantiate();
-                chat.Q<Label>().text = msg;
+                // chat text setting
+                chat.Q<Label>().text = text;
                 break;
+
+            // if Image
             case EChatType.Image:
+                // create VisualElement
                 chat = new VisualElement();
-                ReSizeImage(chat, imageManager.FindPNG(msg).image);
+                // image size change
+                ReSizeImage(chat, imageManager.FindPNG(text).image);
                 break;
+
+            // if CutScene
             case EChatType.CutScene:
+                // create Button
                 chat = new Button();
+                // change chat style
                 chat.AddToClassList("FileChatSize");
                 chat.AddToClassList("NoButtonBorder");
-                Sprite sprite = cutSceneManager.FindCutScene(msg).cutScenes[0].cut[0];
+                // find first cut of cutscene
+                Sprite sprite = cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
+                // change background to image
                 chat.style.backgroundImage = new StyleBackground(sprite);
-                chat.Q<Button>().clicked += (() => { cutSceneSystem.PlayCutScene(msg); });
+                // connection click event, play cutscene
+                chat.Q<Button>().clicked += (() => { cutSceneSystem.PlayCutScene(text); });
                 break;
         }
 
+        // if you this chat record
         if (isRecord)
-            RecordChat(suspect, who, toWho, type, msg);
+            RecordChat(who, toWho, type, text);
 
+        // whose chat style setting
         if (who == EChatState.Me)
             chat.AddToClassList("MyChat");
         else
             chat.AddToClassList("OtherChat");
 
-        // ????????겾??
-        chatGround.Add(chat);
+        // add UI
+        ui_chatGround.Add(chat);
+        // scroll pos to end
         Invoke("EndToScroll", 0.5f);
     }
 
-    public void InputQuestion(ESaveLocation toWho, EChatType type, string msg, bool isRecord, IEnumerator reply, Action action = null)
+    // input question
+    public void InputQuestion(string toWho, bool isLock, string msg, 
+        IEnumerator reply, Action action = null, bool isRecord = true)
     {
-        // ??獄쏅똻??
-        VisualElement chat = null ;
-        MemberChat suspect = FindMember(toWho.ToString());
+        // create chat
+        VisualElement chat = null;
+        // find member
+        MemberProfile member = FindMember(toWho.ToString());
+        // chat type
+        EChatType type = EChatType.Default;
 
-        // ?????嶺뚮Ĳ?됭린?
-        switch (type)
+        // chat type
+        if (isLock)
         {
-            case EChatType.Question:
-                chat = RemoveContainer(ux_askChat.Instantiate());
-                chat.name = msg;
-                //chat.name = msg;
-                chat.Q<Label>().text = msg;
-                //chat.Q<Button>().clicked += action; // ???????쒓낫???
-                chat.Q<Button>().clicked += (() => 
-                { 
-                    chat.parent.Remove(chat);
-                    for (int i = 0; i < suspect.quetions.Count - 1; ++i)
-                    {
-                        if (suspect.quetions[i].text == msg)
-                        {
-                            Debug.Log("癲ル슣??袁ｋ즵 ?????");
-                            suspect.quetions.Remove(suspect.quetions[i]);
-                        }
-                    }
-                    // reply ??⑥レ툓??
-                    if (reply != null)
-                        StartCoroutine(reply);
-                    action?.Invoke();
-                });
-                break;
-            case EChatType.LockQuestion:
-                chat = RemoveContainer(ux_hiddenAskChat.Instantiate());
-                chat.name = msg;
-                //chat.name = msg;
-                break;
-        }
+            // create uxml
+            chat = RemoveContainer(ux_askChat.Instantiate());
+            // chat name setting
+            chat.name = msg;
+            // chat text setting
+            chat.Q<Label>().text = msg;
+            // connection click event
+            chat.Q<Button>().clicked += (() =>
+            {
+                // remove chat
+                chat.parent.Remove(chat);
+                // find record question, and remove this question
+                foreach (Chatting questions in member.quetions) // new! need test
+                {
+                    if (questions.text == msg)
+                        member.quetions.Remove(questions);
+                }
 
+                // original, don't remove this cord...
+                //for (int i = 0; i < member.quetions.Count - 1; ++i)
+                //{
+                //    if (member.quetions[i].text == msg)
+                //    {
+                //        Debug.Log("癲ル슣??袁ｋ즵 ?????");
+                //        member.quetions.Remove(member.quetions[i]);
+                //    }
+                //}
+
+                // if reply isn't null to start coroutine
+                if (reply != null)
+                    StartCoroutine(reply);
+
+                // if action isn't null to start action
+                action?.Invoke();
+
+                // question
+                type = EChatType.Question;
+            });
+        }
+        else
+        {
+            // create uxml
+            chat = RemoveContainer(ux_hiddenAskChat.Instantiate());
+            // chat name setting
+            chat.name = msg;
+            // question
+            type = EChatType.LockQuestion;
+        }
+                
         if (isRecord)
-            RecordChat(suspect, EChatState.Me, toWho, type, msg);
+            RecordChat(EChatState.Me, toWho, type, msg);
 
         //ChangeT(suspect, msg);
 
-        // ????釉먯뒠????⑤베堉?
-        questionGround.Add(chat);
+        // add UI
+        ui_questionGround.Add(chat);
     }
 
-    private void RecordChat(MemberChat member, EChatState who, ESaveLocation toWho, EChatType type, string msg)
+    // record chatting
+    // 이거 type question에는 관계 없어서 빼든 뭐든 해야함
+    private void RecordChat(EChatState who, string toWho, EChatType type, string msg)
     {
-        // ??れ삀??쎈뭄?
+        // create chatting
         Chatting chatting = new Chatting();
+        // find member
+        MemberProfile member = FindMember(toWho);
+
+        // chatting setting
         chatting.who = who;
         chatting.toWho = toWho;
         chatting.chatType = type;
         chatting.text = msg;
 
+        // chatting type
         switch (type)
         {
             case EChatType.Text:
@@ -303,104 +325,142 @@ public class UIReader_Chatting : UI_Reader
         }
     }
 
-    //private void ChangeT(MemberChat member, string msg)
-    //{
-    //    ??筌믨퀣???怨뚮뼚???
-    //    if (member.face != face)
-    //    {
-    //        VisualElement suspectFace = chattingFace.Q<VisualElement>("Face");
-    //        switch (face)
-    //        {
-    //            case EFace.Default:
-    //                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default]);
-    //                break;
-    //            case EFace.Blush:
-    //                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush]);
-    //                break;
-    //            case EFace.Difficult:
-    //                suspectFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Difficult]);
-    //                break;
-    //        }
-
-    //        member.face = face;
-    //    }
-
-    //    ???濚??
-    //    switch (evt)
-    //    {
-    //        case EChatEvent.Vibration:
-    //            break;
-    //        case EChatEvent.Round:
-    //            break;
-    //        case EChatEvent.Camera:
-    //            break;
-    //    }
-    //}
-    public void EndToScroll()
+    // setting Face and event
+    private void SettingChat(MemberProfile member, EFace face, EChatEvent evt)
     {
-        scrollView.verticalScroller.value = scrollView.verticalScroller.highValue;
+        // if current face of member is the same new face
+        if (member.currentFace != face)
+        {
+            // find member face
+            VisualElement memberFace = ui_otherFace.Q<VisualElement>("Face");
+            // face type
+            switch (face)
+            {
+                case EFace.Default:
+                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default]);
+                    break;
+                case EFace.Blush:
+                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush]);
+                    break;
+                case EFace.Difficult:
+                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Difficult]);
+                    break;
+            }
+
+            // change current face of member
+            member.currentFace = face;
+        }
+
+        // event type
+        switch (evt)
+        {
+            case EChatEvent.Vibration:
+                break;
+            //case EChatEvent.Round:
+            //    break;
+            case EChatEvent.Camera:
+                break;
+        }
     }
 
+    // scroll pos setting
+    void OnMouseWheel(WheelEvent evt)
+    {
+        // working progress is stop
+        evt.StopPropagation();
+
+        // multitly scroll speed to current delta value
+        float delta = evt.delta.y * 500f;
+
+        // scroll pos setting
+        ui_chatGround.scrollOffset += new Vector2(0, delta);
+    }
+
+    // scroll pos to end
+    public void EndToScroll()
+    {
+        ui_chatGround.verticalScroller.value = ui_chatGround.verticalScroller.highValue;
+    }
+
+    // add member
     public void AddMember(string memberName)
     {
-        MemberChat member = FindMember(memberName);
+        // find member
+        MemberProfile member = FindMember(memberName);
+
+        // if this member is not open
         if (member.isOpen == false)
         {
+            // member open
             member.isOpen = true;
 
+            // create uxml
             VisualElement newMember = RemoveContainer(ux_memberList.Instantiate());
+            // change member name 
             newMember.Q<Label>("Name").text = member.name;
-            newMember.Q<VisualElement>("Face").style.backgroundImage 
-                = new StyleBackground(member.faces[0]);
+            // change member face 
+            newMember.Q<VisualElement>("Face").style.backgroundImage
+                = new StyleBackground(member.faces[(int)member.currentFace]);
+            // connection click event
             newMember.Q<Button>("ChatMember").clicked += () =>
             {
                 ChoiceMember(member);
             };
 
-            memberList.Add(newMember);
-            //memberChats.Add(new MemberChat(memberName));
+            // add member to memberListGround
+            ui_memberListGround.Add(newMember);
         }
     }
 
-    public void ChangeMember()
+    // change member
+    public void ChoiceMember(MemberProfile member)
+    {
+        // change currentMemberName
+        currentMemberName = member.name;
+
+        // if member isn't null
+        if (member != null)
+        {
+            // change profile
+            ChangeProfile(member.name, member.faces[(int)member.currentFace]);
+            // off memberListGround
+            OnOffMemberList();
+            // remove all chat and question
+            RemoveChatting();
+            // recall chat and question
+            RecallChatting(member);
+
+            //// start chapter.
+            if (member.nickName.ToString() != "")
+            {
+                chapterManager.ChatStart(/*member.name, */member.nickName.ToString());
+            }
+            else
+                Debug.Log("this member hasn't name");
+        }
+    }
+
+    // changed profile setting
+    public void ChangeProfile(string name, Sprite face)
+    {
+        ui_otherFace.Q<Label>("Name").text = name;
+        ui_otherFace.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(face);
+    }
+
+    // member list on/off
+    public void OnOffMemberList()
     {
         isMemberListOpen = !isMemberListOpen;
 
         if (isMemberListOpen)
         {
-            changeMemberButton.style.backgroundImage = new StyleBackground(changeMemberBtnOn);
-            memberList.style.display = DisplayStyle.None;
+            ui_memberListButton.style.backgroundImage = new StyleBackground(changeMemberBtnOn);
+            ui_memberListGround.style.display = DisplayStyle.None;
         }
         else
         {
-            changeMemberButton.style.backgroundImage = new StyleBackground(changeMemberBtnOff);
-            memberList.style.display = DisplayStyle.Flex;
-        }
-    }
-
-    public void ChangeProfile(string name, Sprite face)
-    {
-        chattingFace.Q<Label>("Name").text = name;
-        chattingFace.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(face);
-    }
-
-    public void ChoiceMember(MemberChat member)
-    {
-        currentMemberName = member.name;
-
-        if (member != null)
-        {
-            ChangeProfile(member.name, member.faces[(int)member.face]);
-            ChangeMember(); // ?????癲ル슢?꾤땟戮⑤뭄?????됀?
-            RemoveChatting(); // 癲???????ル깼???
-            RecallChatting(member); // ????궈????ㅼ뒭??
-
-            if (member.chapterName != "")
-            {
-                chapterManager.ChatStart(/*member.name, */member.chapterName);
-            }
-            else
-                Debug.Log("癲?甕겹끂?사??놁씀? ????룹젂???源낆쓱");
+            ui_memberListButton.style.backgroundImage = new StyleBackground(changeMemberBtnOff);
+            ui_memberListGround.style.display = DisplayStyle.Flex;
         }
     }
 }

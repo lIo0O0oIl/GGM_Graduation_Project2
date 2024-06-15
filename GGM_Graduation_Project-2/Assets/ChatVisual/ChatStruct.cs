@@ -27,6 +27,7 @@ namespace ChatVisual
 
     public enum EChatType
     {
+        Default,
         Text,
         Image,
         CutScene,

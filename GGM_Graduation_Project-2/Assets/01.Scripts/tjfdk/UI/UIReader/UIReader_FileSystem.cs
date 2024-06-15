@@ -129,12 +129,12 @@ public class UIReader_FileSystem : UI_Reader
 
     private void FindLockQuestion()
     {
-        MemberChat member = chatSystem.FindMember(chatSystem.currentMemberName);
+        MemberProfile member = chatSystem.FindMember(chatSystem.currentMemberName);
         Debug.Log(member.name);
         for (int i = 0; i < member.quetions.Count; ++i)
         {
             if (member.quetions[i].chatType == EChatType.LockQuestion)
-                lockQuestions.Add(chatSystem.questionGround.ElementAt(i));
+                lockQuestions.Add(chatSystem.ui_questionGround.ElementAt(i));
         }
     }
 

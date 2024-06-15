@@ -20,6 +20,7 @@ namespace ChatVisual
         public ICheck checkClass;
         public bool is_AllQuestion;
         public bool is_SpecificFile;
+        public bool is_LockQuestion;
         
         public void InitConditionNode()
         {
