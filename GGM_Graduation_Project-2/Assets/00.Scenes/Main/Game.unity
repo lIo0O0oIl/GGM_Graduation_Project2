@@ -730,6 +730,37 @@ MonoBehaviour:
   imageSystem: {fileID: 0}
   cutSceneSystem: {fileID: 0}
   changeHumanTime: 1
+--- !u!1 &462252822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 462252823}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &462252823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462252822}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8300158, y: 0.058344096, z: 0.08789162}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &594023513
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowHumanName: Home
+  nowHumanName: Freiend
   nameList:
   - HG
   - Teacher
@@ -1193,6 +1224,134 @@ MonoBehaviour:
       position: {x: 0, y: 0}
       index: 0
       is_UseThis: 0
+    - guid: 3ddd782b8e3cba14f841f7c2b0e68b6a
+      position: {x: 150.4, y: 149.00005}
+      index: 0
+      is_UseThis: 0
+    - guid: f4ae81169e16e6a4fb067b0c32a7cab6
+      position: {x: 150.40001, y: 273.8775}
+      index: 0
+      is_UseThis: 0
+    - guid: d2d90ee4493b12242a745f180e4e0086
+      position: {x: -86.81002, y: 403.4775}
+      index: 0
+      is_UseThis: 0
+    - guid: 01eb905a87756454c840f8bbaa95889f
+      position: {x: -86.81002, y: 522.6775}
+      index: 0
+      is_UseThis: 0
+    - guid: 2b361450c53915f48ab131cdd006e449
+      position: {x: 150.40002, y: 648.24304}
+      index: 0
+      is_UseThis: 0
+    - guid: 84c7af9ee13ab344eb1ce58f967db496
+      position: {x: 151.20001, y: 765.6}
+      index: 0
+      is_UseThis: 0
+    - guid: 8b703daf291d2994aad5afabf023148d
+      position: {x: -21.759888, y: 892}
+      index: 0
+      is_UseThis: 0
+    - guid: dd130b39679ef6c449c8c7e963f48295
+      position: {x: -433.59998, y: 1066.4}
+      index: 0
+      is_UseThis: 0
+    - guid: 7638b5578c6e0084e9a2f447fc13f6f3
+      position: {x: -19.600098, y: 1066.4}
+      index: 0
+      is_UseThis: 0
+    - guid: 9e27e431f4c19dd479d80656ef955b05
+      position: {x: 439.92108, y: 1066.4}
+      index: 0
+      is_UseThis: 0
+    - guid: a5a223d460371514296c9e4dcae61c26
+      position: {x: -562.4, y: 1221.6}
+      index: 0
+      is_UseThis: 0
+    - guid: eb34fb13e62bc4c47bb6fbeea0c92a25
+      position: {x: 351.2, y: 1600.2292}
+      index: 0
+      is_UseThis: 0
+    - guid: bab80b27fe92453448129797f8910df3
+      position: {x: -341.60242, y: 1335.9998}
+      index: 0
+      is_UseThis: 0
+    - guid: 1338e2e876fe56140a67667282f56d57
+      position: {x: -96.80002, y: 1208.1649}
+      index: 0
+      is_UseThis: 0
+    - guid: a50f932dd0b506443ab69d87d5294622
+      position: {x: -96.80002, y: 1335.3649}
+      index: 0
+      is_UseThis: 0
+    - guid: 6fc23e7cf6c7d2e49928023364261b67
+      position: {x: 90.00001, y: 1456.6119}
+      index: 0
+      is_UseThis: 0
+    - guid: 53c4b7e81cf08ba4382b11bb894c1be2
+      position: {x: 90.4, y: 1579.2}
+      index: 0
+      is_UseThis: 0
+    - guid: 55c92b1d87040be43b954324c59ce9aa
+      position: {x: -96.799774, y: 1735.1997}
+      index: 0
+      is_UseThis: 0
+    - guid: 891c0612385158e4dac2fea5a3b612f8
+      position: {x: -95.99979, y: 1851.9996}
+      index: 0
+      is_UseThis: 0
+    - guid: 5abfd76f7dd518b4587ba1bad7ebdea7
+      position: {x: -96.79995, y: 1978.6929}
+      index: 0
+      is_UseThis: 0
+    - guid: 186e5af9d4c0893438aa129030719e39
+      position: {x: -95.999985, y: 2095.1677}
+      index: 0
+      is_UseThis: 0
+    - guid: d089d7bc30af0f045a37fdf9c352690d
+      position: {x: -96.79999, y: 2209.6}
+      index: 0
+      is_UseThis: 0
+    - guid: df9d1eef2bdf32b4cb98d1a7f609c940
+      position: {x: -95.20006, y: 2326.725}
+      index: 0
+      is_UseThis: 0
+    - guid: e59c180e634e4c34aab5932f3364e6fc
+      position: {x: 143.42749, y: 2428}
+      index: 0
+      is_UseThis: 0
+    - guid: dce1d2fdcecff0342a04bfc80708df69
+      position: {x: 157.48503, y: 2560.31}
+      index: 0
+      is_UseThis: 0
+    - guid: e9ebb32693a4c254c809bafb94173b36
+      position: {x: 351.62003, y: 1208.455}
+      index: 0
+      is_UseThis: 0
+    - guid: d5e1eda0b55d0394abf0125baaf31715
+      position: {x: 351.1999, y: 1337.025}
+      index: 0
+      is_UseThis: 0
+    - guid: 8219a57daaa2e7c47b739e4acd7ba879
+      position: {x: 576.8, y: 1477.5997}
+      index: 0
+      is_UseThis: 0
+    - guid: e02b49a8812bc5246b0d2d3cdc3efff1
+      position: {x: 591.12085, y: 1730.4966}
+      index: 0
+      is_UseThis: 0
+    - guid: b40cb74d4904919469e5335bf610cb29
+      position: {x: 338.81314, y: 1875.279}
+      index: 0
+      is_UseThis: 0
+    - guid: f929cb9024e3b144cb3cc67381986a63
+      position: {x: 576.8, y: 1976.7998}
+      index: 0
+      is_UseThis: 0
+    - guid: 40f033dee0351c945934162c5e378d9b
+      position: {x: 576.8, y: 2128.9497}
+      index: 0
+      is_UseThis: 0
 --- !u!1 &1663529864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,3 +1451,4 @@ SceneRoots:
   - {fileID: 1663529867}
   - {fileID: 594023516}
   - {fileID: 150678876}
+  - {fileID: 462252823}
