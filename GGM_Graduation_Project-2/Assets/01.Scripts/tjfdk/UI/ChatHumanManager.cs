@@ -19,7 +19,7 @@ public class ChatHumanManager : UI_Reader
 
     public void AddHuman(string who)     // HG
     {
-        chatSystem.AddMember(who);
+        GameManager.Instance.chatSystem.AddMember(who);
     }
 
     private void Update()

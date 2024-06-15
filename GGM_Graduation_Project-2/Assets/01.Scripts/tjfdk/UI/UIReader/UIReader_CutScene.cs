@@ -10,8 +10,6 @@ public class UIReader_CutScene : UI_Reader
     Button scene;
     Label text;
 
-    Tween currentTextTween;
-
     private void OnEnable()
     {
         base.OnEnable();
@@ -19,12 +17,12 @@ public class UIReader_CutScene : UI_Reader
         scene = root.Q<Button>("Scene");
         text = root.Q<Label>("Text");
 
-        scene.clicked += (() => { cutSceneManager.Next(); });
+        scene.clicked += (() => { GameManager.Instance.cutSceneManager.Next(); });
     }
 
     public void PlayCutScene(string name)
     {
-        cutSceneManager.CutScene(true, name);
+        GameManager.Instance.cutSceneManager.CutScene(true, name);
         OpenCutScene(true);
     }
 
@@ -40,6 +38,8 @@ public class UIReader_CutScene : UI_Reader
     {
         DoText(text, msg, writingDuring, false, () => { });
     }
+
+    public void EndText() => base.EndText();
 
     IEnumerator CutAnimation(Sprite[] cuts)
     {

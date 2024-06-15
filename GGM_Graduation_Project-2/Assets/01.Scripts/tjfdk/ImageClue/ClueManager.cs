@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class ClueManager : Singleton<ClueManager>
 {
-    [SerializeField] private Text description;
+    [SerializeField] private UnityEngine.UI.Text description;
 
     public void Texting(string msg)
     {

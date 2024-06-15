@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 public enum FileType
 {
@@ -42,39 +43,52 @@ public class UIReader_FileSystem : UI_Reader
 
     Tween changeFileSystemSizeDOT;
 
+
+
     // UXML
-    VisualElement fileSystemArea;
-    VisualElement fileGround;
-    VisualElement filePathGround;
-    VisualElement mainFilePath;
-    VisualElement panelGround;
-    public Button changeSizeButton;
+    VisualElement ui_fileSystemArea;
+    VisualElement ui_fileGround;
+    VisualElement ui_filePathGround;
+    VisualElement ui_mainFilePath;
+    VisualElement ui_panelGround;
+    [HideInInspector] public Button ui_changeSizeButton;
+
+
 
     // Template
-    VisualTreeAsset ux_filePath;
-    VisualTreeAsset ux_fileGround;
-    VisualTreeAsset ux_folderFile;
-    VisualTreeAsset ux_imageFile;
-    VisualTreeAsset ux_textFile;
-    VisualTreeAsset ux_ImagePanel;
-    VisualTreeAsset ux_TextPanel;
+    [Header("Template")]
+    [SerializeField] VisualTreeAsset ux_filePath;
+    [SerializeField] VisualTreeAsset ux_fileGround;
+    [SerializeField] VisualTreeAsset ux_folderFile;
+    [SerializeField] VisualTreeAsset ux_imageFile;
+    [SerializeField] VisualTreeAsset ux_textFile;
+    [SerializeField] VisualTreeAsset ux_ImagePanel;
+    [SerializeField] VisualTreeAsset ux_TextPanel;
 
-    // foulder
-    public string currentFolderName;
+
+
+    // folder
+    private string currentFolderName;
+    [SerializeField] List<FolderFile> fileFolders; // this is test, fileFolders -> fileFolderList X!!
+    // if dictionary is correct working, remove fileFolders!
+    public Dictionary<string, FolderFile> fileFolderList;
 
     // path
-    public Stack<string> filePathLisk = new Stack<string>();
-    public List<FolderFile> fileFolders;
+    private Stack<string> filePathLisk;
     public FolderFile currentFileFolder;
 
     // file drag and drop
     private VisualElement fileDefaultArea;
-    private List<VisualElement> lockQuestions = new List<VisualElement>();
+    private List<VisualElement> lockQuestions;
 
     private void Awake()
     {
         base.Awake();
+
         fileFolders = new List<FolderFile>();
+        fileFolderList = new Dictionary<string, FolderFile>();
+        filePathLisk = new Stack<string>();
+        lockQuestions = new List<VisualElement>();
 
         MinWidth = 500f;
         MinHeight = 500f;
@@ -87,33 +101,20 @@ public class UIReader_FileSystem : UI_Reader
         base.OnEnable();
 
         UXML_Load();
-        Template_Load();
         Event_Load();
 
         fileFolders.Add(new FolderFile("Main"));
+        fileFolderList.Add("Main", new FolderFile("Main"));
         AddFilePath("Main");
     }
 
     private void UXML_Load()
     {
-        fileSystemArea = root.Q<VisualElement>("FileSystem");
-        fileGround = root.Q<VisualElement>("FileGround");
-        filePathGround = root.Q<VisualElement>("FilePathGround");
-        panelGround = root.Q<VisualElement>("PanelGround");
-        changeSizeButton = root.Q<Button>("ChangeSize");
-    }
-
-    private void Template_Load()
-    {
-        ux_fileGround = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FileGround.uxml");
-        ux_filePath = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FilePath.uxml");
-
-        ux_folderFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\FolderFile.uxml");
-        ux_imageFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\ImageFile.uxml");
-        ux_textFile = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\TextFile.uxml");
-
-        ux_ImagePanel = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\ImagePanel.uxml");
-        ux_TextPanel = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\File\\TextPanel.uxml");
+        ui_fileSystemArea = root.Q<VisualElement>("FileSystem");
+        ui_fileGround = root.Q<VisualElement>("FileGround");
+        ui_filePathGround = root.Q<VisualElement>("FilePathGround");
+        ui_panelGround = root.Q<VisualElement>("PanelGround");
+        ui_changeSizeButton = root.Q<Button>("ChangeSize");
     }
 
     private void Event_Load()
@@ -121,7 +122,7 @@ public class UIReader_FileSystem : UI_Reader
         //AddFolderGround("Main");
         //AddFilePath("Main", () => FolderPathEvent("Main"));
 
-        changeSizeButton.clicked += () =>
+        ui_changeSizeButton.clicked += () =>
         {
             ChangeSize(0.25f);
         };
@@ -129,12 +130,12 @@ public class UIReader_FileSystem : UI_Reader
 
     private void FindLockQuestion()
     {
-        MemberProfile member = chatSystem.FindMember(chatSystem.currentMemberName);
+        MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatSystem.currentMemberName);
         Debug.Log(member.name);
         for (int i = 0; i < member.quetions.Count; ++i)
         {
             if (member.quetions[i].chatType == EChatType.LockQuestion)
-                lockQuestions.Add(chatSystem.ui_questionGround.ElementAt(i));
+                lockQuestions.Add(GameManager.Instance.chatSystem.ui_questionGround.ElementAt(i));
         }
     }
 
@@ -190,75 +191,49 @@ public class UIReader_FileSystem : UI_Reader
 
     private FolderFile FindFolder(string name)
     {
-        foreach (FolderFile folder in fileFolders)
-        {
-            if (folder.folderName == name)
-                return folder;
-        }
+        //foreach (FolderFile folder in fileFolders)
+        //{
+        //    if (folder.folderName == name)
+        //        return folder;
+        //}
 
-        return null;
-    }
-
-    public FileT FindFile(string name)
-    {
-        foreach (FileT file in fileManager.folderFiles)
-        {
-            if (file.fileName == name)
-                return file;
-        }
-
-        return null;
+        return fileFolderList[name];
     }
 
     public void AddFile(FileType fileType, string fileName, string fileParentName)
     {
         VisualElement file = null;
-        Debug.Log(fileName + " " + fileParentName);
 
+        // file type
         switch (fileType)
         {
+            // if folder
             case FileType.FOLDER:
                 {
-                    // ?앹꽦
+                    // create uxml
                     file = RemoveContainer(ux_folderFile.Instantiate());
-
-                    // ?대쫫 蹂寃?
+                    // change file name
                     file.Q<Label>("FileName").text = fileName;
-                    // ?대깽???곌껐
+                    // connection click event
                     file.Q<Button>("FileImage").clicked += () => 
                     { 
+                        // draw current foluder
                         DrawFile(file.Q<Label>("FileName").text); 
+                        // add current folder path
                         AddFilePath(fileName); 
                     };
-                    // ?대뜑 遺紐?吏??
-                    bool addNew = false;
-                    FolderFile parentFolder = FindFolder(fileParentName);
-                    if (parentFolder != null)
-                    {
-                        Debug.Log("李얠쓬");
-                        parentFolder.folderFiles.Add(file);
-                        fileFolders.Add(new FolderFile(fileName));
-                        addNew = true;
-                    }
 
-                    // ?대뜑 ?앹꽦 諛?異붽?
-                    if (addNew == false)
-                    {
-                        Debug.Log("紐?李얠쓬");
-                        FolderFile folderParent = new FolderFile(fileParentName);
-                        fileFolders.Add(folderParent);
-                        fileFolders.Add(new FolderFile(fileName));
-                        folderParent.folderFiles.Add(file);
-                    }
+                    AddParenet(fileType, fileParentName, fileName, file);
                     break;
                 }
+                // 후.. 너희는 이런 거 하지마라...
             case FileType.IMAGE:
                 {
-                    // ?앹꽦
+                    // create uxml
                     file = RemoveContainer(ux_imageFile.Instantiate());
-                    // ?대쫫 蹂寃?
+                    // change file name
                     file.Q<Label>("FileName").text = fileName;
-                    // ?쒕옒洹????쒕∼ 湲곕뒫 異붽?
+                    // connection drag and drop & button click event
                     file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
                     {
                         var area = FindMoveArea(evt.mousePosition);
@@ -269,7 +244,7 @@ public class UIReader_FileSystem : UI_Reader
                         }
                         else
                         {
-                  /*          LockAskAndReply lockQuestion = FindQuestion(area);
+                        /*LockAskAndReply lockQuestion = FindQuestion(area);
                             if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
                             {
                                 area.parent.Remove(area);
@@ -283,18 +258,22 @@ public class UIReader_FileSystem : UI_Reader
                     () => { ImageEvent(file); }
                     ));
 
+                    AddParenet(fileType, fileParentName, fileName, file);
+
                     // ?뚯씪 遺紐?吏??
                     bool addNew = false;
-                    foreach (FolderFile folder in fileFolders)
+                    //foreach (FolderFile folder in fileFolders)
+                    //{
+                    //    // if you discover parent folder
+                    //    if (folder.folderName != fileParentName)
+                    FolderFile folder = fileFolderList[fileParentName];
+                    if (folder != null)
                     {
-                        // if you discover parent folder
-                        if (folder.folderName == fileParentName)
-                        {
-                            folder.imageFiles.Add(file);
-                            addNew = true;
-                            break;
-                        }
+                        folder.imageFiles.Add(file);
+                        addNew = true;
+                        break;
                     }
+                    //}
 
                     // ?대뜑 ?앹꽦 諛?異붽?
                     // if parentfolder not exist? new add
@@ -336,16 +315,16 @@ public class UIReader_FileSystem : UI_Reader
                     () => { TextEvent(file); }
                     ));
 
+                    AddParenet(fileType, fileParentName, fileName, file);
+
                     // ?뚯씪 遺紐?吏??
                     bool addNew = false;
-                    foreach (FolderFile folder in fileFolders)
+                    FolderFile folder = fileFolderList[fileParentName];
+                    if (folder != null)
                     {
-                        if (folder.folderName == fileParentName)
-                        {
-                            folder.textFiles.Add(file);
-                            addNew = true;
-                            break;
-                        }
+                        folder.imageFiles.Add(file);
+                        addNew = true;
+                        break;
                     }
 
                     // ?대뜑 ?앹꽦 諛?異붽?
@@ -372,41 +351,133 @@ public class UIReader_FileSystem : UI_Reader
         }
     }
 
+    private void AddParenet(FileType fileType, string fileParentName, string fileName, VisualElement file)
+    {
+        // find parentFolder
+        FolderFile parentFolder = fileFolderList[fileParentName];
+
+        // if exist parenteFolder
+        if (parentFolder != null)
+        {
+            // register folder to parentFolder
+            switch (fileType)
+            {
+                case FileType.FOLDER:
+                        fileFolders.Add(new FolderFile(fileName));
+                    fileFolderList.Add(fileName, new FolderFile(fileName));
+                    parentFolder.folderFiles.Add(file);
+                    break;
+                case FileType.IMAGE:
+                    parentFolder.imageFiles.Add(file);
+                    break;
+                case FileType.TEXT:
+                    parentFolder.textFiles.Add(file);
+                    break;
+            }
+        }
+        // if not exist parenteFolder
+        else
+        {
+            FolderFile newParentFolder = FindParent(fileType, fileParentName, fileName);
+            AddFile(fileType, fileName, newParentFolder.folderName);
+            
+            switch (fileType)
+            {
+                case FileType.FOLDER:
+                    newParentFolder.folderFiles.Add(file);
+                    break;
+                case FileType.IMAGE:
+                    newParentFolder.imageFiles.Add(file);
+                    break;
+                case FileType.TEXT:
+                    newParentFolder.textFiles.Add(file);
+                    break;
+            }
+
+            //switch (fileType)
+            //{
+            //    case FileType.FOLDER:
+            //        {
+            //            // create and register new folder
+            //            fileFolders.Add(new FolderFile(fileName));
+            //            fileFolderList.Add(fileName, new FolderFile(fileName));
+
+            //            // register folder to parentFolder
+            //            newParentFolder.folderFiles.Add(file);
+
+            //        }
+            //        break;
+            //    case FileType.IMAGE:
+            //        {
+            //            newParentFolder.imageFiles.Add(file);
+            //            AddParenet(FileType.FOLDER, GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName, fileParentName, newParentFolder);
+            //        }
+            //        //AddFile(FileType.FOLDER, fileParentName, GameManager.Instance.fileManager.FindFile();
+            //        //AddFile(fileType, fileName, fileParentName);
+            //        break;
+            //    case FileType.TEXT:
+            //        AddFile(FileType.FOLDER, fileParentName, "Main");
+            //        AddFile(fileType, fileName, fileParentName);
+            //        parentFolder.textFiles.Add(file);
+            //        break;
+
+            //}
+        }
+    }
+
+    private FolderFile FindParent(FileType fileType, string fileParentName, string fileName)
+    {
+        // create new parentFolder
+        FolderFile newParentFolder = new FolderFile(fileParentName);
+
+        // register parentFolder
+            fileFolders.Add(newParentFolder);
+        fileFolderList.Add(newParentFolder.folderName, newParentFolder);
+
+        //newParentFolder.folderFiles.Add(newParentFolder);
+
+        return newParentFolder;
+    }
+
     public void DrawFile(string folderName)
     {
-        // fileGround - file 洹몃━??怨?
-        // fileFolders - ?꾩옱 紐⑤뱺 ?대뜑 諛곗뿴
-        // folderName - ?꾩옱 ?좏깮???대뜑 ?대쫫
+        // fileGround - current folder ground
+        // fileFolders - current folder list
+        // folderName - current folder name
 
+        // change current folder
         currentFolderName = folderName;
 
-        // ?댁쟾???덈뜕 寃껊뱾 ??吏?곌퀬 (??닚?쇰줈 吏?뚯빞 ?ㅻ쪟 ????
-        for (int i = fileGround.childCount - 1; i >= 0; i--)
-            fileGround.RemoveAt(i);
+        // all file remove of fileGround
+        for (int i = ui_fileGround.childCount - 1; i >= 0; i--)
+            ui_fileGround.RemoveAt(i);
 
-        // ?꾩옱 ?대뜑 蹂寃?
-        foreach (FolderFile folder in fileFolders)
-        {
-            if (folder.folderName == folderName)
-                currentFileFolder = folder;
-        }
+        // 
+        currentFileFolder = fileFolderList[folderName];
+        //foreach (FolderFile folder in fileFolders)
+        //{
+        //    if (folder.folderName == folderName)
+        //        currentFileFolder = folder;
+        //}
 
         if (currentFileFolder != null)
         {
-            // ?덈줈 洹몃━湲?
+            // create current folder's childen
             foreach (VisualElement folder in currentFileFolder.folderFiles)
-                fileGround.Add(folder);
+                ui_fileGround.Add(folder);
+
             foreach (VisualElement image in currentFileFolder.imageFiles)
-                fileGround.Add(image);
+                ui_fileGround.Add(image);
+
             foreach (VisualElement text in currentFileFolder.textFiles)
-                fileGround.Add(text);
+                ui_fileGround.Add(text);
         }
     }
 
     public void OpenImage(string name, Sprite sprite)
     {
-        for (int i = panelGround.childCount - 1; i >= 0; i--)
-            panelGround.RemoveAt(i);
+        for (int i = ui_panelGround.childCount - 1; i >= 0; i--)
+            ui_panelGround.RemoveAt(i);
 
         VisualElement panel = RemoveContainer(ux_ImagePanel.Instantiate());
         panel.Q<Label>("Name").text = name + ".png";  
@@ -414,14 +485,14 @@ public class UIReader_FileSystem : UI_Reader
         ReSizeImage(panel.Q<VisualElement>("Image"), sprite);
         panel.Q<Button>("CloseBtn").clicked += () => 
         { 
-            panelGround.Remove(panel);
+            ui_panelGround.Remove(panel);
         
-            FileT file = FindFile(name);
-            fileManager.UnlockChat(file);
-            fileManager.UnlockChapter(file);
+            File file = GameManager.Instance.fileManager.FindFile(name);
+            GameManager.Instance.fileManager.UnlockChat(file);
+            GameManager.Instance.fileManager.UnlockChapter(file);
         };
 
-        panelGround.Add(panel);
+        ui_panelGround.Add(panel);
     }
 
     public void OpenText(string name, string text)
@@ -431,14 +502,14 @@ public class UIReader_FileSystem : UI_Reader
         panel.Q<Label>("Text").text = text;
         panel.Q<Button>("CloseBtn").clicked += () => 
         { 
-            panelGround.Remove(panel);
+            ui_panelGround.Remove(panel);
 
-            FileT file = FindFile(name);
-            fileManager.UnlockChat(file);
-            fileManager.UnlockChapter(file);
+            File file = GameManager.Instance.fileManager.FindFile(name);
+            GameManager.Instance.fileManager.UnlockChat(file);
+            GameManager.Instance.fileManager.UnlockChapter(file);
         };
 
-        panelGround.Add(panel);
+        ui_panelGround.Add(panel);
     }
 
     private void AddFilePath(string pathName)
@@ -446,7 +517,7 @@ public class UIReader_FileSystem : UI_Reader
         VisualElement filePath = RemoveContainer(ux_filePath.Instantiate());
         filePath.Q<Button>().text = pathName + "> ";
         filePath.Q<Button>().clicked += () => { FolderPathEvent(pathName); };
-        filePathGround.Add(filePath);
+        ui_filePathGround.Add(filePath);
         filePathLisk.Push(pathName);
     }
 
@@ -456,7 +527,7 @@ public class UIReader_FileSystem : UI_Reader
         {
             if (filePathLisk.Peek() == fileName)
                 break;
-            filePathGround.RemoveAt(filePathGround.childCount - 1);
+            ui_filePathGround.RemoveAt(ui_filePathGround.childCount - 1);
             filePathLisk.Pop();
         }
 
@@ -466,13 +537,13 @@ public class UIReader_FileSystem : UI_Reader
     public void ImageEvent(VisualElement file)
     {
         //OpenPanel(imageFindingPanel);
-        imageSystem.EventImage(file);
+        GameManager.Instance.imageSystem.EventImage(file);
     }
 
     public void TextEvent(VisualElement file)
     {
         string name = file.Q<Label>("FileName").text;
-        OpenText(name, imageManager.memoDic[name]);
+        //OpenText(name, GameManager.Instance.imageManager.memoDic[name]);
     }
 
     public void ChangeSize(float during)
@@ -487,15 +558,15 @@ public class UIReader_FileSystem : UI_Reader
 
         if (isFileSystemOpen)
         {
-            changeFileSystemSizeDOT = DOTween.To(() => fileSystemArea.style.flexBasis.value.value, x => 
-                fileSystemArea.style.flexBasis = x, fileAreaSizeOn, during);
-            changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOn);
+            changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x => 
+                ui_fileSystemArea.style.flexBasis = x, fileAreaSizeOn, during);
+            ui_changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOn);
         }
         else
         {
-            changeFileSystemSizeDOT = DOTween.To(() => fileSystemArea.style.flexBasis.value.value, x => 
-                fileSystemArea.style.flexBasis = x, fileAreaSizeOff, during);
-            changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOff);
+            changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x => 
+                ui_fileSystemArea.style.flexBasis = x, fileAreaSizeOff, during);
+            ui_changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOff);
         }
     }
 }

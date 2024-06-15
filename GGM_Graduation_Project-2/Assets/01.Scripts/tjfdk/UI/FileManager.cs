@@ -7,7 +7,7 @@ using Unity.Collections;
 using UnityEngine;
 
 [Serializable]
-public class FileT
+public class File
 {
     public string fileName;
     public string fileParentName;
@@ -18,11 +18,23 @@ public class FileT
 
 public class FileManager : UI_Reader
 {
-    public List<FileT> folderFiles = new List<FileT>();
-    //    public List<FileImage> imageFiles = new List<FileImage>();
-    //    public List<FileText> textFiles = new List<FileText>();
+    [SerializeField] List<File> folderFiles;
+    public Dictionary<string, File> folderFileList;
 
-    public void UnlockChapter(FileT file)
+    private void Awake()
+    {
+        folderFiles = new List<File>();
+        folderFileList = new Dictionary<string, File>();
+    }
+
+    private void Start()
+    {
+        foreach (File file in folderFiles)
+            folderFileList.Add(file.fileName, file);
+    }
+
+    public File FindFile(string name) { return folderFileList[name]; }
+    public void UnlockChapter(File file)
     {
         if (file.eventName != "")
         {
@@ -45,7 +57,7 @@ public class FileManager : UI_Reader
         }
     }
 
-    public void UnlockChat(FileT file)
+    public void UnlockChat(File file)
     {
         if (file.eventName != "")
         {
