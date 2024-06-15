@@ -774,101 +774,360 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowHumanName: HG
+  nowHumanName: Teacher
   nameList:
   - HG
-  - JH
+  - Teacher
+  - Home
+  - Freiend
   nodeList:
   - nodes:
-    - guid: 6bcd0d4e897e7794b9f932b35cdb3a04
-      position: {x: 0, y: 0}
+    - guid: b6fd4346484d2404f90a42296506d291
+      position: {x: -74.40004, y: -25.180458}
       index: 0
       is_UseThis: 0
-    - guid: 28a5a7739b95f534aa9517b31ca0d914
-      position: {x: -182.71303, y: 161.25679}
+    - guid: 02a25c7f1ed0c9d4291f5be0ba1ec309
+      position: {x: -201.59996, y: 142.63268}
       index: 0
       is_UseThis: 0
-    - guid: aee24788e48d3de46bd214edf9849e71
-      position: {x: -182.71303, y: 306.05676}
+    - guid: 306d9bae21ed11c46a2a12f8fc54d45f
+      position: {x: -201.59996, y: 267.4327}
       index: 0
       is_UseThis: 0
-    - guid: 7d5946aeaf0dc7b4ab6fe053c1a25dff
-      position: {x: -164.79987, y: 532.36584}
+    - guid: 0d333858a5f5e234bab0504b67479224
+      position: {x: 103.53123, y: 408.80002}
       index: 0
       is_UseThis: 0
-    - guid: 6caaba2375320124faa08492dcb26b44
-      position: {x: -161.59999, y: 659.6113}
+    - guid: 993c607e0c0ee17419edf9dd28e80f3f
+      position: {x: -201.59999, y: 510.12256}
       index: 0
       is_UseThis: 0
-    - guid: 8d4e3928444323443924a2ed016e9daf
-      position: {x: -164.8, y: 782.0113}
+    - guid: 2d655585ef4d688418e7858159cb1984
+      position: {x: -201.60002, y: 653.07745}
       index: 0
       is_UseThis: 0
-    - guid: 3656a52978834b143866a13e7429da1d
-      position: {x: -164.8, y: 914.8113}
+    - guid: 29fc3ad604461e64c94d9b789d08bac9
+      position: {x: -201.6, y: 772.75}
       index: 0
       is_UseThis: 0
-    - guid: 180c5c7680107414e8e32163734ca7ec
-      position: {x: 267.1999, y: 436.9817}
+    - guid: 254d5595b59300e418cc398a9250f085
+      position: {x: -201.6, y: 897.33746}
       index: 0
       is_UseThis: 0
-    - guid: c75b7b472aa3b7f49bd20111ec302e04
-      position: {x: 252.23247, y: 1050.955}
+    - guid: e40146794b18a7a4eb4c1bf390e75008
+      position: {x: 76, y: 1028.282}
       index: 0
       is_UseThis: 0
-    - guid: 4795185ad07a9754ea36944777be23fd
-      position: {x: 31.903397, y: 1184.4747}
+    - guid: f1f848cd820b6a24e9eb0f568364eafd
+      position: {x: -90.8835, y: 1153.0374}
       index: 0
       is_UseThis: 0
-    - guid: 7e2aa5477794e574aa3a9a71489f36e0
-      position: {x: -163.99983, y: 1370.8801}
+    - guid: c3825686f726c6d41aca8472396f137b
+      position: {x: -221.59998, y: 1287.2677}
       index: 0
       is_UseThis: 0
-    - guid: f45c27f89b7d0f14a9fe5e4f9b5ca968
-      position: {x: -164.79984, y: 1511.6802}
+    - guid: 97c105ded052c7e46953eb5f3f4b6ac3
+      position: {x: -221.32475, y: 1425.1882}
       index: 0
       is_UseThis: 0
-    - guid: e0f81ffd2ed1208418c6da37e6eb7a42
-      position: {x: -161.59998, y: 1657.3201}
+    - guid: dc526e9ef128af44192af0673fc0601d
+      position: {x: -220.80013, y: 1550.2504}
       index: 0
       is_UseThis: 0
-    - guid: b035c7ee89d3e904b89b9f59d9103912
-      position: {x: 292.30072, y: 1811.2}
+    - guid: 6c63ec8dd80b4694192cf48053e2800b
+      position: {x: 92.4079, y: 1667.7411}
       index: 0
       is_UseThis: 0
-    - guid: 4239676b4ac6a8e44a4bf8672f3124b4
-      position: {x: 31.999947, y: 1938.7397}
+    - guid: cecf1987481302a4e9fa9cdb70ba00a6
+      position: {x: -70.400085, y: 1797.5132}
       index: 0
       is_UseThis: 0
-    - guid: ea96aa9e39d02a2438533dad3e009966
-      position: {x: -160.79991, y: 2091.6575}
+    - guid: ddfa25f8dd99e424ea6946b9ac1c7259
+      position: {x: -235.20001, y: 1930.6504}
       index: 0
       is_UseThis: 0
-    - guid: 30f14ce192e362a4fba133e6e34b7547
-      position: {x: 309.2488, y: 2229.1956}
+    - guid: ff600b8e6c1c17a4882da4d4513dc4f2
+      position: {x: 92.79995, y: 2063.2007}
       index: 0
       is_UseThis: 0
-    - guid: 01a3d1e1e7564cd469313722d79be00b
-      position: {x: -160.79993, y: 2369.811}
+    - guid: 6478c3108fbcb0d469c079938e4b46ea
+      position: {x: -235.20006, y: 2201.4502}
       index: 0
       is_UseThis: 0
-    - guid: d40b8975eec0b53459d763d2a2671dff
-      position: {x: -85.199936, y: 2593.3716}
+    - guid: 81b3ef4c2283c684793ae780d89383b0
+      position: {x: -850.72, y: 2362.4001}
       index: 0
       is_UseThis: 0
-    - guid: 9bb779858dc9c784d90dc1baab20a3d7
-      position: {x: 159.1999, y: 2593.6}
+    - guid: b697940f2d1c9bb4fbf160a5607446b0
+      position: {x: -211.95001, y: 2348.0005}
       index: 0
       is_UseThis: 0
-    - guid: 633d09fac01f5084782ca1b436e80b84
-      position: {x: 421.02863, y: 2592.8003}
+    - guid: 9dbc6bca31e66684ba0418e92c2f5d2e
+      position: {x: 836.08936, y: 2347.1992}
+      index: 0
+      is_UseThis: 0
+    - guid: 70df949d0d823344eb7eb25ce366d6e5
+      position: {x: -212, y: 2501.6}
+      index: 0
+      is_UseThis: 0
+    - guid: b08f930c155a3f94db4136628532d702
+      position: {x: -212, y: 2654.4001}
+      index: 0
+      is_UseThis: 0
+    - guid: 77a2c76500655dc4690df63b7e24228f
+      position: {x: -211.99998, y: 2803.935}
+      index: 0
+      is_UseThis: 0
+    - guid: 3c1e6233d8f6f734b913653aeb5aca0a
+      position: {x: -212, y: 2924.8008}
+      index: 0
+      is_UseThis: 0
+    - guid: 2acad7a7fa6b05f4aa246e4c63922373
+      position: {x: 14.399902, y: 3056.8}
+      index: 0
+      is_UseThis: 0
+    - guid: d6d70ac480a0bac4f98dc8d9b1a62310
+      position: {x: -222.40002, y: 3192.0002}
+      index: 0
+      is_UseThis: 0
+    - guid: 30f7c4ca075bc374fb73f8bde58a5ef5
+      position: {x: -222.40002, y: 3293.6}
+      index: 0
+      is_UseThis: 0
+    - guid: cd1f4f561bb68e94282e15939feb3e75
+      position: {x: 28, y: 3424.8}
+      index: 0
+      is_UseThis: 0
+    - guid: c040bcb857e4aa34d898e3a421c9e295
+      position: {x: -211.20007, y: 3525.6}
+      index: 0
+      is_UseThis: 0
+    - guid: d5d734d8ba251a34b83f12b38eea4e11
+      position: {x: 836, y: 2531.2}
+      index: 0
+      is_UseThis: 0
+    - guid: 7e0fdf3bc46516547a988d012eb1259b
+      position: {x: 422.40002, y: 2696}
+      index: 0
+      is_UseThis: 0
+    - guid: 9c1ab15a4f28edd4a8c25bde523370f8
+      position: {x: 836, y: 2692.8}
+      index: 0
+      is_UseThis: 0
+    - guid: 28d27b3fb5f81d549bbed503c1c15edd
+      position: {x: 1210.3999, y: 2696}
+      index: 0
+      is_UseThis: 0
+    - guid: 571c007bb521b8e498ccb5919f71bd35
+      position: {x: 423.19995, y: 2883.2}
+      index: 0
+      is_UseThis: 0
+    - guid: 4155bc22eca305b4d823da3183763e14
+      position: {x: 836.80005, y: 2883.2}
+      index: 0
+      is_UseThis: 0
+    - guid: 9cb0be48e949236489f04f09c58bb995
+      position: {x: 1210.3999, y: 2872.8}
+      index: 0
+      is_UseThis: 0
+    - guid: 2c5905283be8aae449246aa42df84a91
+      position: {x: 324, y: 3040}
+      index: 0
+      is_UseThis: 0
+    - guid: adb80658247379c42b3c13f461c9fab4
+      position: {x: 473.59998, y: 3168}
+      index: 0
+      is_UseThis: 0
+    - guid: 9d6f9f2f99964844193aded52f3febeb
+      position: {x: 736.80005, y: 3018.4001}
+      index: 0
+      is_UseThis: 0
+    - guid: ef0d0bf02123d7246b816b9a34c73c0b
+      position: {x: 736.80005, y: 3140.8}
+      index: 0
+      is_UseThis: 0
+    - guid: 9d4dcf9f2d48a4c408d72c60d7dae8a8
+      position: {x: 736.80005, y: 3269.6}
+      index: 0
+      is_UseThis: 0
+    - guid: ee503f05d1613b84c9847af35809c8fa
+      position: {x: 911.9999, y: 3395.2002}
+      index: 0
+      is_UseThis: 0
+    - guid: 79b870f633f41b74eb54c107f39ee16e
+      position: {x: 1142.3999, y: 3008}
+      index: 0
+      is_UseThis: 0
+    - guid: fdef1f59ea59c5541a71c8babefed615
+      position: {x: 1308.8, y: 3140.8}
+      index: 0
+      is_UseThis: 0
+    - guid: 7abf915b095ff054cbe0f9c5e6572736
+      position: {x: -122.400024, y: 3810.4001}
+      index: 0
+      is_UseThis: 0
+    - guid: d426c35db68ae1d49b83f861518b489a
+      position: {x: -272.80014, y: 3961.8406}
+      index: 0
+      is_UseThis: 0
+    - guid: 935a00a9f5ea5cd4ca84d87674bd49c6
+      position: {x: -272.8, y: 4085.9604}
+      index: 0
+      is_UseThis: 0
+    - guid: ba8163c820315744093bf64613af275c
+      position: {x: 68, y: 4223}
+      index: 0
+      is_UseThis: 0
+    - guid: 01d4716d63760d842b60c7dc01a80ab7
+      position: {x: -122.40006, y: 4361.4395}
+      index: 0
+      is_UseThis: 0
+    - guid: 4ac1eb7fb0be0e7419744b6af8ba5326
+      position: {x: -272.7999, y: 4480.4126}
+      index: 0
+      is_UseThis: 0
+    - guid: e91bf361cd20d6145bc9099216e76636
+      position: {x: 68.7999, y: 4608.342}
+      index: 0
+      is_UseThis: 0
+    - guid: 0af7e6e451ec866458fb676cc29d1221
+      position: {x: -121.599976, y: 4737.5757}
+      index: 0
+      is_UseThis: 0
+    - guid: 1d9a4e372d7881c429e5c2289cb24c64
+      position: {x: -304.45682, y: 4884.0234}
+      index: 0
+      is_UseThis: 0
+    - guid: de6dcfc0cf0fcb64da2a8df1347f6e18
+      position: {x: -304.8, y: 5008.2}
+      index: 0
+      is_UseThis: 0
+    - guid: 7a56eb6c5a40baf48abeb3c4ce89ef2d
+      position: {x: -101.87237, y: 5135.833}
+      index: 0
+      is_UseThis: 0
+    - guid: d674f27445aba074d9f765d4036cdce0
+      position: {x: -1021.1125, y: 2497.11}
+      index: 0
+      is_UseThis: 0
+    - guid: 05d9463f538d192409e5e5984bed6fda
+      position: {x: -700.8, y: 2620.5552}
+      index: 0
+      is_UseThis: 0
+    - guid: 71cd028534d82f647a8774a66b88031e
+      position: {x: -871.20013, y: 2752.0088}
+      index: 0
+      is_UseThis: 0
+    - guid: 7b9ea9c43c46b81419aecc59297eea8a
+      position: {x: -1020.8001, y: 2905.6006}
+      index: 0
+      is_UseThis: 0
+    - guid: 499796ffc378efb44b9b1ace6f573cf6
+      position: {x: -1021.60016, y: 3032.0005}
+      index: 0
+      is_UseThis: 0
+    - guid: 7b1fe6f04f2fa2b49948c8d42f226847
+      position: {x: -1020.8001, y: 3156.8005}
+      index: 0
+      is_UseThis: 0
+    - guid: d2b252dcf617cad428078a0140e1b594
+      position: {x: -700.80005, y: 3258.4001}
       index: 0
       is_UseThis: 0
   - nodes:
-    - guid: eb6bf7532f23fbd468cb2ad623ed2056
+    - guid: 173c46682c866f04596cb674cfce3665
       position: {x: 0, y: 0}
       index: 0
       is_UseThis: 0
+    - guid: b5560ae1106d58143b7daca868399dd1
+      position: {x: 170.51443, y: 127.99126}
+      index: 0
+      is_UseThis: 0
+    - guid: 040cc33405d5af44085180c8510c614d
+      position: {x: -99.53388, y: 253.9165}
+      index: 0
+      is_UseThis: 0
+    - guid: c203ce929fced4e4eb26cde118a062c6
+      position: {x: 171.20001, y: 379.1825}
+      index: 0
+      is_UseThis: 0
+    - guid: e2063b2681230e94b8fd920f868c79f9
+      position: {x: 171.99991, y: 508.9407}
+      index: 0
+      is_UseThis: 0
+    - guid: 628186da6bb17f540b39b8f392f1ee32
+      position: {x: -82.479225, y: 649.83734}
+      index: 0
+      is_UseThis: 0
+    - guid: 0fcf757fa192e8144b8266089c3677a5
+      position: {x: -318.12482, y: 843.19995}
+      index: 0
+      is_UseThis: 0
+    - guid: 95a9b023d61de164caadaa33154c81ef
+      position: {x: -75.19995, y: 843.19995}
+      index: 0
+      is_UseThis: 0
+    - guid: 43673f47860296c4ca4f124f3d63c94f
+      position: {x: 212.27519, y: 843.1998}
+      index: 0
+      is_UseThis: 0
+    - guid: fb82f7fec9838464398f5b8e5b22b330
+      position: {x: -446.98007, y: 1014.0747}
+      index: 0
+      is_UseThis: 0
+    - guid: ed07e5b986ac21541a6adf8cd68dfbc6
+      position: {x: -447.19998, y: 1157.4067}
+      index: 0
+      is_UseThis: 0
+    - guid: e04f1208fb483fe45b820664ad7dc07e
+      position: {x: -74.39995, y: 1000.7999}
+      index: 0
+      is_UseThis: 0
+    - guid: 8dba6f0c95ed8cb4087cbefb0e595889
+      position: {x: 212, y: 1000.7999}
+      index: 0
+      is_UseThis: 0
+  - nodes:
+    - guid: cc664be7f98a218409f38c6da517d86a
+      position: {x: 0, y: 0}
+      index: 0
+      is_UseThis: 0
+  - nodes:
+    - guid: 1ae7479a19e64a54d8baa6c0a334685d
+      position: {x: 0, y: 0}
+      index: 0
+      is_UseThis: 0
+--- !u!1 &903908779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 903908780}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &903908780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903908779}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8300158, y: 0.058344096, z: 0.08789162}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1663529864
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,3 +1227,4 @@ SceneRoots:
   - {fileID: 1663529867}
   - {fileID: 594023516}
   - {fileID: 150678876}
+  - {fileID: 903908780}
