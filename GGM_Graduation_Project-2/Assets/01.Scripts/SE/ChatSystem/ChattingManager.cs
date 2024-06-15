@@ -5,36 +5,36 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using ChatVisual;       // 나중에 지우기
+using ChatVisual;       // ?섏쨷??吏?곌린
 
 public class ChattingManager : MonoBehaviour
 {
     public static ChattingManager Instance;
 
     [Header("ChattingContainer")]
-    public GameObject chatContainer;        // 쳇팅들 담긴 곳임.
+    public GameObject chatContainer;        // 爾뉙똿???닿릿 怨녹엫.
     public TMP_Text chattingHumanName;
     [HideInInspector]
-    public List<GameObject> assistantChatList = new List<GameObject>();    // 조수와 나눈 대화는 저장해주기
-    //[SerializeField] private Chapter[] chapters;      // 쳇팅 SO들을 넣어줌.
+    public List<GameObject> assistantChatList = new List<GameObject>();    // 議곗닔? ?섎늿 ??붾뒗 ??ν빐二쇨린
+    //[SerializeField] private Chapter[] chapters;      // 爾뉙똿 SO?ㅼ쓣 ?ｌ뼱以?
     //public Chapter[] Chapters {  get { return chapters; } set { chapters = value; } }
 
-    [Header("ChatDelay")]       // 쳇팅 딜레이 관련
+    [Header("ChatDelay")]       // 爾뉙똿 ?쒕젅??愿??
     public float delayTime = 0.75f;
     private float currentTime = 0.0f;
-    private bool is_Chatting = false;       // 챗팅을 하는 중이라면
+    private bool is_Chatting = false;       // 梨쀭똿???섎뒗 以묒씠?쇰㈃
 
-    [Header("ChatCount")]       // 지금 쳇팅이 얼마나 진행되었는지
+    [Header("ChatCount")]       // 吏湲?爾뉙똿???쇰쭏??吏꾪뻾?섏뿀?붿?
     [HideInInspector]
-    public int nowLevel = 0;            // 현재 쳇팅의 레벨
-    private int nowChatIndex = 0;            // 현재 쳇팅 인덱스
+    public int nowLevel = 0;            // ?꾩옱 爾뉙똿???덈꺼
+    private int nowChatIndex = 0;            // ?꾩옱 爾뉙똿 ?몃뜳??
 
-    [Header("Ask")]     // 물어보는 것 관련
+    [Header("Ask")]     // 臾쇱뼱蹂대뒗 寃?愿??
     private int askLenght = 0;
-    private bool is_Choosing;       // 선택지가 있어서 선택중일 때. 멈춰있는 시간을 말하는 것.
+    private bool is_Choosing;       // ?좏깮吏媛 ?덉뼱???좏깮以묒씪 ?? 硫덉떠?덈뒗 ?쒓컙??留먰븯??寃?
     private bool is_AskChat;
-    private int nowAskLevel = 0;        // 지금 질문의 레벨   
-    private int nowAskChatIndex = 0;        // 지금 대답의 인덱스
+    private int nowAskLevel = 0;        // 吏湲?吏덈Ц???덈꺼   
+    private int nowAskChatIndex = 0;        // 吏湲???듭쓽 ?몃뜳??
     private List<string> notUseAskList = new List<string>();
 
     private void Start()
@@ -42,14 +42,14 @@ public class ChattingManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Update()       // 쳇팅 시스템
+    private void Update()       // 爾뉙똿 ?쒖뒪??
     {
         if (is_Chatting && !is_Choosing)
         {
             currentTime += Time.deltaTime;
-            if (currentTime > delayTime || Input.GetMouseButtonDown(0))     // 왼쪽 버튼을 눌렀다면
+            if (currentTime > delayTime || Input.GetMouseButtonDown(0))     // ?쇱そ 踰꾪듉???뚮??ㅻ㈃
             {
-                if (is_AskChat) AskChapter();       // 질문에 대한 답을 출력함.
+                if (is_AskChat) AskChapter();       // 吏덈Ц??????듭쓣 異쒕젰??
                 else Chapter();
 
                 currentTime = 0.0f;
@@ -59,9 +59,9 @@ public class ChattingManager : MonoBehaviour
 
     public void StartChatting(int index)
     {
-        Debug.Log("체팅이 시작됨" + index);
-        // 만약 내 쳇팅이 꺼져있으면 켜질 때까지는 대기 엑션으로??
-        // 챗팅이 켜지면 액션으로 다시 이 함수를 부르게 한다?
+        Debug.Log("泥댄똿???쒖옉?? + index");
+        // 留뚯빟 ??爾뉙똿??爰쇱졇?덉쑝硫?耳쒖쭏 ?뚭퉴吏???湲??묒뀡?쇰줈??
+        // 梨쀭똿??耳쒖?硫??≪뀡?쇰줈 ?ㅼ떆 ???⑥닔瑜?遺瑜닿쾶 ?쒕떎?
         //if (UIManager.Instance.panels[0].activeSelf == false)
         //{
         //    UIManager.Instance.alarmIcon.SetActive(true);
@@ -74,18 +74,18 @@ public class ChattingManager : MonoBehaviour
         nowAskChatIndex = 0;
         nowLevel = index;
 
-        // 쳇팅창 정보 설정해주기
-       /* if (chattingHumanName.text != chapters[index].who)     // 다른 사람과 대화를 하는 것이라면
+        // 爾뉙똿李??뺣낫 ?ㅼ젙?댁＜湲?
+       /* if (chattingHumanName.text != chapters[index].who)     // ?ㅻⅨ ?щ엺怨???붾? ?섎뒗 寃껋씠?쇰㈃
         {
-            // 지금까지 있던 대화 다 지워주기
+            // 吏湲덇퉴吏 ?덈뜕 ?????吏?뚯＜湲?
             for (int i = 0; i < chatContainer.transform.childCount; i++)
             {
                 chatContainer.transform.GetChild(i).gameObject.SetActive(false);
             }
 
-            if (chattingHumanName.text != "조수")      // 용의자랑 대화한 내역이였다면 대화 내역을 파일에 png 로 저장하고 대화 내역은 모두 지운다. 그리고 조수의 대화다 켜주기
+            if (chattingHumanName.text != "議곗닔")      // ?⑹쓽?먮옉 ??뷀븳 ?댁뿭?댁??ㅻ㈃ ????댁뿭???뚯씪??png 濡???ν븯怨?????댁뿭? 紐⑤몢 吏?대떎. 洹몃━怨?議곗닔????붾떎 耳쒖＜湲?
             {
-                Debug.Log("용의자 대화 내역 사진식으로 저장해주기!");
+                Debug.Log("?⑹쓽??????댁뿭 ?ъ쭊?앹쑝濡???ν빐二쇨린!");
                 for (int i = 0; i < assistantChatList.Count; i++)
                 {
                     if (assistantChatList[i].gameObject != null)
@@ -95,20 +95,20 @@ public class ChattingManager : MonoBehaviour
                 }
             }
 
-            //chattingHumanName.text = chapters[index].who;      // 이름 넣어주기
+            //chattingHumanName.text = chapters[index].who;      // ?대쫫 ?ｌ뼱二쇨린
         }*/
 
-        //int chatLenght = chapters[index].chat.Count;       // 쳇팅들의 길이
-        //askLenght = chapters[index].askAndReply.Count;      // 질문들의 개수
+        //int chatLenght = chapters[index].chat.Count;       // 爾뉙똿?ㅼ쓽 湲몄씠
+        //askLenght = chapters[index].askAndReply.Count;      // 吏덈Ц?ㅼ쓽 媛쒖닔
 
         is_Chatting = true;
     }
 
     private void Chapter()
     {
-       // if (is_Choosing == false && nowChatIndex < chapters[nowLevel].chat.Count)        // 선택중이 아니라면
+       // if (is_Choosing == false && nowChatIndex < chapters[nowLevel].chat.Count)        // ?좏깮以묒씠 ?꾨땲?쇰㈃
        // {
-            bool state = false;       // 조수인지 플레이어(형사) 인지 형변환. 1이 플레이어임.
+            bool state = false;       // 議곗닔?몄? ?뚮젅?댁뼱(?뺤궗) ?몄? ?뺣??? 1???뚮젅?댁뼱??
             //switch (chapters[nowLevel].chat[nowChatIndex].state)
          //   {
                 /*case E_ChatState.Other:
@@ -118,20 +118,20 @@ public class ChattingManager : MonoBehaviour
                     state = true;
                     break;
                 case E_ChatState.Ask:
-                    notUseAskList.Clear();      // 전에 있던 것 모두 지워주기
+                    notUseAskList.Clear();      // ?꾩뿉 ?덈뜕 寃?紐⑤몢 吏?뚯＜湲?
                     for (int i = 0; i < askLenght; i++)
                     {
                         //TextBox.Instance.InputText(true, chapters[nowLevel].chat[nowChatIndex].text, true);
-                        notUseAskList.Add(chapters[nowLevel].chat[nowChatIndex].text);            // 질문들 추가
+                        notUseAskList.Add(chapters[nowLevel].chat[nowChatIndex].text);            // 吏덈Ц??異붽?
                         nowChatIndex++;
                     }
                     is_Choosing = true;
                     return;
                 case E_ChatState.LoadNext:
-                    Debug.LogError("아직 만들지 않는 LoadNext 예요.");
-                    return;     // 아예 돌려*/
+                    Debug.LogError("?꾩쭅 留뚮뱾吏 ?딅뒗 LoadNext ?덉슂.");
+                    return;     // ?꾩삁 ?뚮젮*/
                 //default:
-                    //Debug.LogError($"{chapters[nowLevel].chat[nowChatIndex].state} 는(은) 없는 유형이예요!");
+                    //Debug.LogError($"{chapters[nowLevel].chat[nowChatIndex].state} ???) ?녿뒗 ?좏삎?댁삁??");
                     //break;
         //    }
             //TextBox.Instance.InputText(state, chapters[nowLevel].chat[nowChatIndex].text, false);
@@ -140,17 +140,17 @@ public class ChattingManager : MonoBehaviour
         //else
         //{
             is_Chatting = false;
-            //Debug.LogError($"이게 왜 나와, 선택중? : {is_Choosing}, 지금 어디야? : {nowLevel}, 지금 채팅은? : {nowChatIndex}");
+            //Debug.LogError($"?닿쾶 ???섏?, ?좏깮以? : {is_Choosing}, 吏湲??대뵒?? : {nowLevel}, 吏湲?梨꾪똿?? : {nowChatIndex}");
         //}
     }
 
-    public void answer(string str)     // 버튼을 클릭했을 때
+    public void answer(string str)     // 踰꾪듉???대┃?덉쓣 ??
     {
         //Debug.Log(str);
         //TextBox.Instance.CurrentSpeechColorChange();
         //for (int i = 0; i < notUseAskList.Count; i++)
         //{
-        //    if (notUseAskList[i] == str)        // 이것의 숫자때문에 입력에서 하나의 대답만이 나오던 것임.
+        //    if (notUseAskList[i] == str)        // ?닿쾬???レ옄?뚮Ц???낅젰?먯꽌 ?섎굹????듬쭔???섏삤??寃껋엫.
         //    {
         //        nowAskLevel = i;
         //        nowAskChatIndex = 0;
@@ -173,7 +173,7 @@ public class ChattingManager : MonoBehaviour
         {
             is_AskChat = false;
 
-            if (notUseAskList.Count == 0)       // 더 질문할 것이 없으면
+            if (notUseAskList.Count == 0)       // ??吏덈Ц??寃껋씠 ?놁쑝硫?
             {
                 is_Choosing = false;
                 return;
@@ -189,6 +189,6 @@ public class ChattingManager : MonoBehaviour
     public void ChangeDelaySpeed(float _value)
     {
         delayTime = _value;
-    }       // 쳇팅 딜레이 시간 변경
+    }       // 爾뉙똿 ?쒕젅???쒓컙 蹂寃?
 }
 

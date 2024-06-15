@@ -83,7 +83,7 @@ namespace ChatVisual
                             GUILayout.Space(5);
 
                             GUILayout.Label("Chat");
-                            chatNode.text = EditorGUILayout.TextArea(chatNode.text, EditorStyles.textArea);
+                            chatNode.chatText = EditorGUILayout.TextArea(chatNode.chatText, EditorStyles.textArea);
                             GUILayout.Space(10);
 
                             enumValue2 = (int)chatNode.face;
@@ -124,7 +124,7 @@ namespace ChatVisual
                             AskNode askNode = node.node as AskNode;
 
                             GUILayout.Label("Ask");
-                            askNode.ask = EditorGUILayout.TextArea(askNode.ask, EditorStyles.textArea);
+                            askNode.askText = EditorGUILayout.TextArea(askNode.askText, EditorStyles.textArea);
 
                             if (!is_LoadList)
                             {

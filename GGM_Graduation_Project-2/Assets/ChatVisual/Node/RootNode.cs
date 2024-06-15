@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ChatVisual
 {
+    [Serializable]
     public class RootNode : Node
     {
         public Node child;

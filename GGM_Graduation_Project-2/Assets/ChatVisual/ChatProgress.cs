@@ -52,7 +52,7 @@ namespace ChatVisual
             }
             else        // When child is not a ChatNode
             {
-                // // 筌욌뜄揆??援?鈺곌퀗援????욧볼??됱뱽 ????욧볼??됱뱽 ??                for (int i = 0; i < children.Count; i++)
+                // // 嶺뚯쉶?꾣룇??????브퀗?쀦뤃?????㏓낵???깅굵 ?????㏓낵???깅굵 ??                for (int i = 0; i < children.Count; i++)
                 {
                     /*if (children[i] is AskNode askNode)
                     {
@@ -63,7 +63,7 @@ namespace ChatVisual
                     {
                         if (conditionNode.is_UseThis)
                         {
-                            // 鈺곌퀗援?紐껊굡????鈺곌퀗援???袁⑥┷??볤탢??겹늺 ??쇱벉 ?紐껊굡 ??곸㉡.
+                            // ?브퀗?쀦뤃?筌뤾퍓援?????브퀗?쀦뤃???熬곣뫁???蹂ㅽ깴??寃밸듆 ???깅쾳 ?筌뤾퍓援???怨멥돘.
                             if (conditionNode.checkClass.Check())
                             {
                                 currentIndex++;

@@ -259,18 +259,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowHumanName: 
-  testList:
-  - state: 1
-    type: 1
-    text: "\uB300\uD654"
-    face: 1
-    textEvent: 0200000003000000
-  - state: 0
-    type: 0
-    text: "\uC544\uB2C8\uC57C"
-    face: 0
-    textEvent: 
+  nowHumanName: HG
+  nameList:
+  - HG
+  nodeList:
+  - nodes:
+    - guid: 2bd6774ff73b9384a8cd60f56d084d5c
+      position: {x: 0, y: 0}
+      index: 0
+      is_UseThis: 0
+    - guid: bf70eac471d9455438a165bfc1a3637c
+      position: {x: 64.51999, y: 149}
+      index: 0
+      is_UseThis: 0
 --- !u!1 &1779873654
 GameObject:
   m_ObjectHideFlags: 0
