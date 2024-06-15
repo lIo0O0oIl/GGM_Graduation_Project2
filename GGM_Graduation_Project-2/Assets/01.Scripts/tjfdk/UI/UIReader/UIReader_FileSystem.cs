@@ -138,7 +138,7 @@ public class UIReader_FileSystem : UI_Reader
         }
     }
 
-    private LockAskAndReply FindQuestion(VisualElement ask)
+/*    private LockAskAndReply FindQuestion(VisualElement ask)
     {
         Chapter chapter = chapterManager.FindChapter(chatSystem.FindMember(chatSystem.currentMemberName).chapterName);
         List<LockAskAndReply> asks = chapter.lockAskAndReply;
@@ -149,19 +149,18 @@ public class UIReader_FileSystem : UI_Reader
         }
 
         return new LockAskAndReply();
-    }
+    }*/
 
     private VisualElement FindMoveArea(Vector2 position)
     {
-        // 안 불려지는듯 
-        Debug.Log("힝");
+        // ??遺덈젮吏?붾벏 
         FindLockQuestion();
         //Debug.Log(lockQuestions.Count);
 
-        //모든 슬롯을 찾아서 그중에서 worldBound 에 position이 속하는 녀석을 찾아오면
+        //紐⑤뱺 ?щ’??李얠븘??洹몄쨷?먯꽌 worldBound ??position???랁븯????앹쓣 李얠븘?ㅻ㈃
         foreach (VisualElement moveArea in lockQuestions)
         {
-            if (moveArea.worldBound.Contains(position)) //해당 RECT안에 포지션이 있는지 검사해
+            if (moveArea.worldBound.Contains(position)) //?대떦 RECT?덉뿉 ?ъ??섏씠 ?덈뒗吏 寃?ы빐
             {
                 Debug.Log(moveArea.Q<Label>().text);
                 return moveArea;
@@ -172,19 +171,18 @@ public class UIReader_FileSystem : UI_Reader
 
     private void LoadDragAndDrop(VisualElement file, Action action)
     {
-        // 드래그 앤 드롭 기능 추가
+        // ?쒕옒洹????쒕∼ 湲곕뒫 異붽?
         file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         {
-            Debug.Log("힝g힝");
             var area = FindMoveArea(evt.mousePosition);
-            Debug.Log(area.name + " area 이름");
+            Debug.Log(area.name + " area ?대쫫");
             target.RemoveFromHierarchy();
             if (area == null)
             {
                 beforeSlot.Add(target);
             }
             else
-                Debug.Log("잠긴 질문과 부딪힘");
+                Debug.Log("?좉릿 吏덈Ц怨?遺?ろ옒");
         },
         () => { action(); }
         ));
@@ -209,7 +207,6 @@ public class UIReader_FileSystem : UI_Reader
                 return file;
         }
 
-        Debug.Log("File을 찾지 못 함");
         return null;
     }
 
@@ -222,32 +219,32 @@ public class UIReader_FileSystem : UI_Reader
         {
             case FileType.FOLDER:
                 {
-                    // 생성
+                    // ?앹꽦
                     file = RemoveContainer(ux_folderFile.Instantiate());
 
-                    // 이름 변경
+                    // ?대쫫 蹂寃?
                     file.Q<Label>("FileName").text = fileName;
-                    // 이벤트 연결
+                    // ?대깽???곌껐
                     file.Q<Button>("FileImage").clicked += () => 
                     { 
                         DrawFile(file.Q<Label>("FileName").text); 
                         AddFilePath(fileName); 
                     };
-                    // 폴더 부모 지정
+                    // ?대뜑 遺紐?吏??
                     bool addNew = false;
                     FolderFile parentFolder = FindFolder(fileParentName);
                     if (parentFolder != null)
                     {
-                        Debug.Log("찾음");
+                        Debug.Log("李얠쓬");
                         parentFolder.folderFiles.Add(file);
                         fileFolders.Add(new FolderFile(fileName));
                         addNew = true;
                     }
 
-                    // 폴더 생성 및 추가
+                    // ?대뜑 ?앹꽦 諛?異붽?
                     if (addNew == false)
                     {
-                        Debug.Log("못 찾음");
+                        Debug.Log("紐?李얠쓬");
                         FolderFile folderParent = new FolderFile(fileParentName);
                         fileFolders.Add(folderParent);
                         fileFolders.Add(new FolderFile(fileName));
@@ -257,11 +254,11 @@ public class UIReader_FileSystem : UI_Reader
                 }
             case FileType.IMAGE:
                 {
-                    // 생성
+                    // ?앹꽦
                     file = RemoveContainer(ux_imageFile.Instantiate());
-                    // 이름 변경
+                    // ?대쫫 蹂寃?
                     file.Q<Label>("FileName").text = fileName;
-                    // 드래그 앤 드롭 기능 추가
+                    // ?쒕옒洹????쒕∼ 湲곕뒫 異붽?
                     file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
                     {
                         var area = FindMoveArea(evt.mousePosition);
@@ -272,7 +269,7 @@ public class UIReader_FileSystem : UI_Reader
                         }
                         else
                         {
-                            LockAskAndReply lockQuestion = FindQuestion(area);
+                  /*          LockAskAndReply lockQuestion = FindQuestion(area);
                             if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
                             {
                                 area.parent.Remove(area);
@@ -280,13 +277,13 @@ public class UIReader_FileSystem : UI_Reader
                                     EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
                             }
                             else
-                                beforeSlot.Add(target);
+                                beforeSlot.Add(target);*/
                         }
                     },
                     () => { ImageEvent(file); }
                     ));
 
-                    // 파일 부모 지정
+                    // ?뚯씪 遺紐?吏??
                     bool addNew = false;
                     foreach (FolderFile folder in fileFolders)
                     {
@@ -299,7 +296,7 @@ public class UIReader_FileSystem : UI_Reader
                         }
                     }
 
-                    // 폴더 생성 및 추가
+                    // ?대뜑 ?앹꽦 諛?異붽?
                     // if parentfolder not exist? new add
                     if (addNew == false)
                     {
@@ -310,11 +307,11 @@ public class UIReader_FileSystem : UI_Reader
                 }
             case FileType.TEXT:
                 {
-                    // 생성
+                    // ?앹꽦
                     file = RemoveContainer(ux_textFile.Instantiate());
-                    // 이름 변경
+                    // ?대쫫 蹂寃?
                     file.Q<Label>("FileName").text = fileName;
-                    // 드래그 앤 드롭 기능 추가
+                    // ?쒕옒洹????쒕∼ 湲곕뒫 異붽?
                     file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
                     {
                         var area = FindMoveArea(evt.mousePosition);
@@ -325,21 +322,21 @@ public class UIReader_FileSystem : UI_Reader
                         }
                         else
                         {
-                            LockAskAndReply lockQuestion = FindQuestion(area);
+                  /*          LockAskAndReply lockQuestion = FindQuestion(area);
                             if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
                             {
                                 area.parent.Remove(area);
                                 chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
                                     EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
-                            }
-                            else
-                                beforeSlot.Add(target);
+                            }*/
+                            //else
+                              //  beforeSlot.Add(target);
                         }
                     },
                     () => { TextEvent(file); }
                     ));
 
-                    // 파일 부모 지정
+                    // ?뚯씪 遺紐?吏??
                     bool addNew = false;
                     foreach (FolderFile folder in fileFolders)
                     {
@@ -351,7 +348,7 @@ public class UIReader_FileSystem : UI_Reader
                         }
                     }
 
-                    // 폴더 생성 및 추가
+                    // ?대뜑 ?앹꽦 諛?異붽?
                     if (addNew == false)
                     {
                         //FolderFile folderParent = new FolderFile(fileParentName);
@@ -377,17 +374,17 @@ public class UIReader_FileSystem : UI_Reader
 
     public void DrawFile(string folderName)
     {
-        // fileGround - file 그리는 곳
-        // fileFolders - 현재 모든 폴더 배열
-        // folderName - 현재 선택된 폴더 이름
+        // fileGround - file 洹몃━??怨?
+        // fileFolders - ?꾩옱 紐⑤뱺 ?대뜑 諛곗뿴
+        // folderName - ?꾩옱 ?좏깮???대뜑 ?대쫫
 
         currentFolderName = folderName;
 
-        // 이전에 있던 것들 다 지우고 (역순으로 지워야 오류 안 남)
+        // ?댁쟾???덈뜕 寃껊뱾 ??吏?곌퀬 (??닚?쇰줈 吏?뚯빞 ?ㅻ쪟 ????
         for (int i = fileGround.childCount - 1; i >= 0; i--)
             fileGround.RemoveAt(i);
 
-        // 현재 폴더 변경
+        // ?꾩옱 ?대뜑 蹂寃?
         foreach (FolderFile folder in fileFolders)
         {
             if (folder.folderName == folderName)
@@ -396,7 +393,7 @@ public class UIReader_FileSystem : UI_Reader
 
         if (currentFileFolder != null)
         {
-            // 새로 그리기
+            // ?덈줈 洹몃━湲?
             foreach (VisualElement folder in currentFileFolder.folderFiles)
                 fileGround.Add(folder);
             foreach (VisualElement image in currentFileFolder.imageFiles)

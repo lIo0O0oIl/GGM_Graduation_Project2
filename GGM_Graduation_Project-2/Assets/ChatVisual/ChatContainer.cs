@@ -12,8 +12,8 @@ namespace ChatVisual
 
         public string nowHumanName;
         
-        private bool is_ConditionNowOk = false;
-        private int nowChatIndex = 1;       // index for Sort
+        //private bool is_ConditionNowOk = false;
+        ///private int nowChatIndex = 1;       // index for Sort
 
 #if UNITY_EDITOR
         public Node CreateNode(Type type)
@@ -70,7 +70,7 @@ namespace ChatVisual
             var conditionNode = parent as ConditionNode;
             if (conditionNode != null)
             {
-                conditionNode.child = child;
+                conditionNode.childList.Add(child);
                 AddParent(parent, child);
                 SortChildAndIndex(HumanAndChatDictionary[nowHumanName][0], 1);
             }
@@ -95,7 +95,7 @@ namespace ChatVisual
             var conditionNode = child as ConditionNode;
             if (conditionNode != null)
             {
-                conditionNode.parentList.Add(child);
+                conditionNode.parentList.Add(parent);
             }
         }
 
@@ -125,7 +125,7 @@ namespace ChatVisual
             var conditionNode = parent as ConditionNode;
             if (conditionNode != null)
             {
-                conditionNode.child = null;
+                conditionNode.childList = null;
             }
         }
 
@@ -151,6 +151,13 @@ namespace ChatVisual
             if (chatNode != null && chatNode.childList.Count != 0)
             {
                 children = chatNode.childList;
+                return children;
+            }
+
+            var conditionNode = parent as ConditionNode;
+            if (conditionNode != null && conditionNode.childList.Count != 0)
+            {
+                children = conditionNode.childList;
             }
 
             return children;

@@ -1,42 +1,30 @@
+using ChatVisual;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-namespace ChatVisual
+public class ChatHumanManager : UI_Reader
 {
-    public class ChatProgress : MonoBehaviour
+    private ChatContainer chatContainer;
+
+    public float changeHumanTime = 1f;       // A time when humans change
+
+    private List<Node> nowNodes = new List<Node>();
+    private string nowHumanName;        // Name of the human you're talking to
+    private int currentIndex = 0;
+    private bool is_ChatStart = false;
+
+    public void AddHuman(string who)     // HG
     {
-        public ChatContainer chatContainer;
+        chatSystem.AddMember(who);
+    }
 
-        public float changeHumanTime = 1f;       // A time when humans change
-
-        private List<Node> nowNodes = new List<Node>();
-        private string nowHumanName;        // Name of the human you're talking to
-        private int currentIndex = 0;
-
-        public void InitChatProgress(string _nowHumanName)
-        {
-            nowHumanName = _nowHumanName;
-            nowNodes = chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName];
-        }
-
-        private void Update()
-        {
-            
-        }
-
-        // Change human
-        public void ChangeHuman(string _changeHumanName)
-        {
-            nowNodes = chatContainer.HumanAndChatDictionary[_changeHumanName];
-            if (nowNodes[0] is RootNode rootNode)
-            {
-                currentIndex = rootNode.nowIndex;       // Change index
-            }
-        }
-
-        // Proceed with chat
-        public void NextChat()
+    private void Update()
+    {
+        if (is_ChatStart)
         {
             var children = chatContainer.GetChild(nowNodes[currentIndex]);
 
@@ -47,6 +35,8 @@ namespace ChatVisual
                 // Emotion Changes
 
                 // Handing Chat Event (Camera, vibration, fileLoad)
+
+                //UI_Reader.Instance.chatSystem.InputChat()
 
                 currentIndex++;
             }
@@ -73,6 +63,14 @@ namespace ChatVisual
                     }*/
                 }
             }
+
         }
+    }
+
+    public void ChatStart(string name)      // HG
+    {
+        nowHumanName = name;
+        //chatContainer.HumanAndChatDictionary[nowHumanName]
+        is_ChatStart=true;
     }
 }

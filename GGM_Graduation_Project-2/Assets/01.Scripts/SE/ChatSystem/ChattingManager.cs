@@ -5,36 +5,36 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using ChatVisual;       // ³ªÁß¿¡ Áö¿ì±â
+using ChatVisual;       // ë‚˜ì¤‘ì— ì§€ìš°ê¸°
 
 public class ChattingManager : MonoBehaviour
 {
     public static ChattingManager Instance;
 
     [Header("ChattingContainer")]
-    public GameObject chatContainer;        // ÃÂÆÃµé ´ã±ä °÷ÀÓ.
+    public GameObject chatContainer;        // ì³‡íŒ…ë“¤ ë‹´ê¸´ ê³³ì„.
     public TMP_Text chattingHumanName;
     [HideInInspector]
-    public List<GameObject> assistantChatList = new List<GameObject>();    // Á¶¼ö¿Í ³ª´« ´ëÈ­´Â ÀúÀåÇØÁÖ±â
-    [SerializeField] private Chapter[] chapters;      // ÃÂÆÃ SOµéÀ» ³Ö¾îÁÜ.
-    public Chapter[] Chapters {  get { return chapters; } set { chapters = value; } }
+    public List<GameObject> assistantChatList = new List<GameObject>();    // ì¡°ìˆ˜ì™€ ë‚˜ëˆˆ ëŒ€í™”ëŠ” ì €ì¥í•´ì£¼ê¸°
+    //[SerializeField] private Chapter[] chapters;      // ì³‡íŒ… SOë“¤ì„ ë„£ì–´ì¤Œ.
+    //public Chapter[] Chapters {  get { return chapters; } set { chapters = value; } }
 
-    [Header("ChatDelay")]       // ÃÂÆÃ µô·¹ÀÌ °ü·Ã
+    [Header("ChatDelay")]       // ì³‡íŒ… ë”œë ˆì´ ê´€ë ¨
     public float delayTime = 0.75f;
     private float currentTime = 0.0f;
-    private bool is_Chatting = false;       // ÃªÆÃÀ» ÇÏ´Â ÁßÀÌ¶ó¸é
+    private bool is_Chatting = false;       // ì±—íŒ…ì„ í•˜ëŠ” ì¤‘ì´ë¼ë©´
 
-    [Header("ChatCount")]       // Áö±İ ÃÂÆÃÀÌ ¾ó¸¶³ª ÁøÇàµÇ¾ú´ÂÁö
+    [Header("ChatCount")]       // ì§€ê¸ˆ ì³‡íŒ…ì´ ì–¼ë§ˆë‚˜ ì§„í–‰ë˜ì—ˆëŠ”ì§€
     [HideInInspector]
-    public int nowLevel = 0;            // ÇöÀç ÃÂÆÃÀÇ ·¹º§
-    private int nowChatIndex = 0;            // ÇöÀç ÃÂÆÃ ÀÎµ¦½º
+    public int nowLevel = 0;            // í˜„ì¬ ì³‡íŒ…ì˜ ë ˆë²¨
+    private int nowChatIndex = 0;            // í˜„ì¬ ì³‡íŒ… ì¸ë±ìŠ¤
 
-    [Header("Ask")]     // ¹°¾îº¸´Â °Í °ü·Ã
+    [Header("Ask")]     // ë¬¼ì–´ë³´ëŠ” ê²ƒ ê´€ë ¨
     private int askLenght = 0;
-    private bool is_Choosing;       // ¼±ÅÃÁö°¡ ÀÖ¾î¼­ ¼±ÅÃÁßÀÏ ¶§. ¸ØÃçÀÖ´Â ½Ã°£À» ¸»ÇÏ´Â °Í.
+    private bool is_Choosing;       // ì„ íƒì§€ê°€ ìˆì–´ì„œ ì„ íƒì¤‘ì¼ ë•Œ. ë©ˆì¶°ìˆëŠ” ì‹œê°„ì„ ë§í•˜ëŠ” ê²ƒ.
     private bool is_AskChat;
-    private int nowAskLevel = 0;        // Áö±İ Áú¹®ÀÇ ·¹º§   
-    private int nowAskChatIndex = 0;        // Áö±İ ´ë´äÀÇ ÀÎµ¦½º
+    private int nowAskLevel = 0;        // ì§€ê¸ˆ ì§ˆë¬¸ì˜ ë ˆë²¨   
+    private int nowAskChatIndex = 0;        // ì§€ê¸ˆ ëŒ€ë‹µì˜ ì¸ë±ìŠ¤
     private List<string> notUseAskList = new List<string>();
 
     private void Start()
@@ -42,14 +42,14 @@ public class ChattingManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Update()       // ÃÂÆÃ ½Ã½ºÅÛ
+    private void Update()       // ì³‡íŒ… ì‹œìŠ¤í…œ
     {
         if (is_Chatting && !is_Choosing)
         {
             currentTime += Time.deltaTime;
-            if (currentTime > delayTime || Input.GetMouseButtonDown(0))     // ¿ŞÂÊ ¹öÆ°À» ´­·¶´Ù¸é
+            if (currentTime > delayTime || Input.GetMouseButtonDown(0))     // ì™¼ìª½ ë²„íŠ¼ì„ ëˆŒë €ë‹¤ë©´
             {
-                if (is_AskChat) AskChapter();       // Áú¹®¿¡ ´ëÇÑ ´äÀ» Ãâ·ÂÇÔ.
+                if (is_AskChat) AskChapter();       // ì§ˆë¬¸ì— ëŒ€í•œ ë‹µì„ ì¶œë ¥í•¨.
                 else Chapter();
 
                 currentTime = 0.0f;
@@ -59,9 +59,9 @@ public class ChattingManager : MonoBehaviour
 
     public void StartChatting(int index)
     {
-        Debug.Log("Ã¼ÆÃÀÌ ½ÃÀÛµÊ" + index);
-        // ¸¸¾à ³» ÃÂÆÃÀÌ ²¨Á®ÀÖÀ¸¸é ÄÑÁú ¶§±îÁö´Â ´ë±â ¿¢¼ÇÀ¸·Î??
-        // ÃªÆÃÀÌ ÄÑÁö¸é ¾×¼ÇÀ¸·Î ´Ù½Ã ÀÌ ÇÔ¼ö¸¦ ºÎ¸£°Ô ÇÑ´Ù?
+        Debug.Log("ì²´íŒ…ì´ ì‹œì‘ë¨" + index);
+        // ë§Œì•½ ë‚´ ì³‡íŒ…ì´ êº¼ì ¸ìˆìœ¼ë©´ ì¼œì§ˆ ë•Œê¹Œì§€ëŠ” ëŒ€ê¸° ì—‘ì…˜ìœ¼ë¡œ??
+        // ì±—íŒ…ì´ ì¼œì§€ë©´ ì•¡ì…˜ìœ¼ë¡œ ë‹¤ì‹œ ì´ í•¨ìˆ˜ë¥¼ ë¶€ë¥´ê²Œ í•œë‹¤?
         //if (UIManager.Instance.panels[0].activeSelf == false)
         //{
         //    UIManager.Instance.alarmIcon.SetActive(true);
@@ -74,18 +74,18 @@ public class ChattingManager : MonoBehaviour
         nowAskChatIndex = 0;
         nowLevel = index;
 
-        // ÃÂÆÃÃ¢ Á¤º¸ ¼³Á¤ÇØÁÖ±â
-       /* if (chattingHumanName.text != chapters[index].who)     // ´Ù¸¥ »ç¶÷°ú ´ëÈ­¸¦ ÇÏ´Â °ÍÀÌ¶ó¸é
+        // ì³‡íŒ…ì°½ ì •ë³´ ì„¤ì •í•´ì£¼ê¸°
+       /* if (chattingHumanName.text != chapters[index].who)     // ë‹¤ë¥¸ ì‚¬ëŒê³¼ ëŒ€í™”ë¥¼ í•˜ëŠ” ê²ƒì´ë¼ë©´
         {
-            // Áö±İ±îÁö ÀÖ´ø ´ëÈ­ ´Ù Áö¿öÁÖ±â
+            // ì§€ê¸ˆê¹Œì§€ ìˆë˜ ëŒ€í™” ë‹¤ ì§€ì›Œì£¼ê¸°
             for (int i = 0; i < chatContainer.transform.childCount; i++)
             {
                 chatContainer.transform.GetChild(i).gameObject.SetActive(false);
             }
 
-            if (chattingHumanName.text != "Á¶¼ö")      // ¿ëÀÇÀÚ¶û ´ëÈ­ÇÑ ³»¿ªÀÌ¿´´Ù¸é ´ëÈ­ ³»¿ªÀ» ÆÄÀÏ¿¡ png ·Î ÀúÀåÇÏ°í ´ëÈ­ ³»¿ªÀº ¸ğµÎ Áö¿î´Ù. ±×¸®°í Á¶¼öÀÇ ´ëÈ­´Ù ÄÑÁÖ±â
+            if (chattingHumanName.text != "ì¡°ìˆ˜")      // ìš©ì˜ìë‘ ëŒ€í™”í•œ ë‚´ì—­ì´ì˜€ë‹¤ë©´ ëŒ€í™” ë‚´ì—­ì„ íŒŒì¼ì— png ë¡œ ì €ì¥í•˜ê³  ëŒ€í™” ë‚´ì—­ì€ ëª¨ë‘ ì§€ìš´ë‹¤. ê·¸ë¦¬ê³  ì¡°ìˆ˜ì˜ ëŒ€í™”ë‹¤ ì¼œì£¼ê¸°
             {
-                Debug.Log("¿ëÀÇÀÚ ´ëÈ­ ³»¿ª »çÁø½ÄÀ¸·Î ÀúÀåÇØÁÖ±â!");
+                Debug.Log("ìš©ì˜ì ëŒ€í™” ë‚´ì—­ ì‚¬ì§„ì‹ìœ¼ë¡œ ì €ì¥í•´ì£¼ê¸°!");
                 for (int i = 0; i < assistantChatList.Count; i++)
                 {
                     if (assistantChatList[i].gameObject != null)
@@ -95,22 +95,22 @@ public class ChattingManager : MonoBehaviour
                 }
             }
 
-            //chattingHumanName.text = chapters[index].who;      // ÀÌ¸§ ³Ö¾îÁÖ±â
+            //chattingHumanName.text = chapters[index].who;      // ì´ë¦„ ë„£ì–´ì£¼ê¸°
         }*/
 
-        int chatLenght = chapters[index].chat.Count;       // ÃÂÆÃµéÀÇ ±æÀÌ
-        askLenght = chapters[index].askAndReply.Count;      // Áú¹®µéÀÇ °³¼ö
+        //int chatLenght = chapters[index].chat.Count;       // ì³‡íŒ…ë“¤ì˜ ê¸¸ì´
+        //askLenght = chapters[index].askAndReply.Count;      // ì§ˆë¬¸ë“¤ì˜ ê°œìˆ˜
 
         is_Chatting = true;
     }
 
     private void Chapter()
     {
-        if (is_Choosing == false && nowChatIndex < chapters[nowLevel].chat.Count)        // ¼±ÅÃÁßÀÌ ¾Æ´Ï¶ó¸é
-        {
-            bool state = false;       // Á¶¼öÀÎÁö ÇÃ·¹ÀÌ¾î(Çü»ç) ÀÎÁö Çüº¯È¯. 1ÀÌ ÇÃ·¹ÀÌ¾îÀÓ.
-            switch (chapters[nowLevel].chat[nowChatIndex].state)
-            {
+       // if (is_Choosing == false && nowChatIndex < chapters[nowLevel].chat.Count)        // ì„ íƒì¤‘ì´ ì•„ë‹ˆë¼ë©´
+       // {
+            bool state = false;       // ì¡°ìˆ˜ì¸ì§€ í”Œë ˆì´ì–´(í˜•ì‚¬) ì¸ì§€ í˜•ë³€í™˜. 1ì´ í”Œë ˆì´ì–´ì„.
+            //switch (chapters[nowLevel].chat[nowChatIndex].state)
+         //   {
                 /*case E_ChatState.Other:
                     state = false;
                     break;
@@ -118,39 +118,39 @@ public class ChattingManager : MonoBehaviour
                     state = true;
                     break;
                 case E_ChatState.Ask:
-                    notUseAskList.Clear();      // Àü¿¡ ÀÖ´ø °Í ¸ğµÎ Áö¿öÁÖ±â
+                    notUseAskList.Clear();      // ì „ì— ìˆë˜ ê²ƒ ëª¨ë‘ ì§€ì›Œì£¼ê¸°
                     for (int i = 0; i < askLenght; i++)
                     {
                         //TextBox.Instance.InputText(true, chapters[nowLevel].chat[nowChatIndex].text, true);
-                        notUseAskList.Add(chapters[nowLevel].chat[nowChatIndex].text);            // Áú¹®µé Ãß°¡
+                        notUseAskList.Add(chapters[nowLevel].chat[nowChatIndex].text);            // ì§ˆë¬¸ë“¤ ì¶”ê°€
                         nowChatIndex++;
                     }
                     is_Choosing = true;
                     return;
                 case E_ChatState.LoadNext:
-                    Debug.LogError("¾ÆÁ÷ ¸¸µéÁö ¾Ê´Â LoadNext ¿¹¿ä.");
-                    return;     // ¾Æ¿¹ µ¹·Á*/
-                default:
-                    Debug.LogError($"{chapters[nowLevel].chat[nowChatIndex].state} ´Â(Àº) ¾ø´Â À¯ÇüÀÌ¿¹¿ä!");
-                    break;
-            }
+                    Debug.LogError("ì•„ì§ ë§Œë“¤ì§€ ì•ŠëŠ” LoadNext ì˜ˆìš”.");
+                    return;     // ì•„ì˜ˆ ëŒë ¤*/
+                //default:
+                    //Debug.LogError($"{chapters[nowLevel].chat[nowChatIndex].state} ëŠ”(ì€) ì—†ëŠ” ìœ í˜•ì´ì˜ˆìš”!");
+                    //break;
+        //    }
             //TextBox.Instance.InputText(state, chapters[nowLevel].chat[nowChatIndex].text, false);
-            nowChatIndex++;
-        }
-        else
-        {
+            //nowChatIndex++;
+       // }
+        //else
+        //{
             is_Chatting = false;
-            //Debug.LogError($"ÀÌ°Ô ¿Ö ³ª¿Í, ¼±ÅÃÁß? : {is_Choosing}, Áö±İ ¾îµğ¾ß? : {nowLevel}, Áö±İ Ã¤ÆÃÀº? : {nowChatIndex}");
-        }
+            //Debug.LogError($"ì´ê²Œ ì™œ ë‚˜ì™€, ì„ íƒì¤‘? : {is_Choosing}, ì§€ê¸ˆ ì–´ë””ì•¼? : {nowLevel}, ì§€ê¸ˆ ì±„íŒ…ì€? : {nowChatIndex}");
+        //}
     }
 
-    public void answer(string str)     // ¹öÆ°À» Å¬¸¯ÇßÀ» ¶§
+    public void answer(string str)     // ë²„íŠ¼ì„ í´ë¦­í–ˆì„ ë•Œ
     {
         //Debug.Log(str);
         //TextBox.Instance.CurrentSpeechColorChange();
         //for (int i = 0; i < notUseAskList.Count; i++)
         //{
-        //    if (notUseAskList[i] == str)        // ÀÌ°ÍÀÇ ¼ıÀÚ¶§¹®¿¡ ÀÔ·Â¿¡¼­ ÇÏ³ªÀÇ ´ë´ä¸¸ÀÌ ³ª¿À´ø °ÍÀÓ.
+        //    if (notUseAskList[i] == str)        // ì´ê²ƒì˜ ìˆ«ìë•Œë¬¸ì— ì…ë ¥ì—ì„œ í•˜ë‚˜ì˜ ëŒ€ë‹µë§Œì´ ë‚˜ì˜¤ë˜ ê²ƒì„.
         //    {
         //        nowAskLevel = i;
         //        nowAskChatIndex = 0;
@@ -164,7 +164,7 @@ public class ChattingManager : MonoBehaviour
 
     private void AskChapter()
     {
-        if (nowAskChatIndex < chapters[nowLevel].askAndReply[nowAskLevel].reply.Count)
+        /*if (nowAskChatIndex < chapters[nowLevel].askAndReply[nowAskLevel].reply.Count)
         {
             //TextBox.Instance.InputText(false, chapters[nowLevel].askAndReply[nowAskLevel].reply[nowAskChatIndex]);
             nowAskChatIndex++;
@@ -173,11 +173,11 @@ public class ChattingManager : MonoBehaviour
         {
             is_AskChat = false;
 
-            if (notUseAskList.Count == 0)       // ´õ Áú¹®ÇÒ °ÍÀÌ ¾øÀ¸¸é
+            if (notUseAskList.Count == 0)       // ë” ì§ˆë¬¸í•  ê²ƒì´ ì—†ìœ¼ë©´
             {
                 is_Choosing = false;
                 return;
-            }
+            }*/
 
             //for (int i = 0; i < notUseAskList.Count; i++)
             //{
@@ -186,10 +186,9 @@ public class ChattingManager : MonoBehaviour
             is_Choosing = true;
         }
 
-    }
-
     public void ChangeDelaySpeed(float _value)
     {
         delayTime = _value;
-    }       // ÃÂÆÃ µô·¹ÀÌ ½Ã°£ º¯°æ
+    }       // ì³‡íŒ… ë”œë ˆì´ ì‹œê°„ ë³€ê²½
 }
+

@@ -8,13 +8,14 @@ namespace ChatVisual
     // Situations in which a ConditionNode will be disarmed
     // 1. if all question nodes associated with you are unlocked
     // 2. when a specific file is opened
+    // 2-2. May have a question node immediately following.
 
     // Classes are used to categorize.
 
     public class ConditionNode : Node
     {
         public List<Node> parentList = new List<Node>();
-        public Node child;
+        public List<Node> childList = new List<Node>();
 
         public ICheck checkClass;
         public bool is_AllQuestion;
@@ -49,16 +50,20 @@ namespace ChatVisual
             for (int i = 0; i < myNode.parentList.Count; i++)
             {
                 Node nowNode = myNode.parentList[i];
-                int repetition = 0;
-                while (++repetition < 50 || !(nowNode is AskNode))
-                {
-                    if (nowNode is ChatNode chatNode)
-                    {
-                        nowNode = chatNode.parent;
-                        Debug.Log(nowNode);
-                    }
-                }
-                asks.Add(nowNode as AskNode);
+                Debug.Log(nowNode);
+                for (int j = 0; j < 50; j++)
+                 {
+                     Debug.Log(nowNode);
+                     if (nowNode is ChatNode chatNode)
+                     {
+                         nowNode = chatNode.parent;
+                     }
+                     if (nowNode is AskNode askNode)
+                     {
+                         asks.Add(askNode);
+                         break;
+                     }
+                 }
             }
         }
 

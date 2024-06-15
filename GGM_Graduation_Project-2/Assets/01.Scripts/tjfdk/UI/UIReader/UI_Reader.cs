@@ -8,20 +8,22 @@ using ChatVisual;
 
 public class UI_Reader : MonoBehaviour
 {
+    static public UI_Reader Instance;
+
     // System
         // UI Reader
-    protected TestUI mainSystem;
-    protected UIReader_Chatting chatSystem;
-    protected UIReader_Connection connectionSystem;
-    protected UIReader_FileSystem fileSystem;
-    protected UIReader_ImageFinding imageSystem;
-    protected UIReader_CutScene cutSceneSystem;
+    public GameManager mainSystem;
+    public UIReader_Chatting chatSystem;
+    public UIReader_Connection connectionSystem;
+    public UIReader_FileSystem fileSystem;
+    public UIReader_ImageFinding imageSystem;
+    public UIReader_CutScene cutSceneSystem;
         // Manager
     protected ChatContainer chatContainer;
     protected CutSceneManager cutSceneManager;
     protected FileManager fileManager;
     protected ImageManager imageManager;
-    protected ChapterManager chapterManager;
+    protected ChatHumanManager chapterManager;
 
     // main
     protected UIDocument document;
@@ -52,9 +54,11 @@ public class UI_Reader : MonoBehaviour
 
     protected void Awake()
     {
-        // 서로 참조라 오류날 수도 있음
+        Instance = this;
+
+        // ??癲ル슢캉??꿸괴 ?轅붽틓?????????????⑤챷逾?????棺堉?댆?????濚밸Ŧ援??
         // UI Reader
-        mainSystem = GetComponent<TestUI>();
+        mainSystem = GetComponent<GameManager>();
         chatSystem = GetComponent<UIReader_Chatting>();
         connectionSystem = GetComponent<UIReader_Connection>();
         fileSystem = GetComponent<UIReader_FileSystem>();
@@ -66,7 +70,7 @@ public class UI_Reader : MonoBehaviour
         cutSceneManager = GetComponent<CutSceneManager>();
         fileManager = GetComponent<FileManager>();
         imageManager = GetComponent<ImageManager>();
-        chapterManager = GetComponent<ChapterManager>();
+        chapterManager = GetComponent<ChatHumanManager>();
     }
 
     protected void OnEnable()
@@ -132,8 +136,6 @@ public class UI_Reader : MonoBehaviour
         {
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
-
-            chatSystem.ChoiceMember(chatSystem.FindMember("HG"));
         }
     }
 
@@ -173,18 +175,18 @@ public class UI_Reader : MonoBehaviour
 
     protected void ReSizeImage(VisualElement visualElement, Sprite sprite)
     {
-        // 이미지 원본 크기
+        // ?????轅붽틓??? ?????????
         float originalWidth = sprite.rect.width;
         float originalHeight = sprite.rect.height;
 
-        // 비율 유지하면서 크기 조정
+        // ??????????????????????곗뒭????
         Vector2 adjustedSize = ChangeSize(originalWidth, originalHeight);
 
-        // VisualElement 크기 설정
+        // VisualElement ???????濚밸Ŧ???
         visualElement.style.width = adjustedSize.x;
         visualElement.style.height = adjustedSize.y;
 
-        // Sprite 설정
+        // Sprite ???濚밸Ŧ???
         visualElement.style.backgroundImage = new StyleBackground(sprite);
     }
 
@@ -194,7 +196,7 @@ public class UI_Reader : MonoBehaviour
         float adjustedWidth = originalWidth;
         float adjustedHeight = originalHeight;
 
-        // 크기가 너무 큰 경우
+        // ???濚밸Þ??猷⑥땡? ????????β뼯援????
         if (originalWidth > MaxWidth || originalHeight > MaxHeight)
         {
             if (aspectRatio > 1)
@@ -209,7 +211,7 @@ public class UI_Reader : MonoBehaviour
             }
         }
 
-        // 크기가 너무 작은 경우
+        // ???濚밸Þ??猷⑥땡? ??????? ??β뼯援????
         if (adjustedWidth < MinWidth || adjustedHeight < MinHeight)
         {
             if (aspectRatio > 1)

@@ -50,14 +50,14 @@ namespace ChatVisual
         LoadNextDialog
     }
 
-    [Serializable]
+/*    [Serializable]
     public class Chat 
     {
         public EChatState state; 
         public EChatType type;
-        public string text;        // 嶺???濡ル츎 ??
-        public bool is_UseThis;     // ??????덈츎嶺뚯솘?
-        public EFace face;       // 嶺??????踰???戮곗젧
+        public string text;        // ?????β뼯爰귨㎘???
+        public bool is_UseThis;     // ????????됲닓?꿔꺂???
+        public EFace face;       // ???????????嶺뚮????
         public bool isCan;
         public List<EChatEvent> textEvent = new List<EChatEvent>();
     }
@@ -65,9 +65,9 @@ namespace ChatVisual
     [Serializable]
     public class AskAndReply
     {
-        public string ask;        // ??좊닔???????덈츎 ??ルㅎ臾며춯?뼿
-        public List<Chat> reply = new List<Chat>();     // ?잙갭梨룩굢??????????援?
-        public bool is_UseThis;     // ??????덈츎嶺뚯솘?
+        public string ask;        // ???ル봾??????????됲닓 ????ｋ??쑩됬빊??됱삩?
+        public List<Chat> reply = new List<Chat>();     // ???녾컯嶺?竊됪뤃????????????
+        public bool is_UseThis;     // ????????됲닓?꿔꺂???
 
         public ESaveLocation changeWhoName;
         public bool isChange;
@@ -92,15 +92,12 @@ namespace ChatVisual
         public List<AskAndReply> askAndReply = new List<AskAndReply>();   
         public List<LockAskAndReply> lockAskAndReply = new List<LockAskAndReply>();      
         public List<string> round = new List<string>();       
-
-        public bool is_nextChapter;    
-        public string nextChapterName;    
       
         public bool isChapterEnd;     // is this chapter ended?
         public bool isCan;            // can this chapter play?
         public bool is_nextChapter;     // is this chapter have next chapter?
         public string nextChapterName;         // next chapter name
-    }
+    }*/
 
     public class ChatStruct : MonoBehaviour { }
 }
