@@ -6,8 +6,10 @@ using UnityEngine.UIElements;
 using DG.Tweening;
 using ChatVisual;
 
-public class UI_Reader : Singleton<UI_Reader>
+public class UI_Reader : MonoBehaviour
 {
+    static public UI_Reader Instance;
+
     // System
         // UI Reader
     public GameManager mainSystem;
@@ -21,7 +23,7 @@ public class UI_Reader : Singleton<UI_Reader>
     protected CutSceneManager cutSceneManager;
     protected FileManager fileManager;
     protected ImageManager imageManager;
-    protected ChapterManager chapterManager;
+    protected ChatHumanManager chapterManager;
 
     // main
     protected UIDocument document;
@@ -52,7 +54,9 @@ public class UI_Reader : Singleton<UI_Reader>
 
     protected void Awake()
     {
-        // ??類ㅼŦ 嶺뚣볦굣??????댁쾼????濡レ┣ ???깅쾳
+        Instance = this;
+
+        // ??癲ル슢캉??꿸괴 ?轅붽틓?????????????⑤챷逾?????棺堉?댆?????濚밸Ŧ援??
         // UI Reader
         mainSystem = GetComponent<GameManager>();
         chatSystem = GetComponent<UIReader_Chatting>();
@@ -66,7 +70,7 @@ public class UI_Reader : Singleton<UI_Reader>
         cutSceneManager = GetComponent<CutSceneManager>();
         fileManager = GetComponent<FileManager>();
         imageManager = GetComponent<ImageManager>();
-        chapterManager = GetComponent<ChapterManager>();
+        chapterManager = GetComponent<ChatHumanManager>();
     }
 
     protected void OnEnable()
@@ -171,18 +175,18 @@ public class UI_Reader : Singleton<UI_Reader>
 
     protected void ReSizeImage(VisualElement visualElement, Sprite sprite)
     {
-        // ????嶺뚯솘? ???沅?????
+        // ?????轅붽틓??? ?????????
         float originalWidth = sprite.rect.width;
         float originalHeight = sprite.rect.height;
 
-        // ??????????濡?듆???????브퀗???
+        // ??????????????????????곗뒭????
         Vector2 adjustedSize = ChangeSize(originalWidth, originalHeight);
 
-        // VisualElement ???????깆젧
+        // VisualElement ???????濚밸Ŧ???
         visualElement.style.width = adjustedSize.x;
         visualElement.style.height = adjustedSize.y;
 
-        // Sprite ???깆젧
+        // Sprite ???濚밸Ŧ???
         visualElement.style.backgroundImage = new StyleBackground(sprite);
     }
 
@@ -192,7 +196,7 @@ public class UI_Reader : Singleton<UI_Reader>
         float adjustedWidth = originalWidth;
         float adjustedHeight = originalHeight;
 
-        // ???깃꼈泥? ???????롪퍔???
+        // ???濚밸Þ??猷⑥땡? ????????β뼯援????
         if (originalWidth > MaxWidth || originalHeight > MaxHeight)
         {
             if (aspectRatio > 1)
@@ -207,7 +211,7 @@ public class UI_Reader : Singleton<UI_Reader>
             }
         }
 
-        // ???깃꼈泥? ??????? ?롪퍔???
+        // ???濚밸Þ??猷⑥땡? ??????? ??β뼯援????
         if (adjustedWidth < MinWidth || adjustedHeight < MinHeight)
         {
             if (aspectRatio > 1)

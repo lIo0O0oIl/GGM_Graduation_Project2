@@ -15,7 +15,7 @@ public class GameManager : UI_Reader
     private void Start()
     {
         cutSceneSystem.PlayCutScene("DieFall");         // StartCutScene
-        chapterManager.AddChapter("HG", "??????戮곗굚");
+        chapterManager.AddHuman("HG");
     }
 
     private void Update()

@@ -14,7 +14,7 @@ public class InvisibleFileManager : MonoBehaviour
 {
     public static InvisibleFileManager Instance;
 
-    public RoundFile[] roundFile;        // 라운드 마다 보여질 것
+    public RoundFile[] roundFile;        // ?쇱슫??留덈떎 蹂댁뿬吏?寃?
     HashSet<string> ShowRoundSet = new HashSet<string>();
 
     private void Awake()
@@ -38,12 +38,12 @@ public class InvisibleFileManager : MonoBehaviour
                 foreach(var rountFile in file.Files)
                 {
                     rountFile.SetActive(true);
-                    //FileManager.instance.NowFilePathIncludeFileCheck(rountFile);     // 키려는 것이 지금 경로에 있어야만함.
+                    //FileManager.instance.NowFilePathIncludeFileCheck(rountFile);     // ?ㅻ젮??寃껋씠 吏湲?寃쎈줈???덉뼱?쇰쭔??
                 }
                 is_Exsist = true;
             }
         }
-        if (is_Exsist == false) Debug.LogError($"{round} 는(은) 없는 라운드 입니다.");
+        if (is_Exsist == false) Debug.LogError($"{round} ???) ?녿뒗 ?쇱슫???낅땲??");
         ShowRoundSet.Add(round);
     }
 
@@ -51,7 +51,7 @@ public class InvisibleFileManager : MonoBehaviour
     {
         foreach (var file in roundFile)
         {
-            if (ShowRoundSet.Contains(file.round) == false)      // 포함되어있지 않으면 꺼주고 현재 파일 경로에 없으면 지워줘야해.
+            if (ShowRoundSet.Contains(file.round) == false)      // ?ы븿?섏뼱?덉? ?딆쑝硫?爰쇱＜怨??꾩옱 ?뚯씪 寃쎈줈???놁쑝硫?吏?뚯쨾?쇳빐.
             {
                 foreach (var obj in file.Files)
                 {
