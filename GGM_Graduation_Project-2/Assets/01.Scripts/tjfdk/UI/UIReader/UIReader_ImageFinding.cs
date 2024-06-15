@@ -10,13 +10,16 @@ using UnityEngine.UIElements;
 public class UIReader_ImageFinding : UI_Reader
 {
     // UXML
-    VisualElement imageGround;
-    //VisualElement evidenceExplanation;
+    VisualElement ui_imageGround;
+
+
 
     // Template
-    VisualTreeAsset ux_imageGround;
-    VisualTreeAsset ux_imageEvidence;
-    VisualTreeAsset ux_evidenceExplanation;
+    [SerializeField] VisualTreeAsset ux_imageGround;
+    [SerializeField] VisualTreeAsset ux_imageEvidence;
+    [SerializeField] VisualTreeAsset ux_evidenceExplanation;
+
+
 
     bool isImageOpen;
 
@@ -30,26 +33,17 @@ public class UIReader_ImageFinding : UI_Reader
         base.OnEnable();
 
         UXML_Load();
-        Template_Load();
     }
 
     private void UXML_Load()
     {
-        imageGround = root.Q<VisualElement>("ImageFinding");
-        //evidenceExplanation = root.Q<VisualElement>("EvidenceDescript");
-    }
-
-    private void Template_Load()
-    {
-        ux_imageGround = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Evidence\\ImageGround.uxml");
-        ux_imageEvidence = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Evidence\\Evidence.uxml");
-        ux_evidenceExplanation = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets\\UI Toolkit\\Prefab\\Evidence\\EvidenceDescript.uxml");
+        ui_imageGround = root.Q<VisualElement>("ImageFinding");
     }
 
     public void EventImage(VisualElement file)
     {
         // Image일 때
-        foreach (ImageB image in imageManager.images)
+        foreach (ImageBig image in GameManager.Instance.imageManager.images)
         {
             // 해당 이미지를 찾았다면 배경 설정
             if (image.name == file.Q<Label>("FileName").text)
@@ -57,25 +51,25 @@ public class UIReader_ImageFinding : UI_Reader
                 if (isImageOpen)
                 {
                     // filesystem 사이즈 변환 버튼 켜기
-                    fileSystem.changeSizeButton.pickingMode = PickingMode.Position;
-                    imageGround.style.display = DisplayStyle.None;
+                    GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Position;
+                    ui_imageGround.style.display = DisplayStyle.None;
 
-                    for (int i = imageGround.childCount - 1; i >= 0; i--)
-                        imageGround.RemoveAt(i);
+                    for (int i = ui_imageGround.childCount - 1; i >= 0; i--)
+                        ui_imageGround.RemoveAt(i);
 
-                    FileT fileT = fileSystem.FindFile(file.Q<Label>("FileName").text);
-                    fileManager.UnlockChat(fileT);
-                    fileManager.UnlockChapter(fileT);
+                    File fileT = GameManager.Instance.fileManager.FindFile(file.Q<Label>("FileName").text);
+                    GameManager.Instance.fileManager.UnlockChat(fileT);
+                    GameManager.Instance.fileManager.UnlockChapter(fileT);
                 }
                 else
                 {
                     // filesystem 사이즈 변환 버튼 끄기
-                    fileSystem.changeSizeButton.pickingMode = PickingMode.Ignore;
+                    GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Ignore;
                     // filesystem 사이즈 작게 만들기
-                    fileSystem.isFileSystemOpen = true;
-                    fileSystem.ChangeSize(0f);
+                    GameManager.Instance.fileSystem.isFileSystemOpen = true;
+                    GameManager.Instance.fileSystem.ChangeSize(0f);
 
-                    imageGround.style.display = DisplayStyle.Flex;
+                    ui_imageGround.style.display = DisplayStyle.Flex;
                     
                     VisualElement textImage = RemoveContainer(ux_imageGround.Instantiate());
                     textImage.style.backgroundImage = new StyleBackground(image.image);
@@ -85,7 +79,7 @@ public class UIReader_ImageFinding : UI_Reader
                     foreach (string evid in image.pngName)
                     {
                         // 해당 단서를 찾았다면
-                        foreach (ImagePng png in imageManager.pngs)
+                        foreach (ImageSmall png in GameManager.Instance.imageManager.pngs)
                         {
                             if (evid == png.name)
                             {
@@ -112,7 +106,7 @@ public class UIReader_ImageFinding : UI_Reader
                                         {
                                             png.isOpen = true;
                                             Debug.Log(png.name + " " + image.name);
-                                            fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
+                                            GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
                                         }
                                     });
                                 }
@@ -149,7 +143,7 @@ public class UIReader_ImageFinding : UI_Reader
                         }
                     }
 
-                    imageGround.Add(textImage);
+                    ui_imageGround.Add(textImage);
                 }
 
                 isImageOpen = !isImageOpen;
@@ -157,10 +151,10 @@ public class UIReader_ImageFinding : UI_Reader
         }
 
         // Png일 때
-        foreach (ImagePng png in imageManager.pngs)
+        foreach (ImageSmall png in GameManager.Instance.imageManager.pngs)
         {
             if (png.name == file.Q<Label>("FileName").text)
-                fileSystem.OpenImage(png.name, png.saveImage);
+                GameManager.Instance.fileSystem.OpenImage(png.name, png.saveSprite);
         }
     }
 }

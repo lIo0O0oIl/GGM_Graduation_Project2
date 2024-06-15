@@ -10,21 +10,6 @@ public class UI_Reader : MonoBehaviour
 {
     static public UI_Reader Instance;
 
-    // System
-        // UI Reader
-    public GameManager mainSystem;
-    public UIReader_Chatting chatSystem;
-    public UIReader_Connection connectionSystem;
-    public UIReader_FileSystem fileSystem;
-    public UIReader_ImageFinding imageSystem;
-    public UIReader_CutScene cutSceneSystem;
-        // Manager
-    protected ChatContainer chatContainer;
-    protected CutSceneManager cutSceneManager;
-    protected FileManager fileManager;
-    protected ImageManager imageManager;
-    protected ChatHumanManager chapterManager;
-
     // main
     protected UIDocument document;
     protected VisualElement root;
@@ -45,7 +30,7 @@ public class UI_Reader : MonoBehaviour
     protected VisualElement imageFindingPanel;
     private List<VisualElement> panels = new List<VisualElement>();
 
-    Tween currentTextTween;
+    public Tween currentTextTween;
 
     protected float MinWidth = 500f;
     protected float MinHeight = 500f;
@@ -55,22 +40,6 @@ public class UI_Reader : MonoBehaviour
     protected void Awake()
     {
         Instance = this;
-
-        // ??癲ル슢캉??꿸괴 ?轅붽틓?????????????⑤챷逾?????棺堉?댆?????濚밸Ŧ援??
-        // UI Reader
-        mainSystem = GetComponent<GameManager>();
-        chatSystem = GetComponent<UIReader_Chatting>();
-        connectionSystem = GetComponent<UIReader_Connection>();
-        fileSystem = GetComponent<UIReader_FileSystem>();
-        imageSystem = GetComponent<UIReader_ImageFinding>();
-        cutSceneSystem = GetComponent<UIReader_CutScene>();
-
-        // Manager
-        chatContainer = GameObject.Find("ChatManager").GetComponent<ChatContainer>();
-        cutSceneManager = GetComponent<CutSceneManager>();
-        fileManager = GetComponent<FileManager>();
-        imageManager = GetComponent<ImageManager>();
-        chapterManager = GetComponent<ChatHumanManager>();
     }
 
     protected void OnEnable()

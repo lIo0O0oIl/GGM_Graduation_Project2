@@ -38,9 +38,9 @@ public class MemberProfile
 
 public class UIReader_Chatting : UI_Reader
 {
+    [Header("Member")]
     // current member name
     public string currentMemberName;
-
     // member profile
     [SerializeField] List<MemberProfile> members;
     public Dictionary<string, MemberProfile> memberList;
@@ -68,6 +68,7 @@ public class UIReader_Chatting : UI_Reader
 
 
     // template
+    [Header("Template")]
     [SerializeField] VisualTreeAsset ux_chat;
     [SerializeField] VisualTreeAsset ux_askChat;
     [SerializeField] VisualTreeAsset ux_hiddenAskChat;
@@ -188,7 +189,7 @@ public class UIReader_Chatting : UI_Reader
                 // create VisualElement
                 chat = new VisualElement();
                 // image size change
-                ReSizeImage(chat, imageManager.FindPNG(text).image);
+                ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).image);
                 break;
 
             // if CutScene
@@ -199,11 +200,11 @@ public class UIReader_Chatting : UI_Reader
                 chat.AddToClassList("FileChatSize");
                 chat.AddToClassList("NoButtonBorder");
                 // find first cut of cutscene
-                Sprite sprite = cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
+                Sprite sprite = GameManager.Instance.cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
                 // change background to image
                 chat.style.backgroundImage = new StyleBackground(sprite);
                 // connection click event, play cutscene
-                chat.Q<Button>().clicked += (() => { cutSceneSystem.PlayCutScene(text); });
+                chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
                 break;
         }
 
@@ -433,7 +434,7 @@ public class UIReader_Chatting : UI_Reader
             //// start chapter.
             if (member.nickName.ToString() != "")
             {
-                chapterManager.ChatStart(/*member.name, */member.nickName.ToString());
+                GameManager.Instance.chapterManager.ChatStart(/*member.name, */member.nickName.ToString());
             }
             else
                 Debug.Log("this member hasn't name");
