@@ -774,7 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowHumanName: Teacher
+  nowHumanName: Home
   nameList:
   - HG
   - Teacher
@@ -1092,42 +1092,107 @@ MonoBehaviour:
       position: {x: 0, y: 0}
       index: 0
       is_UseThis: 0
+    - guid: 038d310dee39cd548bfb47dc13ce12de
+      position: {x: 175.26503, y: 119.89998}
+      index: 0
+      is_UseThis: 0
+    - guid: d7679414ede66444b8c3dd606de92b3c
+      position: {x: 175.19997, y: 252.55502}
+      index: 0
+      is_UseThis: 0
+    - guid: 906e8972d3c73aa4c958088e9236e997
+      position: {x: 175.19997, y: 382.7575}
+      index: 0
+      is_UseThis: 0
+    - guid: 04b2e2cbccf3f764d8b3b7d9a257eecc
+      position: {x: -114.175, y: 504.42258}
+      index: 0
+      is_UseThis: 0
+    - guid: e9bb16c5e3250034084af53e1961c9c0
+      position: {x: -279.13748, y: 659.2}
+      index: 0
+      is_UseThis: 0
+    - guid: 9649ccd2a35e3f74193ee677f98d6eac
+      position: {x: 199.43736, y: 668.3999}
+      index: 0
+      is_UseThis: 0
+    - guid: 2f7163b2d6ee7004a9eed4a907560a06
+      position: {x: -409.05884, y: 786.31213}
+      index: 0
+      is_UseThis: 0
+    - guid: 58ed47b1467941744be818f6f62379d9
+      position: {x: -409.05884, y: 911.9121}
+      index: 0
+      is_UseThis: 0
+    - guid: 55a1afd1dd0fc184e9af23120550ac35
+      position: {x: -409.05884, y: 1055.9121}
+      index: 0
+      is_UseThis: 0
+    - guid: a0a4eb6d4b722c3439ee4e8a7bd3859e
+      position: {x: -204.00003, y: 1180.765}
+      index: 0
+      is_UseThis: 0
+    - guid: 4def239d8c661dc4a9a0ce6f57023bd4
+      position: {x: 125.037384, y: 790.79987}
+      index: 0
+      is_UseThis: 0
+    - guid: 17c1789331f15004abbfa103b00e093b
+      position: {x: 349.83734, y: 921.1999}
+      index: 0
+      is_UseThis: 0
+    - guid: 6e2d2442df243c2489a1132d58ddeec8
+      position: {x: 226.63739, y: 1050.7999}
+      index: 0
+      is_UseThis: 0
+    - guid: 74f34a35bc718444d911e3f2356fb027
+      position: {x: 75.99998, y: 1318.5582}
+      index: 0
+      is_UseThis: 0
+    - guid: 20a1b4b0146632346976c32a234abc59
+      position: {x: 425.83737, y: 1181.2}
+      index: 0
+      is_UseThis: 0
+    - guid: bef1586647341e74fb1270e12c4173e4
+      position: {x: 75.99998, y: 1437.5209}
+      index: 0
+      is_UseThis: 0
+    - guid: c2b0d088661e3394e9836c807640dc40
+      position: {x: 425.59995, y: 1569.5383}
+      index: 0
+      is_UseThis: 0
+    - guid: c1ba468ba60db0e47a1e27b994a827dd
+      position: {x: 425.59995, y: 1691.9384}
+      index: 0
+      is_UseThis: 0
+    - guid: fefc8499497a5e34cb0eb5c6fd61bb58
+      position: {x: 61.397995, y: 1826.5582}
+      index: 0
+      is_UseThis: 0
+    - guid: bf8b5c1453631874ba4025b945045ece
+      position: {x: 61.59998, y: 1951.2615}
+      index: 0
+      is_UseThis: 0
+    - guid: 2b106382ce5510744aad57ccea89dc50
+      position: {x: 61.59998, y: 2067.4111}
+      index: 0
+      is_UseThis: 0
+    - guid: fe0222a670bd0114584b058ebc3bf78b
+      position: {x: 61.599937, y: 2184.1584}
+      index: 0
+      is_UseThis: 0
+    - guid: 732485577cb71b0489e5eb3c42dbf4a5
+      position: {x: 426.39996, y: 2327.3584}
+      index: 0
+      is_UseThis: 0
+    - guid: 35efca3cad9146c4abe16eaf775198db
+      position: {x: 426.39993, y: 2445.5913}
+      index: 0
+      is_UseThis: 0
   - nodes:
     - guid: 1ae7479a19e64a54d8baa6c0a334685d
       position: {x: 0, y: 0}
       index: 0
       is_UseThis: 0
---- !u!1 &903908779
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 903908780}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &903908780
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 903908779}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8300158, y: 0.058344096, z: 0.08789162}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1663529864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,4 +1292,3 @@ SceneRoots:
   - {fileID: 1663529867}
   - {fileID: 594023516}
   - {fileID: 150678876}
-  - {fileID: 903908780}
