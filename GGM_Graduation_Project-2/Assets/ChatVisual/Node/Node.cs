@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,8 @@ using UnityEngine.UIElements;
 
 namespace ChatVisual
 {
-    public abstract class Node
+    [Serializable]
+    public class Node
     {
         public string guid;       // Unity Object Unique identifiers
         public Vector2 position;

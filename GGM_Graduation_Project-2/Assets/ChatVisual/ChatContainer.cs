@@ -6,14 +6,38 @@ using UnityEngine;
 
 namespace ChatVisual
 {
+    [Serializable]
+    public class Nodes
+    {
+        public List<Node> nodes = new List<Node>();
+
+        public Nodes() { }
+        public Nodes(List<Node> nodes)
+        {
+            this.nodes = nodes;
+        }
+    }
+
     public class ChatContainer : MonoBehaviour
     {
         public Dictionary<string, List<Node>> HumanAndChatDictionary = new Dictionary<string, List<Node>>();        // Nodes connected to each other
 
         public string nowHumanName;
-        
+
+        public List<string> nameList = new List<string>();
+        public List<Nodes> nodeList = new List<Nodes>();
+
         //private bool is_ConditionNowOk = false;
         ///private int nowChatIndex = 1;       // index for Sort
+
+        private void Awake()
+        {
+            for (int i = 0; i < nameList.Count; i++)
+            {
+            Debug.Log("Add : " + nameList[i]);
+                HumanAndChatDictionary.Add(nameList[i], nodeList[i].nodes);
+            }
+        }
 
 #if UNITY_EDITOR
         public Node CreateNode(Type type)

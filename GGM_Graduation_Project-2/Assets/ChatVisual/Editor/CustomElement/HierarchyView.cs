@@ -29,11 +29,9 @@ namespace ChatVisual
             // IMGUI
             Clear();
 
-            Debug.Log("Update Hierarchy");
-
             ScrollView scrollView = new ScrollView(ScrollViewMode.Vertical);
             scrollView.style.marginBottom = 5;
-            scrollView.Add(new Label("Chapters :"));
+            scrollView.Add(new Label("Humans :"));
             foreach(string name in chatContainer.HumanAndChatDictionary.Keys)
             {
 
@@ -68,7 +66,7 @@ namespace ChatVisual
 
         private void ChangeChapter(string key)
         {
-            chatView.SaveChatName();   
+            chatView.SaveChatData();   
             chatContainer.ChangeNowChapter(key);    
             chatView.LoadChatData(chatContainer);       
             chatView.PopulateView();

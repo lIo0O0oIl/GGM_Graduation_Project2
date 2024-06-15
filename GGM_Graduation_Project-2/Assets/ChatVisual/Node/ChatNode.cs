@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ChatVisual
 {
+    [Serializable]
     public class ChatNode : Node
     {
         public Node parent;
@@ -11,7 +13,7 @@ namespace ChatVisual
 
         public EChatState state; 
         public EChatType type;
-        public string text;    
+        public string chatText;    
         public EFace face; 
 
         public List<EChatEvent> textEvent = new List<EChatEvent>();

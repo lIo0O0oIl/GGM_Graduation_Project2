@@ -52,16 +52,30 @@ namespace ChatVisual
             }
         }
 
-        public void SaveChatName()
+        public void SaveChatData()
         {
-            if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName][0] is RootNode rootNode)
+            chatContainer.nameList.Clear();
+            chatContainer.nodeList.Clear();
+
+            Debug.Log(chatContainer.HumanAndChatDictionary.Count);
+            foreach (var i in chatContainer.HumanAndChatDictionary)
             {
-                if (chatContainer.nowHumanName != rootNode.showName)
+                string tempName = i.Key;
+                List<Node> tempNodeList = i.Value;
+
+                if (i.Value[0] is RootNode rootNode)
                 {
-                    List<Node> tempNodeList = new List<Node>(chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName]);
-                    chatContainer.HumanAndChatDictionary.Remove(chatContainer.nowHumanName);
-                    chatContainer.HumanAndChatDictionary.Add(rootNode.showName, tempNodeList);
+                    string nowName = rootNode.showName;
+
+                    chatContainer.nameList.Add(nowName);
+                    chatContainer.nodeList.Add(new Nodes(tempNodeList));
                 }
+            }
+
+            chatContainer.HumanAndChatDictionary.Clear();
+            for (int i = 0; i < chatContainer.nameList.Count; i++)
+            {
+                chatContainer.HumanAndChatDictionary.Add(chatContainer.nameList[i], chatContainer.nodeList[i].nodes);
             }
         }
 
@@ -133,14 +147,10 @@ namespace ChatVisual
                 });
             }
 
-            /* if (graphViewChange.movedElements != null)      // If the element moved
+             if (graphViewChange.movedElements != null)      // If the element moved
              {
-                 nodes.ForEach(n =>
-                 {
-                     var nodeView = n as NodeView;
-                     nodeView?.SortChildren();
-                 });
-             }*/
+                SaveChatData();
+            }
 
             return graphViewChange;
         }

@@ -29,7 +29,7 @@ public class ChatEditor : EditorWindow
     {
         if (chatContainer != null)
         {
-            chatView.SaveChatName();
+            chatView.SaveChatData();
             Debug.Log("Close and save");
         }
     }
@@ -68,6 +68,19 @@ public class ChatEditor : EditorWindow
         {
             Debug.Log("Add human");
             chatContainer.HumanAndChatDictionary.Add("???", new List<Node>());
+            string temp = chatContainer.nowHumanName;
+            chatContainer.nowHumanName = "???";
+            if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName].Count == 0)
+            {
+                chatContainer.CreateNode(typeof(RootNode));
+                if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName][0] is RootNode rootNode)
+                {
+                    rootNode.showName = "???";
+                }
+            }
+            chatContainer.nowHumanName = temp;
+            chatContainer.nameList.Add("???");
+            chatContainer.nodeList.Add(new Nodes());
             hierarchyView.UpdateHierarchy();
         }
     }
@@ -92,8 +105,8 @@ public class ChatEditor : EditorWindow
         {
             if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))    
             {
-                // The current chat is an assistant's chat
-                chatContainer.nowHumanName = "Assistant";
+                // The current chat is an assistant's(HG) chat
+                chatContainer.nowHumanName = "HG";
 
                 hierarchyView.InitHierarchy(chatContainer, chatView, inspectorView);
                 hierarchyView.UpdateHierarchy();      

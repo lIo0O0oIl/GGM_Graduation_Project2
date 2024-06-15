@@ -11,10 +11,11 @@ public class ChatHumanManager : UI_Reader
     private ChatContainer chatContainer;
 
     public float changeHumanTime = 1f;       // A time when humans change
+    private float currentTime = 0f;
 
     private List<Node> nowNodes = new List<Node>();
     private string nowHumanName;        // Name of the human you're talking to
-    private int currentIndex = 0;
+    private int nowIndex = 0;
     private bool is_ChatStart = false;
 
     public void AddHuman(string who)     // HG
@@ -24,43 +25,47 @@ public class ChatHumanManager : UI_Reader
 
     private void Update()
     {
-        if (is_ChatStart)
+        currentTime += Time.deltaTime;
+        if (is_ChatStart && currentTime >= changeHumanTime)
         {
-            var children = chatContainer.GetChild(nowNodes[currentIndex]);
+            currentTime = 0f;
 
-            if (children.Count == 1 && children[0] is ChatNode)            // When a child is a ChatNode
+            var children = chatContainer.GetChild(nowNodes[nowIndex]);
+
+            if (children.Count == 1)            // When a child is a ChatNode
             {
+                if (children[0] is ChatNode chatNode)
+                {
+                    Debug.Log(chatNode.chatText);
                 // Outputting Metabolism
 
                 // Emotion Changes
 
                 // Handing Chat Event (Camera, vibration, fileLoad)
-
                 //UI_Reader.Instance.chatSystem.InputChat()
 
-                currentIndex++;
+                nowIndex++;
+                }
             }
             else        // When child is not a ChatNode
             {
-                // // 筌욌뜄揆??援?鈺곌퀗援????욧볼??됱뱽 ????욧볼??됱뱽 ??                for (int i = 0; i < children.Count; i++)
+                for (int i = 0; i < children.Count; i++)
                 {
-                    /*if (children[i] is AskNode askNode)
+                    if (children[i] is AskNode askNode)
                     {
                         // Handling questions
-                        currentIndex++;
+                        Debug.Log(askNode.askText);
+                        nowIndex++;
                     }
                     else if (children[i] is ConditionNode conditionNode)
                     {
-                        if (conditionNode.is_UseThis)
+                        if (conditionNode.checkClass.Check())
                         {
-                            // 鈺곌퀗援?紐껊굡????鈺곌퀗援???袁⑥┷??볤탢??겹늺 ??쇱벉 ?紐껊굡 ??곸㉡.
-                            if (conditionNode.checkClass.Check())
-                            {
-                                currentIndex++;
-                                NextChat();
-                            }
+                            children = chatContainer.GetChild(nowNodes[nowIndex]);
+                            conditionNode.is_UseThis = true;
+                            continue;
                         }
-                    }*/
+                    }
                 }
             }
 
@@ -69,8 +74,13 @@ public class ChatHumanManager : UI_Reader
 
     public void ChatStart(string name)      // HG
     {
+        Debug.Log("��ȭ ����");
         nowHumanName = name;
-        //chatContainer.HumanAndChatDictionary[nowHumanName]
-        is_ChatStart=true;
+        nowNodes = chatContainer.HumanAndChatDictionary[nowHumanName];
+        if (nowNodes[0] is RootNode rootNode)
+        {
+            nowIndex = rootNode.nowIndex;
+        }
+        is_ChatStart = true;
     }
 }

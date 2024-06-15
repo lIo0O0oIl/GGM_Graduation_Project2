@@ -1,4 +1,5 @@
 using DG.Tweening.Core.Easing;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace ChatVisual
 
     // Classes are used to categorize.
 
+    [Serializable]
     public class ConditionNode : Node
     {
         public List<Node> parentList = new List<Node>();
