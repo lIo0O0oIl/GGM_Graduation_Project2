@@ -144,18 +144,14 @@ public class UI_Reader : MonoBehaviour
 
     protected void ReSizeImage(VisualElement visualElement, Sprite sprite)
     {
-        // ?????轅붽틓??? ?????????
         float originalWidth = sprite.rect.width;
         float originalHeight = sprite.rect.height;
 
-        // ??????????????????????곗뒭????
         Vector2 adjustedSize = ChangeSize(originalWidth, originalHeight);
 
-        // VisualElement ???????濚밸Ŧ???
         visualElement.style.width = adjustedSize.x;
         visualElement.style.height = adjustedSize.y;
 
-        // Sprite ???濚밸Ŧ???
         visualElement.style.backgroundImage = new StyleBackground(sprite);
     }
 
@@ -165,7 +161,6 @@ public class UI_Reader : MonoBehaviour
         float adjustedWidth = originalWidth;
         float adjustedHeight = originalHeight;
 
-        // ???濚밸Þ??猷⑥땡? ????????β뼯援????
         if (originalWidth > MaxWidth || originalHeight > MaxHeight)
         {
             if (aspectRatio > 1)
@@ -180,7 +175,6 @@ public class UI_Reader : MonoBehaviour
             }
         }
 
-        // ???濚밸Þ??猷⑥땡? ??????? ??β뼯援????
         if (adjustedWidth < MinWidth || adjustedHeight < MinHeight)
         {
             if (aspectRatio > 1)
