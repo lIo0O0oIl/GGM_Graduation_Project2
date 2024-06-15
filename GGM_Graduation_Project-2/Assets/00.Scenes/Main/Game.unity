@@ -774,7 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowHumanName: JH
+  nowHumanName: HY
   nameList:
   - HG
   - Teacher
@@ -1445,6 +1445,78 @@ MonoBehaviour:
       position: {x: 0, y: 0}
       index: 0
       is_UseThis: 0
+    - guid: ef5dae0c4ee91954a9a8559f2246560c
+      position: {x: 135.20004, y: 155.3}
+      index: 0
+      is_UseThis: 0
+    - guid: c9c812eef49af824ca5d884e14cfe4d0
+      position: {x: 135.45, y: 287.15012}
+      index: 0
+      is_UseThis: 0
+    - guid: dfad85b06b6783a45ad705b29a0d75d7
+      position: {x: 135.19997, y: 399.9001}
+      index: 0
+      is_UseThis: 0
+    - guid: 295fb4a55d69a4948a4d5248eef89772
+      position: {x: -123.617966, y: 534.39984}
+      index: 0
+      is_UseThis: 0
+    - guid: ec247012a4fb6d443914279efec15272
+      position: {x: 157.28812, y: 647.657}
+      index: 0
+      is_UseThis: 0
+    - guid: 6559f8fc1aa8a3446a0194793a0e9d6d
+      position: {x: -123.617966, y: 779.9998}
+      index: 0
+      is_UseThis: 0
+    - guid: 0a1ca0d662c02594ca74a642deb74ce2
+      position: {x: 157.59998, y: 882.39984}
+      index: 0
+      is_UseThis: 0
+    - guid: 8eedf254caf2307419bc25a134b39ca2
+      position: {x: -123.617966, y: 1039.9998}
+      index: 0
+      is_UseThis: 0
+    - guid: cb3eb7431164ca447bcc7ae5030cba32
+      position: {x: 158.40002, y: 1141.5997}
+      index: 0
+      is_UseThis: 0
+    - guid: dc3b73c26151d2e41b66cd9f3ab26825
+      position: {x: 26.399994, y: 1298.5475}
+      index: 0
+      is_UseThis: 0
+    - guid: 08db5fad3e946704e88a6c70d563bcf4
+      position: {x: 202.3425, y: 1425.655}
+      index: 0
+      is_UseThis: 0
+    - guid: 899d98f14a33eea4d81cd0f2c4c91ea6
+      position: {x: 202.40001, y: 1551.4775}
+      index: 0
+      is_UseThis: 0
+    - guid: 22bed5787a7520b408d7bc8aa695619c
+      position: {x: 214.51247, y: 1694.3998}
+      index: 0
+      is_UseThis: 0
+    - guid: 5ea9aac803b343b408456a496602b4f6
+      position: {x: -123.99997, y: 1830.696}
+      index: 0
+      is_UseThis: 0
+    - guid: b8b613eb933134142b27d66bf001024b
+      position: {x: 214.4, y: 1969.6176}
+      index: 0
+      is_UseThis: 0
+    - guid: 3daa16fd3f7aa9746b65c35da9dfc9e0
+      position: {x: -124.00001, y: 2140.6853}
+      index: 0
+      is_UseThis: 0
+    - guid: 5383dc36e3f120149a020d5b4c905b07
+      position: {x: 214.39996, y: 2282.9077}
+      index: 0
+      is_UseThis: 0
+    - guid: 4eeb0c717b35e6141929467f81925a9b
+      position: {x: -123.200035, y: 2429.5676}
+      index: 0
+      is_UseThis: 0
 --- !u!1 &1663529864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,6 +1609,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2099014330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2099014331}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2099014331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099014330}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8300158, y: 0.058344096, z: 0.08789162}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1544,3 +1647,4 @@ SceneRoots:
   - {fileID: 1663529867}
   - {fileID: 594023516}
   - {fileID: 150678876}
+  - {fileID: 2099014331}
