@@ -208,7 +208,6 @@ public class UIReader_Chatting : UI_Reader
             RecordChat(who, toWho, type, text);
 
         // whose chat style setting
-        Debug.Log(chat + " chat null 임");
         if (who == EChatState.Me)
             chat.AddToClassList("MyChat");
         else
@@ -286,8 +285,8 @@ public class UIReader_Chatting : UI_Reader
         if (isRecord)
             RecordChat(EChatState.Me, toWho, type, msg);
 
-        //ChangeT(suspect, msg);
-
+        ////evnet;
+        //SettingChat(member, member.currentFace, chatEvt);
         // add UI
         ui_questionGround.Add(chat);
     }
@@ -325,7 +324,7 @@ public class UIReader_Chatting : UI_Reader
     }
 
     // setting Face and event
-    private void SettingChat(MemberProfile member, EFace face, EChatEvent evt)
+    public void SettingChat(MemberProfile member, Node node, EFace face, List<EChatEvent> evts)
     {
         // if current face of member is the same new face
         if (member.currentFace != face)
@@ -350,15 +349,42 @@ public class UIReader_Chatting : UI_Reader
             member.currentFace = face;
         }
 
-        // event type
-        switch (evt)
+        if (node is ChatNode chatNode)
         {
-            case EChatEvent.Vibration:
-                break;
-            //case EChatEvent.Round:
-            //    break;
-            case EChatEvent.Camera:
-                break;
+            // event type
+            foreach (EChatEvent evt in evts)
+            {
+                switch (evt)
+                {
+                    case EChatEvent.LoadFile:
+                    {
+                        //FileSO file = GameManager.Instance.fileManager.FindFile(chatNode.string);
+                        //GameManager.Instance.fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
+                    }
+                    break;
+                    case EChatEvent.Default:
+                    case EChatEvent.Camera:
+                    case EChatEvent.Vibration:
+                    case EChatEvent.LoadNextDialog:
+                        break;
+                }
+            }
+        }
+        else if (node is AskNode askNode)
+        {
+            // event type
+            foreach (EChatEvent evt in evts)
+            {
+                switch (evt)
+                {
+                    case EChatEvent.Default:
+                    case EChatEvent.Camera:
+                    case EChatEvent.Vibration:
+                    case EChatEvent.LoadFile:
+                    case EChatEvent.LoadNextDialog:
+                        break;
+                }
+            }
         }
     }
 
