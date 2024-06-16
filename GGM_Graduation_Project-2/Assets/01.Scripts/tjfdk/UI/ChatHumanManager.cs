@@ -94,6 +94,8 @@ public class ChatHumanManager : UI_Reader
 
     public IEnumerator ReadChat()
     {
+        MemberProfile member = GameManager.Instance.chatSystem.FindMember(nowHumanName);
+
         while (true) 
         {
             // node list
@@ -107,6 +109,8 @@ public class ChatHumanManager : UI_Reader
 
                     GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
                         chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
+                    // event
+                    GameManager.Instance.chatSystem.SettingChat(member, chatNode, chatNode.face, chatNode.textEvent);
 
                     currentNode = children[0];
                 }
@@ -121,9 +125,13 @@ public class ChatHumanManager : UI_Reader
 
                         bool is_Lock = askNode.parent is ConditionNode ? true : false;
 
+                        // input question
                         GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
                             askNode.askText, askNode.textEvent, () => { currentNode = askNode; });
-                        GameManager.Instance.chatSystem.FindMember(nowHumanName).questions.Add(askNode);
+                        // record question
+                        member.questions.Add(askNode);
+                        // event
+                        GameManager.Instance.chatSystem.SettingChat(member, askNode, member.currentFace, askNode.textEvent);
                     }
                     else if (children[i] is ConditionNode conditionNode) // When child is a ConditionNode
                     {
