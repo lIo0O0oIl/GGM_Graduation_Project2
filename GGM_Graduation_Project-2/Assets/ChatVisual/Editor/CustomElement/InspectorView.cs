@@ -48,7 +48,7 @@ namespace ChatVisual
                             GUILayout.Space(10);
 
                             // LoadFileName
-                            if (!is_LoadList)
+                           /* if (!is_LoadList)
                             {
                                 LoadFileList = new List<string>(rootNode.loadFileNameList);
                                 is_LoadList = true;
@@ -69,7 +69,7 @@ namespace ChatVisual
                             }
                             rootNode.loadFileNameList = new List<string>(LoadFileList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
-                            GUILayout.EndVertical();
+                            GUILayout.EndVertical();*/
 
                             EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.IntField("NowIndex", rootNode.nowIndex);
