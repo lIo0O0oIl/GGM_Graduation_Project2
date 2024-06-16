@@ -61,6 +61,7 @@ namespace ChatVisual
 
         public void Init(ConditionNode myNode)
         {
+            Debug.Log("tl");
             for (int i = 0; i < myNode.parentList.Count; i++)
             {
                 Node nowNode = myNode.parentList[i];
@@ -76,6 +77,7 @@ namespace ChatVisual
                     }
                      if (nowNode is AskNode askNode)
                      {
+                        Debug.Log(i + "_");
                         conditionNode.asks.Add(askNode);
                          break;
                      }

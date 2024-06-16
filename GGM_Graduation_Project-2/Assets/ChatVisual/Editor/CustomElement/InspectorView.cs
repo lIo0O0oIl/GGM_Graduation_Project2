@@ -20,7 +20,7 @@ namespace ChatVisual
         private bool is_Expand = false;
         private bool is_LoadList = false;
         private bool is_AllQuestion = false;
-        private bool is_ShowLoadFileName = false;
+        private bool is_LoadNextDialog = false;
 
         public void UpdateInspector(NodeView node)   
         {
@@ -117,6 +117,7 @@ namespace ChatVisual
                             chatNode.textEvent = new List<EChatEvent>(chatEventList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
+                            GUILayout.Space(10);
 
                             int loadFileCount = 0;
                             for (int i = 0; i < chatEventList.Count; i++)
@@ -125,6 +126,10 @@ namespace ChatVisual
                                 {
                                      loadFileCount++;
                                 }
+                                if (chatEventList[i] == EChatEvent.LoadNextDialog)
+                                {
+                                    is_LoadNextDialog = true;
+                                }
                             }
                             for (int i = 0; i < loadFileCount; i++)
                             {
@@ -132,6 +137,12 @@ namespace ChatVisual
                                 LoadFileList[i] = EditorGUILayout.TextArea(LoadFileList[i], EditorStyles.textArea);
                             }
                             chatNode.loadFileName = new List<string>(LoadFileList);
+                            GUILayout.Space(10);
+
+                            if (is_LoadNextDialog)
+                            {
+                                chatNode.LoadNextDialog = EditorGUILayout.TextArea(chatNode.LoadNextDialog, EditorStyles.textArea);
+                            }
 
                             EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", chatNode.is_UseThis);
@@ -158,6 +169,10 @@ namespace ChatVisual
                                 for (int i = 0; i < chatEventList.Count; ++i)
                                 {
                                     chatEventList[i] = (EChatEvent)EditorGUILayout.EnumPopup(chatEventList[i]);
+                                    if (chatEventList[i] == EChatEvent.LoadNextDialog)
+                                    {
+                                        is_LoadNextDialog = true;
+                                    }
                                 }
                                 if (GUILayout.Button("Add Chat Event"))
                                 {
@@ -167,6 +182,12 @@ namespace ChatVisual
                             askNode.textEvent = new List<EChatEvent>(chatEventList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
+                            GUILayout.Space(10);
+
+                            if (is_LoadNextDialog)
+                            {
+                                askNode.LoadNextDialog = EditorGUILayout.TextArea(askNode.LoadNextDialog, EditorStyles.textArea);
+                            }
 
                             EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", askNode.is_UseThis);
