@@ -133,10 +133,10 @@ public class UIReader_FileSystem : UI_Reader
     {
         MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName);
         Debug.Log(member.name);
-        for (int i = 0; i < member.quetions.Count; ++i)
+        for (int i = 0; i < member.questions.Count; ++i)
         {
             // lockQuestion list 중복ㅎ확인?...
-            if (member.quetions[i].chatType == EChatType.LockQuestion)
+            if (member.questions[i].parent is ConditionNode)
                 lockQuestions.Add(GameManager.Instance.chatSystem.ui_questionGround.ElementAt(i));
         }
     }
@@ -154,11 +154,12 @@ public class UIReader_FileSystem : UI_Reader
         //return new LockAskAndReply();
 
 
+        MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName);
 
-        for (int i = 0; i < GameManager.Instance.chatSystem.questions.Count; ++i)
+        for (int i = 0; i < member.questions.Count; ++i)
         {
-            if (GameManager.Instance.chatSystem.questions[i].askText == ask.name)
-                return GameManager.Instance.chatSystem.questions[i];
+            if (member.questions[i].askText == ask.name)
+                return member.questions[i];
         }
 
         return null;
@@ -205,7 +206,7 @@ public class UIReader_FileSystem : UI_Reader
                         // change from lockQustion to question
                         GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName).name,
                             false, lockAskNode.askText, null, () => { GameManager.Instance.chapterManager.currentNode = lockAskNode; });
-                        GameManager.Instance.chatSystem.questions.Add(lockAskNode);
+                        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName).questions.Add(lockAskNode);
                     }
                     else
                         beforeSlot.Add(target);

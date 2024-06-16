@@ -116,7 +116,7 @@ public class ChatHumanManager : UI_Reader
 
                         GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
                             askNode.askText, askNode.textEvent, () => { currentNode = askNode; });
-                        GameManager.Instance.chatSystem.questions.Add(askNode);
+                        GameManager.Instance.chatSystem.FindMember(nowHumanName).questions.Add(askNode);
                     }
                     else if (children[i] is ConditionNode conditionNode) // When child is a ConditionNode
                     {

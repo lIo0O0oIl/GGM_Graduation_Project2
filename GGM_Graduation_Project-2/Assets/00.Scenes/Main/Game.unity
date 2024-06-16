@@ -190,7 +190,7 @@ MonoBehaviour:
   fileSystem: {fileID: 378627795}
   imageSystem: {fileID: 1207175533}
   chapterManager: {fileID: 150678887}
-  chatContainer: {fileID: 0}
+  chatContainer: {fileID: 594023517}
   cutSceneManager: {fileID: 1857801311}
   fileManager: {fileID: 378627794}
   imageManager: {fileID: 1207175532}
@@ -540,7 +540,9 @@ MonoBehaviour:
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
-  cutScenes: []
+  cutScenes:
+  - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
+  - {fileID: 11400000, guid: 8867d427f3bcade47a447a1766521e38, type: 2}
 --- !u!114 &1857801312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,13 +601,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   members: []
   questions: []
-  changeMemberBtnOn: {fileID: 0}
-  changeMemberBtnOff: {fileID: 0}
+  changeMemberBtnOn: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
+  changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isMemberListOpen: 0
-  ux_chat: {fileID: 0}
-  ux_askChat: {fileID: 0}
-  ux_hiddenAskChat: {fileID: 0}
-  ux_memberList: {fileID: 0}
+  ux_chat: {fileID: 9197481963319205126, guid: 790f5ecd05e5c664789ec66b990f0cee, type: 3}
+  ux_askChat: {fileID: 9197481963319205126, guid: eca624ffc6976be4cbe63439f47c4452, type: 3}
+  ux_hiddenAskChat: {fileID: 9197481963319205126, guid: 167b99bf43499a4418fb5d4f44cf9276, type: 3}
+  ux_memberList: {fileID: 9197481963319205126, guid: b8fd32671ecc31340bf018f921558420, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

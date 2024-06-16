@@ -7,17 +7,6 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [Serializable]
-public struct Chatting
-{
-    public EChatState who;
-    public string toWho;
-    //public ESaveLocation toWho;
-    public EChatType chatType;
-    //public EFace currentFace;
-    public string text;
-}
-
-[Serializable]
 public class MemberProfile
 {
     public string name;
@@ -27,13 +16,10 @@ public class MemberProfile
 
     public bool isOpen;
 
-    public List<Chatting> chattings = new List<Chatting>();
-    public List<Chatting> quetions = new List<Chatting>();
-
-    public MemberProfile(string name)
-    {
-        this.name = name;
-    }
+    public List<ChatNode> chattings = new List<ChatNode>();
+    public List<AskNode> questions = new List<AskNode>();
+    //public List<Chatting> chattings = new List<Chatting>();
+    //public List<Chatting> quetions = new List<Chatting>();
 }
 
 public class UIReader_Chatting : UI_Reader
@@ -44,7 +30,7 @@ public class UIReader_Chatting : UI_Reader
     // member profile
     [SerializeField] List<MemberProfile> members;
     public Dictionary<string, MemberProfile> memberList;
-    public List<AskNode> questions;
+    //public List<AskNode> questions;
 
     // memberList arrow sprite
     [SerializeField]
@@ -87,7 +73,7 @@ public class UIReader_Chatting : UI_Reader
 
         members = new List<MemberProfile>();
         memberList = new Dictionary<string, MemberProfile>();
-        questions = new List<AskNode>();
+        //questions = new List<AskNode>();
     }
 
     private void Start()
@@ -157,11 +143,11 @@ public class UIReader_Chatting : UI_Reader
     {
         ui_otherMemberName.text = otherName.name;
 
-        foreach (Chatting chat in otherName.chattings)
-            InputChat(chat.toWho, chat.who, chat.chatType, otherName.currentFace, chat.text, null, false);
+        foreach (ChatNode chat in otherName.chattings)
+            InputChat(GameManager.Instance.chapterManager.nowHumanName, chat.state, chat.type, otherName.currentFace, chat.chatText, null, false);
 
-        foreach (Chatting chat in otherName.quetions)
-            InputQuestion(otherName.name, true, chat.text, null, null, false);
+        foreach (AskNode chat in otherName.questions)
+            InputQuestion(otherName.name, true, chat.askText, null, null, false);
 
         Invoke("EndToScroll", 0.5f);
     }
@@ -252,10 +238,10 @@ public class UIReader_Chatting : UI_Reader
                 // remove chat
                 chat.parent.Remove(chat);
                 // find record question, and remove this question
-                foreach (Chatting questions in member.quetions) // new! need test
+                foreach (AskNode questions in member.questions) // new! need test
                 {
-                    if (questions.text == msg)
-                        member.quetions.Remove(questions);
+                    if (questions.askText == msg)
+                        member.questions.Remove(questions);
                 }
 
                 // original, don't remove this cord...
@@ -302,29 +288,31 @@ public class UIReader_Chatting : UI_Reader
     // 이거 type question에는 관계 없어서 빼든 뭐든 해야함
     private void RecordChat(EChatState who, string toWho, EChatType type, string msg)
     {
-        // create chatting
-        Chatting chatting = new Chatting();
         // find member
         MemberProfile member = FindMember(toWho);
 
         // chatting setting
-        chatting.who = who;
-        chatting.toWho = toWho;
-        chatting.chatType = type;
-        chatting.text = msg;
-
-        // chatting type
         switch (type)
         {
             case EChatType.Text:
             case EChatType.Image:
             case EChatType.CutScene:
-                member.chattings.Add(chatting);
-                break;
+            {
+                ChatNode chat = new ChatNode();
+                chat.state = who;
+                chat.type = type;
+                chat.chatText = msg;
+                member.chattings.Add(chat);
+            }
+            break;
             case EChatType.Question:
             case EChatType.LockQuestion:
-                member.quetions.Add(chatting);
-                break;
+            {
+                AskNode ask = new AskNode();
+                ask.askText = msg;
+                member.questions.Add(ask);
+            }
+            break;
         }
     }
 
