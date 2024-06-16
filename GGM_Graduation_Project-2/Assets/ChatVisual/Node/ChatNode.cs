@@ -12,7 +12,7 @@ namespace ChatVisual
 
         public EChatState state; 
         public EChatType type;
-        public string text;    
+        public string chatText;    
         public EFace face; 
 
         public List<EChatEvent> textEvent = new List<EChatEvent>();

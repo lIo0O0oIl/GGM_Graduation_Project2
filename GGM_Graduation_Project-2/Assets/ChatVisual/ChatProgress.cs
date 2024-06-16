@@ -17,7 +17,7 @@ namespace ChatVisual
         public void InitChatProgress(string _nowHumanName)
         {
             nowHumanName = _nowHumanName;
-            nowNodes = chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName];
+            //nowNodes = chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName];
         }
 
         private void Update()
@@ -28,7 +28,7 @@ namespace ChatVisual
         // Change human
         public void ChangeHuman(string _changeHumanName)
         {
-            nowNodes = chatContainer.HumanAndChatDictionary[_changeHumanName];
+            //nowNodes = chatContainer.HumanAndChatDictionary[_changeHumanName];
             if (nowNodes[0] is RootNode rootNode)
             {
                 currentIndex = rootNode.nowIndex;       // Change index
@@ -38,9 +38,9 @@ namespace ChatVisual
         // Proceed with chat
         public void NextChat()
         {
-            var children = chatContainer.GetChild(nowNodes[currentIndex]);
+            //var children = chatContainer.GetChild(nowNodes[currentIndex]);
 
-            if (children.Count == 1 && children[0] is ChatNode)            // When a child is a ChatNode
+            //if (children.Count == 1 && children[0] is ChatNode)            // When a child is a ChatNode
             {
                 // Outputting Metabolism
 
@@ -50,10 +50,10 @@ namespace ChatVisual
 
                 currentIndex++;
             }
-            else        // When child is not a ChatNode
-            {
-                // // 嶺뚯쉶?꾣룇??????브퀗?쀦뤃?????㏓낵???깅굵 ?????㏓낵???깅굵 ??                for (int i = 0; i < children.Count; i++)
-                {
+            //else        // When child is not a ChatNode
+           // {
+                // // ?꿔꺂???熬곻퐢利???????됰슦????夷??????蹂κ땁???繹먮굛????????蹂κ땁???繹먮굛????                for (int i = 0; i < children.Count; i++)
+             //   {
                     /*if (children[i] is AskNode askNode)
                     {
                         // Handling questions
@@ -63,7 +63,7 @@ namespace ChatVisual
                     {
                         if (conditionNode.is_UseThis)
                         {
-                            // ?브퀗?쀦뤃?筌뤾퍓援?????브퀗?쀦뤃???熬곣뫁???蹂ㅽ깴??寃밸듆 ???깅쾳 ?筌뤾퍓援???怨멥돘.
+                            // ??됰슦????夷?癲ル슢??蹂좊쨨??????됰슦????夷??????썹땟????곌퇈?뗦틦???롪퍓媛?????繹먮굞???癲ル슢??蹂좊쨨?????ㅔ??
                             if (conditionNode.checkClass.Check())
                             {
                                 currentIndex++;
@@ -71,8 +71,8 @@ namespace ChatVisual
                             }
                         }
                     }*/
-                }
-            }
+             //   }
+           // }
         }
     }
 }

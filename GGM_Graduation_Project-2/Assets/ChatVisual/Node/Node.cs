@@ -6,8 +6,7 @@ using UnityEngine.UIElements;
 
 namespace ChatVisual
 {
-    [Serializable]
-    public class Node
+    public class Node : ScriptableObject
     {
         public string guid;       // Unity Object Unique identifiers
         public Vector2 position;

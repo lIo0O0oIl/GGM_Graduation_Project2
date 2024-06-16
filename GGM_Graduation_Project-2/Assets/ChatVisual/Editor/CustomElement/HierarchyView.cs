@@ -32,16 +32,18 @@ namespace ChatVisual
             ScrollView scrollView = new ScrollView(ScrollViewMode.Vertical);
             scrollView.style.marginBottom = 5;
             scrollView.Add(new Label("Humans :"));
-            foreach(string name in chatContainer.HumanAndChatDictionary.Keys)
+            for(int i = 0;  i < chatContainer.chatTrees.Count; i++)
             {
+                int index = i;
 
-                Button button = new Button(() => ChangeChapter(name));
+                Debug.Log(index);
+                Button button = new Button(() => ChangeHuman(index));
                 button.style.flexDirection = FlexDirection.Row;
                 button.style.justifyContent = Justify.Center;
                 button.style.flexGrow = 1;
 
                 TextElement nameText = new TextElement();
-                nameText.text = name;
+                nameText.text = chatContainer.chatTrees[i].name;
                 button.Add(nameText);
 
                 TextElement indexText = new TextElement();
@@ -49,7 +51,7 @@ namespace ChatVisual
                 indexText.style.color = Color.gray;
                 button.Add(indexText);
 
-                var deleteButton = new Button(() => DeleteChapter(name))
+                var deleteButton = new Button(() => DeleteHuman(index))
                 {
                     text = "Delete"
                 };
@@ -58,24 +60,34 @@ namespace ChatVisual
                 set.Add(button);
                 set.Add(deleteButton);
                 scrollView.Add(set);
-
-                index++;
             }
             Add(scrollView);
         }
 
-        private void ChangeChapter(string key)
+        private void ChangeHuman(int index)
         {
-            chatView.SaveChatData();   
-            chatContainer.ChangeNowChapter(key);    
-            chatView.LoadChatData(chatContainer);       
-            chatView.PopulateView();
+            Debug.Log(index);
+            chatView.PopulateView(chatContainer.chatTrees[index]);
             inspectorView.Clear();
         }
 
-        private void DeleteChapter(string key)
+        private void DeleteHuman(int index)
         {
-            chatContainer.HumanAndChatDictionary.Remove(key);
+            if (chatContainer.chatTrees.Count <= 1) return;
+
+            ChatTree removeChatTree = chatContainer.chatTrees[index];
+            chatContainer.chatTrees.Remove(removeChatTree);
+            AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(removeChatTree));      // Delete directly from memory
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            inspectorView.Clear();
+
+            for (int i = 0; i < chatContainer.chatTrees.Count; i++)
+            {
+                chatView.PopulateView(chatContainer.chatTrees[i]);
+                break;
+            }
+
             UpdateHierarchy();
         }
     }

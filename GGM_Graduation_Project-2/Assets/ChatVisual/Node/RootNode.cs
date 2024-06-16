@@ -5,10 +5,19 @@ using UnityEngine;
 
 namespace ChatVisual
 {
-    [Serializable]
     public class RootNode : Node
     {
+        public ChatTree parent;
         public Node child;
+
+        private void OnValidate()
+        {
+            Debug.Log("change");
+            if (!string.IsNullOrEmpty(showName))
+            {
+                parent.humanName = showName;
+            }
+        }
 
         public string showName;
         public List<string> loadFileNameList = new List<string>();

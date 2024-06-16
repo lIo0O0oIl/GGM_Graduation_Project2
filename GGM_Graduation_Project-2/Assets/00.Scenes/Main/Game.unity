@@ -193,13 +193,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bbbd968b924444191c81e323af6906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSystem: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
   chatSystem: {fileID: 0}
-  connectionSystem: {fileID: 0}
   fileSystem: {fileID: 0}
   imageSystem: {fileID: 0}
-  cutSceneSystem: {fileID: 0}
+  chapterManager: {fileID: 0}
   chatProgress: {fileID: 0}
+  chatContainer: {fileID: 0}
+  cutSceneManager: {fileID: 0}
+  fileManager: {fileID: 0}
+  imageManager: {fileID: 0}
 --- !u!114 &150678878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,12 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8f49d8b99a1654ea80cc3dbde97735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSystem: {fileID: 0}
-  chatSystem: {fileID: 0}
-  connectionSystem: {fileID: 0}
-  fileSystem: {fileID: 0}
-  imageSystem: {fileID: 0}
-  cutSceneSystem: {fileID: 0}
 --- !u!114 &150678879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,22 +227,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34011704b4b14504098dcfd848e9ebba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSystem: {fileID: 0}
-  chatSystem: {fileID: 0}
-  connectionSystem: {fileID: 0}
-  fileSystem: {fileID: 0}
-  imageSystem: {fileID: 0}
-  cutSceneSystem: {fileID: 0}
   fileAreaSizeOn: 285
   fileAreaSizeOff: 150
   changeSizeBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeSizeBtnOff: {fileID: -3753015318093942961, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isFileSystemOpen: 0
-  currentFolderName: 
+  ux_filePath: {fileID: 0}
+  ux_fileGround: {fileID: 0}
+  ux_folderFile: {fileID: 0}
+  ux_imageFile: {fileID: 0}
+  ux_textFile: {fileID: 0}
+  ux_ImagePanel: {fileID: 0}
+  ux_TextPanel: {fileID: 0}
   fileFolders: []
   currentFileFolder:
     folderName: 
     parentFolderName: 
+    folderFiles: []
+    textFiles: []
+    imageFiles: []
 --- !u!114 &150678880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,12 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b7eefaa5f8df24ba5d2a3637293abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSystem: {fileID: 0}
-  chatSystem: {fileID: 0}
-  connectionSystem: {fileID: 0}
-  fileSystem: {fileID: 0}
-  imageSystem: {fileID: 0}
-  cutSceneSystem: {fileID: 0}
   currentMemberName: 
   members: []
   changeMemberBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
@@ -285,12 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523b2f4b2e1de8e4c9a83a0eedeaedaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSystem: {fileID: 0}
-  chatSystem: {fileID: 0}
-  connectionSystem: {fileID: 0}
-  fileSystem: {fileID: 0}
-  imageSystem: {fileID: 0}
-  cutSceneSystem: {fileID: 0}
   images:
   - name: "\uC0AC\uAC74 \uD604\uC7A5"
     image: {fileID: 21300000, guid: 614239e0a07b8c5429bdd87a8e69bb1d, type: 3}
@@ -331,48 +319,48 @@ MonoBehaviour:
     isOpen: 0
     memo: "\uD53C\uD574\uC790\uC758 \uC2DC\uC2E0\uC774\uB2E4."
     importance: 0
-    saveImage: {fileID: 21300000, guid: e3977c1adde0a5040b3b5b373c6228a3, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 1639, y: 1123}
     pos: {x: 24, y: -33}
-    descriptePos: {x: 500, y: 250}
+    memoPos: {x: 0, y: 0}
   - name: "\uC2E0\uBC1C"
     image: {fileID: 21300000, guid: 00531fa989e55b748b68d2ade13982ec, type: 3}
     isOpen: 0
     memo: "\uD53C\uD574\uC790\uC758 \uC2E0\uBC1C\uC73C\uB85C \uCD94\uC815\uB418\uB294
       \uC2E0\uBC1C\uC774\uB2E4."
     importance: 1
-    saveImage: {fileID: 21300000, guid: 00531fa989e55b748b68d2ade13982ec, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 130, y: 130}
     pos: {x: 70, y: 714}
-    descriptePos: {x: 250, y: 350}
+    memoPos: {x: 0, y: 0}
   - name: "\uB09C\uAC04"
     image: {fileID: 21300000, guid: 2325df0c405ce814ca108b5ce80070a7, type: 3}
     isOpen: 0
     memo: "\uC704\uD0DC\uC704\uD0DC\uD574 \uBCF4\uC774\uB294 \uB09C\uAC04\uC774\uB2E4."
     importance: 1
-    saveImage: {fileID: 0}
+    saveSprite: {fileID: 0}
     size: {x: 50, y: 50}
     pos: {x: 400, y: 800}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uCC45"
     image: {fileID: 21300000, guid: 29102b5770e74e447b528dcf2a5e9c5c, type: 3}
     isOpen: 0
     memo: "\uC870\uAE08\uC758 \uCC45\uC774 \uC874\uC7AC\uD55C\uB2E4."
     importance: 1
-    saveImage: {fileID: 0}
+    saveSprite: {fileID: 0}
     size: {x: 103, y: 118}
     pos: {x: 491, y: 323}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uC77C\uAE301"
     image: {fileID: 21300000, guid: 76c169f72c7e29e48850db89dcd78fe9, type: 3}
     isOpen: 0
     memo: "\uC774\uC218\uC5F0\uC758 \uC77C\uAE30\uC7A5\uC73C\uB85C \uBCF4\uC774\uB294
       \uBB3C\uAC74\uC774\uB2E4."
     importance: 0
-    saveImage: {fileID: 21300000, guid: 5d2d96003f834a84ca0d7fc43f98447e, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 103, y: 114}
     pos: {x: 308, y: 536}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uC0AC\uC9C4"
     image: {fileID: 21300000, guid: 575d251884039934b95c8aa23fd6a389, type: 3}
     isOpen: 0
@@ -380,87 +368,85 @@ MonoBehaviour:
       \uC0AC\uC9C4\uCC0D\uD600\uC788\uB2E4. 2\uBA85\uC758 \uC5BC\uAD74\uC740 \uBCF4\uC774\uC9C0
       \uC54A\uB294\uB2E4."
     importance: 1
-    saveImage: {fileID: 21300000, guid: 575d251884039934b95c8aa23fd6a389, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 103, y: 114}
     pos: {x: 1060, y: 362}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uB18D\uAD6C \uD3EC\uC2A4\uD130"
     image: {fileID: 21300000, guid: b221297afd4bdb545bf11a8386b94712, type: 3}
     isOpen: 0
     memo: "\uB204\uAD70\uC9C0 \uBAA8\uB97C \uCE90\uB9AD\uD130\uAC00 \uADF8\uB824\uC838\uC788\uB294
       \uD3EC\uC2A4\uD130\uC774\uB2E4."
     importance: 1
-    saveImage: {fileID: 21300000, guid: 575d251884039934b95c8aa23fd6a389, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 213, y: 251}
     pos: {x: 299, y: 79}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uC57C\uAD6C\uBC29\uB9DD\uC774"
     image: {fileID: 21300000, guid: d3b555cf975a5e2478214d27a348fd20, type: 3}
     isOpen: 0
     memo: "\uC190 \uB54C\uAC00 \uAC00\uB4DD\uD55C \uC57C\uAD6C\uBC29\uB9DD\uC774\uC774\uB2E4."
     importance: 1
-    saveImage: {fileID: 0}
+    saveSprite: {fileID: 0}
     size: {x: 213, y: 251}
     pos: {x: 1462, y: 753}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uC774\uC218\uC5F0\uC758 \uD578\uB4DC\uD3F0"
     image: {fileID: 21300000, guid: e6198f6d75181094dac5fd527d9294ff, type: 3}
     isOpen: 0
     memo: "\uB204\uAD70\uAC00\uC758 \uD578\uB4DC\uD3F0\uC774\uB2E4."
     importance: 1
-    saveImage: {fileID: 21300000, guid: e6198f6d75181094dac5fd527d9294ff, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 198, y: 213}
     pos: {x: 72, y: 584}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uB18D\uAD6C \uD53C\uADDC\uC5B4"
     image: {fileID: 21300000, guid: 029f93eda14d9ee41afdc816f87aeca5, type: 3}
     isOpen: 0
     memo: "\uB18D\uAD6C \uAD00\uB828 \uCE90\uB9AD\uD130\uC758 \uD53C\uADDC\uC5B4\uB4E4\uC774
       \uB193\uC5EC\uC788\uB2E4."
     importance: 1
-    saveImage: {fileID: 21300000, guid: e6198f6d75181094dac5fd527d9294ff, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 209, y: 238}
     pos: {x: 59, y: 204}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uBCA0\uAC1C"
     image: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     isOpen: 0
     memo: "\uBC30\uAC8C \uC785\uB2C8\uB2E4."
     importance: 0
-    saveImage: {fileID: 21300000, guid: 5d2d96003f834a84ca0d7fc43f98447e, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 213, y: 251}
     pos: {x: 1161, y: 445}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uC4F0\uB808\uAE30\uD1B5"
     image: {fileID: 21300000, guid: 9a1b909b4fbe9bb4ea7113ffec736df6, type: 3}
     isOpen: 0
     memo: "\uD3C9\uBC94\uD55C \uC4F0\uB808\uAE30\uD1B5\uC785\uB2C8\uB2E4."
     importance: 1
-    saveImage: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 211, y: 251}
     pos: {x: 110, y: 529}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uCEF4\uD4E8\uD130"
     image: {fileID: 21300000, guid: e7502d889cb3d1543b3d96db99b32410, type: 3}
     isOpen: 0
     memo: "\uBE44\uBC88\uC774 \uAC78\uB824\uC788\uB294 \uCEF4\uD4E8\uD130\uC774\uB2E4."
     importance: 1
-    saveImage: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 211, y: 251}
     pos: {x: 490, y: 162}
-    descriptePos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   - name: "\uC11C\uB78D"
     image: {fileID: 21300000, guid: fe5672c7dca4c4544943c38def302d51, type: 3}
     isOpen: 1
     memo: "\uC11C\uB78D\uC774\uB2E4."
     importance: 1
-    saveImage: {fileID: 21300000, guid: ae9a900c798853942bf613cc64e86301, type: 3}
+    saveSprite: {fileID: 0}
     size: {x: 211, y: 251}
     pos: {x: 404, y: 316}
-    descriptePos: {x: 0, y: 0}
-  memos:
-  - name: "\uC77C\uAE301"
-    memo: 
+    memoPos: {x: 0, y: 0}
+  texts: []
 --- !u!114 &150678882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,12 +459,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60a90a836d390c439310a8232a8b994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSystem: {fileID: 0}
-  chatSystem: {fileID: 0}
-  connectionSystem: {fileID: 0}
-  fileSystem: {fileID: 0}
-  imageSystem: {fileID: 0}
-  cutSceneSystem: {fileID: 0}
+  ux_imageGround: {fileID: 0}
+  ux_imageEvidence: {fileID: 0}
+  ux_evidenceExplanation: {fileID: 0}
 --- !u!114 &150678884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,12 +474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80d74f0e210ffe4a83059ff8df2b6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSystem: {fileID: 0}
-  chatSystem: {fileID: 0}
-  connectionSystem: {fileID: 0}
-  fileSystem: {fileID: 0}
-  imageSystem: {fileID: 0}
-  cutSceneSystem: {fileID: 0}
 --- !u!114 &150678885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,9 +489,7 @@ MonoBehaviour:
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
-  cutSceneChapters:
-  - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
-  - {fileID: 11400000, guid: 72d10a1d28d6b0342ad49ae8c2313967, type: 2}
+  cutScenes: []
 --- !u!114 &150678886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,12 +502,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f5303acd3d13e4a8b4b3c46a8f059c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSystem: {fileID: 0}
-  chatSystem: {fileID: 0}
-  connectionSystem: {fileID: 0}
-  fileSystem: {fileID: 0}
-  imageSystem: {fileID: 0}
-  cutSceneSystem: {fileID: 0}
   folderFiles:
   - fileName: "\uD559\uAD50"
     fileParentName: Main
@@ -723,12 +692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce46f699b261d24c9ed59bd3dd1a949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSystem: {fileID: 0}
-  chatSystem: {fileID: 0}
-  connectionSystem: {fileID: 0}
-  fileSystem: {fileID: 0}
-  imageSystem: {fileID: 0}
-  cutSceneSystem: {fileID: 0}
   changeHumanTime: 1
 --- !u!1 &594023513
 GameObject:
@@ -771,752 +734,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 594023513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
+  m_Script: {fileID: 11500000, guid: 21595680c07e20742a7ef1df761b1b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowHumanName: HY
-  nameList:
-  - HG
-  - Teacher
-  - Home
-  - Freiend
-  - JH
-  - HY
-  nodeList:
-  - nodes:
-    - guid: b6fd4346484d2404f90a42296506d291
-      position: {x: -74.40004, y: -25.180458}
-      index: 0
-      is_UseThis: 0
-    - guid: 02a25c7f1ed0c9d4291f5be0ba1ec309
-      position: {x: -201.59996, y: 142.63268}
-      index: 0
-      is_UseThis: 0
-    - guid: 306d9bae21ed11c46a2a12f8fc54d45f
-      position: {x: -201.59996, y: 267.4327}
-      index: 0
-      is_UseThis: 0
-    - guid: 0d333858a5f5e234bab0504b67479224
-      position: {x: 103.53123, y: 408.80002}
-      index: 0
-      is_UseThis: 0
-    - guid: 993c607e0c0ee17419edf9dd28e80f3f
-      position: {x: -201.59999, y: 510.12256}
-      index: 0
-      is_UseThis: 0
-    - guid: 2d655585ef4d688418e7858159cb1984
-      position: {x: -201.60002, y: 653.07745}
-      index: 0
-      is_UseThis: 0
-    - guid: 29fc3ad604461e64c94d9b789d08bac9
-      position: {x: -201.6, y: 772.75}
-      index: 0
-      is_UseThis: 0
-    - guid: 254d5595b59300e418cc398a9250f085
-      position: {x: -201.6, y: 897.33746}
-      index: 0
-      is_UseThis: 0
-    - guid: e40146794b18a7a4eb4c1bf390e75008
-      position: {x: 76, y: 1028.282}
-      index: 0
-      is_UseThis: 0
-    - guid: f1f848cd820b6a24e9eb0f568364eafd
-      position: {x: -90.8835, y: 1153.0374}
-      index: 0
-      is_UseThis: 0
-    - guid: c3825686f726c6d41aca8472396f137b
-      position: {x: -221.59998, y: 1287.2677}
-      index: 0
-      is_UseThis: 0
-    - guid: 97c105ded052c7e46953eb5f3f4b6ac3
-      position: {x: -221.32475, y: 1425.1882}
-      index: 0
-      is_UseThis: 0
-    - guid: dc526e9ef128af44192af0673fc0601d
-      position: {x: -220.80013, y: 1550.2504}
-      index: 0
-      is_UseThis: 0
-    - guid: 6c63ec8dd80b4694192cf48053e2800b
-      position: {x: 92.4079, y: 1667.7411}
-      index: 0
-      is_UseThis: 0
-    - guid: cecf1987481302a4e9fa9cdb70ba00a6
-      position: {x: -70.400085, y: 1797.5132}
-      index: 0
-      is_UseThis: 0
-    - guid: ddfa25f8dd99e424ea6946b9ac1c7259
-      position: {x: -235.20001, y: 1930.6504}
-      index: 0
-      is_UseThis: 0
-    - guid: ff600b8e6c1c17a4882da4d4513dc4f2
-      position: {x: 92.79995, y: 2063.2007}
-      index: 0
-      is_UseThis: 0
-    - guid: 6478c3108fbcb0d469c079938e4b46ea
-      position: {x: -235.20006, y: 2201.4502}
-      index: 0
-      is_UseThis: 0
-    - guid: 81b3ef4c2283c684793ae780d89383b0
-      position: {x: -850.72, y: 2362.4001}
-      index: 0
-      is_UseThis: 0
-    - guid: b697940f2d1c9bb4fbf160a5607446b0
-      position: {x: -211.95001, y: 2348.0005}
-      index: 0
-      is_UseThis: 0
-    - guid: 9dbc6bca31e66684ba0418e92c2f5d2e
-      position: {x: 836.08936, y: 2347.1992}
-      index: 0
-      is_UseThis: 0
-    - guid: 70df949d0d823344eb7eb25ce366d6e5
-      position: {x: -212, y: 2501.6}
-      index: 0
-      is_UseThis: 0
-    - guid: b08f930c155a3f94db4136628532d702
-      position: {x: -212, y: 2654.4001}
-      index: 0
-      is_UseThis: 0
-    - guid: 77a2c76500655dc4690df63b7e24228f
-      position: {x: -211.99998, y: 2803.935}
-      index: 0
-      is_UseThis: 0
-    - guid: 3c1e6233d8f6f734b913653aeb5aca0a
-      position: {x: -212, y: 2924.8008}
-      index: 0
-      is_UseThis: 0
-    - guid: 2acad7a7fa6b05f4aa246e4c63922373
-      position: {x: 14.399902, y: 3056.8}
-      index: 0
-      is_UseThis: 0
-    - guid: d6d70ac480a0bac4f98dc8d9b1a62310
-      position: {x: -222.40002, y: 3192.0002}
-      index: 0
-      is_UseThis: 0
-    - guid: 30f7c4ca075bc374fb73f8bde58a5ef5
-      position: {x: -222.40002, y: 3293.6}
-      index: 0
-      is_UseThis: 0
-    - guid: cd1f4f561bb68e94282e15939feb3e75
-      position: {x: 28, y: 3424.8}
-      index: 0
-      is_UseThis: 0
-    - guid: c040bcb857e4aa34d898e3a421c9e295
-      position: {x: -211.20007, y: 3525.6}
-      index: 0
-      is_UseThis: 0
-    - guid: d5d734d8ba251a34b83f12b38eea4e11
-      position: {x: 836, y: 2531.2}
-      index: 0
-      is_UseThis: 0
-    - guid: 7e0fdf3bc46516547a988d012eb1259b
-      position: {x: 422.40002, y: 2696}
-      index: 0
-      is_UseThis: 0
-    - guid: 9c1ab15a4f28edd4a8c25bde523370f8
-      position: {x: 836, y: 2692.8}
-      index: 0
-      is_UseThis: 0
-    - guid: 28d27b3fb5f81d549bbed503c1c15edd
-      position: {x: 1210.3999, y: 2696}
-      index: 0
-      is_UseThis: 0
-    - guid: 571c007bb521b8e498ccb5919f71bd35
-      position: {x: 423.19995, y: 2883.2}
-      index: 0
-      is_UseThis: 0
-    - guid: 4155bc22eca305b4d823da3183763e14
-      position: {x: 836.80005, y: 2883.2}
-      index: 0
-      is_UseThis: 0
-    - guid: 9cb0be48e949236489f04f09c58bb995
-      position: {x: 1210.3999, y: 2872.8}
-      index: 0
-      is_UseThis: 0
-    - guid: 2c5905283be8aae449246aa42df84a91
-      position: {x: 324, y: 3040}
-      index: 0
-      is_UseThis: 0
-    - guid: adb80658247379c42b3c13f461c9fab4
-      position: {x: 473.59998, y: 3168}
-      index: 0
-      is_UseThis: 0
-    - guid: 9d6f9f2f99964844193aded52f3febeb
-      position: {x: 736.80005, y: 3018.4001}
-      index: 0
-      is_UseThis: 0
-    - guid: ef0d0bf02123d7246b816b9a34c73c0b
-      position: {x: 736.80005, y: 3140.8}
-      index: 0
-      is_UseThis: 0
-    - guid: 9d4dcf9f2d48a4c408d72c60d7dae8a8
-      position: {x: 736.80005, y: 3269.6}
-      index: 0
-      is_UseThis: 0
-    - guid: ee503f05d1613b84c9847af35809c8fa
-      position: {x: 911.9999, y: 3395.2002}
-      index: 0
-      is_UseThis: 0
-    - guid: 79b870f633f41b74eb54c107f39ee16e
-      position: {x: 1142.3999, y: 3008}
-      index: 0
-      is_UseThis: 0
-    - guid: fdef1f59ea59c5541a71c8babefed615
-      position: {x: 1308.8, y: 3140.8}
-      index: 0
-      is_UseThis: 0
-    - guid: 7abf915b095ff054cbe0f9c5e6572736
-      position: {x: -122.400024, y: 3810.4001}
-      index: 0
-      is_UseThis: 0
-    - guid: d426c35db68ae1d49b83f861518b489a
-      position: {x: -272.80014, y: 3961.8406}
-      index: 0
-      is_UseThis: 0
-    - guid: 935a00a9f5ea5cd4ca84d87674bd49c6
-      position: {x: -272.8, y: 4085.9604}
-      index: 0
-      is_UseThis: 0
-    - guid: ba8163c820315744093bf64613af275c
-      position: {x: 68, y: 4223}
-      index: 0
-      is_UseThis: 0
-    - guid: 01d4716d63760d842b60c7dc01a80ab7
-      position: {x: -122.40006, y: 4361.4395}
-      index: 0
-      is_UseThis: 0
-    - guid: 4ac1eb7fb0be0e7419744b6af8ba5326
-      position: {x: -272.7999, y: 4480.4126}
-      index: 0
-      is_UseThis: 0
-    - guid: e91bf361cd20d6145bc9099216e76636
-      position: {x: 68.7999, y: 4608.342}
-      index: 0
-      is_UseThis: 0
-    - guid: 0af7e6e451ec866458fb676cc29d1221
-      position: {x: -121.599976, y: 4737.5757}
-      index: 0
-      is_UseThis: 0
-    - guid: 1d9a4e372d7881c429e5c2289cb24c64
-      position: {x: -304.45682, y: 4884.0234}
-      index: 0
-      is_UseThis: 0
-    - guid: de6dcfc0cf0fcb64da2a8df1347f6e18
-      position: {x: -304.8, y: 5008.2}
-      index: 0
-      is_UseThis: 0
-    - guid: 7a56eb6c5a40baf48abeb3c4ce89ef2d
-      position: {x: -101.87237, y: 5135.833}
-      index: 0
-      is_UseThis: 0
-    - guid: d674f27445aba074d9f765d4036cdce0
-      position: {x: -1021.1125, y: 2497.11}
-      index: 0
-      is_UseThis: 0
-    - guid: 05d9463f538d192409e5e5984bed6fda
-      position: {x: -700.8, y: 2620.5552}
-      index: 0
-      is_UseThis: 0
-    - guid: 71cd028534d82f647a8774a66b88031e
-      position: {x: -871.20013, y: 2752.0088}
-      index: 0
-      is_UseThis: 0
-    - guid: 7b9ea9c43c46b81419aecc59297eea8a
-      position: {x: -1020.8001, y: 2905.6006}
-      index: 0
-      is_UseThis: 0
-    - guid: 499796ffc378efb44b9b1ace6f573cf6
-      position: {x: -1021.60016, y: 3032.0005}
-      index: 0
-      is_UseThis: 0
-    - guid: 7b1fe6f04f2fa2b49948c8d42f226847
-      position: {x: -1020.8001, y: 3156.8005}
-      index: 0
-      is_UseThis: 0
-    - guid: d2b252dcf617cad428078a0140e1b594
-      position: {x: -700.80005, y: 3258.4001}
-      index: 0
-      is_UseThis: 0
-  - nodes:
-    - guid: 173c46682c866f04596cb674cfce3665
-      position: {x: 0, y: 0}
-      index: 0
-      is_UseThis: 0
-    - guid: b5560ae1106d58143b7daca868399dd1
-      position: {x: 170.51443, y: 127.99126}
-      index: 0
-      is_UseThis: 0
-    - guid: 040cc33405d5af44085180c8510c614d
-      position: {x: -99.53388, y: 253.9165}
-      index: 0
-      is_UseThis: 0
-    - guid: c203ce929fced4e4eb26cde118a062c6
-      position: {x: 171.20001, y: 379.1825}
-      index: 0
-      is_UseThis: 0
-    - guid: e2063b2681230e94b8fd920f868c79f9
-      position: {x: 171.99991, y: 508.9407}
-      index: 0
-      is_UseThis: 0
-    - guid: 628186da6bb17f540b39b8f392f1ee32
-      position: {x: -82.479225, y: 649.83734}
-      index: 0
-      is_UseThis: 0
-    - guid: 0fcf757fa192e8144b8266089c3677a5
-      position: {x: -318.12482, y: 843.19995}
-      index: 0
-      is_UseThis: 0
-    - guid: 95a9b023d61de164caadaa33154c81ef
-      position: {x: -75.19995, y: 843.19995}
-      index: 0
-      is_UseThis: 0
-    - guid: 43673f47860296c4ca4f124f3d63c94f
-      position: {x: 212.27519, y: 843.1998}
-      index: 0
-      is_UseThis: 0
-    - guid: fb82f7fec9838464398f5b8e5b22b330
-      position: {x: -446.98007, y: 1014.0747}
-      index: 0
-      is_UseThis: 0
-    - guid: ed07e5b986ac21541a6adf8cd68dfbc6
-      position: {x: -447.19998, y: 1157.4067}
-      index: 0
-      is_UseThis: 0
-    - guid: e04f1208fb483fe45b820664ad7dc07e
-      position: {x: -74.39995, y: 1000.7999}
-      index: 0
-      is_UseThis: 0
-    - guid: 8dba6f0c95ed8cb4087cbefb0e595889
-      position: {x: 212, y: 1000.7999}
-      index: 0
-      is_UseThis: 0
-  - nodes:
-    - guid: cc664be7f98a218409f38c6da517d86a
-      position: {x: 0, y: 0}
-      index: 0
-      is_UseThis: 0
-    - guid: 038d310dee39cd548bfb47dc13ce12de
-      position: {x: 175.26503, y: 119.89998}
-      index: 0
-      is_UseThis: 0
-    - guid: d7679414ede66444b8c3dd606de92b3c
-      position: {x: 175.19997, y: 252.55502}
-      index: 0
-      is_UseThis: 0
-    - guid: 906e8972d3c73aa4c958088e9236e997
-      position: {x: 175.19997, y: 382.7575}
-      index: 0
-      is_UseThis: 0
-    - guid: 04b2e2cbccf3f764d8b3b7d9a257eecc
-      position: {x: -114.175, y: 504.42258}
-      index: 0
-      is_UseThis: 0
-    - guid: e9bb16c5e3250034084af53e1961c9c0
-      position: {x: -279.13748, y: 659.2}
-      index: 0
-      is_UseThis: 0
-    - guid: 9649ccd2a35e3f74193ee677f98d6eac
-      position: {x: 199.43736, y: 668.3999}
-      index: 0
-      is_UseThis: 0
-    - guid: 2f7163b2d6ee7004a9eed4a907560a06
-      position: {x: -409.05884, y: 786.31213}
-      index: 0
-      is_UseThis: 0
-    - guid: 58ed47b1467941744be818f6f62379d9
-      position: {x: -409.05884, y: 911.9121}
-      index: 0
-      is_UseThis: 0
-    - guid: 55a1afd1dd0fc184e9af23120550ac35
-      position: {x: -409.05884, y: 1055.9121}
-      index: 0
-      is_UseThis: 0
-    - guid: a0a4eb6d4b722c3439ee4e8a7bd3859e
-      position: {x: -204.00003, y: 1180.765}
-      index: 0
-      is_UseThis: 0
-    - guid: 4def239d8c661dc4a9a0ce6f57023bd4
-      position: {x: 125.037384, y: 790.79987}
-      index: 0
-      is_UseThis: 0
-    - guid: 17c1789331f15004abbfa103b00e093b
-      position: {x: 349.83734, y: 921.1999}
-      index: 0
-      is_UseThis: 0
-    - guid: 6e2d2442df243c2489a1132d58ddeec8
-      position: {x: 226.63739, y: 1050.7999}
-      index: 0
-      is_UseThis: 0
-    - guid: 74f34a35bc718444d911e3f2356fb027
-      position: {x: 75.99998, y: 1318.5582}
-      index: 0
-      is_UseThis: 0
-    - guid: 20a1b4b0146632346976c32a234abc59
-      position: {x: 425.83737, y: 1181.2}
-      index: 0
-      is_UseThis: 0
-    - guid: bef1586647341e74fb1270e12c4173e4
-      position: {x: 75.99998, y: 1437.5209}
-      index: 0
-      is_UseThis: 0
-    - guid: c2b0d088661e3394e9836c807640dc40
-      position: {x: 425.59995, y: 1569.5383}
-      index: 0
-      is_UseThis: 0
-    - guid: c1ba468ba60db0e47a1e27b994a827dd
-      position: {x: 425.59995, y: 1691.9384}
-      index: 0
-      is_UseThis: 0
-    - guid: fefc8499497a5e34cb0eb5c6fd61bb58
-      position: {x: 61.397995, y: 1826.5582}
-      index: 0
-      is_UseThis: 0
-    - guid: bf8b5c1453631874ba4025b945045ece
-      position: {x: 61.59998, y: 1951.2615}
-      index: 0
-      is_UseThis: 0
-    - guid: 2b106382ce5510744aad57ccea89dc50
-      position: {x: 61.59998, y: 2067.4111}
-      index: 0
-      is_UseThis: 0
-    - guid: fe0222a670bd0114584b058ebc3bf78b
-      position: {x: 61.599937, y: 2184.1584}
-      index: 0
-      is_UseThis: 0
-    - guid: 732485577cb71b0489e5eb3c42dbf4a5
-      position: {x: 426.39996, y: 2327.3584}
-      index: 0
-      is_UseThis: 0
-    - guid: 35efca3cad9146c4abe16eaf775198db
-      position: {x: 426.39993, y: 2445.5913}
-      index: 0
-      is_UseThis: 0
-  - nodes:
-    - guid: 1ae7479a19e64a54d8baa6c0a334685d
-      position: {x: 0, y: 0}
-      index: 0
-      is_UseThis: 0
-    - guid: 3ddd782b8e3cba14f841f7c2b0e68b6a
-      position: {x: 150.4, y: 149.00005}
-      index: 0
-      is_UseThis: 0
-    - guid: f4ae81169e16e6a4fb067b0c32a7cab6
-      position: {x: 150.40001, y: 273.8775}
-      index: 0
-      is_UseThis: 0
-    - guid: d2d90ee4493b12242a745f180e4e0086
-      position: {x: -86.81002, y: 403.4775}
-      index: 0
-      is_UseThis: 0
-    - guid: 01eb905a87756454c840f8bbaa95889f
-      position: {x: -86.81002, y: 522.6775}
-      index: 0
-      is_UseThis: 0
-    - guid: 2b361450c53915f48ab131cdd006e449
-      position: {x: 150.40002, y: 648.24304}
-      index: 0
-      is_UseThis: 0
-    - guid: 84c7af9ee13ab344eb1ce58f967db496
-      position: {x: 151.20001, y: 765.6}
-      index: 0
-      is_UseThis: 0
-    - guid: 8b703daf291d2994aad5afabf023148d
-      position: {x: -21.759888, y: 892}
-      index: 0
-      is_UseThis: 0
-    - guid: dd130b39679ef6c449c8c7e963f48295
-      position: {x: -433.59998, y: 1066.4}
-      index: 0
-      is_UseThis: 0
-    - guid: 7638b5578c6e0084e9a2f447fc13f6f3
-      position: {x: -19.600098, y: 1066.4}
-      index: 0
-      is_UseThis: 0
-    - guid: 9e27e431f4c19dd479d80656ef955b05
-      position: {x: 439.92108, y: 1066.4}
-      index: 0
-      is_UseThis: 0
-    - guid: a5a223d460371514296c9e4dcae61c26
-      position: {x: -562.4, y: 1221.6}
-      index: 0
-      is_UseThis: 0
-    - guid: eb34fb13e62bc4c47bb6fbeea0c92a25
-      position: {x: 351.2, y: 1600.2292}
-      index: 0
-      is_UseThis: 0
-    - guid: bab80b27fe92453448129797f8910df3
-      position: {x: -341.60242, y: 1335.9998}
-      index: 0
-      is_UseThis: 0
-    - guid: 1338e2e876fe56140a67667282f56d57
-      position: {x: -96.80002, y: 1208.1649}
-      index: 0
-      is_UseThis: 0
-    - guid: a50f932dd0b506443ab69d87d5294622
-      position: {x: -96.80002, y: 1335.3649}
-      index: 0
-      is_UseThis: 0
-    - guid: 6fc23e7cf6c7d2e49928023364261b67
-      position: {x: 90.00001, y: 1456.6119}
-      index: 0
-      is_UseThis: 0
-    - guid: 53c4b7e81cf08ba4382b11bb894c1be2
-      position: {x: 90.4, y: 1579.2}
-      index: 0
-      is_UseThis: 0
-    - guid: 55c92b1d87040be43b954324c59ce9aa
-      position: {x: -96.799774, y: 1735.1997}
-      index: 0
-      is_UseThis: 0
-    - guid: 891c0612385158e4dac2fea5a3b612f8
-      position: {x: -95.99979, y: 1851.9996}
-      index: 0
-      is_UseThis: 0
-    - guid: 5abfd76f7dd518b4587ba1bad7ebdea7
-      position: {x: -96.79995, y: 1978.6929}
-      index: 0
-      is_UseThis: 0
-    - guid: 186e5af9d4c0893438aa129030719e39
-      position: {x: -95.999985, y: 2095.1677}
-      index: 0
-      is_UseThis: 0
-    - guid: d089d7bc30af0f045a37fdf9c352690d
-      position: {x: -96.79999, y: 2209.6}
-      index: 0
-      is_UseThis: 0
-    - guid: df9d1eef2bdf32b4cb98d1a7f609c940
-      position: {x: -95.20006, y: 2326.725}
-      index: 0
-      is_UseThis: 0
-    - guid: e59c180e634e4c34aab5932f3364e6fc
-      position: {x: 143.42749, y: 2428}
-      index: 0
-      is_UseThis: 0
-    - guid: dce1d2fdcecff0342a04bfc80708df69
-      position: {x: 157.48503, y: 2560.31}
-      index: 0
-      is_UseThis: 0
-    - guid: e9ebb32693a4c254c809bafb94173b36
-      position: {x: 351.62003, y: 1208.455}
-      index: 0
-      is_UseThis: 0
-    - guid: d5e1eda0b55d0394abf0125baaf31715
-      position: {x: 351.1999, y: 1337.025}
-      index: 0
-      is_UseThis: 0
-    - guid: 8219a57daaa2e7c47b739e4acd7ba879
-      position: {x: 576.8, y: 1477.5997}
-      index: 0
-      is_UseThis: 0
-    - guid: e02b49a8812bc5246b0d2d3cdc3efff1
-      position: {x: 591.12085, y: 1730.4966}
-      index: 0
-      is_UseThis: 0
-    - guid: b40cb74d4904919469e5335bf610cb29
-      position: {x: 338.81314, y: 1875.279}
-      index: 0
-      is_UseThis: 0
-    - guid: f929cb9024e3b144cb3cc67381986a63
-      position: {x: 576.8, y: 1976.7998}
-      index: 0
-      is_UseThis: 0
-    - guid: 40f033dee0351c945934162c5e378d9b
-      position: {x: 576.8, y: 2128.9497}
-      index: 0
-      is_UseThis: 0
-  - nodes:
-    - guid: 2ed5129d3c77c6a45b5bc84f0d99dd0f
-      position: {x: -8.480011, y: -20.064003}
-      index: 0
-      is_UseThis: 0
-    - guid: 0c6c3115d8578764a86fd98d1c448daf
-      position: {x: 110.800026, y: 109.35}
-      index: 0
-      is_UseThis: 0
-    - guid: b617a4717a02b7d44971d906bd343682
-      position: {x: -84.000015, y: 228.25002}
-      index: 0
-      is_UseThis: 0
-    - guid: 50c19fb42d7f4cb4193eccdd17d5901f
-      position: {x: 141.60005, y: 355.15005}
-      index: 0
-      is_UseThis: 0
-    - guid: 6ae40267579341847bc6decfac8be882
-      position: {x: -84.00003, y: 479.30005}
-      index: 0
-      is_UseThis: 0
-    - guid: a4f75b815e961ca47934fe72278ba6b2
-      position: {x: 141.60004, y: 616.94995}
-      index: 0
-      is_UseThis: 0
-    - guid: 6d1c4bc2d832ade49b1d41b9231069be
-      position: {x: -84.00008, y: 733.60016}
-      index: 0
-      is_UseThis: 0
-    - guid: 8dd1b91fcbf43144d8d0b798b4a2fc50
-      position: {x: 173.24998, y: 857.6502}
-      index: 0
-      is_UseThis: 0
-    - guid: 029cc7e83c3ad3a418639331c286ab73
-      position: {x: -84.00001, y: 994.20013}
-      index: 0
-      is_UseThis: 0
-    - guid: e75edab3a63eba5458171629570e51c1
-      position: {x: -84.00001, y: 1119}
-      index: 0
-      is_UseThis: 0
-    - guid: 475a5d128f721cb46b9bf43c0e25061a
-      position: {x: 23.199913, y: 1246.2}
-      index: 0
-      is_UseThis: 0
-    - guid: ff4e657d1574b8b41afd48877df5cc4f
-      position: {x: 209.30002, y: 1368.1504}
-      index: 0
-      is_UseThis: 0
-    - guid: d91a533b200b7e946a6585af3326a0b3
-      position: {x: -107.09999, y: 1501.9503}
-      index: 0
-      is_UseThis: 0
-    - guid: b6ce269829462dc419b379ab6e77fd7d
-      position: {x: -106.40001, y: 1622.6504}
-      index: 0
-      is_UseThis: 0
-    - guid: c6efa71d1d726a647aab941fe419469c
-      position: {x: 43.200005, y: 1768.9586}
-      index: 0
-      is_UseThis: 0
-    - guid: 66f5e828bc11d4840a172a54f51b9d8e
-      position: {x: 235.63997, y: 1896.9774}
-      index: 0
-      is_UseThis: 0
-    - guid: f97de65d25c0b2c4385c2adc918391e0
-      position: {x: 235.99998, y: 2027.6376}
-      index: 0
-      is_UseThis: 0
-    - guid: 75f27b7a3dc094e419fdef422ab01397
-      position: {x: -106.4, y: 2155.6252}
-      index: 0
-      is_UseThis: 0
-    - guid: 2e76caffcca88cd438d8fc9c74fcef93
-      position: {x: -107.20003, y: 2283.7375}
-      index: 0
-      is_UseThis: 0
-    - guid: 9363ddd65ec90b44ab6afbda5b722f2d
-      position: {x: -105.599915, y: 2409.9426}
-      index: 0
-      is_UseThis: 0
-    - guid: e16b6b62258e2054098346e2ace57871
-      position: {x: 235.99998, y: 2553.8452}
-      index: 0
-      is_UseThis: 0
-    - guid: 1e42a2c4132c5354fa554935ef9b0e65
-      position: {x: -93.74992, y: 2683.7075}
-      index: 0
-      is_UseThis: 0
-    - guid: 299fbe86eb3e88c45a27cd43e1263564
-      position: {x: 236.00002, y: 2816.8008}
-      index: 0
-      is_UseThis: 0
-    - guid: e513237bd9c1b2247b3415034bdf9a26
-      position: {x: -93.600006, y: 2934.3677}
-      index: 0
-      is_UseThis: 0
-    - guid: f1cf5f6fc1ec7da47bbbeae404b33a6f
-      position: {x: -82.05751, y: 3057.046}
-      index: 0
-      is_UseThis: 0
-    - guid: 5ca19d2745371854ea56955f4b0c67ef
-      position: {x: -82.400024, y: 3193.485}
-      index: 0
-      is_UseThis: 0
-    - guid: 3f2a61518e5dd36429b7bf8a29fc14c6
-      position: {x: 270.71002, y: 3316.54}
-      index: 0
-      is_UseThis: 0
-    - guid: aa30b5ccf69542f449043702e74b437e
-      position: {x: -82.40008, y: 3476.0325}
-      index: 0
-      is_UseThis: 0
-    - guid: 172c4fbf32270ed4fa6ac518915ee896
-      position: {x: 99.01999, y: 3621.7634}
-      index: 0
-      is_UseThis: 0
-  - nodes:
-    - guid: c5b184c662ce63b4e8b9f98b87308475
-      position: {x: 0, y: 0}
-      index: 0
-      is_UseThis: 0
-    - guid: ef5dae0c4ee91954a9a8559f2246560c
-      position: {x: 135.20004, y: 155.3}
-      index: 0
-      is_UseThis: 0
-    - guid: c9c812eef49af824ca5d884e14cfe4d0
-      position: {x: 135.45, y: 287.15012}
-      index: 0
-      is_UseThis: 0
-    - guid: dfad85b06b6783a45ad705b29a0d75d7
-      position: {x: 135.19997, y: 399.9001}
-      index: 0
-      is_UseThis: 0
-    - guid: 295fb4a55d69a4948a4d5248eef89772
-      position: {x: -123.617966, y: 534.39984}
-      index: 0
-      is_UseThis: 0
-    - guid: ec247012a4fb6d443914279efec15272
-      position: {x: 157.28812, y: 647.657}
-      index: 0
-      is_UseThis: 0
-    - guid: 6559f8fc1aa8a3446a0194793a0e9d6d
-      position: {x: -123.617966, y: 779.9998}
-      index: 0
-      is_UseThis: 0
-    - guid: 0a1ca0d662c02594ca74a642deb74ce2
-      position: {x: 157.59998, y: 882.39984}
-      index: 0
-      is_UseThis: 0
-    - guid: 8eedf254caf2307419bc25a134b39ca2
-      position: {x: -123.617966, y: 1039.9998}
-      index: 0
-      is_UseThis: 0
-    - guid: cb3eb7431164ca447bcc7ae5030cba32
-      position: {x: 158.40002, y: 1141.5997}
-      index: 0
-      is_UseThis: 0
-    - guid: dc3b73c26151d2e41b66cd9f3ab26825
-      position: {x: 26.399994, y: 1298.5475}
-      index: 0
-      is_UseThis: 0
-    - guid: 08db5fad3e946704e88a6c70d563bcf4
-      position: {x: 202.3425, y: 1425.655}
-      index: 0
-      is_UseThis: 0
-    - guid: 899d98f14a33eea4d81cd0f2c4c91ea6
-      position: {x: 202.40001, y: 1551.4775}
-      index: 0
-      is_UseThis: 0
-    - guid: 22bed5787a7520b408d7bc8aa695619c
-      position: {x: 214.51247, y: 1694.3998}
-      index: 0
-      is_UseThis: 0
-    - guid: 5ea9aac803b343b408456a496602b4f6
-      position: {x: -123.99997, y: 1830.696}
-      index: 0
-      is_UseThis: 0
-    - guid: b8b613eb933134142b27d66bf001024b
-      position: {x: 214.4, y: 1969.6176}
-      index: 0
-      is_UseThis: 0
-    - guid: 3daa16fd3f7aa9746b65c35da9dfc9e0
-      position: {x: -124.00001, y: 2140.6853}
-      index: 0
-      is_UseThis: 0
-    - guid: 5383dc36e3f120149a020d5b4c905b07
-      position: {x: 214.39996, y: 2282.9077}
-      index: 0
-      is_UseThis: 0
-    - guid: 4eeb0c717b35e6141929467f81925a9b
-      position: {x: -123.200035, y: 2429.5676}
-      index: 0
-      is_UseThis: 0
+  chatTrees:
+  - {fileID: 11400000, guid: b6285714d72a89741b9f4a09feace812, type: 2}
 --- !u!1 &1663529864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,37 +831,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2099014330
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2099014331}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2099014331
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099014330}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8300158, y: 0.058344096, z: 0.08789162}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1647,4 +838,3 @@ SceneRoots:
   - {fileID: 1663529867}
   - {fileID: 594023516}
   - {fileID: 150678876}
-  - {fileID: 2099014331}

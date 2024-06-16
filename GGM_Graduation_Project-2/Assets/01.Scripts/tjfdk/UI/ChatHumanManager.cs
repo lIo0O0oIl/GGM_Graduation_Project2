@@ -30,9 +30,9 @@ public class ChatHumanManager : UI_Reader
         {
             currentTime = 0f;
 
-            var children = chatContainer.GetChild(nowNodes[nowIndex]);
+            //var children = chatContainer.GetChild(nowNodes[nowIndex]);
 
-            if (children.Count == 1)            // When a child is a ChatNode
+            /*if (children.Count == 1)            // When a child is a ChatNode
             {
                 if (children[0] is ChatNode chatNode)
                 {
@@ -46,8 +46,8 @@ public class ChatHumanManager : UI_Reader
 
                 nowIndex++;
                 }
-            }
-            else        // When child is not a ChatNode
+            }*/
+           /* else        // When child is not a ChatNode
             {
                 for (int i = 0; i < children.Count; i++)
                 {
@@ -67,16 +67,16 @@ public class ChatHumanManager : UI_Reader
                         }
                     }
                 }
-            }
+            }*/
 
         }
     }
 
     public void ChatStart(string name)      // HG
     {
-        Debug.Log("´ëÈ­ ½ÃÀÛ");
+        Debug.Log("?Â€???ì’–ì˜‰");
         nowHumanName = name;
-        nowNodes = chatContainer.HumanAndChatDictionary[nowHumanName];
+        //nowNodes = chatContainer.HumanAndChatDictionary[nowHumanName];
         if (nowNodes[0] is RootNode rootNode)
         {
             nowIndex = rootNode.nowIndex;

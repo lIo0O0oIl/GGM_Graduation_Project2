@@ -6,7 +6,6 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using System;
 using System.Linq;
-using Codice.Client.Common;
 
 namespace ChatVisual
 {
@@ -15,7 +14,7 @@ namespace ChatVisual
         public new class UxmlFactory : UxmlFactory<ChatView, UxmlTraits> { }
         public class UmalTraits : GraphView.UxmlTraits { }
 
-        private ChatContainer chatContainer;
+        private ChatTree chatTree;
         private Label whoLabel;
 
         public Action<NodeView> OnNodeSelected;
@@ -28,6 +27,13 @@ namespace ChatVisual
             this.AddManipulator(new ContentDragger());      // Add Dragger
             this.AddManipulator(new SelectionDragger());    // Add SelectionDragger
             this.AddManipulator(new RectangleSelector());   // Add RectangleSelector
+            Undo.undoRedoPerformed += OnUndoRedoHandle;
+        }
+
+        private void OnUndoRedoHandle()
+        {
+            PopulateView(chatTree);
+            AssetDatabase.SaveAssets();
         }
 
         public void InitChatView(Label label)
@@ -35,65 +41,32 @@ namespace ChatVisual
             whoLabel = label;
         }
 
-        public void LoadChatData(ChatContainer _chatContainer)
+        public void PopulateView(ChatTree _chatContainer)
         {
-            chatContainer = _chatContainer;
-            whoLabel.text = "ChatView" + $" - {chatContainer.nowHumanName}";
-
-            // Unconditional root nodes exist
-            if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName].Count == 0)
-            {
-                chatContainer.CreateNode(typeof(RootNode));
-            }
-
-            if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName][0] is RootNode rootNode)
-            {
-                rootNode.showName = chatContainer.nowHumanName;
-            }
-        }
-
-        public void SaveChatData()
-        {
-            chatContainer.nameList.Clear();
-            chatContainer.nodeList.Clear();
-
-            Debug.Log(chatContainer.HumanAndChatDictionary.Count);
-            foreach (var i in chatContainer.HumanAndChatDictionary)
-            {
-                string tempName = i.Key;
-                List<Node> tempNodeList = i.Value;
-
-                if (i.Value[0] is RootNode rootNode)
-                {
-                    string nowName = rootNode.showName;
-
-                    chatContainer.nameList.Add(nowName);
-                    chatContainer.nodeList.Add(new Nodes(tempNodeList));
-                }
-            }
-
-            chatContainer.HumanAndChatDictionary.Clear();
-            for (int i = 0; i < chatContainer.nameList.Count; i++)
-            {
-                chatContainer.HumanAndChatDictionary.Add(chatContainer.nameList[i], chatContainer.nodeList[i].nodes);
-            }
-        }
-
-        public void PopulateView()
-        {
+            chatTree = _chatContainer;
+            whoLabel.text = "ChatView - " + chatTree.name;
             graphViewChanged -= OnGraphViewChanged;
 
             DeleteElements(graphElements);      // GraphElement's node delete
 
             graphViewChanged += OnGraphViewChanged;
 
+            if (chatTree.rootNode == null)     
+            {
+                chatTree.rootNode = chatTree.CreateNode(typeof(RootNode)) as RootNode;
+                chatTree.rootNode.parent = chatTree;
+                chatTree.rootNode.showName = chatTree.name;
+                EditorUtility.SetDirty(chatTree);
+                AssetDatabase.SaveAssets();
+            }
+
             // node Create
-            this.chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName].ForEach(n => CreateNodeView(n));
+            chatTree.nodeList.ForEach(n => CreateNodeView(n));
 
             // Line Create
-            this.chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName].ForEach(n =>
+            chatTree.nodeList.ForEach(n =>
             {
-                var children = this.chatContainer.GetChild(n);
+                var children = chatTree.GetChild(n);
                 NodeView parent = FindNodeView(n);
                 children.ForEach(c =>
                 {
@@ -102,9 +75,6 @@ namespace ChatVisual
                     AddElement(edge);
                 });
             });
-
-            // Sort
-            this.chatContainer.SortChildAndIndex(chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName][0], 1);
         }
 
 
@@ -122,7 +92,7 @@ namespace ChatVisual
                     var nodeView = elem as NodeView;
                     if (nodeView != null)
                     {
-                        chatContainer.DeleteNode(nodeView.node); 
+                        chatTree.DeleteNode(nodeView.node); 
                     }
 
                     var edge = elem as Edge;        // RemoveEdge
@@ -131,7 +101,7 @@ namespace ChatVisual
                         NodeView parent = edge.output.node as NodeView;
                         NodeView child = edge.input.node as NodeView;
 
-                        chatContainer.RemoveChild(parent.node, child.node);
+                        chatTree.RemoveChild(parent.node, child.node);
                     }
                 });
             }
@@ -143,13 +113,8 @@ namespace ChatVisual
                     NodeView parent = edge.output.node as NodeView;
                     NodeView child = edge.input.node as NodeView;
 
-                    chatContainer.AddChild(parent.node, child.node);
+                    chatTree.AddChild(parent.node, child.node);
                 });
-            }
-
-             if (graphViewChange.movedElements != null)      // If the element moved
-             {
-                SaveChatData();
             }
 
             return graphViewChange;
@@ -157,7 +122,7 @@ namespace ChatVisual
 
         private void CreateNode(Type type, Vector2 position)
         {
-            Node node = chatContainer.CreateNode(type);      // Create node data
+            Node node = chatTree.CreateNode(type);      // Create node data
             node.position = position;
             CreateNodeView(node);       // Create a visible node in the editor
         }
@@ -171,7 +136,7 @@ namespace ChatVisual
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)       // Mouse Button(0) Click
         {
-            if (chatContainer == null)
+            if (chatTree == null)
             {
                 Debug.Log("Chatcontainer is not selected");
                 evt.StopPropagation();      // event Stop;
