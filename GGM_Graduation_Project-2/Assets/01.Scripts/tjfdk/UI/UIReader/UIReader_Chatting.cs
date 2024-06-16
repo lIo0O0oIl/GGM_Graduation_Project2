@@ -40,10 +40,11 @@ public class UIReader_Chatting : UI_Reader
 {
     [Header("Member")]
     // current member name
-    public string currentMemberName;
+    //public string currentMemberName;
     // member profile
     [SerializeField] List<MemberProfile> members;
     public Dictionary<string, MemberProfile> memberList;
+    public List<AskNode> questions;
 
     // memberList arrow sprite
     [SerializeField]
@@ -86,6 +87,7 @@ public class UIReader_Chatting : UI_Reader
 
         members = new List<MemberProfile>();
         memberList = new Dictionary<string, MemberProfile>();
+        questions = new List<AskNode>();
     }
 
     private void Start()
@@ -416,8 +418,8 @@ public class UIReader_Chatting : UI_Reader
     // change member
     public void ChoiceMember(MemberProfile member)
     {
-        // change currentMemberName
-        currentMemberName = member.name;
+        // change currentMember
+        GameManager.Instance.chapterManager.ChatStart(member.name);
 
         // if member isn't null
         if (member != null)

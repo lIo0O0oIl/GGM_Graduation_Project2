@@ -34,6 +34,7 @@ public class FileManager : UI_Reader
     }
 
     public File FindFile(string name) { return folderFileList[name]; }
+
     public void UnlockChapter(File file)
     {
         if (file.eventName != "")
