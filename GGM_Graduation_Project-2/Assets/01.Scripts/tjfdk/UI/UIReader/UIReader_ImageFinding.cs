@@ -49,7 +49,7 @@ public class UIReader_ImageFinding : UI_Reader
     public void OpenImage(string fileName)
     {
         // find image
-        ImageBig image = GameManager.Instance.imageManager.FindImage(fileName);
+        ImageSO image = GameManager.Instance.imageManager.FindImage(fileName);
 
         // When image isn't null
         if (image != null)
@@ -66,7 +66,7 @@ public class UIReader_ImageFinding : UI_Reader
                     ui_imageGround.RemoveAt(i);
 
                 // image check action
-                File fileT = GameManager.Instance.fileManager.FindFile(fileName);
+                FileSO fileT = GameManager.Instance.fileManager.FindFile(fileName);
                 GameManager.Instance.fileManager.UnlockChat(fileT);
                 GameManager.Instance.fileManager.UnlockChapter(fileT);
 
@@ -101,25 +101,25 @@ public class UIReader_ImageFinding : UI_Reader
                             // 생성
                             VisualElement evidence = null;
                             // 중요하다면
-                            if (png.png.importance)
+                            if (png.importance)
                             {
                                 // 메모장으로 표시
                                 evidence = RemoveContainer(ux_imageEvidence.Instantiate());
-                                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.png.image);
+                                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
-                                evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = png.png.memo;
+                                evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = png.memo;
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                 {
                                     //VisualElement description = evidence.Q<VisualElement>("Descripte");
                                     //description.style.display = DisplayStyle.Flex;
 
                                     evidence.Q<VisualElement>("Descripte").style.display = DisplayStyle.Flex;
-                                    evidence.Q<VisualElement>("Descripte").style.left = png.png.pos.x + png.png.size.x;
-                                    evidence.Q<VisualElement>("Descripte").style.top = png.png.pos.y - 250;
+                                    evidence.Q<VisualElement>("Descripte").style.left = png.pos.x + png.size.x;
+                                    evidence.Q<VisualElement>("Descripte").style.top = png.pos.y - 250;
 
-                                    if (png.png.isOpen == false)
+                                    if (png.isOpen == false)
                                     {
-                                        png.png.isOpen = true;
+                                        png.isOpen = true;
                                         Debug.Log(png.name + " " + image.name);
                                         GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
                                     }
@@ -130,7 +130,7 @@ public class UIReader_ImageFinding : UI_Reader
                             {
                                 // 아래 글로만 표시
                                 evidence = RemoveContainer(ux_imageEvidence.Instantiate());
-                                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.png.image);
+                                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                 {
                                     for (int i = imagePanel.childCount - 1; i >= 0; i--)
@@ -141,17 +141,17 @@ public class UIReader_ImageFinding : UI_Reader
                                     VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
                                     evidenceDescription.name = "descriptionLabel";
                                     imagePanel.Add(evidenceDescription);
-                                    DoText(evidenceDescription.Q<Label>("Text"), png.png.memo, 3f, true,
+                                    DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, true,
                                         () => { imagePanel.Remove(evidenceDescription); });
                                 });
                             }
 
                             //단서 위치 설정
                             evidence.style.position = Position.Absolute;
-                            evidence.Q<Button>("EvidenceImage").style.left = png.png.pos.x;
-                            evidence.Q<Button>("EvidenceImage").style.top = png.png.pos.y;
-                            evidence.Q<Button>("EvidenceImage").style.width = png.png.size.x;
-                            evidence.Q<Button>("EvidenceImage").style.height = png.png.size.y;
+                            evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
+                            evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
+                            evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
+                            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
                             // 단서를 이미지에 추가
                             imagePanel.Add(evidence);
                         }
@@ -184,9 +184,9 @@ public class UIReader_ImageFinding : UI_Reader
                 // change png panel name
                 panel.Q<Label>("Name").text = name + ".png";
                 // change png image
-                panel.Q<VisualElement>("Image").style.backgroundImage = new StyleBackground(png.png.saveSprite);
+                panel.Q<VisualElement>("Image").style.backgroundImage = new StyleBackground(png.saveSprite);
                 // change png size
-                ReSizeImage(panel.Q<VisualElement>("Image"), png.png.saveSprite);
+                ReSizeImage(panel.Q<VisualElement>("Image"), png.saveSprite);
                 // connection exit click event
                 panel.Q<Button>("CloseBtn").clicked += () =>
                 {
@@ -194,7 +194,7 @@ public class UIReader_ImageFinding : UI_Reader
                     ui_panelGround.Remove(panel);
 
                     // png check action
-                    File file = GameManager.Instance.fileManager.FindFile(name);
+                    FileSO file = GameManager.Instance.fileManager.FindFile(name);
                     GameManager.Instance.fileManager.UnlockChat(file);
                     GameManager.Instance.fileManager.UnlockChapter(file);
 
@@ -329,7 +329,7 @@ public class UIReader_ImageFinding : UI_Reader
     {
         // create uxml
         VisualElement panel = RemoveContainer(ux_TextPanel.Instantiate());
-        Text text = GameManager.Instance.imageManager.FindText(name);
+        TextSO text = GameManager.Instance.imageManager.FindText(name);
 
         // change name
         panel.Q<Label>("Name").text = name + ".text";
@@ -342,7 +342,7 @@ public class UIReader_ImageFinding : UI_Reader
             ui_panelGround.Remove(panel);
 
             // text check action
-            File file = GameManager.Instance.fileManager.FindFile(name);
+            FileSO file = GameManager.Instance.fileManager.FindFile(name);
             GameManager.Instance.fileManager.UnlockChat(file);
             GameManager.Instance.fileManager.UnlockChapter(file);
 

@@ -177,7 +177,7 @@ public class UIReader_Chatting : UI_Reader
                 // create VisualElement
                 chat = new VisualElement();
                 // image size change
-                ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).png.image);
+                ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).image);
                 break;
 
             // if CutScene

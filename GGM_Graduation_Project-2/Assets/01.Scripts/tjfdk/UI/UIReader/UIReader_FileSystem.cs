@@ -491,7 +491,7 @@ public class UIReader_FileSystem : UI_Reader
             // create current folder's childen
             foreach (string folderName1 in currentFileFolder.folderFiles)
             {
-                File folder = GameManager.Instance.fileManager.FindFile(folderName1);
+                FileSO folder = GameManager.Instance.fileManager.FindFile(folderName1);
                 // create uxml
                 file = RemoveContainer(ux_folderFile.Instantiate());
                 // change file name
@@ -511,7 +511,7 @@ public class UIReader_FileSystem : UI_Reader
 
             foreach (string imageName in currentFileFolder.imageFiles)
             {
-                File image = GameManager.Instance.fileManager.FindFile(folderName);
+                FileSO image = GameManager.Instance.fileManager.FindFile(folderName);
                 // create uxml
                 file = RemoveContainer(ux_imageFile.Instantiate());
                 // change file name
@@ -546,7 +546,7 @@ public class UIReader_FileSystem : UI_Reader
 
             foreach (string textName in currentFileFolder.textFiles)
             {
-                File text = GameManager.Instance.fileManager.FindFile(folderName);
+                FileSO text = GameManager.Instance.fileManager.FindFile(folderName);
                 // create uxml
                 file = RemoveContainer(ux_textFile.Instantiate());
                 // change file name
