@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: aa8625a70eea1c94aaa7ee3f998eef09
-  position: {x: 151.99998, y: 1939.9446}
+  position: {x: 151.99997, y: 1939.1849}
   index: 0
   is_UseThis: 0
   parent: {fileID: 2890341250885189798}
@@ -750,7 +750,9 @@ MonoBehaviour:
   childList:
   - {fileID: 5593988925598037186}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uC77C\uAE30"
   is_LockQuestion: 0
 --- !u!114 &9139597197851340066
 MonoBehaviour:
@@ -765,7 +767,7 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: aaa1eaf47eea0e649a3b0da7a642964c
-  position: {x: 1.5999382, y: 1675.4286}
+  position: {x: 1.6000061, y: 1672}
   index: 0
   is_UseThis: 0
   parentList:
@@ -773,5 +775,7 @@ MonoBehaviour:
   childList:
   - {fileID: 2890341250885189798}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uD3EC\uC2A4\uD2B8\uC787"
   is_LockQuestion: 0
