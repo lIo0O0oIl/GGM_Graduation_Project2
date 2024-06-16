@@ -13,6 +13,7 @@ namespace ChatVisual
         {
             foreach (ChatTree chatTree in chatTrees)
             {
+                Debug.Log($"{chatTree.name}, {nowName}, {chatTree.name == nowName}");
                 if (chatTree.name == nowName)
                     return chatTree;
             }

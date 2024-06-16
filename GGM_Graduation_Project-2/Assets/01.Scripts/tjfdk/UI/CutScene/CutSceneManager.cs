@@ -16,7 +16,7 @@ public class CutSceneManager : MonoBehaviour
     [SerializeField] private int currentTextNum;
 
     [Header("Data")]
-    [SerializeField] private List<CutSceneSO> cutScenes;
+    [SerializeField] private List<CutSceneSO> cutScenes = new List<CutSceneSO>();
     public Dictionary<string,  CutSceneSO> cutSceneList;
 
     private void Awake()
@@ -24,11 +24,10 @@ public class CutSceneManager : MonoBehaviour
         Instance = this;
         cutsceneUI = GetComponent<UIReader_CutScene>();
 
-        cutScenes = new List<CutSceneSO>();
         cutSceneList = new Dictionary<string, CutSceneSO>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         foreach (CutSceneSO cutScene in cutScenes)
             cutSceneList.Add(cutScene.chapterName, cutScene);
@@ -41,12 +40,12 @@ public class CutSceneManager : MonoBehaviour
         //    if (cutScene.name == name)
         //        return cutScene;
         //}
-
         return cutSceneList[name];
     }
 
     public void CutScene(bool isOpen, string name)
     {
+        Debug.Log("22222");
         currentCutScene = FindCutScene(name);
         currentCutNum = 0;
         currentTextNum = 0;
@@ -56,6 +55,7 @@ public class CutSceneManager : MonoBehaviour
 
     public void Next()
     {
+
         if (currentCutScene != null)
         {
             if (currentCutScene.cutScenes.Count == currentCutNum)
@@ -67,14 +67,25 @@ public class CutSceneManager : MonoBehaviour
 
             else
             {
+                // next text
                 if (currentCutScene.cutScenes[currentCutNum].texts.Count > currentTextNum)
                 {
-                    if (cutsceneUI.currentTextTween.IsPlaying())
-
-                    cutsceneUI.EndText();
-                    cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 1.5f);
-                    currentTextNum++;
+                    if (cutsceneUI.currentTextTween != null)
+                    {
+                        if (cutsceneUI.currentTextTween.IsPlaying())
+                        {
+                            cutsceneUI.EndText();
+                        }
+                        cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 1.5f);
+                        currentTextNum++;
+                    }
+                    else
+                    {
+                        cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 1.5f);
+                        currentTextNum++;
+                    }
                 }
+                // next cut
                 if (currentCutScene.cutScenes.Count > currentCutNum && currentCutScene.cutScenes[currentCutNum].texts.Count == currentTextNum)
                 {
                     cutsceneUI.ChangeCut(currentCutScene.cutScenes[currentCutNum].isAnim, currentCutScene.cutScenes[currentCutNum].cut);

@@ -71,6 +71,9 @@ public class UIReader_ImageFinding : UI_Reader
                 GameManager.Instance.fileManager.UnlockChapter(fileT);
 
                 // restart chatting
+                Debug.Log("대화 다시 호출");
+                if (GameManager.Instance.chapterManager.chatting != null)
+                    StopCoroutine(GameManager.Instance.chapterManager.chatting);
                 StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
             }
             else
@@ -236,7 +239,9 @@ public class UIReader_ImageFinding : UI_Reader
                 //}
 
                 ui_imageGround.Add(imagePanel);
-                StopCoroutine(GameManager.Instance.chapterManager.chatting);
+
+                if (GameManager.Instance.chapterManager.chatting != null)
+                    StopCoroutine(GameManager.Instance.chapterManager.chatting);
             }
 
             isImageOpen = !isImageOpen;
@@ -274,12 +279,17 @@ public class UIReader_ImageFinding : UI_Reader
                     GameManager.Instance.fileManager.UnlockChapter(file);
 
                     // restart chatting
+                    Debug.Log("대화 다시 호출");
+                    if (GameManager.Instance.chapterManager.chatting != null)
+                        StopCoroutine(GameManager.Instance.chapterManager.chatting);
                     StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
                 };
 
 
                 ui_panelGround.Add(panel);
-                StopCoroutine(GameManager.Instance.chapterManager.chatting);
+
+                if (GameManager.Instance.chapterManager.chatting != null)
+                    StopCoroutine(GameManager.Instance.chapterManager.chatting);
             }
             else
                 Debug.Log("it's neither an image nor a png");
@@ -422,6 +432,9 @@ public class UIReader_ImageFinding : UI_Reader
             GameManager.Instance.fileManager.UnlockChapter(file);
 
             // restart chatting
+            Debug.Log("대화 다시 호출");
+            if (GameManager.Instance.chapterManager.chatting != null)
+                StopCoroutine(GameManager.Instance.chapterManager.chatting);
             StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
         };
 

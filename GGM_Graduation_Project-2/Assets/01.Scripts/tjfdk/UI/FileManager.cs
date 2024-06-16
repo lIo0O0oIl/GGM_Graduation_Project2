@@ -18,16 +18,15 @@ using UnityEngine;
 
 public class FileManager : UI_Reader
 {
-    [SerializeField] List<FileSO> folderFiles;
+    [SerializeField] List<FileSO> folderFiles = new List<FileSO>();
     public Dictionary<string, FileSO> folderFileList;
 
     private void Awake()
     {
-        folderFiles = new List<FileSO>();
         folderFileList = new Dictionary<string, FileSO>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         foreach (FileSO file in folderFiles)
             folderFileList.Add(file.fileName, file);

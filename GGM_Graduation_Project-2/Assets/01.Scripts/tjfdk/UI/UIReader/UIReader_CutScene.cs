@@ -22,6 +22,7 @@ public class UIReader_CutScene : UI_Reader
 
     public void PlayCutScene(string name)
     {
+        Debug.Log("dsafojapwilgswtarwhio");
         GameManager.Instance.cutSceneManager.CutScene(true, name);
         OpenCutScene(true);
     }

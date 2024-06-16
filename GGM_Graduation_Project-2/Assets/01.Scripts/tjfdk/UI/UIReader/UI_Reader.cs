@@ -44,7 +44,7 @@ public class UI_Reader : MonoBehaviour
 
     protected void OnEnable()
     {
-        document = GetComponent<UIDocument>();
+        document = GameManager.Instance.GetComponent<UIDocument>();
         root = document.rootVisualElement;
 
         Load();
@@ -98,16 +98,21 @@ public class UI_Reader : MonoBehaviour
     {
         if (isOpen)
         {
+            Debug.Log("333333");
             cutScenePanel.style.display = DisplayStyle.Flex;
             mainPanel.style.display= DisplayStyle.None;
 
-            StopCoroutine(GameManager.Instance.chapterManager.chatting);
+            if (GameManager.Instance.chapterManager.chatting != null)
+                StopCoroutine(GameManager.Instance.chapterManager.chatting);
         }
         else
         {
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
 
+            Debug.Log("대화 다시 호출");
+            if (GameManager.Instance.chapterManager.chatting != null)
+                StopCoroutine(GameManager.Instance.chapterManager.chatting);
             StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
         }
     }
