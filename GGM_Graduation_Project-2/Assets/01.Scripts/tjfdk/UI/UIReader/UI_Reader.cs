@@ -102,8 +102,7 @@ public class UI_Reader : MonoBehaviour
             cutScenePanel.style.display = DisplayStyle.Flex;
             mainPanel.style.display= DisplayStyle.None;
 
-            if (GameManager.Instance.chapterManager.chatting != null)
-                StopCoroutine(GameManager.Instance.chapterManager.chatting);
+            GameManager.Instance.chapterManager.StopChatting();
         }
         else
         {
@@ -111,9 +110,8 @@ public class UI_Reader : MonoBehaviour
             mainPanel.style.display = DisplayStyle.Flex;
 
             Debug.Log("대화 다시 호출");
-            if (GameManager.Instance.chapterManager.chatting != null)
-                StopCoroutine(GameManager.Instance.chapterManager.chatting);
-            StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
+
+            GameManager.Instance.chapterManager.StartChatting();
         }
     }
 

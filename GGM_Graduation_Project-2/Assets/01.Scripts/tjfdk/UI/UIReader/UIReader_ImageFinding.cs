@@ -72,9 +72,7 @@ public class UIReader_ImageFinding : UI_Reader
 
                 // restart chatting
                 Debug.Log("대화 다시 호출");
-                if (GameManager.Instance.chapterManager.chatting != null)
-                    StopCoroutine(GameManager.Instance.chapterManager.chatting);
-                StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
+                GameManager.Instance.chapterManager.StartChatting();
             }
             else
             {
@@ -240,8 +238,7 @@ public class UIReader_ImageFinding : UI_Reader
 
                 ui_imageGround.Add(imagePanel);
 
-                if (GameManager.Instance.chapterManager.chatting != null)
-                    StopCoroutine(GameManager.Instance.chapterManager.chatting);
+                GameManager.Instance.chapterManager.StopChatting();;
             }
 
             isImageOpen = !isImageOpen;
@@ -280,16 +277,13 @@ public class UIReader_ImageFinding : UI_Reader
 
                     // restart chatting
                     Debug.Log("대화 다시 호출");
-                    if (GameManager.Instance.chapterManager.chatting != null)
-                        StopCoroutine(GameManager.Instance.chapterManager.chatting);
-                    StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
+                    GameManager.Instance.chapterManager.StartChatting();
                 };
 
 
                 ui_panelGround.Add(panel);
 
-                if (GameManager.Instance.chapterManager.chatting != null)
-                    StopCoroutine(GameManager.Instance.chapterManager.chatting);
+                GameManager.Instance.chapterManager.StopChatting();
             }
             else
                 Debug.Log("it's neither an image nor a png");
@@ -433,12 +427,10 @@ public class UIReader_ImageFinding : UI_Reader
 
             // restart chatting
             Debug.Log("대화 다시 호출");
-            if (GameManager.Instance.chapterManager.chatting != null)
-                StopCoroutine(GameManager.Instance.chapterManager.chatting);
-            StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
+            GameManager.Instance.chapterManager.StartChatting();
         };
 
         ui_panelGround.Add(panel);
-        StopCoroutine(GameManager.Instance.chapterManager.chatting);
+        GameManager.Instance.chapterManager.StopChatting();
     }
 }

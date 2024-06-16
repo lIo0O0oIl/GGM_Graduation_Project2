@@ -155,10 +155,7 @@ public class ChatHumanManager : UI_Reader
         }
 
         Debug.Log("대화 다시 호출");
-        if (chatting != null)
-            StopCoroutine(chatting);
-        chatting = StartCoroutine(ReadChat());
-        //is_ChatStart = true;
+        StartChatting();
     }
 
     public void StartChatting()
