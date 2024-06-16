@@ -334,7 +334,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowName: 
-  chatTrees: []
+  chatTrees:
+  - {fileID: 11400000, guid: c1a3e3bb83a6eac42ac8aba4b6bafb91, type: 2}
+  - {fileID: 11400000, guid: 54f82722d96610b4c8b7f0ba28e12cee, type: 2}
+  - {fileID: 11400000, guid: d63e5984b26b81648ad7802fafd2d8ee, type: 2}
+  - {fileID: 11400000, guid: b1e07402b87ee024697916645591cd2a, type: 2}
+  - {fileID: 11400000, guid: 2f5daa0cbefe73f49a2ec62c2b6e0261, type: 2}
+  - {fileID: 11400000, guid: b84f96da292e3fc47aca2516b54d85f3, type: 2}
 --- !u!1 &1207175530
 GameObject:
   m_ObjectHideFlags: 0

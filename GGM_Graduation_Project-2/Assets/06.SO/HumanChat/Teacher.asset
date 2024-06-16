@@ -1,0 +1,423 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8702056852616206104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66c069077fcf184bb183350040d8a11, type: 3}
+  m_Name: AskNode
+  m_EditorClassIdentifier: 
+  guid: e35bc5f5a681a9541bb904c8f40183ad
+  position: {x: 342.40005, y: 816.8}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 5242533396505446470}
+  child: {fileID: 8416841811360680755}
+  askText: "\uC131\uC801\uC740 \uC5B4\uB560\uB098\uC694?"
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &-7424584923528859366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 4552c49471421ce4d87948a3acc910ff
+  position: {x: 191.99995, y: 131.2}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 602937082872977072}
+  childList:
+  - {fileID: 1985481332735012546}
+  state: 1
+  type: 0
+  chatText: "\uC774\uC218\uC5F0 \uD559\uC0DD \uB2F4\uC784 \uC120\uC0DD\uB2D8 \uB9DE\uC73C\uC2E0\uAC00\uC694?"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &-6073776599437183859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66c069077fcf184bb183350040d8a11, type: 3}
+  m_Name: AskNode
+  m_EditorClassIdentifier: 
+  guid: 0359b7c8ef860e04bb1b6291cb7857ec
+  position: {x: -423.69855, y: 816.22864}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 5242533396505446470}
+  child: {fileID: 741104619580511104}
+  askText: "\uC774\uC218\uC5F0 \uD559\uC0DD\uC758 \uD3C9\uC18C \uD559\uAD50 \uC0DD\uD65C\uC740
+    \uC5B4\uB560\uB098\uC694?"
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &-5366215494601744893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66c069077fcf184bb183350040d8a11, type: 3}
+  m_Name: AskNode
+  m_EditorClassIdentifier: 
+  guid: 69cb4301360ffc74db2c8734a76ac383
+  position: {x: -34.141087, y: 816.8}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 5242533396505446470}
+  child: {fileID: 8690504082520964297}
+  askText: "\uCE5C\uD55C \uCE5C\uAD6C\uAC00 \uC788\uC5C8\uB098\uC694?"
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &-1991800841637001641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: a0d216381ec725844922703fe8a5252f
+  position: {x: -574.4, y: 1086.3503}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 741104619580511104}
+  childList:
+  - {fileID: 283602436632156317}
+  state: 0
+  type: 0
+  chatText: "\uB9D0\uC37D \uD55C \uBC88 \uBD80\uB9B0\uC801 \uC5C6\uB294 \uCC29\uD55C
+    \uC544\uC774\uC600\uC2B5\uB2C8\uB2E4"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
+  m_Name: Teacher
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 602937082872977072}
+  humanName: Teacher
+  nodeList:
+  - {fileID: 602937082872977072}
+  - {fileID: -7424584923528859366}
+  - {fileID: 1985481332735012546}
+  - {fileID: 5919741465755026066}
+  - {fileID: 1366894560074738329}
+  - {fileID: 5242533396505446470}
+  - {fileID: -6073776599437183859}
+  - {fileID: -5366215494601744893}
+  - {fileID: -8702056852616206104}
+  - {fileID: 741104619580511104}
+  - {fileID: -1991800841637001641}
+  - {fileID: 8690504082520964297}
+  - {fileID: 2445506322801536476}
+  - {fileID: 8416841811360680755}
+  - {fileID: 283602436632156317}
+  - {fileID: 3639042259654192348}
+--- !u!114 &283602436632156317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966f7155bace4ea40b65a6f9c3cd1574, type: 3}
+  m_Name: ConditionNode
+  m_EditorClassIdentifier: 
+  guid: 64ee6a1a7c1fd3d49b7061fa155d5129
+  position: {x: -74.79995, y: 1235.6925}
+  index: 0
+  is_UseThis: 0
+  parentList:
+  - {fileID: 2445506322801536476}
+  - {fileID: -1991800841637001641}
+  - {fileID: 8416841811360680755}
+  childList:
+  - {fileID: 3639042259654192348}
+  is_AllQuestion: 0
+  is_SpecificFile: 0
+  is_LockQuestion: 0
+--- !u!114 &602937082872977072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834f3b7892710d74da32a0f04ef52a51, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  guid: f5985596f7060de479be56a94179b3f6
+  position: {x: 0, y: 0}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 11400000}
+  child: {fileID: -7424584923528859366}
+  showName: Teacher
+  loadFileNameList: []
+  nowIndex: 0
+--- !u!114 &741104619580511104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 85e4d362b8592114abbaef00ca618644
+  position: {x: -574.4001, y: 950.9626}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: -6073776599437183859}
+  childList:
+  - {fileID: -1991800841637001641}
+  state: 0
+  type: 0
+  chatText: "\uC870\uC6A9\uD558\uACE0 \uC18C\uC2EC\uD55C \uCE5C\uAD6C\uC600\uC5B4\uC694"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &1366894560074738329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 6d5b288b66fbdaa4997a9f741dd7bdc8
+  position: {x: 191.99998, y: 508.80002}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 5919741465755026066}
+  childList:
+  - {fileID: 5242533396505446470}
+  state: 1
+  type: 0
+  chatText: "\uC774\uC218\uC5F0 \uD559\uC0DD\uC5D0 \uB300\uD574 \uBA87\uAC00\uC9C0
+    \uBB3C\uC5B4\uB3C4 \uB420\uAE4C\uC694?"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &1985481332735012546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 78b7c3a1bff63244ba814ba5005aa5c0
+  position: {x: -150.40001, y: 266.48788}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: -7424584923528859366}
+  childList:
+  - {fileID: 5919741465755026066}
+  state: 0
+  type: 0
+  chatText: "\uB124 \uC81C\uAC00 \uC774\uC218\uC5F0 \uD559\uC0DD \uB2F4\uC784 \uC120\uC0DD\uC785\uB2C8\uB2E4"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &2445506322801536476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: c441b94a72e0c614ab5b3dfb2fe5280c
+  position: {x: -149.59988, y: 1079.3649}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 8690504082520964297}
+  childList:
+  - {fileID: 283602436632156317}
+  state: 0
+  type: 0
+  chatText: "\uADF8\uB7F0\uC9C0 \uCE5C\uD55C \uCE5C\uAD6C\uB294 \uB531\uD788 \uC5C6\uC5C8\uC5B4\uC694"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &3639042259654192348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 3af12a73cf6cb574cb2238f868728f8e
+  position: {x: 191.99997, y: 1390.7178}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 283602436632156317}
+  childList: []
+  state: 1
+  type: 0
+  chatText: "\uAC10\uC0AC\uD569\uB2C8\uB2E4"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &5242533396505446470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 706b75cc1c4fff84f8160ce3b7fed8a6
+  position: {x: -150.4, y: 635.77136}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 1366894560074738329}
+  childList:
+  - {fileID: -6073776599437183859}
+  - {fileID: -5366215494601744893}
+  - {fileID: -8702056852616206104}
+  state: 0
+  type: 0
+  chatText: "\uB124 \uD3B8\uD558\uAC8C \uBB3C\uC5B4\uBCF4\uC138\uC694"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &5919741465755026066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 9618e1608b746494d9b76714923c6ecf
+  position: {x: 192.40007, y: 388}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 1985481332735012546}
+  childList:
+  - {fileID: 1366894560074738329}
+  state: 1
+  type: 0
+  chatText: "\uC800\uB294 \uC774\uBC88 \uC0AC\uAC74\uC744 \uB9E1\uAC8C \uB41C \uB2F4\uB2F9
+    \uD615\uC0AC\uC785\uB2C8\uB2E4"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &8416841811360680755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: ab7510e3db714694582c2d5bdf8c632b
+  position: {x: 342.4, y: 947.19995}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: -8702056852616206104}
+  childList:
+  - {fileID: 283602436632156317}
+  state: 0
+  type: 0
+  chatText: "\uCD5C\uADFC \uC131\uC801\uC740 \uC218\uC5F0\uC774\uAC00 \uC804\uAD50
+    1\uB4F1\uC744 \uD588\uB358 \uAC78\uB85C \uAE30\uC5B5\uD574\uC694"
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &8690504082520964297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: b5a5d842dafdcff44b9375dc9d655f77
+  position: {x: -150.39993, y: 946.6589}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: -5366215494601744893}
+  childList:
+  - {fileID: 2445506322801536476}
+  state: 0
+  type: 0
+  chatText: "\uC6CC\uB099 \uC870\uC6A9\uD558\uACE0 \uB0B4\uC131\uC801\uC778 \uC131\uACA9\uC774\uB77C "
+  face: 0
+  textEvent: 
+  LoadNextDialog: 
