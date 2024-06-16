@@ -95,10 +95,10 @@ public class ChatHumanManager : UI_Reader
             {
                 if (children[0] is ChatNode chatNode)
                 {
-                    Debug.Log(chatNode.chatText);
+                    Debug.Log(chatNode.text);
 
                     GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
-                        chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
+                        chatNode.type, chatNode.face, chatNode.text, chatNode.textEvent);
 
                     currentNode = children[0];
                 }
