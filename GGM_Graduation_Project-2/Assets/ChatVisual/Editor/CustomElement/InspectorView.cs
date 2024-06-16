@@ -15,10 +15,12 @@ namespace ChatVisual
         private int enumValue2;
 
         private List<EChatEvent> chatEventList = new List<EChatEvent>();
-        private List<string> LoadFileList = new List<string>();     
+        private List<string> LoadFileList = new List<string>(); 
 
         private bool is_Expand = false;
         private bool is_LoadList = false;
+        private bool is_AllQuestion = false;
+        private bool is_ShowLoadFileName = false;
 
         public void UpdateInspector(NodeView node)   
         {
@@ -26,6 +28,7 @@ namespace ChatVisual
 
             is_Expand = false;
             is_LoadList = false;
+            is_AllQuestion = false;
 
             var container = new IMGUIContainer();
             container.onGUIHandler = () =>
@@ -45,7 +48,7 @@ namespace ChatVisual
                             GUILayout.Space(10);
 
                             // LoadFileName
-                            if (!is_LoadList)
+                           /* if (!is_LoadList)
                             {
                                 LoadFileList = new List<string>(rootNode.loadFileNameList);
                                 is_LoadList = true;
@@ -66,7 +69,7 @@ namespace ChatVisual
                             }
                             rootNode.loadFileNameList = new List<string>(LoadFileList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
-                            GUILayout.EndVertical();
+                            GUILayout.EndVertical();*/
 
                             EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.IntField("NowIndex", rootNode.nowIndex);
@@ -94,6 +97,7 @@ namespace ChatVisual
                             if (!is_LoadList)
                             {
                                 chatEventList = new List<EChatEvent>(chatNode.textEvent);
+                                LoadFileList = new List<string>(chatNode.loadFileName);
                                 is_LoadList = true;
                             }
                             GUIStyle boxStyle = EditorStyles.helpBox;
@@ -113,6 +117,21 @@ namespace ChatVisual
                             chatNode.textEvent = new List<EChatEvent>(chatEventList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();
+
+                            int loadFileCount = 0;
+                            for (int i = 0; i < chatEventList.Count; i++)
+                            {
+                                if (chatEventList[i] == EChatEvent.LoadFile)
+                                {
+                                     loadFileCount++;
+                                }
+                            }
+                            for (int i = 0; i < loadFileCount; i++)
+                            {
+                                if (i >= LoadFileList.Count) LoadFileList.Add("");
+                                LoadFileList[i] = EditorGUILayout.TextArea(LoadFileList[i], EditorStyles.textArea);
+                            }
+                            chatNode.loadFileName = new List<string>(LoadFileList);
 
                             EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", chatNode.is_UseThis);
@@ -173,7 +192,11 @@ namespace ChatVisual
                                 if (conditionNode.checkClass is AllQuestion allQuestion)
                                 {
                                     ++EditorGUI.indentLevel;
-                                    allQuestion.Init(conditionNode);
+                                    if (!is_AllQuestion)
+                                    {
+                                        is_AllQuestion = true;
+                                        allQuestion.Init(conditionNode);
+                                    }
                                     GUILayout.BeginHorizontal();
                                     GUILayout.Label($"AskCount");
                                     GUILayout.FlexibleSpace();

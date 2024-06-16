@@ -12,7 +12,6 @@ namespace ChatVisual
 
         private void OnValidate()
         {
-            Debug.Log("change");
             if (!string.IsNullOrEmpty(showName))
             {
                 parent.humanName = showName;
@@ -20,7 +19,7 @@ namespace ChatVisual
         }
 
         public string showName;
-        public List<string> loadFileNameList = new List<string>();
+        //public List<string> loadFileNameList = new List<string>();
 
         public int nowIndex;        // Indexes to continue chatting
     }
