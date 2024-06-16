@@ -25,15 +25,6 @@ public class ChatEditor : EditorWindow
         GetWindow<ChatEditor>("ChatEditor");
     }
 
-    private void OnDestroy() 
-    {
-        if (chatContainer != null)
-        {
-            chatView.SaveChatData();
-            Debug.Log("Close and save");
-        }
-    }
-
     public void CreateGUI()
     {
         VisualElement root = rootVisualElement; 
@@ -67,20 +58,17 @@ public class ChatEditor : EditorWindow
         if (chatContainer != null)
         {
             Debug.Log("Add human");
-            chatContainer.HumanAndChatDictionary.Add("???", new List<Node>());
-            string temp = chatContainer.nowHumanName;
-            chatContainer.nowHumanName = "???";
-            if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName].Count == 0)
-            {
-                chatContainer.CreateNode(typeof(RootNode));
-                if (chatContainer.HumanAndChatDictionary[chatContainer.nowHumanName][0] is RootNode rootNode)
-                {
-                    rootNode.showName = "???";
-                }
-            }
-            chatContainer.nowHumanName = temp;
-            chatContainer.nameList.Add("???");
-            chatContainer.nodeList.Add(new Nodes());
+
+            ChatTree newChatTree = ScriptableObject.CreateInstance<ChatTree>();
+            string assetPath = "Assets/06.SO/HumanChat/NewHuman.asset";
+
+            assetPath = AssetDatabase.GenerateUniqueAssetPath(assetPath);       // Create new names for duplicate filenames
+            AssetDatabase.CreateAsset(newChatTree, assetPath);
+            chatContainer.chatTrees.Add(newChatTree);
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
             hierarchyView.UpdateHierarchy();
         }
     }
@@ -95,7 +83,6 @@ public class ChatEditor : EditorWindow
 
     private void OnSelectionNodeChanged(NodeView nodeView)
     {
-        //chatView.SaveChatSystem();
         inspectorView.UpdateInspector(nodeView); 
     }
 
@@ -106,14 +93,17 @@ public class ChatEditor : EditorWindow
             if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))    
             {
                 // The current chat is an assistant's(HG) chat
-                chatContainer.nowHumanName = "HG";
+                //chatContainer.nowHumanName = "HG";
 
                 hierarchyView.InitHierarchy(chatContainer, chatView, inspectorView);
-                hierarchyView.UpdateHierarchy();      
-                
-                chatView.LoadChatData(chatContainer);
+                hierarchyView.UpdateHierarchy();
 
-                chatView.PopulateView();
+                if (chatContainer.chatTrees.Count <= 0)
+                {
+                    OnArrayAddBtn();
+                }
+
+                chatView.PopulateView(chatContainer.chatTrees[0]);
             }
         }
     }
