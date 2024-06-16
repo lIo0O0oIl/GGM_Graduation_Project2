@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e1567e7b98d5d4cabbf6eac1c4a7ad, type: 3}
+  m_Name: "\uC900\uC6D0\uBC29"
+  m_EditorClassIdentifier: 
+  name: "\uC900\uC6D0\uBC29"
+  image: {fileID: 21300000, guid: ccc20ade177cecb40b2dc005584fe065, type: 3}
+  isOpen: 0
+  pngName:
+  - "\uC57C\uAD6C\uBC29\uB9DD\uC774"
+  - "\uC218\uC5F0\uC774 \uD578\uB4DC\uD3F0"
+  - "\uB18D\uAD6C \uD53C\uADDC\uC5B4"
+  - "\uB18D\uAD6C \uD3EC\uC2A4\uD130"
+  textName: []

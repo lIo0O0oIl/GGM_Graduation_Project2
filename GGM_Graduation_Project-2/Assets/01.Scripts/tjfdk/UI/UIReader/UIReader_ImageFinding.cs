@@ -117,9 +117,14 @@ public class UIReader_ImageFinding : UI_Reader
                                     evidence.Q<VisualElement>("Descripte").style.left = png.pos.x + png.size.x;
                                     evidence.Q<VisualElement>("Descripte").style.top = png.pos.y - 250;
 
-                                    if (png.isOpen == false)
+                                    TextSO text = GameManager.Instance.imageManager.FindText(evid);
+                                    if (text != null)
                                     {
-                                        png.isOpen = true;
+                                        Debug.Log(text.name + " " + image.name);
+                                        GameManager.Instance.fileSystem.AddFile(FileType.TEXT, text.name, image.name);
+                                    }
+                                    else
+                                    {
                                         Debug.Log(png.name + " " + image.name);
                                         GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
                                     }
@@ -159,6 +164,76 @@ public class UIReader_ImageFinding : UI_Reader
                     else
                         Debug.Log("Evidence not found in pngList");
                 }
+
+                //foreach (string evid in image.textName)
+                //{
+                //    // 해당 단서를 찾았다면
+                //    TextSO text = GameManager.Instance.imageManager.textList[evid];
+                //    if (text != null)
+                //    {
+                //        if (evid == text.name)
+                //        {
+                //            // 생성
+                //            VisualElement evidence = null;
+                //            // 중요하다면
+                //            if (text.importance)
+                //            {
+                //                // 메모장으로 표시
+                //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
+                //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(text.image);
+                //                evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = text.name;
+                //                evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = text.memo;
+                //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
+                //                {
+                //                    //VisualElement description = evidence.Q<VisualElement>("Descripte");
+                //                    //description.style.display = DisplayStyle.Flex;
+
+                //                    evidence.Q<VisualElement>("Descripte").style.display = DisplayStyle.Flex;
+                //                    evidence.Q<VisualElement>("Descripte").style.left = text.pos.x + text.size.x;
+                //                    evidence.Q<VisualElement>("Descripte").style.top = text.pos.y - 250;
+
+                //                    if (png.isOpen == false)
+                //                    {
+                //                        png.isOpen = true;
+                //                        Debug.Log(png.name + " " + image.name);
+                //                        GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
+                //                    }
+                //                });
+                //            }
+                //            // 아니라면
+                //            else
+                //            {
+                //                // 아래 글로만 표시
+                //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
+                //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
+                //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
+                //                {
+                //                    for (int i = imagePanel.childCount - 1; i >= 0; i--)
+                //                    {
+                //                        if (imagePanel.Children().ElementAt(i).name == "descriptionLabel")
+                //                            imagePanel.RemoveAt(i);
+                //                    }
+                //                    VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
+                //                    evidenceDescription.name = "descriptionLabel";
+                //                    imagePanel.Add(evidenceDescription);
+                //                    DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, true,
+                //                        () => { imagePanel.Remove(evidenceDescription); });
+                //                });
+                //            }
+
+                //            //단서 위치 설정
+                //            evidence.style.position = Position.Absolute;
+                //            evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
+                //            evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
+                //            evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
+                //            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
+                //            // 단서를 이미지에 추가
+                //            imagePanel.Add(evidence);
+                //        }
+                //    }
+                //    else
+                //        Debug.Log("Evidence not found in pngList");
+                //}
 
                 ui_imageGround.Add(imagePanel);
                 StopCoroutine(GameManager.Instance.chapterManager.chatting);
