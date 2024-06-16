@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 68b529a49b156f0448e0339b0f4d24c5
-  position: {x: 169.50339, y: 820.8}
+  position: {x: 170.39996, y: 820.8}
   index: 0
   is_UseThis: 0
   parent: {fileID: -7582816684183836275}
@@ -147,7 +147,7 @@ MonoBehaviour:
   type: 0
   chatText: "\uB124 \uBCF4\uC154\uB3C4 \uAD1C\uCC2E\uC544\uC694..."
   face: 0
-  textEvent: 
+  textEvent: 03000000030000000300000003000000
   LoadNextDialog: 
 --- !u!114 &-1358756448158181785
 MonoBehaviour:
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 001b95b9e94d62f4797e09560323daa2
-  position: {x: 173.59999, y: 1457.6002}
+  position: {x: 172.79997, y: 1457.6}
   index: 0
   is_UseThis: 0
   parent: {fileID: -8925968331423973008}
@@ -361,7 +361,11 @@ MonoBehaviour:
   parent: {fileID: 11400000}
   child: {fileID: 1684726699841944131}
   showName: Home
-  loadFileNameList: []
+  loadFileNameList:
+  - "\uC774\uC218\uC5F0\uC758 \uBC29"
+  - "\uC0AC\uC9C4"
+  - "\uC218\uC5F0\uC774 \uBC29 \uCC45"
+  - "\uC77C\uAE30"
   nowIndex: 0
 --- !u!114 &2865860514934229862
 MonoBehaviour:

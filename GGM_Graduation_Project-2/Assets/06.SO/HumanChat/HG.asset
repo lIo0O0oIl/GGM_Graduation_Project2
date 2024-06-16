@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: eb6c09f17fb3e324fb7236ba44f87414
-  position: {x: 158.40002, y: 3905.6}
+  position: {x: 158.4001, y: 3903.2878}
   index: 0
   is_UseThis: 0
   parentList:
@@ -25,7 +25,468 @@ MonoBehaviour:
   childList:
   - {fileID: 2959291578591272238}
   is_AllQuestion: 0
+  asks:
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
+  - {fileID: -732252647395145651}
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &-8917121665160068671
 MonoBehaviour:
@@ -74,7 +535,9 @@ MonoBehaviour:
   childList:
   - {fileID: 3340442707748321522}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uC0AC\uC9C4"
   is_LockQuestion: 0
 --- !u!114 &-8693162329726485946
 MonoBehaviour:
@@ -89,7 +552,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 2de44063fdb39da439acd2670d16f4aa
-  position: {x: 275, y: 4299.402}
+  position: {x: 275.19998, y: 4296.502}
   index: 0
   is_UseThis: 0
   parent: {fileID: -3311910791449852511}
@@ -99,7 +562,7 @@ MonoBehaviour:
   type: 0
   chatText: "\uADF8\uB798 \uADF8\uAC8C \uC88B\uACA0\uC5B4."
   face: 0
-  textEvent: 
+  textEvent: 03000000
   LoadNextDialog: 
 --- !u!114 &-8336487026159529361
 MonoBehaviour:
@@ -187,7 +650,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 5b25b9b15f7ef954187aea42fdf47d07
-  position: {x: 156.00014, y: 1721.5402}
+  position: {x: 156.80002, y: 1723.349}
   index: 0
   is_UseThis: 0
   parent: {fileID: 7857513914877094397}
@@ -197,7 +660,7 @@ MonoBehaviour:
   type: 0
   chatText: "\uADF8\uB7EC\uC9C0"
   face: 0
-  textEvent: 
+  textEvent: 0300000003000000
   LoadNextDialog: 
 --- !u!114 &-5865964707741930869
 MonoBehaviour:
@@ -220,7 +683,9 @@ MonoBehaviour:
   childList:
   - {fileID: -645083983494829297}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uC774\uC218\uD604 \uC0AC\uBB3C\uD568"
   is_LockQuestion: 0
 --- !u!114 &-5782642954634753871
 MonoBehaviour:
@@ -235,7 +700,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 5a8577d6112555d40b9ba5c85a37d925
-  position: {x: 156.00003, y: 1061.0775}
+  position: {x: 156.80002, y: 1036}
   index: 0
   is_UseThis: 0
   parent: {fileID: -3163919034992094330}
@@ -323,7 +788,7 @@ MonoBehaviour:
   type: 0
   chatText: "\uC774\uC218\uC5F0 \uD559\uC0DD\uC758 \uC0AC\uBB3C\uD568\uC744 \uBCF4\uB0B4\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4"
   face: 0
-  textEvent: 
+  textEvent: 030000000300000003000000
   LoadNextDialog: 
 --- !u!114 &-3896116579817541065
 MonoBehaviour:
@@ -398,7 +863,7 @@ MonoBehaviour:
   type: 0
   chatText: "\uC0AC\uAC74 \uD604\uC7A5\uC744 \uBA3C\uC800 \uBCF4\uC5EC\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4"
   face: 0
-  textEvent: 
+  textEvent: 0300000003000000
   LoadNextDialog: 
 --- !u!114 &-3075076357164013809
 MonoBehaviour:
@@ -423,7 +888,7 @@ MonoBehaviour:
   type: 0
   chatText: "\uD589\uC815\uC2E4\uC5D0 CCTV\uC5D0 \uAD00\uD574 \uBB38\uC758\uD574\uBCF4\uB2C8"
   face: 0
-  textEvent: 
+  textEvent: 0300000003000000030000000300000003000000
   LoadNextDialog: 
 --- !u!114 &-3023067537697144536
 MonoBehaviour:
@@ -438,7 +903,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 8b9a39118beddb6488016dd3a059c955
-  position: {x: 8.000025, y: 4570.0366}
+  position: {x: 8.000029, y: 4577.3413}
   index: 0
   is_UseThis: 0
   parent: {fileID: 8110062914653484729}
@@ -493,7 +958,9 @@ MonoBehaviour:
   childList:
   - {fileID: 4992044228880227174}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uBD80\uBAA8\uB2D8"
   is_LockQuestion: 0
 --- !u!114 &-1841799184759799048
 MonoBehaviour:
@@ -508,13 +975,13 @@ MonoBehaviour:
   m_Name: AskNode
   m_EditorClassIdentifier: 
   guid: 138b819b647f69347a7fd8952967191e
-  position: {x: 377.59995, y: 2850.4}
+  position: {x: 377.59998, y: 2858.8008}
   index: 0
   is_UseThis: 0
   parent: {fileID: 864478486083944815}
   child: {fileID: 7363202054603727785}
-  askText: "\uB2F4\uC784 \uC120\uC0DD\uB2D8"
-  textEvent: 
+  askText: Teacher
+  textEvent: 04000000
   LoadNextDialog: 
 --- !u!114 &-1783618914926028292
 MonoBehaviour:
@@ -555,7 +1022,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: d0c5e522fe8f8f34f9dfea5c89a85138
-  position: {x: 291.29083, y: 4695.1987}
+  position: {x: 292.94897, y: 4693.451}
   index: 0
   is_UseThis: 0
   parent: {fileID: -3023067537697144536}
@@ -580,7 +1047,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 81b75b8ca00d2bd44a457d20a4ad4659
-  position: {x: 276.67963, y: 3110.4004}
+  position: {x: 286.0576, y: 3114.4004}
   index: 0
   is_UseThis: 0
   parent: {fileID: 7363202054603727785}
@@ -632,13 +1099,13 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: c89d2408c3bd99247a33de9162776dda
-  position: {x: 904.245, y: 3519.6252}
+  position: {x: 801.59973, y: 3492}
   index: 0
   is_UseThis: 0
   parent: {fileID: 2197732529746198942}
   childList:
   - {fileID: -8975104478211627525}
-  state: 0
+  state: 1
   type: 0
   chatText: "\uC218\uD604\uC774 \uCE5C\uAD6C\uB4E4\uC744 \uB9CC\uB098\uBD10\uC57C\uACA0\uAD70"
   face: 0
@@ -657,7 +1124,7 @@ MonoBehaviour:
   m_Name: AskNode
   m_EditorClassIdentifier: 
   guid: a13c7b3b7b90868469f352bcae07ad33
-  position: {x: -42.39988, y: 2452.8}
+  position: {x: -42.400047, y: 2452.8}
   index: 0
   is_UseThis: 0
   parent: {fileID: -5670356622581108905}
@@ -703,7 +1170,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 409a0c774c3a16c48912d6297da62695
-  position: {x: -718.6429, y: 3238.4001}
+  position: {x: -717.6001, y: 3212}
   index: 0
   is_UseThis: 0
   parent: {fileID: 3818050925528462026}
@@ -733,7 +1200,7 @@ MonoBehaviour:
   is_UseThis: 0
   parent: {fileID: -121214396839191027}
   childList: []
-  state: 0
+  state: 1
   type: 0
   chatText: "\uADF8\uB7EC\uC9C0"
   face: 0
@@ -862,7 +1329,7 @@ MonoBehaviour:
   parent: {fileID: 2903525783468171222}
   childList:
   - {fileID: -8975104478211627525}
-  state: 0
+  state: 1
   type: 0
   chatText: "\uAC15\uC9C0\uD604 \uD559\uC0DD\uC744 \uC870\uC0AC\uD574 \uBD10\uC57C
     \uD560 \uAC70 \uAC19\uC544"
@@ -890,7 +1357,9 @@ MonoBehaviour:
   childList:
   - {fileID: 9067494229562781191}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uC0AC\uAC74 \uD604\uC7A5"
   is_LockQuestion: 0
 --- !u!114 &744372558112005897
 MonoBehaviour:
@@ -931,7 +1400,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: c15e8c17341460e4e821d9f7c9fa8920
-  position: {x: 452.98016, y: 2584.8}
+  position: {x: 452.80002, y: 2586.549}
   index: 0
   is_UseThis: 0
   parent: {fileID: -2884602709397033483}
@@ -966,7 +1435,9 @@ MonoBehaviour:
   childList:
   - {fileID: 1942376615523610306}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 1
+  fileName: "\uC2DC\uCCB4"
   is_LockQuestion: 0
 --- !u!114 &1796857732905570435
 MonoBehaviour:
@@ -989,7 +1460,9 @@ MonoBehaviour:
   childList:
   - {fileID: 4172441511576287704}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uBC18 \uCE5C\uAD6C\uB4E4"
   is_LockQuestion: 0
 --- !u!114 &1942376615523610306
 MonoBehaviour:
@@ -1090,7 +1563,9 @@ MonoBehaviour:
   childList:
   - {fileID: 2341333628864779721}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uAC15\uC9C0\uD6042"
   is_LockQuestion: 0
 --- !u!114 &2768966851647550630
 MonoBehaviour:
@@ -1206,13 +1681,29 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   guid: 227ea8fd4bd3fa64c9a508ede1f4a37a
-  position: {x: -1.1499975, y: 0.000003356934}
+  position: {x: 6.4000025, y: -12.881201}
   index: 0
   is_UseThis: 0
   parent: {fileID: 11400000}
   child: {fileID: 2768966851647550630}
   showName: HG
-  loadFileNameList: []
+  loadFileNameList:
+  - "\uC0AC\uAC74 \uD604\uC7A5"
+  - "\uC2DC\uCCB4"
+  - "\uC625\uC0C1\r"
+  - "\uC2E0\uBC1C"
+  - "\uC774\uC218\uC5F0 \uC0AC\uBB3C\uD568"
+  - "\uC774\uC218\uC5F0 \uBB38\uC81C\uC9D1"
+  - "\uC774\uC218\uC5F0 \uAD50\uACFC\uC11C"
+  - CCTV
+  - CCTV1
+  - CCTV2
+  - CCTV3
+  - CCTV4
+  - Teacher
+  - Home
+  - Friend
+  - "\uAC15\uC9C0\uD604 \uC0AC\uBB3C\uD568"
   nowIndex: 0
 --- !u!114 &3337403160450376717
 MonoBehaviour:
@@ -1233,7 +1724,7 @@ MonoBehaviour:
   parent: {fileID: 864478486083944815}
   child: {fileID: -2094241441226533546}
   askText: "\uBD80\uBAA8\uB2D8"
-  textEvent: 
+  textEvent: 04000000
   LoadNextDialog: 
 --- !u!114 &3340442707748321522
 MonoBehaviour:
@@ -1248,13 +1739,13 @@ MonoBehaviour:
   m_Name: AskNode
   m_EditorClassIdentifier: 
   guid: bc77b86002db0624ab8e4590d1824076
-  position: {x: 1144.5184, y: 2850.4001}
+  position: {x: 1145.6001, y: 2850.4001}
   index: 0
   is_UseThis: 0
   parent: {fileID: -8860517450719016306}
   child: {fileID: 1796857732905570435}
-  askText: 
-  textEvent: 
+  askText: "\uBC18 \uCE5C\uAD6C\uB4E4"
+  textEvent: 04000000
   LoadNextDialog: 
 --- !u!114 &3818050925528462026
 MonoBehaviour:
@@ -1371,7 +1862,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 203fb0953813ab34a986a93321821b42
-  position: {x: 156.75003, y: 393.4501}
+  position: {x: 156.80005, y: 390.94}
   index: 0
   is_UseThis: 0
   parent: {fileID: 9086518399393044832}
@@ -1473,7 +1964,7 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: ede15095486224d4bac996a7bd2062c9
-  position: {x: 377.6, y: 2985.4507}
+  position: {x: 377.59998, y: 2985.6}
   index: 0
   is_UseThis: 0
   parentList:
@@ -1481,7 +1972,9 @@ MonoBehaviour:
   childList:
   - {fileID: -1670427780382526299}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uB2F4\uC784 \uC120\uC0DD\uB2D8"
   is_LockQuestion: 0
 --- !u!114 &7486208310539866046
 MonoBehaviour:
@@ -1546,7 +2039,7 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: 8dd7d06ddb1e99241b01d8ebf8ff648d
-  position: {x: 158.40001, y: 4434.4014}
+  position: {x: 158.39998, y: 4434.4}
   index: 0
   is_UseThis: 0
   parentList:
@@ -1554,7 +2047,9 @@ MonoBehaviour:
   childList:
   - {fileID: -3023067537697144536}
   is_AllQuestion: 0
-  is_SpecificFile: 0
+  asks: []
+  is_SpecificFile: 1
+  fileName: "\uAC15\uC9C0\uD6041"
   is_LockQuestion: 0
 --- !u!114 &8592982041982290083
 MonoBehaviour:
