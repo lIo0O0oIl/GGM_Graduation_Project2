@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ChatVisual
 {
-    //[CustomEditor(typeof(ChatContainer))]
+    [CustomEditor(typeof(ChatContainer))]
     public class ChatContainerCustomInspector : Editor
     {
         private bool is_Open, is_Open2;
