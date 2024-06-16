@@ -12,7 +12,6 @@ namespace ChatVisual
 
         private void OnValidate()
         {
-            Debug.Log("change");
             if (!string.IsNullOrEmpty(showName))
             {
                 parent.humanName = showName;

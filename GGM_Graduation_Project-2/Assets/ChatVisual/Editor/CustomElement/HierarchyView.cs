@@ -36,7 +36,6 @@ namespace ChatVisual
             {
                 int index = i;
 
-                Debug.Log(index);
                 Button button = new Button(() => ChangeHuman(index));
                 button.style.flexDirection = FlexDirection.Row;
                 button.style.justifyContent = Justify.Center;

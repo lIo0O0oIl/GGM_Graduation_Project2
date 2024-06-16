@@ -19,6 +19,7 @@ namespace ChatVisual
 
         private bool is_Expand = false;
         private bool is_LoadList = false;
+        private bool is_AllQuestion = false;
 
         public void UpdateInspector(NodeView node)   
         {
@@ -26,6 +27,7 @@ namespace ChatVisual
 
             is_Expand = false;
             is_LoadList = false;
+            is_AllQuestion = false;
 
             var container = new IMGUIContainer();
             container.onGUIHandler = () =>
@@ -173,7 +175,11 @@ namespace ChatVisual
                                 if (conditionNode.checkClass is AllQuestion allQuestion)
                                 {
                                     ++EditorGUI.indentLevel;
-                                    allQuestion.Init(conditionNode);
+                                    if (!is_AllQuestion)
+                                    {
+                                        is_AllQuestion = true;
+                                        allQuestion.Init(conditionNode);
+                                    }
                                     GUILayout.BeginHorizontal();
                                     GUILayout.Label($"AskCount");
                                     GUILayout.FlexibleSpace();

@@ -61,18 +61,19 @@ namespace ChatVisual
 
         public void Init(ConditionNode myNode)
         {
-            Debug.Log(myNode.parentList.Count);
             for (int i = 0; i < myNode.parentList.Count; i++)
             {
                 Node nowNode = myNode.parentList[i];
-                Debug.Log(nowNode);
                 for (int j = 0; j < 50; j++)
                  {
-                     Debug.Log(nowNode);
                      if (nowNode is ChatNode chatNode)
                      {
                          nowNode = chatNode.parent;
                      }
+                     if (nowNode is ConditionNode condition)
+                    {
+                        nowNode = condition.parentList[0];
+                    }
                      if (nowNode is AskNode askNode)
                      {
                         conditionNode.asks.Add(askNode);
@@ -80,6 +81,7 @@ namespace ChatVisual
                      }
                  }
             }
+            
         }
 
         public bool Check()

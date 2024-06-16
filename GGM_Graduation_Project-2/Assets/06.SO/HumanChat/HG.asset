@@ -24,8 +24,15 @@ MonoBehaviour:
   - {fileID: -1670427780382526299}
   childList:
   - {fileID: 2959291578591272238}
-  is_AllQuestion: 0
+  is_AllQuestion: 1
+  asks:
+  - {fileID: -8336487026159529361}
+  - {fileID: -732252647395145651}
+  - {fileID: 3337403160450376717}
+  - {fileID: 3340442707748321522}
+  - {fileID: -1841799184759799048}
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &-8917121665160068671
 MonoBehaviour:
@@ -74,7 +81,9 @@ MonoBehaviour:
   childList:
   - {fileID: 3340442707748321522}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &-8693162329726485946
 MonoBehaviour:
@@ -161,7 +170,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: f83439587196b044f86c88a862174eaf
-  position: {x: 674.40015, y: 3246.2007}
+  position: {x: 623.27875, y: 3246}
   index: 0
   is_UseThis: 0
   parent: {fileID: 4992044228880227174}
@@ -220,7 +229,9 @@ MonoBehaviour:
   childList:
   - {fileID: -645083983494829297}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &-5782642954634753871
 MonoBehaviour:
@@ -493,7 +504,9 @@ MonoBehaviour:
   childList:
   - {fileID: 4992044228880227174}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &-1841799184759799048
 MonoBehaviour:
@@ -529,7 +542,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 1130e921b79687b4a89dd502df0a8faa
-  position: {x: 83.19994, y: 3518.651}
+  position: {x: 107.48601, y: 3452.5378}
   index: 0
   is_UseThis: 0
   parent: {fileID: 6713573219091843661}
@@ -632,7 +645,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: c89d2408c3bd99247a33de9162776dda
-  position: {x: 904.245, y: 3519.6252}
+  position: {x: 812.75684, y: 3485.004}
   index: 0
   is_UseThis: 0
   parent: {fileID: 2197732529746198942}
@@ -890,7 +903,9 @@ MonoBehaviour:
   childList:
   - {fileID: 9067494229562781191}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &744372558112005897
 MonoBehaviour:
@@ -966,7 +981,9 @@ MonoBehaviour:
   childList:
   - {fileID: 1942376615523610306}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 1
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &1796857732905570435
 MonoBehaviour:
@@ -989,7 +1006,9 @@ MonoBehaviour:
   childList:
   - {fileID: 4172441511576287704}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &1942376615523610306
 MonoBehaviour:
@@ -1030,7 +1049,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: e4b0f1ecf081e0e44a635d53a2240db8
-  position: {x: 674.4, y: 3390.501}
+  position: {x: 619.78076, y: 3378.7568}
   index: 0
   is_UseThis: 0
   parent: {fileID: -6490827863239216952}
@@ -1090,7 +1109,9 @@ MonoBehaviour:
   childList:
   - {fileID: 2341333628864779721}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &2768966851647550630
 MonoBehaviour:
@@ -1320,7 +1341,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 32c650a9907736e4f9fa59f5c3537abd
-  position: {x: -182.39989, y: 3650.9497}
+  position: {x: -55.749084, y: 3584.502}
   index: 0
   is_UseThis: 0
   parent: {fileID: -1783618914926028292}
@@ -1345,7 +1366,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 0363ded3aa96ec64194385d2a2e2160a
-  position: {x: 674.1501, y: 3114.8}
+  position: {x: 623.27875, y: 3121.996}
   index: 0
   is_UseThis: 0
   parent: {fileID: -2094241441226533546}
@@ -1422,7 +1443,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 5dcfebb004ec72048931c9d5524c2a75
-  position: {x: -182.40001, y: 3390.1008}
+  position: {x: -178.75703, y: 3328.749}
   index: 0
   is_UseThis: 0
   parent: {fileID: 7277336490882980217}
@@ -1447,7 +1468,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 1f4336ebb3c23d64e835fc86fe43bfba
-  position: {x: -182.39989, y: 3256.8}
+  position: {x: -182.00002, y: 3199.2827}
   index: 0
   is_UseThis: 0
   parent: {fileID: 7486208310539866046}
@@ -1481,7 +1502,9 @@ MonoBehaviour:
   childList:
   - {fileID: -1670427780382526299}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &7486208310539866046
 MonoBehaviour:
@@ -1554,7 +1577,9 @@ MonoBehaviour:
   childList:
   - {fileID: -3023067537697144536}
   is_AllQuestion: 0
+  asks: []
   is_SpecificFile: 0
+  fileName: 
   is_LockQuestion: 0
 --- !u!114 &8592982041982290083
 MonoBehaviour:
