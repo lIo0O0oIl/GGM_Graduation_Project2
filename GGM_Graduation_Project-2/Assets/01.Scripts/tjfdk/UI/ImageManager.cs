@@ -39,21 +39,21 @@ public class Text
 public class ImageManager : MonoBehaviour
 {
     public List<ImageBig> images;
-    public List<ImageSmall> pngs;
+    public List<PngSO> pngs;
     public List<Text> texts;
 
     public Dictionary<string, ImageBig> imageList;
-    public Dictionary<string, ImageSmall> pngList;
+    public Dictionary<string, PngSO> pngList;
     public Dictionary<string, Text> textList;
 
     private void Awake()
     {
         images = new List<ImageBig>();
-        pngs = new List<ImageSmall>();
+        pngs = new List<PngSO>();
         texts = new List<Text>();
 
         imageList = new Dictionary<string, ImageBig>();
-        pngList = new Dictionary<string, ImageSmall>();
+        pngList = new Dictionary<string, PngSO>();
         textList = new Dictionary<string, Text>();
     }
 
@@ -62,7 +62,7 @@ public class ImageManager : MonoBehaviour
         foreach (ImageBig image in images)
             imageList.Add(image.name, image);
 
-        foreach (ImageSmall png in pngs)
+        foreach (PngSO png in pngs)
             pngList.Add(png.name, png);
 
         foreach (Text memo in texts)
@@ -71,7 +71,7 @@ public class ImageManager : MonoBehaviour
 
     public ImageBig FindImage(string name) { return imageList[name]; }
 
-    public ImageSmall FindPng(string name)
+    public PngSO FindPng(string name)
     {
         //foreach (ImageSmall png in  pngs)
         //{

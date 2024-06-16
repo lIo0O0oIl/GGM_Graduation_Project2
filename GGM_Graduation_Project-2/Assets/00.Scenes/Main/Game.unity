@@ -380,8 +380,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523b2f4b2e1de8e4c9a83a0eedeaedaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  images: []
-  pngs: []
+  images:
+  - name: 
+    image: {fileID: 0}
+    isOpen: 0
+    pngName: []
+  pngs:
+  - name: 
+    image: {fileID: 0}
+    isOpen: 0
+    memo: 
+    importance: 0
+    saveSprite: {fileID: 0}
+    size: {x: 0, y: 0}
+    pos: {x: 0, y: 0}
+    memoPos: {x: 0, y: 0}
   texts: []
 --- !u!114 &1207175533
 MonoBehaviour:
@@ -600,7 +613,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   members: []
-  questions: []
   changeMemberBtnOn: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isMemberListOpen: 0
