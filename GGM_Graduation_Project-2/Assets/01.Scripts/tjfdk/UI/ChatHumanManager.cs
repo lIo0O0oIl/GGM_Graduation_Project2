@@ -1,5 +1,6 @@
 using ChatVisual;
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,9 +15,9 @@ public class ChatHumanManager : UI_Reader
     private float currentTime = 0f;
 
     private List<Node> nowNodes = new List<Node>();
-    private string nowHumanName;        // Name of the human you're talking to
+    public string nowHumanName;        // Name of the human you're talking to
     //private int nowIndex = 0;
-    private Node currentNode;
+    public Node currentNode;
     private bool is_ChatStart = false;
 
     public Coroutine chatting;
@@ -115,6 +116,7 @@ public class ChatHumanManager : UI_Reader
 
                         GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
                             askNode.askText, askNode.textEvent, () => { currentNode = askNode; });
+                        GameManager.Instance.chatSystem.questions.Add(askNode);
                     }
                     else if (children[i] is ConditionNode conditionNode) // When child is a ConditionNode
                     {
