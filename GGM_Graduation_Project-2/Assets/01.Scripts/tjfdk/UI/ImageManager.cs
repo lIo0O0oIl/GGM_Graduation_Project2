@@ -4,72 +4,72 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-[Serializable]
-public class ImageDefualt
-{
-    public string name;
-    public Sprite image;
-    public bool isOpen;
-}
+//[Serializable]
+//public class ImageDefualt
+//{
+//    public string name;
+//    public Sprite image;
+//    public bool isOpen;
+//}
 
-[Serializable]
-public class ImageSmall : ImageDefualt
-{
-    public string memo;
-    public bool importance;
-    public Sprite saveSprite;
-    public Vector2 size;
-    public Vector2 pos;
-    public Vector2 memoPos;
-}
+//[Serializable]
+//public class ImageSmall : ImageDefualt
+//{
+//    public string memo;
+//    public bool importance;
+//    public Sprite saveSprite;
+//    public Vector2 size;
+//    public Vector2 pos;
+//    public Vector2 memoPos;
+//}
 
-[Serializable]
-public class ImageBig : ImageDefualt
-{
-    public List<string> pngName = new List<string>();
-}
+//[Serializable]
+//public class ImageBig : ImageDefualt
+//{
+//    public List<string> pngName = new List<string>();
+//}
 
-[Serializable]
-public class Text
-{
-    public string name;
-    public string memo;
-}
+//[Serializable]
+//public class Text
+//{
+//    public string name;
+//    public string memo;
+//}
 
 public class ImageManager : MonoBehaviour
 {
-    public List<ImageBig> images;
+    public List<ImageSO> images;
     public List<PngSO> pngs;
-    public List<Text> texts;
+    public List<TextSO> texts;
 
-    public Dictionary<string, ImageBig> imageList;
+    public Dictionary<string, ImageSO> imageList;
     public Dictionary<string, PngSO> pngList;
-    public Dictionary<string, Text> textList;
+    public Dictionary<string, TextSO> textList;
 
     private void Awake()
     {
-        images = new List<ImageBig>();
+        images = new List<ImageSO>();
         pngs = new List<PngSO>();
-        texts = new List<Text>();
+        texts = new List<TextSO>();
 
-        imageList = new Dictionary<string, ImageBig>();
+        imageList = new Dictionary<string, ImageSO>();
         pngList = new Dictionary<string, PngSO>();
-        textList = new Dictionary<string, Text>();
+        textList = new Dictionary<string, TextSO>();
     }
 
     private void Start()
     {
-        foreach (ImageBig image in images)
+        foreach (ImageSO image in images)
             imageList.Add(image.name, image);
 
         foreach (PngSO png in pngs)
             pngList.Add(png.name, png);
 
-        foreach (Text memo in texts)
+        foreach (TextSO memo in texts)
             textList.Add(memo.name, memo);
     }
 
-    public ImageBig FindImage(string name) { return imageList[name]; }
+    public ImageSO FindImage(string name) { return imageList[name]; }
 
     public PngSO FindPng(string name)
     {
@@ -82,5 +82,5 @@ public class ImageManager : MonoBehaviour
         return pngList[name];
     }
 
-    public Text FindText(string name) { return textList[name]; }
+    public TextSO FindText(string name) { return textList[name]; }
 }

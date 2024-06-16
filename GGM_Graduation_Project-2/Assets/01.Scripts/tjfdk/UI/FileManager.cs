@@ -6,36 +6,36 @@ using System.Runtime.InteropServices;
 using Unity.Collections;
 using UnityEngine;
 
-[Serializable]
-public class File
-{
-    public string fileName;
-    public string fileParentName;
-    public FileType fileType;
-    public string eventName;
-    public string lockQuestionName;
-}
+//[Serializable]
+//public class File
+//{
+//    public string fileName;
+//    public string fileParentName;
+//    public FileType fileType;
+//    public string eventName;
+//    public string lockQuestionName;
+//}
 
 public class FileManager : UI_Reader
 {
-    [SerializeField] List<File> folderFiles;
-    public Dictionary<string, File> folderFileList;
+    [SerializeField] List<FileSO> folderFiles;
+    public Dictionary<string, FileSO> folderFileList;
 
     private void Awake()
     {
-        folderFiles = new List<File>();
-        folderFileList = new Dictionary<string, File>();
+        folderFiles = new List<FileSO>();
+        folderFileList = new Dictionary<string, FileSO>();
     }
 
     private void Start()
     {
-        foreach (File file in folderFiles)
+        foreach (FileSO file in folderFiles)
             folderFileList.Add(file.fileName, file);
     }
 
-    public File FindFile(string name) { return folderFileList[name]; }
+    public FileSO FindFile(string name) { return folderFileList[name]; }
 
-    public void UnlockChapter(File file)
+    public void UnlockChapter(FileSO file)
     {
         if (file.eventName != "")
         {
@@ -58,7 +58,7 @@ public class FileManager : UI_Reader
         }
     }
 
-    public void UnlockChat(File file)
+    public void UnlockChat(FileSO file)
     {
         if (file.eventName != "")
         {
