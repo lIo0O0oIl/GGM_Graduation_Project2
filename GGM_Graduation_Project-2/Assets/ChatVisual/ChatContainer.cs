@@ -32,11 +32,11 @@ namespace ChatVisual
 
         private void Awake()
         {
-            for (int i = 0; i < nameList.Count; i++)
-            {
-            Debug.Log("Add : " + nameList[i]);
-                HumanAndChatDictionary.Add(nameList[i], nodeList[i].nodes);
-            }
+            //for (int i = 0; i < nameList.Count; i++)
+            //{
+            //Debug.Log("Add : " + nameList[i]);
+            //    HumanAndChatDictionary.Add(nameList[i], nodeList[i].nodes);
+            //}
         }
 
 #if UNITY_EDITOR

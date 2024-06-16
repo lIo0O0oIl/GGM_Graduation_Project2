@@ -1,7 +1,9 @@
 using ChatVisual;
 using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
 public class GameManager : Singleton<GameManager>
@@ -26,8 +28,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-
-
         //cutSceneSystem.PlayCutScene("DieFall");         // StartCutScene
         //chapterManager.AddHuman("HG");
     }

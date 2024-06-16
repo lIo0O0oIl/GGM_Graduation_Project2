@@ -226,7 +226,7 @@ public class UIReader_Chatting : UI_Reader
 
     // input question
     public void InputQuestion(string toWho, bool isLock, string msg, 
-        IEnumerator reply, Action action = null, bool isRecord = true)
+        /*IEnumerator reply,*/ List<EChatEvent> chatEvt = null, Action action = null, bool isRecord = true)
     {
         // create chat
         VisualElement chat = null;
@@ -267,8 +267,8 @@ public class UIReader_Chatting : UI_Reader
                 //}
 
                 // if reply isn't null to start coroutine
-                if (reply != null)
-                    StartCoroutine(reply);
+                //if (reply != null)
+                //    StartCoroutine(reply);
 
                 // if action isn't null to start action
                 action?.Invoke();
@@ -388,7 +388,7 @@ public class UIReader_Chatting : UI_Reader
     {
         // find member
         MemberProfile member = FindMember(memberName);
-
+        
         // if this member is not open
         if (member.isOpen == false)
         {
