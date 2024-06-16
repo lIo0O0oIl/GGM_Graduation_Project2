@@ -259,8 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21595680c07e20742a7ef1df761b1b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nowName: 
   chatTrees:
-  - {fileID: 11400000, guid: 24e635516f6a2a145914ae26f1d62a72, type: 2}
+  - {fileID: 11400000, guid: af43d381abb643542a02989271d92845, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

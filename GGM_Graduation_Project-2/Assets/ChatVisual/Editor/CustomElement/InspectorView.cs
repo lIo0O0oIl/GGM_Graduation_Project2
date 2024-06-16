@@ -177,7 +177,7 @@ namespace ChatVisual
                                     GUILayout.BeginHorizontal();
                                     GUILayout.Label($"AskCount");
                                     GUILayout.FlexibleSpace();
-                                    GUILayout.Label($"{allQuestion.asks.Count}");
+                                    GUILayout.Label($"{allQuestion.conditionNode.asks.Count}");
                                     GUILayout.EndHorizontal();
                                     --EditorGUI.indentLevel;
                                 }
@@ -188,7 +188,7 @@ namespace ChatVisual
                                 if (conditionNode.checkClass is SpecificFile specificFile)
                                 {
                                     ++EditorGUI.indentLevel;
-                                    specificFile.fileName = EditorGUILayout.TextField("FileName", specificFile.fileName);
+                                    specificFile.conditionNode.fileName = EditorGUILayout.TextField("FileName", specificFile.conditionNode.fileName);
                                     --EditorGUI.indentLevel;
                                 }
                             }

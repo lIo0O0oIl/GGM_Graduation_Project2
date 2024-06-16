@@ -21,7 +21,10 @@ namespace ChatVisual
 
         public ICheck checkClass;
         public bool is_AllQuestion;
+        public List<AskNode> asks = new List<AskNode>();
         public bool is_SpecificFile;
+        public string fileName;
+
         public bool is_LockQuestion;
         
         public void InitConditionNode()
@@ -29,11 +32,19 @@ namespace ChatVisual
             if (is_AllQuestion)
             {
                 checkClass = new AllQuestion();
+                if (checkClass is AllQuestion allQuestion)
+                {
+                    allQuestion.conditionNode = this;
+                }
             }
 
             if (is_SpecificFile)
             {
                 checkClass = new SpecificFile();
+                if (checkClass is SpecificFile specificFile)
+                {
+                    specificFile.conditionNode = this;
+                }
             }
         }
     }
@@ -43,9 +54,10 @@ namespace ChatVisual
         public bool Check();
     }
 
+    [Serializable]
     public class AllQuestion : ICheck
     {
-        public List<AskNode> asks = new List<AskNode>();
+        public ConditionNode conditionNode;
 
         public void Init(ConditionNode myNode)
         {
@@ -63,7 +75,7 @@ namespace ChatVisual
                      }
                      if (nowNode is AskNode askNode)
                      {
-                         asks.Add(askNode);
+                        conditionNode.asks.Add(askNode);
                          break;
                      }
                  }
@@ -72,9 +84,9 @@ namespace ChatVisual
 
         public bool Check()
         {
-            for (int i = 0; i < asks.Count; i++)
+            for (int i = 0; i < conditionNode.asks.Count; i++)
             {
-                if (asks[i].is_UseThis == false)
+                if (conditionNode.asks[i].is_UseThis == false)
                 {
                     return false;
                 }
@@ -83,9 +95,10 @@ namespace ChatVisual
         }
     }
 
+     [Serializable]
     public class SpecificFile : ICheck
     {
-        public string fileName;
+        public ConditionNode conditionNode;
 
         public bool Check()
         {

@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
+  m_Name: NewHuman
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 325138466169552900}
+  humanName: 
+  nodeList:
+  - {fileID: 325138466169552900}
+  - {fileID: 3021785335030967490}
+--- !u!114 &325138466169552900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834f3b7892710d74da32a0f04ef52a51, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  guid: 12ebefc2b30a4aa4086702e2b7c640dc
+  position: {x: 0, y: 0}
+  index: 0
+  is_UseThis: 0
+  parent: {fileID: 11400000}
+  child: {fileID: 0}
+  showName: NewHuman
+  loadFileNameList: []
+  nowIndex: 0
+--- !u!114 &3021785335030967490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966f7155bace4ea40b65a6f9c3cd1574, type: 3}
+  m_Name: ConditionNode
+  m_EditorClassIdentifier: 
+  guid: c03663287c1a2084985711d9935be833
+  position: {x: 0, y: 0}
+  index: 0
+  is_UseThis: 0
+  parentList: []
+  childList: []
+  is_AllQuestion: 0
+  is_SpecificFile: 0
+  is_LockQuestion: 0
