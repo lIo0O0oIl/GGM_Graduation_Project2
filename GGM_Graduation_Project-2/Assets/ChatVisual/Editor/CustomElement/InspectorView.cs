@@ -83,7 +83,7 @@ namespace ChatVisual
                             GUILayout.Space(5);
 
                             GUILayout.Label("Chat");
-                            chatNode.text = EditorGUILayout.TextArea(chatNode.text, EditorStyles.textArea);
+                            chatNode.chatText = EditorGUILayout.TextArea(chatNode.chatText, EditorStyles.textArea);
                             GUILayout.Space(10);
 
                             enumValue2 = (int)chatNode.face;

@@ -90,16 +90,16 @@ public class ChatHumanManager : UI_Reader
         while (true) 
         {
             // node list
-            var children = chatContainer.GetChild(currentNode);
+            var children = chatContainer.GetChatTree().GetChild(currentNode);
 
             if (children.Count == 1)            // When a child is a ChatNode
             {
                 if (children[0] is ChatNode chatNode)
                 {
-                    Debug.Log(chatNode.text);
+                    Debug.Log(chatNode.chatText);
 
                     GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
-                        chatNode.type, chatNode.face, chatNode.text, chatNode.textEvent);
+                        chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
 
                     currentNode = children[0];
                 }
@@ -122,7 +122,7 @@ public class ChatHumanManager : UI_Reader
                     {
                         if (conditionNode.checkClass.Check())
                         {
-                            children = chatContainer.GetChild(conditionNode);
+                            children = chatContainer.GetChatTree().GetChild(conditionNode);
                             conditionNode.is_UseThis = true;
                             
                             continue;
@@ -139,7 +139,6 @@ public class ChatHumanManager : UI_Reader
     {
         Debug.Log("대화 시작");
         nowHumanName = name;
-        nowNodes = chatContainer.HumanAndChatDictionary[nowHumanName];
         if (nowNodes[0] is RootNode rootNode)
         {
             currentNode = rootNode;
