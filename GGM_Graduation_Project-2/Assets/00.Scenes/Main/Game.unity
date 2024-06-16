@@ -193,16 +193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bbbd968b924444191c81e323af6906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutSceneSystem: {fileID: 0}
+  mainSystem: {fileID: 0}
   chatSystem: {fileID: 0}
+  connectionSystem: {fileID: 0}
   fileSystem: {fileID: 0}
   imageSystem: {fileID: 0}
-  chapterManager: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
   chatProgress: {fileID: 0}
-  chatContainer: {fileID: 0}
-  cutSceneManager: {fileID: 0}
-  fileManager: {fileID: 0}
-  imageManager: {fileID: 0}
 --- !u!114 &150678878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +212,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8f49d8b99a1654ea80cc3dbde97735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSystem: {fileID: 0}
+  chatSystem: {fileID: 0}
+  connectionSystem: {fileID: 0}
+  fileSystem: {fileID: 0}
+  imageSystem: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
 --- !u!114 &150678879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,25 +230,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34011704b4b14504098dcfd848e9ebba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSystem: {fileID: 0}
+  chatSystem: {fileID: 0}
+  connectionSystem: {fileID: 0}
+  fileSystem: {fileID: 0}
+  imageSystem: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
   fileAreaSizeOn: 285
   fileAreaSizeOff: 150
   changeSizeBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeSizeBtnOff: {fileID: -3753015318093942961, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isFileSystemOpen: 0
-  ux_filePath: {fileID: 0}
-  ux_fileGround: {fileID: 0}
-  ux_folderFile: {fileID: 0}
-  ux_imageFile: {fileID: 0}
-  ux_textFile: {fileID: 0}
-  ux_ImagePanel: {fileID: 0}
-  ux_TextPanel: {fileID: 0}
+  currentFolderName: 
   fileFolders: []
   currentFileFolder:
     folderName: 
     parentFolderName: 
-    folderFiles: []
-    textFiles: []
-    imageFiles: []
 --- !u!114 &150678880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +258,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b7eefaa5f8df24ba5d2a3637293abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSystem: {fileID: 0}
+  chatSystem: {fileID: 0}
+  connectionSystem: {fileID: 0}
+  fileSystem: {fileID: 0}
+  imageSystem: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
   currentMemberName: 
   members: []
   changeMemberBtnOn: {fileID: -4521532143779581420, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
@@ -279,6 +285,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523b2f4b2e1de8e4c9a83a0eedeaedaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSystem: {fileID: 0}
+  chatSystem: {fileID: 0}
+  connectionSystem: {fileID: 0}
+  fileSystem: {fileID: 0}
+  imageSystem: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
   images:
   - name: "\uC0AC\uAC74 \uD604\uC7A5"
     image: {fileID: 21300000, guid: 614239e0a07b8c5429bdd87a8e69bb1d, type: 3}
@@ -319,48 +331,48 @@ MonoBehaviour:
     isOpen: 0
     memo: "\uD53C\uD574\uC790\uC758 \uC2DC\uC2E0\uC774\uB2E4."
     importance: 0
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: e3977c1adde0a5040b3b5b373c6228a3, type: 3}
     size: {x: 1639, y: 1123}
     pos: {x: 24, y: -33}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 500, y: 250}
   - name: "\uC2E0\uBC1C"
     image: {fileID: 21300000, guid: 00531fa989e55b748b68d2ade13982ec, type: 3}
     isOpen: 0
     memo: "\uD53C\uD574\uC790\uC758 \uC2E0\uBC1C\uC73C\uB85C \uCD94\uC815\uB418\uB294
       \uC2E0\uBC1C\uC774\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: 00531fa989e55b748b68d2ade13982ec, type: 3}
     size: {x: 130, y: 130}
     pos: {x: 70, y: 714}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 250, y: 350}
   - name: "\uB09C\uAC04"
     image: {fileID: 21300000, guid: 2325df0c405ce814ca108b5ce80070a7, type: 3}
     isOpen: 0
     memo: "\uC704\uD0DC\uC704\uD0DC\uD574 \uBCF4\uC774\uB294 \uB09C\uAC04\uC774\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 0}
     size: {x: 50, y: 50}
     pos: {x: 400, y: 800}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uCC45"
     image: {fileID: 21300000, guid: 29102b5770e74e447b528dcf2a5e9c5c, type: 3}
     isOpen: 0
     memo: "\uC870\uAE08\uC758 \uCC45\uC774 \uC874\uC7AC\uD55C\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 0}
     size: {x: 103, y: 118}
     pos: {x: 491, y: 323}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC77C\uAE301"
     image: {fileID: 21300000, guid: 76c169f72c7e29e48850db89dcd78fe9, type: 3}
     isOpen: 0
     memo: "\uC774\uC218\uC5F0\uC758 \uC77C\uAE30\uC7A5\uC73C\uB85C \uBCF4\uC774\uB294
       \uBB3C\uAC74\uC774\uB2E4."
     importance: 0
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: 5d2d96003f834a84ca0d7fc43f98447e, type: 3}
     size: {x: 103, y: 114}
     pos: {x: 308, y: 536}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC0AC\uC9C4"
     image: {fileID: 21300000, guid: 575d251884039934b95c8aa23fd6a389, type: 3}
     isOpen: 0
@@ -368,85 +380,87 @@ MonoBehaviour:
       \uC0AC\uC9C4\uCC0D\uD600\uC788\uB2E4. 2\uBA85\uC758 \uC5BC\uAD74\uC740 \uBCF4\uC774\uC9C0
       \uC54A\uB294\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: 575d251884039934b95c8aa23fd6a389, type: 3}
     size: {x: 103, y: 114}
     pos: {x: 1060, y: 362}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uB18D\uAD6C \uD3EC\uC2A4\uD130"
     image: {fileID: 21300000, guid: b221297afd4bdb545bf11a8386b94712, type: 3}
     isOpen: 0
     memo: "\uB204\uAD70\uC9C0 \uBAA8\uB97C \uCE90\uB9AD\uD130\uAC00 \uADF8\uB824\uC838\uC788\uB294
       \uD3EC\uC2A4\uD130\uC774\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: 575d251884039934b95c8aa23fd6a389, type: 3}
     size: {x: 213, y: 251}
     pos: {x: 299, y: 79}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC57C\uAD6C\uBC29\uB9DD\uC774"
     image: {fileID: 21300000, guid: d3b555cf975a5e2478214d27a348fd20, type: 3}
     isOpen: 0
     memo: "\uC190 \uB54C\uAC00 \uAC00\uB4DD\uD55C \uC57C\uAD6C\uBC29\uB9DD\uC774\uC774\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 0}
     size: {x: 213, y: 251}
     pos: {x: 1462, y: 753}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC774\uC218\uC5F0\uC758 \uD578\uB4DC\uD3F0"
     image: {fileID: 21300000, guid: e6198f6d75181094dac5fd527d9294ff, type: 3}
     isOpen: 0
     memo: "\uB204\uAD70\uAC00\uC758 \uD578\uB4DC\uD3F0\uC774\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: e6198f6d75181094dac5fd527d9294ff, type: 3}
     size: {x: 198, y: 213}
     pos: {x: 72, y: 584}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uB18D\uAD6C \uD53C\uADDC\uC5B4"
     image: {fileID: 21300000, guid: 029f93eda14d9ee41afdc816f87aeca5, type: 3}
     isOpen: 0
     memo: "\uB18D\uAD6C \uAD00\uB828 \uCE90\uB9AD\uD130\uC758 \uD53C\uADDC\uC5B4\uB4E4\uC774
       \uB193\uC5EC\uC788\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: e6198f6d75181094dac5fd527d9294ff, type: 3}
     size: {x: 209, y: 238}
     pos: {x: 59, y: 204}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uBCA0\uAC1C"
     image: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     isOpen: 0
     memo: "\uBC30\uAC8C \uC785\uB2C8\uB2E4."
     importance: 0
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: 5d2d96003f834a84ca0d7fc43f98447e, type: 3}
     size: {x: 213, y: 251}
     pos: {x: 1161, y: 445}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC4F0\uB808\uAE30\uD1B5"
     image: {fileID: 21300000, guid: 9a1b909b4fbe9bb4ea7113ffec736df6, type: 3}
     isOpen: 0
     memo: "\uD3C9\uBC94\uD55C \uC4F0\uB808\uAE30\uD1B5\uC785\uB2C8\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     size: {x: 211, y: 251}
     pos: {x: 110, y: 529}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uCEF4\uD4E8\uD130"
     image: {fileID: 21300000, guid: e7502d889cb3d1543b3d96db99b32410, type: 3}
     isOpen: 0
     memo: "\uBE44\uBC88\uC774 \uAC78\uB824\uC788\uB294 \uCEF4\uD4E8\uD130\uC774\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: 38590ccd420c5894f8df39a9b4be2b87, type: 3}
     size: {x: 211, y: 251}
     pos: {x: 490, y: 162}
-    memoPos: {x: 0, y: 0}
+    descriptePos: {x: 0, y: 0}
   - name: "\uC11C\uB78D"
     image: {fileID: 21300000, guid: fe5672c7dca4c4544943c38def302d51, type: 3}
     isOpen: 1
     memo: "\uC11C\uB78D\uC774\uB2E4."
     importance: 1
-    saveSprite: {fileID: 0}
+    saveImage: {fileID: 21300000, guid: ae9a900c798853942bf613cc64e86301, type: 3}
     size: {x: 211, y: 251}
     pos: {x: 404, y: 316}
-    memoPos: {x: 0, y: 0}
-  texts: []
+    descriptePos: {x: 0, y: 0}
+  memos:
+  - name: "\uC77C\uAE301"
+    memo: 
 --- !u!114 &150678882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,9 +473,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60a90a836d390c439310a8232a8b994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ux_imageGround: {fileID: 0}
-  ux_imageEvidence: {fileID: 0}
-  ux_evidenceExplanation: {fileID: 0}
+  mainSystem: {fileID: 0}
+  chatSystem: {fileID: 0}
+  connectionSystem: {fileID: 0}
+  fileSystem: {fileID: 0}
+  imageSystem: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
 --- !u!114 &150678884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +491,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80d74f0e210ffe4a83059ff8df2b6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSystem: {fileID: 0}
+  chatSystem: {fileID: 0}
+  connectionSystem: {fileID: 0}
+  fileSystem: {fileID: 0}
+  imageSystem: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
 --- !u!114 &150678885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,7 +512,9 @@ MonoBehaviour:
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
-  cutScenes: []
+  cutSceneChapters:
+  - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
+  - {fileID: 11400000, guid: 72d10a1d28d6b0342ad49ae8c2313967, type: 2}
 --- !u!114 &150678886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,6 +527,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f5303acd3d13e4a8b4b3c46a8f059c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSystem: {fileID: 0}
+  chatSystem: {fileID: 0}
+  connectionSystem: {fileID: 0}
+  fileSystem: {fileID: 0}
+  imageSystem: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
   folderFiles:
   - fileName: "\uD559\uAD50"
     fileParentName: Main
@@ -692,6 +723,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce46f699b261d24c9ed59bd3dd1a949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSystem: {fileID: 0}
+  chatSystem: {fileID: 0}
+  connectionSystem: {fileID: 0}
+  fileSystem: {fileID: 0}
+  imageSystem: {fileID: 0}
+  cutSceneSystem: {fileID: 0}
   changeHumanTime: 1
 --- !u!1 &594023513
 GameObject:
@@ -737,7 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowHumanName: HG
+  nowHumanName: HY
   nameList:
   - HG
   - Teacher
