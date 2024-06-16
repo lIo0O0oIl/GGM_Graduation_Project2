@@ -10,4 +10,5 @@ public class ImageSO : ScriptableObject
     public bool isOpen;
 
     public List<string> pngName = new List<string>();
+    public List<string> textName = new List<string>();
 }
