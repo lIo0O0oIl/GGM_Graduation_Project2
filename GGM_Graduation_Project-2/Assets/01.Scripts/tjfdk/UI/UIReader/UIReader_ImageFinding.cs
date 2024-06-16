@@ -71,7 +71,8 @@ public class UIReader_ImageFinding : UI_Reader
                 GameManager.Instance.fileManager.UnlockChapter(fileT);
 
                 // restart chatting
-                StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
+                Debug.Log("대화 다시 호출");
+                GameManager.Instance.chapterManager.StartChatting();
             }
             else
             {
@@ -236,7 +237,8 @@ public class UIReader_ImageFinding : UI_Reader
                 //}
 
                 ui_imageGround.Add(imagePanel);
-                StopCoroutine(GameManager.Instance.chapterManager.chatting);
+
+                GameManager.Instance.chapterManager.StopChatting();;
             }
 
             isImageOpen = !isImageOpen;
@@ -274,12 +276,14 @@ public class UIReader_ImageFinding : UI_Reader
                     GameManager.Instance.fileManager.UnlockChapter(file);
 
                     // restart chatting
-                    StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
+                    Debug.Log("대화 다시 호출");
+                    GameManager.Instance.chapterManager.StartChatting();
                 };
 
 
                 ui_panelGround.Add(panel);
-                StopCoroutine(GameManager.Instance.chapterManager.chatting);
+
+                GameManager.Instance.chapterManager.StopChatting();
             }
             else
                 Debug.Log("it's neither an image nor a png");
@@ -422,10 +426,11 @@ public class UIReader_ImageFinding : UI_Reader
             GameManager.Instance.fileManager.UnlockChapter(file);
 
             // restart chatting
-            StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
+            Debug.Log("대화 다시 호출");
+            GameManager.Instance.chapterManager.StartChatting();
         };
 
         ui_panelGround.Add(panel);
-        StopCoroutine(GameManager.Instance.chapterManager.chatting);
+        GameManager.Instance.chapterManager.StopChatting();
     }
 }

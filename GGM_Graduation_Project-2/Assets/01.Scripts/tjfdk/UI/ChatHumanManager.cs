@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 
 public class ChatHumanManager : UI_Reader
 {
-    private ChatContainer chatContainer;
+    public ChatContainer chatContainer;
 
     public float changeHumanTime = 1f;       // A time when humans change
     private float currentTime = 0f;
@@ -21,6 +21,13 @@ public class ChatHumanManager : UI_Reader
     private bool is_ChatStart = false;
 
     public Coroutine chatting;
+    public bool isChattingRunning = false;
+
+    private void Start()
+    {
+        //chatting = StartCoroutine(ReadChat());
+        //StopCoroutine(chatting);
+    }
 
     public void AddHuman(string who)     // HG
     {
@@ -96,7 +103,7 @@ public class ChatHumanManager : UI_Reader
             {
                 if (children[0] is ChatNode chatNode)
                 {
-                    Debug.Log(chatNode.chatText);
+                    //Debug.Log(chatNode.chatText);
 
                     GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
                         chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
@@ -110,7 +117,7 @@ public class ChatHumanManager : UI_Reader
                 {
                     if (children[i] is AskNode askNode) // When child is a AskNode
                     {
-                        Debug.Log(askNode.askText);
+                        //Debug.Log(askNode.askText);
 
                         bool is_Lock = askNode.parent is ConditionNode ? true : false;
 
@@ -131,7 +138,7 @@ public class ChatHumanManager : UI_Reader
                 }
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
@@ -139,12 +146,36 @@ public class ChatHumanManager : UI_Reader
     {
         Debug.Log("대화 시작");
         nowHumanName = name;
+        chatContainer.nowName = name;
+        nowNodes = chatContainer.GetChatTree().nodeList;
         if (nowNodes[0] is RootNode rootNode)
         {
             currentNode = rootNode;
             //nowIndex = rootNode.nowIndex;
         }
-        chatting = StartCoroutine(ReadChat());
-        //is_ChatStart = true;
+
+        Debug.Log("대화 다시 호출");
+        StartChatting();
+    }
+
+    public void StartChatting()
+    {
+        if (isChattingRunning == false)
+        {
+            chatting = StartCoroutine(ReadChat());
+        }
+
+        isChattingRunning = true;
+    }
+
+    public void StopChatting()
+    {
+        if (isChattingRunning)
+        {
+            if (chatting != null)
+                StopCoroutine(chatting);
+        }
+
+        isChattingRunning = false;
     }
 }

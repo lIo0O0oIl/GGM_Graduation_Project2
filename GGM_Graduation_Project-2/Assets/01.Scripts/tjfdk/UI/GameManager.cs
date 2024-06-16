@@ -20,4 +20,17 @@ public class GameManager : Singleton<GameManager>
     public CutSceneManager cutSceneManager;
     public FileManager fileManager;
     public ImageManager imageManager;
+
+    private void Start()
+    {
+        cutSceneSystem.PlayCutScene("DieFall");
+        chatSystem.AddMember("HG");
+        chatSystem.OnOffMemberList();
+    }
+
+    private void Update()
+    {
+        //if (Input.GetKeyDown(KeyCode.U))
+        //    cutSceneSystem.PlayCutScene("DieFall");
+    }
 }

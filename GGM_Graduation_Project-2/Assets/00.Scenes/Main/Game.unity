@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce46f699b261d24c9ed59bd3dd1a949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chatContainer: {fileID: 594023517}
   changeHumanTime: 1
   nowHumanName: 
   currentNode: {fileID: 0}
@@ -280,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileAreaSizeOn: 150
-  fileAreaSizeOff: 0
+  fileAreaSizeOff: 285
   changeSizeBtnOn: {fileID: -2236324273849735119, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeSizeBtnOff: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isFileSystemOpen: 0
@@ -715,8 +716,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1663529867}
-  - {fileID: 594023516}
   - {fileID: 150678876}
+  - {fileID: 594023516}
   - {fileID: 1857801310}
   - {fileID: 2099014331}
   - {fileID: 378627793}

@@ -38,9 +38,9 @@ using UnityEngine;
 
 public class ImageManager : MonoBehaviour
 {
-    public List<ImageSO> images;
-    public List<PngSO> pngs;
-    public List<TextSO> texts;
+    public List<ImageSO> images = new List<ImageSO>();
+    public List<PngSO> pngs = new List<PngSO>();
+    public List<TextSO> texts = new List<TextSO>();
 
     public Dictionary<string, ImageSO> imageList;
     public Dictionary<string, PngSO> pngList;
@@ -48,16 +48,12 @@ public class ImageManager : MonoBehaviour
 
     private void Awake()
     {
-        images = new List<ImageSO>();
-        pngs = new List<PngSO>();
-        texts = new List<TextSO>();
-
         imageList = new Dictionary<string, ImageSO>();
         pngList = new Dictionary<string, PngSO>();
         textList = new Dictionary<string, TextSO>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         foreach (ImageSO image in images)
             imageList.Add(image.name, image);

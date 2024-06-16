@@ -2,6 +2,7 @@ using ChatVisual;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -28,7 +29,7 @@ public class UIReader_Chatting : UI_Reader
     // current member name
     //public string currentMemberName;
     // member profile
-    [SerializeField] List<MemberProfile> members;
+    [SerializeField] List<MemberProfile> members = new List<MemberProfile>();
     public Dictionary<string, MemberProfile> memberList;
     //public List<AskNode> questions;
 
@@ -71,16 +72,8 @@ public class UIReader_Chatting : UI_Reader
         MaxWidth = 500;
         MaxHeight = 500;
 
-        members = new List<MemberProfile>();
         memberList = new Dictionary<string, MemberProfile>();
         //questions = new List<AskNode>();
-    }
-
-    private void Start()
-    {
-        // move member profile to member dictionary
-        foreach (MemberProfile member in members)
-            memberList.Add(member.name, member);
     }
 
     private void Update()
@@ -93,6 +86,10 @@ public class UIReader_Chatting : UI_Reader
 
         UXML_Load();
         Event_Load();
+
+        // move member profile to member dictionary
+        foreach (MemberProfile member in members)
+            memberList.Add(member.nickName.ToString(), member);
     }
 
     private void UXML_Load()
@@ -156,11 +153,14 @@ public class UIReader_Chatting : UI_Reader
     public void InputChat(string toWho, EChatState who, EChatType type,
         EFace face, string text, List<EChatEvent> chatEvt = null, bool isRecord = true)
     {
+        type = EChatType.Text;
+
         // create chat
         VisualElement chat = null;
         // find member
         MemberProfile member = FindMember(toWho);
 
+        Debug.Log(type.ToString());
         // chat type
         switch (type)
         {
@@ -194,6 +194,13 @@ public class UIReader_Chatting : UI_Reader
                 // connection click event, play cutscene
                 chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
                 break;
+            case EChatType.Default:
+            case EChatType.Question:
+            case EChatType.LockQuestion:
+            {
+                Debug.LogError("chat type이 아님");
+            }
+            break;
         }
 
         // if you this chat record
@@ -201,6 +208,7 @@ public class UIReader_Chatting : UI_Reader
             RecordChat(who, toWho, type, text);
 
         // whose chat style setting
+        Debug.Log(chat + " chat null 임");
         if (who == EChatState.Me)
             chat.AddToClassList("MyChat");
         else
@@ -407,7 +415,7 @@ public class UIReader_Chatting : UI_Reader
     public void ChoiceMember(MemberProfile member)
     {
         // change currentMember
-        GameManager.Instance.chapterManager.ChatStart(member.name);
+        GameManager.Instance.chapterManager.ChatStart(member.nickName.ToString());
 
         // if member isn't null
         if (member != null)
@@ -421,13 +429,13 @@ public class UIReader_Chatting : UI_Reader
             // recall chat and question
             RecallChatting(member);
 
-            //// start chapter.
-            if (member.nickName.ToString() != "")
-            {
-                GameManager.Instance.chapterManager.ChatStart(/*member.name, */member.nickName.ToString());
-            }
-            else
-                Debug.Log("this member hasn't name");
+            ////// start chapter.
+            //if (member.nickName.ToString() != "")
+            //{
+            //    GameManager.Instance.chapterManager.ChatStart(member.nickName.ToString());
+            //}
+            //else
+            //    Debug.Log("this member hasn't name");
         }
     }
 
