@@ -352,14 +352,17 @@ public class UIReader_Chatting : UI_Reader
         if (node is ChatNode chatNode)
         {
             // event type
-            foreach (EChatEvent evt in evts)
+            for (int i = 0; i < evts.Count; i++)
             {
-                switch (evt)
+                switch (evts[i])
                 {
                     case EChatEvent.LoadFile:
                     {
-                        //FileSO file = GameManager.Instance.fileManager.FindFile(chatNode.string);
-                        //GameManager.Instance.fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
+                        FileSO file = GameManager.Instance.fileManager.FindFile(chatNode.loadFileName[i]);
+                        if (file != null)
+                            GameManager.Instance.fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
+                        else
+                            Debug.Log("this file not exist");
                     }
                     break;
                     case EChatEvent.Default:
