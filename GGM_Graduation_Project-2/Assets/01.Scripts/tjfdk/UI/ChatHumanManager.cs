@@ -15,8 +15,11 @@ public class ChatHumanManager : UI_Reader
 
     private List<Node> nowNodes = new List<Node>();
     private string nowHumanName;        // Name of the human you're talking to
-    private int nowIndex = 0;
+    //private int nowIndex = 0;
+    private Node currentNode;
     private bool is_ChatStart = false;
+
+    public Coroutine chatting;
 
     public void AddHuman(string who)     // HG
     {
@@ -25,62 +28,122 @@ public class ChatHumanManager : UI_Reader
 
     private void Update()
     {
-        currentTime += Time.deltaTime;
-        if (is_ChatStart && currentTime >= changeHumanTime)
-        {
-            currentTime = 0f;
+        //currentTime += Time.deltaTime;
+        //if (is_ChatStart && currentTime >= changeHumanTime)
+        //{
+        //    currentTime = 0f;
 
-            var children = chatContainer.GetChild(nowNodes[nowIndex]);
+        //    // node list
+        //    var children = chatContainer.GetChild(nowNodes[nowIndex]);
+
+        //    if (children.Count == 1)            // When a child is a ChatNode
+        //    {
+        //        if (children[0] is ChatNode chatNode)
+        //        {
+        //            Debug.Log(chatNode.chatText);
+        //            ChatNode chat = (ChatNode)children[0];
+
+        //            // Outputting Metabolism
+        //            GameManager.Instance.chatSystem.InputChat(nowHumanName, chat.state, 
+        //                chat.type, chat.face, chat.chatText, chat.textEvent);
+                    
+        //            // Emotion Changes
+        //                // working to InputChat
+        //            // Handing Chat Event (Camera, vibration, fileLoad)
+        //                // working to InputChat
+
+        //            nowIndex++;
+        //        }
+        //    }
+        //    else        // When child is not a ChatNode
+        //    {
+        //        for (int i = 0; i < children.Count; i++)
+        //        {
+        //            if (children[i] is AskNode askNode)
+        //            {
+        //                // Handling questions
+        //                Debug.Log(askNode.askText);
+        //                AskNode ask = (AskNode)children[i];
+        //                bool is_Lock = ask.parent is ConditionNode ? true : false;
+        //                //GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
+        //                //    ask.askText, , ask.textEvent, );
+        //                nowIndex++;
+        //            }
+        //            else if (children[i] is ConditionNode conditionNode)
+        //            {
+        //                if (conditionNode.checkClass.Check())
+        //                {
+        //                    children = chatContainer.GetChild(nowNodes[nowIndex]);
+        //                    conditionNode.is_UseThis = true;
+        //                    continue;
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //}
+    }
+
+    public IEnumerator ReadChat()
+    {
+        while (true) 
+        {
+            // node list
+            var children = chatContainer.GetChild(currentNode);
 
             if (children.Count == 1)            // When a child is a ChatNode
             {
                 if (children[0] is ChatNode chatNode)
                 {
                     Debug.Log(chatNode.chatText);
-                // Outputting Metabolism
 
-                // Emotion Changes
+                    GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
+                        chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
 
-                // Handing Chat Event (Camera, vibration, fileLoad)
-                //UI_Reader.Instance.chatSystem.InputChat()
-
-                nowIndex++;
+                    currentNode = children[0];
                 }
             }
             else        // When child is not a ChatNode
             {
                 for (int i = 0; i < children.Count; i++)
                 {
-                    if (children[i] is AskNode askNode)
+                    if (children[i] is AskNode askNode) // When child is a AskNode
                     {
-                        // Handling questions
                         Debug.Log(askNode.askText);
-                        nowIndex++;
+
+                        bool is_Lock = askNode.parent is ConditionNode ? true : false;
+
+                        GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
+                            askNode.askText, askNode.textEvent, () => { currentNode = askNode; });
                     }
-                    else if (children[i] is ConditionNode conditionNode)
+                    else if (children[i] is ConditionNode conditionNode) // When child is a ConditionNode
                     {
                         if (conditionNode.checkClass.Check())
                         {
-                            children = chatContainer.GetChild(nowNodes[nowIndex]);
+                            children = chatContainer.GetChild(conditionNode);
                             conditionNode.is_UseThis = true;
+                            
                             continue;
                         }
                     }
                 }
             }
 
+            yield return new WaitForSeconds(1f);
         }
     }
 
     public void ChatStart(string name)      // HG
     {
-        Debug.Log("´ëÈ­ ½ÃÀÛ");
+        Debug.Log("ëŒ€í™” ì‹œìž‘");
         nowHumanName = name;
         nowNodes = chatContainer.HumanAndChatDictionary[nowHumanName];
         if (nowNodes[0] is RootNode rootNode)
         {
-            nowIndex = rootNode.nowIndex;
+            currentNode = rootNode;
+            //nowIndex = rootNode.nowIndex;
         }
-        is_ChatStart = true;
+        chatting = StartCoroutine(ReadChat());
+        //is_ChatStart = true;
     }
 }

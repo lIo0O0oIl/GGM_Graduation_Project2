@@ -60,6 +60,8 @@ public class UIReader_ImageFinding : UI_Reader
                     File fileT = GameManager.Instance.fileManager.FindFile(file.Q<Label>("FileName").text);
                     GameManager.Instance.fileManager.UnlockChat(fileT);
                     GameManager.Instance.fileManager.UnlockChapter(fileT);
+
+                    StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
                 }
                 else
                 {
@@ -67,7 +69,7 @@ public class UIReader_ImageFinding : UI_Reader
                     GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Ignore;
                     // filesystem 사이즈 작게 만들기
                     GameManager.Instance.fileSystem.isFileSystemOpen = true;
-                    GameManager.Instance.fileSystem.ChangeSize(0f);
+                    GameManager.Instance.fileSystem.OnOffFileSystem(0f);
 
                     ui_imageGround.style.display = DisplayStyle.Flex;
                     
@@ -144,6 +146,7 @@ public class UIReader_ImageFinding : UI_Reader
                     }
 
                     ui_imageGround.Add(textImage);
+                    StopCoroutine(GameManager.Instance.chapterManager.chatting);
                 }
 
                 isImageOpen = !isImageOpen;
