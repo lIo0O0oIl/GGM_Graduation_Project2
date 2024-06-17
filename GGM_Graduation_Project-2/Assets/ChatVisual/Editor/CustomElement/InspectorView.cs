@@ -29,6 +29,7 @@ namespace ChatVisual
             is_Expand = false;
             is_LoadList = false;
             is_AllQuestion = false;
+            is_LoadNextDialog = false;
 
             var container = new IMGUIContainer();
             container.onGUIHandler = () =>
@@ -71,7 +72,6 @@ namespace ChatVisual
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();*/
 
-                            EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.IntField("NowIndex", rootNode.nowIndex);
                         }
                         break;
@@ -133,7 +133,11 @@ namespace ChatVisual
                             }
                             for (int i = 0; i < loadFileCount; i++)
                             {
-                                if (i >= LoadFileList.Count) LoadFileList.Add("");
+                                if (i >= LoadFileList.Count)
+                                {
+                                    Debug.Log("LoadFileList 가 ADD 됨.");
+                                    LoadFileList.Add("");
+                                }
                                 LoadFileList[i] = EditorGUILayout.TextArea(LoadFileList[i], EditorStyles.textArea);
                             }
                             chatNode.loadFileName = new List<string>(LoadFileList);
@@ -144,7 +148,6 @@ namespace ChatVisual
                                 chatNode.LoadNextDialog = EditorGUILayout.TextArea(chatNode.LoadNextDialog, EditorStyles.textArea);
                             }
 
-                            EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", chatNode.is_UseThis);
                         }
                         break;
@@ -189,7 +192,6 @@ namespace ChatVisual
                                 askNode.LoadNextDialog = EditorGUILayout.TextArea(askNode.LoadNextDialog, EditorStyles.textArea);
                             }
 
-                            EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", askNode.is_UseThis);
                         }
                         break;
@@ -237,7 +239,6 @@ namespace ChatVisual
                                 }
                             }
 
-                            EditorGUI.BeginDisabledGroup(true);
                             EditorGUILayout.Toggle("is_UseThie", conditionNode.is_UseThis);
                         }
                         break;
@@ -245,7 +246,6 @@ namespace ChatVisual
 
                 //GUILayout.Space(5);
                 //EditorGUILayout.Toggle("child", is_ChildExist);
-                EditorGUI.EndDisabledGroup();
             };
 
             Add(container);
