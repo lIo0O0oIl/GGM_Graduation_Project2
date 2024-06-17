@@ -273,25 +273,11 @@ public class UIReader_Chatting : UI_Reader
                     AddMember(nextMember);
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(nextMember));
                 }
-
-                // original, don't remove this cord...
-                //for (int i = 0; i < member.quetions.Count - 1; ++i)
-                //{
-                //    if (member.quetions[i].text == msg)
-                //    {
-                //        Debug.Log("癲ル슣??袁ｋ즵 ?????");
-                //        member.quetions.Remove(member.quetions[i]);
-                //    }
-                //}
-
-                // if reply isn't null to start coroutine
-                //if (reply != null)
-                //    StartCoroutine(reply);
-
-                // if action isn't null to start action
-
-                Debug.Log("질문 눌림");
-                action?.Invoke();
+                else
+                {
+                    Debug.Log("질문 눌림");
+                    action?.Invoke();
+                }
 
                 // question
                 type = EChatType.Question;
@@ -468,12 +454,12 @@ public class UIReader_Chatting : UI_Reader
     // change member
     public void ChoiceMember(MemberProfile member)
     {
-        // change currentMember
-        GameManager.Instance.chapterManager.ChatStart(member.nickName.ToString());
-
         // if member isn't null
         if (member != null)
         {
+            // change currentMember
+            GameManager.Instance.chapterManager.ChatStart(member.nickName.ToString());
+
             // change profile
             ChangeProfile(member.name, member.faces[(int)member.currentFace]);
             // off memberListGround

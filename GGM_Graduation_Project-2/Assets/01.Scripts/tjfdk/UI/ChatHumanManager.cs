@@ -125,6 +125,7 @@ public class ChatHumanManager : UI_Reader
                         GameManager.Instance.chatSystem.SettingChat(member, chatNode, chatNode.face, chatNode.textEvent);
                         // chat 다음 꺼 ㄱ
                         currentNode = children[0];
+                        Debug.Log(currentNode + " 다음 꺼 잘 들어감");
                         // 읽음 표시
                         chatNode.test_isRead = true;
                     }
