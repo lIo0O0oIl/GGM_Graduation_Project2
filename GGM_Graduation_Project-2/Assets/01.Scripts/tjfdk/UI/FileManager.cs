@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //[Serializable]
@@ -57,6 +58,7 @@ public class FileManager : UI_Reader
 
     public void UnlockChat(FileSO file)
     {
+                Debug.Log(file.name + " " + GameManager.Instance.chapterManager.nowCondition.fileName);
         if (file != null)
         {
             // the same trigger name and file name

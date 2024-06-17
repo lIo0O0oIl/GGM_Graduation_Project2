@@ -218,7 +218,7 @@ namespace ChatVisual
                                     if (!is_AllQuestion)
                                     {
                                         is_AllQuestion = true;
-                                        allQuestion.Init(conditionNode);
+                                        //allQuestion.Init(conditionNode);
                                     }
                                     GUILayout.BeginHorizontal();
                                     GUILayout.Label($"AskCount");
@@ -239,6 +239,7 @@ namespace ChatVisual
                                 }
                             }
 
+                            EditorGUILayout.Toggle("is_LockQuestion", conditionNode.is_LockQuestion);
                             EditorGUILayout.Toggle("is_UseThie", conditionNode.is_UseThis);
                         }
                         break;

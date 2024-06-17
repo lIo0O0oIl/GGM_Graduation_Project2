@@ -20,6 +20,7 @@ public class MemberProfile
     public List<ChatNode> chattings = new List<ChatNode>();
     public List<AskNode> questions = new List<AskNode>();
     public Node memCurrentNode;
+    public Stack<ChatNode> memQuestionParent = new Stack<ChatNode>();
     //public List<Chatting> chattings = new List<Chatting>();
     //public List<Chatting> quetions = new List<Chatting>();
 }
@@ -257,8 +258,12 @@ public class UIReader_Chatting : UI_Reader
             {
                 // remove chat
                 chat.parent.Remove(chat);
-                // if question click? you have to hidding others
-                OpenOtherQuestion(false);
+                    // if question click? you have to hidding others
+                    //foreach ( ask in ui_questionGround.Children())
+                    //{
+
+                    //}
+                    //OpenOtherQuestion(false);
 
                 // find record question, and remove this question
                 //foreach (AskNode questions in member.questions) // new! need test
@@ -410,19 +415,19 @@ public class UIReader_Chatting : UI_Reader
         }
     }
 
-    public void OpenOtherQuestion(bool isOpen)
-    {
-        if (isOpen)
-        {
-            foreach (VisualElement q in ui_questionGround.Children())
-                q.style.display = DisplayStyle.Flex;
-        }
-        else
-        {
-            foreach (VisualElement q in ui_questionGround.Children())
-                q.style.display = DisplayStyle.None;
-        }
-    }
+    //public void OpenOtherQuestion(bool isOpen)
+    //{
+    //    if (isOpen)
+    //    {
+    //        foreach (VisualElement q in ui_questionGround.Children())
+    //            q.style.display = DisplayStyle.Flex;
+    //    }
+    //    else
+    //    {
+    //        foreach (VisualElement q in ui_questionGround.Children())
+    //            q.style.display = DisplayStyle.None;
+    //    }
+    //}
 
     // scroll pos setting
     void OnMouseWheel(WheelEvent evt)

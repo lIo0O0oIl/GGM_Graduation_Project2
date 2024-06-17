@@ -24,7 +24,6 @@ namespace ChatVisual
         public List<AskNode> asks = new List<AskNode>();
         public bool is_SpecificFile;
         public string fileName;
-
         public bool is_LockQuestion;
         
         public void InitConditionNode()
@@ -47,6 +46,18 @@ namespace ChatVisual
                 }
             }
         }
+
+        public bool Checkk()
+        {
+            for (int i = 0; i < asks.Count; i++)
+            {
+                if (asks[i].is_UseThis == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     public interface ICheck
@@ -61,6 +72,7 @@ namespace ChatVisual
 
         public void Init(ConditionNode myNode)
         {
+            conditionNode.asks.Clear();
             Debug.Log("tl");
             for (int i = 0; i < myNode.parentList.Count; i++)
             {
@@ -72,9 +84,9 @@ namespace ChatVisual
                          nowNode = chatNode.parent;
                      }
                      if (nowNode is ConditionNode condition)
-                    {
-                        nowNode = condition.parentList[0];
-                    }
+                     {   
+                        break;
+                     }
                      if (nowNode is AskNode askNode)
                      {
                         Debug.Log(i + "_");

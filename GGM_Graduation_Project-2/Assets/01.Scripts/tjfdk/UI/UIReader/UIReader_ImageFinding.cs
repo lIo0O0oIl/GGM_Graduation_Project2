@@ -127,12 +127,14 @@ public class UIReader_ImageFinding : UI_Reader
                                     if (text != null)
                                     {
                                         Debug.Log(text.name + " " + image.name);
-                                        //GameManager.Instance.fileSystem.AddFile(FileType.TEXT, text.name, image.name);
+                                        GameManager.Instance.fileSystem.AddFile(FileType.TEXT, text.name,
+                                            GameManager.Instance.fileManager.FindFile(text.name).fileParentName);
                                     }
                                     else
                                     {
                                         Debug.Log(png.name + " " + image.name);
-                                        //GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
+                                        GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, 
+                                            GameManager.Instance.fileManager.FindFile(png.name).fileParentName);
                                     }
                                 });
                             }
@@ -264,7 +266,7 @@ public class UIReader_ImageFinding : UI_Reader
                 //create uxml
                 VisualElement panel = RemoveContainer(ux_ImagePanel.Instantiate());
                 // change png panel name
-                panel.Q<Label>("Name").text = name + ".png";
+                panel.Q<Label>("Name").text = png.name + ".png";
                 // change png image
                 panel.Q<VisualElement>("Image").style.backgroundImage = new StyleBackground(png.saveSprite);
                 // change png size
@@ -276,7 +278,8 @@ public class UIReader_ImageFinding : UI_Reader
                     ui_panelGround.Remove(panel);
 
                     // png check action
-                    FileSO file = GameManager.Instance.fileManager.FindFile(name);
+                    Debug.Log(png.name + " 닫은 파일 이름");
+                    FileSO file = GameManager.Instance.fileManager.FindFile(png.name);
                     GameManager.Instance.fileManager.UnlockChat(file);
 
                     //restart chatting
