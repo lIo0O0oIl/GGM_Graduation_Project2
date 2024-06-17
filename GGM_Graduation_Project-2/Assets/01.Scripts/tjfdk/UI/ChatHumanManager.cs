@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,6 +19,7 @@ public class ChatHumanManager : UI_Reader
     public string nowHumanName;        // Name of the human you're talking to
     //private int nowIndex = 0;
     public Node currentNode;
+    public ConditionNode nowCondition;
     private bool is_ChatStart = false;
 
     public Coroutine chatting;
@@ -98,6 +100,7 @@ public class ChatHumanManager : UI_Reader
 
         while (true) 
         {
+            Debug.Log("코루틴 도는 중");
             // node list
             var children = chatContainer.GetChatTree().GetChild(currentNode);
 
@@ -105,17 +108,31 @@ public class ChatHumanManager : UI_Reader
             {
                 if (children[0] is ChatNode chatNode)
                 {
-                    if (chatNode.is_UseThis == false)
-                    {
+                    //if (chatNode.is_UseThis == false)
+                    //{
                         GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
                             chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
                         // event
                         GameManager.Instance.chatSystem.SettingChat(member, chatNode, chatNode.face, chatNode.textEvent);
 
                         currentNode = children[0];
-                        chatNode.is_UseThis = true;
+                        //chatNode.is_UseThis = true;
+                    //}
+                }
+                else if (children[0] is ConditionNode conditionNode)
+                {
+                    if (conditionNode.is_UseThis)
+                    {
+                        Debug.Log("true로 변경됨");
+                        currentNode = conditionNode;
+                    }
+                    else
+                    {
+                        nowCondition = conditionNode;
+                        StopChatting();
                     }
                 }
+
             }
             else        // When child is not a ChatNode
             {
@@ -145,8 +162,6 @@ public class ChatHumanManager : UI_Reader
                             {
                                 children = chatContainer.GetChatTree().GetChild(conditionNode);
                                 conditionNode.is_UseThis = true;
-                            
-                                continue;
                             }
                         }
                     }
@@ -169,12 +184,12 @@ public class ChatHumanManager : UI_Reader
             //nowIndex = rootNode.nowIndex;
         }
 
-        Debug.Log("대화 다시 호출");
         StartChatting();
     }
 
     public void StartChatting()
     {
+        Debug.Log("코루틴 시작");
         if (isChattingRunning == false)
         {
             chatting = StartCoroutine(ReadChat());
@@ -185,6 +200,7 @@ public class ChatHumanManager : UI_Reader
 
     public void StopChatting()
     {
+        Debug.Log("코루틴 중단");
         if (isChattingRunning)
         {
             if (chatting != null)

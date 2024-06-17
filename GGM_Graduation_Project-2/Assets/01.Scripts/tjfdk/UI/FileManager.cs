@@ -55,42 +55,22 @@ public class FileManager : UI_Reader
         return null;
     }
 
-    public void UnlockChapter(FileSO file)
-    {
-        Debug.Log("트리거 호출");
-        if (file.eventName != "")
-        {
-/*            Chapter chapter = chapterManager.FindChapter(file.eventName);
-            if (chapter != null)
-            {
-                if (chapter.isCan == true)
-                {
-                    chapter.isCan = false;
-                    if (chapterManager.previousChapter.isChapterEnd)
-                    {
-                        chapterManager.NextChapter(chapter.showName);
-                        Debug.Log("ddakakakkakakakakak");
-
-                    }
-                }
-            }
-            else
-                Debug.Log("chat ?紐꺿봺椰???곗벉!!");*/
-        }
-    }
-
     public void UnlockChat(FileSO file)
     {
-        Debug.Log("트리거 호출");
+        Debug.Log(file.fileName + " " + file.eventName);
         if (file.eventName != "")
         {
-/*            if (chapterManager.FindChat(file.eventName) != null)
-            {
-                if (chapterManager.FindChat(file.eventName).isCan == true)
-                    chapterManager.FindChat(file.eventName).isCan = false;
-            }
-            else
-                Debug.Log("筌?벤苑??紐꺿봺椰???곗벉!");*/
+            Debug.Log("트리거 호출");
+            GameManager.Instance.chapterManager.nowCondition.is_UseThis = true;
+            GameManager.Instance.chapterManager.StartChatting();
+
+            //if (chapterManager.FindChat(file.eventName) != null)
+            //{
+            //    if (chapterManager.FindChat(file.eventName).isCan == true)
+            //        chapterManager.FindChat(file.eventName).isCan = false;
+            //}
+            //else
+            //    Debug.Log("筌?벤苑??紐꺿봺椰???곗벉!");
         }
     }
 }

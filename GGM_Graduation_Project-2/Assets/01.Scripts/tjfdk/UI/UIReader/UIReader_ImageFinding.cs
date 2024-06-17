@@ -67,12 +67,12 @@ public class UIReader_ImageFinding : UI_Reader
 
                 // image check action
                 FileSO fileT = GameManager.Instance.fileManager.FindFile(fileName);
+                Debug.Log(fileT.fileName);
                 GameManager.Instance.fileManager.UnlockChat(fileT);
-                GameManager.Instance.fileManager.UnlockChapter(fileT);
 
-                // restart chatting
-                Debug.Log("????ㅼ떆 ?몄텧");
-                GameManager.Instance.chapterManager.StartChatting();
+                //// restart chatting
+                //Debug.Log("????ㅼ떆 ?몄텧");
+                //GameManager.Instance.chapterManager.StartChatting();
             }
             else
             {
@@ -273,11 +273,10 @@ public class UIReader_ImageFinding : UI_Reader
                     // png check action
                     FileSO file = GameManager.Instance.fileManager.FindFile(name);
                     GameManager.Instance.fileManager.UnlockChat(file);
-                    GameManager.Instance.fileManager.UnlockChapter(file);
 
-                    // restart chatting
-                    Debug.Log("????ㅼ떆 ?몄텧");
-                    GameManager.Instance.chapterManager.StartChatting();
+                    //restart chatting
+                    //Debug.Log("????ㅼ떆 ?몄텧");
+                    //GameManager.Instance.chapterManager.StartChatting();
                 };
 
 
@@ -423,11 +422,10 @@ public class UIReader_ImageFinding : UI_Reader
             // text check action
             FileSO file = GameManager.Instance.fileManager.FindFile(name);
             GameManager.Instance.fileManager.UnlockChat(file);
-            GameManager.Instance.fileManager.UnlockChapter(file);
 
-            // restart chatting
-            Debug.Log("????ㅼ떆 ?몄텧");
-            GameManager.Instance.chapterManager.StartChatting();
+            //// restart chatting
+            //Debug.Log("????ㅼ떆 ?몄텧");
+            //GameManager.Instance.chapterManager.StartChatting();
         };
 
         ui_panelGround.Add(panel);
