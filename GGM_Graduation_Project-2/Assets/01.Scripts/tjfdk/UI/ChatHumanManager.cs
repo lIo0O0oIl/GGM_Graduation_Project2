@@ -105,42 +105,49 @@ public class ChatHumanManager : UI_Reader
             {
                 if (children[0] is ChatNode chatNode)
                 {
-                    //Debug.Log(chatNode.chatText);
+                    if (chatNode.is_UseThis == false)
+                    {
+                        GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
+                            chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
+                        // event
+                        GameManager.Instance.chatSystem.SettingChat(member, chatNode, chatNode.face, chatNode.textEvent);
 
-                    GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
-                        chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
-                    // event
-                    GameManager.Instance.chatSystem.SettingChat(member, chatNode, chatNode.face, chatNode.textEvent);
-
-                    currentNode = children[0];
+                        currentNode = children[0];
+                        chatNode.is_UseThis = true;
+                    }
                 }
             }
             else        // When child is not a ChatNode
             {
                 for (int i = 0; i < children.Count; i++)
                 {
-                    if (children[i] is AskNode askNode) // When child is a AskNode
+                    if (children[i].is_UseThis == false)
                     {
-                        //Debug.Log(askNode.askText);
-
-                        bool is_Lock = askNode.parent is ConditionNode ? true : false;
-
-                        // input question
-                        GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
-                            askNode.askText, askNode.textEvent, () => { currentNode = askNode; });
-                        // record question
-                        member.questions.Add(askNode);
-                        // event
-                        GameManager.Instance.chatSystem.SettingChat(member, askNode, member.currentFace, askNode.textEvent);
-                    }
-                    else if (children[i] is ConditionNode conditionNode) // When child is a ConditionNode
-                    {
-                        if (conditionNode.checkClass.Check())
+                        if (children[i] is AskNode askNode) // When child is a AskNode
                         {
-                            children = chatContainer.GetChatTree().GetChild(conditionNode);
-                            conditionNode.is_UseThis = true;
+                            //Debug.Log(askNode.askText);
+
+                            bool is_Lock = askNode.parent is ConditionNode ? true : false;
+
+                            // input question
+                            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
+                                askNode.askText, askNode.textEvent, () => { currentNode = askNode; });
+                            // record question
+                            member.questions.Add(askNode);
+                            // event
+                            GameManager.Instance.chatSystem.SettingChat(member, askNode, member.currentFace, askNode.textEvent);
+
+                            askNode.is_UseThis = true;
+                        }
+                        else if (children[i] is ConditionNode conditionNode) // When child is a ConditionNode
+                        {
+                            if (conditionNode.checkClass.Check())
+                            {
+                                children = chatContainer.GetChatTree().GetChild(conditionNode);
+                                conditionNode.is_UseThis = true;
                             
-                            continue;
+                                continue;
+                            }
                         }
                     }
                 }
