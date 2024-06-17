@@ -46,7 +46,6 @@ namespace ChatVisual
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
-#endif
 
         public void AddChild(Node parent, Node child)
         {
@@ -150,6 +149,7 @@ namespace ChatVisual
                 EditorUtility.SetDirty(conditionNode);
             }
         }
+#endif
 
         public List<Node> GetChild(Node parent)
         {
