@@ -31,6 +31,11 @@ public class UIReader_ImageFinding : UI_Reader
     private void Awake()
     {
         base.Awake();
+
+        MinWidth = 1000;
+        MinHeight = 700;
+        MaxWidth = 1800f;
+        MaxHeight = 980f;
     }
 
     private void OnEnable()

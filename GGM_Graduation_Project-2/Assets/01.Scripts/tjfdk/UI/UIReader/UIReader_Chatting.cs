@@ -67,10 +67,10 @@ public class UIReader_Chatting : UI_Reader
     {
         base.Awake();
 
-        MinWidth = 100;
-        MinHeight = 100f;
-        MaxWidth = 500;
-        MaxHeight = 500;
+        //MinWidth = 100;
+        //MinHeight = 100f;
+        //MaxWidth = 500;
+        //MaxHeight = 500;
 
         //memberList = new Dictionary<string, MemberProfile>();
         //questions = new List<AskNode>();
@@ -287,6 +287,8 @@ public class UIReader_Chatting : UI_Reader
                 //    StartCoroutine(reply);
 
                 // if action isn't null to start action
+
+                Debug.Log("질문 눌림");
                 action?.Invoke();
 
                 // question

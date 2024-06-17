@@ -521,6 +521,8 @@ public class UIReader_FileSystem : UI_Reader
                 // connection click event
                 file.Q<Button>("FileImage").clicked += () =>
                 {
+                    // image check action
+                    GameManager.Instance.fileManager.UnlockChat(folder);
                     // draw current foluder
                     DrawFile(folder.fileName);
                     // add current folder path

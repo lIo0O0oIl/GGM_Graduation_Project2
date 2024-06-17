@@ -20,6 +20,7 @@ public class ChatHumanManager : UI_Reader
     //private int nowIndex = 0;
     public Node currentNode;
     public ConditionNode nowCondition;
+    public ChatNode nowQuestionParent;
     private bool is_ChatStart = false;
 
     public Coroutine chatting;
@@ -33,6 +34,7 @@ public class ChatHumanManager : UI_Reader
             for (int j = 0; j < chatTree.nodeList.Count; j++)
             {
                 chatTree.nodeList[j].is_UseThis = false;
+                chatTree.nodeList[j].test_isRead = false;
             }
         }
     }
@@ -110,33 +112,75 @@ public class ChatHumanManager : UI_Reader
             // node list
             var children = chatContainer.GetChatTree().GetChild(currentNode);
 
-            if (children.Count == 1)            // When a child is a ChatNode
+            if (children.Count == 1)            
             {
-                if (children[0] is ChatNode chatNode)
+                if (children[0] is ChatNode chatNode) // When a child is a ChatNode
                 {
-                    //if (chatNode.is_UseThis == false)
-                    //{
+                    if (chatNode.test_isRead == false) // 안 한 거라면
+                    {
+                        // 인풋
                         GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
                             chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
                         // event
                         GameManager.Instance.chatSystem.SettingChat(member, chatNode, chatNode.face, chatNode.textEvent);
-
+                        // chat 다음 꺼 ㄱ
                         currentNode = children[0];
-                        //chatNode.is_UseThis = true;
-                    //}
+                        // 읽음 표시
+                        chatNode.test_isRead = true;
+                    }
                 }
-                else if (children[0] is ConditionNode conditionNode)
+                else if (children[0] is ConditionNode conditionNode) // When a child is a ConditionNode
                 {
-                    if (conditionNode.is_UseThis)
+                    // When a file Trigger condition
+                    if (conditionNode.is_SpecificFile)
                     {
-                        Debug.Log("true로 변경됨");
-                        currentNode = conditionNode;
+                        // 아직이라면 trigger 올 때까지 정지
+                        if (conditionNode.is_UseThis == false)
+                        {
+                            Debug.Log("file trigger off");
+                            nowCondition = conditionNode;
+                            StopChatting();
+                        }
+                        else
+                        {
+                            // 왔다면 conditino 아래 챗 ㄱ
+                            Debug.Log("file trigger on");
+                            currentNode = conditionNode;
+                        }
+                    }
+                    // When a Check all read question condition
+                    else if (conditionNode.is_AllQuestion)
+                    {
+                        Debug.Log("모든 질문이 끝났는지 검사하는 곳에 옴");
+                        if (nowQuestionParent != null)
+                        {
+                            bool all_Use = true;
+                            var questions = chatContainer.GetChatTree().GetChild(nowQuestionParent);
+                            foreach (AskNode ask in questions)
+                            {
+                                if (ask.is_UseThis == false)
+                                    all_Use = false;
+                            }
+
+                            if (all_Use == false)
+                                currentNode = nowQuestionParent;
+                            else
+                            {
+                                Debug.Log("어디가 문제일까아아ㅏㅏㅏㅏㅏㅏㅏ");
+                                conditionNode.is_UseThis = true;
+                                currentNode = conditionNode;
+                            }
+                        }
+                        else
+                            Debug.LogError("not exist question, but exist question condition");
+                    }
+                    // When a lock question condition
+                    else if (conditionNode.is_LockQuestion)
+                    {
+                        // lock question condition
                     }
                     else
-                    {
-                        nowCondition = conditionNode;
-                        StopChatting();
-                    }
+                        Debug.Log("tlqkftlqlfktl");
                 }
 
             }
@@ -145,33 +189,87 @@ public class ChatHumanManager : UI_Reader
                 Debug.Log("질문 초반 진입");
                 for (int i = 0; i < children.Count; i++)
                 {
-                    if (children[i].is_UseThis == false)
+                    if (children[i] is AskNode askNode) // When child is a AskNode
                     {
-                        if (children[i] is AskNode askNode) // When child is a AskNode
+                        if (askNode.test_isRead == false)
                         {
                             Debug.Log(askNode.askText);
 
+                            nowQuestionParent = askNode.parent as ChatNode;
                             bool is_Lock = askNode.parent is ConditionNode ? false : true;
 
                             // input question
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
-                                askNode.askText, askNode.textEvent, askNode.LoadNextDialog, () => { currentNode = askNode; });
+                                askNode.askText, askNode.textEvent, askNode.LoadNextDialog, () => { currentNode = askNode; askNode.is_UseThis = true; });
                             // record question
                             member.questions.Add(askNode);
                             // event
                             GameManager.Instance.chatSystem.SettingChat(member, askNode, member.currentFace, askNode.textEvent);
 
-                            askNode.is_UseThis = true;
+                            askNode.test_isRead = true;
                             //currentNode = askNode.parent;
                         }
-                        else if (children[i] is ConditionNode conditionNode) // When child is a ConditionNode
+                    }
+                    if (children[i] is ConditionNode conditionNode) // When child is a ConditionNode
+                    {
+                        if (conditionNode.is_AllQuestion)
                         {
-                            if (conditionNode.checkClass.Check())
+                            Debug.Log("모든 질문이 끝났는지 검사하는 곳에 옴");
+                            if (nowQuestionParent != null)
                             {
-                                children = chatContainer.GetChatTree().GetChild(conditionNode);
-                                conditionNode.is_UseThis = true;
+                                bool all_Use = true;
+                                var questions = chatContainer.GetChatTree().GetChild(nowQuestionParent);
+                                foreach (AskNode ask in questions)
+                                {
+                                    if (ask.is_UseThis == false)
+                                        all_Use = false;
+                                }
+
+                                if (all_Use == false)
+                                    currentNode = nowQuestionParent;
+                                else
+                                {
+                                    Debug.Log("어디가 문제일까아아ㅏㅏㅏㅏㅏㅏㅏ");
+                                    conditionNode.is_UseThis = true;
+                                    currentNode = conditionNode;
+                                }
+                            }
+                            else
+                                Debug.LogError("not exist question, but exist question condition");
+                        }
+                        else if (conditionNode.is_SpecificFile)
+                        {
+                            //if (conditionNode.checkClass.Check())
+                            //{
+                            //    Debug.Log(conditionNode.childList.Count + "얘가 불러와짐!!");
+                            //    children = chatContainer.GetChatTree().GetChild(conditionNode);
+                            //    conditionNode.is_UseThis = true;
+                            //}
+                            //else
+                            //{
+
+                            //}
+
+                            // 아직이라면 trigger 올 때까지 정지
+                            if (conditionNode.is_UseThis == false)
+                            {
+                                Debug.Log("file trigger off");
+                                nowCondition = conditionNode;
+                                StopChatting();
+                            }
+                            else
+                            {
+                                // 왔다면 conditino 아래 챗 ㄱ
+                                Debug.Log("file trigger on");
+                                currentNode = conditionNode;
                             }
                         }
+                        else if (conditionNode.is_LockQuestion)
+                        {
+                            // lock question condition
+                        }
+                        else
+                            Debug.Log("tlqkftlqlfktl");
                     }
                 }
             }
