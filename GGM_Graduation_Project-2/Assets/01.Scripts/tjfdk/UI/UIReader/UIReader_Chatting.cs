@@ -122,6 +122,7 @@ public class UIReader_Chatting : UI_Reader
                 return member;
         }
 
+        Debug.Log(name);
         return null;
 
         //Debug.Log(name + " MemberProfile dictionary");
@@ -269,6 +270,7 @@ public class UIReader_Chatting : UI_Reader
                 {
                     Debug.Log("뭔가 다음 사람이 있어");
                     GameManager.Instance.chapterManager.StopChatting();
+                    AddMember(nextMember);
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(nextMember));
                 }
 
@@ -475,6 +477,7 @@ public class UIReader_Chatting : UI_Reader
             // change profile
             ChangeProfile(member.name, member.faces[(int)member.currentFace]);
             // off memberListGround
+            isMemberListOpen = false;
             OnOffMemberList();
             // remove all chat and question
             RemoveChatting();

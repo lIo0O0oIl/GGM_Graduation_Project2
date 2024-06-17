@@ -211,6 +211,7 @@ MonoBehaviour:
   nowHumanName: 
   currentNode: {fileID: 0}
   nowCondition: {fileID: 0}
+  nowQuestionParent: {fileID: 0}
   isChattingRunning: 0
 --- !u!1 &378627792
 GameObject:
@@ -274,6 +275,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f3453f8eb8941e845b5b43169af9c319, type: 2}
   - {fileID: 11400000, guid: 70ab9864a4b3d964e98f39c34dd0e946, type: 2}
   - {fileID: 11400000, guid: c1352e0c256cc7f478d155c0d17473df, type: 2}
+  - {fileID: 11400000, guid: 150d9fcfd97a66745ab54965caf48a54, type: 2}
+  - {fileID: 11400000, guid: b504439fa3153d345ad6d6404fae09be, type: 2}
 --- !u!114 &378627795
 MonoBehaviour:
   m_ObjectHideFlags: 0
