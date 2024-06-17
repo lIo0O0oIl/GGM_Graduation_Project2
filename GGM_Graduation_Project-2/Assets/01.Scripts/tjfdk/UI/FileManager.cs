@@ -64,7 +64,7 @@ public class FileManager : UI_Reader
             {
                 if (file.name == GameManager.Instance.chapterManager.nowCondition.fileName)
                 {
-                    Debug.Log("트리거 호출");
+                    Debug.Log("?몃━嫄??몄텧");
                     GameManager.Instance.chapterManager.nowCondition.is_UseThis = true;
                     GameManager.Instance.chapterManager.nowCondition = null;
                 }
