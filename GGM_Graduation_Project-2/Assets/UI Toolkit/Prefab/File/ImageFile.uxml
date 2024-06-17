@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/USS/File.uss?fileID=7433441132597879392&amp;guid=52529ae86f49f7f48b6ba569bcb8bcb6&amp;type=3#File" />
     <ui:VisualElement name="ImageFile" class="File">
-        <ui:Button name="FileImage" display-tooltip-when-elided="false" picking-mode="Ignore" class="FileImage NoButtonBorder" style="background-image: url(&apos;project://database/Assets/02.Sprites/Icons/Image%201.png?fileID=2800000&amp;guid=9348e23f3abd3ad4ea3943b7833e9459&amp;type=3#Image 1&apos;);" />
-        <ui:Label text="폴더 " name="FileName" class="FileName" />
+        <ui:Button name="FileImage" display-tooltip-when-elided="false" picking-mode="Ignore" class="FileImage NoButtonBorder" style="background-image: url(&apos;project://database/Assets/06.SO/FileSO/Icons/Image%201.png?fileID=2800000&amp;guid=9348e23f3abd3ad4ea3943b7833e9459&amp;type=3#Image 1&apos;);" />
+        <ui:Label text="폴더 " name="FileName" class="FileName" style="-unity-font: initial; -unity-font-definition: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo-toolkit%20SDF.asset?fileID=11400000&amp;guid=8a1a53547849f8e41ab1f62754582c6e&amp;type=2#DungGeunMo-toolkit SDF&apos;);" />
     </ui:VisualElement>
 </ui:UXML>

@@ -137,11 +137,14 @@ public class UIReader_Chatting : UI_Reader
     }
 
     // remove all chat and question
-    private void RemoveChatting()
+    public void RemoveChatting()
     {
         for (int i = ui_chatGround.childCount - 1; i >= 0; i--)
             ui_chatGround.RemoveAt(i);
+    }
 
+    public void RemoveQuestion()
+    {
         for (int i = ui_questionGround.childCount - 1; i >= 0; i--)
             ui_questionGround.RemoveAt(i);
     }
@@ -486,6 +489,7 @@ public class UIReader_Chatting : UI_Reader
             OnOffMemberList();
             // remove all chat and question
             RemoveChatting();
+            RemoveQuestion();
             // recall chat and question
             RecallChatting(member);
 

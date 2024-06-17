@@ -181,7 +181,7 @@ public class ChatHumanManager : UI_Reader
                         // lock question condition
                     }
                     else
-                        Debug.Log("tlqkftlqlfktl");
+                        Debug.Log("condition node type not select");
                 }
                 else if (children[0] is AskNode askNode) // When child is a AskNode
                 {
@@ -202,6 +202,7 @@ public class ChatHumanManager : UI_Reader
                         GameManager.Instance.chatSystem.SettingChat(member, askNode, member.currentFace, askNode.textEvent);
 
                         member.memCurrentNode = askNode.child;
+                        GameManager.Instance.chatSystem.RemoveQuestion();
                         askNode.test_isRead = true;
                         //currentNode = askNode.parent;
                     }
