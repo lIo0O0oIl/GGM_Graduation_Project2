@@ -79,7 +79,7 @@ public class UIReader_ImageFinding : UI_Reader
                 // fileSystem size change button off
                 GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Ignore;
                 // fileSystem off bool value
-                GameManager.Instance.fileSystem.isFileSystemOpen = true;
+                GameManager.Instance.fileSystem.isFileSystemOpen = false;
                 // fileSystem size function
                 GameManager.Instance.fileSystem.OnOffFileSystem(0f);
 

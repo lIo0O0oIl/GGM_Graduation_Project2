@@ -211,7 +211,7 @@ public class UIReader_FileSystem : UI_Reader
                         area.parent.Remove(area);
                         // change from lockQustion to question
                         GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName).name,
-                            false, lockAskNode.askText, null, () => { GameManager.Instance.chapterManager.currentNode = lockAskNode; });
+                            false, lockAskNode.askText, null, lockAskNode.LoadNextDialog, () => { GameManager.Instance.chapterManager.currentNode = lockAskNode; });
                         GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName).questions.Add(lockAskNode);
                     }
                     else

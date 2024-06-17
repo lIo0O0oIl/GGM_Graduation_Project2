@@ -148,7 +148,7 @@ public class ChatHumanManager : UI_Reader
 
                             // input question
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
-                                askNode.askText, askNode.textEvent, () => { currentNode = askNode; });
+                                askNode.askText, askNode.textEvent, askNode.LoadNextDialog, () => { currentNode = askNode; });
                             // record question
                             member.questions.Add(askNode);
                             // event
