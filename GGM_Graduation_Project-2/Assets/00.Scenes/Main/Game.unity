@@ -210,6 +210,7 @@ MonoBehaviour:
   changeHumanTime: 1
   nowHumanName: 
   currentNode: {fileID: 0}
+  nowCondition: {fileID: 0}
   isChattingRunning: 0
 --- !u!1 &378627792
 GameObject:
@@ -351,37 +352,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1e07402b87ee024697916645591cd2a, type: 2}
   - {fileID: 11400000, guid: 2f5daa0cbefe73f49a2ec62c2b6e0261, type: 2}
   - {fileID: 11400000, guid: b84f96da292e3fc47aca2516b54d85f3, type: 2}
---- !u!1 &1144644274
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1144644275}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1144644275
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144644274}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0977786, y: -0.6092174, z: 0.008797536}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1207175530
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,4 +744,3 @@ SceneRoots:
   - {fileID: 2099014331}
   - {fileID: 378627793}
   - {fileID: 1207175531}
-  - {fileID: 1144644275}
