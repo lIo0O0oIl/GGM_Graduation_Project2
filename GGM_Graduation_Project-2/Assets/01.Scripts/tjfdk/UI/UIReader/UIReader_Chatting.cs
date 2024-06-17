@@ -153,7 +153,7 @@ public class UIReader_Chatting : UI_Reader
             InputChat(GameManager.Instance.chapterManager.nowHumanName, chat.state, chat.type, otherName.currentFace, chat.chatText, null, false);
 
         foreach (AskNode chat in otherName.questions)
-            InputQuestion(otherName.name, true, chat.askText, null, null, false);
+            InputQuestion(otherName.name, true, chat.askText, null, null, null, false);
 
         Invoke("EndToScroll", 0.5f);
     }
@@ -229,7 +229,7 @@ public class UIReader_Chatting : UI_Reader
 
     // input question
     public void InputQuestion(string toWho, bool isLock, string msg, 
-        /*IEnumerator reply,*/ List<EChatEvent> chatEvt = null, Action action = null, bool isRecord = true)
+        List<EChatEvent> chatEvt = null, string nextMember = "", Action action = null, bool isRecord = true)
     {
         // create chat
         VisualElement chat = null;
@@ -257,6 +257,12 @@ public class UIReader_Chatting : UI_Reader
                 {
                     if (questions.askText == msg)
                         member.questions.Remove(questions);
+                }
+
+                if (nextMember != "")
+                {
+                    GameManager.Instance.chapterManager.StopChatting();
+                    ChoiceMember(GameManager.Instance.chatSystem.FindMember(nextMember));
                 }
 
                 // original, don't remove this cord...
