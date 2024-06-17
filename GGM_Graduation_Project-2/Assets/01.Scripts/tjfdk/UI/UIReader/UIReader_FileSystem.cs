@@ -2,13 +2,11 @@ using ChatVisual;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using Unity.VisualScripting;
+using System.Data;
 using UnityEditor;
 using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.WSA;
 
 public enum FileType
 {
@@ -29,18 +27,19 @@ public class FolderFile
     //public List<VisualElement> textFiles;
     //public List<VisualElement> imageFiles;
 
-    public FolderFile(string name)
+    public FolderFile(string name, string parent)
     {
         folderName = name;
-        parentFolderName = "Main";
+        parentFolderName = parent;
         folderFiles = new List<string>();
         textFiles = new List<string>();
         imageFiles = new List<string>();
 
-        void FolderFile(string name)
-        {
-            folderName = name;
-        }
+        //void FolderFile(string name, string parent)
+        //{
+        //    folderName = name;
+        //    parentFolderName = parent;
+        //}
     }
 }
 
@@ -111,7 +110,7 @@ public class UIReader_FileSystem : UI_Reader
         UXML_Load();
         Event_Load();
 
-        fileFolders.Add(new FolderFile("Main"));
+        fileFolders.Add(new FolderFile("Main", "Main"));
         //fileFolderList.Add("Main", new FolderFile("Main"));
         AddFilePath("Main");
     }
@@ -245,17 +244,20 @@ public class UIReader_FileSystem : UI_Reader
 
     public void AddFile(FileType fileType, string fileName, string fileParentName)
     {
+        Debug.Log(fileName + " " + fileParentName);
+
         // find parentFolder
         FolderFile parentFolder = FindFolder(fileParentName);
 
         // if exist parenteFolder
         if (parentFolder != null)
         {
+            Debug.Log("부모 찾음");
             // register folder to parentFolder
             switch (fileType)
             {
                 case FileType.FOLDER:
-                        fileFolders.Add(new FolderFile(fileName));
+                        fileFolders.Add(new FolderFile(fileName, fileParentName));
                     //fileFolderList.Add(fileName, new FolderFile(fileName));
                     parentFolder.folderFiles.Add(fileName);
                     break;
@@ -444,7 +446,7 @@ public class UIReader_FileSystem : UI_Reader
     {
             // file - parent
         // create new parentFolder
-        FolderFile newParentFolder = new FolderFile(fileParentName);
+        FolderFile newParentFolder = new FolderFile(fileParentName, GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName);
 
         // register parentFolder
             fileFolders.Add(newParentFolder);
@@ -487,6 +489,7 @@ public class UIReader_FileSystem : UI_Reader
 
     public void DrawFile(string folderName)
     {
+        Debug.Log(folderName + " 이거 열거임");
         // fileGround - current folder ground
         // fileFolders - current folder list
         // folderName - current folder name
@@ -510,6 +513,7 @@ public class UIReader_FileSystem : UI_Reader
             foreach (string folderName1 in currentFileFolder.folderFiles)
             {
                 FileSO folder = GameManager.Instance.fileManager.FindFile(folderName1);
+                Debug.Log("가ㅣㅈ고 이슨ㄴㄹ ㄹfolder " + folder.fileName);
                 // create uxml
                 file = RemoveContainer(ux_folderFile.Instantiate());
                 // change file name
@@ -518,7 +522,7 @@ public class UIReader_FileSystem : UI_Reader
                 file.Q<Button>("FileImage").clicked += () =>
                 {
                     // draw current foluder
-                    DrawFile(file.Q<Label>("FileName").text);
+                    DrawFile(folder.fileName);
                     // add current folder path
                     AddFilePath(folder.fileName);
                 };

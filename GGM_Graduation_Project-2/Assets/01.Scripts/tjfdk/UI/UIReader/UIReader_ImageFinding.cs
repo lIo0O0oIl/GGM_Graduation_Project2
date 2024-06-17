@@ -122,12 +122,12 @@ public class UIReader_ImageFinding : UI_Reader
                                     if (text != null)
                                     {
                                         Debug.Log(text.name + " " + image.name);
-                                        GameManager.Instance.fileSystem.AddFile(FileType.TEXT, text.name, image.name);
+                                        //GameManager.Instance.fileSystem.AddFile(FileType.TEXT, text.name, image.name);
                                     }
                                     else
                                     {
                                         Debug.Log(png.name + " " + image.name);
-                                        GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
+                                        //GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
                                     }
                                 });
                             }

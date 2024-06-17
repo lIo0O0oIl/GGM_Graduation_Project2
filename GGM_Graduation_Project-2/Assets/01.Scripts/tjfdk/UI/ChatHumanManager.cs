@@ -32,7 +32,7 @@ public class ChatHumanManager : UI_Reader
             ChatTree chatTree = chatContainer.chatTrees[i];
             for (int j = 0; j < chatTree.nodeList.Count; j++)
             {
-                chatTree.nodeList[i].is_UseThis = false;
+                chatTree.nodeList[j].is_UseThis = false;
             }
         }
     }
