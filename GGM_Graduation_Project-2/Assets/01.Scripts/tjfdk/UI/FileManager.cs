@@ -60,12 +60,17 @@ public class FileManager : UI_Reader
         if (file != null)
         {
             // the same trigger name and file name
-            if (file.name == GameManager.Instance.chapterManager.nowCondition.fileName)
+            if (GameManager.Instance.chapterManager.nowCondition != null)
             {
-                Debug.Log("트리거 호출");
-                GameManager.Instance.chapterManager.nowCondition.is_UseThis = true;
-                GameManager.Instance.chapterManager.StartChatting();
+                if (file.name == GameManager.Instance.chapterManager.nowCondition.fileName)
+                {
+                    Debug.Log("트리거 호출");
+                    GameManager.Instance.chapterManager.nowCondition.is_UseThis = true;
+                    GameManager.Instance.chapterManager.nowCondition = null;
+                }
             }
         }
+
+        GameManager.Instance.chapterManager.StartChatting();
     }
 }

@@ -267,6 +267,7 @@ public class UIReader_Chatting : UI_Reader
 
                 if (nextMember != "")
                 {
+                    Debug.Log("뭔가 다음 사람이 있어");
                     GameManager.Instance.chapterManager.StopChatting();
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(nextMember));
                 }
