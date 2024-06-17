@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using System;
+using UnityEditor.Callbacks;
 
 public class ChatEditor : EditorWindow
 {
@@ -23,6 +24,17 @@ public class ChatEditor : EditorWindow
     public static void OpenWindow()
     {
         GetWindow<ChatEditor>("ChatEditor");
+    }
+
+    [OnOpenAsset]
+    public static bool OnOpenAsset(int instanceId, int line)
+    {
+        if (Selection.activeObject is ChatTree)
+        {
+            OpenWindow();
+            return true;
+        }
+        return false;
     }
 
     public void CreateGUI()
@@ -46,7 +58,7 @@ public class ChatEditor : EditorWindow
         arrayAddBtn.clickable.clicked += OnArrayAddBtn;
         sortBtn = root.Q<Button>("SortBtn");
         sortBtn.tooltip = "Delete All Nodes";
-        sortBtn.clickable.clicked += OnSortNodes;
+        sortBtn.clickable.clicked += FindChatContainer;
 
         chatView.OnNodeSelected += OnSelectionNodeChanged;
 
@@ -73,12 +85,10 @@ public class ChatEditor : EditorWindow
         }
     }
     
-    private void OnSortNodes()
+    private void FindChatContainer()
     {
-        if (chatContainer != null)
-        {
-            Debug.Log("Sort all nodes!");
-        }
+        chatContainer = FindObjectOfType<ChatContainer>();
+        InitEditor();
     }
 
     private void OnSelectionNodeChanged(NodeView nodeView)
@@ -90,21 +100,26 @@ public class ChatEditor : EditorWindow
     {
         if (Selection.activeGameObject != null)
         {
-            if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))    
+            if (Selection.activeGameObject.TryGetComponent<ChatContainer>(out chatContainer))
             {
                 // The current chat is an assistant's(HG) chat
                 //chatContainer.nowHumanName = "HG";
 
-                hierarchyView.InitHierarchy(chatContainer, chatView, inspectorView);
-                hierarchyView.UpdateHierarchy();
-
-                if (chatContainer.chatTrees.Count <= 0)
-                {
-                    OnArrayAddBtn();
-                }
-
-                chatView.PopulateView(chatContainer.chatTrees[0]);
+                InitEditor();
             }
         }
+    }
+
+    private void InitEditor()
+    {
+        hierarchyView.InitHierarchy(chatContainer, chatView, inspectorView);
+        hierarchyView.UpdateHierarchy();
+
+        if (chatContainer.chatTrees.Count <= 0)
+        {
+            OnArrayAddBtn();
+        }
+
+        chatView.PopulateView(chatContainer.chatTrees[0]);
     }
 }
