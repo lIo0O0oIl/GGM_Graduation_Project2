@@ -210,8 +210,9 @@ MonoBehaviour:
   type: 0
   chatText: "\uADF8\uB7EC\uC9C0"
   face: 0
-  loadFileName: []
-  textEvent: 0300000003000000
+  loadFileName:
+  - "\uC625\uC0C1"
+  textEvent: 03000000
   LoadNextDialog: 
 --- !u!114 &-5865964707741930869
 MonoBehaviour:
@@ -236,7 +237,7 @@ MonoBehaviour:
   is_AllQuestion: 0
   asks: []
   is_SpecificFile: 1
-  fileName: "\uC774\uC218\uD604 \uC0AC\uBB3C\uD568"
+  fileName: "\uC774\uC218\uC5F0 \uC0AC\uBB3C\uD568"
   is_LockQuestion: 0
 --- !u!114 &-5782642954634753871
 MonoBehaviour:
@@ -307,7 +308,7 @@ MonoBehaviour:
   guid: 59dfb746f110dda4ba020bbd9068ca7c
   position: {x: -118.39999, y: 801.485}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   parent: {fileID: 3081115622426955644}
   childList:
   - {fileID: -3163919034992094330}
@@ -342,8 +343,10 @@ MonoBehaviour:
   type: 0
   chatText: "\uC774\uC218\uC5F0 \uD559\uC0DD\uC758 \uC0AC\uBB3C\uD568\uC744 \uBCF4\uB0B4\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4"
   face: 0
-  loadFileName: []
-  textEvent: 030000000300000003000000
+  loadFileName:
+  - "\uBC18"
+  - "\uC774\uC218\uC5F0 \uC0AC\uBB3C\uD568"
+  textEvent: 0300000003000000
   LoadNextDialog: 
 --- !u!114 &-3896116579817541065
 MonoBehaviour:
@@ -448,7 +451,12 @@ MonoBehaviour:
   type: 0
   chatText: "\uD589\uC815\uC2E4\uC5D0 CCTV\uC5D0 \uAD00\uD574 \uBB38\uC758\uD574\uBCF4\uB2C8"
   face: 0
-  loadFileName: []
+  loadFileName:
+  - CCTV
+  - CCTV1
+  - CCTV2
+  - CCTV3
+  - CCTV4
   textEvent: 0300000003000000030000000300000003000000
   LoadNextDialog: 
 --- !u!114 &-3023067537697144536
@@ -542,9 +550,9 @@ MonoBehaviour:
   is_UseThis: 0
   parent: {fileID: 864478486083944815}
   child: {fileID: 7363202054603727785}
-  askText: Teacher
+  askText: "\uB2F4\uC784\uC120\uC0DD\uB2D8"
   textEvent: 04000000
-  LoadNextDialog: 
+  LoadNextDialog: Teachers
 --- !u!114 &-1783618914926028292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,7 +956,7 @@ MonoBehaviour:
   guid: 5aa4ddbc84da5cb4eb9248a47098c45d
   position: {x: -118.40004, y: 552.26}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   parent: {fileID: 5707633102190996492}
   childList:
   - {fileID: 3081115622426955644}
@@ -1011,7 +1019,7 @@ MonoBehaviour:
   is_AllQuestion: 0
   asks: []
   is_SpecificFile: 1
-  fileName: "\uC2DC\uCCB4"
+  fileName: "\uC625\uC0C1"
   is_LockQuestion: 0
 --- !u!114 &1796857732905570435
 MonoBehaviour:
@@ -1159,7 +1167,7 @@ MonoBehaviour:
   guid: 08ef1c8aafc961644bb180a47fc9043a
   position: {x: -119.399994, y: 147}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   parent: {fileID: 3332800361343203531}
   childList:
   - {fileID: 9086518399393044832}
@@ -1237,7 +1245,7 @@ MonoBehaviour:
   guid: 8a4feb01eb4ab284bbd314454e24c97a
   position: {x: -118.399994, y: 682.66}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   parent: {fileID: 744372558112005897}
   childList:
   - {fileID: -4103585968011123268}
@@ -1289,7 +1297,7 @@ MonoBehaviour:
   child: {fileID: -2094241441226533546}
   askText: "\uBD80\uBAA8\uB2D8"
   textEvent: 04000000
-  LoadNextDialog: 
+  LoadNextDialog: Home
 --- !u!114 &3340442707748321522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,7 +1318,7 @@ MonoBehaviour:
   child: {fileID: 1796857732905570435}
   askText: "\uBC18 \uCE5C\uAD6C\uB4E4"
   textEvent: 04000000
-  LoadNextDialog: 
+  LoadNextDialog: Friend
 --- !u!114 &3818050925528462026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,7 +1440,7 @@ MonoBehaviour:
   guid: 203fb0953813ab34a986a93321821b42
   position: {x: 156.80005, y: 390.94}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   parent: {fileID: 9086518399393044832}
   childList:
   - {fileID: 744372558112005897}
@@ -1720,13 +1728,13 @@ MonoBehaviour:
   guid: 0fbde3629535ebf42b3a30c9590030d5
   position: {x: -118.39999, y: 267.60007}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   parent: {fileID: 2768966851647550630}
   childList:
   - {fileID: 5707633102190996492}
   state: 0
   type: 0
-  chatText: "\uC800\uB294 \uC774\uBC88 \uC218\uC0AC\uB97C \uB3D5\uAC8C \uB41C \uC870\uC218\uC785\uB2C8\uB2E4!"
+  chatText: "\uC774\uBC88 \uC218\uC0AC\uB97C \uB3D5\uAC8C \uB41C \uACBD\uC7A5 \uBC15\uD604\uADDC\uC785\uB2C8\uB2E4!"
   face: 0
   loadFileName: []
   textEvent: 

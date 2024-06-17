@@ -27,8 +27,14 @@ public class ChatHumanManager : UI_Reader
 
     private void Start()
     {
-        //chatting = StartCoroutine(ReadChat());
-        //StopCoroutine(chatting);
+        for (int i = 0; i < chatContainer.chatTrees.Count; i++)
+        {
+            ChatTree chatTree = chatContainer.chatTrees[i];
+            for (int j = 0; j < chatTree.nodeList.Count; j++)
+            {
+                chatTree.nodeList[i].is_UseThis = false;
+            }
+        }
     }
 
     public void AddHuman(string who)     // HG
@@ -136,15 +142,16 @@ public class ChatHumanManager : UI_Reader
             }
             else        // When child is not a ChatNode
             {
+                Debug.Log("질문 초반 진입");
                 for (int i = 0; i < children.Count; i++)
                 {
                     if (children[i].is_UseThis == false)
                     {
                         if (children[i] is AskNode askNode) // When child is a AskNode
                         {
-                            //Debug.Log(askNode.askText);
+                            Debug.Log(askNode.askText);
 
-                            bool is_Lock = askNode.parent is ConditionNode ? true : false;
+                            bool is_Lock = askNode.parent is ConditionNode ? false : true;
 
                             // input question
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
@@ -155,6 +162,7 @@ public class ChatHumanManager : UI_Reader
                             GameManager.Instance.chatSystem.SettingChat(member, askNode, member.currentFace, askNode.textEvent);
 
                             askNode.is_UseThis = true;
+                            //currentNode = askNode.parent;
                         }
                         else if (children[i] is ConditionNode conditionNode) // When child is a ConditionNode
                         {
@@ -168,7 +176,7 @@ public class ChatHumanManager : UI_Reader
                 }
             }
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
         }
     }
 

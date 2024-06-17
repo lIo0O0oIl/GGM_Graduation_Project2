@@ -155,7 +155,7 @@ public class UIReader_Chatting : UI_Reader
         foreach (AskNode chat in otherName.questions)
             InputQuestion(otherName.name, true, chat.askText, null, null, null, false);
 
-        Invoke("EndToScroll", 0.5f);
+        Invoke("EndToScroll", 0.25f);
     }
 
     // input chat
@@ -253,10 +253,16 @@ public class UIReader_Chatting : UI_Reader
                 // remove chat
                 chat.parent.Remove(chat);
                 // find record question, and remove this question
-                foreach (AskNode questions in member.questions) // new! need test
+                //foreach (AskNode questions in member.questions) // new! need test
+                //{s
+                //    if (questions.askText == msg)
+                //        member.questions.Remove(questions);
+                //}
+
+                for (int i = 0; i < member.questions.Count; ++i)
                 {
-                    if (questions.askText == msg)
-                        member.questions.Remove(questions);
+                    if (member.questions[i].askText == msg)
+                        member.questions.RemoveAt(i);
                 }
 
                 if (nextMember != "")
