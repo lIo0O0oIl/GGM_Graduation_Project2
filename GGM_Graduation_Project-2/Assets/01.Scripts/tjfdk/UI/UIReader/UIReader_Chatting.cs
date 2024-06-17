@@ -30,7 +30,7 @@ public class UIReader_Chatting : UI_Reader
     //public string currentMemberName;
     // member profile
     [SerializeField] List<MemberProfile> members = new List<MemberProfile>();
-    public Dictionary<string, MemberProfile> memberList;
+    //public Dictionary<string, MemberProfile> memberList;
     //public List<AskNode> questions;
 
     // memberList arrow sprite
@@ -72,7 +72,7 @@ public class UIReader_Chatting : UI_Reader
         MaxWidth = 500;
         MaxHeight = 500;
 
-        memberList = new Dictionary<string, MemberProfile>();
+        //memberList = new Dictionary<string, MemberProfile>();
         //questions = new List<AskNode>();
     }
 
@@ -88,8 +88,8 @@ public class UIReader_Chatting : UI_Reader
         Event_Load();
 
         // move member profile to member dictionary
-        foreach (MemberProfile member in members)
-            memberList.Add(member.nickName.ToString(), member);
+        //foreach (MemberProfile member in members)
+        //    memberList.Add(member.nickName.ToString(), member);
     }
 
     private void UXML_Load()
@@ -116,13 +116,22 @@ public class UIReader_Chatting : UI_Reader
     // find member
     public MemberProfile FindMember(string name)
     {
-        //foreach(MemberProfile member in members)
-        //{
-        //    if (member.nickName.ToString() == name || member.name == name)
-        //        return member;
-        //}
+        foreach (MemberProfile member in members)
+        {
+            if (member.nickName.ToString() == name || member.name == name)
+                return member;
+        }
 
-        return memberList[name];
+        return null;
+
+        //Debug.Log(name + " MemberProfile dictionary");
+        //MemberProfile member = memberList[name];
+        //if (member != null)
+        //    return member;
+        //else
+        //    return null;
+
+        //return memberList[name];
     }
 
     // remove all chat and question
@@ -160,7 +169,6 @@ public class UIReader_Chatting : UI_Reader
         // find member
         MemberProfile member = FindMember(toWho);
 
-        Debug.Log(type.ToString());
         // chat type
         switch (type)
         {
