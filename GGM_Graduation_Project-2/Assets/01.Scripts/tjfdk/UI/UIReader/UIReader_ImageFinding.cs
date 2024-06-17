@@ -71,7 +71,7 @@ public class UIReader_ImageFinding : UI_Reader
                 GameManager.Instance.fileManager.UnlockChapter(fileT);
 
                 // restart chatting
-                Debug.Log("대화 다시 호출");
+                Debug.Log("????ㅼ떆 ?몄텧");
                 GameManager.Instance.chapterManager.StartChatting();
             }
             else
@@ -90,21 +90,21 @@ public class UIReader_ImageFinding : UI_Reader
                 VisualElement imagePanel = RemoveContainer(ux_imageGround.Instantiate());
                 imagePanel.style.backgroundImage = new StyleBackground(image.image);
 
-                // 이름으로 찾아주고
+                // ?대쫫?쇰줈 李얠븘二쇨퀬
                 foreach (string evid in image.pngName)
                 {
-                    // 해당 단서를 찾았다면
-                    PngSO png = GameManager.Instance.imageManager.pngList[evid];
+                    // ?대떦 ?⑥꽌瑜?李얠븯?ㅻ㈃
+                    PngSO png = GameManager.Instance.imageManager.FindPng(evid);
                     if (png != null)
                     {
                         if (evid == png.name)
                         {
-                            // 생성
+                            // ?앹꽦
                             VisualElement evidence = null;
-                            // 중요하다면
+                            // 以묒슂?섎떎硫?
                             if (png.importance)
                             {
-                                // 메모장으로 표시
+                                // 硫붾え?μ쑝濡??쒖떆
                                 evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
@@ -131,10 +131,10 @@ public class UIReader_ImageFinding : UI_Reader
                                     }
                                 });
                             }
-                            // 아니라면
+                            // ?꾨땲?쇰㈃
                             else
                             {
-                                // 아래 글로만 표시
+                                // ?꾨옒 湲濡쒕쭔 ?쒖떆
                                 evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
@@ -152,13 +152,13 @@ public class UIReader_ImageFinding : UI_Reader
                                 });
                             }
 
-                            //단서 위치 설정
+                            //?⑥꽌 ?꾩튂 ?ㅼ젙
                             evidence.style.position = Position.Absolute;
                             evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
                             evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
                             evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
                             evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-                            // 단서를 이미지에 추가
+                            // ?⑥꽌瑜??대?吏??異붽?
                             imagePanel.Add(evidence);
                         }
                     }
@@ -168,18 +168,18 @@ public class UIReader_ImageFinding : UI_Reader
 
                 //foreach (string evid in image.textName)
                 //{
-                //    // 해당 단서를 찾았다면
+                //    // ?대떦 ?⑥꽌瑜?李얠븯?ㅻ㈃
                 //    TextSO text = GameManager.Instance.imageManager.textList[evid];
                 //    if (text != null)
                 //    {
                 //        if (evid == text.name)
                 //        {
-                //            // 생성
+                //            // ?앹꽦
                 //            VisualElement evidence = null;
-                //            // 중요하다면
+                //            // 以묒슂?섎떎硫?
                 //            if (text.importance)
                 //            {
-                //                // 메모장으로 표시
+                //                // 硫붾え?μ쑝濡??쒖떆
                 //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                 //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(text.image);
                 //                evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = text.name;
@@ -201,10 +201,10 @@ public class UIReader_ImageFinding : UI_Reader
                 //                    }
                 //                });
                 //            }
-                //            // 아니라면
+                //            // ?꾨땲?쇰㈃
                 //            else
                 //            {
-                //                // 아래 글로만 표시
+                //                // ?꾨옒 湲濡쒕쭔 ?쒖떆
                 //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                 //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                 //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
@@ -222,13 +222,13 @@ public class UIReader_ImageFinding : UI_Reader
                 //                });
                 //            }
 
-                //            //단서 위치 설정
+                //            //?⑥꽌 ?꾩튂 ?ㅼ젙
                 //            evidence.style.position = Position.Absolute;
                 //            evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
                 //            evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
                 //            evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
                 //            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-                //            // 단서를 이미지에 추가
+                //            // ?⑥꽌瑜??대?吏??異붽?
                 //            imagePanel.Add(evidence);
                 //        }
                 //    }
@@ -243,7 +243,7 @@ public class UIReader_ImageFinding : UI_Reader
 
             isImageOpen = !isImageOpen;
         }
-        // png 일 때
+        // png ????
         else
         {
             // find png
@@ -276,7 +276,7 @@ public class UIReader_ImageFinding : UI_Reader
                     GameManager.Instance.fileManager.UnlockChapter(file);
 
                     // restart chatting
-                    Debug.Log("대화 다시 호출");
+                    Debug.Log("????ㅼ떆 ?몄텧");
                     GameManager.Instance.chapterManager.StartChatting();
                 };
 
@@ -291,12 +291,12 @@ public class UIReader_ImageFinding : UI_Reader
 
         //foreach (ImageBig image in GameManager.Instance.imageManager.images)
         //{
-        //    // 해당 이미지를 찾았다면 배경 설정
+        //    // ?대떦 ?대?吏瑜?李얠븯?ㅻ㈃ 諛곌꼍 ?ㅼ젙
         //    if (image.name == fileName.Q<Label>("FileName").text)
         //    {
         //        if (isImageOpen)
         //        {
-        //            // filesystem 사이즈 변환 버튼 켜기
+        //            // filesystem ?ъ씠利?蹂??踰꾪듉 耳쒓린
         //            GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Position;
         //            ui_imageGround.style.display = DisplayStyle.None;
 
@@ -311,9 +311,9 @@ public class UIReader_ImageFinding : UI_Reader
         //        }
         //        else
         //        {
-        //            // filesystem 사이즈 변환 버튼 끄기
+        //            // filesystem ?ъ씠利?蹂??踰꾪듉 ?꾧린
         //            GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Ignore;
-        //            // filesystem 사이즈 작게 만들기
+        //            // filesystem ?ъ씠利??묎쾶 留뚮뱾湲?
         //            GameManager.Instance.fileSystem.isFileSystemOpen = true;
         //            GameManager.Instance.fileSystem.OnOffFileSystem(0f);
 
@@ -322,21 +322,21 @@ public class UIReader_ImageFinding : UI_Reader
         //            VisualElement textImage = RemoveContainer(ux_imageGround.Instantiate());
         //            textImage.style.backgroundImage = new StyleBackground(image.image);
 
-        //            // 자식 단서들을 생성
-        //            // 이름으로 찾아주고
+        //            // ?먯떇 ?⑥꽌?ㅼ쓣 ?앹꽦
+        //            // ?대쫫?쇰줈 李얠븘二쇨퀬
         //            foreach (string evid in image.pngName)
         //            {
-        //                // 해당 단서를 찾았다면
+        //                // ?대떦 ?⑥꽌瑜?李얠븯?ㅻ㈃
         //                foreach (ImageSmall png in GameManager.Instance.imageManager.pngs)
         //                {
         //                    if (evid == png.name)
         //                    {
-        //                        // 생성
+        //                        // ?앹꽦
         //                        VisualElement evidence = null;
-        //                        // 중요하다면
+        //                        // 以묒슂?섎떎硫?
         //                        if (png.importance)
         //                        {
-        //                            // 메모장으로 표시
+        //                            // 硫붾え?μ쑝濡??쒖떆
         //                            evidence = RemoveContainer(ux_imageEvidence.Instantiate());
         //                            evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
         //                            evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
@@ -358,10 +358,10 @@ public class UIReader_ImageFinding : UI_Reader
         //                                }
         //                            });
         //                        }
-        //                        // 아니라면
+        //                        // ?꾨땲?쇰㈃
         //                        else
         //                        {
-        //                            // 아래 글로만 표시
+        //                            // ?꾨옒 湲濡쒕쭔 ?쒖떆
         //                            evidence = RemoveContainer(ux_imageEvidence.Instantiate());
         //                            evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
         //                            evidence.Q<Button>("EvidenceImage").clicked += (() =>
@@ -379,13 +379,13 @@ public class UIReader_ImageFinding : UI_Reader
         //                            });
         //                        }
 
-        //                        //단서 위치 설정
+        //                        //?⑥꽌 ?꾩튂 ?ㅼ젙
         //                        evidence.style.position = Position.Absolute;
         //                        evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
         //                        evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
         //                        evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
         //                        evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-        //                        // 단서를 이미지에 추가
+        //                        // ?⑥꽌瑜??대?吏??異붽?
         //                        textImage.Add(evidence);
         //                    }
         //                }
@@ -396,7 +396,7 @@ public class UIReader_ImageFinding : UI_Reader
         //        }
 
         //        isImageOpen = !isImageOpen;
-        //// Png일 때
+        //// Png????
         //foreach (ImageSmall png in GameManager.Instance.imageManager.pngs)
         //{
         //    if (png.name == fileName)
@@ -426,7 +426,7 @@ public class UIReader_ImageFinding : UI_Reader
             GameManager.Instance.fileManager.UnlockChapter(file);
 
             // restart chatting
-            Debug.Log("대화 다시 호출");
+            Debug.Log("????ㅼ떆 ?몄텧");
             GameManager.Instance.chapterManager.StartChatting();
         };
 

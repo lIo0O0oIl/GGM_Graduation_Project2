@@ -55,14 +55,14 @@ public class ImageManager : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (ImageSO image in images)
-            imageList.Add(image.name, image);
+        //foreach (ImageSO image in images)
+        //    imageList.Add(image.name, image);
 
-        foreach (PngSO png in pngs)
-            pngList.Add(png.name, png);
+        //foreach (PngSO png in pngs)
+        //    pngList.Add(png.name, png);
 
-        foreach (TextSO memo in texts)
-            textList.Add(memo.name, memo);
+        //foreach (TextSO memo in texts)
+        //    textList.Add(memo.name, memo);
     }
 
     public ImageSO FindImage(string name) 
