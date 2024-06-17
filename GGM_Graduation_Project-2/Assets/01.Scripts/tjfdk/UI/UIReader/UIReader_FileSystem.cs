@@ -244,15 +244,12 @@ public class UIReader_FileSystem : UI_Reader
 
     public void AddFile(FileType fileType, string fileName, string fileParentName)
     {
-        Debug.Log(fileName + " " + fileParentName);
-
         // find parentFolder
         FolderFile parentFolder = FindFolder(fileParentName);
 
         // if exist parenteFolder
         if (parentFolder != null)
         {
-            Debug.Log("부모 찾음");
             // register folder to parentFolder
             switch (fileType)
             {

@@ -183,7 +183,29 @@ public class ChatHumanManager : UI_Reader
                     else
                         Debug.Log("tlqkftlqlfktl");
                 }
+                else if (children[0] is AskNode askNode) // When child is a AskNode
+                {
+                    GameManager.Instance.chatSystem.OpenOtherQuestion(true);
+                    if (askNode.test_isRead == false)
+                    {
+                        Debug.Log(askNode.askText);
 
+                        nowQuestionParent = askNode.parent as ChatNode;
+                        bool is_Lock = askNode.parent is ConditionNode ? false : true;
+
+                        // input question
+                        GameManager.Instance.chatSystem.InputQuestion(nowHumanName, is_Lock,
+                            askNode.askText, askNode.textEvent, askNode.LoadNextDialog, () => { currentNode = askNode; askNode.is_UseThis = true; });
+                        // record question
+                        member.questions.Add(askNode);
+                        // event
+                        GameManager.Instance.chatSystem.SettingChat(member, askNode, member.currentFace, askNode.textEvent);
+
+                        member.memCurrentNode = askNode.child;
+                        askNode.test_isRead = true;
+                        //currentNode = askNode.parent;
+                    }
+                }
             }
             else        // When child is not a ChatNode
             {
@@ -287,11 +309,15 @@ public class ChatHumanManager : UI_Reader
     {
         Debug.Log("대화 시작");
         nowHumanName = name;
+        MemberProfile member = GameManager.Instance.chatSystem.FindMember(nowHumanName);
         chatContainer.nowName = name;
         nowNodes = chatContainer.GetChatTree().nodeList;
         if (nowNodes[0] is RootNode rootNode)
         {
-            currentNode = rootNode;
+            if (member.memCurrentNode != null)
+                currentNode = member.memCurrentNode;
+            else
+                currentNode = rootNode;
             //nowIndex = rootNode.nowIndex;
         }
 

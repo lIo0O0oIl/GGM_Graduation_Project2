@@ -570,7 +570,7 @@ MonoBehaviour:
   is_UseThis: 0
   test_isRead: 0
   parent: {fileID: 864478486083944815}
-  child: {fileID: 7363202054603727785}
+  child: {fileID: -1670427780382526299}
   askText: "\uB2F4\uC784\uC120\uC0DD\uB2D8"
   textEvent: 04000000
   LoadNextDialog: Teacher
@@ -646,7 +646,7 @@ MonoBehaviour:
   index: 0
   is_UseThis: 0
   test_isRead: 0
-  parent: {fileID: 7363202054603727785}
+  parent: {fileID: -1841799184759799048}
   childList:
   - {fileID: -8975104478211627525}
   state: 0
@@ -898,7 +898,6 @@ MonoBehaviour:
   - {fileID: -1841799184759799048}
   - {fileID: 3337403160450376717}
   - {fileID: 3340442707748321522}
-  - {fileID: 7363202054603727785}
   - {fileID: -1670427780382526299}
   - {fileID: -2094241441226533546}
   - {fileID: 4992044228880227174}
@@ -1587,32 +1586,6 @@ MonoBehaviour:
   loadFileName: []
   textEvent: 
   LoadNextDialog: 
---- !u!114 &7363202054603727785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 966f7155bace4ea40b65a6f9c3cd1574, type: 3}
-  m_Name: ConditionNode
-  m_EditorClassIdentifier: 
-  guid: ede15095486224d4bac996a7bd2062c9
-  position: {x: 377.59998, y: 2985.6}
-  index: 0
-  is_UseThis: 0
-  test_isRead: 0
-  parentList:
-  - {fileID: -1841799184759799048}
-  childList:
-  - {fileID: -1670427780382526299}
-  is_AllQuestion: 0
-  asks: []
-  is_SpecificFile: 1
-  fileName: "\uB2F4\uC784 \uC120\uC0DD\uB2D8"
-  is_LockQuestion: 0
 --- !u!114 &7486208310539866046
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class MemberProfile
 
     public List<ChatNode> chattings = new List<ChatNode>();
     public List<AskNode> questions = new List<AskNode>();
+    public Node memCurrentNode;
     //public List<Chatting> chattings = new List<Chatting>();
     //public List<Chatting> quetions = new List<Chatting>();
 }

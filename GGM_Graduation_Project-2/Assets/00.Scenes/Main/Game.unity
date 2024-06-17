@@ -653,6 +653,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
+    memCurrentNode: {fileID: 0}
   - name: "\uD669\uC900\uC6D0"
     nickName: 2
     currentFace: 0
@@ -663,6 +664,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
+    memCurrentNode: {fileID: 0}
   - name: "\uACFD\uD604\uC11D"
     nickName: 3
     currentFace: 0
@@ -673,6 +675,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
+    memCurrentNode: {fileID: 0}
   - name: "\uC774\uCC44\uBBFC"
     nickName: 4
     currentFace: 0
@@ -683,6 +686,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
+    memCurrentNode: {fileID: 0}
   - name: "\uBC15\uD604\uADDC"
     nickName: 5
     currentFace: 0
@@ -693,6 +697,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
+    memCurrentNode: {fileID: 0}
   - name: "\uAC15\uB300\uC591"
     nickName: 6
     currentFace: 0
@@ -703,6 +708,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
+    memCurrentNode: {fileID: 0}
   - name: "\uB2F4\uC784\uC120\uC0DD\uB2D8"
     nickName: 7
     currentFace: 0
@@ -713,6 +719,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
+    memCurrentNode: {fileID: 0}
   - name: "\uD559\uC0DD"
     nickName: 8
     currentFace: 0
@@ -723,6 +730,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
+    memCurrentNode: {fileID: 0}
   - name: "\uD53C\uD574\uC790\uC758 \uBD80\uBAA8"
     nickName: 9
     currentFace: 0
@@ -733,6 +741,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
+    memCurrentNode: {fileID: 0}
   changeMemberBtnOn: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isMemberListOpen: 0
