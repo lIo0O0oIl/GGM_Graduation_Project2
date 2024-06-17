@@ -65,18 +65,43 @@ public class ImageManager : MonoBehaviour
             textList.Add(memo.name, memo);
     }
 
-    public ImageSO FindImage(string name) { return imageList[name]; }
+    public ImageSO FindImage(string name) 
+    {
+        foreach (ImageSO image in images)
+        {
+            Debug.Log(image.name + " " + name);
+            if (image.name == name)
+                return image;
+        }
+
+        return null;
+
+        //return imageList[name]; 
+    }
 
     public PngSO FindPng(string name)
     {
-        //foreach (ImageSmall png in  pngs)
-        //{
-        //    if (png.name == name) 
-        //        return png;
-        //}
+        foreach (PngSO png in pngs)
+        {
+            if (png.name == name)
+                return png;
+        }
 
-        return pngList[name];
+        return null;
+
+        //return pngList[name];
     }
 
-    public TextSO FindText(string name) { return textList[name]; }
+    public TextSO FindText(string name) 
+    {
+        foreach (TextSO text in texts)
+        {
+            if (text.name == name)
+                return text;
+        }
+
+        return null;
+
+        //return textList[name]; 
+    }
 }

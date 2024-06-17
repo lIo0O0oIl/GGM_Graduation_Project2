@@ -19,20 +19,41 @@ using UnityEngine;
 public class FileManager : UI_Reader
 {
     [SerializeField] List<FileSO> folderFiles = new List<FileSO>();
-    public Dictionary<string, FileSO> folderFileList;
+    //public Dictionary<string, FileSO> folderFileList;
 
     private void Awake()
     {
-        folderFileList = new Dictionary<string, FileSO>();
+        //folderFileList = new Dictionary<string, FileSO>();
     }
 
     private void OnEnable()
     {
-        foreach (FileSO file in folderFiles)
-            folderFileList.Add(file.fileName, file);
+        //foreach (FileSO file in folderFiles)
+        //    folderFileList.Add(file.fileName, file);
     }
 
-    public FileSO FindFile(string name) { return folderFileList[name]; }
+    public FileSO FindFile(string name) 
+    {
+        //foreach (var f in folderFileList.Values)
+        //    Debug.Log(f.fileName + " " + name);
+
+        //FileSO file = folderFileList[name];
+        //if (file != null)
+        //    return file;
+        //else
+        //    return null;
+
+        ////return folderFileList[name]; 
+        ///
+
+        foreach (FileSO file in folderFiles)
+        {
+            if (file.fileName == name)
+                return file;
+        }
+
+        return null;
+    }
 
     public void UnlockChapter(FileSO file)
     {

@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Build.Content;
 using UnityEngine;
@@ -35,6 +36,11 @@ public class FolderFile
         folderFiles = new List<string>();
         textFiles = new List<string>();
         imageFiles = new List<string>();
+
+        void FolderFile(string name)
+        {
+            folderName = name;
+        }
     }
 }
 
@@ -70,10 +76,10 @@ public class UIReader_FileSystem : UI_Reader
 
 
     // folder
-    private string currentFolderName;
+    public string currentFolderName;
     [SerializeField] List<FolderFile> fileFolders; // this is test, fileFolders -> fileFolderList X!!
     // if dictionary is correct working, remove fileFolders!
-    public Dictionary<string, FolderFile> fileFolderList;
+    //public Dictionary<string, FolderFile> fileFolderList;
 
     // path
     private Stack<string> filePathLisk;
@@ -88,7 +94,7 @@ public class UIReader_FileSystem : UI_Reader
         base.Awake();
 
         fileFolders = new List<FolderFile>();
-        fileFolderList = new Dictionary<string, FolderFile>();
+        //fileFolderList = new Dictionary<string, FolderFile>();
         filePathLisk = new Stack<string>();
         lockQuestions = new List<VisualElement>();
 
@@ -106,7 +112,7 @@ public class UIReader_FileSystem : UI_Reader
         Event_Load();
 
         fileFolders.Add(new FolderFile("Main"));
-        fileFolderList.Add("Main", new FolderFile("Main"));
+        //fileFolderList.Add("Main", new FolderFile("Main"));
         AddFilePath("Main");
     }
 
@@ -221,13 +227,20 @@ public class UIReader_FileSystem : UI_Reader
 
     private FolderFile FindFolder(string name)
     {
-        //foreach (FolderFile folder in fileFolders)
-        //{
-        //    if (folder.folderName == name)
-        //        return folder;
-        //}
+        foreach (FolderFile folder in fileFolders)
+        {
+            if (folder.folderName == name)
+                return folder;
+        }
 
-        return fileFolderList[name];
+        return null;
+
+
+        //FolderFile file = fileFolderList[name];
+        //if (file != null)
+        //    return file;
+        //else
+        //    return null;
     }
 
     public void AddFile(FileType fileType, string fileName, string fileParentName)
@@ -243,7 +256,7 @@ public class UIReader_FileSystem : UI_Reader
             {
                 case FileType.FOLDER:
                         fileFolders.Add(new FolderFile(fileName));
-                    fileFolderList.Add(fileName, new FolderFile(fileName));
+                    //fileFolderList.Add(fileName, new FolderFile(fileName));
                     parentFolder.folderFiles.Add(fileName);
                     break;
                 case FileType.IMAGE:
@@ -257,24 +270,25 @@ public class UIReader_FileSystem : UI_Reader
         // if not exist parenteFolder
         else
         {
-            FolderFile newParentFolder = CreateNewParent(fileType, fileParentName, fileName);
-            if (newParentFolder != null)
-                AddFile(fileType, fileName, newParentFolder.folderName);
-            else
-                Debug.Log("FindParent error, unable to make parent");
+            Debug.Log(fileParentName + " this is null");
+            //FolderFile newParentFolder = CreateNewParent(fileType, fileParentName, fileName);
+            //if (newParentFolder != null)
+            //    AddFile(fileType, fileName, newParentFolder.folderName);
+            //else
+            //    Debug.Log("FindParent error, unable to make parent");
 
-            //switch (fileType)
-            //{
-            //    case FileType.FOLDER:
-            //        newParentFolder.folderFiles.Add(file);
-            //        break;
-            //    case FileType.IMAGE:
-            //        newParentFolder.imageFiles.Add(file);
-            //        break;
-            //    case FileType.TEXT:
-            //        newParentFolder.textFiles.Add(file);
-            //        break;
-            //}
+            ////switch (fileType)
+            ////{
+            ////    case FileType.FOLDER:
+            ////        newParentFolder.folderFiles.Add(file);
+            ////        break;
+            ////    case FileType.IMAGE:
+            ////        newParentFolder.imageFiles.Add(file);
+            ////        break;
+            ////    case FileType.TEXT:
+            ////        newParentFolder.textFiles.Add(file);
+            ////        break;
+            ////}
         }
 
         ////VisualElement file = null;
@@ -418,9 +432,12 @@ public class UIReader_FileSystem : UI_Reader
         //}
 
         if (currentFolderName == "")
+        {
             currentFolderName = fileParentName;
+        }
         if (currentFolderName == fileParentName)
             DrawFile(currentFolderName);
+        //DrawFile("Main");
     }
 
     private FolderFile CreateNewParent(FileType fileType, string fileParentName, string fileName)
@@ -431,7 +448,7 @@ public class UIReader_FileSystem : UI_Reader
 
         // register parentFolder
             fileFolders.Add(newParentFolder);
-        fileFolderList.Add(newParentFolder.folderName, newParentFolder);
+        //fileFolderList.Add(newParentFolder.folderName, newParentFolder);
         
         // add file to newParentFolder
         switch (fileType)
@@ -470,18 +487,19 @@ public class UIReader_FileSystem : UI_Reader
 
     public void DrawFile(string folderName)
     {
-            // fileGround - current folder ground
-            // fileFolders - current folder list
-            // folderName - current folder name
+        // fileGround - current folder ground
+        // fileFolders - current folder list
+        // folderName - current folder name
 
         // change current folder
         currentFolderName = folderName;
+        currentFileFolder = FindFolder(folderName);
 
         // all file remove of fileGround
         RemoveFile();
 
         // find current folder
-        currentFileFolder = fileFolderList[folderName];
+        //currentFileFolder = fileFolderList[folderName];
 
         // folder isn't null
         if (currentFileFolder != null)
@@ -511,34 +529,34 @@ public class UIReader_FileSystem : UI_Reader
 
             foreach (string imageName in currentFileFolder.imageFiles)
             {
-                FileSO image = GameManager.Instance.fileManager.FindFile(folderName);
+                FileSO image = GameManager.Instance.fileManager.FindFile(imageName);
                 // create uxml
                 file = RemoveContainer(ux_imageFile.Instantiate());
                 // change file name
                 file.Q<Label>("FileName").text = image.fileName;
                 // connection drag and drop & button click event
                 LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(image.fileName); });
-                    //file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
-                    //{
-                    //    var area = FindMoveArea(evt.mousePosition);
-                    //    target.RemoveFromHierarchy();
-                    //    if (area == null)
-                    //        beforeSlot.Add(target);
-                    //    else
-                    //    {
-                    //        LockAskAndReply lockQuestion = FindQuestion(area);
-                    //        if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
-                    //        {
-                    //            area.parent.Remove(area);
-                    //            chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
-                    //                EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
-                    //        }
-                    //        else
-                    //            beforeSlot.Add(target);
-                    //    }
-                    //},
-                    //() => { GameManager.Instance.imageSystem.OpenImage(image.fileName); }
-                    //));
+                //file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
+                //{
+                //    var area = FindMoveArea(evt.mousePosition);
+                //    target.RemoveFromHierarchy();
+                //    if (area == null)
+                //        beforeSlot.Add(target);
+                //    else
+                //    {
+                //        LockAskAndReply lockQuestion = FindQuestion(area);
+                //        if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
+                //        {
+                //            area.parent.Remove(area);
+                //            chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
+                //                EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
+                //        }
+                //        else
+                //            beforeSlot.Add(target);
+                //    }
+                //},
+                //() => { GameManager.Instance.imageSystem.OpenImage(image.fileName); }
+                //));
 
                 // add file
                 ui_fileGround.Add(file);
@@ -546,27 +564,30 @@ public class UIReader_FileSystem : UI_Reader
 
             foreach (string textName in currentFileFolder.textFiles)
             {
-                FileSO text = GameManager.Instance.fileManager.FindFile(folderName);
+                Debug.Log(textName + " png");
+                FileSO text = GameManager.Instance.fileManager.FindFile(textName);
                 // create uxml
                 file = RemoveContainer(ux_textFile.Instantiate());
                 // change file name
                 file.Q<Label>("FileName").text = text.fileName;
                 // connection drag and drop & button click event
                 LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(text.fileName); });
-                    //file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
-                    //{
-                    //    var area = FindMoveArea(evt.mousePosition);
-                    //    target.RemoveFromHierarchy();
-                    //    if (area == null)
-                    //        beforeSlot.Add(target);
-                    //},
-                    //() => { GameManager.Instance.imageSystem.OpenImage(text.fileName); }
-                    //));
+                //file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
+                //{
+                //    var area = FindMoveArea(evt.mousePosition);
+                //    target.RemoveFromHierarchy();
+                //    if (area == null)
+                //        beforeSlot.Add(target);
+                //},
+                //() => { GameManager.Instance.imageSystem.OpenImage(text.fileName); }
+                //));
 
                 // add file
                 ui_fileGround.Add(file);
             }
         }
+        else
+            Debug.Log("current folder file null");
     }
 
     private void RemoveFile()
