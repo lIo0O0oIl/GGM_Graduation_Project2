@@ -57,20 +57,15 @@ public class FileManager : UI_Reader
 
     public void UnlockChat(FileSO file)
     {
-        Debug.Log(file.fileName + " " + file.eventName);
-        if (file.eventName != "")
+        if (file != null)
         {
-            Debug.Log("트리거 호출");
-            GameManager.Instance.chapterManager.nowCondition.is_UseThis = true;
-            GameManager.Instance.chapterManager.StartChatting();
-
-            //if (chapterManager.FindChat(file.eventName) != null)
-            //{
-            //    if (chapterManager.FindChat(file.eventName).isCan == true)
-            //        chapterManager.FindChat(file.eventName).isCan = false;
-            //}
-            //else
-            //    Debug.Log("筌?벤苑??紐꺿봺椰???곗벉!");
+            // the same trigger name and file name
+            if (file.name == GameManager.Instance.chapterManager.nowCondition.fileName)
+            {
+                Debug.Log("트리거 호출");
+                GameManager.Instance.chapterManager.nowCondition.is_UseThis = true;
+                GameManager.Instance.chapterManager.StartChatting();
+            }
         }
     }
 }
