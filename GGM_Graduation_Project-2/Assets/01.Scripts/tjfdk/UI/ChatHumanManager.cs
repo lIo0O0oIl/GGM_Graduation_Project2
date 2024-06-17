@@ -125,7 +125,7 @@ public class ChatHumanManager : UI_Reader
                         GameManager.Instance.chatSystem.SettingChat(member, chatNode, chatNode.face, chatNode.textEvent);
                         // chat 다음 꺼 ㄱ
                         currentNode = children[0];
-                        Debug.Log(currentNode + " 다음 꺼 잘 들어감");
+                        Debug.Log(currentNode + " 다음 꺼 잘 들어감ㄴ");
                         // 읽음 표시
                         chatNode.test_isRead = true;
                     }
@@ -187,11 +187,12 @@ public class ChatHumanManager : UI_Reader
             }
             else        // When child is not a ChatNode
             {
-                Debug.Log("질문 초반 진입");
+                // 여기까지 옴, 질문 켜주는 함수 OpenOtherQuestion 호출 위치르 ㄹ 바꿔야함!
                 for (int i = 0; i < children.Count; i++)
                 {
                     if (children[i] is AskNode askNode) // When child is a AskNode
                     {
+                        GameManager.Instance.chatSystem.OpenOtherQuestion(true);
                         if (askNode.test_isRead == false)
                         {
                             Debug.Log(askNode.askText);
@@ -227,7 +228,10 @@ public class ChatHumanManager : UI_Reader
                                 }
 
                                 if (all_Use == false)
+                                {
                                     currentNode = nowQuestionParent;
+                                    //GameManager.Instance.chatSystem.OpenOtherQuestion(true);
+                                }
                                 else
                                 {
                                     Debug.Log("어디가 문제일까아아ㅏㅏㅏㅏㅏㅏㅏ");

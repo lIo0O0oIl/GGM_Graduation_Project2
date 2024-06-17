@@ -253,6 +253,9 @@ public class UIReader_Chatting : UI_Reader
             {
                 // remove chat
                 chat.parent.Remove(chat);
+                // if question click? you have to hidding others
+                OpenOtherQuestion(false);
+
                 // find record question, and remove this question
                 //foreach (AskNode questions in member.questions) // new! need test
                 //{s
@@ -260,6 +263,7 @@ public class UIReader_Chatting : UI_Reader
                 //        member.questions.Remove(questions);
                 //}
 
+                // current question value list
                 for (int i = 0; i < member.questions.Count; ++i)
                 {
                     if (member.questions[i].askText == msg)
@@ -399,6 +403,20 @@ public class UIReader_Chatting : UI_Reader
                         break;
                 }
             }
+        }
+    }
+
+    public void OpenOtherQuestion(bool isOpen)
+    {
+        if (isOpen)
+        {
+            foreach (VisualElement q in ui_questionGround.Children())
+                q.style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+            foreach (VisualElement q in ui_questionGround.Children())
+                q.style.display = DisplayStyle.None;
         }
     }
 
