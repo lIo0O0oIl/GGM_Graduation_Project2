@@ -137,7 +137,6 @@ public class UIReader_FileSystem : UI_Reader
     private void FindLockQuestion()
     {
         MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName);
-        Debug.Log(member.name);
         for (int i = 0; i < member.questions.Count; ++i)
         {
             // lockQuestion list 중복ㅎ확인?...
@@ -181,7 +180,6 @@ public class UIReader_FileSystem : UI_Reader
         {
             if (moveArea.worldBound.Contains(position)) //?대떦 RECT?덉뿉 ?ъ??섏씠 ?덈뒗吏 寃?ы빐
             {
-                Debug.Log(moveArea.Q<Label>().text);
                 return moveArea;
             }
         }
@@ -488,7 +486,7 @@ public class UIReader_FileSystem : UI_Reader
 
     public void DrawFile(string folderName)
     {
-        Debug.Log(folderName + " 이거 열거임");
+        //Debug.Log(folderName + " 이거 열거임");
         // fileGround - current folder ground
         // fileFolders - current folder list
         // folderName - current folder name
@@ -512,7 +510,7 @@ public class UIReader_FileSystem : UI_Reader
             foreach (string folderName1 in currentFileFolder.folderFiles)
             {
                 FileSO folder = GameManager.Instance.fileManager.FindFile(folderName1);
-                Debug.Log("클릭된 파일이름 : " + folder.fileName);
+                //Debug.Log("클릭된 파일이름 : " + folder.fileName);
                 // create uxml
                 file = RemoveContainer(ux_folderFile.Instantiate());
                 // change file name
@@ -569,7 +567,7 @@ public class UIReader_FileSystem : UI_Reader
 
             foreach (string textName in currentFileFolder.textFiles)
             {
-                Debug.Log(textName + " png");
+                //Debug.Log(textName + " png");
                 FileSO text = GameManager.Instance.fileManager.FindFile(textName);
                 // create uxml
                 file = RemoveContainer(ux_textFile.Instantiate());

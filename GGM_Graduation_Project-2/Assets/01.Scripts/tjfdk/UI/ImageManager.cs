@@ -69,7 +69,6 @@ public class ImageManager : MonoBehaviour
     {
         foreach (ImageSO image in images)
         {
-            Debug.Log(image.name + " " + name);
             if (image.name == name)
                 return image;
         }

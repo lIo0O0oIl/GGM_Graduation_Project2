@@ -49,7 +49,7 @@ namespace ChatVisual
 
         public void AddChild(Node parent, Node child)
         {
-            Debug.Log($"Connect! parent : {parent}, child : {child}");
+            //Debug.Log($"Connect! parent : {parent}, child : {child}");
 
             AddParent(parent, child);
 

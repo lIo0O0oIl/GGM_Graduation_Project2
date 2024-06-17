@@ -45,7 +45,6 @@ public class CutSceneManager : MonoBehaviour
 
     public void CutScene(bool isOpen, string name)
     {
-        Debug.Log("22222");
         currentCutScene = FindCutScene(name);
         currentCutNum = 0;
         currentTextNum = 0;

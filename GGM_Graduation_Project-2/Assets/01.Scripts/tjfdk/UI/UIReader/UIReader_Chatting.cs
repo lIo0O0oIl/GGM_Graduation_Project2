@@ -124,7 +124,6 @@ public class UIReader_Chatting : UI_Reader
                 return member;
         }
 
-        Debug.Log(name);
         return null;
 
         //Debug.Log(name + " MemberProfile dictionary");
@@ -158,8 +157,8 @@ public class UIReader_Chatting : UI_Reader
         foreach (ChatNode chat in otherName.chattings)
             InputChat(GameManager.Instance.chapterManager.nowHumanName, chat.state, chat.type, otherName.currentFace, chat.chatText, null, false);
 
-        foreach (AskNode chat in otherName.questions)
-            InputQuestion(otherName.name, true, chat.askText, null, null, null, false);
+        //foreach (AskNode chat in otherName.questions)
+        //    InputQuestion(otherName.name, true, chat.askText, null, null, null, false);
 
         Invoke("EndToScroll", 0.25f);
     }
@@ -281,14 +280,12 @@ public class UIReader_Chatting : UI_Reader
 
                 if (nextMember != "")
                 {
-                    Debug.Log("뭔가 다음 사람이 있어");
                     GameManager.Instance.chapterManager.StopChatting();
                     AddMember(nextMember);
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(nextMember));
                 }
                 else
                 {
-                    Debug.Log("질문 눌림");
                     action?.Invoke();
                 }
 

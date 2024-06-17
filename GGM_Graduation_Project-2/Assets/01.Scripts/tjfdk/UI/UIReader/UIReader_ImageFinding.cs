@@ -72,7 +72,7 @@ public class UIReader_ImageFinding : UI_Reader
 
                 // image check action
                 FileSO fileT = GameManager.Instance.fileManager.FindFile(fileName);
-                Debug.Log(fileT.fileName);
+                //Debug.Log(fileT.fileName);
                 GameManager.Instance.fileManager.UnlockChat(fileT);
 
                 //// restart chatting
@@ -126,13 +126,13 @@ public class UIReader_ImageFinding : UI_Reader
                                     TextSO text = GameManager.Instance.imageManager.FindText(evid);
                                     if (text != null)
                                     {
-                                        Debug.Log(text.name + " " + image.name);
+                                        //Debug.Log(text.name + " " + image.name);
                                         GameManager.Instance.fileSystem.AddFile(FileType.TEXT, text.name,
                                             GameManager.Instance.fileManager.FindFile(text.name).fileParentName);
                                     }
                                     else
                                     {
-                                        Debug.Log(png.name + " " + image.name);
+                                        //Debug.Log(png.name + " " + image.name);
                                         GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, 
                                             GameManager.Instance.fileManager.FindFile(png.name).fileParentName);
                                     }
@@ -278,7 +278,7 @@ public class UIReader_ImageFinding : UI_Reader
                     ui_panelGround.Remove(panel);
 
                     // png check action
-                    Debug.Log(png.name + " 닫은 파일 이름");
+                    //Debug.Log(png.name + " 닫은 파일 이름");
                     FileSO file = GameManager.Instance.fileManager.FindFile(png.name);
                     GameManager.Instance.fileManager.UnlockChat(file);
 

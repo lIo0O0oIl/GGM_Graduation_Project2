@@ -30,7 +30,7 @@ namespace ChatVisual
             baseArea.Add(invenElem);
             button.AddManipulator(new Dragger((evt, target, beforeSlot) =>
             {
-                Debug.Log(beforeSlot.name);
+                //Debug.Log(beforeSlot.name);
                 var area = FindMoveArea(evt.mousePosition);
 
                 target.RemoveFromHierarchy();

@@ -18,7 +18,7 @@ namespace ChatVisual
 
         public Action<NodeView> OnNodeSelected;     // Node Click Events
 
-        public NodeView(Node node) : base("Assets/ChatVisual/NodeView/NodeView.uxml")
+        public NodeView(Node node) : base("Assets/ChatVisual/Editor/NodeView/NodeView.uxml")
         {
             this.node = node;
             this.title = node.GetType().Name;

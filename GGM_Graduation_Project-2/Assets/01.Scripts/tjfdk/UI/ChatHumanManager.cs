@@ -130,24 +130,27 @@ public class ChatHumanManager : UI_Reader
                 {
                     if (askNode.test_isRead == false && askNode.is_UseThis == false)
                     {
-                        Debug.Log(askNode.askText);
-
                         nowQuestionParent = askNode.parent as ChatNode;
 
                         // 중복검사 하고 스택에 parent 넣기
                         if (member.memQuestionParent.Count == 0)
                         {
                             member.memQuestionParent.Push(nowQuestionParent);
+                            Debug.Log("stack에 넣음 " + member.memQuestionParent.Count);
                         }
                         else
                         {
                             if (member.memQuestionParent.Contains(nowQuestionParent) == false)
+                            {
                                 member.memQuestionParent.Push(nowQuestionParent);
+                                Debug.Log("stack에 넣음 " + member.memQuestionParent.Count);
+                            }
                         }
 
                         GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode.askText, askNode.textEvent,
                             askNode.LoadNextDialog, () => 
                             { 
+                                    //Debug.Log(member.name + " " + askNode.askText);
                                 currentNode = askNode; 
                                 askNode.is_UseThis = true;
                                 GameManager.Instance.chatSystem.RemoveQuestion();
@@ -160,10 +163,10 @@ public class ChatHumanManager : UI_Reader
                         member.questions.Add(askNode);
 
                         //GameManager.Instance.chatSystem.RemoveQuestion();
-                        if (member.memCurrentNode is ChatNode c)
-                            Debug.Log(c + " 현재 인물의 최근 대화");
-                        else
-                            Debug.Log("chatnode 자료형이 아님");
+                        //if (member.memCurrentNode is ChatNode c)
+                        //    Debug.Log(c + " 현재 인물의 최근 대화");
+                        //else
+                        //    Debug.Log("chatnode 자료형이 아님");
                         member.memCurrentNode = askNode.parent;
                         currentNode = askNode.parent;
 
@@ -187,7 +190,7 @@ public class ChatHumanManager : UI_Reader
                             }
                             else
                             {
-                                Debug.Log("오시나용...");
+                                ////Debug.Log("오시나용...");
                                 currentNode = nowQuestionParent;
                                 StartChatting();
                             }
@@ -199,13 +202,13 @@ public class ChatHumanManager : UI_Reader
                     {
                         if (conditionNode.is_UseThis == false)
                         {
-                            Debug.Log("file trigger off");
+                            //Debug.Log("file trigger off");
                             nowCondition = conditionNode;
                             StopChatting();
                         }
                         else
                         {
-                            Debug.Log("file trigger on");
+                            //Debug.Log("file trigger on");
                             currentNode = conditionNode;
                         }
                     }
@@ -488,9 +491,14 @@ public class ChatHumanManager : UI_Reader
         if (nowNodes[0] is RootNode rootNode)
         {
             if (member.memCurrentNode != null)
+            {
                 currentNode = member.memCurrentNode;
+                ChatNode test = currentNode as ChatNode;
+                Debug.Log(test.chatText + " 시작 지점");
+            }
             else
                 currentNode = rootNode;
+
             //nowIndex = rootNode.nowIndex;
         }
 

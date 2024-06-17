@@ -108,8 +108,6 @@ public class UI_Reader : MonoBehaviour
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
 
-            Debug.Log("대화 다시 호출");
-
             GameManager.Instance.chapterManager.StartChatting();
         }
     }

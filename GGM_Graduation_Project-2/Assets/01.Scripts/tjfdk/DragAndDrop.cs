@@ -15,10 +15,10 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private Vector2 dragStartPosition;
     private Vector2 dragEndPosition;
 
-    [SerializeField] private LineRenderer line; // ÇöÀç ±×·ÁÁö°í ÀÖ´Â ¼±
-    [SerializeField] private Material lineMaterial; // ¼±À» ±×¸®±â À§ÇÑ ÇÁ¸®ÆÕ
-    [SerializeField] private int currentLineCnt; // ÇöÀç ¼± °³¼ö
-    [SerializeField] private Transform lineParent; // ÇöÀç ¼± °³¼ö
+    [SerializeField] private LineRenderer line; // í˜„ì¬ ê·¸ë ¤ì§€ê³  ìˆëŠ” ì„ 
+    [SerializeField] private Material lineMaterial; // ì„ ì„ ê·¸ë¦¬ê¸° ìœ„í•œ í”„ë¦¬íŒ¹
+    [SerializeField] private int currentLineCnt; // í˜„ì¬ ì„  ê°œìˆ˜
+    [SerializeField] private Transform lineParent; // í˜„ì¬ ì„  ê°œìˆ˜
     private Vector3 mousePos;
 
     private void Awake()
@@ -41,7 +41,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
         else
         {
-            Debug.Log(dragStartPosition +  " " + dragEndPosition);
+            //Debug.Log(dragStartPosition +  " " + dragEndPosition);
             UpdateLine();
         }
     }

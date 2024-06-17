@@ -58,7 +58,6 @@ public class FileManager : UI_Reader
 
     public void UnlockChat(FileSO file)
     {
-                Debug.Log(file.name + " " + GameManager.Instance.chapterManager.nowCondition.fileName);
         if (file != null)
         {
             // the same trigger name and file name
@@ -66,7 +65,6 @@ public class FileManager : UI_Reader
             {
                 if (file.name == GameManager.Instance.chapterManager.nowCondition.fileName)
                 {
-                    Debug.Log("?몃━嫄??몄텧");
                     GameManager.Instance.chapterManager.nowCondition.is_UseThis = true;
                     GameManager.Instance.chapterManager.nowCondition = null;
                 }

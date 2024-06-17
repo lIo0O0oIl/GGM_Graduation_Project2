@@ -569,7 +569,6 @@ namespace ChatVisual
                 {
                     if (!_doubleClickInitiated)
                     {
-                        Debug.Log("踰꾪듉 ?ㅽ뻾??");
                         _clickCallback?.Invoke();
                     }
                 }).StartingIn((int)(_doubleClickThreshold * 1000)); // ?붾툝 ?대┃ ?꾧퀎媛??쒓컙 ?숈븞 吏??
