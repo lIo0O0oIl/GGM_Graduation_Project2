@@ -246,6 +246,8 @@ namespace ChatVisual
 
                 //GUILayout.Space(5);
                 //EditorGUILayout.Toggle("child", is_ChildExist);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             };
 
             Add(container);

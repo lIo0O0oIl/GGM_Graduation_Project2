@@ -32,6 +32,11 @@ MonoBehaviour:
   - {fileID: 3337403160450376717}
   - {fileID: 3340442707748321522}
   - {fileID: -1841799184759799048}
+  - {fileID: -8336487026159529361}
+  - {fileID: -732252647395145651}
+  - {fileID: 3337403160450376717}
+  - {fileID: 3340442707748321522}
+  - {fileID: -1841799184759799048}
   is_SpecificFile: 0
   fileName: 
   is_LockQuestion: 0
@@ -526,32 +531,6 @@ MonoBehaviour:
   askText: "\uC8FC\uBCC0\uC778 \uD0D0\uBB38"
   textEvent: 
   LoadNextDialog: 
---- !u!114 &-2094241441226533546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 966f7155bace4ea40b65a6f9c3cd1574, type: 3}
-  m_Name: ConditionNode
-  m_EditorClassIdentifier: 
-  guid: 36e0f90c00fce144c819a74eec07f4e6
-  position: {x: 801.6001, y: 2985.6003}
-  index: 0
-  is_UseThis: 0
-  test_isRead: 0
-  parentList:
-  - {fileID: 3337403160450376717}
-  childList:
-  - {fileID: 4992044228880227174}
-  is_AllQuestion: 0
-  asks: []
-  is_SpecificFile: 1
-  fileName: "\uBD80\uBAA8\uB2D8"
-  is_LockQuestion: 0
 --- !u!114 &-1841799184759799048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,7 +878,6 @@ MonoBehaviour:
   - {fileID: 3337403160450376717}
   - {fileID: 3340442707748321522}
   - {fileID: -1670427780382526299}
-  - {fileID: -2094241441226533546}
   - {fileID: 4992044228880227174}
   - {fileID: -6490827863239216952}
   - {fileID: 2197732529746198942}
@@ -1340,7 +1318,7 @@ MonoBehaviour:
   is_UseThis: 0
   test_isRead: 0
   parent: {fileID: 864478486083944815}
-  child: {fileID: -2094241441226533546}
+  child: {fileID: 4992044228880227174}
   askText: "\uBD80\uBAA8\uB2D8"
   textEvent: 04000000
   LoadNextDialog: Home
@@ -1465,7 +1443,7 @@ MonoBehaviour:
   index: 0
   is_UseThis: 0
   test_isRead: 0
-  parent: {fileID: -2094241441226533546}
+  parent: {fileID: 3337403160450376717}
   childList:
   - {fileID: -6490827863239216952}
   state: 0
