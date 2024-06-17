@@ -98,7 +98,6 @@ public class UI_Reader : MonoBehaviour
     {
         if (isOpen)
         {
-            Debug.Log("333333");
             cutScenePanel.style.display = DisplayStyle.Flex;
             mainPanel.style.display= DisplayStyle.None;
 

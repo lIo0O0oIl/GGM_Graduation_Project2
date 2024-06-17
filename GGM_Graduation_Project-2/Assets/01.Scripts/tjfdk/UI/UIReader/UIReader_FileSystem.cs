@@ -199,19 +199,21 @@ public class UIReader_FileSystem : UI_Reader
                 beforeSlot.Add(target);
             else
             {
-                AskNode lockAskNode = FindQuestion(area);
-                if (lockAskNode != null)
+                ConditionNode conditionNode = FindQuestion(area).parent as ConditionNode;
+                if (conditionNode != null)
                 {
                     string fileName = file.Q<Label>("FileName").text;
 
-                    if (GameManager.Instance.fileManager.FindFile(fileName).lockQuestionName == lockAskNode.askText)
+                    //if (GameManager.Instance.fileManager.FindFile(fileName).lockQuestionName == lockAskNode.askText)
+                    if (GameManager.Instance.fileManager.FindFile(fileName).fileName == conditionNode.fileName)
                     {
                         // remove this lockQuestion
                         area.parent.Remove(area);
                         // change from lockQustion to question
                         GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName).name,
-                            false, lockAskNode.askText, null, lockAskNode.LoadNextDialog, () => { GameManager.Instance.chapterManager.currentNode = lockAskNode; });
-                        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName).questions.Add(lockAskNode);
+                            false, ((AskNode)conditionNode.childList[0]).askText, null, ((AskNode)conditionNode.childList[0]).LoadNextDialog, 
+                            () => { GameManager.Instance.chapterManager.currentNode = conditionNode; });
+                        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName).questions.Add((AskNode)conditionNode.childList[0]);
                     }
                     else
                         beforeSlot.Add(target);
@@ -510,7 +512,7 @@ public class UIReader_FileSystem : UI_Reader
             foreach (string folderName1 in currentFileFolder.folderFiles)
             {
                 FileSO folder = GameManager.Instance.fileManager.FindFile(folderName1);
-                Debug.Log("가ㅣㅈ고 이슨ㄴㄹ ㄹfolder " + folder.fileName);
+                Debug.Log("클릭된 파일이름 : " + folder.fileName);
                 // create uxml
                 file = RemoveContainer(ux_folderFile.Instantiate());
                 // change file name

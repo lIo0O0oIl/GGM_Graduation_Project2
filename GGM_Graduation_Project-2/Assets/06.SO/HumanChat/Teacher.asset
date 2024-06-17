@@ -177,8 +177,11 @@ MonoBehaviour:
   - {fileID: 8416841811360680755}
   childList:
   - {fileID: 3639042259654192348}
-  is_AllQuestion: 0
-  asks: []
+  is_AllQuestion: 1
+  asks:
+  - {fileID: -8702056852616206104}
+  - {fileID: -6073776599437183859}
+  - {fileID: -5366215494601744893}
   is_SpecificFile: 0
   fileName: 
   is_LockQuestion: 0
@@ -358,9 +361,9 @@ MonoBehaviour:
   test_isRead: 0
   parent: {fileID: 3639042259654192348}
   child: {fileID: 0}
-  askText: 
-  textEvent: 
-  LoadNextDialog: 
+  askText: "(\uB3CC\uC544\uAC08\uAE4C?)"
+  textEvent: 04000000
+  LoadNextDialog: HG
 --- !u!114 &5242533396505446470
 MonoBehaviour:
   m_ObjectHideFlags: 0
