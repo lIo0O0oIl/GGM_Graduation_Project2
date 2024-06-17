@@ -15,7 +15,7 @@
 ////////        private VisualElement _beforeSlot;
 ////////        public Dragger(Action<MouseUpEvent, VisualElement, VisualElement> DropCallback)
 ////////        {
-////////            Debug.Log("생성됨");
+////////            Debug.Log("?앹꽦??);
 ////////            activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
 ////////            _dropCallback = DropCallback;
 ////////        }
@@ -36,13 +36,13 @@
 
 ////////        protected void OnMouseDown(MouseDownEvent evt)
 ////////        {
-////////            Debug.Log("아무거나");
+////////            Debug.Log("?꾨Т嫄곕굹");
 ////////            if (CanStartManipulation(evt))
 ////////            {
 ////////                var x = target.layout.x;
 ////////                var y = target.layout.y;
 ////////                _beforeSlot = target.parent;
-////////                var container = target.parent.parent; //백그라운드
+////////                var container = target.parent.parent; //諛깃렇?쇱슫??
 
 ////////                target.RemoveFromHierarchy();
 ////////                container.Add(target);
@@ -84,7 +84,7 @@
 ////////            target.style.left = 0;
 ////////            target.style.top = 0;
 
-////////            //이벤트, 드래그하고있는 녀석, 이전 부모
+////////            //?대깽?? ?쒕옒洹명븯怨좎엳????? ?댁쟾 遺紐?
 ////////            _dropCallback?.Invoke(evt, target, _beforeSlot);
 ////////        }
 ////////    }
@@ -105,12 +105,12 @@
 //////        private Vector2 _startPos;
 //////        private VisualElement _beforeSlot;
 //////        private float _clickStartTime;
-//////        private float _clickThreshold = 0.2f; // 클릭으로 인식할 최대 시간 (초)
-//////        private float _moveThreshold = 5.0f; // 클릭으로 인식할 최대 이동 거리 (픽셀)
+//////        private float _clickThreshold = 0.2f; // ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 (珥?
+//////        private float _moveThreshold = 5.0f; // ?대┃?쇰줈 ?몄떇??理쒕? ?대룞 嫄곕━ (?쎌?)
 
 //////        public Dragger(Action<MouseUpEvent, VisualElement, VisualElement> DropCallback)
 //////        {
-//////            Debug.Log("생성됨");
+//////            Debug.Log("?앹꽦??);
 //////            activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
 //////            _dropCallback = DropCallback;
 //////            //_clickCallback = ClickCallback;
@@ -183,14 +183,14 @@
 
 //////            if (clickDuration <= _clickThreshold && diff.magnitude <= _moveThreshold)
 //////            {
-//////                // 버튼 클릭으로 인식
+//////                // 踰꾪듉 ?대┃?쇰줈 ?몄떇
 //////                //_clickCallback?.Invoke();
 
-//////                Debug.Log("야이 버튼 눌리셨다11");
+//////                Debug.Log("?쇱씠 踰꾪듉 ?뚮━?⑤떎11");
 //////            }
 //////            else
 //////            {
-//////                // 드래그로 인식
+//////                // ?쒕옒洹몃줈 ?몄떇
 //////                target.style.position = Position.Relative;
 //////                target.style.left = 0;
 //////                target.style.top = 0;
@@ -217,13 +217,13 @@
 ////        private VisualElement _beforeSlot;
 ////        private float _clickStartTime;
 ////        private float _lastClickTime;
-////        private float _clickThreshold = 0.2f; // 클릭으로 인식할 최대 시간 (초)
-////        private float _doubleClickThreshold = 0.3f; // 더블 클릭으로 인식할 최대 시간 간격 (초)
-////        private float _moveThreshold = 5.0f; // 클릭으로 인식할 최대 이동 거리 (픽셀)
+////        private float _clickThreshold = 0.2f; // ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 (珥?
+////        private float _doubleClickThreshold = 0.3f; // ?붾툝 ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 媛꾧꺽 (珥?
+////        private float _moveThreshold = 5.0f; // ?대┃?쇰줈 ?몄떇??理쒕? ?대룞 嫄곕━ (?쎌?)
 
 ////        public Dragger(Action<MouseUpEvent, VisualElement, VisualElement> DropCallback)
 ////        {
-////            Debug.Log("생성됨");
+////            Debug.Log("?앹꽦??);
 ////            activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
 ////            _dropCallback = DropCallback;
 ////        }
@@ -250,13 +250,13 @@
 
 ////                if (Time.time - _lastClickTime <= _doubleClickThreshold)
 ////                {
-////                    // 더블 클릭으로 드래그 시작
+////                    // ?붾툝 ?대┃?쇰줈 ?쒕옒洹??쒖옉
 ////                    StartDrag(evt);
 ////                }
 ////                else
 ////                {
-////                    // 단일 클릭으로 버튼 클릭 인식
-////                    //Debug.Log("시발");
+////                    // ?⑥씪 ?대┃?쇰줈 踰꾪듉 ?대┃ ?몄떇
+////                    //Debug.Log("?쒕컻");
 ////                    _isDrag = false;
 ////                }
 
@@ -267,7 +267,7 @@
 
 ////        private void StartDrag(MouseDownEvent evt)
 ////        {
-////            Debug.Log("이게 왜 시작되농");
+////            Debug.Log("?닿쾶 ???쒖옉?섎냽");
 ////            _beforeSlot = target.parent;
 ////            var container = target.parent.parent;
 
@@ -307,7 +307,7 @@
 
 ////                target.ReleaseMouse();
 
-////                // 드래그 앤 드롭 완료
+////                // ?쒕옒洹????쒕∼ ?꾨즺
 ////                target.style.position = Position.Relative;
 ////                target.style.left = 0;
 ////                target.style.top = 0;
@@ -316,8 +316,8 @@
 ////            }
 ////            else
 ////            {
-////                // 단일 클릭으로 버튼 클릭 인식
-////                Debug.Log("버튼 응담함!!!!");
+////                // ?⑥씪 ?대┃?쇰줈 踰꾪듉 ?대┃ ?몄떇
+////                Debug.Log("踰꾪듉 ?묐떞??!!!");
 ////            }
 ////        }
 ////    }
@@ -339,14 +339,14 @@
 //        private VisualElement _beforeSlot;
 //        private float _clickStartTime;
 //        private float _lastClickTime;
-//        private float _clickThreshold = 0.2f; // 클릭으로 인식할 최대 시간 (초)
-//        private float _doubleClickThreshold = 0.3f; // 더블 클릭으로 인식할 최대 시간 간격 (초)
-//        private float _moveThreshold = 5.0f; // 클릭으로 인식할 최대 이동 거리 (픽셀)
+//        private float _clickThreshold = 0.2f; // ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 (珥?
+//        private float _doubleClickThreshold = 0.3f; // ?붾툝 ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 媛꾧꺽 (珥?
+//        private float _moveThreshold = 5.0f; // ?대┃?쇰줈 ?몄떇??理쒕? ?대룞 嫄곕━ (?쎌?)
 //        private bool _doubleClickInitiated = false;
 
 //        public Dragger(Action<MouseUpEvent, VisualElement, VisualElement> DropCallback)
 //        {
-//            Debug.Log("생성됨");
+//            Debug.Log("?앹꽦??);
 //            activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
 //            _dropCallback = DropCallback;
 //        }
@@ -373,13 +373,13 @@
 
 //                if (Time.time - _lastClickTime <= _doubleClickThreshold)
 //                {
-//                    // 더블 클릭으로 드래그 시작
+//                    // ?붾툝 ?대┃?쇰줈 ?쒕옒洹??쒖옉
 //                    _doubleClickInitiated = true;
 //                    StartDrag(evt);
 //                }
 //                else
 //                {
-//                    // 단일 클릭으로 버튼 클릭 인식
+//                    // ?⑥씪 ?대┃?쇰줈 踰꾪듉 ?대┃ ?몄떇
 //                    _isDrag = false;
 //                    _doubleClickInitiated = false;
 //                }
@@ -432,7 +432,7 @@
 
 //                target.ReleaseMouse();
 
-//                // 드래그 앤 드롭 완료
+//                // ?쒕옒洹????쒕∼ ?꾨즺
 //                target.style.position = Position.Relative;
 //                target.style.left = 0;
 //                target.style.top = 0;
@@ -441,8 +441,8 @@
 //            }
 //            else if (!_doubleClickInitiated)
 //            {
-//                // 단일 클릭으로 버튼 클릭 인식
-//                Debug.Log("심봤다!!");
+//                // ?⑥씪 ?대┃?쇰줈 踰꾪듉 ?대┃ ?몄떇
+//                Debug.Log("?щ뇬??!");
 //            }
 //        }
 //    }
@@ -465,9 +465,9 @@ namespace ChatVisual
         private VisualElement _beforeSlot;
         private float _clickStartTime;
         private float _lastClickTime;
-        private float _clickThreshold = 0.2f; // 클릭으로 인식할 최대 시간 (초)
-        private float _doubleClickThreshold = 0.3f; // 더블 클릭으로 인식할 최대 시간 간격 (초)
-        private float _moveThreshold = 5.0f; // 클릭으로 인식할 최대 이동 거리 (픽셀)
+        private float _clickThreshold = 0.2f; // ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 (珥?
+        private float _doubleClickThreshold = 0.3f; // ?붾툝 ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 媛꾧꺽 (珥?
+        private float _moveThreshold = 5.0f; // ?대┃?쇰줈 ?몄떇??理쒕? ?대룞 嫄곕━ (?쎌?)
         private bool _doubleClickInitiated = false;
 
         public Dragger(Action<MouseUpEvent, VisualElement, VisualElement> DropCallback, Action ClickCallback    )
@@ -499,13 +499,13 @@ namespace ChatVisual
 
                 if (Time.time - _lastClickTime <= _doubleClickThreshold)
                 {
-                    // 더블 클릭으로 드래그 시작
+                    // ?붾툝 ?대┃?쇰줈 ?쒕옒洹??쒖옉
                     _doubleClickInitiated = true;
                     StartDrag(evt);
                 }
                 else
                 {
-                    // 단일 클릭으로 버튼 클릭 인식
+                    // ?⑥씪 ?대┃?쇰줈 踰꾪듉 ?대┃ ?몄떇
                     _isDrag = false;
                     _doubleClickInitiated = false;
                 }
@@ -564,18 +564,18 @@ namespace ChatVisual
             }
             else if (!_doubleClickInitiated)
             {
-                // 클릭 지연 처리
+                // ?대┃ 吏??泥섎━
                 target.schedule.Execute(() =>
                 {
                     if (!_doubleClickInitiated)
                     {
-                        Debug.Log("버튼 실행됨");
+                        Debug.Log("踰꾪듉 ?ㅽ뻾??");
                         _clickCallback?.Invoke();
                     }
-                }).StartingIn((int)(_doubleClickThreshold * 1000)); // 더블 클릭 임계값 시간 동안 지연
+                }).StartingIn((int)(_doubleClickThreshold * 1000)); // ?붾툝 ?대┃ ?꾧퀎媛??쒓컙 ?숈븞 吏??
             }
 
-            // 더블 클릭 상태 초기화
+            // ?붾툝 ?대┃ ?곹깭 珥덇린??
             _doubleClickInitiated = false;
         }
     }

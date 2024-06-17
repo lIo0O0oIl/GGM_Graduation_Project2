@@ -57,6 +57,7 @@ public class FileManager : UI_Reader
 
     public void UnlockChapter(FileSO file)
     {
+        Debug.Log("트리거 호출");
         if (file.eventName != "")
         {
 /*            Chapter chapter = chapterManager.FindChapter(file.eventName);
@@ -74,12 +75,13 @@ public class FileManager : UI_Reader
                 }
             }
             else
-                Debug.Log("chat ?몃━嫄??우쓬!!");*/
+                Debug.Log("chat ?紐꺿봺椰???곗벉!!");*/
         }
     }
 
     public void UnlockChat(FileSO file)
     {
+        Debug.Log("트리거 호출");
         if (file.eventName != "")
         {
 /*            if (chapterManager.FindChat(file.eventName) != null)
@@ -88,7 +90,7 @@ public class FileManager : UI_Reader
                     chapterManager.FindChat(file.eventName).isCan = false;
             }
             else
-                Debug.Log("梨뺥꽣 ?몃━嫄??우쓬!");*/
+                Debug.Log("筌?벤苑??紐꺿봺椰???곗벉!");*/
         }
     }
 }
