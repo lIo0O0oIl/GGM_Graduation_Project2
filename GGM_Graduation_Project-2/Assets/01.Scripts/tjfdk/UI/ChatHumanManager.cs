@@ -74,11 +74,11 @@ public class ChatHumanManager : UI_Reader
                     {
                         if (askNode.test_isRead == false && askNode.is_UseThis == false)
                         {
-                            // 筌왖疫?筌욌뜄揆 ?봔筌?揶쎛?紐???
+                            // 嶺뚯솘???嶺뚯쉶?꾣룇 ?遊붋嶺??띠럾??筌???
                             currentNode = askNode.parent;
                             nowHuman.memCurrentNode = askNode.parent;
 
-                            // 筌욌뜄揆 ??밴쉐
+                            // 嶺뚯쉶?꾣룇 ??諛댁뎽
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode);
                             nowHuman.questions.Add(askNode);
                             askNode.test_isRead = true;
@@ -151,7 +151,7 @@ public class ChatHumanManager : UI_Reader
 
     public void ChatResetAndStart(string name)      // HG
     {
-        Debug.Log("?紐꺪?癰궰野?");
+        Debug.Log("?筌뤾벳??곌떠???");
 
         nowHumanName = name;
         nowHuman = GameManager.Instance.chatSystem.FindMember(nowHumanName);

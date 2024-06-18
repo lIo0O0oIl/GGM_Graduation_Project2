@@ -92,21 +92,21 @@ public class UIReader_ImageFinding : UI_Reader
                 VisualElement imagePanel = RemoveContainer(ux_imageGround.Instantiate());
                 imagePanel.style.backgroundImage = new StyleBackground(image.image);
 
-                // ?대쫫?쇰줈 李얠븘二쇨퀬
+                // ???藥??怨쀬Ŧ 嶺뚢돦堉싮뇡?놃떊??┑?
                 foreach (string evid in image.pngName)
                 {
-                    // ?대떦 ?⑥꽌瑜?李얠븯?ㅻ㈃
+                    // ???????觀???嶺뚢돦堉싮뇡???좊듆
                     PngSO png = GameManager.Instance.imageManager.FindPng(evid);
                     if (png != null)
                     {
                         if (evid == png.name)
                         {
-                            // ?앹꽦
+                            // ??諛댁뎽
                             VisualElement evidence = null;
-                            // 以묒슂?섎떎硫?
+                            // 繞벿살탳???濡ル펲嶺?
                             if (png.importance)
                             {
-                                // 硫붾え?μ쑝濡??쒖떆
+                                // 嶺뚮∥???????뿉???戮?뻣
                                 evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
@@ -134,10 +134,10 @@ public class UIReader_ImageFinding : UI_Reader
                                     evidence.Q<Button>("EvidenceImage").pickingMode = PickingMode.Ignore;
                                 });
                             }
-                            // ?꾨땲?쇰㈃
+                            // ?熬곣뫀鍮??寃밸듆
                             else
                             {
-                                // ?꾨옒 湲濡쒕쭔 ?쒖떆
+                                // ?熬곣뫁???リ섣??β돦裕녶퐲???戮?뻣
                                 evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
@@ -155,13 +155,13 @@ public class UIReader_ImageFinding : UI_Reader
                                 });
                             }
 
-                            //?⑥꽌 ?꾩튂 ?ㅼ젙
+                            //??觀???熬곣뫚?????깆젧
                             evidence.style.position = Position.Absolute;
                             evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
                             evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
                             evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
                             evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-                            // ?⑥꽌瑜??대?吏??異붽?
+                            // ??觀???????嶺뚯솘????怨뺣뼺?
                             imagePanel.Add(evidence);
                         }
                     }
@@ -171,18 +171,18 @@ public class UIReader_ImageFinding : UI_Reader
 
                 //foreach (string evid in image.textName)
                 //{
-                //    // ?대떦 ?⑥꽌瑜?李얠븯?ㅻ㈃
+                //    // ???????觀???嶺뚢돦堉싮뇡???좊듆
                 //    TextSO text = GameManager.Instance.imageManager.textList[evid];
                 //    if (text != null)
                 //    {
                 //        if (evid == text.name)
                 //        {
-                //            // ?앹꽦
+                //            // ??諛댁뎽
                 //            VisualElement evidence = null;
-                //            // 以묒슂?섎떎硫?
+                //            // 繞벿살탳???濡ル펲嶺?
                 //            if (text.importance)
                 //            {
-                //                // 硫붾え?μ쑝濡??쒖떆
+                //                // 嶺뚮∥???????뿉???戮?뻣
                 //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                 //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(text.image);
                 //                evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = text.name;
@@ -204,10 +204,10 @@ public class UIReader_ImageFinding : UI_Reader
                 //                    }
                 //                });
                 //            }
-                //            // ?꾨땲?쇰㈃
+                //            // ?熬곣뫀鍮??寃밸듆
                 //            else
                 //            {
-                //                // ?꾨옒 湲濡쒕쭔 ?쒖떆
+                //                // ?熬곣뫁???リ섣??β돦裕녶퐲???戮?뻣
                 //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                 //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                 //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
@@ -225,13 +225,13 @@ public class UIReader_ImageFinding : UI_Reader
                 //                });
                 //            }
 
-                //            //?⑥꽌 ?꾩튂 ?ㅼ젙
+                //            //??觀???熬곣뫚?????깆젧
                 //            evidence.style.position = Position.Absolute;
                 //            evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
                 //            evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
                 //            evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
                 //            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-                //            // ?⑥꽌瑜??대?吏??異붽?
+                //            // ??觀???????嶺뚯솘????怨뺣뼺?
                 //            imagePanel.Add(evidence);
                 //        }
                 //    }

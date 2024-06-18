@@ -165,7 +165,7 @@ public class UIReader_FileSystem : UI_Reader
             Debug.Log(member.questions[i].askText.Trim() == ask.name.Trim());
             if (member.questions[i].askText.Trim() == ask.name.Trim())
             {
-                Debug.Log("??쇰선揶쎛??");
+                Debug.Log("???곗꽑?띠럾???");
                 return member.questions[i];
             }
         }
@@ -188,7 +188,7 @@ public class UIReader_FileSystem : UI_Reader
             }
             else
             {
-                Debug.Log(questions.ElementAt(i).childCount + " ?醫됰┸ 筌욌뜄揆???袁⑤뻷");
+                Debug.Log(questions.ElementAt(i).childCount);
             }
         }
 
@@ -326,7 +326,7 @@ public class UIReader_FileSystem : UI_Reader
         //            AddParenet(fileType, fileParentName, fileName, file);
         //            break;
         //        }
-        //        // ??. ???녿탹???????濾????嶺뚮씭???..
+        //        // ??. ????욱꺓???????癲????癲ル슢????..
         //    case FileType.IMAGE:
         //        {
         //            //// create uxml
@@ -360,7 +360,7 @@ public class UIReader_FileSystem : UI_Reader
 
         //            AddParenet(fileType, fileParentName, fileName, file);
 
-        //            //// ???????딅텑?癲?癲ル슣????
+        //            //// ????????낇뀘????꿔꺂?????
         //            //bool addNew = false;
         //            ////foreach (FolderFile folder in fileFolders)
         //            ////{
@@ -375,7 +375,7 @@ public class UIReader_FileSystem : UI_Reader
         //            //}
         //            ////}
 
-        //            //// ???????獄쏅똻??????⑤베堉?
+        //            //// ????????꾩룆????????ㅻ쿋??
         //            //// if parentfolder not exist? new add
         //            //if (addNew == false)
         //            //{
@@ -386,11 +386,11 @@ public class UIReader_FileSystem : UI_Reader
         //        }
         //    case FileType.TEXT:
         //        {
-        //          //  // ??獄쏅똻??
+        //          //  // ???꾩룆???
         //          //  file = RemoveContainer(ux_textFile.Instantiate());
-        //          //  // ??????怨뚮뼚???
+        //          //  // ???????⑤슢堉???
         //          //  file.Q<Label>("FileName").text = fileName;
-        //          //  // ??筌먦끉援??????筌먯떜????れ삀?????⑤베堉?
+        //          //  // ??嶺뚮Ĳ?됪뤃??????嶺뚮Ŋ??????뚯???????ㅻ쿋??
         //          //  file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         //          //  {
         //          //      var area = FindMoveArea(evt.mousePosition);
@@ -417,7 +417,7 @@ public class UIReader_FileSystem : UI_Reader
 
         //            AddParenet(fileType, fileParentName, fileName, file);
 
-        //            //// ???????딅텑?癲?癲ル슣????
+        //            //// ????????낇뀘????꿔꺂?????
         //            //bool addNew = false;
         //            //FolderFile folder = fileFolderList[fileParentName];
         //            //if (folder != null)
@@ -427,7 +427,7 @@ public class UIReader_FileSystem : UI_Reader
         //            //    break;
         //            //}
 
-        //            //// ???????獄쏅똻??????⑤베堉?
+        //            //// ????????꾩룆????????ㅻ쿋??
         //            //if (addNew == false)
         //            //{
         //            //    //FolderFile folderParent = new FolderFile(fileParentName);
@@ -442,12 +442,26 @@ public class UIReader_FileSystem : UI_Reader
         //        }
         //}
 
-        if (currentFolderName == "")
+        //if (currentFolderName == "")
+        //{
+        //    currentFolderName = fileParentName;
+        //}
+        //if (currentFolderName == fileParentName)
+        //DrawFile(currentFolderName);
+        Debug.Log(currentFolderName);
+        if (currentFolderName != "")
         {
-            currentFolderName = fileParentName;
+            if (GameManager.Instance.fileManager.FindFile(currentFolderName) != null)
+            {
+                if (GameManager.Instance.fileManager.FindFile(currentFolderName).fileParentName != "")
+                    DrawFile(GameManager.Instance.fileManager.FindFile(currentFolderName).fileParentName);
+            }
+            else
+                    DrawFile("Main");
         }
-        if (currentFolderName == fileParentName)
-            DrawFile(currentFolderName);
+        else
+                DrawFile("Main");
+
         //DrawFile("Main");
     }
 
@@ -498,7 +512,7 @@ public class UIReader_FileSystem : UI_Reader
 
     public void DrawFile(string folderName)
     {
-        //Debug.Log(folderName + " ???㏉깴 ???㏉깴??);
+        //Debug.Log(folderName + " ????됯뭅 ????됯뭅??);
         // fileGround - current folder ground
         // fileFolders - current folder list
         // folderName - current folder name
@@ -522,7 +536,7 @@ public class UIReader_FileSystem : UI_Reader
             foreach (string folderName1 in currentFileFolder.folderFiles)
             {
                 FileSO folder = GameManager.Instance.fileManager.FindFile(folderName1);
-                //Debug.Log("?????????逾???藥?: " + folder.fileName);
+                //Debug.Log("???????????????: " + folder.fileName);
                 // create uxml
                 file = RemoveContainer(ux_folderFile.Instantiate());
                 // change file name

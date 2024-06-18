@@ -289,6 +289,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: df40c14282ccba64cadba2ce018d564a, type: 2}
   - {fileID: 11400000, guid: 0bf8e70bfee65e348bcc227991c27f74, type: 2}
   - {fileID: 11400000, guid: d51f95773df0da94cbbc49c572e5e34b, type: 2}
+  - {fileID: 11400000, guid: 4e9501c5b49269d47ba6c467908910d1, type: 2}
+  - {fileID: 11400000, guid: 1a4d03963b92e7e478adfbda854c4462, type: 2}
+  - {fileID: 11400000, guid: 4ff2f94a7ba2a4a47b1b28c249f5e89a, type: 2}
 --- !u!114 &378627795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +319,8 @@ MonoBehaviour:
   currentFileFolder:
     folderName: 
     parentFolderName: 
-    folderFiles: []
+    folderFiles:
+    - Main
     textFiles: []
     imageFiles: []
 --- !u!1 &594023513

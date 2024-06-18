@@ -126,8 +126,8 @@ public class UIReader_Chatting : UI_Reader
         ui_otherMemberName.text = otherName.name;
 
         foreach (ChatNode chat in otherName.chattings)
-            InputChat(GameManager.Instance.chatHumanManager.nowHumanName, chat.state, chat.type, 
-                otherName.currentFace, chat.chatText, null, false);
+            //InputChat(GameManager.Instance.chatHumanManager.nowHumanName, chat.state, chat.type, 
+            //    otherName.currentFace, chat.chatText, null, false);
 
         Invoke("EndToScroll", 0.25f);
     }
@@ -136,8 +136,6 @@ public class UIReader_Chatting : UI_Reader
     public void InputChat(string toWho, EChatState who, EChatType type,
         EFace face, string text, List<EChatEvent> chatEvt = null, bool isRecord = true)
     {
-        type = EChatType.Text;
-
         // create chat
         VisualElement chat = null;
         // find member
@@ -159,7 +157,7 @@ public class UIReader_Chatting : UI_Reader
                 // create VisualElement
                 chat = new VisualElement();
                 // image size change
-                ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).image);
+                ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
                 break;
 
             // if CutScene
@@ -176,13 +174,8 @@ public class UIReader_Chatting : UI_Reader
                 // connection click event, play cutscene
                 chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
                 break;
-            case EChatType.Default:
-            case EChatType.Question:
-            case EChatType.LockQuestion:
-            {
-                Debug.LogError("chat type????ш끽維筌?");
-            }
-            break;
+
+
         }
 
         // if you this chat record
@@ -190,6 +183,7 @@ public class UIReader_Chatting : UI_Reader
             RecordChat(who, toWho, type, text);
 
         // whose chat style setting
+        Debug.Log(type.ToString() + " 타입 이상ㅎ마");
         if (who == EChatState.Me)
             chat.AddToClassList("MyChat");
         else
@@ -209,9 +203,7 @@ public class UIReader_Chatting : UI_Reader
         // find member
         MemberProfile member = FindMember(toWho.ToString());
         // chat type
-        EChatType type = EChatType.Default;
-
-        // chat type
+        EChatType type = EChatType.Text;
         if (isLock)
         {
             // create uxml
@@ -241,7 +233,7 @@ public class UIReader_Chatting : UI_Reader
 
                 if (askNode.textEvent.Count == 1)
                 {
-                    Debug.Log(askNode.LoadNextDialog + " ????됰씭???壤?");
+                    Debug.Log(askNode.LoadNextDialog + " ?????怨쀫뎐???傭?");
                     GameManager.Instance.chatHumanManager.StopChatting();
                     member.memCurrentNode = askNode;
                     AddMember(askNode.LoadNextDialog);
@@ -250,7 +242,6 @@ public class UIReader_Chatting : UI_Reader
                 else
                 {
                     GameManager.Instance.chatHumanManager.currentNode = askNode;
-                    Debug.Log("?嶺뚮ㅎ踰???怨뚮뼚??濡ろ뜑???壤? ????낆툗 癲ル슣??袁ｋ즵");
                 }
 
                 // all question visualelement down
@@ -260,7 +251,7 @@ public class UIReader_Chatting : UI_Reader
                 // currntNode, member's currentNode change
                 member.memCurrentNode = askNode;
 
-                // 癲ル슣??袁ｋ즵 ???????덊렡
+                // ?轅붽틓????ш내??쭩??????????낆젵
                 askNode.is_UseThis = true;
 
                 // chatting start
@@ -277,7 +268,7 @@ public class UIReader_Chatting : UI_Reader
             // chat name setting
             chat.name = askNode.askText;
             // question
-            type = EChatType.LockQuestion;
+            //type = EChatType.LockQuestion;
         }
                 
         // record
@@ -289,7 +280,7 @@ public class UIReader_Chatting : UI_Reader
     }
 
     // record chatting
-    // ????됯뭅 type question???獒????굿?????⑤９苑?????戮с궘??筌뤾틹??????⑤；???
+    // ??????異?type question?????????댁삩????????욱룑??????嶺뚮칾怨댄뀭??癲ル슢??????????욱룕???
     private void RecordChat(EChatState who, string toWho, EChatType type, string msg)
     {
         // find member
@@ -310,13 +301,13 @@ public class UIReader_Chatting : UI_Reader
             }
             break;
             case EChatType.Question:
-            case EChatType.LockQuestion:
-            {
-                    Debug.Log("嶺뚯쉶?꾣룇?怨뺣뼺?");
-  /*              AskNode ask = new AskNode();
-                ask.askText = msg;
-                member.questions.Add(ask);*/
-            }
+  //          case EChatType.LockQuestion:
+  //          {
+  //                  Debug.Log("?꿔꺂???熬곻퐢利???ㅻ쿋??");
+  ///*              AskNode ask = new AskNode();
+  //              ask.askText = msg;
+  //              member.questions.Add(ask);*/
+  //          }
             break;
         }
     }
