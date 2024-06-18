@@ -1,7 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Evidence" src="project://database/Assets/UI%20Toolkit/Prefab/Evidence/Evidence.uxml?fileID=9197481963319205126&amp;guid=9c545897f9c89ee44a64ba60abdb5167&amp;type=3#Evidence" />
     <Style src="project://database/Assets/ChatVisual/Test/Test.uss?fileID=7433441132597879392&amp;guid=753eb97c7bdc2d646b7ad1a71c5d46ae&amp;type=3#Test" />
     <ui:VisualElement name="Inventory" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-        <ui:VisualElement name="MoveArea" class="slot" style="flex-grow: 1; background-color: rgba(56, 161, 178, 0.56); position: absolute; height: 508px; width: 432px; top: 300px; left: 200px;" />
+        <ui:VisualElement name="MoveArea" class="slot" style="flex-grow: 1; background-color: rgba(56, 161, 178, 0.56); position: absolute; height: 508px; width: 432px; top: 300px; left: 200px;">
+            <ui:Instance template="Evidence" name="Evidence" />
+        </ui:VisualElement>
         <ui:VisualElement name="BaseArea" class="slot" style="flex-grow: 1; background-color: rgba(56, 161, 178, 0.56); position: absolute; height: 508px; width: 432px; top: 300px; left: 1000px;" />
     </ui:VisualElement>
 </ui:UXML>
