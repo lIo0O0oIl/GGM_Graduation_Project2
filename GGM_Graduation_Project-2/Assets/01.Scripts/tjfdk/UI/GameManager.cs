@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     public UIReader_ImageFinding imageSystem;
 
     [Header("Manager")]
-    public ChatHumanManager chapterManager;
+    public ChatHumanManager chatHumanManager;
     public ChatContainer chatContainer;
     public CutSceneManager cutSceneManager;
     public FileManager fileManager;

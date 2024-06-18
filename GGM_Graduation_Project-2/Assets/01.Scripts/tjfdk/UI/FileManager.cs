@@ -61,16 +61,16 @@ public class FileManager : UI_Reader
         if (file != null)
         {
             // the same trigger name and file name
-            if (GameManager.Instance.chapterManager.nowCondition != null)
+            if (GameManager.Instance.chatHumanManager.nowCondition != null)
             {
-                if (file.name == GameManager.Instance.chapterManager.nowCondition.fileName)
+                if (file.name == GameManager.Instance.chatHumanManager.nowCondition.fileName)
                 {
-                    GameManager.Instance.chapterManager.nowCondition.is_UseThis = true;
-                    GameManager.Instance.chapterManager.nowCondition = null;
+                    GameManager.Instance.chatHumanManager.nowCondition.is_UseThis = true;
+                    GameManager.Instance.chatHumanManager.nowCondition = null;
                 }
             }
         }
 
-        GameManager.Instance.chapterManager.StartChatting();
+        GameManager.Instance.chatHumanManager.StartChatting();
     }
 }

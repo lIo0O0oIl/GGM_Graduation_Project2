@@ -2,8 +2,6 @@ using ChatVisual;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,20 +18,12 @@ public class MemberProfile
     public List<ChatNode> chattings = new List<ChatNode>();
     public List<AskNode> questions = new List<AskNode>();
     public Node memCurrentNode;
-    public Stack<ChatNode> memQuestionParent = new Stack<ChatNode>();
-    //public List<Chatting> chattings = new List<Chatting>();
-    //public List<Chatting> quetions = new List<Chatting>();
 }
 
 public class UIReader_Chatting : UI_Reader
 {
     [Header("Member")]
-    // current member name
-    //public string currentMemberName;
-    // member profile
     [SerializeField] List<MemberProfile> members = new List<MemberProfile>();
-    //public Dictionary<string, MemberProfile> memberList;
-    //public List<AskNode> questions;
 
     // memberList arrow sprite
     [SerializeField]
@@ -68,14 +58,6 @@ public class UIReader_Chatting : UI_Reader
     private void Awake()
     {
         base.Awake();
-
-        //MinWidth = 100;
-        //MinHeight = 100f;
-        //MaxWidth = 500;
-        //MaxHeight = 500;
-
-        //memberList = new Dictionary<string, MemberProfile>();
-        //questions = new List<AskNode>();
     }
 
     private void Update()
@@ -88,10 +70,6 @@ public class UIReader_Chatting : UI_Reader
 
         UXML_Load();
         Event_Load();
-
-        // move member profile to member dictionary
-        //foreach (MemberProfile member in members)
-        //    memberList.Add(member.nickName.ToString(), member);
     }
 
     private void UXML_Load()
@@ -125,15 +103,6 @@ public class UIReader_Chatting : UI_Reader
         }
 
         return null;
-
-        //Debug.Log(name + " MemberProfile dictionary");
-        //MemberProfile member = memberList[name];
-        //if (member != null)
-        //    return member;
-        //else
-        //    return null;
-
-        //return memberList[name];
     }
 
     // remove all chat and question
@@ -155,10 +124,8 @@ public class UIReader_Chatting : UI_Reader
         ui_otherMemberName.text = otherName.name;
 
         foreach (ChatNode chat in otherName.chattings)
-            InputChat(GameManager.Instance.chapterManager.nowHumanName, chat.state, chat.type, otherName.currentFace, chat.chatText, null, false);
-
-        //foreach (AskNode chat in otherName.questions)
-        //    InputQuestion(otherName.name, true, chat.askText, null, null, null, false);
+            InputChat(GameManager.Instance.chatHumanManager.nowHumanName, chat.state, chat.type, 
+                otherName.currentFace, chat.chatText, null, false);
 
         Invoke("EndToScroll", 0.25f);
     }
@@ -233,8 +200,7 @@ public class UIReader_Chatting : UI_Reader
     }
 
     // input question
-    public void InputQuestion(string toWho, bool isLock, string msg, 
-        List<EChatEvent> chatEvt = null, string nextMember = "", Action action = null, bool isRecord = true)
+    public void InputQuestion(string toWho, bool isLock, AskNode askNode, bool isRecord = true)
     {
         // create chat
         VisualElement chat = null;
@@ -249,45 +215,54 @@ public class UIReader_Chatting : UI_Reader
             // create uxml
             chat = RemoveContainer(ux_askChat.Instantiate());
             // chat name setting
-            chat.name = msg;
+            chat.name = askNode.askText;
             // chat text setting
-            chat.Q<Label>().text = msg;
+            chat.Q<Label>().text = askNode.askText;
             // connection click event
             chat.Q<Button>().clicked += (() =>
             {
-                // remove chat
-                chat.parent.Remove(chat);
-                    // if question click? you have to hidding others
-                    //foreach ( ask in ui_questionGround.Children())
-                    //{
-
-                    //}
-                    //OpenOtherQuestion(false);
-
-                // find record question, and remove this question
-                //foreach (AskNode questions in member.questions) // new! need test
-                //{s
-                //    if (questions.askText == msg)
-                //        member.questions.Remove(questions);
-                //}
+                // add chat
+                InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText);
 
                 // current question value list
                 for (int i = 0; i < member.questions.Count; ++i)
                 {
-                    if (member.questions[i].askText == msg)
+                    if (member.questions[i].askText == askNode.askText)
                         member.questions.RemoveAt(i);
                 }
 
-                if (nextMember != "")
+                // other question read false
+                foreach (AskNode ask in member.questions)
                 {
-                    GameManager.Instance.chapterManager.StopChatting();
-                    AddMember(nextMember);
-                    ChoiceMember(GameManager.Instance.chatSystem.FindMember(nextMember));
+                    ask.test_isRead = false;
+                }
+
+                if (askNode.textEvent.Count == 1)
+                {
+                    Debug.Log(askNode.LoadNextDialog + " 얘 불러짐");
+                    GameManager.Instance.chatHumanManager.StopChatting();
+                    member.memCurrentNode = askNode;
+                    AddMember(askNode.LoadNextDialog);
+                    ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
                 }
                 else
                 {
-                    action?.Invoke();
+                    GameManager.Instance.chatHumanManager.currentNode = askNode;
+                    Debug.Log("인물을 변경하지 않는 질문");
                 }
+
+                // all question visualelement down
+                GameManager.Instance.chatSystem.RemoveQuestion();
+                member.questions.Clear();
+
+                // currntNode, member's currentNode change
+                member.memCurrentNode = askNode;
+
+                // 질문 사용했다
+                askNode.is_UseThis = true;
+
+                // chatting start
+                GameManager.Instance.chatHumanManager.StartChatting();
 
                 // question
                 type = EChatType.Question;
@@ -298,17 +273,16 @@ public class UIReader_Chatting : UI_Reader
             // create uxml
             chat = RemoveContainer(ux_hiddenAskChat.Instantiate());
             // chat name setting
-            chat.name = msg;
+            chat.name = askNode.askText;
             // question
             type = EChatType.LockQuestion;
         }
                 
+        // record
         if (isRecord)
-            RecordChat(EChatState.Me, toWho, type, msg);
+            RecordChat(EChatState.Me, toWho, type, askNode.askText);
 
-        ////evnet;
-        //SettingChat(member, member.currentFace, chatEvt);
-        // add UI
+        // add visualelement
         ui_questionGround.Add(chat);
     }
 
@@ -389,23 +363,6 @@ public class UIReader_Chatting : UI_Reader
                     case EChatEvent.Default:
                     case EChatEvent.Camera:
                     case EChatEvent.Vibration:
-                    case EChatEvent.LoadNextDialog:
-                        break;
-                }
-            }
-        }
-        else if (node is AskNode askNode)
-        {
-            // event type
-            foreach (EChatEvent evt in evts)
-            {
-                switch (evt)
-                {
-                    case EChatEvent.Default:
-                    case EChatEvent.Camera:
-                    case EChatEvent.Vibration:
-                    case EChatEvent.LoadFile:
-                    case EChatEvent.LoadNextDialog:
                         break;
                 }
             }
@@ -482,7 +439,7 @@ public class UIReader_Chatting : UI_Reader
         if (member != null)
         {
             // change currentMember
-            GameManager.Instance.chapterManager.ChatStart(member.nickName.ToString());
+            GameManager.Instance.chatHumanManager.ChatResetAndStart(member.nickName.ToString());
 
             // change profile
             ChangeProfile(member.name, member.faces[(int)member.currentFace]);
@@ -494,14 +451,6 @@ public class UIReader_Chatting : UI_Reader
             RemoveQuestion();
             // recall chat and question
             RecallChatting(member);
-
-            ////// start chapter.
-            //if (member.nickName.ToString() != "")
-            //{
-            //    GameManager.Instance.chapterManager.ChatStart(member.nickName.ToString());
-            //}
-            //else
-            //    Debug.Log("this member hasn't name");
         }
     }
 
@@ -510,6 +459,7 @@ public class UIReader_Chatting : UI_Reader
     {
         ui_otherFace.Q<Label>("Name").text = name;
         ui_otherFace.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(face);
+
     }
 
     // member list on/off

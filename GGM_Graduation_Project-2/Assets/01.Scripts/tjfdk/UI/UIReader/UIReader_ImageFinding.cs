@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
@@ -74,10 +75,6 @@ public class UIReader_ImageFinding : UI_Reader
                 FileSO fileT = GameManager.Instance.fileManager.FindFile(fileName);
                 //Debug.Log(fileT.fileName);
                 GameManager.Instance.fileManager.UnlockChat(fileT);
-
-                //// restart chatting
-                //Debug.Log("????ㅼ떆 ?몄텧");
-                //GameManager.Instance.chapterManager.StartChatting();
             }
             else
             {
@@ -116,9 +113,6 @@ public class UIReader_ImageFinding : UI_Reader
                                 evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = png.memo;
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                 {
-                                    //VisualElement description = evidence.Q<VisualElement>("Descripte");
-                                    //description.style.display = DisplayStyle.Flex;
-
                                     evidence.Q<VisualElement>("Descripte").style.display = DisplayStyle.Flex;
                                     evidence.Q<VisualElement>("Descripte").style.left = png.memoPos.x;
                                     evidence.Q<VisualElement>("Descripte").style.top = png.memoPos.y;
@@ -136,6 +130,8 @@ public class UIReader_ImageFinding : UI_Reader
                                         GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, 
                                             GameManager.Instance.fileManager.FindFile(png.name).fileParentName);
                                     }
+
+                                    evidence.Q<Button>("EvidenceImage").pickingMode = PickingMode.Ignore;
                                 });
                             }
                             // ?꾨땲?쇰㈃
@@ -245,7 +241,7 @@ public class UIReader_ImageFinding : UI_Reader
 
                 ui_imageGround.Add(imagePanel);
 
-                GameManager.Instance.chapterManager.StopChatting();;
+                GameManager.Instance.chatHumanManager.StopChatting();;
             }
 
             isImageOpen = !isImageOpen;
@@ -278,165 +274,53 @@ public class UIReader_ImageFinding : UI_Reader
                     ui_panelGround.Remove(panel);
 
                     // png check action
-                    //Debug.Log(png.name + " 닫은 파일 이름");
                     FileSO file = GameManager.Instance.fileManager.FindFile(png.name);
                     GameManager.Instance.fileManager.UnlockChat(file);
-
-                    //restart chatting
-                    //Debug.Log("????ㅼ떆 ?몄텧");
-                    //GameManager.Instance.chapterManager.StartChatting();
                 };
 
 
                 ui_panelGround.Add(panel);
 
-                GameManager.Instance.chapterManager.StopChatting();
+                GameManager.Instance.chatHumanManager.StopChatting();
             }
             else
                 Debug.Log("it's neither an image nor a png");
         }
-
-        //foreach (ImageBig image in GameManager.Instance.imageManager.images)
-        //{
-        //    // ?대떦 ?대?吏瑜?李얠븯?ㅻ㈃ 諛곌꼍 ?ㅼ젙
-        //    if (image.name == fileName.Q<Label>("FileName").text)
-        //    {
-        //        if (isImageOpen)
-        //        {
-        //            // filesystem ?ъ씠利?蹂??踰꾪듉 耳쒓린
-        //            GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Position;
-        //            ui_imageGround.style.display = DisplayStyle.None;
-
-        //            for (int i = ui_imageGround.childCount - 1; i >= 0; i--)
-        //                ui_imageGround.RemoveAt(i);
-
-        //            File fileT = GameManager.Instance.fileManager.FindFile(fileName.Q<Label>("FileName").text);
-        //            GameManager.Instance.fileManager.UnlockChat(fileT);
-        //            GameManager.Instance.fileManager.UnlockChapter(fileT);
-
-        //            StartCoroutine(GameManager.Instance.chapterManager.ReadChat());
-        //        }
-        //        else
-        //        {
-        //            // filesystem ?ъ씠利?蹂??踰꾪듉 ?꾧린
-        //            GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Ignore;
-        //            // filesystem ?ъ씠利??묎쾶 留뚮뱾湲?
-        //            GameManager.Instance.fileSystem.isFileSystemOpen = true;
-        //            GameManager.Instance.fileSystem.OnOffFileSystem(0f);
-
-        //            ui_imageGround.style.display = DisplayStyle.Flex;
-
-        //            VisualElement textImage = RemoveContainer(ux_imageGround.Instantiate());
-        //            textImage.style.backgroundImage = new StyleBackground(image.image);
-
-        //            // ?먯떇 ?⑥꽌?ㅼ쓣 ?앹꽦
-        //            // ?대쫫?쇰줈 李얠븘二쇨퀬
-        //            foreach (string evid in image.pngName)
-        //            {
-        //                // ?대떦 ?⑥꽌瑜?李얠븯?ㅻ㈃
-        //                foreach (ImageSmall png in GameManager.Instance.imageManager.pngs)
-        //                {
-        //                    if (evid == png.name)
-        //                    {
-        //                        // ?앹꽦
-        //                        VisualElement evidence = null;
-        //                        // 以묒슂?섎떎硫?
-        //                        if (png.importance)
-        //                        {
-        //                            // 硫붾え?μ쑝濡??쒖떆
-        //                            evidence = RemoveContainer(ux_imageEvidence.Instantiate());
-        //                            evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
-        //                            evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
-        //                            evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = png.memo;
-        //                            evidence.Q<Button>("EvidenceImage").clicked += (() =>
-        //                            {
-        //                                //VisualElement description = evidence.Q<VisualElement>("Descripte");
-        //                                //description.style.display = DisplayStyle.Flex;
-
-        //                                evidence.Q<VisualElement>("Descripte").style.display = DisplayStyle.Flex;
-        //                                evidence.Q<VisualElement>("Descripte").style.left = png.pos.x + png.size.x;
-        //                                evidence.Q<VisualElement>("Descripte").style.top = png.pos.y - 250;
-
-        //                                if (png.isOpen == false)
-        //                                {
-        //                                    png.isOpen = true;
-        //                                    Debug.Log(png.name + " " + image.name);
-        //                                    GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
-        //                                }
-        //                            });
-        //                        }
-        //                        // ?꾨땲?쇰㈃
-        //                        else
-        //                        {
-        //                            // ?꾨옒 湲濡쒕쭔 ?쒖떆
-        //                            evidence = RemoveContainer(ux_imageEvidence.Instantiate());
-        //                            evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
-        //                            evidence.Q<Button>("EvidenceImage").clicked += (() =>
-        //                            {
-        //                                for (int i = textImage.childCount - 1; i >= 0; i--)
-        //                                {
-        //                                    if (textImage.Children().ElementAt(i).name == "descriptionLabel")
-        //                                        textImage.RemoveAt(i);
-        //                                }
-        //                                VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
-        //                                evidenceDescription.name = "descriptionLabel";
-        //                                textImage.Add(evidenceDescription);
-        //                                DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, true,
-        //                                    () => { textImage.Remove(evidenceDescription); });
-        //                            });
-        //                        }
-
-        //                        //?⑥꽌 ?꾩튂 ?ㅼ젙
-        //                        evidence.style.position = Position.Absolute;
-        //                        evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
-        //                        evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
-        //                        evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
-        //                        evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-        //                        // ?⑥꽌瑜??대?吏??異붽?
-        //                        textImage.Add(evidence);
-        //                    }
-        //                }
-        //            }
-
-        //            ui_imageGround.Add(textImage);
-        //            StopCoroutine(GameManager.Instance.chapterManager.chatting);
-        //        }
-
-        //        isImageOpen = !isImageOpen;
-        //// Png????
-        //foreach (ImageSmall png in GameManager.Instance.imageManager.pngs)
-        //{
-        //    if (png.name == fileName)
-        //        GameManager.Instance.fileSystem.OpenImage(png.name, png.saveSprite);
-        //}
     }
 
     public void OpenText(string name)
     {
         // create uxml
         VisualElement panel = RemoveContainer(ux_TextPanel.Instantiate());
+        // find text
         TextSO text = GameManager.Instance.imageManager.FindText(name);
 
-        // change name
-        panel.Q<Label>("Name").text = name + ".text";
-        // change memo
-        panel.Q<Label>("Text").text = text.memo;
-        // connection click event
-        panel.Q<Button>("CloseBtn").clicked += () =>
+        // When png isn't null
+        if (text != null)
         {
-            // remove this panel
-            ui_panelGround.Remove(panel);
+            // text panel clear
+            for (int i = ui_panelGround.childCount - 1; i >= 0; i--)
+                ui_panelGround.RemoveAt(i);
 
-            // text check action
-            FileSO file = GameManager.Instance.fileManager.FindFile(name);
-            GameManager.Instance.fileManager.UnlockChat(file);
+            // change name
+            panel.Q<Label>("Name").text = name + ".text";
+            // change memo
+            panel.Q<Label>("Text").text = text.memo;
+            // connection exit click event
+            panel.Q<Button>("CloseBtn").clicked += () =>
+            {
+                // remove this panel 
+                ui_panelGround.Remove(panel);
 
-            //// restart chatting
-            //Debug.Log("????ㅼ떆 ?몄텧");
-            //GameManager.Instance.chapterManager.StartChatting();
-        };
+                // text check action
+                FileSO file = GameManager.Instance.fileManager.FindFile(name);
+                GameManager.Instance.fileManager.UnlockChat(file);
+            };
 
-        ui_panelGround.Add(panel);
-        GameManager.Instance.chapterManager.StopChatting();
+
+            ui_panelGround.Add(panel);
+
+            GameManager.Instance.chatHumanManager.StopChatting();
+        }
     }
 }

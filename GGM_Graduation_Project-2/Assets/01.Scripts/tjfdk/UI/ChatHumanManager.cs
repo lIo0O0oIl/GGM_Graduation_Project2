@@ -1,6 +1,7 @@
 using ChatVisual;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChatHumanManager : UI_Reader
@@ -8,16 +9,19 @@ public class ChatHumanManager : UI_Reader
     public ChatContainer chatContainer;
 
     public float changeHumanTime = 1f;       // A time when humans change
+    public float nextChatTime = 1f;         // when load next chat time
     private float currentTime = 0f;
+    private bool is_ChatStart = false;
+
+    private bool is_ask = false;
 
     private List<Node> nowNodes = new List<Node>();
     public string nowHumanName;        // Name of the human you're talking to
+    public MemberProfile nowHuman;
     public Node currentNode;
     public ConditionNode nowCondition;
-    public ChatNode nowQuestionParent;
-    private bool is_ChatStart = false;
 
-    public Coroutine chatting;
+    //public Coroutine chatting;
     public bool isChattingRunning = false;
 
     private void Start()
@@ -40,178 +44,127 @@ public class ChatHumanManager : UI_Reader
 
     private void Update()
     {
-
-    }
-
-    public IEnumerator ReadChat()
-    {
-        MemberProfile member = GameManager.Instance.chatSystem.FindMember(nowHumanName);
-
-        while (true)
+        if (is_ChatStart)
         {
-            // node list
-            var children = chatContainer.GetChatTree().GetChild(currentNode);
-
-            foreach (Node node in children)
+            currentTime += Time.deltaTime;
+            if (Input.GetMouseButtonDown(0) || currentTime >= nextChatTime)
             {
-                if (node is ChatNode chatNode)
-                {
-                    // Input chat
-                    GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
-                        chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
+                Debug.Log("진행중");
+                // code here
+                // node list
+                var children = chatContainer.GetChatTree().GetChild(currentNode);
 
-                    // chat event
-                    GameManager.Instance.chatSystem.SettingChat(member, chatNode, chatNode.face, chatNode.textEvent);
-
-                    // load next
-                    currentNode = children[0];
-                }
-                else if (node is AskNode askNode)
+                foreach (Node node in children)
                 {
-                    if (askNode.test_isRead == false && askNode.is_UseThis == false)
+                    if (node is ChatNode chatNode)
                     {
-                        nowQuestionParent = askNode.parent as ChatNode;
+                        // Input chat
+                        GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
+                            chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
 
-                        // 以묐났寃???섍퀬 ?ㅽ깮??parent ?ｊ린
-                        if (member.memQuestionParent.Count == 0)
-                        {
-                            member.memQuestionParent.Push(nowQuestionParent);
-                            Debug.Log("stack???ｌ쓬 " + member.memQuestionParent.Count);
-                        }
-                        else
-                        {
-                            if (member.memQuestionParent.Contains(nowQuestionParent) == false)
-                            {
-                                member.memQuestionParent.Push(nowQuestionParent);
-                                Debug.Log("stack???ｌ쓬 " + member.memQuestionParent.Count);
-                            }
-                        }
+                        // chat event
+                        GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode, chatNode.face, chatNode.textEvent);
 
-                        GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode.askText, askNode.textEvent,
-                            askNode.LoadNextDialog, () => 
-                            { 
-                                    //Debug.Log(member.name + " " + askNode.askText);
-                                currentNode = askNode; 
-                                askNode.is_UseThis = true;
-                                GameManager.Instance.chatSystem.RemoveQuestion();
-                                foreach (AskNode ask in member.questions)
-                                {
-                                    ask.test_isRead = false;
-                                }
-                            });
-                        GameManager.Instance.chatSystem.SettingChat(member, askNode, member.currentFace, askNode.textEvent);
-                        member.questions.Add(askNode);
-
-                        //GameManager.Instance.chatSystem.RemoveQuestion();
-                        //if (member.memCurrentNode is ChatNode c)
-                        //    Debug.Log(c + " ?꾩옱 ?몃Ъ??理쒓렐 ???);
-                        //else
-                        //    Debug.Log("chatnode ?먮즺?뺤씠 ?꾨떂");
-                        member.memCurrentNode = askNode.parent;
-                        currentNode = askNode.parent;
-
-                        askNode.test_isRead = true;
+                        // load next
+                        currentNode = children[0];
                     }
-                }
-                else if (node is ConditionNode conditionNode)
-                {
-                    if (conditionNode.is_AllQuestion)
+                    else if (node is AskNode askNode)
                     {
-                        nowQuestionParent = member.memQuestionParent.Peek();
-                        if (nowQuestionParent != null)
+                        if (askNode.test_isRead == false && askNode.is_UseThis == false)
                         {
-                            var questions = chatContainer.GetChatTree().GetChild(nowQuestionParent);
+                            // 지금 질문 부모 가져와서
+                            currentNode = askNode.parent;
+                            nowHuman.memCurrentNode = askNode.parent;
 
-                            if (conditionNode.Checkk())
+                            // 질문 생성
+                            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode);
+                            nowHuman.questions.Add(askNode);
+                            askNode.test_isRead = true;
+
+                            is_ask = true;
+                        }
+                    }
+                    else if (node is ConditionNode conditionNode)
+                    {
+                        // When allquestion condition
+                        if (conditionNode.is_AllQuestion)
+                        {
+                            if (conditionNode.asks.Count > 0)
                             {
-                                member.memQuestionParent.Pop();
-                                conditionNode.is_UseThis = true;
+                                // when all question is useThis true
+                                if (conditionNode.Checkk())
+                                {
+                                    conditionNode.is_UseThis = true;
+                                    currentNode = conditionNode;
+                                }
+                                else
+                                {
+                                    currentNode = conditionNode.asks[0].parent;
+                                    StartChatting();
+                                }
+                            }
+                            else
+                                Debug.LogError("not exist question, but exist question condition");
+                        }
+                        else if (conditionNode.is_SpecificFile)
+                        {
+                            if (conditionNode.is_UseThis == false)
+                            {
+                                //Debug.Log("file trigger off");
+                                nowCondition = conditionNode;
+                                StopChatting();
+                            }
+                            else
+                            {
+                                //Debug.Log("file trigger on");
                                 currentNode = conditionNode;
                             }
-                            else
-                            {
-                                ////Debug.Log("?ㅼ떆?섏슜...");
-                                currentNode = nowQuestionParent;
-                                StartChatting();
-                            }
                         }
-                        else
-                            Debug.LogError("not exist question, but exist question condition");
-                    }
-                    else if (conditionNode.is_SpecificFile)
-                    {
-                        if (conditionNode.is_UseThis == false)
+                        else if (conditionNode.is_LockQuestion)
                         {
-                            //Debug.Log("file trigger off");
-                            nowCondition = conditionNode;
-                            StopChatting();
-                        }
-                        else
-                        {
-                            //Debug.Log("file trigger on");
-                            currentNode = conditionNode;
-                        }
-                    }
-                    else if (conditionNode.is_LockQuestion)
-                    {
-                        AskNode ask = conditionNode.childList[0] as AskNode;
+                            AskNode ask = conditionNode.childList[0] as AskNode;
 
-                        if (conditionNode.childList[0].test_isRead == false && conditionNode.childList[0].is_UseThis == false)
-                        {
-                            // 以묐났寃???섍퀬 ?ㅽ깮??parent ?ｊ린
-                            if (member.memQuestionParent.Count == 0)
+                            if (conditionNode.childList[0].test_isRead == false && conditionNode.childList[0].is_UseThis == false)
                             {
-                                member.memQuestionParent.Push(nowQuestionParent);
+                                GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
+                                nowHuman.questions.Add(ask);
+                                conditionNode.childList[0].test_isRead = true;
                             }
-                            else
-                            {
-                                if (member.memQuestionParent.Contains(nowQuestionParent) == false)
-                                    member.memQuestionParent.Push(nowQuestionParent);
-                            }
-
-                            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask.askText, ask.textEvent,
-                                ask.LoadNextDialog, () =>
-                                {
-                                    currentNode = ask;
-                                    conditionNode.childList[0].is_UseThis = true;
-                                    GameManager.Instance.chatSystem.RemoveQuestion();
-                                    foreach (AskNode ask in member.questions)
-                                    {
-                                        ask.test_isRead = false;
-                                    }
-                                });
-                            GameManager.Instance.chatSystem.SettingChat(member, ask, member.currentFace, ask.textEvent);
-                            member.questions.Add(ask);
-                            conditionNode.childList[0].test_isRead = true;
                         }
                     }
+
                 }
 
-            }
+                if (is_ask)
+                {
+                    StopChatting();
+                    is_ask = false;
+                }
 
-            yield return new WaitForSeconds(1f);
+                currentTime = 0f;
+            }
         }
+        else currentTime = 0f;
     }
 
-    public void ChatStart(string name)      // HG
+    public void ChatResetAndStart(string name)      // HG
     {
-        Debug.Log("????쒖옉");
+        Debug.Log("인물 변경");
+
         nowHumanName = name;
-        MemberProfile member = GameManager.Instance.chatSystem.FindMember(nowHumanName);
+        nowHuman = GameManager.Instance.chatSystem.FindMember(nowHumanName);
+
         chatContainer.nowName = name;
         nowNodes = chatContainer.GetChatTree().nodeList;
+
         if (nowNodes[0] is RootNode rootNode)
         {
-            if (member.memCurrentNode != null)
+            if (nowHuman.memCurrentNode != null)          // return human
             {
-                currentNode = member.memCurrentNode;
-                ChatNode test = currentNode as ChatNode;
-                Debug.Log(test.chatText + " ?쒖옉 吏??");
+                currentNode = nowHuman.memCurrentNode;
             }
             else
                 currentNode = rootNode;
-
-            //nowIndex = rootNode.nowIndex;
         }
 
         StartChatting();
@@ -219,22 +172,11 @@ public class ChatHumanManager : UI_Reader
 
     public void StartChatting()
     {
-        if (isChattingRunning == false)
-        {
-            chatting = StartCoroutine(ReadChat());
-        }
-
-        isChattingRunning = true;
+        is_ChatStart = true;
     }
 
     public void StopChatting()
     {
-        if (isChattingRunning)
-        {
-            if (chatting != null)
-                StopCoroutine(chatting);
-        }
-
-        isChattingRunning = false;
+        is_ChatStart = false;
     }
 }

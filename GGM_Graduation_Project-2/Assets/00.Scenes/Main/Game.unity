@@ -189,7 +189,7 @@ MonoBehaviour:
   chatSystem: {fileID: 2099014332}
   fileSystem: {fileID: 378627795}
   imageSystem: {fileID: 1207175533}
-  chapterManager: {fileID: 150678887}
+  chatHumanManager: {fileID: 150678887}
   chatContainer: {fileID: 594023517}
   cutSceneManager: {fileID: 1857801311}
   fileManager: {fileID: 378627794}
@@ -208,10 +208,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chatContainer: {fileID: 594023517}
   changeHumanTime: 1
+  nextChatTime: 1
   nowHumanName: 
+  nowHuman:
+    name: 
+    nickName: 0
+    currentFace: 0
+    faces: []
+    isOpen: 0
+    chattings: []
+    questions: []
+    memCurrentNode: {fileID: 0}
   currentNode: {fileID: 0}
   nowCondition: {fileID: 0}
-  nowQuestionParent: {fileID: 0}
   isChattingRunning: 0
 --- !u!1 &378627792
 GameObject:
@@ -279,6 +288,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b504439fa3153d345ad6d6404fae09be, type: 2}
   - {fileID: 11400000, guid: df40c14282ccba64cadba2ce018d564a, type: 2}
   - {fileID: 11400000, guid: 0bf8e70bfee65e348bcc227991c27f74, type: 2}
+  - {fileID: 11400000, guid: d51f95773df0da94cbbc49c572e5e34b, type: 2}
 --- !u!114 &378627795
 MonoBehaviour:
   m_ObjectHideFlags: 0

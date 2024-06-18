@@ -101,14 +101,14 @@ public class UI_Reader : MonoBehaviour
             cutScenePanel.style.display = DisplayStyle.Flex;
             mainPanel.style.display= DisplayStyle.None;
 
-            GameManager.Instance.chapterManager.StopChatting();
+            GameManager.Instance.chatHumanManager.StopChatting();
         }
         else
         {
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
 
-            GameManager.Instance.chapterManager.StartChatting();
+            GameManager.Instance.chatHumanManager.StartChatting();
         }
     }
 

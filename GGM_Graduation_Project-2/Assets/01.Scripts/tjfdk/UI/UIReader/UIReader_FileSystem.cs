@@ -131,16 +131,18 @@ public class UIReader_FileSystem : UI_Reader
         };
     }
 
-    private void FindLockQuestion()
-    {
-        MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName);
-        for (int i = 0; i < member.questions.Count; ++i)
-        {
-            // lockQuestion list 以묐났?롰솗??...
-            if (member.questions[i].parent is ConditionNode)
-                lockQuestions.Add(GameManager.Instance.chatSystem.ui_questionGround.ElementAt(i));
-        }
-    }
+    //private void FindLockQuestion()
+    //{
+    //    MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName);
+    //    for (int i = 0; i < member.questions.Count; ++i)
+    //    {
+    //        if (member.questions[i].parent is ConditionNode)
+    //        {
+    //            Debug.Log(member.questions[i].parent.name);
+    //            lockQuestions.Add(GameManager.Instance.chatSystem.ui_questionGround.ElementAt(i));
+    //        }
+    //    }
+    //}
 
     private AskNode FindQuestion(VisualElement ask)
     {
@@ -155,12 +157,16 @@ public class UIReader_FileSystem : UI_Reader
         //return new LockAskAndReply();
 
 
-        MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName);
+        MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName);
 
         for (int i = 0; i < member.questions.Count; ++i)
         {
-            if (member.questions[i].askText == ask.name)
+            Debug.Log(member.questions[i].askText.Trim() == ask.name.Trim());
+            if (member.questions[i].askText.Trim() == ask.name.Trim())
+            {
+                Debug.Log("들어가나?");
                 return member.questions[i];
+            }
         }
 
         return null;
@@ -168,18 +174,23 @@ public class UIReader_FileSystem : UI_Reader
 
     private VisualElement FindMoveArea(Vector2 position)
     {
-        // ???븍뜄??쭪??遺얜쾹 
-        FindLockQuestion();
-        //Debug.Log(lockQuestions.Count);
-
-        //筌뤴뫀諭??????筌≪뼚釉??域밸챷夷?癒?퐣 worldBound ??position????곷릭??????뱀뱽 筌≪뼚釉??삠늺
-        foreach (VisualElement moveArea in lockQuestions)
+        VisualElement questions = GameManager.Instance.chatSystem.ui_questionGround;
+        for (int i = 0; i < GameManager.Instance.chatSystem.ui_questionGround.childCount; ++i)
         {
-            if (moveArea.worldBound.Contains(position)) //????RECT??됰퓠 ?????륁뵠 ??덈뮉筌왖 野꺜??鍮?
+            // lock question
+            if (questions.ElementAt(i).Q<VisualElement>("LockIcon") != null)
             {
-                return moveArea;
+                if (questions.ElementAt(i).worldBound.Contains(position))
+                {
+                    return questions.ElementAt(i);
+                }
+            }
+            else
+            {
+                Debug.Log(questions.ElementAt(i).childCount +  " 잠긴 질문이 아님");
             }
         }
+
         return null;
     }
 
@@ -194,21 +205,21 @@ public class UIReader_FileSystem : UI_Reader
                 beforeSlot.Add(target);
             else
             {
-                ConditionNode conditionNode = FindQuestion(area).parent as ConditionNode;
+                AskNode conditionNode = FindQuestion(area);
+                Debug.Log(conditionNode.askText);
                 if (conditionNode != null)
                 {
                     string fileName = file.Q<Label>("FileName").text;
 
-                    //if (GameManager.Instance.fileManager.FindFile(fileName).lockQuestionName == lockAskNode.askText)
-                    if (GameManager.Instance.fileManager.FindFile(fileName).fileName == conditionNode.fileName)
+                    Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName);
+                    if (GameManager.Instance.fileManager.FindFile(fileName).fileName == conditionNode.askText)
                     {
                         // remove this lockQuestion
                         area.parent.Remove(area);
                         // change from lockQustion to question
-                        GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName).name,
-                            false, ((AskNode)conditionNode.childList[0]).askText, null, ((AskNode)conditionNode.childList[0]).LoadNextDialog, 
-                            () => { GameManager.Instance.chapterManager.currentNode = conditionNode; });
-                        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName).questions.Add((AskNode)conditionNode.childList[0]);
+                        GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
+                            false, conditionNode);
+                        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode);
                     }
                     else
                         beforeSlot.Add(target);
@@ -536,28 +547,6 @@ public class UIReader_FileSystem : UI_Reader
                 file.Q<Label>("FileName").text = image.fileName;
                 // connection drag and drop & button click event
                 LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(image.fileName); });
-                //file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
-                //{
-                //    var area = FindMoveArea(evt.mousePosition);
-                //    target.RemoveFromHierarchy();
-                //    if (area == null)
-                //        beforeSlot.Add(target);
-                //    else
-                //    {
-                //        LockAskAndReply lockQuestion = FindQuestion(area);
-                //        if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
-                //        {
-                //            area.parent.Remove(area);
-                //            chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
-                //                EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
-                //        }
-                //        else
-                //            beforeSlot.Add(target);
-                //    }
-                //},
-                //() => { GameManager.Instance.imageSystem.OpenImage(image.fileName); }
-                //));
-
                 // add file
                 ui_fileGround.Add(file);
             }
@@ -572,16 +561,6 @@ public class UIReader_FileSystem : UI_Reader
                 file.Q<Label>("FileName").text = text.fileName;
                 // connection drag and drop & button click event
                 LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(text.fileName); });
-                //file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
-                //{
-                //    var area = FindMoveArea(evt.mousePosition);
-                //    target.RemoveFromHierarchy();
-                //    if (area == null)
-                //        beforeSlot.Add(target);
-                //},
-                //() => { GameManager.Instance.imageSystem.OpenImage(text.fileName); }
-                //));
-
                 // add file
                 ui_fileGround.Add(file);
             }
