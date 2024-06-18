@@ -28,11 +28,13 @@ public class UIReader_Chatting : UI_Reader
     // memberList arrow sprite
     [SerializeField]
     private Texture2D changeMemberBtnOn, changeMemberBtnOff;
+    [SerializeField]
+    private float wheelSpeed = 100f;
 
 
 
     // UXLM
-        // chat and question ground
+    // chat and question ground
     ScrollView ui_chatGround;
     [HideInInspector] public VisualElement ui_questionGround;
 
@@ -178,7 +180,7 @@ public class UIReader_Chatting : UI_Reader
             case EChatType.Question:
             case EChatType.LockQuestion:
             {
-                Debug.LogError("chat type이 아님");
+                Debug.LogError("chat type????ш끽維筌?");
             }
             break;
         }
@@ -239,7 +241,7 @@ public class UIReader_Chatting : UI_Reader
 
                 if (askNode.textEvent.Count == 1)
                 {
-                    Debug.Log(askNode.LoadNextDialog + " 얘 불러짐");
+                    Debug.Log(askNode.LoadNextDialog + " ????됰씭???壤?");
                     GameManager.Instance.chatHumanManager.StopChatting();
                     member.memCurrentNode = askNode;
                     AddMember(askNode.LoadNextDialog);
@@ -248,7 +250,7 @@ public class UIReader_Chatting : UI_Reader
                 else
                 {
                     GameManager.Instance.chatHumanManager.currentNode = askNode;
-                    Debug.Log("인물을 변경하지 않는 질문");
+                    Debug.Log("?嶺뚮ㅎ踰???怨뚮뼚??濡ろ뜑???壤? ????낆툗 癲ル슣??袁ｋ즵");
                 }
 
                 // all question visualelement down
@@ -258,7 +260,7 @@ public class UIReader_Chatting : UI_Reader
                 // currntNode, member's currentNode change
                 member.memCurrentNode = askNode;
 
-                // 질문 사용했다
+                // 癲ル슣??袁ｋ즵 ???????덊렡
                 askNode.is_UseThis = true;
 
                 // chatting start
@@ -287,7 +289,7 @@ public class UIReader_Chatting : UI_Reader
     }
 
     // record chatting
-    // 이거 type question에는 관계 없어서 빼든 뭐든 해야함
+    // ????됯뭅 type question???獒????굿?????⑤９苑?????戮с궘??筌뤾틹??????⑤；???
     private void RecordChat(EChatState who, string toWho, EChatType type, string msg)
     {
         // find member
@@ -310,9 +312,10 @@ public class UIReader_Chatting : UI_Reader
             case EChatType.Question:
             case EChatType.LockQuestion:
             {
-                AskNode ask = new AskNode();
+                    Debug.Log("嶺뚯쉶?꾣룇?怨뺣뼺?");
+  /*              AskNode ask = new AskNode();
                 ask.askText = msg;
-                member.questions.Add(ask);
+                member.questions.Add(ask);*/
             }
             break;
         }
@@ -390,7 +393,7 @@ public class UIReader_Chatting : UI_Reader
         evt.StopPropagation();
 
         // multitly scroll speed to current delta value
-        float delta = evt.delta.y * 500f;
+        float delta = evt.delta.y * wheelSpeed;
 
         // scroll pos setting
         ui_chatGround.scrollOffset += new Vector2(0, delta);

@@ -49,8 +49,6 @@ public class ChatHumanManager : UI_Reader
             currentTime += Time.deltaTime;
             if (Input.GetMouseButtonDown(0) || currentTime >= nextChatTime)
             {
-                Debug.Log("진행중");
-                // code here
                 // node list
                 var children = chatContainer.GetChatTree().GetChild(currentNode);
 
@@ -58,25 +56,29 @@ public class ChatHumanManager : UI_Reader
                 {
                     if (node is ChatNode chatNode)
                     {
-                        // Input chat
-                        GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
-                            chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
+                        if (chatNode.test_isRead == false)
+                        {
+                            // Input chat
+                            GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
+                                chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
 
-                        // chat event
-                        GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode, chatNode.face, chatNode.textEvent);
+                            // chat event
+                            GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode, chatNode.face, chatNode.textEvent);
 
-                        // load next
-                        currentNode = children[0];
+                            // load next
+                            currentNode = children[0];
+                            children[0].test_isRead = true;
+                        }
                     }
                     else if (node is AskNode askNode)
                     {
                         if (askNode.test_isRead == false && askNode.is_UseThis == false)
                         {
-                            // 지금 질문 부모 가져와서
+                            // 筌왖疫?筌욌뜄揆 ?봔筌?揶쎛?紐???
                             currentNode = askNode.parent;
                             nowHuman.memCurrentNode = askNode.parent;
 
-                            // 질문 생성
+                            // 筌욌뜄揆 ??밴쉐
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode);
                             nowHuman.questions.Add(askNode);
                             askNode.test_isRead = true;
@@ -149,7 +151,7 @@ public class ChatHumanManager : UI_Reader
 
     public void ChatResetAndStart(string name)      // HG
     {
-        Debug.Log("인물 변경");
+        Debug.Log("?紐꺪?癰궰野?");
 
         nowHumanName = name;
         nowHuman = GameManager.Instance.chatSystem.FindMember(nowHumanName);
