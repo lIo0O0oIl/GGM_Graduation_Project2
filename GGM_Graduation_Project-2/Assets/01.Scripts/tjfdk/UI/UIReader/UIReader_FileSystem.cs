@@ -2,6 +2,7 @@ using ChatVisual;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -98,7 +99,7 @@ public class UIReader_FileSystem : UI_Reader
         MinHeight = 500f;
         MaxWidth = 1800f;
         MaxHeight = 980f;
-}
+    }
 
     private void OnEnable()
     {
@@ -164,7 +165,7 @@ public class UIReader_FileSystem : UI_Reader
             Debug.Log(member.questions[i].askText.Trim() == ask.name.Trim());
             if (member.questions[i].askText.Trim() == ask.name.Trim())
             {
-                Debug.Log("들어가나?");
+                Debug.Log("??쇰선揶쎛??");
                 return member.questions[i];
             }
         }
@@ -187,7 +188,7 @@ public class UIReader_FileSystem : UI_Reader
             }
             else
             {
-                Debug.Log(questions.ElementAt(i).childCount +  " 잠긴 질문이 아님");
+                Debug.Log(questions.ElementAt(i).childCount + " ?醫됰┸ 筌욌뜄揆???袁⑤뻷");
             }
         }
 
@@ -205,21 +206,24 @@ public class UIReader_FileSystem : UI_Reader
                 beforeSlot.Add(target);
             else
             {
-                AskNode conditionNode = FindQuestion(area);
-                Debug.Log(conditionNode.askText);
+                ConditionNode conditionNode = FindQuestion(area).parent as ConditionNode;
+                Debug.Log(conditionNode);
                 if (conditionNode != null)
                 {
                     string fileName = file.Q<Label>("FileName").text;
 
-                    Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName);
-                    if (GameManager.Instance.fileManager.FindFile(fileName).fileName == conditionNode.askText)
+                    Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName + " " + conditionNode.fileName);
+                    Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName.Trim() == conditionNode.fileName.Trim());
+                    if (GameManager.Instance.fileManager.FindFile(fileName).fileName.Trim() == conditionNode.fileName.Trim())
                     {
+                        Debug.Log((conditionNode.childList[0] as AskNode).askText);
                         // remove this lockQuestion
                         area.parent.Remove(area);
-                        // change from lockQustion to question
+                        //change from lockQustion to question
                         GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
-                            false, conditionNode);
-                        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode);
+                            true, conditionNode.childList[0] as AskNode);
+                        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode.childList[0] as AskNode);
+
                     }
                     else
                         beforeSlot.Add(target);
@@ -262,7 +266,7 @@ public class UIReader_FileSystem : UI_Reader
             switch (fileType)
             {
                 case FileType.FOLDER:
-                        fileFolders.Add(new FolderFile(fileName, fileParentName));
+                    fileFolders.Add(new FolderFile(fileName, fileParentName));
                     //fileFolderList.Add(fileName, new FolderFile(fileName));
                     parentFolder.folderFiles.Add(fileName);
                     break;
@@ -322,7 +326,7 @@ public class UIReader_FileSystem : UI_Reader
         //            AddParenet(fileType, fileParentName, fileName, file);
         //            break;
         //        }
-        //        // ??. ?덊씗???대윴 嫄??섏?留덈씪...
+        //        // ??. ???녿탹???????濾????嶺뚮씭???..
         //    case FileType.IMAGE:
         //        {
         //            //// create uxml
@@ -356,7 +360,7 @@ public class UIReader_FileSystem : UI_Reader
 
         //            AddParenet(fileType, fileParentName, fileName, file);
 
-        //            //// ???뵬 ?봔筌?筌왖??
+        //            //// ???????딅텑?癲?癲ル슣????
         //            //bool addNew = false;
         //            ////foreach (FolderFile folder in fileFolders)
         //            ////{
@@ -371,7 +375,7 @@ public class UIReader_FileSystem : UI_Reader
         //            //}
         //            ////}
 
-        //            //// ??????밴쉐 獄??곕떽?
+        //            //// ???????獄쏅똻??????⑤베堉?
         //            //// if parentfolder not exist? new add
         //            //if (addNew == false)
         //            //{
@@ -382,11 +386,11 @@ public class UIReader_FileSystem : UI_Reader
         //        }
         //    case FileType.TEXT:
         //        {
-        //          //  // ??밴쉐
+        //          //  // ??獄쏅똻??
         //          //  file = RemoveContainer(ux_textFile.Instantiate());
-        //          //  // ??已?癰궰野?
+        //          //  // ??????怨뚮뼚???
         //          //  file.Q<Label>("FileName").text = fileName;
-        //          //  // ??뺤삋域?????뺚댘 疫꿸퀡???곕떽?
+        //          //  // ??筌먦끉援??????筌먯떜????れ삀?????⑤베堉?
         //          //  file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         //          //  {
         //          //      var area = FindMoveArea(evt.mousePosition);
@@ -413,7 +417,7 @@ public class UIReader_FileSystem : UI_Reader
 
         //            AddParenet(fileType, fileParentName, fileName, file);
 
-        //            //// ???뵬 ?봔筌?筌왖??
+        //            //// ???????딅텑?癲?癲ル슣????
         //            //bool addNew = false;
         //            //FolderFile folder = fileFolderList[fileParentName];
         //            //if (folder != null)
@@ -423,7 +427,7 @@ public class UIReader_FileSystem : UI_Reader
         //            //    break;
         //            //}
 
-        //            //// ??????밴쉐 獄??곕떽?
+        //            //// ???????獄쏅똻??????⑤베堉?
         //            //if (addNew == false)
         //            //{
         //            //    //FolderFile folderParent = new FolderFile(fileParentName);
@@ -449,14 +453,14 @@ public class UIReader_FileSystem : UI_Reader
 
     private FolderFile CreateNewParent(FileType fileType, string fileParentName, string fileName)
     {
-            // file - parent
+        // file - parent
         // create new parentFolder
         FolderFile newParentFolder = new FolderFile(fileParentName, GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName);
 
         // register parentFolder
-            fileFolders.Add(newParentFolder);
+        fileFolders.Add(newParentFolder);
         //fileFolderList.Add(newParentFolder.folderName, newParentFolder);
-        
+
         // add file to newParentFolder
         switch (fileType)
         {
@@ -473,7 +477,7 @@ public class UIReader_FileSystem : UI_Reader
 
 
 
-            // parent - super parent
+        // parent - super parent
         // find super parent name
         string superParentFolderName = GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName;
         // find super parent
@@ -494,7 +498,7 @@ public class UIReader_FileSystem : UI_Reader
 
     public void DrawFile(string folderName)
     {
-        //Debug.Log(folderName + " ?닿굅 ?닿굅??);
+        //Debug.Log(folderName + " ???㏉깴 ???㏉깴??);
         // fileGround - current folder ground
         // fileFolders - current folder list
         // folderName - current folder name
@@ -518,7 +522,7 @@ public class UIReader_FileSystem : UI_Reader
             foreach (string folderName1 in currentFileFolder.folderFiles)
             {
                 FileSO folder = GameManager.Instance.fileManager.FindFile(folderName1);
-                //Debug.Log("?대┃???뚯씪?대쫫 : " + folder.fileName);
+                //Debug.Log("?????????逾???藥?: " + folder.fileName);
                 // create uxml
                 file = RemoveContainer(ux_folderFile.Instantiate());
                 // change file name
@@ -609,13 +613,13 @@ public class UIReader_FileSystem : UI_Reader
 
         if (isFileSystemOpen)
         {
-            changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x => 
+            changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x =>
                 ui_fileSystemArea.style.flexBasis = x, fileAreaSizeOn, during);
             ui_changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOn);
         }
         else
         {
-            changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x => 
+            changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x =>
                 ui_fileSystemArea.style.flexBasis = x, fileAreaSizeOff, during);
             ui_changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOff);
         }

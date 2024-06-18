@@ -49,10 +49,10 @@ public class ChatHumanManager : UI_Reader
             currentTime += Time.deltaTime;
             if (Input.GetMouseButtonDown(0) || currentTime >= nextChatTime)
             {
-                Debug.Log("진행중");
-                // code here
                 // node list
                 var children = chatContainer.GetChatTree().GetChild(currentNode);
+
+                Debug.Log(children[0]);
 
                 foreach (Node node in children)
                 {
@@ -72,11 +72,11 @@ public class ChatHumanManager : UI_Reader
                     {
                         if (askNode.test_isRead == false && askNode.is_UseThis == false)
                         {
-                            // 지금 질문 부모 가져와서
+                            // 吏湲?吏덈Ц 遺紐?媛?몄???
                             currentNode = askNode.parent;
                             nowHuman.memCurrentNode = askNode.parent;
 
-                            // 질문 생성
+                            // 吏덈Ц ?앹꽦
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode);
                             nowHuman.questions.Add(askNode);
                             askNode.test_isRead = true;
@@ -149,7 +149,7 @@ public class ChatHumanManager : UI_Reader
 
     public void ChatResetAndStart(string name)      // HG
     {
-        Debug.Log("인물 변경");
+        Debug.Log("?몃Ъ 蹂寃?");
 
         nowHumanName = name;
         nowHuman = GameManager.Instance.chatSystem.FindMember(nowHumanName);
