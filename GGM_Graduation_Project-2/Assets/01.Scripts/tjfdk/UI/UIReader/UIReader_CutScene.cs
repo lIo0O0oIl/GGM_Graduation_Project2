@@ -39,7 +39,10 @@ public class UIReader_CutScene : UI_Reader
         DoText(text, msg, writingDuring, false, () => { });
     }
 
-    public void EndText() => base.EndText();
+    public void EndText()
+    {
+        base.EndText();
+    }
 
     IEnumerator CutAnimation(Sprite[] cuts)
     {

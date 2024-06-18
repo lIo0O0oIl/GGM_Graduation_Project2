@@ -17,30 +17,31 @@ public class CutSceneManager : MonoBehaviour
 
     [Header("Data")]
     [SerializeField] private List<CutSceneSO> cutScenes = new List<CutSceneSO>();
-    public Dictionary<string,  CutSceneSO> cutSceneList;
+    //public Dictionary<string,  CutSceneSO> cutSceneList;
 
     private void Awake()
     {
         Instance = this;
         cutsceneUI = GetComponent<UIReader_CutScene>();
 
-        cutSceneList = new Dictionary<string, CutSceneSO>();
+        //cutSceneList = new Dictionary<string, CutSceneSO>();
     }
 
     private void OnEnable()
     {
-        foreach (CutSceneSO cutScene in cutScenes)
-            cutSceneList.Add(cutScene.chapterName, cutScene);
+        //foreach (CutSceneSO cutScene in cutScenes)
+        //    cutSceneList.Add(cutScene.chapterName, cutScene);
     }
 
     public CutSceneSO FindCutScene(string name)
     {
-        //foreach (CutSceneSO cutScene in cutScenes)
-        //{
-        //    if (cutScene.name == name)
-        //        return cutScene;
-        //}
-        return cutSceneList[name];
+        foreach (CutSceneSO cutScene in cutScenes)
+        {
+            if (cutScene.name == name)
+                return cutScene;
+        }
+        return null;
+        //return cutSceneList[name];
     }
 
     public void CutScene(bool isOpen, string name)
@@ -49,18 +50,20 @@ public class CutSceneManager : MonoBehaviour
         currentCutNum = 0;
         currentTextNum = 0;
 
+        GameManager.Instance.cutSceneSystem.ChangeCut(false, currentCutScene.cutScenes[0].cut);
         Next();
     }
 
     public void Next()
     {
-
         if (currentCutScene != null)
         {
             if (currentCutScene.cutScenes.Count == currentCutNum)
             {
-                GameManager.Instance.chatSystem.ChoiceMember
-                    (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName));
+                GameManager.Instance.fileManager.UnlockChat(currentCutScene.name);
+                if (currentCutScene.nextMemberName != "")
+                    GameManager.Instance.chatSystem.ChoiceMember
+                        (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName));
                 cutsceneUI.OpenCutScene(false);
             }
 
@@ -73,14 +76,18 @@ public class CutSceneManager : MonoBehaviour
                     {
                         if (cutsceneUI.currentTextTween.IsPlaying())
                         {
+                            Debug.Log("텍스트 자동 완성");
                             cutsceneUI.EndText();
                         }
-                        cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 1.5f);
-                        currentTextNum++;
+                        else
+                        {
+                            cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f);
+                            currentTextNum++;
+                        }
                     }
                     else
                     {
-                        cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 1.5f);
+                        cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f);
                         currentTextNum++;
                     }
                 }

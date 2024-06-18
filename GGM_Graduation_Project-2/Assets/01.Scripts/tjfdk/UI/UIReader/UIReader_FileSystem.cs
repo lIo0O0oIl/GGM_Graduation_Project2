@@ -442,27 +442,26 @@ public class UIReader_FileSystem : UI_Reader
         //        }
         //}
 
-        //if (currentFolderName == "")
-        //{
-        //    currentFolderName = fileParentName;
-        //}
-        //if (currentFolderName == fileParentName)
-        //DrawFile(currentFolderName);
-        Debug.Log(currentFolderName);
-        if (currentFolderName != "")
-        {
-            if (GameManager.Instance.fileManager.FindFile(currentFolderName) != null)
-            {
-                if (GameManager.Instance.fileManager.FindFile(currentFolderName).fileParentName != "")
-                    DrawFile(GameManager.Instance.fileManager.FindFile(currentFolderName).fileParentName);
-            }
-            else
-                    DrawFile("Main");
-        }
-        else
-                DrawFile("Main");
+        if (currentFolderName == "")
+            currentFolderName = fileParentName;
+        if (currentFolderName == fileParentName)
+            DrawFile(currentFolderName);
 
         //DrawFile("Main");
+
+        //Debug.Log(currentFolderName);
+        //if (currentFolderName != "")
+        //{
+        //    if (GameManager.Instance.fileManager.FindFile(currentFolderName) != null)
+        //    {
+        //        if (GameManager.Instance.fileManager.FindFile(currentFolderName).fileParentName != "")
+        //            DrawFile(GameManager.Instance.fileManager.FindFile(currentFolderName).fileParentName);
+        //    }
+        //    else
+        //            DrawFile("Main");
+        //}
+        //else
+        //        DrawFile("Main");
     }
 
     private FolderFile CreateNewParent(FileType fileType, string fileParentName, string fileName)
@@ -545,7 +544,8 @@ public class UIReader_FileSystem : UI_Reader
                 file.Q<Button>("FileImage").clicked += () =>
                 {
                     // image check action
-                    GameManager.Instance.fileManager.UnlockChat(folder);
+                    if (folder != null)
+                        GameManager.Instance.fileManager.UnlockChat(folder.name);
                     // draw current foluder
                     DrawFile(folder.fileName);
                     // add current folder path

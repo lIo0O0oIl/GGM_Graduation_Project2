@@ -74,7 +74,8 @@ public class UIReader_ImageFinding : UI_Reader
                 // image check action
                 FileSO fileT = GameManager.Instance.fileManager.FindFile(fileName);
                 //Debug.Log(fileT.fileName);
-                GameManager.Instance.fileManager.UnlockChat(fileT);
+                if (fileT != null)
+                    GameManager.Instance.fileManager.UnlockChat(fileT.name);
             }
             else
             {
@@ -150,7 +151,7 @@ public class UIReader_ImageFinding : UI_Reader
                                     VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
                                     evidenceDescription.name = "descriptionLabel";
                                     imagePanel.Add(evidenceDescription);
-                                    DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, true,
+                                    DoText(evidenceDescription.Q<Label>("Text"), png.memo, 2f, true,
                                         () => { imagePanel.Remove(evidenceDescription); });
                                 });
                             }
@@ -275,7 +276,8 @@ public class UIReader_ImageFinding : UI_Reader
 
                     // png check action
                     FileSO file = GameManager.Instance.fileManager.FindFile(png.name);
-                    GameManager.Instance.fileManager.UnlockChat(file);
+                    if (file != null)
+                        GameManager.Instance.fileManager.UnlockChat(file.name);
                 };
 
 
@@ -314,7 +316,8 @@ public class UIReader_ImageFinding : UI_Reader
 
                 // text check action
                 FileSO file = GameManager.Instance.fileManager.FindFile(name);
-                GameManager.Instance.fileManager.UnlockChat(file);
+                if (file != null)
+                    GameManager.Instance.fileManager.UnlockChat(file.name);
             };
 
 

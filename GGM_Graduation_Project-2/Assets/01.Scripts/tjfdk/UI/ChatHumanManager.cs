@@ -51,6 +51,7 @@ public class ChatHumanManager : UI_Reader
             {
                 // node list
                 var children = chatContainer.GetChatTree().GetChild(currentNode);
+                Debug.Log(children[0]);
 
                 foreach (Node node in children)
                 {
@@ -58,16 +59,16 @@ public class ChatHumanManager : UI_Reader
                     {
                         if (chatNode.test_isRead == false)
                         {
+                            // load next
+                            currentNode = children[0];
+                            children[0].test_isRead = true;
+
                             // Input chat
                             GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
                                 chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
 
                             // chat event
                             GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode, chatNode.face, chatNode.textEvent);
-
-                            // load next
-                            currentNode = children[0];
-                            children[0].test_isRead = true;
                         }
                     }
                     else if (node is AskNode askNode)
@@ -112,7 +113,7 @@ public class ChatHumanManager : UI_Reader
                         {
                             if (conditionNode.is_UseThis == false)
                             {
-                                //Debug.Log("file trigger off");
+                                Debug.Log("file trigger off");
                                 nowCondition = conditionNode;
                                 StopChatting();
                             }

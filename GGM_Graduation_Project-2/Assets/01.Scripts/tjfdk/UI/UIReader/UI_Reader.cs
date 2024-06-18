@@ -31,6 +31,8 @@ public class UI_Reader : MonoBehaviour
     private List<VisualElement> panels = new List<VisualElement>();
 
     public Tween currentTextTween;
+    private string currentText;
+    private Label currentTextUi;
 
     protected float MinWidth = 500f;
     protected float MinHeight = 500f;
@@ -117,6 +119,9 @@ public class UI_Reader : MonoBehaviour
         int currentTextLength = 0;
         int previousTextLength = -1;
 
+        currentTextUi = ui;
+        currentText = text;
+
         currentTextTween = DOTween.To(() => currentTextLength, x => currentTextLength = x, text.Length, during)
             .SetEase(Ease.Linear)
             .OnPlay(() => { ui.text = ""; })
@@ -141,7 +146,9 @@ public class UI_Reader : MonoBehaviour
     {
         if (currentTextTween != null)
         {
-            currentTextTween.Complete();
+            Debug.Log("완성해줄게!");
+            currentTextUi.text = currentText;
+            currentTextTween.Kill();
             currentTextTween = null;
         }
     }

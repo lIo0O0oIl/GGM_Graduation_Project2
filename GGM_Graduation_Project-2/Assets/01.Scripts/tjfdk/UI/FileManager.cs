@@ -56,17 +56,19 @@ public class FileManager : UI_Reader
         return null;
     }
 
-    public void UnlockChat(FileSO file)
+    public void UnlockChat(string triggerName)
     {
-        if (file != null)
+        if (triggerName != "")
         {
             // the same trigger name and file name
             if (GameManager.Instance.chatHumanManager.nowCondition != null)
             {
-                if (file.name == GameManager.Instance.chatHumanManager.nowCondition.fileName)
+                if (triggerName == GameManager.Instance.chatHumanManager.nowCondition.fileName)
                 {
+                    Debug.Log(GameManager.Instance.chatHumanManager.nowCondition.asks);
                     GameManager.Instance.chatHumanManager.nowCondition.is_UseThis = true;
-                    GameManager.Instance.chatHumanManager.nowCondition = null;
+                    //GameManager.Instance.chatHumanManager.nowCondition = null;
+                    GameManager.Instance.chatHumanManager.currentNode = GameManager.Instance.chatHumanManager.nowCondition;
                 }
             }
         }

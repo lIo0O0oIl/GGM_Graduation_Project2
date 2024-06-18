@@ -2,6 +2,7 @@ using ChatVisual;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -29,7 +30,7 @@ public class UIReader_Chatting : UI_Reader
     [SerializeField]
     private Texture2D changeMemberBtnOn, changeMemberBtnOff;
     [SerializeField]
-    private float wheelSpeed = 100f;
+    private float wheelSpeed = 25f;
 
 
 
@@ -132,10 +133,23 @@ public class UIReader_Chatting : UI_Reader
         Invoke("EndToScroll", 0.25f);
     }
 
+    private void GameDown()
+    {
+        Application.Quit();
+    }
+
     // input chat
     public void InputChat(string toWho, EChatState who, EChatType type,
         EFace face, string text, List<EChatEvent> chatEvt = null, bool isRecord = true)
     {
+        // test
+        if (text == "더 나은 빌드로 돌아오겠습니다.")
+        {
+            Invoke("GameDown", 3f);
+        }
+
+
+
         // create chat
         VisualElement chat = null;
         // find member
@@ -168,8 +182,10 @@ public class UIReader_Chatting : UI_Reader
                 chat.AddToClassList("FileChatSize");
                 chat.AddToClassList("NoButtonBorder");
                 // find first cut of cutscene
-                Sprite sprite = GameManager.Instance.cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
+                ChatNode cutScene = GameManager.Instance.chatHumanManager.currentNode as ChatNode;
+                GameManager.Instance.chatHumanManager.nowCondition = cutScene.childList[0] as ConditionNode;
                 // change background to image
+                Sprite sprite = GameManager.Instance.cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
                 chat.style.backgroundImage = new StyleBackground(sprite);
                 // connection click event, play cutscene
                 chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
