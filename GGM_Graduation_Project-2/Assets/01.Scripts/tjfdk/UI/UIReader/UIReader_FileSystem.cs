@@ -2,9 +2,6 @@ using ChatVisual;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using UnityEditor;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -139,7 +136,7 @@ public class UIReader_FileSystem : UI_Reader
         MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chapterManager.nowHumanName);
         for (int i = 0; i < member.questions.Count; ++i)
         {
-            // lockQuestion list 중복ㅎ확인?...
+            // lockQuestion list 以묐났?롰솗??...
             if (member.questions[i].parent is ConditionNode)
                 lockQuestions.Add(GameManager.Instance.chatSystem.ui_questionGround.ElementAt(i));
         }
@@ -171,14 +168,14 @@ public class UIReader_FileSystem : UI_Reader
 
     private VisualElement FindMoveArea(Vector2 position)
     {
-        // ??遺덈젮吏?붾벏 
+        // ???븍뜄??쭪??遺얜쾹 
         FindLockQuestion();
         //Debug.Log(lockQuestions.Count);
 
-        //紐⑤뱺 ?щ’??李얠븘??洹몄쨷?먯꽌 worldBound ??position???랁븯????앹쓣 李얠븘?ㅻ㈃
+        //筌뤴뫀諭??????筌≪뼚釉??域밸챷夷?癒?퐣 worldBound ??position????곷릭??????뱀뱽 筌≪뼚釉??삠늺
         foreach (VisualElement moveArea in lockQuestions)
         {
-            if (moveArea.worldBound.Contains(position)) //?대떦 RECT?덉뿉 ?ъ??섏씠 ?덈뒗吏 寃?ы빐
+            if (moveArea.worldBound.Contains(position)) //????RECT??됰퓠 ?????륁뵠 ??덈뮉筌왖 野꺜??鍮?
             {
                 return moveArea;
             }
@@ -314,7 +311,7 @@ public class UIReader_FileSystem : UI_Reader
         //            AddParenet(fileType, fileParentName, fileName, file);
         //            break;
         //        }
-        //        // 후.. 너희는 이런 거 하지마라...
+        //        // ??. ?덊씗???대윴 嫄??섏?留덈씪...
         //    case FileType.IMAGE:
         //        {
         //            //// create uxml
@@ -348,7 +345,7 @@ public class UIReader_FileSystem : UI_Reader
 
         //            AddParenet(fileType, fileParentName, fileName, file);
 
-        //            //// ?뚯씪 遺紐?吏??
+        //            //// ???뵬 ?봔筌?筌왖??
         //            //bool addNew = false;
         //            ////foreach (FolderFile folder in fileFolders)
         //            ////{
@@ -363,7 +360,7 @@ public class UIReader_FileSystem : UI_Reader
         //            //}
         //            ////}
 
-        //            //// ?대뜑 ?앹꽦 諛?異붽?
+        //            //// ??????밴쉐 獄??곕떽?
         //            //// if parentfolder not exist? new add
         //            //if (addNew == false)
         //            //{
@@ -374,11 +371,11 @@ public class UIReader_FileSystem : UI_Reader
         //        }
         //    case FileType.TEXT:
         //        {
-        //          //  // ?앹꽦
+        //          //  // ??밴쉐
         //          //  file = RemoveContainer(ux_textFile.Instantiate());
-        //          //  // ?대쫫 蹂寃?
+        //          //  // ??已?癰궰野?
         //          //  file.Q<Label>("FileName").text = fileName;
-        //          //  // ?쒕옒洹????쒕∼ 湲곕뒫 異붽?
+        //          //  // ??뺤삋域?????뺚댘 疫꿸퀡???곕떽?
         //          //  file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         //          //  {
         //          //      var area = FindMoveArea(evt.mousePosition);
@@ -405,7 +402,7 @@ public class UIReader_FileSystem : UI_Reader
 
         //            AddParenet(fileType, fileParentName, fileName, file);
 
-        //            //// ?뚯씪 遺紐?吏??
+        //            //// ???뵬 ?봔筌?筌왖??
         //            //bool addNew = false;
         //            //FolderFile folder = fileFolderList[fileParentName];
         //            //if (folder != null)
@@ -415,7 +412,7 @@ public class UIReader_FileSystem : UI_Reader
         //            //    break;
         //            //}
 
-        //            //// ?대뜑 ?앹꽦 諛?異붽?
+        //            //// ??????밴쉐 獄??곕떽?
         //            //if (addNew == false)
         //            //{
         //            //    //FolderFile folderParent = new FolderFile(fileParentName);
@@ -486,7 +483,7 @@ public class UIReader_FileSystem : UI_Reader
 
     public void DrawFile(string folderName)
     {
-        //Debug.Log(folderName + " 이거 열거임");
+        //Debug.Log(folderName + " ?닿굅 ?닿굅??);
         // fileGround - current folder ground
         // fileFolders - current folder list
         // folderName - current folder name
@@ -510,7 +507,7 @@ public class UIReader_FileSystem : UI_Reader
             foreach (string folderName1 in currentFileFolder.folderFiles)
             {
                 FileSO folder = GameManager.Instance.fileManager.FindFile(folderName1);
-                //Debug.Log("클릭된 파일이름 : " + folder.fileName);
+                //Debug.Log("?대┃???뚯씪?대쫫 : " + folder.fileName);
                 // create uxml
                 file = RemoveContainer(ux_folderFile.Instantiate());
                 // change file name
