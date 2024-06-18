@@ -180,7 +180,7 @@ public class UIReader_Chatting : UI_Reader
             case EChatType.Question:
             case EChatType.LockQuestion:
             {
-                Debug.LogError("chat type???熬곣뫀六?");
+                Debug.LogError("chat type????ш끽維筌?");
             }
             break;
         }
@@ -241,7 +241,7 @@ public class UIReader_Chatting : UI_Reader
 
                 if (askNode.textEvent.Count == 1)
                 {
-                    Debug.Log(askNode.LoadNextDialog + " ???釉띾쐞??彛?");
+                    Debug.Log(askNode.LoadNextDialog + " ????됰씭???壤?");
                     GameManager.Instance.chatHumanManager.StopChatting();
                     member.memCurrentNode = askNode;
                     AddMember(askNode.LoadNextDialog);
@@ -250,7 +250,7 @@ public class UIReader_Chatting : UI_Reader
                 else
                 {
                     GameManager.Instance.chatHumanManager.currentNode = askNode;
-                    Debug.Log("?筌뤾벳???곌떠??롪퍔???彛? ???낅츎 嶺뚯쉶?꾣룇");
+                    Debug.Log("?嶺뚮ㅎ踰???怨뚮뼚??濡ろ뜑???壤? ????낆툗 癲ル슣??袁ｋ즵");
                 }
 
                 // all question visualelement down
@@ -260,7 +260,7 @@ public class UIReader_Chatting : UI_Reader
                 // currntNode, member's currentNode change
                 member.memCurrentNode = askNode;
 
-                // 嶺뚯쉶?꾣룇 ??????덈펲
+                // 癲ル슣??袁ｋ즵 ???????덊렡
                 askNode.is_UseThis = true;
 
                 // chatting start
@@ -289,7 +289,7 @@ public class UIReader_Chatting : UI_Reader
     }
 
     // record chatting
-    // ???㏉깴 type question???裕???㉱????怨룹꽑?????뽬キ??紐꺟?キ???怨룻뒍??
+    // ????됯뭅 type question???獒????굿?????⑤９苑?????戮с궘??筌뤾틹??????⑤；???
     private void RecordChat(EChatState who, string toWho, EChatType type, string msg)
     {
         // find member
@@ -312,7 +312,7 @@ public class UIReader_Chatting : UI_Reader
             case EChatType.Question:
             case EChatType.LockQuestion:
             {
-                    Debug.Log("筌욌뜄揆?곕떽?");
+                    Debug.Log("嶺뚯쉶?꾣룇?怨뺣뼺?");
   /*              AskNode ask = new AskNode();
                 ask.askText = msg;
                 member.questions.Add(ask);*/
