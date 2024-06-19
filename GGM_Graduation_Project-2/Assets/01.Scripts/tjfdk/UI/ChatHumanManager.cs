@@ -65,7 +65,7 @@ public class ChatHumanManager : UI_Reader
 
                             // Input chat
                             GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
-                                chatNode.type, chatNode.face, chatNode.chatText, chatNode.textEvent);
+                                chatNode.type, chatNode.face, chatNode.chatText, true);
 
                             // chat event
                             GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode, chatNode.face, chatNode.textEvent);

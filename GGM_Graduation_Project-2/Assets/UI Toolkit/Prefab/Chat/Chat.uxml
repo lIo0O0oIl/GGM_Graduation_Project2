@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="Chat">
+    <ui:VisualElement name="Chat" style="background-image: url(&apos;project://database/Assets/02.Sprites/Button/Chat.png?fileID=21300000&amp;guid=e085a94efd6dc254482ed4b34fc42f4a&amp;type=3#Chat&apos;);">
         <ui:VisualElement name="Speech" class="Speech">
             <ui:Label text="Test" name="Text" class="ChatText" style="-unity-font-definition: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo-toolkit%20SDF.asset?fileID=11400000&amp;guid=8a1a53547849f8e41ab1f62754582c6e&amp;type=2#DungGeunMo-toolkit SDF&apos;);" />
         </ui:VisualElement>

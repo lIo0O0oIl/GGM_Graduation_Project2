@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -24,6 +26,13 @@ public class MemberProfile
 
 public class UIReader_Chatting : UI_Reader
 {
+    [Header("ToolBar")]
+    private Button chatBtn;
+    private Button connectionBtn;
+    private Button settingBtn;
+    private VisualElement connectionPanel;
+    public GameObject setting;
+
     [Header("Member")]
     [SerializeField] List<MemberProfile> members = new List<MemberProfile>();
 
@@ -69,12 +78,38 @@ public class UIReader_Chatting : UI_Reader
     {
     }
 
+    bool isConnectionOpen = false;
+    bool isSettingOpen = false;
+
     private void OnEnable()
     {
         base.OnEnable();
 
+        chatBtn = root.Q<Button>("ChattingBtn");
+        connectionBtn = root.Q<Button>("ConnectionBtn");
+        settingBtn = root.Q<Button>("SoundSettingBtn");
+
+        connectionPanel = root.Q<VisualElement>("Connection");
+
+        connectionBtn.clicked += (() => { OpenConnection(); });
+        settingBtn.clicked += (() => 
+        { 
+            UIManager.Instance.OpenSetting(isSettingOpen); 
+            isSettingOpen = !isSettingOpen; 
+        });
+
         UXML_Load();
-        Event_Load();
+        Event_Load();   
+    }
+
+    private void OpenConnection()
+    {
+        if (isConnectionOpen)
+            connectionPanel.style.display = DisplayStyle.Flex;
+        else
+            connectionPanel.style.display = DisplayStyle.None;
+
+        isConnectionOpen = !isConnectionOpen;
     }
 
     private void UXML_Load()
@@ -128,13 +163,12 @@ public class UIReader_Chatting : UI_Reader
     }
 
     // recall member chat and question
-    private void RecallChatting(MemberProfile otherName)
+    private void RecallChatting(MemberProfile member)
     {
-        ui_otherMemberName.text = otherName.name;
-
-        foreach (ChatNode chat in otherName.chattings)
-            //InputChat(GameManager.Instance.chatHumanManager.nowHumanName, chat.state, chat.type, 
-            //    otherName.currentFace, chat.chatText, null, false);
+        foreach (ChatNode chat in member.chattings)
+        {
+            InputChat(member.name, chat.state, chat.type, member.currentFace, chat.chatText, false);
+        }
 
         Invoke("EndToScroll", 0.25f);
     }
@@ -152,7 +186,7 @@ public class UIReader_Chatting : UI_Reader
 
     // input chat
     public void InputChat(string toWho, EChatState who, EChatType type,
-        EFace face, string text, List<EChatEvent> chatEvt = null, bool isRecord = true)
+        EFace face, string text, bool isRecord = true)
     {
         // test
         if (text == "????? ???????대퓠????????됰?諭??????")
@@ -180,6 +214,7 @@ public class UIReader_Chatting : UI_Reader
             case EChatType.Text:
                 // create uxml
                 chat = ux_chat.Instantiate();
+                chat.name = "chat";
                 // chat text setting
                 chat.Q<Label>().text = text;
                 break;
@@ -188,6 +223,7 @@ public class UIReader_Chatting : UI_Reader
             case EChatType.Image:
                 // create VisualElement
                 chat = new VisualElement();
+                chat.name = "image";
                 // image size change
                 ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
                 break;
@@ -196,6 +232,7 @@ public class UIReader_Chatting : UI_Reader
             case EChatType.CutScene:
                 // create Button
                 chat = new Button();
+                chat.name = "cutScene";
                 // change chat style
                 chat.AddToClassList("FileChatSize");
                 chat.AddToClassList("NoButtonBorder");
@@ -208,22 +245,24 @@ public class UIReader_Chatting : UI_Reader
                 // connection click event, play cutscene
                 chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
                 break;
-
-
         }
 
         // if you this chat record
         if (isRecord)
             RecordChat(who, toWho, type, text);
 
-        // whose chat style setting
-        Debug.Log(type.ToString() + " ???????⑤?彛??β뼯爰껆빊?");
+        // whose chat style setting        
         if (who == EChatState.Me)
+        {
+            Debug.Log("나");
             chat.AddToClassList("MyChat");
+        }
         else
+        {
+            Debug.Log("상대방");
             chat.AddToClassList("OtherChat");
+        }
 
-        // add UI
         ui_chatGround.Add(chat);
         // scroll pos to end
         Invoke("EndToScroll", 0.5f);
@@ -250,7 +289,7 @@ public class UIReader_Chatting : UI_Reader
             chat.Q<Button>().clicked += (() =>
             {
                 // add chat
-                InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText);
+                InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText, false);
 
                 // current question value list
                 for (int i = 0; i < member.questions.Count; ++i)
@@ -478,6 +517,7 @@ public class UIReader_Chatting : UI_Reader
             // remove all chat and question
             RemoveChatting();
             RemoveQuestion();
+
             // recall chat and question
             RecallChatting(member);
         }

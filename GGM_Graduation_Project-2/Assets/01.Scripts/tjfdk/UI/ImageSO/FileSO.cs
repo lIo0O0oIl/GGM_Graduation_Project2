@@ -8,4 +8,5 @@ public class FileSO : ScriptableObject
     public string fileName;
     public string fileParentName;
     public FileType fileType;
+    public bool isRead;
 }

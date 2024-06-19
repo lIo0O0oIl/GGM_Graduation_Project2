@@ -543,9 +543,15 @@ public class UIReader_FileSystem : UI_Reader
                 // connection click event
                 file.Q<Button>("FileImage").clicked += () =>
                 {
+                    GameManager.Instance.fileManager.FindFile(folderName1).isRead = true;
                     // image check action
                     if (folder != null)
                         GameManager.Instance.fileManager.UnlockChat(folder.name);
+                    if (GameManager.Instance.fileManager.FindFile(folderName1).isRead == true)
+                    {
+                        Debug.Log("들어오긴하심");
+                        file.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
+                    }
                     // draw current foluder
                     DrawFile(folder.fileName);
                     // add current folder path
@@ -564,7 +570,7 @@ public class UIReader_FileSystem : UI_Reader
                 // change file name
                 file.Q<Label>("FileName").text = image.fileName;
                 // connection drag and drop & button click event
-                LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(image.fileName); });
+                LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(file, image.fileName); });
                 // add file
                 ui_fileGround.Add(file);
             }
@@ -578,7 +584,7 @@ public class UIReader_FileSystem : UI_Reader
                 // change file name
                 file.Q<Label>("FileName").text = text.fileName;
                 // connection drag and drop & button click event
-                LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(text.fileName); });
+                LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(file, text.fileName); });
                 // add file
                 ui_fileGround.Add(file);
             }
