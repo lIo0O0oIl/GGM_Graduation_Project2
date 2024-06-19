@@ -404,7 +404,7 @@ MonoBehaviour:
   - soundName: bomb
     clip: {fileID: 8300000, guid: 4ad8345aa88cc464b98bad6508fe7a4f, type: 3}
   - soundName: typing
-    clip: {fileID: 8300000, guid: c83402922e92ea14b9668f5e1cf6a662, type: 3}
+    clip: {fileID: 8300000, guid: 69785c176c52d214d82cebd4bf8dafb6, type: 3}
   audioSourceBgmPlayers: {fileID: 1318594009}
   audioSourceEffectsPlayers: {fileID: 1318594010}
 --- !u!82 &1318594009
@@ -612,6 +612,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 097331ddd5b24db4b81717f0e8c0b330, type: 2}
+  masterValue: 0
+  bgmValue: 0
+  sfxValue: 0
+  scrollValue: 0
+  wheelValue: 0
 --- !u!1 &2077088061
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,11 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66964fd372bf01b42a6aa7f52ef5108b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterValue: 0
-  bgmValue: 0
-  sfxValue: 0
-  scrollValue: 0
-  wheelValue: 0
+  chatHumanManager: {fileID: 0}
 --- !u!1 &2100005360
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,6 +710,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuObj: {fileID: 1273004370}
   settingObj: {fileID: 2077088061}
+  scrollSpeed: 0
+  wheelSpeed: 0
 --- !u!4 &2100005362
 Transform:
   m_ObjectHideFlags: 0
@@ -730,7 +733,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 355605235}
   - {fileID: 134224099}
-  - {fileID: 1318594006}
   - {fileID: 1273004371}
   - {fileID: 2077088063}
   - {fileID: 2100005362}
+  - {fileID: 1318594006}

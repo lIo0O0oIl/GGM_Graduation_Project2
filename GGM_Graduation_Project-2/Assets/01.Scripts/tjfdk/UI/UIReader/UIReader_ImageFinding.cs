@@ -64,7 +64,7 @@ public class UIReader_ImageFinding : UI_Reader
             if (isImageOpen)
             {
                 // fileSystem size change button on
-                GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Position;
+                GameManager.Instance.fileSystem.ui_changeSizeButton.style.display = DisplayStyle.Flex;
                 // image panel off
                 ui_imageGround.style.display = DisplayStyle.None;
 
@@ -74,17 +74,14 @@ public class UIReader_ImageFinding : UI_Reader
 
                 // image check action
                 FileSO fileT = GameManager.Instance.fileManager.FindFile(fileName);
-                GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
                 //Debug.Log(fileT.fileName);
                 if (fileT != null)
                     GameManager.Instance.fileManager.UnlockChat(fileT.name);
-                if (GameManager.Instance.fileManager.FindFile(fileName) == true)
-                    fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
             }
             else
             {
                 // fileSystem size change button off
-                GameManager.Instance.fileSystem.ui_changeSizeButton.pickingMode = PickingMode.Ignore;
+                GameManager.Instance.fileSystem.ui_changeSizeButton.style.display = DisplayStyle.None;
                 // fileSystem off bool value
                 GameManager.Instance.fileSystem.isFileSystemOpen = false;
                 // fileSystem size function
@@ -93,9 +90,15 @@ public class UIReader_ImageFinding : UI_Reader
                 // png panel ground on
                 ui_imageGround.style.display = DisplayStyle.Flex;
 
+                GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
+                if (GameManager.Instance.fileManager.FindFile(fileName) == true)
+                    fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
+
                 // create uxml
                 VisualElement imagePanel = RemoveContainer(ux_imageGround.Instantiate());
-                imagePanel.style.backgroundImage = new StyleBackground(image.image);
+                imagePanel.Q<VisualElement>("ImageGround").style.backgroundImage = new StyleBackground(image.image);
+
+                imagePanel.Q<Button>("ImageExitBtn").clicked += (() => { OpenImage(fileIcon, fileName); });
 
                 // ???藥??怨쀬Ŧ 嶺뚢돦堉싮뇡?놃떊??┑?
                 foreach (string evid in image.pngName)
@@ -147,16 +150,16 @@ public class UIReader_ImageFinding : UI_Reader
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                 {
-                                    for (int i = imagePanel.childCount - 1; i >= 0; i--)
+                                    for (int i = imagePanel.Q<VisualElement>("ImageGround").childCount - 1; i >= 0; i--)
                                     {
-                                        if (imagePanel.Children().ElementAt(i).name == "descriptionLabel")
-                                            imagePanel.RemoveAt(i);
+                                        if (imagePanel.Q<VisualElement>("ImageGround").Children().ElementAt(i).name == "descriptionLabel")
+                                            imagePanel.Q<VisualElement>("ImageGround").RemoveAt(i);
                                     }
                                     VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
                                     evidenceDescription.name = "descriptionLabel";
-                                    imagePanel.Add(evidenceDescription);
+                                    imagePanel.Q<VisualElement>("ImageGround").Add(evidenceDescription);
                                     DoText(evidenceDescription.Q<Label>("Text"), png.memo, 2f, true,
-                                        () => { imagePanel.Remove(evidenceDescription); });
+                                        () => { imagePanel.Q<VisualElement>("ImageGround").Remove(evidenceDescription); }, null);
                                 });
                             }
 
@@ -167,7 +170,7 @@ public class UIReader_ImageFinding : UI_Reader
                             evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
                             evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
                             // ??觀???????嶺뚯솘????怨뺣뼺?
-                            imagePanel.Add(evidence);
+                            imagePanel.Q<VisualElement>("ImageGround").Add(evidence);
                         }
                     }
                     else
@@ -280,13 +283,13 @@ public class UIReader_ImageFinding : UI_Reader
 
                     // png check action
                     FileSO file = GameManager.Instance.fileManager.FindFile(png.name);
-                    GameManager.Instance.fileManager.FindFile(png.name).isRead = true;
                     if (file != null)
                         GameManager.Instance.fileManager.UnlockChat(file.name);
-                    if (GameManager.Instance.fileManager.FindFile(png.name).isRead == true)
-                        fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
                 };
 
+                GameManager.Instance.fileManager.FindFile(png.name).isRead = true;
+                if (GameManager.Instance.fileManager.FindFile(png.name).isRead == true)
+                    fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
 
                 ui_panelGround.Add(panel);
 
@@ -323,13 +326,13 @@ public class UIReader_ImageFinding : UI_Reader
 
                 // text check action
                 FileSO file = GameManager.Instance.fileManager.FindFile(name);
-                GameManager.Instance.fileManager.FindFile(name).isRead = true;
                 if (file != null)
                     GameManager.Instance.fileManager.UnlockChat(file.name);
-                if (GameManager.Instance.fileManager.FindFile(name).isRead == true)
-                    fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
             };
 
+                GameManager.Instance.fileManager.FindFile(name).isRead = true;
+                if (GameManager.Instance.fileManager.FindFile(name).isRead == true)
+                    fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
 
             ui_panelGround.Add(panel);
 

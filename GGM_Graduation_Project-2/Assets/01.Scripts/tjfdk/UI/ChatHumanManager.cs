@@ -24,6 +24,9 @@ public class ChatHumanManager : UI_Reader
     //public Coroutine chatting;
     public bool isChattingRunning = false;
 
+    public void SetChatSpeed(float value) => changeHumanTime = value;
+    public void SetWheelSpeed(float value) => GameManager.Instance.chatSystem.wheelSpeed = value;
+
     private void Start()
     {
         for (int i = 0; i < chatContainer.chatTrees.Count; i++)
@@ -51,7 +54,6 @@ public class ChatHumanManager : UI_Reader
             {
                 // node list
                 var children = chatContainer.GetChatTree().GetChild(currentNode);
-                Debug.Log(children[0]);
 
                 foreach (Node node in children)
                 {
@@ -113,7 +115,6 @@ public class ChatHumanManager : UI_Reader
                         {
                             if (conditionNode.is_UseThis == false)
                             {
-                                Debug.Log("file trigger off");
                                 nowCondition = conditionNode;
                                 StopChatting();
                             }

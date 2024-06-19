@@ -281,10 +281,8 @@ public class UIReader_FileSystem : UI_Reader
                         if (folder != null)
                             GameManager.Instance.fileManager.UnlockChat(folder.name);
                         if (GameManager.Instance.fileManager.FindFile(fileName).isRead == true)
-                        {
-                            Debug.Log("들어오긴하심");
                             file.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
-                        }
+                        
                         // draw current foluder
                         DrawFile(folder.fileName);
                         // add current folder path
@@ -334,7 +332,9 @@ public class UIReader_FileSystem : UI_Reader
             DrawFile(currentFolderName);
     }
 
-    // I use this function don't remove - tjfdk
+    // ===============================================
+    // I will use this function, don't remove - tjfdk
+    // ===============================================
     //private FolderFile CreateNewParent(FileType fileType, string fileParentName, string fileName)
     //{
     //    // file - parent
@@ -376,7 +376,6 @@ public class UIReader_FileSystem : UI_Reader
 
     public void DrawFile(string folderName)
     {
-        //Debug.Log(folderName + " ????됯뭅 ????됯뭅??);
         // fileGround - current folder ground
         // fileFolders - current folder list
         // folderName - current folder name
@@ -396,23 +395,13 @@ public class UIReader_FileSystem : UI_Reader
         {
             // create current folder's childen
             foreach (VisualElement folder in currentFileFolder.folderFiles)
-            {
                 ui_fileGround.Add(folder);
-            }
 
             foreach (VisualElement image in currentFileFolder.imageFiles)
-            {
-                
-                // add file
                 ui_fileGround.Add(image);
-            }
 
-            foreach (VisualElement text in currentFileFolder.textFiles)
-            {
-                
-                // add file
+            foreach (VisualElement text in currentFileFolder.textFiles)                
                 ui_fileGround.Add(text);
-            }
         }
         else
             Debug.Log("current folder file null");
