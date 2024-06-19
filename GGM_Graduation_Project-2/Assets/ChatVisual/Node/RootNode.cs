@@ -19,8 +19,5 @@ namespace ChatVisual
         }
 
         public string showName;
-        //public List<string> loadFileNameList = new List<string>();
-
-        public int nowIndex;        // Indexes to continue chatting
     }
 }

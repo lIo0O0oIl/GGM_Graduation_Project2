@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour       // ±×³É ½Ì±ÛÅÏ
+public class Singleton<T> : MonoBehaviour where T : MonoBehaviour       // ê·¸ëƒ¥ ì‹±ê¸€í„´
 {
     static T instance;
 
@@ -10,13 +10,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour       // ±×³É 
         {
             if (instance == null)
             {
-/*                instance = GameObject.FindObjectOfType<T>();
-
-                if (instance == null)
-                {
-                    GameObject singleton = new GameObject(typeof(T).Name);
-                    instance = singleton.AddComponent<T>();
-                }*/
                 return null;    
             }
             return instance;
@@ -28,11 +21,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour       // ±×³É 
         if (instance == null)
         {
             instance = this as T;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(instance);
+            instance = this as T;
         }
     }
 }

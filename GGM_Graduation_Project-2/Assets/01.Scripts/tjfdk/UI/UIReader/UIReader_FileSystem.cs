@@ -165,7 +165,7 @@ public class UIReader_FileSystem : UI_Reader
             Debug.Log(member.questions[i].askText.Trim() == ask.name.Trim());
             if (member.questions[i].askText.Trim() == ask.name.Trim())
             {
-                Debug.Log("???곗꽑?띠럾???");
+                Debug.Log("???怨쀪퐨??좊읈???");
                 return member.questions[i];
             }
         }
@@ -326,7 +326,7 @@ public class UIReader_FileSystem : UI_Reader
         //            AddParenet(fileType, fileParentName, fileName, file);
         //            break;
         //        }
-        //        // ??. ????욱꺓???????癲????癲ル슢????..
+        //        // ??. ?????깃틩?????????????꿔꺂?????..
         //    case FileType.IMAGE:
         //        {
         //            //// create uxml
@@ -360,7 +360,7 @@ public class UIReader_FileSystem : UI_Reader
 
         //            AddParenet(fileType, fileParentName, fileName, file);
 
-        //            //// ????????낇뀘????꿔꺂?????
+        //            //// ?????????뉖????轅붽틓?????
         //            //bool addNew = false;
         //            ////foreach (FolderFile folder in fileFolders)
         //            ////{
@@ -375,7 +375,7 @@ public class UIReader_FileSystem : UI_Reader
         //            //}
         //            ////}
 
-        //            //// ????????꾩룆????????ㅻ쿋??
+        //            //// ????????袁⑸즴?????????살퓢??
         //            //// if parentfolder not exist? new add
         //            //if (addNew == false)
         //            //{
@@ -386,11 +386,11 @@ public class UIReader_FileSystem : UI_Reader
         //        }
         //    case FileType.TEXT:
         //        {
-        //          //  // ???꾩룆???
+        //          //  // ???袁⑸즴???
         //          //  file = RemoveContainer(ux_textFile.Instantiate());
-        //          //  // ???????⑤슢堉???
+        //          //  // ????????ㅼ뒧????
         //          //  file.Q<Label>("FileName").text = fileName;
-        //          //  // ??嶺뚮Ĳ?됪뤃??????嶺뚮Ŋ??????뚯???????ㅻ쿋??
+        //          //  // ??癲ル슢캉??る쨨??????癲ル슢흮???????????????살퓢??
         //          //  file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         //          //  {
         //          //      var area = FindMoveArea(evt.mousePosition);
@@ -417,7 +417,7 @@ public class UIReader_FileSystem : UI_Reader
 
         //            AddParenet(fileType, fileParentName, fileName, file);
 
-        //            //// ????????낇뀘????꿔꺂?????
+        //            //// ?????????뉖????轅붽틓?????
         //            //bool addNew = false;
         //            //FolderFile folder = fileFolderList[fileParentName];
         //            //if (folder != null)
@@ -427,7 +427,7 @@ public class UIReader_FileSystem : UI_Reader
         //            //    break;
         //            //}
 
-        //            //// ????????꾩룆????????ㅻ쿋??
+        //            //// ????????袁⑸즴?????????살퓢??
         //            //if (addNew == false)
         //            //{
         //            //    //FolderFile folderParent = new FolderFile(fileParentName);
@@ -511,7 +511,7 @@ public class UIReader_FileSystem : UI_Reader
 
     public void DrawFile(string folderName)
     {
-        //Debug.Log(folderName + " ????됯뭅 ????됯뭅??);
+        //Debug.Log(folderName + " ??????춦 ??????춦??);
         // fileGround - current folder ground
         // fileFolders - current folder list
         // folderName - current folder name

@@ -71,8 +71,6 @@ namespace ChatVisual
                             rootNode.loadFileNameList = new List<string>(LoadFileList);
                             EditorGUILayout.EndFoldoutHeaderGroup();
                             GUILayout.EndVertical();*/
-
-                            EditorGUILayout.IntField("NowIndex", rootNode.nowIndex);
                         }
                         break;
                     case ChatNode:
@@ -135,7 +133,7 @@ namespace ChatVisual
                             {
                                 if (i >= LoadFileList.Count)
                                 {
-                                    Debug.Log("LoadFileList 가 ADD 됨.");
+                                    Debug.Log("LoadFileList 媛 ADD ??");
                                     LoadFileList.Add("");
                                 }
                                 LoadFileList[i] = EditorGUILayout.TextArea(LoadFileList[i], EditorStyles.textArea);
@@ -247,8 +245,6 @@ namespace ChatVisual
 
                 //GUILayout.Space(5);
                 //EditorGUILayout.Toggle("child", is_ChildExist);
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
             };
 
             Add(container);

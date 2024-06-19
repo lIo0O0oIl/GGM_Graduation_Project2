@@ -76,7 +76,7 @@ public class CutSceneManager : MonoBehaviour
                     {
                         if (cutsceneUI.currentTextTween.IsPlaying())
                         {
-                            Debug.Log("텍스트 자동 완성");
+                            Debug.Log("??용뮞???癒?짗 ?袁⑷쉐");
                             cutsceneUI.EndText();
                         }
                         else
