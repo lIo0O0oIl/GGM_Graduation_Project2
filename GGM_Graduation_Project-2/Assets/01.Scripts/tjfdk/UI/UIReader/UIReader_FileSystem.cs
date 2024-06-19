@@ -18,9 +18,9 @@ public class FolderFile
 {
     public string folderName;
     public string parentFolderName;
-    public List<string> folderFiles;
-    public List<string> textFiles;
-    public List<string> imageFiles;
+    public List<VisualElement> folderFiles;
+    public List<VisualElement> textFiles;
+    public List<VisualElement> imageFiles;
     //public List<VisualElement> folderFiles;
     //public List<VisualElement> textFiles;
     //public List<VisualElement> imageFiles;
@@ -29,9 +29,9 @@ public class FolderFile
     {
         folderName = name;
         parentFolderName = parent;
-        folderFiles = new List<string>();
-        textFiles = new List<string>();
-        imageFiles = new List<string>();
+        folderFiles = new List<VisualElement>();
+        textFiles = new List<VisualElement>();
+        imageFiles = new List<VisualElement>();
 
         //void FolderFile(string name, string parent)
         //{
@@ -262,252 +262,117 @@ public class UIReader_FileSystem : UI_Reader
         // if exist parenteFolder
         if (parentFolder != null)
         {
+            VisualElement file;
             // register folder to parentFolder
             switch (fileType)
             {
                 case FileType.FOLDER:
+                {
+                    FileSO folder = GameManager.Instance.fileManager.FindFile(fileName);
+                    // create uxml
+                    file = RemoveContainer(ux_folderFile.Instantiate());
+                    // change file name
+                    file.Q<Label>("FileName").text = folder.fileName;
+                    // connection click event
+                    file.Q<Button>("FileImage").clicked += () =>
+                    {
+                        GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
+                        // image check action
+                        if (folder != null)
+                            GameManager.Instance.fileManager.UnlockChat(folder.name);
+                        if (GameManager.Instance.fileManager.FindFile(fileName).isRead == true)
+                        {
+                            Debug.Log("들어오긴하심");
+                            file.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
+                        }
+                        // draw current foluder
+                        DrawFile(folder.fileName);
+                        // add current folder path
+                        AddFilePath(folder.fileName);
+                    };
+
                     fileFolders.Add(new FolderFile(fileName, fileParentName));
-                    //fileFolderList.Add(fileName, new FolderFile(fileName));
-                    parentFolder.folderFiles.Add(fileName);
-                    break;
+                    parentFolder.folderFiles.Add(file);
+                }
+                //fileFolderList.Add(fileName, new FolderFile(fileName));
+                break;
                 case FileType.IMAGE:
-                    parentFolder.imageFiles.Add(fileName);
-                    break;
+                {
+                    FileSO image = GameManager.Instance.fileManager.FindFile(fileName);
+                    // create uxml
+                    file = RemoveContainer(ux_imageFile.Instantiate());
+                    // change file name
+                    file.Q<Label>("FileName").text = image.fileName;
+                    // connection drag and drop & button click event
+                    LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(file, image.fileName); });
+                    parentFolder.imageFiles.Add(file);
+                }
+                break;
                 case FileType.TEXT:
-                    parentFolder.textFiles.Add(fileName);
-                    break;
+                {
+                    FileSO text = GameManager.Instance.fileManager.FindFile(fileName);
+                    // create uxml
+                    file = RemoveContainer(ux_textFile.Instantiate());
+                    // change file name
+                    file.Q<Label>("FileName").text = text.fileName;
+                    // connection drag and drop & button click event
+                    LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(file, text.fileName); });
+                    parentFolder.textFiles.Add(file);
+                }
+                break;
             }
         }
         // if not exist parenteFolder
         else
         {
             Debug.Log(fileParentName + " this is null");
-            //FolderFile newParentFolder = CreateNewParent(fileType, fileParentName, fileName);
-            //if (newParentFolder != null)
-            //    AddFile(fileType, fileName, newParentFolder.folderName);
-            //else
-            //    Debug.Log("FindParent error, unable to make parent");
-
-            ////switch (fileType)
-            ////{
-            ////    case FileType.FOLDER:
-            ////        newParentFolder.folderFiles.Add(file);
-            ////        break;
-            ////    case FileType.IMAGE:
-            ////        newParentFolder.imageFiles.Add(file);
-            ////        break;
-            ////    case FileType.TEXT:
-            ////        newParentFolder.textFiles.Add(file);
-            ////        break;
-            ////}
         }
-
-        ////VisualElement file = null;
-
-        //// file type
-        //switch (fileType)
-        //{
-        //    // if folder
-        //    case FileType.FOLDER:
-        //        {
-        //            //// create uxml
-        //            //file = RemoveContainer(ux_folderFile.Instantiate());
-        //            //// change file name
-        //            //file.Q<Label>("FileName").text = fileName;
-        //            //// connection click event
-        //            //file.Q<Button>("FileImage").clicked += () => 
-        //            //{ 
-        //            //    // draw current foluder
-        //            //    DrawFile(file.Q<Label>("FileName").text); 
-        //            //    // add current folder path
-        //            //    AddFilePath(fileName); 
-        //            //};
-
-        //            AddParenet(fileType, fileParentName, fileName, file);
-        //            break;
-        //        }
-        //        // ??. ????욱꺓???????癲????癲ル슢????..
-        //    case FileType.IMAGE:
-        //        {
-        //            //// create uxml
-        //            //file = RemoveContainer(ux_imageFile.Instantiate());
-        //            //// change file name
-        //            //file.Q<Label>("FileName").text = fileName;
-        //            //// connection drag and drop & button click event
-        //            //file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
-        //            //{
-        //            //    var area = FindMoveArea(evt.mousePosition);
-        //            //    target.RemoveFromHierarchy();
-        //            //    if (area == null)
-        //            //    {
-        //            //        beforeSlot.Add(target);
-        //            //    }
-        //            //    else
-        //            //    {
-        //            //    /*LockAskAndReply lockQuestion = FindQuestion(area);
-        //            //        if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
-        //            //        {
-        //            //            area.parent.Remove(area);
-        //            //            chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
-        //            //                EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
-        //            //        }
-        //            //        else
-        //            //            beforeSlot.Add(target);*/
-        //            //    }
-        //            //},
-        //            //() => { ImageEvent(file); }
-        //            //));
-
-        //            AddParenet(fileType, fileParentName, fileName, file);
-
-        //            //// ????????낇뀘????꿔꺂?????
-        //            //bool addNew = false;
-        //            ////foreach (FolderFile folder in fileFolders)
-        //            ////{
-        //            ////    // if you discover parent folder
-        //            ////    if (folder.folderName != fileParentName)
-        //            //FolderFile folder = fileFolderList[fileParentName];
-        //            //if (folder != null)
-        //            //{
-        //            //    folder.imageFiles.Add(file);
-        //            //    addNew = true;
-        //            //    break;
-        //            //}
-        //            ////}
-
-        //            //// ????????꾩룆????????ㅻ쿋??
-        //            //// if parentfolder not exist? new add
-        //            //if (addNew == false)
-        //            //{
-        //            //    AddFile(FileType.FOLDER, fileParentName, "Main");
-        //            //    AddFile(fileType, fileName, fileParentName);
-        //            //}
-        //            break;
-        //        }
-        //    case FileType.TEXT:
-        //        {
-        //          //  // ???꾩룆???
-        //          //  file = RemoveContainer(ux_textFile.Instantiate());
-        //          //  // ???????⑤슢堉???
-        //          //  file.Q<Label>("FileName").text = fileName;
-        //          //  // ??嶺뚮Ĳ?됪뤃??????嶺뚮Ŋ??????뚯???????ㅻ쿋??
-        //          //  file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
-        //          //  {
-        //          //      var area = FindMoveArea(evt.mousePosition);
-        //          //      target.RemoveFromHierarchy();
-        //          //      if (area == null)
-        //          //      {
-        //          //          beforeSlot.Add(target);
-        //          //      }
-        //          //      else
-        //          //      {
-        //          ///*          LockAskAndReply lockQuestion = FindQuestion(area);
-        //          //          if (FindFile(fileName).lockQuestionName == lockQuestion.ask)
-        //          //          {
-        //          //              area.parent.Remove(area);
-        //          //              chatSystem.InputQuestion((chatSystem.FindMember(chatSystem.currentMemberName).nickName),
-        //          //                  EChatType.Question, lockQuestion.ask, true, chapterManager.InputCChat(true, lockQuestion.reply));
-        //          //          }*/
-        //          //          //else
-        //          //            //  beforeSlot.Add(target);
-        //          //      }
-        //          //  },
-        //          //  () => { TextEvent(file); }
-        //          //  ));
-
-        //            AddParenet(fileType, fileParentName, fileName, file);
-
-        //            //// ????????낇뀘????꿔꺂?????
-        //            //bool addNew = false;
-        //            //FolderFile folder = fileFolderList[fileParentName];
-        //            //if (folder != null)
-        //            //{
-        //            //    folder.imageFiles.Add(file);
-        //            //    addNew = true;
-        //            //    break;
-        //            //}
-
-        //            //// ????????꾩룆????????ㅻ쿋??
-        //            //if (addNew == false)
-        //            //{
-        //            //    //FolderFile folderParent = new FolderFile(fileParentName);
-        //            //    //fileFolders.Add(folderParent);
-        //            //    //fileFolders.Add(new FolderFile(fileName));
-        //            //    //folderParent.folderFiles.Add(file);
-
-        //            //    AddFile(FileType.FOLDER, fileParentName, "Main");
-        //            //    AddFile(fileType, fileName, fileParentName);
-        //            //}
-        //            break;
-        //        }
-        //}
 
         if (currentFolderName == "")
             currentFolderName = fileParentName;
         if (currentFolderName == fileParentName)
             DrawFile(currentFolderName);
-
-        //DrawFile("Main");
-
-        //Debug.Log(currentFolderName);
-        //if (currentFolderName != "")
-        //{
-        //    if (GameManager.Instance.fileManager.FindFile(currentFolderName) != null)
-        //    {
-        //        if (GameManager.Instance.fileManager.FindFile(currentFolderName).fileParentName != "")
-        //            DrawFile(GameManager.Instance.fileManager.FindFile(currentFolderName).fileParentName);
-        //    }
-        //    else
-        //            DrawFile("Main");
-        //}
-        //else
-        //        DrawFile("Main");
     }
 
-    private FolderFile CreateNewParent(FileType fileType, string fileParentName, string fileName)
-    {
-        // file - parent
-        // create new parentFolder
-        FolderFile newParentFolder = new FolderFile(fileParentName, GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName);
+    // I use this function don't remove - tjfdk
+    //private FolderFile CreateNewParent(FileType fileType, string fileParentName, string fileName)
+    //{
+    //    // file - parent
+    //    // create new parentFolder
+    //    FolderFile newParentFolder = new FolderFile(fileParentName, GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName);
 
-        // register parentFolder
-        fileFolders.Add(newParentFolder);
-        //fileFolderList.Add(newParentFolder.folderName, newParentFolder);
+    //    // register parentFolder
+    //    fileFolders.Add(newParentFolder);
+    //    //fileFolderList.Add(newParentFolder.folderName, newParentFolder);
 
-        // add file to newParentFolder
-        switch (fileType)
-        {
-            case FileType.FOLDER:
-                newParentFolder.folderFiles.Add(fileName);
-                break;
-            case FileType.IMAGE:
-                newParentFolder.imageFiles.Add(fileName);
-                break;
-            case FileType.TEXT:
-                newParentFolder.textFiles.Add(fileName);
-                break;
-        }
-
-
-
-        // parent - super parent
-        // find super parent name
-        string superParentFolderName = GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName;
-        // find super parent
-        FolderFile superParentFolder = FindFolder(superParentFolderName);
-        // if superParent is exist, add newParentFolder to it's parent
-        if (superParentFolder != null)
-            superParentFolder.folderFiles.Add(newParentFolder.folderName);
-        // if superParent isn't exist, add newParentFolder to it's new parent
-        else
-            CreateNewParent(FileType.FOLDER, superParentFolderName, fileParentName)
-                .folderFiles.Add(newParentFolder.folderName);
-
-
-
-        // return new parent
-        return newParentFolder;
-    }
+    //    // add file to newParentFolder
+    //    switch (fileType)
+    //    {
+    //        case FileType.FOLDER:
+    //            newParentFolder.folderFiles.Add(fileName);
+    //            break;
+    //        case FileType.IMAGE:
+    //            newParentFolder.imageFiles.Add(fileName);
+    //            break;
+    //        case FileType.TEXT:
+    //            newParentFolder.textFiles.Add(fileName);
+    //            break;
+    //    }
+    //    // parent - super parent
+    //    // find super parent name
+    //    string superParentFolderName = GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName;
+    //    // find super parent
+    //    FolderFile superParentFolder = FindFolder(superParentFolderName);
+    //    // if superParent is exist, add newParentFolder to it's parent
+    //    if (superParentFolder != null)
+    //        superParentFolder.folderFiles.Add(newParentFolder.folderName);
+    //    // if superParent isn't exist, add newParentFolder to it's new parent
+    //    else
+    //        CreateNewParent(FileType.FOLDER, superParentFolderName, fileParentName)
+    //            .folderFiles.Add(newParentFolder.folderName);
+    //    // return new parent
+    //    return newParentFolder;
+    //}
 
     public void DrawFile(string folderName)
     {
@@ -529,64 +394,24 @@ public class UIReader_FileSystem : UI_Reader
         // folder isn't null
         if (currentFileFolder != null)
         {
-            VisualElement file = null;
-
             // create current folder's childen
-            foreach (string folderName1 in currentFileFolder.folderFiles)
+            foreach (VisualElement folder in currentFileFolder.folderFiles)
             {
-                FileSO folder = GameManager.Instance.fileManager.FindFile(folderName1);
-                //Debug.Log("???????????????: " + folder.fileName);
-                // create uxml
-                file = RemoveContainer(ux_folderFile.Instantiate());
-                // change file name
-                file.Q<Label>("FileName").text = folder.fileName;
-                // connection click event
-                file.Q<Button>("FileImage").clicked += () =>
-                {
-                    GameManager.Instance.fileManager.FindFile(folderName1).isRead = true;
-                    // image check action
-                    if (folder != null)
-                        GameManager.Instance.fileManager.UnlockChat(folder.name);
-                    if (GameManager.Instance.fileManager.FindFile(folderName1).isRead == true)
-                    {
-                        Debug.Log("들어오긴하심");
-                        file.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
-                    }
-                    // draw current foluder
-                    DrawFile(folder.fileName);
-                    // add current folder path
-                    AddFilePath(folder.fileName);
-                };
-
-                // add file
-                ui_fileGround.Add(file);
+                ui_fileGround.Add(folder);
             }
 
-            foreach (string imageName in currentFileFolder.imageFiles)
+            foreach (VisualElement image in currentFileFolder.imageFiles)
             {
-                FileSO image = GameManager.Instance.fileManager.FindFile(imageName);
-                // create uxml
-                file = RemoveContainer(ux_imageFile.Instantiate());
-                // change file name
-                file.Q<Label>("FileName").text = image.fileName;
-                // connection drag and drop & button click event
-                LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(file, image.fileName); });
+                
                 // add file
-                ui_fileGround.Add(file);
+                ui_fileGround.Add(image);
             }
 
-            foreach (string textName in currentFileFolder.textFiles)
+            foreach (VisualElement text in currentFileFolder.textFiles)
             {
-                //Debug.Log(textName + " png");
-                FileSO text = GameManager.Instance.fileManager.FindFile(textName);
-                // create uxml
-                file = RemoveContainer(ux_textFile.Instantiate());
-                // change file name
-                file.Q<Label>("FileName").text = text.fileName;
-                // connection drag and drop & button click event
-                LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(file, text.fileName); });
+                
                 // add file
-                ui_fileGround.Add(file);
+                ui_fileGround.Add(text);
             }
         }
         else
