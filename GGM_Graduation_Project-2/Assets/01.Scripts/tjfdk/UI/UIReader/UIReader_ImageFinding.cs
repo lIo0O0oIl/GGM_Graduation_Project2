@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.NetworkInformation;
 using Unity.VisualScripting;
@@ -52,7 +53,7 @@ public class UIReader_ImageFinding : UI_Reader
         ui_panelGround = root.Q<VisualElement>("PanelGround");
     }
 
-    public void OpenImage(string fileName)
+    public void OpenImage(VisualElement fileIcon, string fileName)
     {
         // find image
         ImageSO image = GameManager.Instance.imageManager.FindImage(fileName);
@@ -73,9 +74,12 @@ public class UIReader_ImageFinding : UI_Reader
 
                 // image check action
                 FileSO fileT = GameManager.Instance.fileManager.FindFile(fileName);
+                GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
                 //Debug.Log(fileT.fileName);
                 if (fileT != null)
                     GameManager.Instance.fileManager.UnlockChat(fileT.name);
+                if (GameManager.Instance.fileManager.FindFile(fileName) == true)
+                    fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
             }
             else
             {
@@ -276,8 +280,11 @@ public class UIReader_ImageFinding : UI_Reader
 
                     // png check action
                     FileSO file = GameManager.Instance.fileManager.FindFile(png.name);
+                    GameManager.Instance.fileManager.FindFile(png.name).isRead = true;
                     if (file != null)
                         GameManager.Instance.fileManager.UnlockChat(file.name);
+                    if (GameManager.Instance.fileManager.FindFile(png.name).isRead == true)
+                        fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
                 };
 
 
@@ -290,7 +297,7 @@ public class UIReader_ImageFinding : UI_Reader
         }
     }
 
-    public void OpenText(string name)
+    public void OpenText(VisualElement fileIcon, string name)
     {
         // create uxml
         VisualElement panel = RemoveContainer(ux_TextPanel.Instantiate());
@@ -316,8 +323,11 @@ public class UIReader_ImageFinding : UI_Reader
 
                 // text check action
                 FileSO file = GameManager.Instance.fileManager.FindFile(name);
+                GameManager.Instance.fileManager.FindFile(name).isRead = true;
                 if (file != null)
                     GameManager.Instance.fileManager.UnlockChat(file.name);
+                if (GameManager.Instance.fileManager.FindFile(name).isRead == true)
+                    fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
             };
 
 

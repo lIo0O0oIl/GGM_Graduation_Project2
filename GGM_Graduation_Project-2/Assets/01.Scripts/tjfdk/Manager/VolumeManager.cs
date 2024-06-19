@@ -4,41 +4,36 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class VolumeManager : MonoBehaviour
+public class VolumeManager : Singleton<VolumeManager>
 {
     [SerializeField] private AudioMixer mixer;
-    [SerializeField] private Slider masterSlider;
-    [SerializeField] private Slider bgmSlider;
-    [SerializeField] private Slider sfxSlider;
-    [SerializeField] private Slider speedSlider;
+    //[SerializeField] private Slider masterSlider;
+    //[SerializeField] private Slider bgmSlider;
+    //[SerializeField] private Slider sfxSlider;
+    //[SerializeField] private Slider speedSlider;
 
-    private void Start()
+    //private void Start()
+    //{
+    //    float master, bgm, sfx;
+    //    mixer.GetFloat("Master", out master);
+    //    mixer.GetFloat("BGM", out bgm);
+    //    mixer.GetFloat("SFX", out sfx);
+    //}
+
+    public void Master(float master)
     {
-        float master, bgm, sfx;
-        mixer.GetFloat("Master", out master);
-        mixer.GetFloat("BGM", out bgm);
-        mixer.GetFloat("SFX", out sfx);
-        masterSlider.value = master;
-        bgmSlider.value = bgm;
-        sfxSlider.value = sfx;
+        mixer.SetFloat("Master", master);
+        mixer.SetFloat("BGM", master);
+        mixer.SetFloat("SFX", master);
     }
 
-    public void Master()
+    public void BGM(float bgm)
     {
-        mixer.SetFloat("Master", masterSlider.value);
-        mixer.SetFloat("BGM", masterSlider.value);
-        mixer.SetFloat("SFX", masterSlider.value);
-        if (speedSlider)
-            ChattingManager.Instance.ChangeDelaySpeed(speedSlider.value);
+        mixer.SetFloat("BGM", bgm);
     }
 
-    public void BGM()
+    public void SFX(float sfx)
     {
-        mixer.SetFloat("BGM", bgmSlider.value);
-    }
-
-    public void SFX()
-    {
-        mixer.SetFloat("SFX", sfxSlider.value);
+        mixer.SetFloat("SFX", sfx);
     }
 }

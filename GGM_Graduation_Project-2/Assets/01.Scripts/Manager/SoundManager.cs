@@ -9,11 +9,11 @@ public class Sound
 
 public class SoundManager : Singleton<SoundManager>
 {
-    public Sound[] bgmSounds;           // BGM »ç¿îµå ÀúÀå
-    public Sound[] effectSounds;        // SFX »ç¿îµå ÀúÀå
+    public Sound[] bgmSounds;           // BGM ì‚¬ìš´ë“œ ì €ì¥
+    public Sound[] effectSounds;        // SFX ì‚¬ìš´ë“œ ì €ì¥
 
-    public AudioSource audioSourceBgmPlayers;           // BGMÀ» Ãâ·ÂÇÒ ¿Àµğ¿À ¼Ò½º
-    public AudioSource audioSourceEffectsPlayers;     // SFX¸¦ Ãâ·ÂÇÒ ¿Àµğ¿À ¼Ò½º
+    public AudioSource audioSourceBgmPlayers;           // BGMì„ ì¶œë ¥í•  ì˜¤ë””ì˜¤ ì†ŒìŠ¤
+    public AudioSource audioSourceEffectsPlayers;     // SFXë¥¼ ì¶œë ¥í•  ì˜¤ë””ì˜¤ ì†ŒìŠ¤
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class SoundManager : Singleton<SoundManager>
             PlaySFX("click");
     }
 
-    public void PlayBGM(string name) // BGM ½ÇÇà
+    public void PlayBGM(string name) // BGM ì‹¤í–‰
     {
         for (int i = 0; i < bgmSounds.Length; i++)
         {
@@ -38,7 +38,7 @@ public class SoundManager : Singleton<SoundManager>
                 return;
             }
         }
-        //Debug.LogError("¹è°æÀ½¾Ç »ç¿îµå ÀÌ¸§ Àß¸øºÎ¸§!");
+        //Debug.LogError("ë°°ê²½ìŒì•… ì‚¬ìš´ë“œ ì´ë¦„ ì˜ëª»ë¶€ë¦„!");
     }
 
     public void PlaySFX(string name)
@@ -47,11 +47,11 @@ public class SoundManager : Singleton<SoundManager>
         {
             if (name == effectSounds[i].soundName)
             {
-                audioSourceEffectsPlayers.PlayOneShot(effectSounds[i].clip);        // ¼Ò¸® ÇÑ¹ø¸¸ µü ³»ÁÖ´Â °Í.
+                audioSourceEffectsPlayers.PlayOneShot(effectSounds[i].clip);        // ì†Œë¦¬ í•œë²ˆë§Œ ë”± ë‚´ì£¼ëŠ” ê²ƒ.
                 return;
             }
         }
-        //Debug.LogError("ÀÌÆåÆ® »ç¿îµå ÀÌ¸§ Àß¸øºÎ¸§!");
+        //Debug.LogError("ì´í™íŠ¸ ì‚¬ìš´ë“œ ì´ë¦„ ì˜ëª»ë¶€ë¦„!");
     }
 
 

@@ -1,90 +1,55 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 using static Unity.VisualScripting.Member;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    [Header("Panel")]
-    public List<GameObject> panels;
-    public GameObject alarmIcon;
-
-    public Action<int> startChatEvent;
-    public int chatIndex = 0;
-
-    [Header("Connection System")]
-    [SerializeField] GameObject connectionPanel;
-    [SerializeField] Transform connectionParent;
-
-    //[Header("InputField")]
-    //[SerializeField] Selectable firstInput;
+    [SerializeField] GameObject MenuObj;
+    [SerializeField] GameObject settingObj;
 
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(settingObj);
     }
 
-    public void InputFieldFocus(InputField field)
+    void OnEnable()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Selectable next = EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-            if (next != null)
-                next.Select();
-        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void test()
+    void OnDisable()
     {
-        alarmIcon.SetActive(!alarmIcon.activeSelf);
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    public void Panle_OnOff(GameObject panel)       // 해당 패널 꺼주기
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        panel.SetActive(!panel.activeSelf);
-    }
-
-    public void Panel_Popup(GameObject panel)
-    {
-        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
-        if (panel.activeSelf == false)
-        {
-            foreach (GameObject obj in panels)
-                obj.SetActive(false);       // 모드 패널 꺼주기
-            panel.SetActive(true);      // 키려고 하는 패널은 켜주기
-            if (panel.gameObject.name == panels[0].gameObject.name && startChatEvent == null)         // 알람이 올 때 채팅에 가야 다시 
-            {
-                startChatEvent.Invoke(chatIndex);
-                startChatEvent -= (index) => ChattingManager.Instance.StartChatting(index);
-            }
-        }
-    }
-
-    public void ChangeParent()
-    {
-        connectionPanel.transform.parent.gameObject.SetActive(false);
-        connectionParent.gameObject.SetActive(true);
-
-        Transform temp = connectionPanel.transform.parent;
-        connectionPanel.transform.SetParent(connectionParent);
-        connectionParent = temp;
-
-        connectionPanel.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
-        connectionPanel.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-        connectionPanel.transform.SetAsFirstSibling();
+        settingObj = GameObject.Find("Setting");
+        settingObj.SetActive(false);
+        settingObj.GetComponent< UIReader_SettingScene>().BringDefaultValue();
     }
 
     public void SceneChange(string _sceneName)
     {
         SceneManager.LoadScene(_sceneName);
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void OpenSetting(bool is_open)
+    {
+        settingObj.SetActive(is_open);
     }
 
     public void Exit()
