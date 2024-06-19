@@ -117,6 +117,12 @@ namespace ChatVisual
                 });
             }
 
+            if (graphViewChange.movedElements != null)
+            {
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
+
             return graphViewChange;
         }
 

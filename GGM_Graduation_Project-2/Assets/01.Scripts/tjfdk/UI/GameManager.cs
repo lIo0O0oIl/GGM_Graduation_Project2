@@ -21,16 +21,29 @@ public class GameManager : Singleton<GameManager>
     public FileManager fileManager;
     public ImageManager imageManager;
 
+    [SerializeField] private bool is_tutorial;
+    [SerializeField] private Sprite myFaec;
+
+
     private void Start()
     {
-        cutSceneSystem.PlayCutScene("DieFall");
-        chatSystem.AddMember("HG");
-        chatSystem.OnOffMemberList();
+        GameStart();
     }
 
-    private void Update()
+    public void GameStart()
     {
-        //if (Input.GetKeyDown(KeyCode.U))
-        //    cutSceneSystem.PlayCutScene("DieFall");
+        if (!is_tutorial)
+        {
+            cutSceneSystem.PlayCutScene("DieFall");
+            chatSystem.AddMember("HG");
+            chatSystem.OnOffMemberList();
+        }
+        else
+        {
+            chatSystem.AddMember("Tutorial2");
+            chatSystem.ChoiceMember(chatSystem.FindMember("Tutorial2"));
+            chatSystem.ChangeMyProfile("플레이어", myFaec);
+            is_tutorial = false;
+        }
     }
 }

@@ -146,7 +146,7 @@ public class UI_Reader : MonoBehaviour
     {
         if (currentTextTween != null)
         {
-            Debug.Log("완성해줄게!");
+            Debug.Log("?꾩꽦?댁쨪寃?");
             currentTextUi.text = currentText;
             currentTextTween.Kill();
             currentTextTween = null;

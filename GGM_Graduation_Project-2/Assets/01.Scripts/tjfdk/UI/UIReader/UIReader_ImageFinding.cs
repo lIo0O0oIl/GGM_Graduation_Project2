@@ -97,21 +97,21 @@ public class UIReader_ImageFinding : UI_Reader
                 VisualElement imagePanel = RemoveContainer(ux_imageGround.Instantiate());
                 imagePanel.style.backgroundImage = new StyleBackground(image.image);
 
-                // ???藥??怨쀬Ŧ 嶺뚢돦堉싮뇡?놃떊??┑?
+                // ???????⑥??癲ル슓??젆??눀??껊뻿???뫢?
                 foreach (string evid in image.pngName)
                 {
-                    // ???????觀???嶺뚢돦堉싮뇡???좊듆
+                    // ???????鰲???癲ル슓??젆??눀???醫딅뱠
                     PngSO png = GameManager.Instance.imageManager.FindPng(evid);
                     if (png != null)
                     {
                         if (evid == png.name)
                         {
-                            // ??諛댁뎽
+                            // ??獄쏅똻??
                             VisualElement evidence = null;
-                            // 繞벿살탳???濡ル펲嶺?
+                            // 濚욌꼬?댄꺍???嚥▲꺂?뀐┼?
                             if (png.importance)
                             {
-                                // 嶺뚮∥???????뿉???戮?뻣
+                                // 癲ル슢?????????肉???筌?六?
                                 evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
@@ -139,10 +139,10 @@ public class UIReader_ImageFinding : UI_Reader
                                     evidence.Q<Button>("EvidenceImage").pickingMode = PickingMode.Ignore;
                                 });
                             }
-                            // ?熬곣뫀鍮??寃밸듆
+                            // ??ш끽維???野껊갭??
                             else
                             {
-                                // ?熬곣뫁???リ섣??β돦裕녶퐲???戮?뻣
+                                // ??ш끽維????れ꽔??棺??짆?띤맪???筌?六?
                                 evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
@@ -160,13 +160,13 @@ public class UIReader_ImageFinding : UI_Reader
                                 });
                             }
 
-                            //??觀???熬곣뫚?????깆젧
+                            //??鰲????ш끽維?????源놁젳
                             evidence.style.position = Position.Absolute;
                             evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
                             evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
                             evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
                             evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-                            // ??觀???????嶺뚯솘????怨뺣뼺?
+                            // ??鰲???????癲ル슣??????⑤베堉?
                             imagePanel.Add(evidence);
                         }
                     }
@@ -176,18 +176,18 @@ public class UIReader_ImageFinding : UI_Reader
 
                 //foreach (string evid in image.textName)
                 //{
-                //    // ???????觀???嶺뚢돦堉싮뇡???좊듆
+                //    // ???????鰲???癲ル슓??젆??눀???醫딅뱠
                 //    TextSO text = GameManager.Instance.imageManager.textList[evid];
                 //    if (text != null)
                 //    {
                 //        if (evid == text.name)
                 //        {
-                //            // ??諛댁뎽
+                //            // ??獄쏅똻??
                 //            VisualElement evidence = null;
-                //            // 繞벿살탳???濡ル펲嶺?
+                //            // 濚욌꼬?댄꺍???嚥▲꺂?뀐┼?
                 //            if (text.importance)
                 //            {
-                //                // 嶺뚮∥???????뿉???戮?뻣
+                //                // 癲ル슢?????????肉???筌?六?
                 //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                 //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(text.image);
                 //                evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = text.name;
@@ -209,10 +209,10 @@ public class UIReader_ImageFinding : UI_Reader
                 //                    }
                 //                });
                 //            }
-                //            // ?熬곣뫀鍮??寃밸듆
+                //            // ??ш끽維???野껊갭??
                 //            else
                 //            {
-                //                // ?熬곣뫁???リ섣??β돦裕녶퐲???戮?뻣
+                //                // ??ш끽維????れ꽔??棺??짆?띤맪???筌?六?
                 //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
                 //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                 //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
@@ -230,13 +230,13 @@ public class UIReader_ImageFinding : UI_Reader
                 //                });
                 //            }
 
-                //            //??觀???熬곣뫚?????깆젧
+                //            //??鰲????ш끽維?????源놁젳
                 //            evidence.style.position = Position.Absolute;
                 //            evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
                 //            evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
                 //            evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
                 //            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-                //            // ??觀???????嶺뚯솘????怨뺣뼺?
+                //            // ??鰲???????癲ル슣??????⑤베堉?
                 //            imagePanel.Add(evidence);
                 //        }
                 //    }

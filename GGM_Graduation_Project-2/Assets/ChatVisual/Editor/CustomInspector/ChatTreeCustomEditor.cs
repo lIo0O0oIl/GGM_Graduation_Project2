@@ -22,7 +22,7 @@ namespace ChatVisual
                 {
                     AssetDatabase.RenameAsset(path, tree.humanName);
                     AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
+                    //AssetDatabase.Refresh();
                 }
             }
         }

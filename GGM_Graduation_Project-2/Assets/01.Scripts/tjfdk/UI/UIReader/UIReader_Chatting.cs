@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 [Serializable]
@@ -55,6 +56,7 @@ public class UIReader_Chatting : UI_Reader
 
         // other member profile
     VisualElement ui_otherFace;
+    VisualElement ui_myFace;
     Label ui_otherMemberName;
 
 
@@ -115,6 +117,7 @@ public class UIReader_Chatting : UI_Reader
         ui_chatGround = root.Q<ScrollView>("ChatGround");
         ui_questionGround = root.Q<VisualElement>("QuestionGround");
         ui_otherFace = root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
+        ui_myFace = root.Q<VisualElement>("FaceGround").Q<VisualElement>("MyFace");
         ui_memberListButton = root.Q<Button>("ChangeTarget");
         ui_otherMemberName = root.Q<Label>("TargetName");
         ui_memberListGround = root.Q<VisualElement>("ChatMemberList");
@@ -134,8 +137,11 @@ public class UIReader_Chatting : UI_Reader
     // find member
     public MemberProfile FindMember(string name)
     {
+        Debug.Log(name);
         foreach (MemberProfile member in members)
         {
+            Debug.Log(member.nickName.ToString().Trim() == name );
+            Debug.Log(member.name.Trim() == name );
             if (member.nickName.ToString() == name || member.name == name)
                 return member;
         }
@@ -172,14 +178,26 @@ public class UIReader_Chatting : UI_Reader
         Application.Quit();
     }
 
+    private void TutorialEnd()
+    {
+        SceneManager.LoadScene("Game");
+        GameManager.Instance.GameStart();
+    }
+
     // input chat
     public void InputChat(string toWho, EChatState who, EChatType type,
         EFace face, string text, bool isRecord = true)
     {
         // test
-        if (text == "더 나은 빌드로 돌아오겠습니다.")
+        if (text == "????? ???????대퓠????????됰?諭??????")
         {
             Invoke("GameDown", 3f);
+        }
+        if (text == "튜토리얼은 여기까지 입니다.")
+        {
+            GameManager.Instance.chatHumanManager.StopChatting();
+            GameManager.Instance.chatHumanManager.currentNode = null;
+            Invoke("TutorialEnd", 3f);
         }
 
 
@@ -233,7 +251,7 @@ public class UIReader_Chatting : UI_Reader
         if (isRecord)
             RecordChat(who, toWho, type, text);
 
-        // whose chat style setting
+        // whose chat style setting        
         if (who == EChatState.Me)
         {
             Debug.Log("나");
@@ -288,7 +306,7 @@ public class UIReader_Chatting : UI_Reader
 
                 if (askNode.textEvent.Count == 1)
                 {
-                    Debug.Log(askNode.LoadNextDialog + " ?????怨쀫뎐???傭?");
+                    Debug.Log(askNode.LoadNextDialog + " ????????????ъ몥?????");
                     GameManager.Instance.chatHumanManager.StopChatting();
                     member.memCurrentNode = askNode;
                     AddMember(askNode.LoadNextDialog);
@@ -306,7 +324,7 @@ public class UIReader_Chatting : UI_Reader
                 // currntNode, member's currentNode change
                 member.memCurrentNode = askNode;
 
-                // ?轅붽틓????ш내??쭩??????????낆젵
+                // ????븐뼐???????????傭?????????????⑤챷竊?
                 askNode.is_UseThis = true;
 
                 // chatting start
@@ -335,7 +353,7 @@ public class UIReader_Chatting : UI_Reader
     }
 
     // record chatting
-    // ??????異?type question?????????댁삩????????욱룑??????嶺뚮칾怨댄뀭??癲ル슢??????????욱룕???
+    // ????????type question????????????ㅳ늾??????????濚밸Ŧ援????????饔낅떽??吏??筌뚮?????닿튃????耀붾굝??????????????濚밸Ŧ援욃퐲???
     private void RecordChat(EChatState who, string toWho, EChatType type, string msg)
     {
         // find member
@@ -358,7 +376,7 @@ public class UIReader_Chatting : UI_Reader
             case EChatType.Question:
   //          case EChatType.LockQuestion:
   //          {
-  //                  Debug.Log("?꿔꺂???熬곻퐢利???ㅻ쿋??");
+  //                  Debug.Log("??遺얘턁??????????鶯??????袁④뎬??");
   ///*              AskNode ask = new AskNode();
   //              ask.askText = msg;
   //              member.questions.Add(ask);*/
@@ -455,8 +473,9 @@ public class UIReader_Chatting : UI_Reader
     public void AddMember(string memberName)
     {
         // find member
+        Debug.Log(memberName);
         MemberProfile member = FindMember(memberName);
-        
+
         // if this member is not open
         if (member.isOpen == false)
         {
@@ -509,7 +528,12 @@ public class UIReader_Chatting : UI_Reader
     {
         ui_otherFace.Q<Label>("Name").text = name;
         ui_otherFace.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(face);
+    }
 
+    public void ChangeMyProfile(string name, Sprite face)
+    {
+        ui_myFace.Q<Label>("Name").text = name;
+        ui_myFace.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(face);
     }
 
     // member list on/off
