@@ -81,13 +81,25 @@ public class CutSceneManager : MonoBehaviour
                         }
                         else
                         {
-                            cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f);
+                            if (currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].sound != "")
+                            {
+                                string sound = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].sound;
+                                cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f, sound);
+                            }
+                            else
+                                cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f, null);
                             currentTextNum++;
                         }
                     }
                     else
                     {
-                        cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f);
+                        if (currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].sound != "")
+                        {
+                            string sound = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].sound;
+                            cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f, sound);
+                        }
+                        else
+                            cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f, null);
                         currentTextNum++;
                     }
                 }

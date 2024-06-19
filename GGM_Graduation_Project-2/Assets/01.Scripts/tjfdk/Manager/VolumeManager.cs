@@ -6,19 +6,21 @@ using UnityEngine.UI;
 
 public class VolumeManager : Singleton<VolumeManager>
 {
-    [SerializeField] private AudioMixer mixer;
-    //[SerializeField] private Slider masterSlider;
-    //[SerializeField] private Slider bgmSlider;
-    //[SerializeField] private Slider sfxSlider;
-    //[SerializeField] private Slider speedSlider;
+    public AudioMixer mixer;
+    public float masterValue;
+    public float bgmValue;
+    public float sfxValue;
+    public float scrollValue;
+    public float wheelValue;
 
-    //private void Start()
-    //{
-    //    float master, bgm, sfx;
-    //    mixer.GetFloat("Master", out master);
-    //    mixer.GetFloat("BGM", out bgm);
-    //    mixer.GetFloat("SFX", out sfx);
-    //}
+    private void Start()
+    {
+        //masterValue = -20;
+        //bgmValue = -20;
+        //sfxValue = -20;
+        //scrollValue = 2.75f;
+        //wheelValue = 105;
+    }
 
     public void Master(float master)
     {

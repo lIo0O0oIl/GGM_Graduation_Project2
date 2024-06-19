@@ -34,9 +34,9 @@ public class UIReader_CutScene : UI_Reader
             scene.style.backgroundImage = new StyleBackground(cuts[0]);
     }
 
-    public void ChangeText(string msg, float writingDuring)
+    public void ChangeText(string msg, float writingDuring, string soundName = "typing")
     {
-        DoText(text, msg, writingDuring, false, () => { });
+        DoText(text, msg, writingDuring, false, () => { }, soundName);
     }
 
     public void EndText()
