@@ -349,6 +349,7 @@ MonoBehaviour:
   chatTrees:
   - {fileID: 11400000, guid: 8a0e19d35d2db4545b83b352f6df53c7, type: 2}
   - {fileID: 11400000, guid: 5f5fab8b2a8821e4a9f33c74ef966f92, type: 2}
+  - {fileID: 11400000, guid: c1a3e3bb83a6eac42ac8aba4b6bafb91, type: 2}
 --- !u!1 &1112735943
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1112735944
 MonoBehaviour:
   m_ObjectHideFlags: 0

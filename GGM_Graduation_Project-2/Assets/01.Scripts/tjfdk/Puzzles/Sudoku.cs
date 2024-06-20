@@ -13,7 +13,7 @@ public class Sudoku : MonoBehaviour
     [SerializeField] private int hiddingAmount = 0;
     [SerializeField] private int puzzleAmount;
 
-    [SerializeField] private Folder lockFolder;
+    //[SerializeField] private Folder lockFolder;
 
     private void Awake()
     {
@@ -96,7 +96,7 @@ public class Sudoku : MonoBehaviour
         {
             Debug.Log("스도쿠 클리어");
             //FileManager.instance.PuzzleLockBackClick();     // 퍼즐판넬 꺼주기
-            lockFolder.PuzzleClear();       // 퍼즐 클리어됨
+           // lockFolder.PuzzleClear();       // 퍼즐 클리어됨
         }
     }
 

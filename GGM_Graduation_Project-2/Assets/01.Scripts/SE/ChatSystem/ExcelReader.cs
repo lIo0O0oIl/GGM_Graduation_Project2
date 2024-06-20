@@ -7,68 +7,68 @@ using UnityEngine.Networking;
 public class ExcelReader : MonoBehaviour
 {
     private const string address = "https://docs.google.com/spreadsheets/d/1ogh_aUgnIo8FNzaShRvGjYOCyq1bT2eX";
-    private string locations = "B4:B17";     // Ã¤ÆÃµéÀÇ À§Ä¡¸¦ ¸ð¾ÆµÐ °Í. 4 ~ 17 °³ Á¸Àç
+    private string locations = "B4:B17";     // Ã¤ï¿½Ãµï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Æµï¿½ ï¿½ï¿½. 4 ~ 17 ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private const long id = 2137741761; 
-    private int nowReadLine = 0;        // ³»°¡ Áö±Ý ÀÐ°í ÀÖ´Â ÁÙ
-    private int nowAskIndex = 0;        // ³»°¡ Áö±Ý °¡Áö°íÀÖ´Â Áú¹® ÀÎµ¦½º
+    private int nowReadLine = 0;        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð°ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½
+    private int nowAskIndex = 0;        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½
 
-    private Chat[] chat;            // Ã¤ÆÃµé
-    private AskAndReply[] askAndReplySO;   // Áú¹®µé
+    private Chat[] chat;            // Ã¤ï¿½Ãµï¿½
+    private AskAndReply[] askAndReplySO;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Round[] round;
 
     private void Start()
     {
-        //locations = "B4:B6";        // 3°³¸¸ ÀÓÀÇ·Î ºÒ·¯¿ÍÁÜ. ±×´ë·Î´Â ³Ê¹« ±æ¾î.
+        //locations = "B4:B6";        // 3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½×´ï¿½Î´ï¿½ ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½.
         StartCoroutine(LoadData());
     }
 
     private IEnumerator LoadData()
     {
-        // ÀÎ½ºÅÏ½º ¸®¼Ò½º ÇØÁ¦¸¦ À§ÇÑ using.
-        using (UnityWebRequest www = UnityWebRequest.Get(GetTSVAddress(locations, id)))     /// Ã¤ÆÃµéÀÌ ÀÖ´Â °÷ °¡Á®¿À±â
+        // ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ using.
+        using (UnityWebRequest www = UnityWebRequest.Get(GetTSVAddress(locations, id)))     /// Ã¤ï¿½Ãµï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             yield return www.SendWebRequest();
 
-            string[] chatsLocation = www.downloadHandler.text.Split('\n');       // ÃÂµéÀÇ À§Ä¡¿¡¼­ ÁÙ ³»¸² ÇÑ °ÍÀ¸·Î ³ª´²ÁÖ±â
-            ChattingManager.Instance.Chapters = new Chapters[chatsLocation.Length];      // ÃÑ ´ëÈ­ÀÇ °³¼ö
+            string[] chatsLocation = www.downloadHandler.text.Split('\n');       // ï¿½Âµï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
+            ChattingManager.Instance.Chapters = new Chapters[chatsLocation.Length];      // ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
             for (int i = 0; i < chatsLocation.Length; i++)
             {
-                using (UnityWebRequest www2 = UnityWebRequest.Get(GetTSVAddress(chatsLocation[i].Trim(), id)))        // ÇÏ³ªÀÇ ÃÂÆÃ¿¡¼­ ¸ðµç °ÍÀ» °¡Á®¿ÍÁÖ±â
+                using (UnityWebRequest www2 = UnityWebRequest.Get(GetTSVAddress(chatsLocation[i].Trim(), id)))        // ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
                 {
                     yield return www2.SendWebRequest();
 
-                    string[] lineCut = www2.downloadHandler.text.Split("\n");       // ÁÙ ³»¸² ÇÑ °ÍÀ¸·Î ³ª´²ÁÖ±â
+                    string[] lineCut = www2.downloadHandler.text.Split("\n");       // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 
-                    ChattingManager.Instance.Chapters[i].who = lineCut[0].Split('\t')[0];        // ÀÌ¸§ ³Ö¾îÁÖ±â
+                    ChattingManager.Instance.Chapters[i].who = lineCut[0].Split('\t')[0];        // ï¿½Ì¸ï¿½ ï¿½Ö¾ï¿½ï¿½Ö±ï¿½
 
-                    // Áú¹®°ú ÅØ½ºÆ®ÀÇ Å©±â¸¦ °¡Á®¿À±â
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     string[] chatSize = lineCut[2].Split('\t');
                     if (int.TryParse(chatSize[0], out int askCount))
                     {
                         askAndReplySO = new AskAndReply[askCount];
                     }
-                    else { Debug.LogError("Áú¹® °¹¼ö ¼³Á¤ ½ÇÆÐ"); }
+                    else { Debug.LogError("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½"); }
 
                     if (int.TryParse(chatSize[1], out int chatCount))
                     {
                         chat = new Chat[chatCount + askCount];
                     }
-                    else { Debug.LogError("´ëÈ­ °¹¼ö ¼³Á¤ ½ÇÆÐ"); }
+                    else { Debug.LogError("ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½"); }
 
-                    for (int j = 4; j < chat.Length + 4; j++)         // ´ëÈ­ ³Ö¾îÁÖ±â
+                    for (int j = 4; j < chat.Length + 4; j++)         // ï¿½ï¿½È­ ï¿½Ö¾ï¿½ï¿½Ö±ï¿½
                     {
                         string[] chatAndState = lineCut[j + nowReadLine].Split('\t');
-                        chat[j - 4].text = chatAndState[1];       // ÅÃ½ºÆ® ³Ö¾îÁÜ.
+                        chat[j - 4].text = chatAndState[1];       // ï¿½Ã½ï¿½Æ® ï¿½Ö¾ï¿½ï¿½ï¿½.
 
                         E_ChatState state = (E_ChatState)Enum.Parse(typeof(E_ChatState), chatAndState[0]);
                         if (state == E_ChatState.Ask)
                         {
-                            chat[j - 4].state = E_ChatState.Ask;            // Áú¹®ÀÌ¶ó´Â Å¸ÀÔÀ» ³Ö¾îÁÜ.
-                            askAndReplySO[nowAskIndex].ask = chatAndState[1];       // Áú¹®ÂÊ¿¡ ÅØ½ºÆ®¸¦ ³Ö¾îÁÜ. ³ªÁß¿¡ ÀÌ°É·Î Ã£¾Æ¼­ ´ë´äÀ» ÇØÁÙ°ÅÀÓ. µñ¼Å³Ê¸®¸¦ ¾µ±î? ½ºÆ®¸µ°ú ¹è¿­½ºÆ®¸µÀ¸·Î?
-                            if (int.TryParse(lineCut[j + nowReadLine + 1].Split('\t')[1], out int replyCount))      // Áú¹®¿¡ ´ëÇÑ ´ë´äÀÇ °¹¼ö
+                            chat[j - 4].state = E_ChatState.Ask;            // ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½.
+                            askAndReplySO[nowAskIndex].ask = chatAndState[1];       // ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ì°É·ï¿½ Ã£ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ï¿½ï¿½. ï¿½ï¿½Å³Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
+                            if (int.TryParse(lineCut[j + nowReadLine + 1].Split('\t')[1], out int replyCount))      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                             {
-                                nowReadLine += 2;       // ´ë´äµé ºÎÅÍ ½ÃÀÛ
+                                nowReadLine += 2;       // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                                 askAndReplySO[nowAskIndex].reply = new string[replyCount];
                                 for (int k = 0; k < replyCount; k++)
                                 {
@@ -85,7 +85,7 @@ public class ExcelReader : MonoBehaviour
                         }
                     }
 
-                    int roundStartLine = nowReadLine + chat.Length + 5;        // Round ½ÃÀÛ ÁöÁ¡.
+                    int roundStartLine = nowReadLine + chat.Length + 5;        // Round ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
                     if (lineCut.Length - roundStartLine > 0)
                     {
                         round = new Round[lineCut.Length - roundStartLine];
@@ -99,20 +99,20 @@ public class ExcelReader : MonoBehaviour
                     }
                     else round = new Round[0];
 
-                    // Ã©ÅÍ ¸¸µé¾îÁÖ±â
+                    // Ã©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
                     ChattingManager.Instance.Chapters[i].chat = chat;
                     ChattingManager.Instance.Chapters[i].askAndReply = askAndReplySO;
                     ChattingManager.Instance.Chapters[i].round = round;
 
-                    // ÃÊ±âÈ­
+                    // ï¿½Ê±ï¿½È­
                     nowAskIndex = 0;
                     nowReadLine = 0;
                 }
             }
         }
 
-        // ÃÂÆÃ ½Ã½ºÅÛ ÄÑÁÖ±â
-        Debug.Log("ÃªÆÃ ·Îµù ¿Ï·á");
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö±ï¿½
+        Debug.Log("Ãªï¿½ï¿½ ï¿½Îµï¿½ ï¿½Ï·ï¿½");
         LoadingManager.Instance.LoadingEnd();
         //ChattingManager.Instance.StartChatting(0);
         CutSceneManager.Instance.CutScene(true, "Start");
