@@ -39,7 +39,7 @@ public class UIReader_SettingScene : MonoBehaviour
         bgm.RegisterValueChangedCallback(OnBGMChange);
         sfx.RegisterValueChangedCallback(OnSFXChange);
 
-        ChangeDefaultValue();
+        //ChangeDefaultValue();
         //scroll.RegisterValueChangedCallback(OnChatSpeedChange);
         //wheel.RegisterValueChangedCallback(OnWheelSpeedhange);
 

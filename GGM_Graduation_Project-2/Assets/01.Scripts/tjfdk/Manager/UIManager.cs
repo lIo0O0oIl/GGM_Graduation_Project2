@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
     {
         settingObj = GameObject.Find("Setting");
         settingObj.SetActive(false);
-        settingObj.GetComponent< UIReader_SettingScene>().ChangeDefaultValue();
+        //settingObj.GetComponent< UIReader_SettingScene>().ChangeDefaultValue();
     }
 
     public void SceneChange(string _sceneName)

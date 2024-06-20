@@ -139,11 +139,8 @@ public class UIReader_Chatting : UI_Reader
     // find member
     public MemberProfile FindMember(string name)
     {
-        Debug.Log(name);
         foreach (MemberProfile member in members)
         {
-            Debug.Log(member.nickName.ToString().Trim() == name );
-            Debug.Log(member.name.Trim() == name );
             if (member.nickName.ToString() == name || member.name == name)
                 return member;
         }
@@ -191,7 +188,7 @@ public class UIReader_Chatting : UI_Reader
         EFace face, string text, bool isRecord = true)
     {
         // test
-        if (text == "????? ???????대퓠????????됰?諭??????")
+        if (text == "더 나은 빌드로 돌아오겠습니다.")
         {
             Invoke("GameDown", 3f);
         }

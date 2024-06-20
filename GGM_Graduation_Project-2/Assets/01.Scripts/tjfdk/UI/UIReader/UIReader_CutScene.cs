@@ -36,6 +36,8 @@ public class UIReader_CutScene : UI_Reader
 
     public void ChangeText(string msg, float writingDuring, string soundName = "typing")
     {
+        currentTextTween.Kill();
+        text.text = "";
         DoText(text, msg, writingDuring, false, () => { }, soundName);
     }
 
