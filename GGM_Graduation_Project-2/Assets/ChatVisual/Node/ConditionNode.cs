@@ -20,12 +20,16 @@ namespace ChatVisual
         public List<Node> childList = new List<Node>();
 
         public ICheck checkClass;
+
         public bool is_AllQuestion;
         public List<AskNode> asks = new List<AskNode>();
+        
         public bool is_SpecificFile;
         public string fileName;
-        public bool is_LockQuestion;
         
+        public bool is_LockQuestion;
+        public bool is_Unlock;      // 열려있는지 확인
+
         public void InitConditionNode()
         {
             if (is_AllQuestion)

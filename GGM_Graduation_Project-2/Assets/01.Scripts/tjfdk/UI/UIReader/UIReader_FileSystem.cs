@@ -217,6 +217,8 @@ public class UIReader_FileSystem : UI_Reader
                     if (GameManager.Instance.fileManager.FindFile(fileName).fileName.Trim() == conditionNode.fileName.Trim())
                     {
                         Debug.Log((conditionNode.childList[0] as AskNode).askText);
+                        // 컨디션 노드 열림
+                        conditionNode.is_Unlock = true;
                         // remove this lockQuestion
                         area.parent.Remove(area);
                         //change from lockQustion to question

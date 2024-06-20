@@ -26,6 +26,7 @@ MonoBehaviour:
   is_SpecificFile: 0
   fileName: "\uC22B\uC790"
   is_LockQuestion: 1
+  is_Unlock: 1
 --- !u!114 &-7710130745440325194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,7 +42,7 @@ MonoBehaviour:
   guid: c23f463e61084af43832ceb0e77bb17d
   position: {x: 38.880005, y: 582}
   index: 0
-  is_UseThis: 0
+  is_UseThis: 1
   test_isRead: 0
   parent: {fileID: 2930161960634033475}
   child: {fileID: -5281965540573634118}
@@ -64,7 +65,7 @@ MonoBehaviour:
   position: {x: -61, y: 982}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 7389537567083862801}
   childList: []
   state: 0
@@ -145,7 +146,7 @@ MonoBehaviour:
   position: {x: 42, y: 711}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: -7710130745440325194}
   childList:
   - {fileID: 7389537567083862801}
@@ -255,6 +256,7 @@ MonoBehaviour:
   is_SpecificFile: 0
   fileName: "\uC22B\uC790 2"
   is_LockQuestion: 1
+  is_Unlock: 1
 --- !u!114 &7389537567083862801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +272,7 @@ MonoBehaviour:
   guid: 83f63048b1781f84c9d9bcfd3cca9cf1
   position: {x: -59, y: 856}
   index: 0
-  is_UseThis: 0
+  is_UseThis: 1
   test_isRead: 0
   parentList:
   - {fileID: -3328711222198745969}
@@ -284,6 +286,7 @@ MonoBehaviour:
   is_SpecificFile: 0
   fileName: 
   is_LockQuestion: 0
+  is_Unlock: 0
 --- !u!114 &9193042446610041499
 MonoBehaviour:
   m_ObjectHideFlags: 0

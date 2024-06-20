@@ -86,7 +86,6 @@ public class ChatHumanManager : UI_Reader
                             currentNode = askNode.parent;
                             nowHuman.memCurrentNode = askNode.parent;
 
-                            // ?饔낅떽?????????彛????熬곣뫖利???
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode);
                             nowHuman.questions.Add(askNode);
                             askNode.test_isRead = true;
@@ -111,6 +110,10 @@ public class ChatHumanManager : UI_Reader
                                 else
                                 {
                                     currentNode = conditionNode.asks[0].parent;
+                                    if (currentNode is ConditionNode)
+                                    {
+                                        currentNode = (conditionNode.asks[0].parent as ConditionNode).parentList[0];
+                                    }
                                     StartChatting();
                                 }
                             }
@@ -136,7 +139,14 @@ public class ChatHumanManager : UI_Reader
 
                             if (conditionNode.childList[0].test_isRead == false && conditionNode.childList[0].is_UseThis == false)
                             {
-                                GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
+                                if (conditionNode.is_Unlock)
+                                {
+                                    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, ask);
+                                }
+                                else
+                                {
+                                    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
+                                }
                                 nowHuman.questions.Add(ask);
                                 conditionNode.childList[0].test_isRead = true;
                                 is_ChatStart = true;
