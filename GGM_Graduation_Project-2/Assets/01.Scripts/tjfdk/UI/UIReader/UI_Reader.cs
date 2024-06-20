@@ -126,12 +126,16 @@ public class UI_Reader : MonoBehaviour
         if (soundName == "")
             soundName = "typing";
 
+        ui.text = "";
+
         currentTextTween = DOTween.To(() => currentTextLength, x => currentTextLength = x, text.Length, during)
             .SetEase(Ease.Linear)
             .OnPlay(() => 
             { 
-                SoundManager.Instance.PlaySFX(soundName);
-                ui.text = "";
+                if (soundName != null)
+                    SoundManager.Instance.PlaySFX(soundName);
+
+                //ui.text = "";
             })
             .OnUpdate(() =>
             {
@@ -143,11 +147,14 @@ public class UI_Reader : MonoBehaviour
             })
             .OnComplete(() =>
             {
+                Debug.Log("여기가 왜 아ㄴ 딜까..");
+                action();
+
                 SoundManager.Instance.StopSFX();
+
                 if (isErase)
                     ui.text = "";
                 currentTextLength = 0;
-                action();
             });
     }
 
@@ -155,9 +162,10 @@ public class UI_Reader : MonoBehaviour
     {
         if (currentTextTween != null)
         {
-            currentTextUi.text = currentText;
             currentTextTween.Kill();
-            currentTextTween = null;
+            currentTextUi.text = currentText;
+            GameManager.Instance.cutSceneManager.currentTextNum++;
+            //currentTextTween = null;
         }
     }
 

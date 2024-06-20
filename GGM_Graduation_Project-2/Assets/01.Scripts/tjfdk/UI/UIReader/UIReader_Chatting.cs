@@ -470,7 +470,6 @@ public class UIReader_Chatting : UI_Reader
     public void AddMember(string memberName)
     {
         // find member
-        Debug.Log(memberName);
         MemberProfile member = FindMember(memberName);
 
         // if this member is not open

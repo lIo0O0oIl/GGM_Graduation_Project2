@@ -209,7 +209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatContainer: {fileID: 594023517}
-  changeHumanTime: 3
   nextChatTime: 1
   nowHumanName: 
   nowHuman:
@@ -390,7 +389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1027867024
 MonoBehaviour:
   m_ObjectHideFlags: 0

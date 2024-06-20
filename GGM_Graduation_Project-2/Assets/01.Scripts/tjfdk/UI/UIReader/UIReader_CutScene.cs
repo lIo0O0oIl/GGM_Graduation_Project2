@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
 using System.Linq;
+using System;
 
 public class UIReader_CutScene : UI_Reader
 {
@@ -34,11 +35,11 @@ public class UIReader_CutScene : UI_Reader
             scene.style.backgroundImage = new StyleBackground(cuts[0]);
     }
 
-    public void ChangeText(string msg, float writingDuring, string soundName = "typing")
+    public void ChangeText(string msg, float writingDuring, Action action, string soundName = "typing")
     {
-        currentTextTween.Kill();
-        text.text = "";
-        DoText(text, msg, writingDuring, false, () => { }, soundName);
+        //currentTextTween.Kill();
+        //text.text = "";
+        DoText(text, msg, writingDuring, false, action, soundName);
     }
 
     public void EndText()
