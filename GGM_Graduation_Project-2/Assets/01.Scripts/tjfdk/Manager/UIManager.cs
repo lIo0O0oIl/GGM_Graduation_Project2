@@ -17,6 +17,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject MenuObj;
     [SerializeField] GameObject settingObj;
 
+    [SerializeField] private float scrollSpeed;
+    public float ScrollSpeed => scrollSpeed;
+    [SerializeField] private float wheelSpeed;
+    public float WheelSpeed => wheelSpeed;
+
+    public void SetScrollSpeed(float value) => scrollSpeed = value;
+    public void SetWheelSpeed(float value) => wheelSpeed = value;
+
+
     private void Awake()
     {
         Instance = this;
@@ -38,7 +47,7 @@ public class UIManager : MonoBehaviour
     {
         settingObj = GameObject.Find("Setting");
         settingObj.SetActive(false);
-        settingObj.GetComponent< UIReader_SettingScene>().BringDefaultValue();
+        //settingObj.GetComponent< UIReader_SettingScene>().ChangeDefaultValue();
     }
 
     public void SceneChange(string _sceneName)

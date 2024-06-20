@@ -66,30 +66,42 @@ public class CutSceneManager : MonoBehaviour
                         (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName));
                 cutsceneUI.OpenCutScene(false);
             }
-
             else
             {
                 // next text
                 if (currentCutScene.cutScenes[currentCutNum].texts.Count > currentTextNum)
                 {
-                    if (cutsceneUI.currentTextTween != null)
-                    {
-                        if (cutsceneUI.currentTextTween.IsPlaying())
-                        {
-                            Debug.Log("??용뮞???癒?짗 ?袁⑷쉐");
-                            cutsceneUI.EndText();
-                        }
-                        else
-                        {
-                            cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f);
-                            currentTextNum++;
-                        }
-                    }
-                    else
-                    {
-                        cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f);
+                    //if (cutsceneUI.currentTextTween != null)
+                    //{
+                    //    if (cutsceneUI.currentTextTween.IsPlaying())
+                    //    {
+                    //        cutsceneUI.EndText();
+                    //    }
+                    //    else
+                    //    {
+                    //        cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f);
+                    //        if (currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].sound != "")
+                    //        {
+                    //            string sound = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].sound;
+                    //            cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f, sound);
+                    //        }
+                    //        else
+                    //            cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f, null);
+                    //        currentTextNum++;
+                    //    }
+                    //}
+                    //else  
+                    //{
+                        //cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f);
+                        //if (currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].sound != "")
+                        //{
+                        //    string sound = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].sound;
+                        //    cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f, sound);
+                        //}
+                        //else
+                        cutsceneUI.ChangeText(currentCutScene.cutScenes[currentCutNum].texts[currentTextNum].text, 3f, null);
                         currentTextNum++;
-                    }
+                    //}
                 }
                 // next cut
                 if (currentCutScene.cutScenes.Count > currentCutNum && currentCutScene.cutScenes[currentCutNum].texts.Count == currentTextNum)

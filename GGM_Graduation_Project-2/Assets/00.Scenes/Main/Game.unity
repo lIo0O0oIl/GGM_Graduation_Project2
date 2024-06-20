@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatContainer: {fileID: 594023517}
-  changeHumanTime: 1
+  changeHumanTime: 3
   nextChatTime: 1
   nowHumanName: 
   nowHuman:
@@ -321,10 +321,6 @@ MonoBehaviour:
   currentFileFolder:
     folderName: 
     parentFolderName: 
-    folderFiles:
-    - Main
-    textFiles: []
-    imageFiles: []
 --- !u!1 &594023513
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,11 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66964fd372bf01b42a6aa7f52ef5108b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterValue: 0
-  bgmValue: 0
-  sfxValue: 0
-  scrollValue: 0
-  wheelValue: 0
+  chatHumanManager: {fileID: 0}
 --- !u!114 &1027867025
 MonoBehaviour:
   m_ObjectHideFlags: 0

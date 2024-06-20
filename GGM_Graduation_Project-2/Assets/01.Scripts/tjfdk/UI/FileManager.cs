@@ -65,7 +65,6 @@ public class FileManager : UI_Reader
             {
                 if (triggerName == GameManager.Instance.chatHumanManager.nowCondition.fileName)
                 {
-                    Debug.Log(GameManager.Instance.chatHumanManager.nowCondition.asks);
                     GameManager.Instance.chatHumanManager.nowCondition.is_UseThis = true;
                     //GameManager.Instance.chatHumanManager.nowCondition = null;
                     GameManager.Instance.chatHumanManager.currentNode = GameManager.Instance.chatHumanManager.nowCondition;

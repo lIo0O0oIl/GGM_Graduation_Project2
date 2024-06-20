@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -39,8 +40,10 @@ public class UIReader_Chatting : UI_Reader
     // memberList arrow sprite
     [SerializeField]
     private Texture2D changeMemberBtnOn, changeMemberBtnOff;
-    [SerializeField]
-    private float wheelSpeed = 25f;
+    public float wheelSpeed = 25f;
+
+    bool isConnectionOpen = false;
+    bool isSettingOpen = false;
 
 
 
@@ -69,6 +72,7 @@ public class UIReader_Chatting : UI_Reader
     [SerializeField] VisualTreeAsset ux_memberList;
 
 
+
     private void Awake()
     {
         base.Awake();
@@ -78,8 +82,6 @@ public class UIReader_Chatting : UI_Reader
     {
     }
 
-    bool isConnectionOpen = false;
-    bool isSettingOpen = false;
 
     private void OnEnable()
     {
@@ -137,11 +139,8 @@ public class UIReader_Chatting : UI_Reader
     // find member
     public MemberProfile FindMember(string name)
     {
-        Debug.Log(name);
         foreach (MemberProfile member in members)
         {
-            Debug.Log(member.nickName.ToString().Trim() == name );
-            Debug.Log(member.name.Trim() == name );
             if (member.nickName.ToString() == name || member.name == name)
                 return member;
         }
@@ -189,7 +188,7 @@ public class UIReader_Chatting : UI_Reader
         EFace face, string text, bool isRecord = true)
     {
         // test
-        if (text == "????? ???????대퓠????????됰?諭??????")
+        if (text == "더 나은 빌드로 돌아오겠습니다.")
         {
             Invoke("GameDown", 3f);
         }
@@ -254,12 +253,10 @@ public class UIReader_Chatting : UI_Reader
         // whose chat style setting        
         if (who == EChatState.Me)
         {
-            Debug.Log("나");
             chat.AddToClassList("MyChat");
         }
         else
         {
-            Debug.Log("상대방");
             chat.AddToClassList("OtherChat");
         }
 

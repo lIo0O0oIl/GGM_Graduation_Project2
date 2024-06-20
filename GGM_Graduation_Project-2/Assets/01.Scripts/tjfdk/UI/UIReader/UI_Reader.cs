@@ -114,7 +114,8 @@ public class UI_Reader : MonoBehaviour
         }
     }
 
-    public void DoText(Label ui, string text, float during, bool isErase, Action action)
+    public void DoText(Label ui, string text, float during, bool isErase, Action action,
+        string soundName)
     {
         int currentTextLength = 0;
         int previousTextLength = -1;
@@ -122,9 +123,16 @@ public class UI_Reader : MonoBehaviour
         currentTextUi = ui;
         currentText = text;
 
+        if (soundName == "")
+            soundName = "typing";
+
         currentTextTween = DOTween.To(() => currentTextLength, x => currentTextLength = x, text.Length, during)
             .SetEase(Ease.Linear)
-            .OnPlay(() => { ui.text = ""; })
+            .OnPlay(() => 
+            { 
+                SoundManager.Instance.PlaySFX(soundName);
+                ui.text = "";
+            })
             .OnUpdate(() =>
             {
                 if (currentTextLength != previousTextLength)
@@ -135,6 +143,7 @@ public class UI_Reader : MonoBehaviour
             })
             .OnComplete(() =>
             {
+                SoundManager.Instance.StopSFX();
                 if (isErase)
                     ui.text = "";
                 currentTextLength = 0;
@@ -146,7 +155,6 @@ public class UI_Reader : MonoBehaviour
     {
         if (currentTextTween != null)
         {
-            Debug.Log("?얏 한국어?");
             currentTextUi.text = currentText;
             currentTextTween.Kill();
             currentTextTween = null;
