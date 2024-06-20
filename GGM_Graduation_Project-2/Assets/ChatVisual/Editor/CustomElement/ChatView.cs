@@ -27,13 +27,6 @@ namespace ChatVisual
             this.AddManipulator(new ContentDragger());      // Add Dragger
             this.AddManipulator(new SelectionDragger());    // Add SelectionDragger
             this.AddManipulator(new RectangleSelector());   // Add RectangleSelector
-            Undo.undoRedoPerformed += OnUndoRedoHandle;
-        }
-
-        private void OnUndoRedoHandle()
-        {
-            PopulateView(chatTree);
-            AssetDatabase.SaveAssets();
         }
 
         public void InitChatView(Label label)

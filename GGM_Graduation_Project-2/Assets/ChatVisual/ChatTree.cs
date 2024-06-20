@@ -56,7 +56,6 @@ namespace ChatVisual
             var rootNode = parent as RootNode;
             if (rootNode != null)
             {
-                Undo.RecordObject(rootNode, "CE(AddChild)");
                 rootNode.child = child;
                 EditorUtility.SetDirty(rootNode);
                 return;
@@ -65,7 +64,6 @@ namespace ChatVisual
             var chatNode = parent as ChatNode;
             if (chatNode != null)
             {
-                Undo.RecordObject(chatNode, "CE(AddChild)");
                 chatNode.childList.Add(child);
                 EditorUtility.SetDirty(chatNode);
                 return;
@@ -74,7 +72,6 @@ namespace ChatVisual
             var askNode = parent as AskNode;
             if (askNode != null)
             {
-                Undo.RecordObject(askNode, "CE(AddChild)");
                 askNode.child = child;
                 EditorUtility.SetDirty(askNode);
                 return;
@@ -83,7 +80,6 @@ namespace ChatVisual
             var conditionNode = parent as ConditionNode;
             if (conditionNode != null)
             {
-                Undo.RecordObject(conditionNode, "CE(AddChild)");
                 conditionNode.childList.Add(child);
                 EditorUtility.SetDirty(conditionNode);
             }
@@ -114,10 +110,11 @@ namespace ChatVisual
 
         public void RemoveChild(Node parent, Node child)
         {
+            RemoveParent(parent, child);
+
             var rootNode = parent as RootNode;
             if (rootNode != null)
             {
-                Undo.RecordObject(rootNode, "BT(RemoveChild)");
                 rootNode.child = null;
                 EditorUtility.SetDirty(rootNode);
                 return;
@@ -126,7 +123,6 @@ namespace ChatVisual
             var chatNode = parent as ChatNode;
             if (chatNode != null)
             {
-                Undo.RecordObject(chatNode, "BT(RemoveChild)");
                 chatNode.childList.Remove(child);
                 EditorUtility.SetDirty(chatNode);
                 return;
@@ -135,7 +131,6 @@ namespace ChatVisual
             var askNode = parent as AskNode;
             if (askNode != null)
             {
-                Undo.RecordObject(askNode, "BT(RemoveChild)");
                 askNode.child = null;
                 EditorUtility.SetDirty(askNode);
                 return;
@@ -144,8 +139,33 @@ namespace ChatVisual
             var conditionNode = parent as ConditionNode;
             if (conditionNode != null)
             {
-                Undo.RecordObject(conditionNode, "BT(RemoveChild)");
-                conditionNode.childList = null;
+                conditionNode.childList.Remove(child);
+                EditorUtility.SetDirty(conditionNode);
+            }
+        }
+
+        public void RemoveParent(Node parent, Node child)
+        {
+            var chatNode = child as ChatNode;
+            if (chatNode != null)
+            {
+                chatNode.parent = null;
+                EditorUtility.SetDirty(chatNode);
+                return;
+            }
+
+            var askNode = child as AskNode;
+            if (askNode != null)
+            {
+                askNode.parent = null;
+                EditorUtility.SetDirty(askNode);
+                return;
+            }
+
+            var conditionNode = child as ConditionNode;
+            if (conditionNode != null)
+            {
+                conditionNode.parentList.Remove(child);
                 EditorUtility.SetDirty(conditionNode);
             }
         }
