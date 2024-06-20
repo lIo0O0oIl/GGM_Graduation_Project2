@@ -75,7 +75,7 @@ public class ChatHumanManager : UI_Reader
                     {
                         if (askNode.test_isRead == false && askNode.is_UseThis == false)
                         {
-                            // ?饔낅떽???????饔낅떽?????????彛??????뼿???????ル늉???????
+                            // 한국어 내놔!!!
                             currentNode = askNode.parent;
                             nowHuman.memCurrentNode = askNode.parent;
 

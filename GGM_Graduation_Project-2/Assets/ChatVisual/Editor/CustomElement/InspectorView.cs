@@ -28,7 +28,6 @@ namespace ChatVisual
 
             is_Expand = false;
             is_LoadList = false;
-            is_AllQuestion = false;
             is_LoadNextDialog = false;
 
             var container = new IMGUIContainer();
@@ -146,7 +145,7 @@ namespace ChatVisual
                                 chatNode.LoadNextDialog = EditorGUILayout.TextArea(chatNode.LoadNextDialog, EditorStyles.textArea);
                             }
 
-                            EditorGUILayout.Toggle("is_UseThie", chatNode.is_UseThis);
+                            chatNode.is_UseThis = EditorGUILayout.Toggle("is_UseThis", chatNode.is_UseThis);
                         }
                         break;
                     case AskNode:
@@ -190,7 +189,7 @@ namespace ChatVisual
                                 askNode.LoadNextDialog = EditorGUILayout.TextArea(askNode.LoadNextDialog, EditorStyles.textArea);
                             }
 
-                            EditorGUILayout.Toggle("is_UseThie", askNode.is_UseThis);
+                            askNode.is_UseThis = EditorGUILayout.Toggle("is_UseThis", askNode.is_UseThis);
                         }
                         break;
                     case ConditionNode:
@@ -198,13 +197,17 @@ namespace ChatVisual
                             ConditionNode conditionNode = node.node as ConditionNode;
                             GUILayout.Space(15);
 
-                            if (conditionNode.is_SpecificFile == false)
+                            if (!conditionNode.is_SpecificFile && !conditionNode.is_LockQuestion)
                             {
                                 conditionNode.is_AllQuestion = EditorGUILayout.Toggle("AllQuestion", conditionNode.is_AllQuestion);
                             }
-                            if (conditionNode.is_AllQuestion == false)
+                            if (!conditionNode.is_AllQuestion && !conditionNode.is_LockQuestion)
                             {
                                 conditionNode.is_SpecificFile = EditorGUILayout.Toggle("SpecificFile", conditionNode.is_SpecificFile);
+                            }
+                            if (!conditionNode.is_AllQuestion && !conditionNode.is_SpecificFile)
+                            {
+                                conditionNode.is_LockQuestion = EditorGUILayout.Toggle("is_LockQuestion", conditionNode.is_LockQuestion);
                             }
 
                             if (conditionNode.is_AllQuestion)
@@ -212,20 +215,21 @@ namespace ChatVisual
                                 conditionNode.InitConditionNode();
                                 if (conditionNode.checkClass is AllQuestion allQuestion)
                                 {
-                                    ++EditorGUI.indentLevel;
-                                    if (!is_AllQuestion)
-                                    {
-                                        is_AllQuestion = true;
-                                        //allQuestion.Init(conditionNode);
-                                    }
+                                    ++EditorGUI.indentLevel;                                 
                                     GUILayout.BeginHorizontal();
                                     GUILayout.Label($"AskCount");
                                     GUILayout.FlexibleSpace();
                                     GUILayout.Label($"{allQuestion.conditionNode.asks.Count}");
                                     GUILayout.EndHorizontal();
+                                    
+                                    if (GUILayout.Button("AutoInit"))
+                                    {
+                                        allQuestion.Init(conditionNode);
+                                    }
                                     --EditorGUI.indentLevel;
                                 }
                             }
+
                             if (conditionNode.is_SpecificFile)
                             {
                                 conditionNode.InitConditionNode();
@@ -237,8 +241,14 @@ namespace ChatVisual
                                 }
                             }
 
-                            EditorGUILayout.Toggle("is_LockQuestion", conditionNode.is_LockQuestion);
-                            EditorGUILayout.Toggle("is_UseThie", conditionNode.is_UseThis);
+                            if (conditionNode.is_LockQuestion)
+                            {
+                                ++EditorGUI.indentLevel;
+                                conditionNode.fileName = EditorGUILayout.TextField("FileName", conditionNode.fileName);
+                                --EditorGUI.indentLevel;
+                            }
+
+                            conditionNode.is_UseThis = EditorGUILayout.Toggle("is_UseThis", conditionNode.is_UseThis);
                         }
                         break;
                 }
