@@ -499,15 +499,13 @@ namespace ChatVisual
 
                 if (Time.time - _lastClickTime <= _doubleClickThreshold)
                 {
-                    // ?붾툝 ?대┃?쇰줈 ?쒕옒洹??쒖옉
-                    _doubleClickInitiated = true;
-                    StartDrag(evt);
+                    _isDrag = false;
+                    _doubleClickInitiated = false;
                 }
                 else
                 {
-                    // ?⑥씪 ?대┃?쇰줈 踰꾪듉 ?대┃ ?몄떇
-                    _isDrag = false;
-                    _doubleClickInitiated = false;
+                    _doubleClickInitiated = true;
+                    StartDrag(evt);
                 }
 
                 _lastClickTime = Time.time;
@@ -564,17 +562,15 @@ namespace ChatVisual
             }
             else if (!_doubleClickInitiated)
             {
-                // ?대┃ 吏??泥섎━
                 target.schedule.Execute(() =>
                 {
                     if (!_doubleClickInitiated)
                     {
                         _clickCallback?.Invoke();
                     }
-                }).StartingIn((int)(_doubleClickThreshold * 1000)); // ?붾툝 ?대┃ ?꾧퀎媛??쒓컙 ?숈븞 吏??
+                }).StartingIn((int)(_doubleClickThreshold * 1000));
             }
 
-            // ?붾툝 ?대┃ ?곹깭 珥덇린??
             _doubleClickInitiated = false;
         }
     }

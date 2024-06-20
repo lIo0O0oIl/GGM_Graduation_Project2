@@ -8,9 +8,9 @@ public class ChatHumanManager : UI_Reader
 {
     public ChatContainer chatContainer;
 
-    public float changeHumanTime = 1f;       // A time when humans change
+    //public float changeHumanTime = 1f;       // A time when humans change
     public float nextChatTime = 1f;         // when load next chat time
-    private float currentTime = 0f;
+    //private float currentTime = 0f;
     private bool is_ChatStart = false;
 
     private bool is_ask = false;
@@ -24,7 +24,7 @@ public class ChatHumanManager : UI_Reader
     //public Coroutine chatting;
     public bool isChattingRunning = false;
 
-    public void SetChatSpeed(float value) => changeHumanTime = value;
+    //public void SetChatSpeed(float value) => changeHumanTime = value;
     public void SetWheelSpeed(float value) => GameManager.Instance.chatSystem.wheelSpeed = value;
 
     private void Start()
@@ -49,8 +49,8 @@ public class ChatHumanManager : UI_Reader
     {
         if (is_ChatStart)
         {
-            currentTime += Time.deltaTime;
-            if (Input.GetMouseButtonDown(0) || currentTime >= nextChatTime)
+            //currentTime += Time.deltaTime;
+            if (Input.GetMouseButtonDown(0))
             {
                 // node list
                 var children = chatContainer.GetChatTree().GetChild(currentNode);
@@ -145,16 +145,14 @@ public class ChatHumanManager : UI_Reader
                     is_ask = false;
                 }
 
-                currentTime = 0f;
+                //currentTime = 0f;
             }
         }
-        else currentTime = 0f;
+        //else currentTime = 0f;
     }
 
     public void ChatResetAndStart(string name)      // HG
     {
-        Debug.Log("??轅붽틓??嚥△뫀??????쇰뮛????");
-
         nowHumanName = name;
         nowHuman = GameManager.Instance.chatSystem.FindMember(nowHumanName);
 

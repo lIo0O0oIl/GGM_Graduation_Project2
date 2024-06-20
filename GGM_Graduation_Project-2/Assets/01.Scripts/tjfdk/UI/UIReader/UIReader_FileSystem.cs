@@ -201,7 +201,7 @@ public class UIReader_FileSystem : UI_Reader
         file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         {
             var area = FindMoveArea(evt.mousePosition);
-            target.RemoveFromHierarchy();
+            //target.RemoveFromHierarchy();
             if (area == null)
                 beforeSlot.Add(target);
             else
