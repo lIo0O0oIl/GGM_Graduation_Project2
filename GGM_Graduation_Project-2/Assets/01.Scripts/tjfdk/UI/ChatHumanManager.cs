@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ChatHumanManager : UI_Reader
+public class ChatHumanManager : MonoBehaviour
 {
     public ChatContainer chatContainer;
 

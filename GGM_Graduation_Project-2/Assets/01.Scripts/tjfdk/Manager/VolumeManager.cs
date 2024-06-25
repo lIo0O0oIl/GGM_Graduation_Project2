@@ -15,7 +15,7 @@ public class VolumeManager : Singleton<VolumeManager>
 
     private void Start()
     {
-        //masterValue = -20;
+        //masterValue = -20;    
         //bgmValue = -20;
         //sfxValue = -20;
         //scrollValue = 2.75f;

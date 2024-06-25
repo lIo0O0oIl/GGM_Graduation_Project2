@@ -21,9 +21,6 @@ public class FolderFile
     public List<VisualElement> folderFiles;
     public List<VisualElement> textFiles;
     public List<VisualElement> imageFiles;
-    //public List<VisualElement> folderFiles;
-    //public List<VisualElement> textFiles;
-    //public List<VisualElement> imageFiles;
 
     public FolderFile(string name, string parent)
     {
@@ -32,16 +29,10 @@ public class FolderFile
         folderFiles = new List<VisualElement>();
         textFiles = new List<VisualElement>();
         imageFiles = new List<VisualElement>();
-
-        //void FolderFile(string name, string parent)
-        //{
-        //    folderName = name;
-        //    parentFolderName = parent;
-        //}
     }
 }
 
-public class UIReader_FileSystem : UI_Reader
+public class UIReader_FileSystem : MonoBehaviour
 {
     [SerializeField]
     private float fileAreaSizeOn, fileAreaSizeOff;
@@ -52,6 +43,8 @@ public class UIReader_FileSystem : UI_Reader
     Tween changeFileSystemSizeDOT;
 
 
+    // root
+    VisualElement root;
 
     // UXML
     VisualElement ui_fileSystemArea;
@@ -88,76 +81,45 @@ public class UIReader_FileSystem : UI_Reader
 
     private void Awake()
     {
-        base.Awake();
-
         fileFolders = new List<FolderFile>();
-        //fileFolderList = new Dictionary<string, FolderFile>();
         filePathLisk = new Stack<string>();
         lockQuestions = new List<VisualElement>();
 
-        MinWidth = 500f;
-        MinHeight = 500f;
-        MaxWidth = 1800f;
-        MaxHeight = 980f;
+        //UI_Reader.Instance.MinWidth = 500f;
+        //UI_Reader.Instance.MinHeight = 500f;
+        //UI_Reader.Instance.MaxWidth = 1800f;
+        //UI_Reader.Instance.MaxHeight = 980f;
     }
 
     private void OnEnable()
     {
-        base.OnEnable();
-
         UXML_Load();
         Event_Load();
 
         fileFolders.Add(new FolderFile("Main", "Main"));
-        //fileFolderList.Add("Main", new FolderFile("Main"));
         AddFilePath("Main");
     }
 
     private void UXML_Load()
     {
+        root = GameObject.Find("Game").GetComponent<UIDocument>().rootVisualElement;
+
         ui_fileSystemArea = root.Q<VisualElement>("FileSystem");
-        ui_fileGround = root.Q<VisualElement>("FileGround");
-        ui_filePathGround = root.Q<VisualElement>("FilePathGround");
-        ui_changeSizeButton = root.Q<Button>("ChangeSize");
+        ui_fileGround = UI_Reader.Instance.root.Q<VisualElement>("FileGround");
+        ui_filePathGround = UI_Reader.Instance.root.Q<VisualElement>("FilePathGround");
+        ui_changeSizeButton = UI_Reader.Instance.root.Q<Button>("ChangeSize");
     }
 
     private void Event_Load()
     {
-        //AddFolderGround("Main");
-        //AddFilePath("Main", () => FolderPathEvent("Main"));
-
         ui_changeSizeButton.clicked += () =>
         {
             OnOffFileSystem(0.25f);
         };
     }
 
-    //private void FindLockQuestion()
-    //{
-    //    MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName);
-    //    for (int i = 0; i < member.questions.Count; ++i)
-    //    {
-    //        if (member.questions[i].parent is ConditionNode)
-    //        {
-    //            Debug.Log(member.questions[i].parent.name);
-    //            lockQuestions.Add(GameManager.Instance.chatSystem.ui_questionGround.ElementAt(i));
-    //        }
-    //    }
-    //}
-
     private AskNode FindQuestion(VisualElement ask)
     {
-        //Chapter chapter = chapterManager.FindChapter(chatSystem.FindMember(chatSystem.currentMemberName).chapterName);
-        //List<LockAskAndReply> asks = chapter.lockAskAndReply;
-        //for (int i = 0; i < chapter.lockAskAndReply.Count; ++i)
-        //{
-        //    if (chapter.lockAskAndReply[i].ask == ask.name)
-        //        return chapter.lockAskAndReply[i];
-        //}
-
-        //return new LockAskAndReply();
-
-
         MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName);
 
         for (int i = 0; i < member.questions.Count; ++i)
@@ -245,13 +207,6 @@ public class UIReader_FileSystem : UI_Reader
         }
 
         return null;
-
-
-        //FolderFile file = fileFolderList[name];
-        //if (file != null)
-        //    return file;
-        //else
-        //    return null;
     }
 
     public void AddFile(FileType fileType, string fileName, string fileParentName)
@@ -270,7 +225,7 @@ public class UIReader_FileSystem : UI_Reader
                 {
                     FileSO folder = GameManager.Instance.fileManager.FindFile(fileName);
                     // create uxml
-                    file = RemoveContainer(ux_folderFile.Instantiate());
+                    file = UI_Reader.Instance.RemoveContainer(ux_folderFile.Instantiate());
                     // change file name
                     file.Q<Label>("FileName").text = folder.fileName;
                     // connection click event
@@ -298,7 +253,7 @@ public class UIReader_FileSystem : UI_Reader
                 {
                     FileSO image = GameManager.Instance.fileManager.FindFile(fileName);
                     // create uxml
-                    file = RemoveContainer(ux_imageFile.Instantiate());
+                    file = UI_Reader.Instance.RemoveContainer(ux_imageFile.Instantiate());
                     // change file name
                     file.Q<Label>("FileName").text = image.fileName;
                     // connection drag and drop & button click event
@@ -310,7 +265,7 @@ public class UIReader_FileSystem : UI_Reader
                 {
                     FileSO text = GameManager.Instance.fileManager.FindFile(fileName);
                     // create uxml
-                    file = RemoveContainer(ux_textFile.Instantiate());
+                    file = UI_Reader.Instance.RemoveContainer(ux_textFile.Instantiate());
                     // change file name
                     file.Q<Label>("FileName").text = text.fileName;
                     // connection drag and drop & button click event
@@ -415,7 +370,7 @@ public class UIReader_FileSystem : UI_Reader
 
     private void AddFilePath(string pathName)
     {
-        VisualElement filePath = RemoveContainer(ux_filePath.Instantiate());
+        VisualElement filePath = UI_Reader.Instance.RemoveContainer(ux_filePath.Instantiate());
         filePath.Q<Button>().text = pathName + "> ";
         filePath.Q<Button>().clicked += () => { FolderPathEvent(pathName); };
         ui_filePathGround.Add(filePath);

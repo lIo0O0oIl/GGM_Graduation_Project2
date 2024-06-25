@@ -5,79 +5,105 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
 using ChatVisual;
+using System.Net.Sockets;
+using Unity.VisualScripting;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+
+public enum EPanel
+{
+    MAIN,
+    CUTSCENE,
+    SETTING,
+    CONNECTION
+}
 
 public class UI_Reader : MonoBehaviour
 {
     static public UI_Reader Instance;
 
     // main
-    protected UIDocument document;
-    protected VisualElement root;
-    protected VisualElement myRoot;
+    public UIDocument document;
+    public VisualElement root;
 
     // UXML
-        // Button
-    protected Button chattingButton;
-    protected Button connectionButton;
-    protected Button settingButton;
-        // Panel
-    public VisualElement cutScenePanel;
+    // Button
+    //public Button playButton;
+    //public Button ExitButton;
+    public Button chattingButton;
+    public Button connectionButton;
+    public Button settingButton;
+    // Panel
     public VisualElement mainPanel;
+    public VisualElement cutScenePanel;
+    public VisualElement settingPanel;
+    public VisualElement connectionPanel;
 
-    protected VisualElement previousPanel;
-    protected VisualElement chattingPanel;
-    protected VisualElement connectionPanel;
-    protected VisualElement imageFindingPanel;
-    private List<VisualElement> panels = new List<VisualElement>();
+    public bool isMainOpen;
+    public bool isCutSceneOpen;
+    public bool isSettingOpen;
+    public bool isConnectionOpen;
+
+    //protected VisualElement previousPanel;
+    //protected VisualElement chattingPanel;
+    //protected VisualElement imageFindingPanel;
+    //private List<VisualElement> panels = new List<VisualElement>();
 
     public Tween currentTextTween;
-    private string currentText;
-    private Label currentTextUi;
+    public string currentText;
+    public Label currentTextUi;
 
-    protected float MinWidth = 500f;
-    protected float MinHeight = 500f;
-    protected float MaxWidth = 1800f;
-    protected float MaxHeight = 980f;
+    public float MinWidth = 500f;
+    public float MinHeight = 500f;
+    public float MaxWidth = 1800f;
+    public float MaxHeight = 980f;
 
-    protected void Awake()
+    private void Awake()
     {
         Instance = this;
     }
 
-    protected void OnEnable()
+    private void OnEnable()
     {
-        document = GameManager.Instance.GetComponent<UIDocument>();
         root = document.rootVisualElement;
 
-        Load();
-
-        //panels.Add(cutScenePanel);
-        panels.Add(chattingPanel);
-        panels.Add(connectionPanel);
-        panels.Add(imageFindingPanel);
+        //if (document.visualTreeAsset.name == "Intro")
+        //    MenuLoad();
+        //else if (document.visualTreeAsset.name == "Game")
+            GameLoad();
     }
 
-    private void Load()
+    private void MenuLoad()
     {
+        Debug.Log("메뉴");
         // Button
+        //playButton = root.Q<Button>("PlayBtn");
+        //settingButton = root.Q<Button>("SettingBtn");
+        //ExitButton = root.Q<Button>("ExitBtn");
+
+        settingPanel = root.Q<VisualElement>("Setting");
+
+        //playButton.clicked += () => { SceneManager.LoadScene("Game"); };
+        //settingButton.clicked += () => { OpenSetting(); };
+        //settingButton.Q<Button>("ExitBtn").clicked += () => { OpenSetting(); };
+        //ExitButton.clicked += () => { Application.Quit(); };
+    }
+
+    private void GameLoad()
+    {
+        Debug.Log("게임");
+        // Panel
+
         chattingButton = root.Q<Button>("ChattingBtn");
         connectionButton = root.Q<Button>("ConnectionBtn");
         settingButton = root.Q<Button>("SoundSettingBtn");
 
-        // Panel
-        cutScenePanel = root.Q<VisualElement>("CutScene");
         mainPanel = root.Q<VisualElement>("MainGame");
+        cutScenePanel = root.Q<VisualElement>("CutScene");
+        settingPanel = root.Q<VisualElement>("Setting");
 
-        chattingPanel = root.Q<VisualElement>("Chatting");
-        connectionPanel = root.Q<VisualElement>("Connection");
-        imageFindingPanel = root.Q<VisualElement>("ImageFinding");
-    }
-
-    private void AddEvent()
-    {
-        chattingButton.clicked += () => { OpenPanel(chattingPanel); };
-        connectionButton.clicked += () => { OpenPanel(connectionButton); };
-        //settingButton.clicked += () => { OpenPanel(settingButton); };
+        settingButton.clicked += () => { OpenSetting(); };
+        settingPanel.Q<Button>("ExitBtn").clicked += () => { OpenSetting(); };
     }
 
     public VisualElement RemoveContainer(VisualElement visualElement)
@@ -85,20 +111,53 @@ public class UI_Reader : MonoBehaviour
         return visualElement[0];
     }
 
-    public void OpenPanel(VisualElement currentPanel)
+    public void OpenSetting()
     {
-        foreach (VisualElement panel in panels)
-        {
-            if (panel == currentPanel)
-                panel.style.display = DisplayStyle.Flex;
-            else
-                panel.style.display = DisplayStyle.None;
-        }
+        if (isSettingOpen)
+            settingPanel.style.display = DisplayStyle.None;
+        else
+            settingPanel.style.display = DisplayStyle.Flex;
+
+        isSettingOpen = !isSettingOpen;
     }
 
-    public void OpenCutScene(bool isOpen)
+    //public void OpenPanel(EPanel panelType)
+    //{
+    //    VisualElement panel = null;
+    //    bool isOpen = false;
+
+    //    switch (panelType)
+    //    {
+    //        case EPanel.MAIN:
+    //            panel = mainPanel;
+    //            isOpen = isMainOpen;
+    //            break;
+    //        case EPanel.CUTSCENE:
+    //            panel = cutScenePanel;
+    //            isOpen = isCutSceneOpen;
+    //            break;
+    //        case EPanel.SETTING:
+    //            panel = settingPanel;
+    //            isOpen = isSettingOpen;
+    //            break;
+    //        case EPanel.CONNECTION:
+    //            panel = connectionPanel;
+    //            isOpen = isConnectionOpen;
+    //            break;
+    //    }
+        
+    //    if (isOpen)
+    //        panel.style.display = DisplayStyle.None;
+    //    else
+    //        panel.style.display = DisplayStyle.Flex;
+
+    //    // 이거 어쩔거여 ㅠㅡ
+    //    isOpen = !isOpen;
+    //}
+
+    public void OpenCutScene()
     {
-        if (isOpen)
+        if (isCutSceneOpen)
         {
             cutScenePanel.style.display = DisplayStyle.Flex;
             mainPanel.style.display= DisplayStyle.None;
@@ -123,19 +182,12 @@ public class UI_Reader : MonoBehaviour
         currentTextUi = ui;
         currentText = text;
 
-        if (soundName == "")
-            soundName = "typing";
-
-        ui.text = "";
-
         currentTextTween = DOTween.To(() => currentTextLength, x => currentTextLength = x, text.Length, during)
             .SetEase(Ease.Linear)
             .OnPlay(() => 
             { 
                 if (soundName != null)
                     SoundManager.Instance.PlaySFX(soundName);
-
-                //ui.text = "";
             })
             .OnUpdate(() =>
             {
@@ -147,7 +199,6 @@ public class UI_Reader : MonoBehaviour
             })
             .OnComplete(() =>
             {
-                Debug.Log("여기가 왜 아ㄴ 딜까..");
                 action();
 
                 SoundManager.Instance.StopSFX();
@@ -165,11 +216,10 @@ public class UI_Reader : MonoBehaviour
             currentTextTween.Kill();
             currentTextUi.text = currentText;
             GameManager.Instance.cutSceneManager.currentTextNum++;
-            //currentTextTween = null;
         }
     }
 
-    protected void ReSizeImage(VisualElement visualElement, Sprite sprite)
+    public void ReSizeImage(VisualElement visualElement, Sprite sprite)
     {
         float originalWidth = sprite.rect.width;
         float originalHeight = sprite.rect.height;
@@ -182,7 +232,7 @@ public class UI_Reader : MonoBehaviour
         visualElement.style.backgroundImage = new StyleBackground(sprite);
     }
 
-    protected Vector2 ChangeSize(float originalWidth, float originalHeight)
+    private Vector2 ChangeSize(float originalWidth, float originalHeight)
     {
         float aspectRatio = originalWidth / originalHeight;
         float adjustedWidth = originalWidth;

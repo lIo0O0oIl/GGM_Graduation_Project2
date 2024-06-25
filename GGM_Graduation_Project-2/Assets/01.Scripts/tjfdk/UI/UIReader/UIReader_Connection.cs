@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIReader_Connection : UI_Reader
+public class UIReader_Connection : MonoBehaviour
 {
     // 용의자 생성하고...
     // 다시 생성하고...

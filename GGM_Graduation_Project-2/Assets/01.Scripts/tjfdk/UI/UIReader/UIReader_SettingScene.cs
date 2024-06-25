@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 public class UIReader_SettingScene : MonoBehaviour
 {
-    [SerializeField] ChatHumanManager chatHumanManager;
+    //[SerializeField] ChatHumanManager chatHumanManager;
 
     [Header("Setting")]
     private UIDocument settingUI;
@@ -25,7 +25,7 @@ public class UIReader_SettingScene : MonoBehaviour
     private void OnEnable()
     {
         settingUI = GetComponent<UIDocument>();
-        settingRoot = settingUI.rootVisualElement;
+        settingRoot = settingUI.rootVisualElement; //?
 
         settingExitBtn = settingRoot.Q<Button>("ExitBtn");
         master = settingRoot.Q<Slider>("SliderMaster");
@@ -34,7 +34,7 @@ public class UIReader_SettingScene : MonoBehaviour
         //scroll = settingRoot.Q<Slider>("SliderScroll");
         //wheel = settingRoot.Q<Slider>("SliderWheel");
 
-        settingExitBtn.clicked += (() => { UIManager.Instance.OpenSetting(false); });
+        settingExitBtn.clicked += (() => { UI_Reader.Instance.OpenSetting(); });
         master.RegisterValueChangedCallback(OnMasterChange);
         bgm.RegisterValueChangedCallback(OnBGMChange);
         sfx.RegisterValueChangedCallback(OnSFXChange);
@@ -43,19 +43,19 @@ public class UIReader_SettingScene : MonoBehaviour
         //scroll.RegisterValueChangedCallback(OnChatSpeedChange);
         //wheel.RegisterValueChangedCallback(OnWheelSpeedhange);
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        //SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (GameObject.Find("Game"))
-            chatHumanManager = GameObject.Find("Game").GetComponent<ChatHumanManager>();
-    }
+    //void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    //{
+    //    if (GameObject.Find("Game"))
+    //        chatHumanManager = GameObject.Find("Game").GetComponent<ChatHumanManager>();
+    //}
 
     public void ChangeDefaultValue()
     {

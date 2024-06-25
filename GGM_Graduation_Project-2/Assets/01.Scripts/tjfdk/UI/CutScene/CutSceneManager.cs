@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 
 public class CutSceneManager : MonoBehaviour
 {
-    UIReader_CutScene cutsceneUI;
     public static CutSceneManager Instance;
 
     [Header("Current Index")]
@@ -23,7 +22,6 @@ public class CutSceneManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        cutsceneUI = GetComponent<UIReader_CutScene>();
 
         //cutSceneList = new Dictionary<string, CutSceneSO>();
     }
@@ -67,7 +65,7 @@ public class CutSceneManager : MonoBehaviour
                 if (currentCutScene.cutScenes.Count <= currentCutNum)
                 {
                     GameManager.Instance.fileManager.UnlockChat(currentCutScene.name);
-                    cutsceneUI.OpenCutScene(false);
+                    UI_Reader.Instance.OpenCutScene();
 
                     if (currentCutScene.nextMemberName != "")
                         GameManager.Instance.chatSystem.ChoiceMember
@@ -77,32 +75,32 @@ public class CutSceneManager : MonoBehaviour
                 }
                 else
                 {
-                    cutsceneUI.ChangeCut(currentCutScene.cutScenes[currentCutNum].isAnim,
+                    GameManager.Instance.cutSceneSystem.ChangeCut(currentCutScene.cutScenes[currentCutNum].isAnim,
                         currentCutScene.cutScenes[currentCutNum].cut);
                 }
             }
             if (currentCutScene.cutScenes[currentCutNum].texts.Count > currentTextNum)
             {
-                if (cutsceneUI.currentTextTween != null)
+                if (UI_Reader.Instance.currentTextTween != null)
                 {
-                    if (cutsceneUI.currentTextTween.IsPlaying())
-                        cutsceneUI.EndText();
+                    if (UI_Reader.Instance.currentTextTween.IsPlaying())
+                        UI_Reader.Instance.EndText();
                     else
                     {
                         CutSceneText msg = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum];
                         if (msg.sound != "")
-                            cutsceneUI.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound);
+                            GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound);
                         else
-                            cutsceneUI.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; });
+                            GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; });
                     }
                 }
                 else
                 {
                     CutSceneText msg = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum];
                     if (msg.sound != "")
-                        cutsceneUI.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound);
+                        GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound);
                     else
-                        cutsceneUI.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; });
+                        GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; });
                 }
             }
         }

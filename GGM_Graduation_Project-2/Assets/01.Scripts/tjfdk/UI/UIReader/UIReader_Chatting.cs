@@ -25,15 +25,8 @@ public class MemberProfile
     public Node memCurrentNode;
 }
 
-public class UIReader_Chatting : UI_Reader
+public class UIReader_Chatting : MonoBehaviour
 {
-    [Header("ToolBar")]
-    private Button chatBtn;
-    private Button connectionBtn;
-    private Button settingBtn;
-    private VisualElement connectionPanel;
-    public GameObject setting;
-
     [Header("Member")]
     [SerializeField] List<MemberProfile> members = new List<MemberProfile>();
 
@@ -43,9 +36,11 @@ public class UIReader_Chatting : UI_Reader
     public float wheelSpeed = 25f;
 
     bool isConnectionOpen = false;
-    bool isSettingOpen = false;
+    //bool isSettingOpen = false;
 
 
+    // root
+    VisualElement root;
 
     // UXLM
     // chat and question ground
@@ -75,7 +70,6 @@ public class UIReader_Chatting : UI_Reader
 
     private void Awake()
     {
-        base.Awake();
     }
 
     private void Update()
@@ -85,21 +79,6 @@ public class UIReader_Chatting : UI_Reader
 
     private void OnEnable()
     {
-        base.OnEnable();
-
-        chatBtn = root.Q<Button>("ChattingBtn");
-        connectionBtn = root.Q<Button>("ConnectionBtn");
-        settingBtn = root.Q<Button>("SoundSettingBtn");
-
-        connectionPanel = root.Q<VisualElement>("Connection");
-
-        connectionBtn.clicked += (() => { OpenConnection(); });
-        settingBtn.clicked += (() => 
-        { 
-            UIManager.Instance.OpenSetting(isSettingOpen); 
-            isSettingOpen = !isSettingOpen; 
-        });
-
         UXML_Load();
         Event_Load();   
     }
@@ -107,22 +86,24 @@ public class UIReader_Chatting : UI_Reader
     private void OpenConnection()
     {
         if (isConnectionOpen)
-            connectionPanel.style.display = DisplayStyle.Flex;
+            UI_Reader.Instance.connectionPanel.style.display = DisplayStyle.Flex;
         else
-            connectionPanel.style.display = DisplayStyle.None;
+            UI_Reader.Instance.connectionPanel.style.display = DisplayStyle.None;
 
         isConnectionOpen = !isConnectionOpen;
     }
 
     private void UXML_Load()
     {
-        ui_chatGround = root.Q<ScrollView>("ChatGround");
-        ui_questionGround = root.Q<VisualElement>("QuestionGround");
-        ui_otherFace = root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
-        ui_myFace = root.Q<VisualElement>("FaceGround").Q<VisualElement>("MyFace");
-        ui_memberListButton = root.Q<Button>("ChangeTarget");
-        ui_otherMemberName = root.Q<Label>("TargetName");
-        ui_memberListGround = root.Q<VisualElement>("ChatMemberList");
+        root = GameObject.Find("Game").GetComponent<UIDocument>().rootVisualElement;
+
+        ui_chatGround = UI_Reader.Instance.root.Q<ScrollView>("ChatGround");
+        ui_questionGround = UI_Reader.Instance.root.Q<VisualElement>("QuestionGround");
+        ui_otherFace = UI_Reader.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
+        ui_myFace = UI_Reader.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("MyFace");
+        ui_memberListButton = UI_Reader.Instance.root.Q<Button>("ChangeTarget");
+        ui_otherMemberName = UI_Reader.Instance.root.Q<Label>("TargetName");
+        ui_memberListGround = UI_Reader.Instance.root.Q<VisualElement>("ChatMemberList");
     }
 
     private void Event_Load()
@@ -224,7 +205,7 @@ public class UIReader_Chatting : UI_Reader
                 chat = new VisualElement();
                 chat.name = "image";
                 // image size change
-                ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
+                UI_Reader.Instance.ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
                 break;
 
             // if CutScene
@@ -277,7 +258,7 @@ public class UIReader_Chatting : UI_Reader
         if (isLock)
         {
             // create uxml
-            chat = RemoveContainer(ux_askChat.Instantiate());
+            chat = UI_Reader.Instance.RemoveContainer(ux_askChat.Instantiate());
             // chat name setting
             chat.name = askNode.askText;
             // chat text setting
@@ -321,7 +302,6 @@ public class UIReader_Chatting : UI_Reader
                 // currntNode, member's currentNode change
                 member.memCurrentNode = askNode;
 
-                // ????븐뼐???????????傭?????????????⑤챷竊?
                 askNode.is_UseThis = true;
 
                 // chatting start
@@ -334,7 +314,7 @@ public class UIReader_Chatting : UI_Reader
         else
         {
             // create uxml
-            chat = RemoveContainer(ux_hiddenAskChat.Instantiate());
+            chat = UI_Reader.Instance.RemoveContainer(ux_hiddenAskChat.Instantiate());
             // chat name setting
             chat.name = askNode.askText;
             // question
@@ -433,20 +413,6 @@ public class UIReader_Chatting : UI_Reader
         }
     }
 
-    //public void OpenOtherQuestion(bool isOpen)
-    //{
-    //    if (isOpen)
-    //    {
-    //        foreach (VisualElement q in ui_questionGround.Children())
-    //            q.style.display = DisplayStyle.Flex;
-    //    }
-    //    else
-    //    {
-    //        foreach (VisualElement q in ui_questionGround.Children())
-    //            q.style.display = DisplayStyle.None;
-    //    }
-    //}
-
     // scroll pos setting
     void OnMouseWheel(WheelEvent evt)
     {
@@ -479,7 +445,7 @@ public class UIReader_Chatting : UI_Reader
             member.isOpen = true;
 
             // create uxml
-            VisualElement newMember = RemoveContainer(ux_memberList.Instantiate());
+            VisualElement newMember = UI_Reader.Instance.RemoveContainer(ux_memberList.Instantiate());
             // change member name 
             newMember.Q<Label>("Name").text = member.name;
             // change member face 

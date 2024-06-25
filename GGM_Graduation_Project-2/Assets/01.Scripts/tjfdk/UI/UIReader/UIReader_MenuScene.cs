@@ -14,18 +14,34 @@ public class UIReader_MenuScene : MonoBehaviour
     [SerializeField] private Button startBtn;
     [SerializeField] private Button settingBtn;
     [SerializeField] private Button exitBtn;
+    private VisualElement settingPanel;
+
+    public bool isSettingOpen;
 
     private void OnEnable()
     {
         menuUI = GetComponent<UIDocument>();
         menuRoot = menuUI.rootVisualElement;
 
-        startBtn = menuRoot.Q<Button>("Play");
-        settingBtn = menuRoot.Q<Button>("Setting");
-        exitBtn = menuRoot.Q<Button>("Exit");
+        startBtn = menuRoot.Q<Button>("PlayBtn");
+        settingBtn = menuRoot.Q<Button>("SettingBtn");
+        exitBtn = menuRoot.Q<Button>("ExitBtn");
+        settingPanel = menuRoot.Q<VisualElement>("Setting");
 
-        startBtn.clicked += (() => { UIManager.Instance.SceneChange("Tutorial"); });
-        settingBtn.clicked += (() => { UIManager.Instance.OpenSetting(true); });
+        // you have to change this scene name, no tutorial! game!!!
+        startBtn.clicked += (() => { UIManager.Instance.SceneChange("Game"); });
+        settingBtn.clicked += (() => { OpenSetting(); });
+        settingPanel.Q<Button>("ExitBtn").clicked += () => { OpenSetting(); };
         exitBtn.clicked += (() => { UIManager.Instance.Exit(); });
+    }
+
+    public void OpenSetting()
+    {
+        if (isSettingOpen)
+            settingPanel.style.display = DisplayStyle.None;
+        else
+            settingPanel.style.display = DisplayStyle.Flex;
+
+        isSettingOpen = !isSettingOpen;
     }
 }

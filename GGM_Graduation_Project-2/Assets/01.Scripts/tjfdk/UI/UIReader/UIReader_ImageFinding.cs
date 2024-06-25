@@ -11,8 +11,11 @@ using UnityEngine.SocialPlatforms;
 using UnityEngine.U2D;
 using UnityEngine.UIElements;
 
-public class UIReader_ImageFinding : UI_Reader
+public class UIReader_ImageFinding : MonoBehaviour
 {
+    // root
+    VisualElement root;
+
     // UXML
     VisualElement ui_imageGround;
     VisualElement ui_panelGround;
@@ -32,23 +35,21 @@ public class UIReader_ImageFinding : UI_Reader
 
     private void Awake()
     {
-        base.Awake();
-
-        MinWidth = 1000;
-        MinHeight = 700;
-        MaxWidth = 1800f;
-        MaxHeight = 980f;
+        //UI_Reader.Instance.MinWidth = 1000;
+        //UI_Reader.Instance.MinHeight = 700;
+        //UI_Reader.Instance.MaxWidth = 1800f;
+        //UI_Reader.Instance.MaxHeight = 980f;
     }
 
     private void OnEnable()
     {
-        base.OnEnable();
-
         UXML_Load();
     }
 
     private void UXML_Load()
     {
+        root = GameObject.Find("Game").GetComponent<UIDocument>().rootVisualElement;
+
         ui_imageGround = root.Q<VisualElement>("ImageFinding");
         ui_panelGround = root.Q<VisualElement>("PanelGround");
     }
@@ -95,27 +96,22 @@ public class UIReader_ImageFinding : UI_Reader
                     fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
 
                 // create uxml
-                VisualElement imagePanel = RemoveContainer(ux_imageGround.Instantiate());
+                VisualElement imagePanel = UI_Reader.Instance.RemoveContainer(ux_imageGround.Instantiate());
                 imagePanel.Q<VisualElement>("ImageGround").style.backgroundImage = new StyleBackground(image.image);
 
                 imagePanel.Q<Button>("ImageExitBtn").clicked += (() => { OpenImage(fileIcon, fileName); });
 
-                // ???藥??怨쀬Ŧ 嶺뚢돦堉싮뇡?놃떊??┑?
                 foreach (string evid in image.pngName)
                 {
-                    // ???????觀???嶺뚢돦堉싮뇡???좊듆
                     PngSO png = GameManager.Instance.imageManager.FindPng(evid);
                     if (png != null)
                     {
                         if (evid == png.name)
                         {
-                            // ??諛댁뎽
                             VisualElement evidence = null;
-                            // 繞벿살탳???濡ル펲嶺?
                             if (png.importance)
                             {
-                                // 嶺뚮∥???????뿉???戮?뻣
-                                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
+                                evidence = UI_Reader.Instance.RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
                                 evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = png.memo;
@@ -134,7 +130,6 @@ public class UIReader_ImageFinding : UI_Reader
                                     }
                                     else
                                     {
-                                        //Debug.Log(png.name + " " + image.name);
                                         GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, 
                                             GameManager.Instance.fileManager.FindFile(png.name).fileParentName);
                                     }
@@ -142,11 +137,9 @@ public class UIReader_ImageFinding : UI_Reader
                                     evidence.Q<Button>("EvidenceImage").pickingMode = PickingMode.Ignore;
                                 });
                             }
-                            // ?熬곣뫀鍮??寃밸듆
                             else
                             {
-                                // ?熬곣뫁???リ섣??β돦裕녶퐲???戮?뻣
-                                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
+                                evidence = UI_Reader.Instance.RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                 {
@@ -155,21 +148,19 @@ public class UIReader_ImageFinding : UI_Reader
                                         if (imagePanel.Q<VisualElement>("ImageGround").Children().ElementAt(i).name == "descriptionLabel")
                                             imagePanel.Q<VisualElement>("ImageGround").RemoveAt(i);
                                     }
-                                    VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
+                                    VisualElement evidenceDescription = UI_Reader.Instance.RemoveContainer(ux_evidenceExplanation.Instantiate());
                                     evidenceDescription.name = "descriptionLabel";
                                     imagePanel.Q<VisualElement>("ImageGround").Add(evidenceDescription);
-                                    DoText(evidenceDescription.Q<Label>("Text"), png.memo, 2f, true,
+                                    UI_Reader.Instance.DoText(evidenceDescription.Q<Label>("Text"), png.memo, 2f, true,
                                         () => { imagePanel.Q<VisualElement>("ImageGround").Remove(evidenceDescription); }, null);
                                 });
                             }
 
-                            //??觀???熬곣뫚?????깆젧
                             evidence.style.position = Position.Absolute;
                             evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
                             evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
                             evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
                             evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-                            // ??觀???????嶺뚯솘????怨뺣뼺?
                             imagePanel.Q<VisualElement>("ImageGround").Add(evidence);
                         }
                     }
@@ -177,78 +168,7 @@ public class UIReader_ImageFinding : UI_Reader
                         Debug.Log("Evidence not found in pngList");
                 }
 
-                //foreach (string evid in image.textName)
-                //{
-                //    // ???????觀???嶺뚢돦堉싮뇡???좊듆
-                //    TextSO text = GameManager.Instance.imageManager.textList[evid];
-                //    if (text != null)
-                //    {
-                //        if (evid == text.name)
-                //        {
-                //            // ??諛댁뎽
-                //            VisualElement evidence = null;
-                //            // 繞벿살탳???濡ル펲嶺?
-                //            if (text.importance)
-                //            {
-                //                // 嶺뚮∥???????뿉???戮?뻣
-                //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
-                //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(text.image);
-                //                evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = text.name;
-                //                evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = text.memo;
-                //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
-                //                {
-                //                    //VisualElement description = evidence.Q<VisualElement>("Descripte");
-                //                    //description.style.display = DisplayStyle.Flex;
-
-                //                    evidence.Q<VisualElement>("Descripte").style.display = DisplayStyle.Flex;
-                //                    evidence.Q<VisualElement>("Descripte").style.left = text.pos.x + text.size.x;
-                //                    evidence.Q<VisualElement>("Descripte").style.top = text.pos.y - 250;
-
-                //                    if (png.isOpen == false)
-                //                    {
-                //                        png.isOpen = true;
-                //                        Debug.Log(png.name + " " + image.name);
-                //                        GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, image.name);
-                //                    }
-                //                });
-                //            }
-                //            // ?熬곣뫀鍮??寃밸듆
-                //            else
-                //            {
-                //                // ?熬곣뫁???リ섣??β돦裕녶퐲???戮?뻣
-                //                evidence = RemoveContainer(ux_imageEvidence.Instantiate());
-                //                evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
-                //                evidence.Q<Button>("EvidenceImage").clicked += (() =>
-                //                {
-                //                    for (int i = imagePanel.childCount - 1; i >= 0; i--)
-                //                    {
-                //                        if (imagePanel.Children().ElementAt(i).name == "descriptionLabel")
-                //                            imagePanel.RemoveAt(i);
-                //                    }
-                //                    VisualElement evidenceDescription = RemoveContainer(ux_evidenceExplanation.Instantiate());
-                //                    evidenceDescription.name = "descriptionLabel";
-                //                    imagePanel.Add(evidenceDescription);
-                //                    DoText(evidenceDescription.Q<Label>("Text"), png.memo, 3f, true,
-                //                        () => { imagePanel.Remove(evidenceDescription); });
-                //                });
-                //            }
-
-                //            //??觀???熬곣뫚?????깆젧
-                //            evidence.style.position = Position.Absolute;
-                //            evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
-                //            evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
-                //            evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
-                //            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
-                //            // ??觀???????嶺뚯솘????怨뺣뼺?
-                //            imagePanel.Add(evidence);
-                //        }
-                //    }
-                //    else
-                //        Debug.Log("Evidence not found in pngList");
-                //}
-
                 ui_imageGround.Add(imagePanel);
-
                 GameManager.Instance.chatHumanManager.StopChatting();;
             }
 
@@ -268,13 +188,13 @@ public class UIReader_ImageFinding : UI_Reader
                     ui_panelGround.RemoveAt(i);
 
                 //create uxml
-                VisualElement panel = RemoveContainer(ux_ImagePanel.Instantiate());
+                VisualElement panel = UI_Reader.Instance.RemoveContainer(ux_ImagePanel.Instantiate());
                 // change png panel name
                 panel.Q<Label>("Name").text = png.name + ".png";
                 // change png image
                 panel.Q<VisualElement>("Image").style.backgroundImage = new StyleBackground(png.saveSprite);
                 // change png size
-                ReSizeImage(panel.Q<VisualElement>("Image"), png.saveSprite);
+                UI_Reader.Instance.ReSizeImage(panel.Q<VisualElement>("Image"), png.saveSprite);
                 // connection exit click event
                 panel.Q<Button>("CloseBtn").clicked += () =>
                 {
@@ -303,7 +223,7 @@ public class UIReader_ImageFinding : UI_Reader
     public void OpenText(VisualElement fileIcon, string name)
     {
         // create uxml
-        VisualElement panel = RemoveContainer(ux_TextPanel.Instantiate());
+        VisualElement panel = UI_Reader.Instance.RemoveContainer(ux_TextPanel.Instantiate());
         // find text
         TextSO text = GameManager.Instance.imageManager.FindText(name);
 

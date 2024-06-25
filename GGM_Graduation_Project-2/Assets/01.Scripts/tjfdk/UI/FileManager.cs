@@ -17,7 +17,7 @@ using UnityEngine;
 //    public string lockQuestionName;
 //}
 
-public class FileManager : UI_Reader
+public class FileManager : MonoBehaviour
 {
     [SerializeField] List<FileSO> folderFiles = new List<FileSO>();
     //public Dictionary<string, FileSO> folderFileList;
