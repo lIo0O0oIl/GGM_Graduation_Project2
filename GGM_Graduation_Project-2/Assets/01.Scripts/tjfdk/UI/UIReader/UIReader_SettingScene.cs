@@ -12,38 +12,29 @@ public class UIReader_SettingScene : MonoBehaviour
 
     [Header("Setting")]
     private UIDocument settingUI;
-    private VisualElement settingRoot;
+    private VisualElement root;
 
-    private Button settingExitBtn;
     private Slider master;
     private Slider bgm;
     private Slider sfx;
+    private Slider wheel;
     //private Slider scroll;
-    //private Slider wheel;
 
 
     private void OnEnable()
     {
         settingUI = GetComponent<UIDocument>();
-        settingRoot = settingUI.rootVisualElement; //?
+        root = settingUI.rootVisualElement;
 
-        settingExitBtn = settingRoot.Q<Button>("ExitBtn");
-        master = settingRoot.Q<Slider>("SliderMaster");
-        bgm = settingRoot.Q<Slider>("SliderBGM");
-        sfx = settingRoot.Q<Slider>("SliderSFX");
-        //scroll = settingRoot.Q<Slider>("SliderScroll");
-        //wheel = settingRoot.Q<Slider>("SliderWheel");
+        master = root.Q<Slider>("SliderMaster");
+        bgm = root.Q<Slider>("SliderBGM");
+        sfx = root.Q<Slider>("SliderSFX");
+        wheel = root.Q<Slider>("SliderTextSpeed");
 
-        settingExitBtn.clicked += (() => { UI_Reader.Instance.OpenSetting(); });
         master.RegisterValueChangedCallback(OnMasterChange);
         bgm.RegisterValueChangedCallback(OnBGMChange);
         sfx.RegisterValueChangedCallback(OnSFXChange);
-
-        //ChangeDefaultValue();
-        //scroll.RegisterValueChangedCallback(OnChatSpeedChange);
-        //wheel.RegisterValueChangedCallback(OnWheelSpeedhange);
-
-        //SceneManager.sceneLoaded += OnSceneLoaded;
+        wheel.RegisterValueChangedCallback(OnWheelSpeedhange);
     }
 
     void OnDisable()
@@ -56,6 +47,14 @@ public class UIReader_SettingScene : MonoBehaviour
     //    if (GameObject.Find("Game"))
     //        chatHumanManager = GameObject.Find("Game").GetComponent<ChatHumanManager>();
     //}
+
+    private void Start()
+    {
+        master.value = VolumeManager.Instance.masterValue;
+        bgm.value = VolumeManager.Instance.bgmValue;
+        sfx.value = VolumeManager.Instance.sfxValue;
+        wheel.value = VolumeManager.Instance.wheelValue;
+    }
 
     public void ChangeDefaultValue()
     {
@@ -94,12 +93,12 @@ public class UIReader_SettingScene : MonoBehaviour
     //        chatHumanManager.SetChatSpeed(UIManager.Instance.ScrollSpeed);
     //}
 
-    //private void OnWheelSpeedhange(ChangeEvent<float> evt)
-    //{
-    //    VolumeManager.Instance.wheelValue = wheel.value;
-    //    UIManager.Instance.SetWheelSpeed(wheel.value);
+    private void OnWheelSpeedhange(ChangeEvent<float> evt)
+    {
+        VolumeManager.Instance.wheelValue = wheel.value;
+        //UIManager.Instance.SetWheelSpeed(wheel.value);
 
-    //    if (chatHumanManager)
-    //        chatHumanManager.SetWheelSpeed(UIManager.Instance.WheelSpeed);
-    //}
+        //if (chatHumanManager)
+        //    chatHumanManager.SetWheelSpeed(UIManager.Instance.WheelSpeed);
+    }
 }

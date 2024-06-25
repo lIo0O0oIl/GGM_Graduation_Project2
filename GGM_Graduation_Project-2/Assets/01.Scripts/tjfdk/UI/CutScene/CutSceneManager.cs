@@ -65,7 +65,7 @@ public class CutSceneManager : MonoBehaviour
                 if (currentCutScene.cutScenes.Count <= currentCutNum)
                 {
                     GameManager.Instance.fileManager.UnlockChat(currentCutScene.name);
-                    UI_Reader.Instance.OpenCutScene();
+                    UIReader_Main.Instance.OpenCutScene();
 
                     if (currentCutScene.nextMemberName != "")
                         GameManager.Instance.chatSystem.ChoiceMember
@@ -81,10 +81,10 @@ public class CutSceneManager : MonoBehaviour
             }
             if (currentCutScene.cutScenes[currentCutNum].texts.Count > currentTextNum)
             {
-                if (UI_Reader.Instance.currentTextTween != null)
+                if (UIReader_Main.Instance.currentTextTween != null)
                 {
-                    if (UI_Reader.Instance.currentTextTween.IsPlaying())
-                        UI_Reader.Instance.EndText();
+                    if (UIReader_Main.Instance.currentTextTween.IsPlaying())
+                        UIReader_Main.Instance.EndText();
                     else
                     {
                         CutSceneText msg = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum];

@@ -96,7 +96,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                     fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
 
                 // create uxml
-                VisualElement imagePanel = UI_Reader.Instance.RemoveContainer(ux_imageGround.Instantiate());
+                VisualElement imagePanel = UIReader_Main.Instance.RemoveContainer(ux_imageGround.Instantiate());
                 imagePanel.Q<VisualElement>("ImageGround").style.backgroundImage = new StyleBackground(image.image);
 
                 imagePanel.Q<Button>("ImageExitBtn").clicked += (() => { OpenImage(fileIcon, fileName); });
@@ -111,7 +111,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                             VisualElement evidence = null;
                             if (png.importance)
                             {
-                                evidence = UI_Reader.Instance.RemoveContainer(ux_imageEvidence.Instantiate());
+                                evidence = UIReader_Main.Instance.RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<VisualElement>("Descripte").Q<Label>("EvidenceName").text = png.name;
                                 evidence.Q<VisualElement>("Descripte").Q<Label>("Memo").text = png.memo;
@@ -139,7 +139,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                             }
                             else
                             {
-                                evidence = UI_Reader.Instance.RemoveContainer(ux_imageEvidence.Instantiate());
+                                evidence = UIReader_Main.Instance.RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                 {
@@ -148,10 +148,10 @@ public class UIReader_ImageFinding : MonoBehaviour
                                         if (imagePanel.Q<VisualElement>("ImageGround").Children().ElementAt(i).name == "descriptionLabel")
                                             imagePanel.Q<VisualElement>("ImageGround").RemoveAt(i);
                                     }
-                                    VisualElement evidenceDescription = UI_Reader.Instance.RemoveContainer(ux_evidenceExplanation.Instantiate());
+                                    VisualElement evidenceDescription = UIReader_Main.Instance.RemoveContainer(ux_evidenceExplanation.Instantiate());
                                     evidenceDescription.name = "descriptionLabel";
                                     imagePanel.Q<VisualElement>("ImageGround").Add(evidenceDescription);
-                                    UI_Reader.Instance.DoText(evidenceDescription.Q<Label>("Text"), png.memo, 2f, true,
+                                    UIReader_Main.Instance.DoText(evidenceDescription.Q<Label>("Text"), png.memo, 2f, true,
                                         () => { imagePanel.Q<VisualElement>("ImageGround").Remove(evidenceDescription); }, null);
                                 });
                             }
@@ -188,13 +188,13 @@ public class UIReader_ImageFinding : MonoBehaviour
                     ui_panelGround.RemoveAt(i);
 
                 //create uxml
-                VisualElement panel = UI_Reader.Instance.RemoveContainer(ux_ImagePanel.Instantiate());
+                VisualElement panel = UIReader_Main.Instance.RemoveContainer(ux_ImagePanel.Instantiate());
                 // change png panel name
                 panel.Q<Label>("Name").text = png.name + ".png";
                 // change png image
                 panel.Q<VisualElement>("Image").style.backgroundImage = new StyleBackground(png.saveSprite);
                 // change png size
-                UI_Reader.Instance.ReSizeImage(panel.Q<VisualElement>("Image"), png.saveSprite);
+                UIReader_Main.Instance.ReSizeImage(panel.Q<VisualElement>("Image"), png.saveSprite);
                 // connection exit click event
                 panel.Q<Button>("CloseBtn").clicked += () =>
                 {
@@ -223,7 +223,7 @@ public class UIReader_ImageFinding : MonoBehaviour
     public void OpenText(VisualElement fileIcon, string name)
     {
         // create uxml
-        VisualElement panel = UI_Reader.Instance.RemoveContainer(ux_TextPanel.Instantiate());
+        VisualElement panel = UIReader_Main.Instance.RemoveContainer(ux_TextPanel.Instantiate());
         // find text
         TextSO text = GameManager.Instance.imageManager.FindText(name);
 

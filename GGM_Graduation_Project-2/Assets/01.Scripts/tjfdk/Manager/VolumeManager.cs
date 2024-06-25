@@ -10,7 +10,6 @@ public class VolumeManager : Singleton<VolumeManager>
     public float masterValue;
     public float bgmValue;
     public float sfxValue;
-    public float scrollValue;
     public float wheelValue;
 
     private void Start()
@@ -25,8 +24,8 @@ public class VolumeManager : Singleton<VolumeManager>
     public void Master(float master)
     {
         mixer.SetFloat("Master", master);
-        mixer.SetFloat("BGM", master);
-        mixer.SetFloat("SFX", master);
+        //mixer.SetFloat("BGM", master);
+        //mixer.SetFloat("SFX", master);
     }
 
     public void BGM(float bgm)
@@ -37,5 +36,10 @@ public class VolumeManager : Singleton<VolumeManager>
     public void SFX(float sfx)
     {
         mixer.SetFloat("SFX", sfx);
+    }
+
+    public void WheelSpeed()
+    {
+        Debug.Log("fdfsdfasff");
     }
 }

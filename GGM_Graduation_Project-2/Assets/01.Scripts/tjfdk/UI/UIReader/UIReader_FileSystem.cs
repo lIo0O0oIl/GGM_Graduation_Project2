@@ -105,9 +105,9 @@ public class UIReader_FileSystem : MonoBehaviour
         root = GameObject.Find("Game").GetComponent<UIDocument>().rootVisualElement;
 
         ui_fileSystemArea = root.Q<VisualElement>("FileSystem");
-        ui_fileGround = UI_Reader.Instance.root.Q<VisualElement>("FileGround");
-        ui_filePathGround = UI_Reader.Instance.root.Q<VisualElement>("FilePathGround");
-        ui_changeSizeButton = UI_Reader.Instance.root.Q<Button>("ChangeSize");
+        ui_fileGround = UIReader_Main.Instance.root.Q<VisualElement>("FileGround");
+        ui_filePathGround = UIReader_Main.Instance.root.Q<VisualElement>("FilePathGround");
+        ui_changeSizeButton = UIReader_Main.Instance.root.Q<Button>("ChangeSize");
     }
 
     private void Event_Load()
@@ -225,7 +225,7 @@ public class UIReader_FileSystem : MonoBehaviour
                 {
                     FileSO folder = GameManager.Instance.fileManager.FindFile(fileName);
                     // create uxml
-                    file = UI_Reader.Instance.RemoveContainer(ux_folderFile.Instantiate());
+                    file = UIReader_Main.Instance.RemoveContainer(ux_folderFile.Instantiate());
                     // change file name
                     file.Q<Label>("FileName").text = folder.fileName;
                     // connection click event
@@ -253,7 +253,7 @@ public class UIReader_FileSystem : MonoBehaviour
                 {
                     FileSO image = GameManager.Instance.fileManager.FindFile(fileName);
                     // create uxml
-                    file = UI_Reader.Instance.RemoveContainer(ux_imageFile.Instantiate());
+                    file = UIReader_Main.Instance.RemoveContainer(ux_imageFile.Instantiate());
                     // change file name
                     file.Q<Label>("FileName").text = image.fileName;
                     // connection drag and drop & button click event
@@ -265,7 +265,7 @@ public class UIReader_FileSystem : MonoBehaviour
                 {
                     FileSO text = GameManager.Instance.fileManager.FindFile(fileName);
                     // create uxml
-                    file = UI_Reader.Instance.RemoveContainer(ux_textFile.Instantiate());
+                    file = UIReader_Main.Instance.RemoveContainer(ux_textFile.Instantiate());
                     // change file name
                     file.Q<Label>("FileName").text = text.fileName;
                     // connection drag and drop & button click event
@@ -370,7 +370,7 @@ public class UIReader_FileSystem : MonoBehaviour
 
     private void AddFilePath(string pathName)
     {
-        VisualElement filePath = UI_Reader.Instance.RemoveContainer(ux_filePath.Instantiate());
+        VisualElement filePath = UIReader_Main.Instance.RemoveContainer(ux_filePath.Instantiate());
         filePath.Q<Button>().text = pathName + "> ";
         filePath.Q<Button>().clicked += () => { FolderPathEvent(pathName); };
         ui_filePathGround.Add(filePath);

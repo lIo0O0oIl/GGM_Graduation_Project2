@@ -18,9 +18,9 @@ public enum EPanel
     CONNECTION
 }
 
-public class UI_Reader : MonoBehaviour
+public class UIReader_Main : MonoBehaviour
 {
-    static public UI_Reader Instance;
+    static public UIReader_Main Instance;
 
     // main
     public UIDocument document;

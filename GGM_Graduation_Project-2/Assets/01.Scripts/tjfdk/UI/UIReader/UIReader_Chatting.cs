@@ -86,9 +86,9 @@ public class UIReader_Chatting : MonoBehaviour
     private void OpenConnection()
     {
         if (isConnectionOpen)
-            UI_Reader.Instance.connectionPanel.style.display = DisplayStyle.Flex;
+            UIReader_Main.Instance.connectionPanel.style.display = DisplayStyle.Flex;
         else
-            UI_Reader.Instance.connectionPanel.style.display = DisplayStyle.None;
+            UIReader_Main.Instance.connectionPanel.style.display = DisplayStyle.None;
 
         isConnectionOpen = !isConnectionOpen;
     }
@@ -97,13 +97,13 @@ public class UIReader_Chatting : MonoBehaviour
     {
         root = GameObject.Find("Game").GetComponent<UIDocument>().rootVisualElement;
 
-        ui_chatGround = UI_Reader.Instance.root.Q<ScrollView>("ChatGround");
-        ui_questionGround = UI_Reader.Instance.root.Q<VisualElement>("QuestionGround");
-        ui_otherFace = UI_Reader.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
-        ui_myFace = UI_Reader.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("MyFace");
-        ui_memberListButton = UI_Reader.Instance.root.Q<Button>("ChangeTarget");
-        ui_otherMemberName = UI_Reader.Instance.root.Q<Label>("TargetName");
-        ui_memberListGround = UI_Reader.Instance.root.Q<VisualElement>("ChatMemberList");
+        ui_chatGround = UIReader_Main.Instance.root.Q<ScrollView>("ChatGround");
+        ui_questionGround = UIReader_Main.Instance.root.Q<VisualElement>("QuestionGround");
+        ui_otherFace = UIReader_Main.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
+        ui_myFace = UIReader_Main.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("MyFace");
+        ui_memberListButton = UIReader_Main.Instance.root.Q<Button>("ChangeTarget");
+        ui_otherMemberName = UIReader_Main.Instance.root.Q<Label>("TargetName");
+        ui_memberListGround = UIReader_Main.Instance.root.Q<VisualElement>("ChatMemberList");
     }
 
     private void Event_Load()
@@ -205,7 +205,7 @@ public class UIReader_Chatting : MonoBehaviour
                 chat = new VisualElement();
                 chat.name = "image";
                 // image size change
-                UI_Reader.Instance.ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
+                UIReader_Main.Instance.ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
                 break;
 
             // if CutScene
@@ -258,7 +258,7 @@ public class UIReader_Chatting : MonoBehaviour
         if (isLock)
         {
             // create uxml
-            chat = UI_Reader.Instance.RemoveContainer(ux_askChat.Instantiate());
+            chat = UIReader_Main.Instance.RemoveContainer(ux_askChat.Instantiate());
             // chat name setting
             chat.name = askNode.askText;
             // chat text setting
@@ -314,7 +314,7 @@ public class UIReader_Chatting : MonoBehaviour
         else
         {
             // create uxml
-            chat = UI_Reader.Instance.RemoveContainer(ux_hiddenAskChat.Instantiate());
+            chat = UIReader_Main.Instance.RemoveContainer(ux_hiddenAskChat.Instantiate());
             // chat name setting
             chat.name = askNode.askText;
             // question
@@ -445,7 +445,7 @@ public class UIReader_Chatting : MonoBehaviour
             member.isOpen = true;
 
             // create uxml
-            VisualElement newMember = UI_Reader.Instance.RemoveContainer(ux_memberList.Instantiate());
+            VisualElement newMember = UIReader_Main.Instance.RemoveContainer(ux_memberList.Instantiate());
             // change member name 
             newMember.Q<Label>("Name").text = member.name;
             // change member face 

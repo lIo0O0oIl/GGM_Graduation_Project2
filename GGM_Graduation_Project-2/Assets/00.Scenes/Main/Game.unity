@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 150678876}
   - component: {fileID: 150678875}
   - component: {fileID: 150678888}
+  - component: {fileID: 150678889}
   - component: {fileID: 150678877}
   - component: {fileID: 150678887}
   m_Layer: 0
@@ -246,6 +247,18 @@ MonoBehaviour:
   MinHeight: 500
   MaxWidth: 1800
   MaxHeight: 980
+--- !u!114 &150678889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150678874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66964fd372bf01b42a6aa7f52ef5108b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &378627792
 GameObject:
   m_ObjectHideFlags: 0

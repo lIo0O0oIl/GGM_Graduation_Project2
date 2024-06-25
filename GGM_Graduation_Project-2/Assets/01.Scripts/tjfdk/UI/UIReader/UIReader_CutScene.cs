@@ -13,8 +13,8 @@ public class UIReader_CutScene : MonoBehaviour
 
     private void OnEnable()
     {
-        scene = UI_Reader.Instance.root.Q<Button>("Scene");
-        text = UI_Reader.Instance.root.Q<Label>("Text");
+        scene = UIReader_Main.Instance.root.Q<Button>("Scene");
+        text = UIReader_Main.Instance.root.Q<Label>("Text");
 
         scene.clicked += (() => { GameManager.Instance.cutSceneManager.Next(); });
     }
@@ -22,7 +22,7 @@ public class UIReader_CutScene : MonoBehaviour
     public void PlayCutScene(string name)
     {
         GameManager.Instance.cutSceneManager.CutScene(true, name);
-        UI_Reader.Instance.OpenCutScene();
+        UIReader_Main.Instance.OpenCutScene();
     }
 
     public void ChangeCut(bool isAnim, Sprite[] cuts)
@@ -35,12 +35,12 @@ public class UIReader_CutScene : MonoBehaviour
 
     public void ChangeText(string msg, float writingDuring, Action action, string soundName = "typing")
     {
-        UI_Reader.Instance.DoText(text, msg, writingDuring, false, action, soundName);
+        UIReader_Main.Instance.DoText(text, msg, writingDuring, false, action, soundName);
     }
 
     public void EndText()
     {
-        UI_Reader.Instance.EndText();
+        UIReader_Main.Instance.EndText();
     }
 
     IEnumerator CutAnimation(Sprite[] cuts)
