@@ -16,7 +16,7 @@ public class Board : MonoBehaviour
     [SerializeField] private TextMeshProUGUI numberOfMoves;
     [SerializeField] private TextMeshProUGUI minnumNumMoves; // 최소 횟수를 나타낼 TMP
 
-    [SerializeField] private Folder lockFolder;
+    //[SerializeField] private Folder lockFolder;
     [SerializeField] private GameObject passwordUI;
     [SerializeField] private GameObject numUI;
 
@@ -168,7 +168,7 @@ public class Board : MonoBehaviour
         {
             Debug.Log("진입");
             //FileManager.instance.PuzzleLockBackClick();     // 퍼즐판넬 꺼주기
-            lockFolder.PuzzleClear();       // 퍼즐 클리어됨
+            //lockFolder.PuzzleClear();       // 퍼즐 클리어됨
 
             passwordUI.SetActive(true);
             numUI.SetActive(false);

@@ -13,7 +13,7 @@ public class ChatHumanManager : MonoBehaviour
     //private float currentTime = 0f;
     private bool is_ChatStart = false;
 
-    private bool is_ask = false;
+    private bool is_ChatStop = false;
 
     private List<Node> nowNodes = new List<Node>();
     public string nowHumanName;        // Name of the human you're talking to
@@ -34,8 +34,11 @@ public class ChatHumanManager : MonoBehaviour
             ChatTree chatTree = chatContainer.chatTrees[i];
             for (int j = 0; j < chatTree.nodeList.Count; j++)
             {
-                chatTree.nodeList[j].is_UseThis = false;
-                chatTree.nodeList[j].test_isRead = false;
+                if (chatTree.nodeList[j] != null)
+                {
+                    chatTree.nodeList[j].is_UseThis = false;
+                    chatTree.nodeList[j].test_isRead = false;
+                }
             }
         }
     }
@@ -54,6 +57,8 @@ public class ChatHumanManager : MonoBehaviour
             {
                 // node list
                 var children = chatContainer.GetChatTree().GetChild(currentNode);
+
+                Debug.Log(children[0]);     // 에스크 노드가 오는 경우
 
                 foreach (Node node in children)
                 {
@@ -75,18 +80,17 @@ public class ChatHumanManager : MonoBehaviour
                     }
                     else if (node is AskNode askNode)
                     {
+                        Debug.Log(askNode.test_isRead == false && askNode.is_UseThis == false);
                         if (askNode.test_isRead == false && askNode.is_UseThis == false)
                         {
-                            // 한국어 내놔!!!
                             currentNode = askNode.parent;
                             nowHuman.memCurrentNode = askNode.parent;
 
-                            // ?饔낅떽?????????彛????熬곣뫖利???
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode);
                             nowHuman.questions.Add(askNode);
                             askNode.test_isRead = true;
 
-                            is_ask = true;
+                            is_ChatStop = true;
                         }
                     }
                     else if (node is ConditionNode conditionNode)
@@ -96,6 +100,7 @@ public class ChatHumanManager : MonoBehaviour
                         {
                             if (conditionNode.asks.Count > 0)
                             {
+                                Debug.Log(conditionNode.Checkk());
                                 // when all question is useThis true
                                 if (conditionNode.Checkk())
                                 {
@@ -105,6 +110,10 @@ public class ChatHumanManager : MonoBehaviour
                                 else
                                 {
                                     currentNode = conditionNode.asks[0].parent;
+                                    if (currentNode is ConditionNode)
+                                    {
+                                        currentNode = (conditionNode.asks[0].parent as ConditionNode).parentList[0];
+                                    }
                                     StartChatting();
                                 }
                             }
@@ -116,7 +125,7 @@ public class ChatHumanManager : MonoBehaviour
                             if (conditionNode.is_UseThis == false)
                             {
                                 nowCondition = conditionNode;
-                                StopChatting();
+                                is_ChatStart = true;
                             }
                             else
                             {
@@ -130,19 +139,27 @@ public class ChatHumanManager : MonoBehaviour
 
                             if (conditionNode.childList[0].test_isRead == false && conditionNode.childList[0].is_UseThis == false)
                             {
-                                GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
+                                if (conditionNode.is_Unlock)
+                                {
+                                    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, ask);
+                                }
+                                else
+                                {
+                                    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
+                                }
                                 nowHuman.questions.Add(ask);
                                 conditionNode.childList[0].test_isRead = true;
+                                is_ChatStart = true;
                             }
                         }
                     }
 
                 }
 
-                if (is_ask)
+                if (is_ChatStop)
                 {
                     StopChatting();
-                    is_ask = false;
+                    is_ChatStop = false;
                 }
 
                 //currentTime = 0f;
