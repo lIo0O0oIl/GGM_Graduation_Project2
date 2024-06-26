@@ -42,7 +42,7 @@ namespace ChatVisual
             switch (node)
             {
                 case ChatNode:
-                    input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
+                    input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Multi, typeof(bool));
                     break;
                 case AskNode:
                     input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
