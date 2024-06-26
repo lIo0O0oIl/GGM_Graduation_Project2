@@ -24,7 +24,7 @@ public class UIReader_MenuScene : MonoBehaviour
         settingBtn = menuRoot.Q<Button>("Setting");
         exitBtn = menuRoot.Q<Button>("Exit");
 
-        startBtn.clicked += (() => { UIManager.Instance.SceneChange("Tutorial"); });
+        startBtn.clicked += (() => { UIManager.Instance.SceneChange("Game"); });
         settingBtn.clicked += (() => { UIManager.Instance.OpenSetting(true); });
         exitBtn.clicked += (() => { UIManager.Instance.Exit(); });
     }
