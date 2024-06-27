@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager>
     public FileManager fileManager;
     public ImageManager imageManager;
 
-    [SerializeField] private bool is_tutorial;
+    [SerializeField] private bool is_tutorial = false;
     [SerializeField] private Sprite myFaec;
 
 
@@ -32,19 +32,18 @@ public class GameManager : Singleton<GameManager>
 
     public void GameStart()
     {
-        //if (!is_tutorial)
-        //{
-        
+        if (!is_tutorial)
+        {
             cutSceneSystem.PlayCutScene("DieFall");
             chatSystem.AddMember("GJH");
             chatSystem.OnOffMemberList();
-        //}
-        //else
-        //{
-        //    chatSystem.AddMember("Tutorial1");
-        //    chatSystem.ChoiceMember(chatSystem.FindMember("Tutorial1"));
-        //    chatSystem.ChangeMyProfile("플레이어", myFaec);
-        //    is_tutorial = false;
-        //}
+    }
+        else
+        {
+            chatSystem.AddMember("Tutorial1");
+            chatSystem.ChoiceMember(chatSystem.FindMember("Tutorial1"));
+            chatSystem.ChangeMyProfile("플레이어", myFaec);
+            is_tutorial = false;
+        }
     }
 }

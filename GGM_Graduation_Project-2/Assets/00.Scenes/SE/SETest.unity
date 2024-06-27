@@ -133,10 +133,12 @@ GameObject:
   m_Component:
   - component: {fileID: 150678876}
   - component: {fileID: 150678875}
+  - component: {fileID: 150678888}
+  - component: {fileID: 150678889}
   - component: {fileID: 150678877}
   - component: {fileID: 150678887}
   m_Layer: 0
-  m_Name: Main
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatContainer: {fileID: 594023517}
-  changeHumanTime: 1
   nextChatTime: 1
   nowHumanName: 
   nowHuman:
@@ -224,6 +225,40 @@ MonoBehaviour:
   currentNode: {fileID: 0}
   nowCondition: {fileID: 0}
   isChattingRunning: 0
+--- !u!114 &150678888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150678874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f772b671f4a8dd8438c5dd38919c8511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  document: {fileID: 150678875}
+  isMainOpen: 0
+  isCutSceneOpen: 0
+  isSettingOpen: 0
+  isConnectionOpen: 0
+  currentText: 
+  MinWidth: 500
+  MinHeight: 500
+  MaxWidth: 1800
+  MaxHeight: 980
+--- !u!114 &150678889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150678874}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66964fd372bf01b42a6aa7f52ef5108b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &378627792
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,10 +305,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   folderFiles:
-  - {fileID: 11400000, guid: c3a4c0acb7b8e4a47ae4a370d6537e79, type: 2}
-  - {fileID: 11400000, guid: 3fa66ac983a8cad4d8415261bc2cd80d, type: 2}
-  - {fileID: 11400000, guid: 9a799cd3fc8c4854ea544a6d975e966c, type: 2}
-  - {fileID: 11400000, guid: c32b98655c2c3a8449a820221a2bc738, type: 2}
+  - {fileID: 11400000, guid: 587dc8ecd8fade947a58a99d315078eb, type: 2}
+  - {fileID: 11400000, guid: 4ff2f94a7ba2a4a47b1b28c249f5e89a, type: 2}
+  - {fileID: 11400000, guid: da881454c2c475f438c8baaec9628ef5, type: 2}
+  - {fileID: 11400000, guid: ce18bb519ef23eb4fa1ebaf7b87914ff, type: 2}
+  - {fileID: 11400000, guid: b45bb9e558ed47f4e92eed9073287079, type: 2}
+  - {fileID: 11400000, guid: c1e655613908da44f83524e529a299f0, type: 2}
+  - {fileID: 11400000, guid: 7a47900d93c836b44aeaa52a4fa485dd, type: 2}
+  - {fileID: 11400000, guid: b840c2b00679a5b45a94043560fd8626, type: 2}
+  - {fileID: 11400000, guid: 3cc417de2d36e8847ac4e361f2e4ae0b, type: 2}
+  - {fileID: 11400000, guid: 3c7b736caa1ee874eadf7d52321ffbaa, type: 2}
+  - {fileID: 11400000, guid: 93e7aa4a5d4469541bbf889e69fc989b, type: 2}
+  - {fileID: 11400000, guid: f7cc9d5022deeca46b5ffdc18b1c9413, type: 2}
+  - {fileID: 11400000, guid: cd75f6f4586360546b2a6702c54587cb, type: 2}
+  - {fileID: 11400000, guid: f3453f8eb8941e845b5b43169af9c319, type: 2}
+  - {fileID: 11400000, guid: 70ab9864a4b3d964e98f39c34dd0e946, type: 2}
+  - {fileID: 11400000, guid: c1352e0c256cc7f478d155c0d17473df, type: 2}
+  - {fileID: 11400000, guid: 150d9fcfd97a66745ab54965caf48a54, type: 2}
+  - {fileID: 11400000, guid: b504439fa3153d345ad6d6404fae09be, type: 2}
+  - {fileID: 11400000, guid: df40c14282ccba64cadba2ce018d564a, type: 2}
+  - {fileID: 11400000, guid: 0bf8e70bfee65e348bcc227991c27f74, type: 2}
+  - {fileID: 11400000, guid: d51f95773df0da94cbbc49c572e5e34b, type: 2}
+  - {fileID: 11400000, guid: 4e9501c5b49269d47ba6c467908910d1, type: 2}
+  - {fileID: 11400000, guid: 1a4d03963b92e7e478adfbda854c4462, type: 2}
+  - {fileID: 11400000, guid: 4ff2f94a7ba2a4a47b1b28c249f5e89a, type: 2}
 --- !u!114 &378627795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileAreaSizeOn: 150
-  fileAreaSizeOff: 450
+  fileAreaSizeOff: 300
   changeSizeBtnOn: {fileID: -2236324273849735119, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeSizeBtnOff: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isFileSystemOpen: 0
@@ -349,69 +404,6 @@ MonoBehaviour:
   chatTrees:
   - {fileID: 11400000, guid: 8a0e19d35d2db4545b83b352f6df53c7, type: 2}
   - {fileID: 11400000, guid: 5f5fab8b2a8821e4a9f33c74ef966f92, type: 2}
-  - {fileID: 11400000, guid: c1a3e3bb83a6eac42ac8aba4b6bafb91, type: 2}
---- !u!1 &1112735943
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1112735946}
-  - component: {fileID: 1112735945}
-  - component: {fileID: 1112735944}
-  m_Layer: 0
-  m_Name: Setting
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1112735944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112735943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66964fd372bf01b42a6aa7f52ef5108b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chatHumanManager: {fileID: 0}
---- !u!114 &1112735945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112735943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: e89bcb5bf1923f040a37a8360039f3fd, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 5f9d870cd21841045b8446151b61dd44, type: 3}
-  m_SortingOrder: 1
---- !u!4 &1112735946
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112735943}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1207175530
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +432,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -458,11 +450,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   images:
-  - {fileID: 11400000, guid: 8ffc6d65c6b2481438d3def36528d8d4, type: 2}
+  - {fileID: 11400000, guid: 075c6194b901161478aa8a848fc8a197, type: 2}
+  - {fileID: 11400000, guid: f864ad77c2a53f6469a2b7f074260a06, type: 2}
+  - {fileID: 11400000, guid: bb6e1c015e0b3424281e75e086915889, type: 2}
+  - {fileID: 11400000, guid: e1d3f014e117c814aaeda6d87659d54e, type: 2}
+  - {fileID: 11400000, guid: 076114b5ea0c1d74ab6694dcb2d834c5, type: 2}
   pngs:
-  - {fileID: 11400000, guid: e513b3a7540da0c4ab9b30a61d39c972, type: 2}
-  - {fileID: 11400000, guid: 95c51faee2a00d041a12af60a2307b46, type: 2}
-  texts: []
+  - {fileID: 11400000, guid: a887f32d772ff4d418ca35b167c56c25, type: 2}
+  - {fileID: 11400000, guid: 62627cb4959ae6a4db55f275aaa58a85, type: 2}
+  - {fileID: 11400000, guid: 38ebb75d4c7150a47a2e891e78e325e1, type: 2}
+  - {fileID: 11400000, guid: f3ae058b363dc644e89636df28ead02a, type: 2}
+  - {fileID: 11400000, guid: 6a8b347abe00fcb44852c953ee7c0ddc, type: 2}
+  - {fileID: 11400000, guid: 5f2b1faf3c14e504eb1ca025f6ac75c3, type: 2}
+  - {fileID: 11400000, guid: 5dda80f3afbdea244be83e28f6de86da, type: 2}
+  - {fileID: 11400000, guid: dbf4eee19f878434889d119c9d3739f9, type: 2}
+  - {fileID: 11400000, guid: 92e54577a19ad1c4abaa0b03ebdf596e, type: 2}
+  - {fileID: 11400000, guid: f0f5c1d5dd3668f45bfe266c13c7914a, type: 2}
+  - {fileID: 11400000, guid: e13e14be30fc5c64695971f307d1123e, type: 2}
+  - {fileID: 11400000, guid: 0739c8fc0c36262469dc0c681529238c, type: 2}
+  - {fileID: 11400000, guid: eb5302528430c504b8ef61c2a61061ca, type: 2}
+  texts:
+  - {fileID: 11400000, guid: 406930a706ead504fbb8def487191b05, type: 2}
 --- !u!114 &1207175533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,7 +597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1857801310
 Transform:
   m_ObjectHideFlags: 0
@@ -620,7 +628,9 @@ MonoBehaviour:
   currentCutScene: {fileID: 0}
   currentCutNum: 0
   currentTextNum: 0
-  cutScenes: []
+  cutScenes:
+  - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
+  - {fileID: 11400000, guid: 8867d427f3bcade47a447a1766521e38, type: 2}
 --- !u!114 &1857801312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,7 +654,7 @@ GameObject:
   - component: {fileID: 2099014331}
   - component: {fileID: 2099014332}
   m_Layer: 0
-  m_Name: ChatMembersAndSystem
+  m_Name: ChatSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,9 +687,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b7eefaa5f8df24ba5d2a3637293abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setting: {fileID: 0}
   members:
-  - name: "\uD29C\uD1A0\uB9AC\uC5BC 1"
+  - name: Tutorial1
     nickName: 10
     currentFace: 0
     faces:
@@ -688,7 +697,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
-  - name: "\uD29C\uD1A0\uB9AC\uC5BC 2"
+  - name: Tutorial2
     nickName: 11
     currentFace: 0
     faces:
@@ -701,10 +710,14 @@ MonoBehaviour:
   changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   wheelSpeed: 25
   isMemberListOpen: 0
+  ux_text: {fileID: 9197481963319205126, guid: 7214ad9c964cfbe43bb36a1fe2d9ea0e, type: 3}
+  ux_highlightedtext: {fileID: 9197481963319205126, guid: 4ee041c9c45728d47a43d9275dc3fcdd, type: 3}
   ux_chat: {fileID: 9197481963319205126, guid: 790f5ecd05e5c664789ec66b990f0cee, type: 3}
   ux_askChat: {fileID: 9197481963319205126, guid: eca624ffc6976be4cbe63439f47c4452, type: 3}
   ux_hiddenAskChat: {fileID: 9197481963319205126, guid: 167b99bf43499a4418fb5d4f44cf9276, type: 3}
   ux_memberList: {fileID: 9197481963319205126, guid: b8fd32671ecc31340bf018f921558420, type: 3}
+  duration: 0.75
+  strength: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -712,8 +725,7 @@ SceneRoots:
   - {fileID: 1663529867}
   - {fileID: 150678876}
   - {fileID: 594023516}
+  - {fileID: 1857801310}
   - {fileID: 2099014331}
   - {fileID: 378627793}
-  - {fileID: 1857801310}
   - {fileID: 1207175531}
-  - {fileID: 1112735946}
