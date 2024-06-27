@@ -54,6 +54,8 @@ public class UIReader_Chatting : MonoBehaviour
     [HideInInspector] public Button ui_memberListButton;
     [HideInInspector] public bool isMemberListOpen;
 
+    [HideInInspector] public Button ui_nextChatButton;
+
     // other member profile
     VisualElement ui_otherFace;
     VisualElement ui_myFace;
@@ -109,6 +111,7 @@ public class UIReader_Chatting : MonoBehaviour
         ui_otherFace = UIReader_Main.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
         ui_myFace = UIReader_Main.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("MyFace");
         ui_memberListButton = UIReader_Main.Instance.root.Q<Button>("ChangeTarget");
+        ui_nextChatButton = UIReader_Main.Instance.root.Q<Button>("NextChatBtn");
         ui_otherMemberName = UIReader_Main.Instance.root.Q<Label>("TargetName");
         ui_memberListGround = UIReader_Main.Instance.root.Q<VisualElement>("ChatMemberList");
     }
@@ -122,6 +125,7 @@ public class UIReader_Chatting : MonoBehaviour
         // member list hidden
         OnOffMemberList();
         ui_memberListButton.clicked += OnOffMemberList;
+        ui_nextChatButton.clicked += () => { GameManager.Instance.chatHumanManager.NextChat(); };
     }
 
     // find member
