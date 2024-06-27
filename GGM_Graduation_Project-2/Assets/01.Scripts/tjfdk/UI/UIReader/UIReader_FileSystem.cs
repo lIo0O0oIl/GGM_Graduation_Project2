@@ -398,6 +398,8 @@ public class UIReader_FileSystem : MonoBehaviour
 
     public void HighlightingFolderPathEvent(string folderName)
     {
+        Debug.Log("네");
+
         Stack<string> pathName = new Stack<string>();
         string top = folderName;
 
