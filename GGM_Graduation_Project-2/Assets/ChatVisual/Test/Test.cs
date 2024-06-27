@@ -9,10 +9,10 @@ namespace ChatVisual
     {
         private UIDocument uiDocument;
 
-        private VisualElement baseArea;
+        private VisualElement baseArea, baseArea2;
         private Label textAnim;
 
-        public GameObject cube;
+        public GameObject cube, cube2;
 
         private void Awake()
         {
@@ -23,18 +23,25 @@ namespace ChatVisual
         {
             var root = uiDocument.rootVisualElement;
             baseArea = root.Q<VisualElement>("BaseArea");
+            baseArea2 = root.Q<VisualElement>("BaseArea2");
             textAnim = root.Q<Label>("TextAnim");
 
             ShakeChat();
         }
 
-        public float duration = 1.0f; // 흔들기 지속 시간
-        public float strength = 1; // 얼마나 멀리로 흔들리는지
+        public float duration; // 흔들기 지속 시간
+        public float strength; // 얼마나 멀리로 흔들리는지
+
+        //[Header("Cube2")]
+        //public float dru
 
         private void ShakeChat()
         {
             cube.transform.DOShakePosition(60f, .025f, 10, 40, false, false, ShakeRandomnessMode.Harmonic);
+            cube2.transform.DOShakePosition(.65f, .13f, 20, 50, false, false);
 
+
+            #region 긴 진동
             Vector3 originalPosition = baseArea.transform.position;
             Vector3 randomOffset = Vector3.zero;
             float elapsed = 0f;
@@ -59,7 +66,7 @@ namespace ChatVisual
                     else
                     {
                         movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / duration);
-                }
+                    }
                     baseArea.transform.position = movePos;
                 })
                 .OnStepComplete(() =>
@@ -74,40 +81,61 @@ namespace ChatVisual
                     Debug.Log(randomOffset);
                 })
                 .SetLoops(-1, LoopType.Restart);
+            #endregion
 
 
-            /*    DOTween.To(() => elapsed, x => elapsed = x, 1f, duration)
-           .OnStart(() =>
-           {
-               float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
-               float x = strength * Mathf.Cos(randomAngle);
-               float y = strength * Mathf.Sin(randomAngle);
-
-               randomOffset = new Vector3(x, y, 0);
-               Debug.Log(randomOffset);
-           })
-           .OnUpdate(() =>
-           {
-               // 무작위 위치 오프셋을 생성
-               Vector3 movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / duration);
-               baseArea.transform.position = originalPosition + movePos;
-               Debug.Log(1);
-           })
-           .OnComplete(() =>
-           {
-               // 애니메이션이 끝나면 원래 위치로 되돌립니다.
-               baseArea.transform.position = originalPosition;
-               Debug.Log(baseArea.transform.position);
-           })
-           .SetLoops(-1, LoopType.Restart);
-
-            */
+            Cube2();
 
             textAnim.text = string.Empty;
             string m = "element.transform.position = new Vector3(100, 50, 0);";
             DOTween.To(() => textAnim.text, x => textAnim.text = x, m, 3f).SetEase(Ease.Linear);
 
 
+        }
+
+        private void Cube2()
+        {
+            Vector3 originalPosition = baseArea2.transform.position;
+            Vector3 randomOffset = Vector3.zero;
+            float elapsed = 0f;
+            float _duration = 1;
+            float _strength = 40;
+
+            DOTween.To(() => elapsed, x => elapsed = x, 1f, 0.03f)
+                .OnStart(() =>
+                {
+                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+                    float x = _strength * Mathf.Cos(randomAngle);
+                    float y = _strength * Mathf.Sin(randomAngle);
+
+                    randomOffset = new Vector3(x, y, 0);
+                    Debug.Log(randomOffset);
+                })
+                .OnUpdate(() =>
+                {
+                    Vector3 movePos = Vector3.zero;
+                    if (elapsed < (_duration / 2))       // 밖으로 나가는 중
+                    {
+                        movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / _duration);
+                    }
+                    else
+                    {
+                        movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / _duration);
+                    }
+                    baseArea2.transform.position = movePos;
+                })
+                .OnStepComplete(() =>
+                {
+                    baseArea2.transform.position = originalPosition;
+
+                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+                    float x = _strength * Mathf.Cos(randomAngle);
+                    float y = _strength * Mathf.Sin(randomAngle);
+
+                    randomOffset = new Vector3(x, y, 0);
+                    Debug.Log(randomOffset);
+                })
+                .SetLoops(20, LoopType.Restart);
         }
     }
 }

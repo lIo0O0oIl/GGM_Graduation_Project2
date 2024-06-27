@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: 0276ca75995e7d749b7048ff10e348f7
-  position: {x: -207.31308, y: 766.4616}
+  position: {x: -191.0399, y: 989.4417}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: -6193624714006786704}
   - {fileID: -8356285087240472601}
   - {fileID: 4405423513054005677}
+  - {fileID: 8966165020682150359}
   childList:
   - {fileID: -6076696539461381510}
   is_AllQuestion: 0
@@ -69,7 +70,7 @@ MonoBehaviour:
   m_Name: AskNode
   m_EditorClassIdentifier: 
   guid: c23f463e61084af43832ceb0e77bb17d
-  position: {x: 5.6869655, y: 900.4616}
+  position: {x: 21.960106, y: 1123.4418}
   index: 0
   is_UseThis: 0
   test_isRead: 1
@@ -91,7 +92,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: de206ac89be293547aa7926bc5832e7d
-  position: {x: -94.31304, y: 1300.4617}
+  position: {x: -78.03986, y: 1523.4419}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_Name: AskNode
   m_EditorClassIdentifier: 
   guid: 4547aa1c6cb4a6248ad22d7b15132925
-  position: {x: -223.31306, y: 903.4617}
+  position: {x: -207.03989, y: 1126.4418}
   index: 0
   is_UseThis: 0
   test_isRead: 1
@@ -171,7 +172,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 3c79e0703a82e614dbe00311e3a6d082
-  position: {x: 8.686998, y: 1029.4617}
+  position: {x: 24.960096, y: 1252.4419}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -198,7 +199,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 8728c81ccad54c94787001710adf34b4
-  position: {x: -222.31303, y: 1030.4617}
+  position: {x: -206.03986, y: 1253.4417}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -240,6 +241,8 @@ MonoBehaviour:
   - {fileID: -6675896327477291590}
   - {fileID: -8356285087240472601}
   - {fileID: 4405423513054005677}
+  - {fileID: 8259243804894548275}
+  - {fileID: 8966165020682150359}
 --- !u!114 &2188139232480600969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +276,7 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: af23961aba11d4d4a9b6f336f4e22fac
-  position: {x: 5.6869655, y: 767.4617}
+  position: {x: 21.960106, y: 990.4417}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -281,6 +284,7 @@ MonoBehaviour:
   - {fileID: -6193624714006786704}
   - {fileID: -8356285087240472601}
   - {fileID: 4405423513054005677}
+  - {fileID: 8966165020682150359}
   childList:
   - {fileID: -7710130745440325194}
   is_AllQuestion: 0
@@ -308,8 +312,7 @@ MonoBehaviour:
   test_isRead: 0
   parent: {fileID: -8356285087240472601}
   childList:
-  - {fileID: -8971342560890099455}
-  - {fileID: 2930161960634033475}
+  - {fileID: 8259243804894548275}
   state: 0
   type: 0
   chatText: "\uD754\uB4E4\uB9AC\uB294 \uD6A8\uACFC \uB05D\uB0A8?"
@@ -330,7 +333,7 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: 83f63048b1781f84c9d9bcfd3cca9cf1
-  position: {x: -92.31304, y: 1174.4617}
+  position: {x: -76.039894, y: 1397.4417}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -347,6 +350,61 @@ MonoBehaviour:
   fileName: 
   is_LockQuestion: 0
   is_Unlock: 0
+--- !u!114 &8259243804894548275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: cabb661fb8ae80f428eecabc6fd73361
+  position: {x: -95.00007, y: 695.7502}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: 4405423513054005677}
+  childList:
+  - {fileID: 8966165020682150359}
+  state: 0
+  type: 0
+  chatText: "\uC774\uAC74 \uD55C\uBC88\uB9CC \uC9C4\uB3D9"
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &8966165020682150359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 7ada71631c7977b49937c16d01d55af2
+  position: {x: -20.000046, y: 821.3002}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: 8259243804894548275}
+  childList:
+  - {fileID: 2930161960634033475}
+  - {fileID: -8971342560890099455}
+  state: 0
+  type: 0
+  chatText: "\uB0D0\uBC0D"
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
 --- !u!114 &9193042446610041499
 MonoBehaviour:
   m_ObjectHideFlags: 0
