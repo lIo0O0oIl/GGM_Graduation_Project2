@@ -40,8 +40,8 @@ public class GameManager : Singleton<GameManager>
     }
         else
         {
-            chatSystem.AddMember("Tutorial1");
-            chatSystem.ChoiceMember(chatSystem.FindMember("Tutorial1"));
+            chatSystem.AddMember("Test");
+            chatSystem.ChoiceMember(chatSystem.FindMember("Test"));
             chatSystem.ChangeMyProfile("플레이어", myFaec);
             is_tutorial = false;
         }
