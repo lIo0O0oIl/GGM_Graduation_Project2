@@ -19,7 +19,6 @@ namespace ChatVisual
 
         private bool is_Expand = false;
         private bool is_LoadList = false;
-        private bool is_AllQuestion = false;
         private bool is_LoadNextDialog = false;
 
         public void UpdateInspector(NodeView node)   
@@ -146,6 +145,11 @@ namespace ChatVisual
                             }
 
                             chatNode.is_UseThis = EditorGUILayout.Toggle("is_UseThis", chatNode.is_UseThis);
+
+                            EditorGUI.BeginDisabledGroup(true);
+                            EditorGUILayout.IntField("ParentExist", chatNode.parent != null ? 1 : 0);
+                            EditorGUILayout.IntField("ChildListCount", chatNode.childList.Count);
+                            EditorGUI.EndDisabledGroup();
                         }
                         break;
                     case AskNode:

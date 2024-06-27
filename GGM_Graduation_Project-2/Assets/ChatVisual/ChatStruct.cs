@@ -17,7 +17,9 @@ namespace ChatVisual
 
         Teacher,
         Friend,
-        Home
+        Home,
+
+        Test
     }
 
     public enum EChatState
