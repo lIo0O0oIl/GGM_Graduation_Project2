@@ -198,7 +198,7 @@ public class UIReader_Chatting : MonoBehaviour
                 chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
                 chat.name = "chat";
 
-                PopulateChatText(chat, text);
+                HighlightingChatText(chat, text);
                 break;
 
             // if Image
@@ -289,7 +289,7 @@ public class UIReader_Chatting : MonoBehaviour
         Invoke("EndToScroll", 0.5f);
     }
 
-    private void PopulateChatText(VisualElement chat, string text)
+    private void HighlightingChatText(VisualElement chat, string text)
     {
         VisualElement speech = chat.Q<VisualElement>("Speech");
 
