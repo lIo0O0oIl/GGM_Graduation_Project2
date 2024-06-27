@@ -64,8 +64,11 @@ namespace ChatVisual
                 children.ForEach(c =>
                 {
                     NodeView child = FindNodeView(c);
-                    Edge edge = parent.output.ConnectTo(child.input);
-                    AddElement(edge);
+                    if (parent != null && child != null)
+                    {
+                        Edge edge = parent.output.ConnectTo(child.input);
+                        AddElement(edge);
+                    }
                 });
             });
         }
@@ -73,6 +76,7 @@ namespace ChatVisual
 
         private NodeView FindNodeView(Node node)
         {
+            if (node == null) return null;
             return GetNodeByGuid(node.guid) as NodeView;
         }
 
