@@ -1,13 +1,8 @@
 using ChatVisual;
 using DG.Tweening;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Security.Cryptography;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -307,12 +302,23 @@ public class UIReader_Chatting : MonoBehaviour
                 if (isHyperlink)
                 {
                     Button hyperlinkButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate()).Q<Button>();
-                    hyperlinkButton.Q<Label>().text = segment;
+                    Label hyperlinkLabel = hyperlinkButton.Q<Label>();
+                    hyperlinkLabel.text = segment;
 
                     hyperlinkButton.clicked += () =>
                     {
                         UIReader_FileSystem.Instance.HighlightingFolderPathEvent(segment);
                     };
+
+                    hyperlinkButton.RegisterCallback<MouseEnterEvent>(evt =>
+                    {
+                        hyperlinkLabel.style.color = new UnityEngine.Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
+                    });
+
+                    hyperlinkButton.RegisterCallback<MouseLeaveEvent>(evt =>
+                    {
+                        hyperlinkLabel.style.color = new UnityEngine.Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
+                    });
 
                     speech.Add(hyperlinkButton);
                 }
