@@ -75,7 +75,7 @@ public class ChatHumanManager : MonoBehaviour
                                 chatNode.type, chatNode.face, chatNode.chatText, true);
 
                             // chat event
-                            GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode, chatNode.face, chatNode.textEvent);
+                            GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode.state, chatNode, chatNode.face, chatNode.textEvent);
                         }
                     }
                     else if (node is AskNode askNode)
