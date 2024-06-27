@@ -11,6 +11,7 @@ namespace ChatVisual
         JW, // Junwon
         HS, // Hyensuck
         CM, // Cheamin
+        HG, // HyenGue
         GJH, // GoJinHyek
         DY, // Deayang
 

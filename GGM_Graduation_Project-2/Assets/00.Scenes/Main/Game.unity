@@ -736,8 +736,19 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
-  - name: "\uACE0\uC9C4\uD601 \uC120\uBC30\uB2D8"
+  - name: "\uBC15\uD604\uADDC"
     nickName: 5
+    currentFace: 0
+    faces:
+    - {fileID: 21300000, guid: 0af0a498aac2b3c4b8f2933f75198551, type: 3}
+    - {fileID: 21300000, guid: f73b7fc13a9f4fc4696dba895d845b60, type: 3}
+    - {fileID: 21300000, guid: 4230f11a38d80e149bc6dfd3e9ff4fb0, type: 3}
+    isOpen: 0
+    chattings: []
+    questions: []
+    memCurrentNode: {fileID: 0}
+  - name: "\uACE0\uC9C4\uD601 \uC120\uBC30\uB2D8"
+    nickName: 6
     currentFace: 0
     faces:
     - {fileID: 21300000, guid: 4e1725d5bfe5ba54b9c4524071df03d7, type: 3}

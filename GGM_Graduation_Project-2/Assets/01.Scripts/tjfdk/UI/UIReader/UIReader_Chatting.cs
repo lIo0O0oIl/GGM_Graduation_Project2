@@ -363,24 +363,40 @@ public class UIReader_Chatting : MonoBehaviour
     }
 
     // setting Face and event
-    public void SettingChat(MemberProfile member, Node node, EFace face, List<EChatEvent> evts)
+    public void SettingChat(MemberProfile member, EChatState who, Node node, EFace face, List<EChatEvent> evts)
     {
         // if current face of member is the same new face
         if (member.currentFace != face)
         {
             // find member face
-            VisualElement memberFace = ui_otherFace.Q<VisualElement>("Face");
+            VisualElement memberFace = null;
+
+            if (who == EChatState.Me)
+            {
+                Debug.Log("나");
+                member = FindMember("HG");
+                memberFace = ui_myFace.Q<VisualElement>("Face");
+            }
+            else
+            {
+                Debug.Log("상대");
+                memberFace = ui_otherFace.Q<VisualElement>("Face");
+            }
+
             // face type
             switch (face)
             {
                 case EFace.Default:
-                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default]);
+                    Debug.Log(face.ToString() + " " + ((int)EFace.Default));
+                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default - 1]);
                     break;
                 case EFace.Blush:
-                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush]);
+                    Debug.Log(face.ToString() + " " + ((int)EFace.Blush));
+                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush - 1]);
                     break;
                 case EFace.Angry:
-                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Angry]);
+                    Debug.Log(face.ToString() + " " + ((int)EFace.Angry));
+                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Angry - 1]);
                     break;
             }
 
