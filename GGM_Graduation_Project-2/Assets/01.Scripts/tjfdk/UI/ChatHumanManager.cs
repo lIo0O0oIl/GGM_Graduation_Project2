@@ -174,7 +174,7 @@ public class ChatHumanManager : MonoBehaviour
         // node list
         var children = chatContainer.GetChatTree().GetChild(currentNode);
 
-        Debug.Log(children[0]);     // 에스크 노드가 오는 경우
+        //Debug.Log(children[0]);     // 에스크 노드가 오는 경우
 
         foreach (Node node in children)
         {
