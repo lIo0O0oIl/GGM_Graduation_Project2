@@ -50,6 +50,7 @@ namespace ChatVisual
     {
         Default,
         Vibration,
+        OneVibration,
         Camera,
         LoadFile,
         LoadNextDialog

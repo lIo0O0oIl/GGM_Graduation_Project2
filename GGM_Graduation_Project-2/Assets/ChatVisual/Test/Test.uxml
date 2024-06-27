@@ -2,8 +2,13 @@
     <Style src="project://database/Assets/ChatVisual/Test/Test.uss?fileID=7433441132597879392&amp;guid=753eb97c7bdc2d646b7ad1a71c5d46ae&amp;type=3#Test" />
     <ui:VisualElement name="Main" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:Label tabindex="-1" text="element.transform.position = new Vector3(100, 50, 0);&#10;" display-tooltip-when-elided="true" name="TextAnim" style="font-size: 50px; position: absolute; top: 728px; left: 315px; height: 81px; color: rgb(255, 255, 255);" />
-        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 375px; width: 540px; position: absolute; top: 350px; left: 733px;">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 375px; width: 540px; position: absolute; top: 338px; left: 422px;">
             <ui:VisualElement name="BaseArea" class="slot" style="background-color: rgb(255, 255, 255); position: relative; height: 60px; width: 425px; left: 0; top: 0; rotate: 0;" />
+            <ui:Label tabindex="-1" text="Vibration" display-tooltip-when-elided="true" style="top: 100px; font-size: 50px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 375px; width: 540px; position: absolute; top: 331px; left: 1072px;">
+            <ui:VisualElement name="BaseArea2" class="slot" style="background-color: rgb(255, 255, 255); position: relative; height: 60px; width: 425px; left: 0; top: 0; rotate: 0;" />
+            <ui:Label tabindex="-1" text="OneVibration" display-tooltip-when-elided="true" style="top: 100px; font-size: 50px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
