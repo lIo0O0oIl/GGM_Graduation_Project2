@@ -1,4 +1,5 @@
 using ChatVisual;
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq.Expressions;
 using System.Security.Cryptography;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -57,8 +59,6 @@ public class UIReader_Chatting : MonoBehaviour
     VisualElement ui_myFace;
     Label ui_otherMemberName;
 
-
-
     // template
     [Header("Template")]
     [SerializeField] VisualTreeAsset ux_text;
@@ -68,7 +68,11 @@ public class UIReader_Chatting : MonoBehaviour
     [SerializeField] VisualTreeAsset ux_hiddenAskChat;
     [SerializeField] VisualTreeAsset ux_memberList;
 
-
+    // 흔들림 효과 넣어주기
+    private Tween DoTween;
+    public float duration = 1.0f; // 흔들기 지속 시간
+    public float strength = 1; // 얼마나 멀리로 흔들리는지
+    private VisualElement currentElement;
 
     private void Awake()
     {
@@ -285,6 +289,7 @@ public class UIReader_Chatting : MonoBehaviour
         }
 
         ui_chatGround.Add(chat);
+        currentElement = chat;
         // scroll pos to end
         Invoke("EndToScroll", 0.5f);
     }
@@ -491,7 +496,57 @@ public class UIReader_Chatting : MonoBehaviour
                     case EChatEvent.Default:
                     case EChatEvent.Camera:
                     case EChatEvent.Vibration:
+                        {
+                            Debug.Log("진동 시작");
+                            Vector3 originalPosition = currentElement.transform.position;
+                            Vector3 randomOffset = Vector3.zero;
+                            float elapsed = 0f;
+
+                            DoTween = DOTween.To(() => elapsed, x => elapsed = x, 1f, 0.25f)
+                                .OnStart(() =>
+                                {
+                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+                                    float x = strength * Mathf.Cos(randomAngle);
+                                    float y = strength * Mathf.Sin(randomAngle);
+
+                                    randomOffset = new Vector3(x, y, 0);
+                                    Debug.Log(randomOffset);
+                                })
+                                .OnUpdate(() =>
+                                {
+                                    Vector3 movePos = Vector3.zero;
+                                    if (elapsed < (duration / 2))       // 밖으로 나가는 중
+                                    {
+                                        movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / duration);
+                                    }
+                                    else
+                                    {
+                                        movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / duration);
+                                    }
+                                    currentElement.transform.position = movePos;
+                                })
+                                .OnStepComplete(() =>
+                                {
+                                    currentElement.transform.position = originalPosition;
+
+                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+                                    float x = strength * Mathf.Cos(randomAngle);
+                                    float y = strength * Mathf.Sin(randomAngle);
+
+                                    randomOffset = new Vector3(x, y, 0);
+                                    Debug.Log(randomOffset);
+                                })
+                                .SetLoops(-1, LoopType.Restart);
+                        }
                         break;
+                }
+            }
+            if (evts.Count <= 0/* || evts.Contains(EChatEvent.Vibration)*/)
+            {
+                // 만약 트윈이 되고 있는 중이라면 꺼주기
+                if (DoTween != null && DoTween.IsPlaying())
+                {
+                    DoTween.Kill();
                 }
             }
         }
