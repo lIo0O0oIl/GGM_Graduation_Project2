@@ -11,7 +11,7 @@ namespace ChatVisual
         JW, // Junwon
         HS, // Hyensuck
         CM, // Cheamin
-        HG, // HyenGue
+        GJH, // GoJinHyek
         DY, // Deayang
 
         Teacher,
@@ -39,9 +39,10 @@ namespace ChatVisual
 
     public enum EFace
     {
+        NotChange,       
         Default,       
         Blush,      
-        Difficult   
+        Angry   
     }
 
     public enum EChatEvent

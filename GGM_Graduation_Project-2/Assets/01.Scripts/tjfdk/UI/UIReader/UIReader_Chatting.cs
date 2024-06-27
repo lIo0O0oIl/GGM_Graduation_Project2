@@ -463,8 +463,8 @@ public class UIReader_Chatting : MonoBehaviour
                 case EFace.Blush:
                     memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush]);
                     break;
-                case EFace.Difficult:
-                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Difficult]);
+                case EFace.Angry:
+                    memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Angry]);
                     break;
             }
 

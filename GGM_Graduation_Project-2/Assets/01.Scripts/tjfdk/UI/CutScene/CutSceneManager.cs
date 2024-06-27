@@ -43,7 +43,7 @@ public class CutSceneManager : MonoBehaviour
         //return cutSceneList[name];
     }
 
-    public void CutScene(bool isOpen, string name)
+    public void CutScene(string name)
     {
         currentCutScene = FindCutScene(name);
         currentCutNum = 0;
