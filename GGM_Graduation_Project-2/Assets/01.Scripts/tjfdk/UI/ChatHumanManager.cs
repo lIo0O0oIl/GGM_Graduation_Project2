@@ -125,7 +125,7 @@ public class ChatHumanManager : MonoBehaviour
                             if (conditionNode.is_UseThis == false)
                             {
                                 nowCondition = conditionNode;
-                                is_ChatStart = true;
+                                StartChatting();
                             }
                             else
                             {
@@ -149,7 +149,7 @@ public class ChatHumanManager : MonoBehaviour
                                 }
                                 nowHuman.questions.Add(ask);
                                 conditionNode.childList[0].test_isRead = true;
-                                is_ChatStart = true;
+                                StartChatting();
                             }
                         }
                     }
@@ -192,10 +192,12 @@ public class ChatHumanManager : MonoBehaviour
     public void StartChatting()
     {
         is_ChatStart = true;
+        GameManager.Instance.chatSystem.OnOffMemberListButton(false);
     }
 
     public void StopChatting()
     {
         is_ChatStart = false;
+        GameManager.Instance.chatSystem.OnOffMemberListButton(true);
     }
 }

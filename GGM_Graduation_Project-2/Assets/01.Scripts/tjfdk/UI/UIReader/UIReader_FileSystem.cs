@@ -379,17 +379,44 @@ public class UIReader_FileSystem : MonoBehaviour
         filePathLisk.Push(pathName);
     }
 
-    private void FolderPathEvent(string fileName)
+    private void FolderPathEvent(string folderName)
     {
         while (true)
         {
-            if (filePathLisk.Peek() == fileName)
+            if (filePathLisk.Peek() == folderName)
                 break;
             ui_filePathGround.RemoveAt(ui_filePathGround.childCount - 1);
             filePathLisk.Pop();
         }
 
         DrawFile(filePathLisk.Peek());
+    }
+
+    public void HighlightingFolderPathEvent(string folderName)
+    {
+        Stack<string> pathName = new Stack<string>();
+        string top = folderName;
+
+        // all remove paths
+        //for (int i = ui_filePathGround.childCount - 1; i >= 0; i--)
+        //    ui_filePathGround.RemoveAt(i);
+
+        while (top != "Main")
+        {
+            pathName.Push(top);
+            top = GameManager.Instance.fileSystem.FindFolder(top).parentFolderName;
+        }
+
+        //AddFilePath("Main");
+            Debug.Log("Main");
+        while (pathName.Count > 0)
+        {
+            //AddFilePath(pathName.Peek());
+            Debug.Log(pathName.Peek());
+            pathName.Pop();
+        }
+
+        DrawFile(folderName);
     }
 
     public void OnOffFileSystem(float during)

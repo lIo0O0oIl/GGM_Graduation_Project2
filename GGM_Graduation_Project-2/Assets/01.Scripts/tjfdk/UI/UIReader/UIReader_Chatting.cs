@@ -684,6 +684,24 @@ public class UIReader_Chatting : MonoBehaviour
         ui_myFace.Q<VisualElement>("Face").style.backgroundImage = new StyleBackground(face);
     }
 
+    // member list button on/off
+    public void OnOffMemberListButton(bool isOpen)
+    {
+        if (isOpen)
+        {
+            ui_memberListButton.style.backgroundImage = new StyleBackground(changeMemberBtnOn);
+            ui_memberListButton.pickingMode = PickingMode.Position;
+            ui_memberListButton.RemoveFromClassList("translucence");
+        }
+        else
+        {
+            ui_memberListButton.style.backgroundImage = new StyleBackground(changeMemberBtnOff);
+            ui_memberListButton.pickingMode = PickingMode.Ignore;
+            ui_memberListButton.AddToClassList("translucence");
+            ui_memberListGround.style.display = DisplayStyle.None;
+        }
+    }
+
     // member list on/off
     public void OnOffMemberList()
     {

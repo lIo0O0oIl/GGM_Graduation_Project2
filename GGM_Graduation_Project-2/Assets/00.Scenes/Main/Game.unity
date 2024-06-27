@@ -329,6 +329,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e9501c5b49269d47ba6c467908910d1, type: 2}
   - {fileID: 11400000, guid: 1a4d03963b92e7e478adfbda854c4462, type: 2}
   - {fileID: 11400000, guid: 4ff2f94a7ba2a4a47b1b28c249f5e89a, type: 2}
+  - {fileID: 11400000, guid: ac994f062d573ad4dbb4df103331b42e, type: 2}
 --- !u!114 &378627795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +474,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e13e14be30fc5c64695971f307d1123e, type: 2}
   - {fileID: 11400000, guid: 0739c8fc0c36262469dc0c681529238c, type: 2}
   - {fileID: 11400000, guid: eb5302528430c504b8ef61c2a61061ca, type: 2}
+  - {fileID: 11400000, guid: e990686ddbb16004db296f92e3defcd2, type: 2}
   texts:
   - {fileID: 11400000, guid: 406930a706ead504fbb8def487191b05, type: 2}
 --- !u!114 &1207175533
@@ -808,6 +810,7 @@ MonoBehaviour:
   isMemberListOpen: 0
   ux_text: {fileID: 9197481963319205126, guid: 7214ad9c964cfbe43bb36a1fe2d9ea0e, type: 3}
   ux_highlightedtext: {fileID: 9197481963319205126, guid: 4ee041c9c45728d47a43d9275dc3fcdd, type: 3}
+  ux_button: {fileID: 0}
   ux_chat: {fileID: 9197481963319205126, guid: 790f5ecd05e5c664789ec66b990f0cee, type: 3}
   ux_askChat: {fileID: 9197481963319205126, guid: eca624ffc6976be4cbe63439f47c4452, type: 3}
   ux_hiddenAskChat: {fileID: 9197481963319205126, guid: 167b99bf43499a4418fb5d4f44cf9276, type: 3}
