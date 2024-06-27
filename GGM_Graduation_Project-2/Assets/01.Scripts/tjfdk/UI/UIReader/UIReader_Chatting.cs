@@ -304,6 +304,12 @@ public class UIReader_Chatting : MonoBehaviour
                 {
                     Button hyperlinkButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate()).Q<Button>();
                     hyperlinkButton.Q<Label>().text = segment;
+
+                    hyperlinkButton.clicked += () =>
+                    {
+                        UIReader_FileSystem.Instance.HighlightingFolderPathEvent(segment);
+                    };
+
                     speech.Add(hyperlinkButton);
                 }
                 else

@@ -34,6 +34,8 @@ public class FolderFile
 
 public class UIReader_FileSystem : MonoBehaviour
 {
+    static public UIReader_FileSystem Instance;
+
     [SerializeField]
     private float fileAreaSizeOn, fileAreaSizeOff;
     [SerializeField]
@@ -81,6 +83,8 @@ public class UIReader_FileSystem : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         fileFolders = new List<FolderFile>();
         filePathLisk = new Stack<string>();
         lockQuestions = new List<VisualElement>();
@@ -416,6 +420,7 @@ public class UIReader_FileSystem : MonoBehaviour
             pathName.Pop();
         }
 
+        Debug.Log(folderName);
         DrawFile(folderName);
     }
 
