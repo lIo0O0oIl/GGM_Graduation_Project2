@@ -91,7 +91,6 @@ public class UIReader_Main : MonoBehaviour
 
     private void GameLoad()
     {
-        Debug.Log("게임");
         // Panel
 
         chattingButton = root.Q<Button>("ChattingBtn");
@@ -157,8 +156,10 @@ public class UIReader_Main : MonoBehaviour
 
     public void OpenCutScene()
     {
+        isCutSceneOpen = !isCutSceneOpen;
+
         if (isCutSceneOpen)
-        {
+        {            
             cutScenePanel.style.display = DisplayStyle.Flex;
             mainPanel.style.display= DisplayStyle.None;
 
@@ -181,6 +182,8 @@ public class UIReader_Main : MonoBehaviour
 
         currentTextUi = ui;
         currentText = text;
+
+        ui.text = "";
 
         currentTextTween = DOTween.To(() => currentTextLength, x => currentTextLength = x, text.Length, during)
             .SetEase(Ease.Linear)

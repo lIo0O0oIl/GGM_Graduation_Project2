@@ -32,18 +32,19 @@ public class GameManager : Singleton<GameManager>
 
     public void GameStart()
     {
-        if (!is_tutorial)
-        {
+        //if (!is_tutorial)
+        //{
+        
             cutSceneSystem.PlayCutScene("DieFall");
-            chatSystem.AddMember("HG");
+            chatSystem.AddMember("GJH");
             chatSystem.OnOffMemberList();
-        }
-        else
-        {
-            chatSystem.AddMember("Tutorial1");
-            chatSystem.ChoiceMember(chatSystem.FindMember("Tutorial1"));
-            chatSystem.ChangeMyProfile("플레이어", myFaec);
-            is_tutorial = false;
-        }
+        //}
+        //else
+        //{
+        //    chatSystem.AddMember("Tutorial1");
+        //    chatSystem.ChoiceMember(chatSystem.FindMember("Tutorial1"));
+        //    chatSystem.ChangeMyProfile("플레이어", myFaec);
+        //    is_tutorial = false;
+        //}
     }
 }

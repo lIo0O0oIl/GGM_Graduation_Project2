@@ -14,14 +14,14 @@ public class UIReader_CutScene : MonoBehaviour
     private void OnEnable()
     {
         scene = UIReader_Main.Instance.root.Q<Button>("Scene");
-        text = UIReader_Main.Instance.root.Q<Label>("Text");
+        text = UIReader_Main.Instance.root.Q<VisualElement>("CutScene").Q<Label>("Text");
 
         scene.clicked += (() => { GameManager.Instance.cutSceneManager.Next(); });
     }
 
     public void PlayCutScene(string name)
     {
-        GameManager.Instance.cutSceneManager.CutScene(true, name);
+        GameManager.Instance.cutSceneManager.CutScene(name);
         UIReader_Main.Instance.OpenCutScene();
     }
 

@@ -2126,10 +2126,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb5192e7663f39d43b3f22d2ad511606, type: 3}
-  m_Name: HG
+  m_Name: GJH
   m_EditorClassIdentifier: 
   rootNode: {fileID: 3332800361343203531}
-  humanName: HG
+  humanName: GJ
   nodeList:
   - {fileID: 3332800361343203531}
   - {fileID: 2768966851647550630}
@@ -3286,13 +3286,13 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   guid: 227ea8fd4bd3fa64c9a508ede1f4a37a
-  position: {x: 2260.5376, y: -537.47003}
+  position: {x: 2259.4775, y: -537.60016}
   index: 0
   is_UseThis: 0
   test_isRead: 0
   parent: {fileID: 11400000}
   child: {fileID: 8966239018989811733}
-  showName: HG
+  showName: GJH
 --- !u!114 &3337403160450376717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4828,7 +4828,7 @@ MonoBehaviour:
   state: 1
   type: 0
   chatText: "(zzz...) \uD760... \uD760\uB0D0..."
-  face: 0
+  face: 2
   loadFileName: []
   textEvent: 
   LoadNextDialog: 
