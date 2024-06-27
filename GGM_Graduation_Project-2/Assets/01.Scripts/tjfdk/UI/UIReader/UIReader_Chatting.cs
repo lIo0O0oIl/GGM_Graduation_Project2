@@ -63,6 +63,7 @@ public class UIReader_Chatting : MonoBehaviour
     [Header("Template")]
     [SerializeField] VisualTreeAsset ux_text;
     [SerializeField] VisualTreeAsset ux_highlightedtext;
+    [SerializeField] VisualTreeAsset ux_button;
     [SerializeField] VisualTreeAsset ux_chat;
     [SerializeField] VisualTreeAsset ux_askChat;
     [SerializeField] VisualTreeAsset ux_hiddenAskChat;
@@ -202,7 +203,7 @@ public class UIReader_Chatting : MonoBehaviour
                 chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
                 chat.name = "chat";
 
-                HighlightingChatText(chat, text);
+                EventChatText(chat, text);
                 break;
 
             // if Image
@@ -233,47 +234,6 @@ public class UIReader_Chatting : MonoBehaviour
                 break;
         }
 
-        //// chat type
-        //switch (type)
-        //{
-        //    // if Text
-        //    case EChatType.Text:
-        //        // create uxml
-        //        chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
-        //        chat.name = "chat";
-
-        //        // chat text setting
-        //        chat.Q<Label>().text = text;
-        //        break;
-
-        //    // if Image
-        //    case EChatType.Image:
-        //        // create VisualElement
-        //        chat = new VisualElement();
-        //        chat.name = "image";
-        //        // image size change
-        //        UIReader_Main.Instance.ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
-        //        break;
-
-        //    // if CutScene
-        //    case EChatType.CutScene:
-        //        // create Button
-        //        chat = new Button();
-        //        chat.name = "cutScene";
-        //        // change chat style
-        //        chat.AddToClassList("FileChatSize");
-        //        chat.AddToClassList("NoButtonBorder");
-        //        // find first cut of cutscene
-        //        ChatNode cutScene = GameManager.Instance.chatHumanManager.currentNode as ChatNode;
-        //        GameManager.Instance.chatHumanManager.nowCondition = cutScene.childList[0] as ConditionNode;
-        //        // change background to image
-        //        Sprite sprite = GameManager.Instance.cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
-        //        chat.style.backgroundImage = new StyleBackground(sprite);
-        //        // connection click event, play cutscene
-        //        chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
-        //        break;
-        //}
-
         // if you this chat record
         if (isRecord)
             RecordChat(who, toWho, type, text);
@@ -294,13 +254,13 @@ public class UIReader_Chatting : MonoBehaviour
         Invoke("EndToScroll", 0.5f);
     }
 
-    private void HighlightingChatText(VisualElement chat, string text)
+    private void EventChatText(VisualElement chat, string text)
     {
         VisualElement speech = chat.Q<VisualElement>("Speech");
 
-        if (text.Contains("/"))
+        if (text.Contains("*"))
         {
-            string[] segments = text.Split('/');
+            string[] segments = text.Split('*');
             bool isHighlight = false;
 
             foreach (var segment in segments)
@@ -325,6 +285,35 @@ public class UIReader_Chatting : MonoBehaviour
                 }
 
                 isHighlight = !isHighlight;
+            }
+        }
+        else if (text.Contains("/"))
+        {
+            string[] segments = text.Split('/');
+            bool isHyperlink = false;
+
+            foreach (var segment in segments)
+            {
+                if (string.IsNullOrEmpty(segment))
+                {
+                    isHyperlink = !isHyperlink;
+                    continue;
+                }
+
+                if (isHyperlink)
+                {
+                    Button hyperlinkButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate()).Q<Button>();
+                    hyperlinkButton.Q<Label>().text = segment;
+                    speech.Add(hyperlinkButton);
+                }
+                else
+                {
+                    Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
+                    textLabel.text = segment;
+                    speech.Add(textLabel);
+                }
+
+                isHyperlink = !isHyperlink;
             }
         }
         else
