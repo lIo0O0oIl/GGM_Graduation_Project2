@@ -761,7 +761,7 @@ MonoBehaviour:
     questions: []
     memCurrentNode: {fileID: 0}
   - name: "\uAC15\uB300\uC591"
-    nickName: 6
+    nickName: 7
     currentFace: 0
     faces:
     - {fileID: 21300000, guid: 1df6394bc8096fd4290208ac8d161298, type: 3}
@@ -772,17 +772,6 @@ MonoBehaviour:
     questions: []
     memCurrentNode: {fileID: 0}
   - name: "\uB2F4\uC784\uC120\uC0DD\uB2D8"
-    nickName: 7
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    isOpen: 0
-    chattings: []
-    questions: []
-    memCurrentNode: {fileID: 0}
-  - name: "\uD559\uC0DD\uB4E4"
     nickName: 8
     currentFace: 0
     faces:
@@ -793,8 +782,19 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
-  - name: "\uC774\uC218\uC5F0\uC758 \uBD80\uBAA8"
+  - name: "\uD559\uC0DD\uB4E4"
     nickName: 9
+    currentFace: 0
+    faces:
+    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
+    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
+    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
+    isOpen: 0
+    chattings: []
+    questions: []
+    memCurrentNode: {fileID: 0}
+  - name: "\uC774\uC218\uC5F0\uC758 \uBD80\uBAA8"
+    nickName: 10
     currentFace: 0
     faces:
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
