@@ -266,8 +266,6 @@ public class UIReader_Chatting : MonoBehaviour
 
     private void EventChatText(VisualElement chat, string text)
     {
-        VisualElement speech = chat.Q<VisualElement>("Speech");
-
         if (text.Contains("*"))
         {
             string[] segments = text.Split('*');
@@ -285,13 +283,13 @@ public class UIReader_Chatting : MonoBehaviour
                 {
                     Label highlightedLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
                     highlightedLabel.text = segment;
-                    speech.Add(highlightedLabel);
+                    chat.Add(highlightedLabel);
                 }
                 else
                 {
                     Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
                     textLabel.text = segment;
-                    speech.Add(textLabel);
+                    chat.Add(textLabel);
                 }
 
                 isHighlight = !isHighlight;
@@ -304,42 +302,54 @@ public class UIReader_Chatting : MonoBehaviour
 
             foreach (var segment in segments)
             {
-                if (string.IsNullOrEmpty(segment))
+                Debug.Log("1");
+                string removeSegment = "";
+
+                if (segment.Contains("[") && segment.Contains("]"))
                 {
-                    isHyperlink = !isHyperlink;
-                    continue;
+                Debug.Log("2");
+                    int startIndex = segment.IndexOf("[") + 1;
+                    int endIndex = segment.IndexOf("]");
+                    if (startIndex < endIndex)
+                    {
+                Debug.Log("3");
+                        string insideParentheses = segment.Substring(startIndex, endIndex - startIndex);
+
+                        UIReader_FileSystem.Instance.HighlightingFolderPathEvent(insideParentheses);
+
+                        removeSegment = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
+                    }
                 }
 
-                if (isHyperlink)
+                if (!string.IsNullOrEmpty(removeSegment))
                 {
-                    Button hyperlinkButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate()).Q<Button>();
-                    Label hyperlinkLabel = hyperlinkButton.Q<Label>();
-                    hyperlinkLabel.text = segment;
+                    Button textButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate())?.Q<Button>();
 
-                    hyperlinkButton.clicked += () =>
+                    if (textButton != null)
                     {
-                        UIReader_FileSystem.Instance.HighlightingFolderPathEvent(segment);
-                    };
+                        Label textLabel = textButton.Q<Label>();
+                        textLabel.text = removeSegment;
 
-                    hyperlinkButton.RegisterCallback<MouseEnterEvent>(evt =>
+                        textButton.RegisterCallback<MouseEnterEvent>(evt =>
+                        {
+                            textLabel.style.color = new UnityEngine.Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
+                        });
+
+                        textButton.RegisterCallback<MouseLeaveEvent>(evt =>
+                        {
+                            textLabel.style.color = new UnityEngine.Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
+                        });
+
+                        chat.Add(textButton);
+                    }
+                    else
                     {
-                        hyperlinkLabel.style.color = new UnityEngine.Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
-                    });
-
-                    hyperlinkButton.RegisterCallback<MouseLeaveEvent>(evt =>
-                    {
-                        hyperlinkLabel.style.color = new UnityEngine.Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
-                    });
-
-                    speech.Add(hyperlinkButton);
-                }
-                else
-                {
-                    Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
-                    textLabel.text = segment;
-                    speech.Add(textLabel);
+                        Debug.LogWarning("Failed to instantiate textButton from RemoveContainer.");
+                    }
                 }
 
+
+                Debug.Log("4");
                 isHyperlink = !isHyperlink;
             }
         }
@@ -347,7 +357,7 @@ public class UIReader_Chatting : MonoBehaviour
         {
             Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
             textLabel.text = text;
-            speech.Add(textLabel);
+            chat.Add(textLabel);
         }
     }
 
