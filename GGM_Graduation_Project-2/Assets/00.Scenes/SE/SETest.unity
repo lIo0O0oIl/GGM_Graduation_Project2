@@ -403,7 +403,6 @@ MonoBehaviour:
   nowName: Tutorial1
   chatTrees:
   - {fileID: 11400000, guid: 8a0e19d35d2db4545b83b352f6df53c7, type: 2}
-  - {fileID: 11400000, guid: 5f5fab8b2a8821e4a9f33c74ef966f92, type: 2}
 --- !u!1 &1207175530
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,9 +708,11 @@ MonoBehaviour:
   changeMemberBtnOn: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   wheelSpeed: 25
+  scrollEndSpeed: 0.15
   isMemberListOpen: 0
   ux_text: {fileID: 9197481963319205126, guid: 7214ad9c964cfbe43bb36a1fe2d9ea0e, type: 3}
   ux_highlightedtext: {fileID: 9197481963319205126, guid: 4ee041c9c45728d47a43d9275dc3fcdd, type: 3}
+  ux_button: {fileID: 0}
   ux_chat: {fileID: 9197481963319205126, guid: 790f5ecd05e5c664789ec66b990f0cee, type: 3}
   ux_askChat: {fileID: 9197481963319205126, guid: eca624ffc6976be4cbe63439f47c4452, type: 3}
   ux_hiddenAskChat: {fileID: 9197481963319205126, guid: 167b99bf43499a4418fb5d4f44cf9276, type: 3}
