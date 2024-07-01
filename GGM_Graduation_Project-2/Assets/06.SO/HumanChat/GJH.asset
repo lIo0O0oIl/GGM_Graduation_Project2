@@ -162,7 +162,7 @@ MonoBehaviour:
   test_isRead: 0
   parentList:
   - {fileID: 8529387666312923663}
-  - {fileID: 5882735428265198276}
+  - {fileID: 0}
   - {fileID: 8529387666312923663}
   childList:
   - {fileID: -3870628286759582371}
@@ -238,7 +238,7 @@ MonoBehaviour:
   position: {x: 3401.6, y: 1498.4001}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: -7846756755371823312}
   childList:
   - {fileID: -1069927322310382696}
@@ -318,8 +318,8 @@ MonoBehaviour:
   guid: 01fa4c9ac30b2ed4aa5008c4cb5640c2
   position: {x: 3399.9995, y: 1315.6338}
   index: 0
-  is_UseThis: 0
-  test_isRead: 0
+  is_UseThis: 1
+  test_isRead: 1
   parent: {fileID: -926940031618249110}
   child: {fileID: -8030497475363808289}
   askText: "\uC54C\uACE0 \uC788\uC2B5\uB2C8\uB2E4!"
@@ -341,7 +341,7 @@ MonoBehaviour:
   position: {x: 4177.5996, y: 2100.6401}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: -3311353108092716133}
   childList:
   - {fileID: 4620656411362003011}
@@ -503,7 +503,7 @@ MonoBehaviour:
   position: {x: 4919.1997, y: -405.12}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 7320979113346287414}
   childList:
   - {fileID: -5719539343191529500}
@@ -530,7 +530,7 @@ MonoBehaviour:
   position: {x: 4473.679, y: 530.39996}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 321272594931335832}
   childList:
   - {fileID: -2106816245483486233}
@@ -864,7 +864,7 @@ MonoBehaviour:
   position: {x: 4923.1997, y: -254.71991}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: -6995495356414135065}
   childList:
   - {fileID: 3251198960901701627}
@@ -978,7 +978,7 @@ MonoBehaviour:
   position: {x: 4176, y: 1027.9999}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 1843989738880380059}
   childList:
   - {fileID: 8667306259463927012}
@@ -1030,11 +1030,11 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: ba4d9c4cde4f3084a8717bce2cc14abe
-  position: {x: 3379.738, y: 2564.25}
+  position: {x: 3409.988, y: 2281.6501}
   index: 0
   is_UseThis: 0
   test_isRead: 1
-  parent: {fileID: -567885154332187815}
+  parent: {fileID: -2016299786303368182}
   childList:
   - {fileID: 8529387666312923663}
   state: 0
@@ -1337,7 +1337,7 @@ MonoBehaviour:
   position: {x: 4181.5996, y: 1943.8401}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 3994515966481311482}
   childList:
   - {fileID: -7756006125917768227}
@@ -1649,10 +1649,11 @@ MonoBehaviour:
   test_isRead: 1
   parent: {fileID: 3499047581785122703}
   childList:
-  - {fileID: 5882735428265198276}
+  - {fileID: -4711544455836914397}
   state: 0
   type: 0
-  chatText: "\uD559\uAD50 \uD30C\uC77C \uBCF4\uC774\uC9C0? \uC5F4\uC5B4\uBD10"
+  chatText: "\uD559\uAD50 \uD3F4\uB354 \uC548\uC5D0 \uC0AC\uAC74 \uD604\uC7A5 \uD30C\uC77C\uC774
+    \uBCF4\uC77C \uAC70\uB2E4"
   face: 0
   loadFileName: []
   textEvent: 
@@ -1672,8 +1673,8 @@ MonoBehaviour:
   guid: d21b8cc840991394e95acabe3174cb92
   position: {x: 4541.5996, y: 69.27991}
   index: 0
-  is_UseThis: 1
-  test_isRead: 1
+  is_UseThis: 0
+  test_isRead: 0
   parent: {fileID: 3251198960901701627}
   child: {fileID: 660766909759281513}
   askText: "\uC774\uC218\uC5F0\uC758 \uBB3C\uD488\uC744 \uC870\uC0AC\uD55C\uB2E4"
@@ -2011,7 +2012,7 @@ MonoBehaviour:
   position: {x: 3401.6, y: 1668}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 0}
   childList:
   - {fileID: -3847818033897733795}
@@ -2143,7 +2144,7 @@ MonoBehaviour:
   position: {x: 4172.8, y: 1325.6}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 8667306259463927012}
   childList:
   - {fileID: 7302046405631266908}
@@ -2151,33 +2152,6 @@ MonoBehaviour:
   type: 0
   chatText: "\uC0AC\uAC74 \uD604\uC7A5\uC5D0\uC11C \uB534 \uC0DD\uAC01\uC744 \uD558\uC2DC\uB2E4\uB2C8
     \uAD49\uC7A5\uD788 *'\uD504\uB85C \uD328\uC158'* \uD558\uC9C0 \uBABB\uD558\uC2DC\uB124\uC694!!"
-  face: 0
-  loadFileName: []
-  textEvent: 
-  LoadNextDialog: 
---- !u!114 &-567885154332187815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
-  m_Name: ChatNode
-  m_EditorClassIdentifier: 
-  guid: cfb8b68074217af44b575c11d85c222a
-  position: {x: 3377.338, y: 2413.05}
-  index: 0
-  is_UseThis: 0
-  test_isRead: 1
-  parent: {fileID: 5882735428265198276}
-  childList:
-  - {fileID: -4711544455836914397}
-  state: 0
-  type: 0
-  chatText: "\uC548\uC5D0 \uC0AC\uAC74 \uD604\uC7A5 \uD30C\uC77C\uC774 \uBCF4\uC774\uC9C0?"
   face: 0
   loadFileName: []
   textEvent: 
@@ -2428,12 +2402,10 @@ MonoBehaviour:
   - {fileID: 3997826109742122272}
   - {fileID: -8030497475363808289}
   - {fileID: 2009037640079285236}
-  - {fileID: -567885154332187815}
   - {fileID: -4711544455836914397}
   - {fileID: -1069927322310382696}
   - {fileID: 8529387666312923663}
   - {fileID: -3847818033897733795}
-  - {fileID: 5882735428265198276}
   - {fileID: -8353108294519145336}
   - {fileID: -3870628286759582371}
   - {fileID: -7267696647020615181}
@@ -2640,7 +2612,7 @@ MonoBehaviour:
   position: {x: 4472, y: 370.08008}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 660766909759281513}
   childList:
   - {fileID: -6742110487727372702}
@@ -2695,7 +2667,7 @@ MonoBehaviour:
   position: {x: 4620.8, y: 229.2799}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: -1991535778670149751}
   childList:
   - {fileID: 321272594931335832}
@@ -2751,7 +2723,7 @@ MonoBehaviour:
   position: {x: 4173.5996, y: 1611.2001}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 7302046405631266908}
   childList:
   - {fileID: 3994515966481311482}
@@ -2833,7 +2805,7 @@ MonoBehaviour:
   guid: 68d0a68e3bcc93548b0706ef7b6b267a
   position: {x: 4174.0503, y: 572}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   test_isRead: 0
   parentList:
   - {fileID: -3200679936724666560}
@@ -2947,7 +2919,7 @@ MonoBehaviour:
   position: {x: 3997.5999, y: 890.4}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 7034218697225490994}
   childList:
   - {fileID: -5138945016394506065}
@@ -3031,7 +3003,7 @@ MonoBehaviour:
   position: {x: 3632, y: 1501.5999}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 3997826109742122272}
   childList:
   - {fileID: 5536665952785700262}
@@ -3514,7 +3486,7 @@ MonoBehaviour:
   position: {x: 4923.1997, y: -107.52002}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: -5719539343191529500}
   childList:
   - {fileID: -1991535778670149751}
@@ -3745,7 +3717,7 @@ MonoBehaviour:
   position: {x: 4176.8, y: 1783.2001}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 752091018327289875}
   childList:
   - {fileID: -3311353108092716133}
@@ -3773,8 +3745,8 @@ MonoBehaviour:
   guid: c9b394f8112ae6447a58fec5504ccfdc
   position: {x: 3634.6611, y: 1315.5654}
   index: 0
-  is_UseThis: 1
-  test_isRead: 1
+  is_UseThis: 0
+  test_isRead: 0
   parent: {fileID: -926940031618249110}
   child: {fileID: 2009037640079285236}
   askText: "\uC74C... \uADF8\uAC8C..."
@@ -3959,7 +3931,7 @@ MonoBehaviour:
   position: {x: 4001.3406, y: 2272.02}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: -7756006125917768227}
   childList:
   - {fileID: 7320979113346287414}
@@ -4177,7 +4149,7 @@ MonoBehaviour:
   position: {x: 3636.1504, y: 1661.65}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 2009037640079285236}
   childList:
   - {fileID: -3847818033897733795}
@@ -4265,37 +4237,6 @@ MonoBehaviour:
   askText: "\uAC15\uC9C0\uD604\uC744 \uC870\uC0AC\uD574\uC57C\uACA0\uC5B4"
   textEvent: 04000000
   LoadNextDialog: JH
---- !u!114 &5882735428265198276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 966f7155bace4ea40b65a6f9c3cd1574, type: 3}
-  m_Name: ConditionNode
-  m_EditorClassIdentifier: 
-  guid: 64b5767d6e513ea4a9c4e325db1d898c
-  position: {x: 3411.1128, y: 2287.5576}
-  index: 0
-  is_UseThis: 1
-  test_isRead: 0
-  parentList:
-  - {fileID: 0}
-  - {fileID: -3847818033897733795}
-  - {fileID: 3499047581785122703}
-  - {fileID: 8529387666312923663}
-  - {fileID: -2016299786303368182}
-  childList:
-  - {fileID: -567885154332187815}
-  is_AllQuestion: 0
-  asks: []
-  is_SpecificFile: 1
-  fileName: "\uD559\uAD50"
-  is_LockQuestion: 0
-  is_Unlock: 0
 --- !u!114 &6130349546739233201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4554,7 +4495,7 @@ MonoBehaviour:
   position: {x: 4178.4, y: 746.4}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 1575072578736318061}
   childList:
   - {fileID: 1843989738880380059}
@@ -4637,7 +4578,7 @@ MonoBehaviour:
   position: {x: 3990.4001, y: 1471.2001}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: -587807816830999874}
   childList:
   - {fileID: 752091018327289875}
@@ -4665,7 +4606,7 @@ MonoBehaviour:
   position: {x: 4916, y: -560.32}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 4620656411362003011}
   childList:
   - {fileID: -6995495356414135065}
@@ -4886,7 +4827,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 9ad9104df1728f9479b18257c6bb1c35
-  position: {x: 3381.338, y: 2724.25}
+  position: {x: 3411.5881, y: 2441.6504}
   index: 0
   is_UseThis: 0
   test_isRead: 1
@@ -4944,7 +4885,7 @@ MonoBehaviour:
   position: {x: 3990.4001, y: 1173.6}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: -5138945016394506065}
   childList:
   - {fileID: -587807816830999874}
