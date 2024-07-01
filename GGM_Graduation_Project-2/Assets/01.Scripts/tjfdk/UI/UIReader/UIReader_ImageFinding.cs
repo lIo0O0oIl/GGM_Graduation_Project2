@@ -151,8 +151,8 @@ public class UIReader_ImageFinding : MonoBehaviour
                                     VisualElement evidenceDescription = UIReader_Main.Instance.RemoveContainer(ux_evidenceExplanation.Instantiate());
                                     evidenceDescription.name = "descriptionLabel";
                                     imagePanel.Q<VisualElement>("ImageGround").Add(evidenceDescription);
-                                    UIReader_Main.Instance.DoText(evidenceDescription.Q<Label>("Text"), png.memo, 2f, true,
-                                        () => { imagePanel.Q<VisualElement>("ImageGround").Remove(evidenceDescription); }, null);
+                                    UIReader_Main.Instance.DoText(evidenceDescription.Q<Label>("Text"), png.memo, 2f, false,
+                                        () => { /*imagePanel.Q<VisualElement>("ImageGround").Remove(evidenceDescription);*/ }, null);
                                     GameManager.Instance.fileManager.UnlockChat(png.name);
                                 });
                             }
