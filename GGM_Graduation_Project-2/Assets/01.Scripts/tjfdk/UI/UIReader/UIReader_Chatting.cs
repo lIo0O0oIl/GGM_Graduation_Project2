@@ -121,6 +121,10 @@ public class UIReader_Chatting : MonoBehaviour
         OnOffMemberList();
         ui_memberListButton.clicked += OnOffMemberList;
         ui_nextChatButton.clicked += () => { GameManager.Instance.chatHumanManager.NextChat(); };
+
+        ui_chatGround.Q<VisualElement>("unity-content-and-vertical-scroll-container").pickingMode = PickingMode.Ignore;
+        ui_chatGround.Q<VisualElement>("unity-content-viewport").pickingMode = PickingMode.Ignore;
+        ui_chatGround.Q<VisualElement>("unity-content-container").pickingMode = PickingMode.Ignore;
     }
 
     // find member
@@ -156,7 +160,7 @@ public class UIReader_Chatting : MonoBehaviour
             InputChat(member.name, chat.state, chat.type, member.currentFace, chat.chatText, false);
         }
 
-        Invoke("EndToScroll", 0.25f);
+        Invoke("EndToScroll", 0f);
     }
 
     private void GameDown()
@@ -250,7 +254,7 @@ public class UIReader_Chatting : MonoBehaviour
         ui_chatGround.Add(chat);
         currentElement = chat;
         // scroll pos to end
-        Invoke("EndToScroll", 0.5f);
+        Invoke("EndToScroll", 0f);
     }
 
     private void EventChatText(VisualElement chat, string text)
@@ -472,7 +476,6 @@ public class UIReader_Chatting : MonoBehaviour
             memberFace = ui_otherFace.Q<VisualElement>("Face");
         }
 
-        Debug.Log(who.ToString() + " " + face.ToString());
         // face type
         switch (face)
         {
@@ -523,7 +526,6 @@ public class UIReader_Chatting : MonoBehaviour
                                     float y = strength * Mathf.Sin(randomAngle);
 
                                     randomOffset = new Vector3(x, y, 0);
-                                    Debug.Log(randomOffset);
                                 })
                                 .OnUpdate(() =>
                                 {
