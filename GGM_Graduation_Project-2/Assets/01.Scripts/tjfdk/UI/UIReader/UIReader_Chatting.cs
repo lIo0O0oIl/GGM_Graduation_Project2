@@ -31,6 +31,7 @@ public class UIReader_Chatting : MonoBehaviour
     [SerializeField]
     private Texture2D changeMemberBtnOn, changeMemberBtnOff;
     public float wheelSpeed = 25f;
+    public float scrollEndSpeed = 0.15f;
 
     bool isConnectionOpen = false;
     //bool isSettingOpen = false;
@@ -50,6 +51,7 @@ public class UIReader_Chatting : MonoBehaviour
     [HideInInspector] public bool isMemberListOpen;
 
     [HideInInspector] public Button ui_nextChatButton;
+    private bool isMouseOverButton = false;
 
     // other member profile
     VisualElement ui_otherFace;
@@ -115,16 +117,21 @@ public class UIReader_Chatting : MonoBehaviour
     {
         // scrollview find, and wheel speed setting
         ui_chatGround = ui_chatGround.Q<ScrollView>(ui_chatGround.name);
-        ui_chatGround.RegisterCallback<WheelEvent>(OnMouseWheel);
+        //ui_chatGround.RegisterCallback<WheelEvent>(OnMouseWheel);
 
         // member list hidden
         OnOffMemberList();
         ui_memberListButton.clicked += OnOffMemberList;
+
         ui_nextChatButton.clicked += () => { GameManager.Instance.chatHumanManager.NextChat(); };
+        ui_nextChatButton.RegisterCallback<PointerEnterEvent>(OnMouseEnterButton);
+        ui_nextChatButton.RegisterCallback<PointerLeaveEvent>(OnMouseLeaveButton);
 
         ui_chatGround.Q<VisualElement>("unity-content-and-vertical-scroll-container").pickingMode = PickingMode.Ignore;
         ui_chatGround.Q<VisualElement>("unity-content-viewport").pickingMode = PickingMode.Ignore;
         ui_chatGround.Q<VisualElement>("unity-content-container").pickingMode = PickingMode.Ignore;
+
+        root.RegisterCallback<WheelEvent>(OnMouseWheel);
     }
 
     // find member
@@ -160,7 +167,7 @@ public class UIReader_Chatting : MonoBehaviour
             InputChat(member.name, chat.state, chat.type, member.currentFace, chat.chatText, false);
         }
 
-        Invoke("EndToScroll", 0f);
+        Invoke("EndToScroll", scrollEndSpeed);
     }
 
     private void GameDown()
@@ -254,7 +261,7 @@ public class UIReader_Chatting : MonoBehaviour
         ui_chatGround.Add(chat);
         currentElement = chat;
         // scroll pos to end
-        Invoke("EndToScroll", 0f);
+        Invoke("EndToScroll", scrollEndSpeed);
     }
 
     private void EventChatText(VisualElement chat, string text)
@@ -609,17 +616,37 @@ public class UIReader_Chatting : MonoBehaviour
         }
     }
 
+    void OnMouseEnterButton(PointerEnterEvent evt)
+    {
+        isMouseOverButton = true;
+    }
+
+    void OnMouseLeaveButton(PointerLeaveEvent evt)
+    {
+        isMouseOverButton = false;
+    }
+
     // scroll pos setting
     void OnMouseWheel(WheelEvent evt)
     {
-        // working progress is stop
-        evt.StopPropagation();
+        //// working progress is stop
+        //evt.StopPropagation();
 
-        // multitly scroll speed to current delta value
-        float delta = evt.delta.y * wheelSpeed;
+        //// multitly scroll speed to current delta value
+        //float delta = evt.delta.y * wheelSpeed;
 
-        // scroll pos setting
-        ui_chatGround.scrollOffset += new Vector2(0, delta);
+        //// scroll pos setting
+        //ui_chatGround.scrollOffset += new Vector2(0, delta);
+
+
+
+        if (isMouseOverButton)
+        {
+            // 마우스 휠 이벤트에 따라 ScrollView를 스크롤합니다.
+            float delta = evt.delta.y * wheelSpeed;
+            ui_chatGround.scrollOffset += new Vector2(0, delta);
+            evt.StopPropagation(); // 이벤트 전파를 막습니다.
+        }
     }
 
     // scroll pos to end
