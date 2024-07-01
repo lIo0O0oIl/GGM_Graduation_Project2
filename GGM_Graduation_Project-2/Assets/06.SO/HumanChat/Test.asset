@@ -204,7 +204,8 @@ MonoBehaviour:
   is_UseThis: 0
   test_isRead: 0
   parent: {fileID: 8259243804894548275}
-  childList: []
+  childList:
+  - {fileID: 3328749367225555932}
   state: 0
   type: 0
   chatText: 
@@ -362,7 +363,7 @@ MonoBehaviour:
   index: 0
   is_UseThis: 0
   test_isRead: 0
-  parent: {fileID: 0}
+  parent: {fileID: -3835399606760235480}
   child: {fileID: 0}
   askText: 
   textEvent: 
@@ -471,7 +472,7 @@ MonoBehaviour:
   parent: {fileID: 4405423513054005677}
   childList:
   - {fileID: -3835399606760235480}
-  - {fileID: 0}
+  - {fileID: 7584456758078608397}
   state: 0
   type: 0
   chatText: "\uC774\uAC74 \uD55C\uBC88\uB9CC \uC9C4\uB3D9"

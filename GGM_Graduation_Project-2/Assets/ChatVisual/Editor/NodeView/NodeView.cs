@@ -35,6 +35,24 @@ namespace ChatVisual
 
             Label descLabel = this.Q<Label>("description");     // Element Label Change
             descLabel.bindingPath = "description";
+            if (node is ChatNode chatNode)
+            {
+                if (chatNode.chatText.Length > 13)
+                {
+                    descLabel.text = chatNode.chatText.Substring(0, 13);
+                    descLabel.text += "...";
+                }
+                else descLabel.text = chatNode.chatText;
+            }
+            else if (node is AskNode askNode)
+            {
+                if (askNode.askText.Length > 13)
+                {
+                    descLabel.text = askNode.askText.Substring(0, 13);
+                    descLabel.text += "...";
+                }
+                else descLabel.text = askNode.askText;
+            }
         }
 
         private void CreateInputPorts()
