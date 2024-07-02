@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Windows;
 
 public enum FileType
 {
@@ -173,28 +174,33 @@ public class UIReader_FileSystem : MonoBehaviour
             else
             {
                 ConditionNode conditionNode = FindQuestion(area).parent as ConditionNode;
-                Debug.Log(conditionNode);
+                //Debug.Log(conditionNode);
                 if (conditionNode != null)
                 {
-                    string fileName = file.Q<Label>("FileName").text;
+                    //Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName + " " + conditionNode.fileName);
+                    //Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName.Trim() == conditionNode.fileName.Trim());
 
-                    Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName + " " + conditionNode.fileName);
-                    Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName.Trim() == conditionNode.fileName.Trim());
-                    if (GameManager.Instance.fileManager.FindFile(fileName).fileName.Trim() == conditionNode.fileName.Trim())
+                    string fileName = file.Q<Label>("FileName").text;
+                    string[] names = conditionNode.fileName.Split('/');
+
+                    foreach (string name in names)
                     {
-                        Debug.Log((conditionNode.childList[0] as AskNode).askText);
-                        // 컨디션 노드 열림
-                        conditionNode.is_Unlock = true;
-                        // remove this lockQuestion
-                        area.parent.Remove(area);
-                        //change from lockQustion to question
-                        GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
-                            true, conditionNode.childList[0] as AskNode);
-                        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode.childList[0] as AskNode);
-                        beforeSlot.Add(target);
+                        if (GameManager.Instance.fileManager.FindFile(fileName).fileName.Trim() == name.Trim())
+                        {
+                            Debug.Log((conditionNode.childList[0] as AskNode).askText);
+                            // 컨디션 노드 열림
+                            conditionNode.is_Unlock = true;
+                            // remove this lockQuestion
+                            area.parent.Remove(area);
+                            //change from lockQustion to question
+                            GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
+                                true, conditionNode.childList[0] as AskNode);
+                            GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode.childList[0] as AskNode);
+                            beforeSlot.Add(target);
+                        }
+                        else
+                            beforeSlot.Add(target);
                     }
-                    else
-                        beforeSlot.Add(target);
                 }
                 else
                     Debug.Log("it's not found in questions(current AskNode list)");
