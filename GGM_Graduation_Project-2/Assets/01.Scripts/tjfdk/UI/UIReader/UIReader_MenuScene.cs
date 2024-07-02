@@ -11,12 +11,19 @@ public class UIReader_MenuScene : MonoBehaviour
     private UIDocument menuUI;
     private VisualElement menuRoot;
 
-    [SerializeField] private Button startBtn;
-    [SerializeField] private Button settingBtn;
-    [SerializeField] private Button exitBtn;
+    private Button startBtn;
+    private Button settingBtn;
+    private Button exitBtn;
     private VisualElement settingPanel;
+    [SerializeField] private AudioClip buttonClickSound;
+    private AudioSource audioSource;
 
     public bool isSettingOpen;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnEnable()
     {
@@ -30,9 +37,14 @@ public class UIReader_MenuScene : MonoBehaviour
 
         // you have to change this scene name, no tutorial! game!!!
         startBtn.clicked += (() => { UIManager.Instance.SceneChange("Game"); });
+        startBtn.RegisterCallback<MouseEnterEvent>(evt => BtnSoundPlay());
+
         settingBtn.clicked += (() => { OpenSetting(); });
+        settingBtn.RegisterCallback<MouseEnterEvent>(evt => BtnSoundPlay());        // 마우스 입력 시 소리
         settingPanel.Q<Button>("ExitBtn").clicked += () => { OpenSetting(); };
+
         exitBtn.clicked += (() => { UIManager.Instance.Exit(); });
+        exitBtn.RegisterCallback<MouseEnterEvent>(evt => BtnSoundPlay());
     }
 
     public void OpenSetting()
@@ -43,5 +55,11 @@ public class UIReader_MenuScene : MonoBehaviour
             settingPanel.style.display = DisplayStyle.Flex;
 
         isSettingOpen = !isSettingOpen;
+    }
+
+    private void BtnSoundPlay()
+    {
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.PlayOneShot(buttonClickSound);
     }
 }

@@ -11,6 +11,10 @@ namespace ChatVisual
 
         private VisualElement baseArea, baseArea2;
         private Label textAnim;
+        private Button btn;
+
+        public AudioClip hoverSound;
+        private AudioSource audioSource;
 
         public GameObject cube, cube2;
 
@@ -19,12 +23,20 @@ namespace ChatVisual
             uiDocument = GetComponent<UIDocument>();
         }
 
-        private void OnEnable()
+        private void Start()
         {
             var root = uiDocument.rootVisualElement;
             baseArea = root.Q<VisualElement>("BaseArea");
             baseArea2 = root.Q<VisualElement>("BaseArea2");
             textAnim = root.Q<Label>("TextAnim");
+            btn = root.Q<Button>("Button1");
+
+            audioSource = gameObject.GetComponent<AudioSource>();
+
+            btn.RegisterCallback<MouseEnterEvent>(evt => {
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.PlayOneShot(hoverSound);
+                });
 
             ShakeChat();
         }
