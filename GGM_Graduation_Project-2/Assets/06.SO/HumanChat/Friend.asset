@@ -155,7 +155,8 @@ MonoBehaviour:
   is_UseThis: 0
   test_isRead: 0
   parent: {fileID: 3345406218694260716}
-  childList: []
+  childList:
+  - {fileID: -6650985126050880310}
   state: 1
   type: 0
   chatText: "\uC194\uC9C1\uD558\uAC8C \uB9D0\uD574\uC918\uC11C \uACE0\uB9C8\uC6CC!\\n\uB3C4\uC6C0\uC774
@@ -325,6 +326,33 @@ MonoBehaviour:
   state: 0
   type: 0
   chatText: "\uC774\uAC83\uB3C4 \uC870\uC0AC?...\uC778\uAC00\uC694?..."
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &-6650985126050880310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 3b0c9ac8cbc9e134f8da1314bd349d59
+  position: {x: 3645.4, y: 288.4}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: -7288796410148817763}
+  childList:
+  - {fileID: 1443126660798554182}
+  state: 0
+  type: 0
+  chatText: "\uB124 \uC548\uB155\uD788 \uACC4\uC138\uC694!"
   face: 0
   loadFileName: []
   textEvent: 
@@ -891,6 +919,8 @@ MonoBehaviour:
   - {fileID: 3345406218694260716}
   - {fileID: -7288796410148817763}
   - {fileID: -1152112196469942598}
+  - {fileID: -6650985126050880310}
+  - {fileID: 1443126660798554182}
 --- !u!114 &342919510241506413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,6 +1081,32 @@ MonoBehaviour:
   state: 0
   type: 0
   chatText: "\uC544 \uADF8\uAC8C..."
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &1443126660798554182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 93e2e3d14abe3af43b6436c034332470
+  position: {x: 3794.4, y: 432.99997}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: -6650985126050880310}
+  childList: []
+  state: 1
+  type: 0
+  chatText: "*(\uB098\uB3C4 \uC2AC\uC2AC \uB3CC\uC544\uAC00\uC57C\uACA0\uB2E4)*"
   face: 0
   loadFileName: []
   textEvent: 

@@ -1151,6 +1151,32 @@ MonoBehaviour:
   loadFileName: []
   textEvent: 
   LoadNextDialog: 
+--- !u!114 &-971641090363118405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 5d02dbbc06cdb374caa69079d16d4403
+  position: {x: 0, y: 0}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: 0}
+  childList: []
+  state: 0
+  type: 0
+  chatText: 
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
 --- !u!114 &-966356635167477776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1356,6 +1382,7 @@ MonoBehaviour:
   - {fileID: 3499047581785122703}
   - {fileID: -2016299786303368182}
   - {fileID: 1700827858513221048}
+  - {fileID: -971641090363118405}
 --- !u!114 &10005552213000085
 MonoBehaviour:
   m_ObjectHideFlags: 0
