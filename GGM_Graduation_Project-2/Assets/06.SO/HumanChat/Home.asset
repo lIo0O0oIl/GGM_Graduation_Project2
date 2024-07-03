@@ -242,7 +242,9 @@ MonoBehaviour:
   childList:
   - {fileID: 5017268677114318630}
   is_AllQuestion: 1
-  asks: []
+  asks:
+  - {fileID: -2610124690925982490}
+  - {fileID: -4724418015323682173}
   is_SpecificFile: 0
   fileName: 
   is_LockQuestion: 0
