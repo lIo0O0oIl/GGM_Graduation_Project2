@@ -16,7 +16,7 @@ namespace ChatVisual
         public EFace face; 
 
         public List<string> loadFileName = new List<string>();
-        public List<EChatEvent> textEvent = new List<EChatEvent>();
+        public List<EChatEvent> textEvent = new List<EChatEvent>(); 
         public string LoadNextDialog;
     }
 }

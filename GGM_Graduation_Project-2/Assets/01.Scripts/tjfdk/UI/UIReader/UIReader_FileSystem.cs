@@ -166,6 +166,8 @@ public class UIReader_FileSystem : MonoBehaviour
         // drl!
         file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         {
+            Debug.Log("드는중");
+
             var area = FindMoveArea(evt.mousePosition);
             //target.RemoveFromHierarchy();
             if (area == null)
