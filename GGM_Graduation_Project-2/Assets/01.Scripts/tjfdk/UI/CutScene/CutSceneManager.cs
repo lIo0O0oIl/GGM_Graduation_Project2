@@ -89,18 +89,18 @@ public class CutSceneManager : MonoBehaviour
                     {
                         CutSceneText msg = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum];
                         if (msg.sound != "")
-                            GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound);
+                            GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound, msg.vibration);
                         else
-                            GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; });
+                            GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, "", msg.vibration);
                     }
                 }
                 else
                 {
                     CutSceneText msg = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum];
                     if (msg.sound != "")
-                        GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound);
+                        GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound, msg.vibration);
                     else
-                        GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; });
+                        GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, "", msg.vibration);
                 }
             }
         }

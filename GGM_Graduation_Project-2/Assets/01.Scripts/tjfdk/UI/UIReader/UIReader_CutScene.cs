@@ -33,9 +33,9 @@ public class UIReader_CutScene : MonoBehaviour
             scene.style.backgroundImage = new StyleBackground(cuts[0]);
     }
 
-    public void ChangeText(string msg, float writingDuring, Action action, string soundName = "typing")
+    public void ChangeText(string msg, float writingDuring, Action action, string soundName, bool vibration)
     {
-        UIReader_Main.Instance.DoText(text, msg, writingDuring, false, action, soundName);
+        UIReader_Main.Instance.DoText(text, msg, writingDuring, false, action, soundName, vibration);
     }
 
     public void EndText()
