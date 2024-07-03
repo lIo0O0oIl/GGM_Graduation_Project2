@@ -302,27 +302,24 @@ public class UIReader_Chatting : MonoBehaviour
 
             foreach (var segment in segments)
             {
-                Debug.Log("1");
-                string removeSegment = "";
-
-                if (segment.Contains("[") && segment.Contains("]"))
+                if (isHyperlink)
                 {
-                Debug.Log("2");
-                    int startIndex = segment.IndexOf("[") + 1;
-                    int endIndex = segment.IndexOf("]");
-                    if (startIndex < endIndex)
+                    string removeSegment = segment;
+
+                    if (segment.Contains("[") && segment.Contains("]"))
                     {
-                Debug.Log("3");
-                        string insideParentheses = segment.Substring(startIndex, endIndex - startIndex);
+                        int startIndex = segment.IndexOf("[") + 1;
+                        int endIndex = segment.IndexOf("]");
+                        if (startIndex < endIndex)
+                        {
+                            string insideParentheses = segment.Substring(startIndex, endIndex - startIndex);
 
-                        UIReader_FileSystem.Instance.HighlightingFolderPathEvent(insideParentheses);
+                            UIReader_FileSystem.Instance.HighlightingFolderPathEvent(insideParentheses);
 
-                        removeSegment = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
+                            removeSegment = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
+                        }
                     }
-                }
 
-                if (!string.IsNullOrEmpty(removeSegment))
-                {
                     Button textButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate())?.Q<Button>();
 
                     if (textButton != null)
@@ -347,9 +344,13 @@ public class UIReader_Chatting : MonoBehaviour
                         Debug.LogWarning("Failed to instantiate textButton from RemoveContainer.");
                     }
                 }
+                else
+                {
+                    Label textb = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate())?.Q<Label>();
+                    textb.text = segment;
+                    chat.Add(textb);
+                }
 
-
-                Debug.Log("4");
                 isHyperlink = !isHyperlink;
             }
         }
