@@ -53,7 +53,7 @@ public class ChatHumanManager : MonoBehaviour
         if (is_ChatStart)
         {
             //currentTime += Time.deltaTime;
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 NextChat();
                 //// node list
