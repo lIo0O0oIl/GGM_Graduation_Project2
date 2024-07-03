@@ -305,6 +305,7 @@ public class UIReader_Chatting : MonoBehaviour
                 if (isHyperlink)
                 {
                     string removeSegment = segment;
+                    string insideParentheses = "";
 
                     if (segment.Contains("[") && segment.Contains("]"))
                     {
@@ -312,9 +313,7 @@ public class UIReader_Chatting : MonoBehaviour
                         int endIndex = segment.IndexOf("]");
                         if (startIndex < endIndex)
                         {
-                            string insideParentheses = segment.Substring(startIndex, endIndex - startIndex);
-
-                            UIReader_FileSystem.Instance.HighlightingFolderPathEvent(insideParentheses);
+                            insideParentheses = segment.Substring(startIndex, endIndex - startIndex);
 
                             removeSegment = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
                         }
@@ -330,6 +329,8 @@ public class UIReader_Chatting : MonoBehaviour
                         textButton.RegisterCallback<MouseEnterEvent>(evt =>
                         {
                             textLabel.style.color = new UnityEngine.Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
+
+                            UIReader_FileSystem.Instance.HighlightingFolderPathEvent(insideParentheses);
                         });
 
                         textButton.RegisterCallback<MouseLeaveEvent>(evt =>
