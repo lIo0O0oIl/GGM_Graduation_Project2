@@ -329,13 +329,16 @@ public class UIReader_Chatting : MonoBehaviour
                         textButton.RegisterCallback<MouseEnterEvent>(evt =>
                         {
                             textLabel.style.color = new UnityEngine.Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
-
-                            UIReader_FileSystem.Instance.HighlightingFolderPathEvent(insideParentheses);
                         });
 
                         textButton.RegisterCallback<MouseLeaveEvent>(evt =>
                         {
                             textLabel.style.color = new UnityEngine.Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
+                        });
+
+                        textButton.RegisterCallback<ClickEvent>(evt =>
+                        {
+                            UIReader_FileSystem.Instance.HighlightingFolderPathEvent(insideParentheses);
                         });
 
                         chat.Add(textButton);
