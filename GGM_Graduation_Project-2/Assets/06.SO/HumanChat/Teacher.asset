@@ -55,6 +55,32 @@ MonoBehaviour:
   loadFileName: []
   textEvent: 
   LoadNextDialog: 
+--- !u!114 &-7826192660362518483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 78ff6e5d3e1b5294a989cdc570baf554
+  position: {x: 3260.9402, y: 1278.8002}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: 0}
+  childList: []
+  state: 0
+  type: 0
+  chatText: 
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
 --- !u!114 &-7612576686380142789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +150,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 5efc78098104ab846afb3c64891a81fc
-  position: {x: 2095.2, y: 3483.8}
+  position: {x: 2879.2, y: 790.3999}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -184,6 +210,32 @@ MonoBehaviour:
   state: 0
   type: 0
   chatText: "\uC5B4... (\uC774 \uC815\uB3C4...)"
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &-5114627091883241453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 0ba9edcb65e2f2644a2483b8fd46b216
+  position: {x: 3499.2, y: 868.80005}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: 0}
+  childList: []
+  state: 0
+  type: 0
+  chatText: 
   face: 0
   loadFileName: []
   textEvent: 
@@ -255,7 +307,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 4531ce20024cbe64198fdef265660c1a
-  position: {x: 2255.6, y: 3636.2002}
+  position: {x: 3039.2, y: 943.1997}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -347,6 +399,32 @@ MonoBehaviour:
   state: 1
   type: 0
   chatText: "\uCE5C\uAD6C\uB4E4\uC774\uB791\uC740 \uC798 \uC9C0\uB0C8\uB098\uC694?"
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &-2965489071220784468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 8d9514231e29f0c4895c6207158908cd
+  position: {x: 3643.2, y: 972.80005}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: 0}
+  childList: []
+  state: 0
+  type: 0
+  chatText: 
   face: 0
   loadFileName: []
   textEvent: 
@@ -532,7 +610,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 5f452da9b3a8e0246a8832e466225cd2
-  position: {x: 2100.15, y: 2995.4006}
+  position: {x: 2884, y: 302.3999}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -560,7 +638,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 5da4f41a49e07344ebb5b5c4087718cb
-  position: {x: 2099.6, y: 3166}
+  position: {x: 2883.2, y: 472.80005}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -657,6 +735,9 @@ MonoBehaviour:
   - {fileID: -5981118719233688000}
   - {fileID: -4309996588586065549}
   - {fileID: 6140866200985175055}
+  - {fileID: -2965489071220784468}
+  - {fileID: -5114627091883241453}
+  - {fileID: -7826192660362518483}
 --- !u!114 &39648675074212568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,7 +778,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: a6d6d5b3a87adde49a0b5f35b0246045
-  position: {x: 2258, y: 3325.4001}
+  position: {x: 3041.5999, y: 632}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -930,7 +1011,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: e4ced8091c638f247835abb3962acfb3
-  position: {x: 2256.705, y: 2838.6125}
+  position: {x: 3040.8, y: 145.59991}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -1042,7 +1123,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: b4d7438f05963dd40bf638909f510709
-  position: {x: 2258.4, y: 3788}
+  position: {x: 3042.4, y: 1094.4}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -1125,7 +1206,7 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: c1df6291f71116f4d956ecd8117c6c97
-  position: {x: 2179.4402, y: 2667.48}
+  position: {x: 2963.2, y: -25.600037}
   index: 0
   is_UseThis: 0
   test_isRead: 0

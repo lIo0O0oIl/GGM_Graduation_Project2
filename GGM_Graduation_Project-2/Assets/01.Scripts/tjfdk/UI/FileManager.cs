@@ -66,11 +66,12 @@ public class FileManager : MonoBehaviour
                 if (triggerName == GameManager.Instance.chatHumanManager.nowCondition.fileName)
                 {
                     GameManager.Instance.chatHumanManager.nowCondition.is_UseThis = true;
-                    //GameManager.Instance.chatHumanManager.nowCondition = null;
                     GameManager.Instance.chatHumanManager.currentNode = GameManager.Instance.chatHumanManager.nowCondition;
                 }
             }
         }
+        else
+            Debug.LogError("Trigger name is null");
 
         GameManager.Instance.chatHumanManager.StartChatting();
     }
