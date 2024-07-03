@@ -186,12 +186,12 @@ public class ChatHumanManager : MonoBehaviour
                     currentNode = children[0];
                     children[0].test_isRead = true;
 
+                    // chat event
+                    GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode.state, chatNode, chatNode.face, chatNode.textEvent);
+
                     // Input chat
                     GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
                         chatNode.type, chatNode.face, chatNode.chatText, true);
-
-                    // chat event
-                    GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode.state, chatNode, chatNode.face, chatNode.textEvent);
                 }
             }
             else if (node is AskNode askNode)
@@ -255,6 +255,7 @@ public class ChatHumanManager : MonoBehaviour
 
                     if (conditionNode.childList[0].test_isRead == false && conditionNode.childList[0].is_UseThis == false)
                     {
+                        Debug.Log(conditionNode.fileName + " " + conditionNode.is_Unlock);
                         if (conditionNode.is_Unlock)
                         {
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, ask);
