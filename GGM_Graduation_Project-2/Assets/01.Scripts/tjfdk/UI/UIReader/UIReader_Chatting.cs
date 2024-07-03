@@ -631,6 +631,11 @@ public class UIReader_Chatting : MonoBehaviour
         }
     }
 
+    public void ChangeMemberName(string name)
+    {
+        ui_otherMemberName.text = name;
+    }
+
     void OnMouseEnterButton(PointerEnterEvent evt)
     {
         isMouseOverButton = true;

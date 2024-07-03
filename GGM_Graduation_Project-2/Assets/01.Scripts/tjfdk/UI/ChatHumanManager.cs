@@ -288,6 +288,10 @@ public class ChatHumanManager : MonoBehaviour
         nowHumanName = name;
         nowHuman = GameManager.Instance.chatSystem.FindMember(nowHumanName);
 
+        // top name changed
+        GameManager.Instance.chatSystem.ChangeMemberName
+            (GameManager.Instance.chatSystem.FindMember(nowHumanName).name);
+
         chatContainer.nowName = name;
         nowNodes = chatContainer.GetChatTree().nodeList;
 
