@@ -13,6 +13,7 @@ namespace ChatVisual
 
         private int enumValue;
         private int enumValue2;
+        private int enumValue3;
 
         private List<EChatEvent> chatEventList = new List<EChatEvent>();
         private List<string> LoadFileList = new List<string>(); 
@@ -88,6 +89,11 @@ namespace ChatVisual
                             enumValue2 = (int)chatNode.face;
                             enumValue2 = GUILayout.Toolbar(enumValue2, System.Enum.GetNames(typeof(EFace)));     
                             chatNode.face = (EFace)enumValue2;
+                            GUILayout.Space(10);
+
+                            enumValue3 = (int)chatNode.type;
+                            enumValue3 = GUILayout.Toolbar(enumValue3, System.Enum.GetNames(typeof(EChatType)));
+                            chatNode.type = (EChatType)enumValue3;
                             GUILayout.Space(10);
 
                             if (!is_LoadList)
