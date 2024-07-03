@@ -10,6 +10,7 @@ public class CutSceneText
 {
     public string sound;
     public string text;
+    public bool vibration;
 }
 
 [Serializable]
