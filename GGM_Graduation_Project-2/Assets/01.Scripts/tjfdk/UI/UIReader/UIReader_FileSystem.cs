@@ -243,8 +243,9 @@ public class UIReader_FileSystem : MonoBehaviour
                     // change file name
                     file.Q<Label>("FileName").text = folder.fileName;
                     // connection click event
-                    file.Q<Button>("FileImage").clicked += () =>
+                    LoadDragAndDrop(file, () => 
                     {
+                        Debug.Log("ddsfoajihsfeQRO3AR");
                         GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
                         // image check action
                         if (folder != null)
@@ -256,12 +257,11 @@ public class UIReader_FileSystem : MonoBehaviour
                         DrawFile(folder.fileName);
                         // add current folder path
                         AddFilePath(folder.fileName);
-                    };
+                    });
 
                     fileFolders.Add(new FolderFile(fileName, fileParentName));
                     parentFolder.folderFiles.Add(file);
                 }
-                //fileFolderList.Add(fileName, new FolderFile(fileName));
                 break;
                 case FileType.IMAGE:
                 {
