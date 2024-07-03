@@ -183,7 +183,7 @@ public class UIReader_Chatting : MonoBehaviour
 
     // input chat
     public void InputChat(string toWho, EChatState who, EChatType type,
-        EFace face, string text, bool isRecord = true)
+        EFace face, string text, bool isRecord = true, bool isQuestion = false)
     {
         // test
         if (text == "더 나은 빌드로 돌아오겠습니다.")
@@ -212,7 +212,8 @@ public class UIReader_Chatting : MonoBehaviour
                 // create uxml
                 chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
                 chat.name = "chat";
-
+                if (isQuestion)
+                    chat.AddToClassList("Question");
                 EventChatText(chat, text);
                 break;
 
@@ -387,7 +388,7 @@ public class UIReader_Chatting : MonoBehaviour
             chat.Q<Button>().clicked += (() =>
             {
                 // add chat
-                InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText, false);
+                InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText, false, true);
 
                 // current question value list
                 for (int i = 0; i < member.questions.Count; ++i)

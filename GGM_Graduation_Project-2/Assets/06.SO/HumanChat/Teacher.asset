@@ -261,7 +261,7 @@ MonoBehaviour:
   test_isRead: 0
   parent: {fileID: -5981118719233688000}
   childList:
-  - {fileID: 6140866200985175055}
+  - {fileID: -3861185161261849712}
   state: 1
   type: 0
   chatText: "\uD611\uC870\uD574 \uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
@@ -297,6 +297,29 @@ MonoBehaviour:
   loadFileName: []
   textEvent: 
   LoadNextDialog: 
+--- !u!114 &-3861185161261849712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66c069077fcf184bb183350040d8a11, type: 3}
+  m_Name: AskNode
+  m_EditorClassIdentifier: 
+  guid: 4eca7eddef9487f45b85f03a64d5c117
+  position: {x: 3043.8, y: 1096.2}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: -4309996588586065549}
+  child: {fileID: 0}
+  askText: "*(\uC67C\uCABD \uC704\uC5D0 \uD654\uC0B4\uD45C\uB97C \uB20C\uB7EC\uC11C
+    \uC120\uBC30\uB2D8\uAED8 \uB3CC\uC544\uAC00\uC790)*"
+  textEvent: 05000000
+  LoadNextDialog: GJH
 --- !u!114 &-3675233723632599636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,6 +680,7 @@ MonoBehaviour:
   - {fileID: -5981118719233688000}
   - {fileID: -4309996588586065549}
   - {fileID: 6140866200985175055}
+  - {fileID: -3861185161261849712}
 --- !u!114 &39648675074212568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,11 +1066,11 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: b4d7438f05963dd40bf638909f510709
-  position: {x: 3042.4, y: 1094.4}
+  position: {x: 3042.4, y: 1263.4}
   index: 0
   is_UseThis: 0
   test_isRead: 0
-  parent: {fileID: -4309996588586065549}
+  parent: {fileID: 0}
   childList: []
   state: 1
   type: 0
