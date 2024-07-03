@@ -407,7 +407,7 @@ public class UIReader_FileSystem : MonoBehaviour
         Debug.Log(folderName);
 
         Stack<string> pathName = new Stack<string>();
-        string top = folderName;
+        string top = GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName;
 
         // all remove paths
         for (int i = ui_filePathGround.childCount - 1; i >= 0; i--)
