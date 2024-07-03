@@ -38,6 +38,9 @@ public class ChatHumanManager : MonoBehaviour
                 {
                     chatTree.nodeList[j].is_UseThis = false;
                     chatTree.nodeList[j].test_isRead = false;
+
+                    if (chatTree.nodeList[j] is ConditionNode conditionNode)
+                        conditionNode.is_Unlock = false;
                 }
             }
         }

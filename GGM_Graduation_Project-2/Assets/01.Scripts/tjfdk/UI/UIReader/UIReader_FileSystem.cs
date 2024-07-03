@@ -51,7 +51,7 @@ public class UIReader_FileSystem : MonoBehaviour
 
     // UXML
     VisualElement ui_fileSystemArea;
-    VisualElement ui_fileGround;
+    public VisualElement ui_fileGround;
     VisualElement ui_filePathGround;
     VisualElement ui_mainFilePath;
     [HideInInspector] public Button ui_changeSizeButton;

@@ -68,7 +68,8 @@ namespace ChatVisual
 
         private void StartDrag(MouseDownEvent evt)
         {
-            _beforeSlot = target.parent;
+            //_beforeSlot = target.parent;
+            _beforeSlot = GameManager.Instance.fileSystem.ui_fileGround;
             var container = target.parent.parent;
 
             target.RemoveFromHierarchy();
@@ -120,6 +121,7 @@ namespace ChatVisual
                 {
                     if (!_doubleClickInitiated)
                     {
+                        Debug.Log("더블 클릭");
                         _clickCallback?.Invoke();
                     }
                 }).StartingIn((int)(_doubleClickThreshold * 1000));
@@ -133,7 +135,6 @@ namespace ChatVisual
             yield return new WaitForSeconds(1.5f);
             if (is_MouseDown)
             {
-                Debug.Log("Mouse Held");
                 StartDrag(_evt);
             }
         }
