@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.Timeline;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class UIReader_MenuScene : MonoBehaviour
@@ -11,9 +12,9 @@ public class UIReader_MenuScene : MonoBehaviour
     private UIDocument menuUI;
     private VisualElement menuRoot;
 
-    private Button startBtn;
-    private Button settingBtn;
-    private Button exitBtn;
+    public UnityEngine.UI.Button startBtn;
+    public UnityEngine.UI.Button settingBtn;
+    public UnityEngine.UI.Button exitBtn;
     private VisualElement settingPanel;
     [SerializeField] private AudioClip buttonClickSound;
     private AudioSource audioSource;
@@ -23,6 +24,7 @@ public class UIReader_MenuScene : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        menuUI.enabled = false;
     }
 
     private void OnEnable()
@@ -30,34 +32,36 @@ public class UIReader_MenuScene : MonoBehaviour
         menuUI = GetComponent<UIDocument>();
         menuRoot = menuUI.rootVisualElement;
 
-        startBtn = menuRoot.Q<Button>("PlayBtn");
-        settingBtn = menuRoot.Q<Button>("SettingBtn");
-        exitBtn = menuRoot.Q<Button>("ExitBtn");
         settingPanel = menuRoot.Q<VisualElement>("Setting");
 
         // you have to change this scene name, no tutorial! game!!!
-        startBtn.clicked += (() => { UIManager.Instance.SceneChange("Game"); });
-        startBtn.RegisterCallback<MouseEnterEvent>(evt => BtnSoundPlay());
+        startBtn.onClick.AddListener(() => { UIManager.Instance.SceneChange("Game"); });
 
-        settingBtn.clicked += (() => { OpenSetting(); });
-        settingBtn.RegisterCallback<MouseEnterEvent>(evt => BtnSoundPlay());        // 마우스 입력 시 소리
-        settingPanel.Q<Button>("ExitBtn").clicked += () => { OpenSetting(); };
+        settingBtn.onClick.AddListener(() => { OpenSetting(); });
+        settingPanel.Q<UnityEngine.UIElements.Button>("ExitBtn").clicked += () => { OpenSetting(); };
 
-        exitBtn.clicked += (() => { UIManager.Instance.Exit(); });
-        exitBtn.RegisterCallback<MouseEnterEvent>(evt => BtnSoundPlay());
+        exitBtn.onClick.AddListener(() => { UIManager.Instance.Exit(); });
     }
+
+    
 
     public void OpenSetting()
     {
         if (isSettingOpen)
+        {
+            menuUI.enabled = false;
             settingPanel.style.display = DisplayStyle.None;
+        }
         else
+        {
+            menuUI.enabled = true;
             settingPanel.style.display = DisplayStyle.Flex;
+        }
 
         isSettingOpen = !isSettingOpen;
     }
 
-    private void BtnSoundPlay()
+    public void BtnSoundPlay()
     {
         audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.PlayOneShot(buttonClickSound);

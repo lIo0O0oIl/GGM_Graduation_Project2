@@ -83,21 +83,3 @@
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
 }
-
-:hover > #PlayBtn {
-    transition-property: scale;
-    transition-duration: 0.1s;
-    scale: 1.1 1.1;
-}
-
-:hover > #SettingBtn {
-    transition-property: scale;
-    transition-duration: 0.1s;
-    scale: 1.1 1.1;
-}
-
-:hover > #ExitBtn {
-    transition-property: scale;
-    transition-duration: 0.1s;
-    scale: 1.1 1.1;
-}
