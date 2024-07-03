@@ -432,7 +432,7 @@ MonoBehaviour:
   position: {x: 3465.6, y: -623.19995}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: -267337331274752954}
   child: {fileID: -3193881089447086209}
   askText: "\uC77C\uAE30\uC5D0 \uB300\uD574\uC11C"
@@ -482,7 +482,7 @@ MonoBehaviour:
   position: {x: 2193.0598, y: 693.9293}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: -2809756319434307351}
   childList:
   - {fileID: 796052572294044899}
@@ -648,7 +648,7 @@ MonoBehaviour:
   position: {x: 2193.0598, y: 401.92923}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 1538258627449708841}
   childList:
   - {fileID: -3906902575870341958}
@@ -676,7 +676,7 @@ MonoBehaviour:
   position: {x: 3088.4, y: -427.19998}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 4932036651163026817}
   child: {fileID: 7158399006783260055}
   askText: "\uC0AC\uC9C4\uC5D0 \uB300\uD574\uC11C"
@@ -835,7 +835,7 @@ MonoBehaviour:
   position: {x: 2197.0598, y: 1177.9292}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 4081257676060421128}
   childList:
   - {fileID: 3621202831624794146}
@@ -862,7 +862,7 @@ MonoBehaviour:
   position: {x: 3087.2, y: -762.3999}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 1823172369336447848}
   childList:
   - {fileID: 7886152720236768745}
@@ -873,7 +873,7 @@ MonoBehaviour:
   - {fileID: 7886152720236768745}
   state: 0
   type: 0
-  chatText: "/\uC218\uC5F0\uC774 \uBC29/\uC740 \uC774\uCABD\uC774\uC5D0\uC694"
+  chatText: "/[\uC774\uC218\uC5F0 \uC9D1]\uC218\uC5F0\uC774 \uBC29/\uC740 \uC774\uCABD\uC774\uC5D0\uC694"
   face: 0
   loadFileName:
   - "\uC774\uC218\uC5F0 \uBC29"
@@ -1127,7 +1127,7 @@ MonoBehaviour:
   position: {x: 2367.46, y: 856.3293}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: -3906902575870341958}
   childList:
   - {fileID: 4081257676060421128}
@@ -1210,7 +1210,7 @@ MonoBehaviour:
   position: {x: 2380.26, y: 221.1292}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 5263095840189011489}
   childList:
   - {fileID: -2809756319434307351}
@@ -1267,7 +1267,7 @@ MonoBehaviour:
   position: {x: 2376.26, y: 1843.5293}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 7115155440884241633}
   childList:
   - {fileID: -267337331274752954}
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   position: {x: 2365.0598, y: 1335.5293}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: -692975090306287439}
   childList:
   - {fileID: 4336122318370824433}
@@ -1514,7 +1514,7 @@ MonoBehaviour:
   position: {x: 2370.66, y: 1017.92944}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 796052572294044899}
   childList:
   - {fileID: -692975090306287439}
@@ -1541,7 +1541,7 @@ MonoBehaviour:
   position: {x: 2189.0598, y: 1517.9293}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 3621202831624794146}
   childList:
   - {fileID: 7115155440884241633}
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   position: {x: 2197.8599, y: 59.529247}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 7250967009119201171}
   childList:
   - {fileID: 1538258627449708841}
@@ -1845,7 +1845,7 @@ MonoBehaviour:
   position: {x: 2381.8599, y: 1685.1292}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 4336122318370824433}
   childList:
   - {fileID: 1823172369336447848}
@@ -1899,7 +1899,7 @@ MonoBehaviour:
   position: {x: 2375.46, y: -105.27072}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 1267111254205511021}
   childList:
   - {fileID: 5263095840189011489}
@@ -2037,7 +2037,7 @@ MonoBehaviour:
   position: {x: 2728.8, y: -609.6001}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: -267337331274752954}
   child: {fileID: -3339313847476658995}
   askText: "\uCC45\uC5D0 \uB300\uD574\uC11C"
