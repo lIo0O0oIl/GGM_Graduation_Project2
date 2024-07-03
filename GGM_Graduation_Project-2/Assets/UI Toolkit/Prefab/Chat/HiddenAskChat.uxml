@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/USS/Chat.uss?fileID=7433441132597879392&amp;guid=196e6005f5443d14a87a584d5b6e61e3&amp;type=3#Chat" />
-    <ui:VisualElement name="HiddenAskChat" style="width: 100%; align-self: center;">
+    <ui:VisualElement name="HiddenAskChat" style="width: 100%; align-self: center; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
         <ui:VisualElement name="Speech" class="Speech" style="background-color: rgb(151, 151, 151); display: flex;">
             <ui:Label text="현재 질문은 잠겨있습니다" name="Text" class="ChatText" style="-unity-font: initial; -unity-font-definition: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo-toolkit%20SDF.asset?fileID=11400000&amp;guid=8a1a53547849f8e41ab1f62754582c6e&amp;type=2#DungGeunMo-toolkit SDF&apos;); display: flex; color: rgba(27, 27, 27, 0);" />
         </ui:VisualElement>
-        <ui:VisualElement name="LockIcon" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; align-self: center; top: -7.5px; width: 75px; height: 75px; bottom: auto; background-image: url(&apos;project://database/Assets/06.SO/FileSO/Icons/lock%201.png?fileID=2800000&amp;guid=aa52d3b844ad7a744a9367c708aed3f5&amp;type=3#lock 1&apos;);" />
+        <ui:VisualElement name="LockIcon" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; align-self: center; top: -7.5px; width: 75px; height: 75px; bottom: auto; background-image: url(&apos;project://database/Assets/02.Sprites/Icons/lock%201.png?fileID=2800000&amp;guid=aa52d3b844ad7a744a9367c708aed3f5&amp;type=3#lock 1&apos;);" />
     </ui:VisualElement>
 </ui:UXML>
