@@ -245,7 +245,7 @@ public class UIReader_FileSystem : MonoBehaviour
                     // connection click event
                     LoadDragAndDrop(file, () => 
                     {
-                        Debug.Log("ddsfoajihsfeQRO3AR");
+                        Debug.Log(fileName + " 얘가 호출됨");
                         GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
                         // image check action
                         if (folder != null)

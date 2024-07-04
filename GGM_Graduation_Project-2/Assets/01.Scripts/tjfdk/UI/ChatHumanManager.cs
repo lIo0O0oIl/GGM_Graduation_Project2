@@ -11,7 +11,7 @@ public class ChatHumanManager : MonoBehaviour
     //public float changeHumanTime = 1f;       // A time when humans change
     public float nextChatTime = 1f;         // when load next chat time
     //private float currentTime = 0f;
-    private bool is_ChatStart = false;
+    public bool is_ChatStart = false;
 
     private bool is_ChatStop = false;
 
