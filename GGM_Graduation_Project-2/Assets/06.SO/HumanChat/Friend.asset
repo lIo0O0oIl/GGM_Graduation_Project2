@@ -83,33 +83,6 @@ MonoBehaviour:
   loadFileName: []
   textEvent: 
   LoadNextDialog: 
---- !u!114 &-7691773845221438234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
-  m_Name: ChatNode
-  m_EditorClassIdentifier: 
-  guid: 06b3a2d0d4b60244497db3e5279c57c0
-  position: {x: 2371.2, y: -425.4}
-  index: 0
-  is_UseThis: 0
-  test_isRead: 0
-  parent: {fileID: 1206607300903494877}
-  childList:
-  - {fileID: -6911573132553870728}
-  state: 1
-  type: 0
-  chatText: "(\u1172\u1172)"
-  face: 0
-  loadFileName: []
-  textEvent: 
-  LoadNextDialog: 
 --- !u!114 &-7302709020142497239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,7 +264,7 @@ MonoBehaviour:
   index: 0
   is_UseThis: 0
   test_isRead: 0
-  parent: {fileID: -7691773845221438234}
+  parent: {fileID: 1206607300903494877}
   childList:
   - {fileID: 8853178973089426237}
   state: 1
@@ -869,7 +842,7 @@ MonoBehaviour:
   m_Name: Friend
   m_EditorClassIdentifier: 
   rootNode: {fileID: -2073506101436489320}
-  humanName: Friend
+  humanName: Friend.
   nodeList:
   - {fileID: -2073506101436489320}
   - {fileID: 5927108122935111430}
@@ -892,7 +865,6 @@ MonoBehaviour:
   - {fileID: 8438558496349887953}
   - {fileID: -7101996132768763304}
   - {fileID: 1206607300903494877}
-  - {fileID: -7691773845221438234}
   - {fileID: -6911573132553870728}
   - {fileID: 8849760026848314807}
   - {fileID: -5307458170294695644}
@@ -1025,7 +997,7 @@ MonoBehaviour:
   test_isRead: 0
   parent: {fileID: -7101996132768763304}
   childList:
-  - {fileID: -7691773845221438234}
+  - {fileID: -6911573132553870728}
   state: 0
   type: 0
   chatText: "\uB124!........"
@@ -2232,7 +2204,10 @@ MonoBehaviour:
   childList:
   - {fileID: 7723755766555087201}
   is_AllQuestion: 1
-  asks: []
+  asks:
+  - {fileID: -4499261338198701422}
+  - {fileID: -6386957733615435218}
+  - {fileID: -6353113625244190535}
   is_SpecificFile: 0
   fileName: 
   is_LockQuestion: 0
