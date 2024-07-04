@@ -37,6 +37,8 @@ public class UIReader_FileSystem : MonoBehaviour
 {
     static public UIReader_FileSystem Instance;
 
+    public bool isPathClick = false;
+
     [SerializeField]
     private float fileAreaSizeOn, fileAreaSizeOff;
     [SerializeField]
@@ -167,8 +169,6 @@ public class UIReader_FileSystem : MonoBehaviour
         // drl!
         file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         {
-            Debug.Log("드는중");
-
             var area = FindMoveArea(evt.mousePosition);
             //target.RemoveFromHierarchy();
             if (area == null)
@@ -176,12 +176,8 @@ public class UIReader_FileSystem : MonoBehaviour
             else
             {
                 ConditionNode conditionNode = FindQuestion(area).parent as ConditionNode;
-                //Debug.Log(conditionNode);
                 if (conditionNode != null)
                 {
-                    //Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName + " " + conditionNode.fileName);
-                    //Debug.Log(GameManager.Instance.fileManager.FindFile(fileName).fileName.Trim() == conditionNode.fileName.Trim());
-
                     string fileName = file.Q<Label>("FileName").text;
                     string[] names = conditionNode.fileName.Split('/');
 
@@ -245,7 +241,6 @@ public class UIReader_FileSystem : MonoBehaviour
                     // connection click event
                     LoadDragAndDrop(file, () => 
                     {
-                        Debug.Log(fileName + " 얘가 호출됨");
                         GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
                         // image check action
                         if (folder != null)
@@ -364,7 +359,9 @@ public class UIReader_FileSystem : MonoBehaviour
         {
             // create current folder's childen
             foreach (VisualElement folder in currentFileFolder.folderFiles)
+            {
                 ui_fileGround.Add(folder);
+            }
 
             foreach (VisualElement image in currentFileFolder.imageFiles)
                 ui_fileGround.Add(image);
@@ -386,7 +383,7 @@ public class UIReader_FileSystem : MonoBehaviour
     {
         VisualElement filePath = UIReader_Main.Instance.RemoveContainer(ux_filePath.Instantiate());
         filePath.Q<Button>().text = pathName + "> ";
-        filePath.Q<Button>().clicked += () => { FolderPathEvent(pathName); };
+        filePath.Q<Button>().clicked += () => { FolderPathEvent(pathName); isPathClick = true; };
         ui_filePathGround.Add(filePath);
         filePathLisk.Push(pathName);
     }
@@ -406,8 +403,6 @@ public class UIReader_FileSystem : MonoBehaviour
 
     public void HighlightingFolderPathEvent(string folderName)
     {
-        Debug.Log(folderName);
-
         Stack<string> pathName = new Stack<string>();
         string top = GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName;
 
@@ -421,17 +416,14 @@ public class UIReader_FileSystem : MonoBehaviour
             top = GameManager.Instance.fileSystem.FindFolder(top).parentFolderName;
         }
 
-        Debug.Log("Main");
         AddFilePath("Main");
         while (pathName.Count > 0)
         {
             AddFilePath(pathName.Peek());
-            Debug.Log(pathName.Peek());
             pathName.Pop();
         }
 
         DrawFile(GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName);
-        Debug.Log(folderName);
     }
 
     public void OnOffFileSystem(float during)

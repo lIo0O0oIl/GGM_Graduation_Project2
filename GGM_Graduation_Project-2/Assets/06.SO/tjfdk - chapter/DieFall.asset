@@ -15,6 +15,13 @@ MonoBehaviour:
   chapterName: DieFall
   nextMemberName: GJH
   cutScenes:
+  - isAnim: 1
+    cut:
+    - {fileID: 21300000, guid: c550b8bef08f45e4f8681696677c68f8, type: 3}
+    texts:
+    - sound: 
+      text: " 2011\uB144 6\uC6D4 20\uC77C, \uC740\uC131\uACE0\uB4F1\uD559\uAD50..."
+      vibration: 0
   - isAnim: 0
     cut:
     - {fileID: 21300000, guid: 33fe52c30c5a5874c9b3250e3730e87d, type: 3}
