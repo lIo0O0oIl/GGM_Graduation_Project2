@@ -50,12 +50,10 @@ public class UIReader_MenuScene : MonoBehaviour
         if (isSettingOpen)
         {
             menuUI.enabled = false;
-            settingPanel.style.display = DisplayStyle.None;
         }
         else
         {
             menuUI.enabled = true;
-            settingPanel.style.display = DisplayStyle.Flex;
         }
 
         isSettingOpen = !isSettingOpen;
