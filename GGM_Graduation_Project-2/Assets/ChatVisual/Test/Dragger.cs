@@ -17,7 +17,7 @@ namespace ChatVisual
         private float _clickThreshold = 0.2f; // ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 (珥?
         private float _doubleClickThreshold = 0.3f; // ?붾툝 ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 媛꾧꺽 (珥?
         private float _moveThreshold = 5.0f; // ?대┃?쇰줈 ?몄떇??理쒕? ?대룞 嫄곕━ (?쎌?)
-        private bool _doubleClickInitiated = false;
+        public bool _doubleClickInitiated = false;
 
         private float moveDelay;
         private bool is_MouseDown = false;
@@ -50,11 +50,13 @@ namespace ChatVisual
             {
                 if (Time.time - _lastClickTime <= _doubleClickThreshold)
                 {
+                    Debug.Log("false 됨");
                     _isDrag = false;
                     _doubleClickInitiated = false;
                 }
                 else
                 {
+                    Debug.Log("true 됨");
                     GameManager.Instance.StartCoroutine(CheckMouseHold());
                     _evt = evt;
                     is_MouseDown = true;
@@ -115,14 +117,17 @@ namespace ChatVisual
                 _dropCallback?.Invoke(evt, target, _beforeSlot);
                 _isDrag = false;
             }
-            else if (!_doubleClickInitiated)
+            else if (_doubleClickInitiated == false)
             {
                 target.schedule.Execute(() =>
                 {
-                    if (!_doubleClickInitiated)
+                    if (_doubleClickInitiated == false)
                     {
-                        Debug.Log("더블 클릭");
-                        _clickCallback?.Invoke();
+                        Debug.LogError(GameManager.Instance.fileSystem.isPathClick);
+                        if (GameManager.Instance.fileSystem.isPathClick == false)
+                            _clickCallback?.Invoke();
+                        else
+                            GameManager.Instance.fileSystem.isPathClick = false;
                     }
                 }).StartingIn((int)(_doubleClickThreshold * 1000));
             }
