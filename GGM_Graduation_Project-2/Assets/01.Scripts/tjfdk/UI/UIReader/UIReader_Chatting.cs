@@ -388,7 +388,7 @@ public class UIReader_Chatting : MonoBehaviour
             chat.Q<Button>().clicked += (() =>
             {
                 // add chat
-                InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText, false, true);
+                InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText, true, true);
 
                 // current question value list
                 for (int i = 0; i < member.questions.Count; ++i)
@@ -444,7 +444,7 @@ public class UIReader_Chatting : MonoBehaviour
 
         // record
         if (isRecord)
-            RecordChat(EChatState.Me, toWho, type, askNode.askText);
+            RecordChat(EChatState.Me, toWho, type, askNode.askText, true);
 
         // add visualelement
         ui_questionGround.Add(chat);
@@ -452,7 +452,7 @@ public class UIReader_Chatting : MonoBehaviour
 
     // record chatting
     // ????????type question????????????ㅳ늾??????????濚밸Ŧ援????????饔낅떽??吏??筌뚮?????닿튃????耀붾굝??????????????濚밸Ŧ援욃퐲???
-    private void RecordChat(EChatState who, string toWho, EChatType type, string msg)
+    private void RecordChat(EChatState who, string toWho, EChatType type, string msg, bool isQuestion = false)
     {
         // find member
         MemberProfile member = FindMember(toWho);
@@ -472,13 +472,11 @@ public class UIReader_Chatting : MonoBehaviour
                 }
                 break;
             case EChatType.Question:
-                //          case EChatType.LockQuestion:
-                //          {
-                //                  Debug.Log("??遺얘턁??????????鶯??????袁④뎬??");
-                ///*              AskNode ask = new AskNode();
-                //              ask.askText = msg;
-                //              member.questions.Add(ask);*/
-                //          }
+                {
+                    Debug.Log("질문으로 들어옴");
+                    //Quesion
+
+                }
                 break;
         }
     }
