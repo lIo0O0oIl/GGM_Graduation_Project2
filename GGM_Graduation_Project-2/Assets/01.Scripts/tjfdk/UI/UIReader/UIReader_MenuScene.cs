@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 public class UIReader_MenuScene : MonoBehaviour
 {
     [Header("Menu")]
-    private UIDocument menuUI;
+    public UIDocument menuUI;
     private VisualElement menuRoot;
 
     public UnityEngine.UI.Button startBtn;
@@ -21,32 +21,53 @@ public class UIReader_MenuScene : MonoBehaviour
 
     public bool isSettingOpen;
 
-    private void Start()
+    private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        menuUI.enabled = false;
-    }
-
-    private void OnEnable()
-    {
-        menuUI = GetComponent<UIDocument>();
         menuRoot = menuUI.rootVisualElement;
-
-        settingPanel = menuRoot.Q<VisualElement>("Setting");
 
         // you have to change this scene name, no tutorial! game!!!
         startBtn.onClick.AddListener(() => { UIManager.Instance.SceneChange("Game"); });
 
         settingBtn.onClick.AddListener(() => { OpenSetting(); });
-        settingPanel.Q<UnityEngine.UIElements.Button>("ExitBtn").clicked += () => { OpenSetting(); };
+        menuRoot.Q<UnityEngine.UIElements.Button>("ExitBtn").clicked += () => { OpenSetting(); };
 
         exitBtn.onClick.AddListener(() => { UIManager.Instance.Exit(); });
+
+        StartCoroutine(min());
     }
 
-    
+    private void OnEnable()
+    {
+        Debug.Log(menuRoot.Q<UnityEngine.UIElements.Button>("ExitBtn"));
+        menuRoot.Q<UnityEngine.UIElements.Button>("ExitBtn").clicked += () => 
+        {
+            Debug.Log("들어옴"); 
+            OpenSetting();
+        };
+    }
+
+    private IEnumerator min()
+    {
+        yield return new WaitForEndOfFrame();
+        menuUI.enabled = false;
+    }
+
+    public void OnStart()
+    {
+        Debug.Log("dk");
+        UIManager.Instance.SceneChange("Game");
+    }
+
+    public void OnExit()
+    {
+        Debug.Log("나가");
+        UIManager.Instance.Exit();
+    }
 
     public void OpenSetting()
     {
+        Debug.Log(isSettingOpen);
         if (isSettingOpen)
         {
             menuUI.enabled = false;

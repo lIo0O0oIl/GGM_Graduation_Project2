@@ -11,7 +11,7 @@ public class UIReader_SettingScene : MonoBehaviour
     //[SerializeField] ChatHumanManager chatHumanManager;
 
     [Header("Setting")]
-    private UIDocument settingUI;
+    public UIDocument settingUI;
     private VisualElement root;
 
     private Slider master;
@@ -21,10 +21,17 @@ public class UIReader_SettingScene : MonoBehaviour
     //private Slider scroll;
 
 
-    private void OnEnable()
+    private void Start()
     {
-        settingUI = GetComponent<UIDocument>();
-        root = settingUI.rootVisualElement;
+        if (settingUI == null)
+        {
+            settingUI = GetComponent<UIDocument>();
+            root = settingUI.rootVisualElement;
+        }
+        else
+        {
+            root = settingUI.rootVisualElement;
+        }
 
         master = root.Q<Slider>("SliderMaster");
         bgm = root.Q<Slider>("SliderBGM");
@@ -35,21 +42,7 @@ public class UIReader_SettingScene : MonoBehaviour
         bgm.RegisterValueChangedCallback(OnBGMChange);
         sfx.RegisterValueChangedCallback(OnSFXChange);
         wheel.RegisterValueChangedCallback(OnWheelSpeedhange);
-    }
 
-    void OnDisable()
-    {
-        //SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    //void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    //{
-    //    if (GameObject.Find("Game"))
-    //        chatHumanManager = GameObject.Find("Game").GetComponent<ChatHumanManager>();
-    //}
-
-    private void Start()
-    {
         master.value = VolumeManager.Instance.masterValue;
         bgm.value = VolumeManager.Instance.bgmValue;
         sfx.value = VolumeManager.Instance.sfxValue;

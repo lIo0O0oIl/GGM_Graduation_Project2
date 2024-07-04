@@ -1472,7 +1472,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273004370}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
@@ -1493,6 +1493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb6b35c5748e004686cf5ce13f3a9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuUI: {fileID: 1273004372}
   startBtn: {fileID: 1252056200}
   settingBtn: {fileID: 934900553}
   exitBtn: {fileID: 551930905}
@@ -1510,6 +1511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66964fd372bf01b42a6aa7f52ef5108b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingUI: {fileID: 1273004372}
 --- !u!82 &1273004375
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1521,7 +1523,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6792560587974360074, guid: 097331ddd5b24db4b81717f0e8c0b330, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
