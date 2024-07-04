@@ -104,6 +104,7 @@ namespace ChatVisual
         protected void OnMouseUp(MouseUpEvent evt)
         {
             is_MouseDown = false;
+            GameManager.Instance.StopCoroutine(CheckMouseHold());
             if (_isDrag)
             {
                 if (!target.HasMouseCapture())
@@ -123,7 +124,6 @@ namespace ChatVisual
                 {
                     if (_doubleClickInitiated == false)
                     {
-                        Debug.LogError(GameManager.Instance.fileSystem.isPathClick);
                         if (GameManager.Instance.fileSystem.isPathClick == false)
                             _clickCallback?.Invoke();
                         else
@@ -137,7 +137,7 @@ namespace ChatVisual
 
         IEnumerator CheckMouseHold()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
             if (is_MouseDown)
             {
                 StartDrag(_evt);
