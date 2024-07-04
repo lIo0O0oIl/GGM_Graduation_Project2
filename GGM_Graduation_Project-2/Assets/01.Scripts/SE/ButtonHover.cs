@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
     [SerializeField] private UIReader_MenuScene sound;
 
@@ -19,5 +19,10 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         GameObject hoverButton = eventData.pointerEnter;
         hoverButton.transform.DOScale(new Vector2(1.0f, 1.0f), 0.1f);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        //gameObject.SetActive(false);
     }
 }
