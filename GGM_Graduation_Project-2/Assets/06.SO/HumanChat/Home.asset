@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: ea89ac3c81680504caa36ec2545ef1ce
-  position: {x: 3534.8, y: 811.39996}
+  position: {x: 3542.4004, y: 960}
   index: 0
   is_UseThis: 0
   test_isRead: 1
@@ -374,14 +374,13 @@ MonoBehaviour:
   m_Name: AskNode
   m_EditorClassIdentifier: 
   guid: 855ea68412124c04a93c2da26c62be45
-  position: {x: 3616.8, y: 983}
+  position: {x: 3624.0005, y: 1131.2}
   index: 0
-  is_UseThis: 0
-  test_isRead: 0
+  is_UseThis: 1
+  test_isRead: 1
   parent: {fileID: -9000675419848741926}
   child: {fileID: 0}
-  askText: "*(\uC67C\uCABD \uC704\uC5D0 \uD654\uC0B4\uD45C\uB97C \uB20C\uB7EC\uC11C
-    \uC120\uBC30\uB2D8\uAED8 \uB3CC\uC544\uAC00\uC790)*"
+  askText: "*(\uB3CC\uC544\uAC00\uC790)*"
   textEvent: 05000000
   LoadNextDialog: GJH
 --- !u!114 &-4912762733513924726
@@ -397,7 +396,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: ffffbcf2ac5a54f4e966251afa1b75e7
-  position: {x: 3550.18, y: 367.2399}
+  position: {x: 3557.6003, y: 515.2}
   index: 0
   is_UseThis: 0
   test_isRead: 1
@@ -514,6 +513,34 @@ MonoBehaviour:
   type: 0
   chatText: "\uC5B4\uB9B4 \uB54C\uBD80\uD130 \uC218\uC5F0\uC774\uD55C\uD150 \uC2E0\uACBD\uC744
     \uC798 \uBABB\uC368\uC92C\uC5B4\uC694..."
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &-3418665210829044281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: ea351051281595d489623451dc93f943
+  position: {x: 3784.8003, y: 9.600037}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: 2028848214327331146}
+  childList:
+  - {fileID: 4683548531726610977}
+  state: 0
+  type: 0
+  chatText: "\uC218\uC5F0\uC774 \uD734\uB300\uD3F0\uC5D0\uB294 \uC0AC\uC9C4\uC774
+    \uC788\uC744\uAE4C \uC2F6\uC5B4\uC11C..."
   face: 0
   loadFileName: []
   textEvent: 
@@ -674,7 +701,7 @@ MonoBehaviour:
   position: {x: 2778.4, y: -212.79993}
   index: 0
   is_UseThis: 1
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 4932036651163026817}
   child: {fileID: 7158399006783260055}
   askText: "\uC0AC\uC9C4\uC5D0 \uB300\uD574\uC11C"
@@ -857,16 +884,15 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 9f41991f71de9e24a82c3a9097ce4e0b
-  position: {x: 3697.6, y: 1139.6}
+  position: {x: 3704.8005, y: 1288}
   index: 0
   is_UseThis: 0
-  test_isRead: 1
+  test_isRead: 0
   parent: {fileID: 0}
   childList: []
   state: 1
   type: 0
-  chatText: "*(\uC67C\uCABD \uC704\uC5D0 \uD654\uC0B4\uD45C\uB97C \uB20C\uB7EC\uC11C
-    \uC120\uBC30\uB2D8\uAED8 \uB3CC\uC544\uAC00\uC790)*"
+  chatText: "*(\uB3CC\uC544\uAC00\uC790)*"
   face: 0
   loadFileName: []
   textEvent: 
@@ -1013,6 +1039,7 @@ MonoBehaviour:
   - {fileID: -1107879041917425579}
   - {fileID: 5947273001145852265}
   - {fileID: -5064307632681578910}
+  - {fileID: -3418665210829044281}
 --- !u!114 &421194090308952518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,7 +1080,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 97a2681e84784174b9e01839ae6b2657
-  position: {x: 3550.4397, y: 40.854942}
+  position: {x: 3557.6003, y: 188.79999}
   index: 0
   is_UseThis: 0
   test_isRead: 1
@@ -1093,7 +1120,7 @@ MonoBehaviour:
   type: 0
   chatText: "\uC544\uD558\uD558... \uADF8\uB807\uC8E0!!\\n\uADF8... \uD3C9\uC18C
     \uC218\uC5F0 \uC591 \uAD00\uB828\uD574\uC11C \uBA87 \uAC00\uC9C0 \uC5EC\uCB64\uBCF4\uACE0
-    \uC2F6\uC740\uB370 \uD639\uC2DC \uC2DC\uAC04 \uC880 \uB0B4\uC8FC\uC2E4 \uC218
+    \uC2F6\uC740\uB370\\n\uD639\uC2DC \uC2DC\uAC04 \uC880 \uB0B4\uC8FC\uC2E4 \uC218
     \uC788\uB098\uC694?"
   face: 0
   loadFileName: []
@@ -1205,7 +1232,7 @@ MonoBehaviour:
   state: 1
   type: 0
   chatText: "\uD639\uC2DC \uD3C9\uC18C \uD559\uC5C5\uC774\uB098 \uAD50\uC6B0 \uAD00\uACC4\uB85C
-    \uC2A4\uD2B8\uB808\uC2A4\uB97C \uBC1B\uB294\uB2E4\uB358\uAC00 \uADF8\uB7F0 \uAC8C
+    \uC2A4\uD2B8\uB808\uC2A4\uB97C \uBC1B\uB294\uB2E4\uB358\uAC00/n\uADF8\uB7F0 \uAC8C
     \uC788\uC5C8\uC744\uAE4C\uC694?"
   face: 0
   loadFileName: []
@@ -1286,13 +1313,12 @@ MonoBehaviour:
   test_isRead: 1
   parent: {fileID: -1480277824138029490}
   childList:
-  - {fileID: 4683548531726610977}
+  - {fileID: -3418665210829044281}
   state: 0
   type: 0
   chatText: "\uC5B4\uB9B4 \uB54C\uBD80\uD130 \uC218\uC5F0\uC774\uD55C\uD14C \uC2E0\uACBD\uC744
-    \uB9CE\uC774 \uBABB \uC368\uC918\uC11C \uC218\uC5F0\uC774 \uC0AC\uC9C4\uC774
-    \uBCC4\uB85C \uC5C6\uAC70\uB4E0\uC694...\\n\uC218\uC5F0\uC774 \uD734\uB300\uD3F0\uC5D0\uB294
-    \uC0AC\uC9C4\uC774 \uC788\uC744\uAE4C \uC2F6\uC5B4\uC11C..."
+    \uB9CE\uC774 \uBABB \uC368\uC918\\n \uC218\uC5F0\uC774 \uC0AC\uC9C4\uC774 \uBCC4\uB85C
+    \uC5C6\uAC70\uB4E0\uC694..."
   face: 0
   loadFileName: []
   textEvent: 
@@ -1339,7 +1365,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: bbdcaf9f867eaf44a8db93f2009ebb29
-  position: {x: 3715.7168, y: 661.7756}
+  position: {x: 3723.2004, y: 809.6}
   index: 0
   is_UseThis: 0
   test_isRead: 1
@@ -1608,11 +1634,11 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: efc543b2c26c95e4c994b4ac96bb2612
-  position: {x: 3552.0396, y: -120.74501}
+  position: {x: 3559.2004, y: 27.20002}
   index: 0
   is_UseThis: 0
   test_isRead: 1
-  parent: {fileID: 2028848214327331146}
+  parent: {fileID: -3418665210829044281}
   childList:
   - {fileID: 472301378071454030}
   state: 0
@@ -1829,7 +1855,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: e9d8c42786b051141b104ac7c9dc577b
-  position: {x: 3713.317, y: 519.3755}
+  position: {x: 3720.8005, y: 667.19995}
   index: 0
   is_UseThis: 0
   test_isRead: 1
@@ -1964,7 +1990,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 3b7dcf01f032c354fabc1ee4831cb415
-  position: {x: 3548.8396, y: 208.05501}
+  position: {x: 3556.0005, y: 356.00003}
   index: 0
   is_UseThis: 0
   test_isRead: 1
