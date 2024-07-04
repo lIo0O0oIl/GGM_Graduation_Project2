@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class UIReader_MenuScene : MonoBehaviour
@@ -21,7 +21,7 @@ public class UIReader_MenuScene : MonoBehaviour
 
     public bool isSettingOpen;
 
-    private void Awake()
+    private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         menuRoot = menuUI.rootVisualElement;
@@ -30,21 +30,15 @@ public class UIReader_MenuScene : MonoBehaviour
         startBtn.onClick.AddListener(() => { UIManager.Instance.SceneChange("Game"); });
 
         settingBtn.onClick.AddListener(() => { OpenSetting(); });
-        menuRoot.Q<UnityEngine.UIElements.Button>("ExitBtn").clicked += () => { OpenSetting(); };
+        menuRoot.Q<Button>("ExitBtn").RegisterCallback<ClickEvent>(evt =>
+        {
+            Debug.Log("Button clicked");
+            OpenSetting();
+        });
 
         exitBtn.onClick.AddListener(() => { UIManager.Instance.Exit(); });
 
         StartCoroutine(min());
-    }
-
-    private void OnEnable()
-    {
-        Debug.Log(menuRoot.Q<UnityEngine.UIElements.Button>("ExitBtn"));
-        menuRoot.Q<UnityEngine.UIElements.Button>("ExitBtn").clicked += () => 
-        {
-            Debug.Log("들어옴"); 
-            OpenSetting();
-        };
     }
 
     private IEnumerator min()
@@ -73,8 +67,14 @@ public class UIReader_MenuScene : MonoBehaviour
             menuUI.enabled = false;
         }
         else
-        {
+        {   
             menuUI.enabled = true;
+            menuUI.rootVisualElement.Q<Button>("ExitBtn").RegisterCallback<ClickEvent>(evt =>
+        {
+            Debug.Log("Button clicked");
+            OpenSetting();
+        });
+
         }
 
         isSettingOpen = !isSettingOpen;
