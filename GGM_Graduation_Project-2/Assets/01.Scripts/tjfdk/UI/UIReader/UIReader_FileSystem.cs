@@ -403,6 +403,8 @@ public class UIReader_FileSystem : MonoBehaviour
 
     public void HighlightingFolderPathEvent(string folderName)
     {
+        isPathClick = true;
+
         Stack<string> pathName = new Stack<string>();
         string top = GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName;
 
