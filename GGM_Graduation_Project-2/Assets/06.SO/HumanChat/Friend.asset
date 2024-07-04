@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 06b3a2d0d4b60244497db3e5279c57c0
-  position: {x: 2399.2, y: -302.752}
+  position: {x: 2371.2, y: -425.4}
   index: 0
   is_UseThis: 0
   test_isRead: 0
@@ -287,18 +287,17 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 6dd1ac252ac36d447914465bcedb94a4
-  position: {x: 2402.4, y: -165.95197}
+  position: {x: 2374.4, y: -288.6}
   index: 0
   is_UseThis: 0
   test_isRead: 0
   parent: {fileID: -7691773845221438234}
   childList:
-  - {fileID: 8849760026848314807}
+  - {fileID: 8853178973089426237}
   state: 1
   type: 0
   chatText: "(\uC804 \uC5EC\uC790\uCE5C\uAD6C\uD55C\uD14C *\"\uB10C \uC7AC\uBBF8\uAC00
-    \uC5C6\uC5B4\"*\uB77C\uBA70 \uCC28\uC778 \uC774\uD6C4\uB85C\\n\uC774\uB807\uAC8C
-    \uB9C8\uC74C \uC544\uD508 \uC801\uC740 \uCC98\uC74C\uC774\uB124...)"
+    \uC5C6\uC5B4\"*\uB77C\uBA70 \uCC28\uC778 \uC774\uD6C4\uB85C)"
   face: 0
   loadFileName: []
   textEvent: 
@@ -950,6 +949,7 @@ MonoBehaviour:
   - {fileID: 1443126660798554182}
   - {fileID: -3893606000886053700}
   - {fileID: 2559938997995620129}
+  - {fileID: 8853178973089426237}
 --- !u!114 &342919510241506413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2142,7 +2142,7 @@ MonoBehaviour:
   index: 0
   is_UseThis: 0
   test_isRead: 0
-  parent: {fileID: -6911573132553870728}
+  parent: {fileID: 0}
   childList:
   - {fileID: -5307458170294695644}
   state: 1
@@ -2150,6 +2150,33 @@ MonoBehaviour:
   chatText: "\uC218\uC5F0\uC774\uC5D0 \uB300\uD574\uC11C \uBA87 \uAC00\uC9C0 \uBB3C\uC5B4\uBCFC
     \uAC74\uB370 \uC194\uC9C1\uD558\uAC8C \uC544\uB294 \uAC83\uB9CC \uB300\uB2F5\uD574
     \uC8FC\uBA74 \uB3FC!"
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
+--- !u!114 &8853178973089426237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: ccc9f82e3d47c89428013ed4155f2bb1
+  position: {x: 2606.4, y: -69.19998}
+  index: 0
+  is_UseThis: 0
+  test_isRead: 0
+  parent: {fileID: -6911573132553870728}
+  childList:
+  - {fileID: 8849760026848314807}
+  state: 1
+  type: 0
+  chatText: "(\uC774\uB807\uAC8C \uB9C8\uC74C \uC544\uD508 \uC801\uC740 \uCC98\uC74C\uC774\uB124...)"
   face: 0
   loadFileName: []
   textEvent: 
