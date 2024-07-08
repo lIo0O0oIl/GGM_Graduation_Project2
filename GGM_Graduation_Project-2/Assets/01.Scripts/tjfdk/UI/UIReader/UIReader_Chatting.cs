@@ -82,21 +82,10 @@ public class UIReader_Chatting : MonoBehaviour
     {
     }
 
-
     private void OnEnable()
     {
         UXML_Load();
         Event_Load();
-    }
-
-    private void OpenConnection()
-    {
-        if (isConnectionOpen)
-            UIReader_Main.Instance.connectionPanel.style.display = DisplayStyle.Flex;
-        else
-            UIReader_Main.Instance.connectionPanel.style.display = DisplayStyle.None;
-
-        isConnectionOpen = !isConnectionOpen;
     }
 
     private void UXML_Load()
@@ -170,35 +159,10 @@ public class UIReader_Chatting : MonoBehaviour
         Invoke("EndToScroll", scrollEndSpeed);
     }
 
-    private void GameDown()
-    {
-        Application.Quit();
-    }
-
-    private void TutorialEnd()
-    {
-        SceneManager.LoadScene("Game");
-        GameManager.Instance.GameStart();
-    }
-
     // input chat
     public void InputChat(string toWho, EChatState who, EChatType type,
         EFace face, string text, bool isRecord = true, bool isQuestion = false)
     {
-        // test
-        if (text == "더 나은 빌드로 돌아오겠습니다.")
-        {
-            Invoke("GameDown", 3f);
-        }
-        if (text == "튜토리얼은 여기까지 입니다.")
-        {
-            GameManager.Instance.chatHumanManager.StopChatting();
-            GameManager.Instance.chatHumanManager.currentNode = null;
-            Invoke("TutorialEnd", 3f);
-        }
-
-
-
         // create chat
         VisualElement chat = null;
         // find member
@@ -207,7 +171,6 @@ public class UIReader_Chatting : MonoBehaviour
         // chat type
         switch (type)
         {
-            // if Text
             case EChatType.Text:
                 // create uxml
                 chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
@@ -216,8 +179,6 @@ public class UIReader_Chatting : MonoBehaviour
                     chat.AddToClassList("Question");
                 EventChatText(chat, text);
                 break;
-
-            // if Image
             case EChatType.Image:
                 // create VisualElement
                 chat = new VisualElement();
@@ -225,21 +186,23 @@ public class UIReader_Chatting : MonoBehaviour
                 // image size change
                 UIReader_Main.Instance.ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
                 break;
-
-            // if CutScene
             case EChatType.CutScene:
                 // create Button
                 chat = new Button();
                 chat.name = "cutScene";
+                
                 // change chat style
                 chat.AddToClassList("FileChatSize");
                 chat.AddToClassList("NoButtonBorder");
+                
                 // find first cut of cutscene
                 ChatNode cutScene = GameManager.Instance.chatHumanManager.currentNode as ChatNode;
-                GameManager.Instance.chatHumanManager.nowCondition = cutScene.childList[0] as ConditionNode;
+                //GameManager.Instance.chatHumanManager.nowCondition = cutScene.childList[0] as ConditionNode;
+                
                 // change background to image
                 Sprite sprite = GameManager.Instance.cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
                 chat.style.backgroundImage = new StyleBackground(sprite);
+                
                 // connection click event, play cutscene
                 chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
                 break;
@@ -263,6 +226,234 @@ public class UIReader_Chatting : MonoBehaviour
         currentElement = chat;
         // scroll pos to end
         Invoke("EndToScroll", scrollEndSpeed);
+    }
+
+    // input question
+    public void InputQuestion(string toWho, bool isLock, AskNode askNode, bool isRecord = true)
+    {
+        // create chat
+        VisualElement chat = null;
+        // find member
+        MemberProfile member = FindMember(toWho.ToString());
+        // chat type
+        EChatType type = EChatType.Text;
+        if (!isLock)
+        {
+            // create uxml
+            chat = UIReader_Main.Instance.RemoveContainer(ux_askChat.Instantiate());
+            // chat name setting
+            chat.name = askNode.askText;
+            // chat text setting
+            chat.Q<Label>().text = askNode.askText;
+            // connection click event
+            chat.Q<Button>().clicked += (() =>
+            {
+                // add chat
+                InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText, true, true);
+
+                // current question value list
+                for (int i = 0; i < member.questions.Count; ++i)
+                {
+                    if (member.questions[i].askText == askNode.askText)
+                        member.questions.RemoveAt(i);
+                }
+
+                // other question read false
+                foreach (AskNode ask in member.questions)
+                {
+                    ask.test_isRead = false;
+                }
+
+                if (askNode.textEvent.Count == 1)
+                {
+                    Debug.Log(askNode.LoadNextDialog + " ????????????ъ몥?????");
+                    GameManager.Instance.chatHumanManager.StopChatting();
+                    AddMember(askNode.LoadNextDialog);
+                    ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
+                }
+                else
+                {
+                    GameManager.Instance.chatHumanManager.currentNode = askNode;
+                }
+
+                // all question visualelement down
+                GameManager.Instance.chatSystem.RemoveQuestion();
+                member.questions.Clear();
+
+                // currntNode, member's currentNode change
+                member.memCurrentNode = askNode;
+                askNode.is_UseThis = true;
+
+                // chatting start
+                GameManager.Instance.chatHumanManager.StartChatting();
+
+                // question
+                type = EChatType.Question;
+            });
+        }
+        else
+        {
+            // create uxml
+            chat = UIReader_Main.Instance.RemoveContainer(ux_hiddenAskChat.Instantiate());
+            // chat name setting
+            chat.name = askNode.askText;
+            // question
+            //type = EChatType.LockQuestion;
+        }
+
+        // record
+        if (isRecord)
+            RecordChat(EChatState.Me, toWho, type, askNode.askText, true);
+
+        // add visualelement
+        ui_questionGround.Add(chat);
+    }
+
+    // setting Face and event
+    public void SettingChat(MemberProfile member, EChatState who, Node node, EFace face, List<EChatEvent> evts)
+    {
+        // find member face
+        VisualElement memberFace = null;
+
+        if (who == EChatState.Me)
+        {
+            member = FindMember("HG");
+            memberFace = ui_myFace.Q<VisualElement>("Face");
+        }
+        else
+        {
+            memberFace = ui_otherFace.Q<VisualElement>("Face");
+        }
+
+        // face type
+        switch (face)
+        {
+            case EFace.Default:
+                memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default - 1]);
+                break;
+            case EFace.Blush:
+                memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush - 1]);
+                break;
+            case EFace.Angry:
+                memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Angry - 1]);
+                break;
+        }
+
+        // change current face of member
+        member.currentFace = face;
+
+        if (node is ChatNode chatNode)
+        {
+            // event type
+            for (int i = 0; i < evts.Count; i++)
+            {
+                switch (evts[i])
+                {
+                    case EChatEvent.LoadFile:
+                        {
+                            FileSO file = GameManager.Instance.fileManager.FindFile(chatNode.loadFileName[i]);
+                            if (file != null)
+                                GameManager.Instance.fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
+                            else
+                                Debug.Log("this file not exist");
+                        }
+                        break;
+                    case EChatEvent.Vibration:
+                        {
+                            Debug.Log("진동 시작");
+                            Vector3 originalPosition = currentElement.transform.position;
+                            Vector3 randomOffset = Vector3.zero;
+                            float elapsed = 0f;
+
+                            DoTween = DOTween.To(() => elapsed, x => elapsed = x, 1f, 0.25f)
+                                .OnStart(() =>
+                                {
+                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+                                    float x = strength * Mathf.Cos(randomAngle);
+                                    float y = strength * Mathf.Sin(randomAngle);
+
+                                    randomOffset = new Vector3(x, y, 0);
+                                })
+                                .OnUpdate(() =>
+                                {
+                                    Vector3 movePos = Vector3.zero;
+                                    if (elapsed < (duration / 2))       // 밖으로 나가는 중
+                                    {
+                                        movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / duration);
+                                    }
+                                    else
+                                    {
+                                        movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / duration);
+                                    }
+                                    currentElement.transform.position = movePos;
+                                })
+                                .OnStepComplete(() =>
+                                {
+                                    currentElement.transform.position = originalPosition;
+
+                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+                                    float x = strength * Mathf.Cos(randomAngle);
+                                    float y = strength * Mathf.Sin(randomAngle);
+
+                                    randomOffset = new Vector3(x, y, 0);
+                                    //Debug.Log(randomOffset);
+                                })
+                                .SetLoops(-1, LoopType.Restart);
+                            return;
+                        }
+                    case EChatEvent.OneVibration:
+                        {
+                            Vector3 originalPosition = currentElement.transform.position;
+                            Vector3 randomOffset = Vector3.zero;
+                            float elapsed = 0f;
+                            float _duration = 1;
+                            float _strength = 40;
+
+                            DOTween.To(() => elapsed, x => elapsed = x, 1f, 0.03f)
+                                .OnStart(() =>
+                                {
+                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+                                    float x = _strength * Mathf.Cos(randomAngle);
+                                    float y = _strength * Mathf.Sin(randomAngle);
+
+                                    randomOffset = new Vector3(x, y, 0);
+                                    Debug.Log(randomOffset);
+                                })
+                                .OnUpdate(() =>
+                                {
+                                    Vector3 movePos = Vector3.zero;
+                                    if (elapsed < (_duration / 2))       // 밖으로 나가는 중
+                                    {
+                                        movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / _duration);
+                                    }
+                                    else
+                                    {
+                                        movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / _duration);
+                                    }
+                                    currentElement.transform.position = movePos;
+                                })
+                                .OnStepComplete(() =>
+                                {
+                                    currentElement.transform.position = originalPosition;
+
+                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+                                    float x = _strength * Mathf.Cos(randomAngle);
+                                    float y = _strength * Mathf.Sin(randomAngle);
+
+                                    randomOffset = new Vector3(x, y, 0);
+                                    Debug.Log(randomOffset);
+                                })
+                                .SetLoops(20, LoopType.Restart);
+                        }
+                        break;
+                }
+            }
+            // 만약 트윈이 되고 있는 중이라면 꺼주기
+            if (DoTween != null && DoTween.IsPlaying())
+            {
+                DoTween.Kill();
+            }
+        }
     }
 
     private void EventChatText(VisualElement chat, string text)
@@ -367,91 +558,6 @@ public class UIReader_Chatting : MonoBehaviour
         }
     }
 
-    // input question
-    public void InputQuestion(string toWho, bool isLock, AskNode askNode, bool isRecord = true)
-    {
-        // create chat
-        VisualElement chat = null;
-        // find member
-        MemberProfile member = FindMember(toWho.ToString());
-        // chat type
-        EChatType type = EChatType.Text;
-        if (isLock)
-        {
-            // create uxml
-            chat = UIReader_Main.Instance.RemoveContainer(ux_askChat.Instantiate());
-            // chat name setting
-            chat.name = askNode.askText;
-            // chat text setting
-            chat.Q<Label>().text = askNode.askText;
-            // connection click event
-            chat.Q<Button>().clicked += (() =>
-            {
-                // add chat
-                InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText, true, true);
-
-                // current question value list
-                for (int i = 0; i < member.questions.Count; ++i)
-                {
-                    if (member.questions[i].askText == askNode.askText)
-                        member.questions.RemoveAt(i);
-                }
-
-                // other question read false
-                foreach (AskNode ask in member.questions)
-                {
-                    ask.test_isRead = false;
-                }
-
-                if (askNode.textEvent.Count == 1)
-                {
-                    Debug.Log(askNode.LoadNextDialog + " ????????????ъ몥?????");
-                    GameManager.Instance.chatHumanManager.StopChatting();
-                    member.memCurrentNode = askNode;
-                    AddMember(askNode.LoadNextDialog);
-                    ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
-                }
-                else
-                {
-                    GameManager.Instance.chatHumanManager.currentNode = askNode;
-                }
-
-                // all question visualelement down
-                GameManager.Instance.chatSystem.RemoveQuestion();
-                member.questions.Clear();
-
-                // currntNode, member's currentNode change
-                member.memCurrentNode = askNode;
-
-                askNode.is_UseThis = true;
-
-                // chatting start
-                GameManager.Instance.chatHumanManager.StartChatting();
-
-                // question
-                type = EChatType.Question;
-            });
-        }
-        else
-        {
-            // create uxml
-            chat = UIReader_Main.Instance.RemoveContainer(ux_hiddenAskChat.Instantiate());
-            // chat name setting
-            chat.name = askNode.askText;
-            // question
-            //type = EChatType.LockQuestion;
-        }
-
-        // record
-        if (isRecord)
-            RecordChat(EChatState.Me, toWho, type, askNode.askText, true);
-
-        // add visualelement
-        ui_questionGround.Add(chat);
-    }
-
-    // record chatting
-    // ????????type question????????????ㅳ늾??????????濚밸Ŧ援????????饔낅떽??吏??筌뚮?????닿튃????耀붾굝??????????????濚밸Ŧ援욃퐲???
     private void RecordChat(EChatState who, string toWho, EChatType type, string msg, bool isQuestion = false)
     {
         // find member
@@ -460,11 +566,11 @@ public class UIReader_Chatting : MonoBehaviour
         // chatting setting
         switch (type)
         {
-            case EChatType.Text:
-            case EChatType.Image:
+            case EChatType.Text: break;
+            case EChatType.Image: break;
             case EChatType.CutScene:
                 {
-                    ChatNode chat = new ChatNode();
+                    ChatNode chat = ScriptableObject.CreateInstance("ChatNode") as ChatNode;
                     chat.state = who;
                     chat.type = type;
                     chat.chatText = msg;
@@ -478,155 +584,6 @@ public class UIReader_Chatting : MonoBehaviour
 
                 }
                 break;
-        }
-    }
-
-    // setting Face and event
-    public void SettingChat(MemberProfile member, EChatState who, Node node, EFace face, List<EChatEvent> evts)
-    {
-        // find member face
-        VisualElement memberFace = null;
-
-        if (who == EChatState.Me)
-        {
-            member = FindMember("HG");
-            memberFace = ui_myFace.Q<VisualElement>("Face");
-        }
-        else
-        {
-            memberFace = ui_otherFace.Q<VisualElement>("Face");
-        }
-
-        // face type
-        switch (face)
-        {
-            case EFace.Default:
-                memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Default - 1]);
-                break;
-            case EFace.Blush:
-                memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Blush - 1]);
-                break;
-            case EFace.Angry:
-                memberFace.style.backgroundImage = new StyleBackground(member.faces[(int)EFace.Angry - 1]);
-                break;
-        }
-
-        // change current face of member
-        member.currentFace = face;
-
-        if (node is ChatNode chatNode)
-        {
-            // event type
-            for (int i = 0; i < evts.Count; i++)
-            {
-                switch (evts[i])
-                {
-                    case EChatEvent.LoadFile:
-                        {
-                            FileSO file = GameManager.Instance.fileManager.FindFile(chatNode.loadFileName[i]);
-                            if (file != null)
-                                GameManager.Instance.fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
-                            else
-                                Debug.Log("this file not exist");
-                        }
-                        break;
-                    case EChatEvent.Default: break;
-                    case EChatEvent.Camera: break;
-                    case EChatEvent.Vibration:
-                        {
-                            Debug.Log("진동 시작");
-                            Vector3 originalPosition = currentElement.transform.position;
-                            Vector3 randomOffset = Vector3.zero;
-                            float elapsed = 0f;
-
-                            DoTween = DOTween.To(() => elapsed, x => elapsed = x, 1f, 0.25f)
-                                .OnStart(() =>
-                                {
-                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
-                                    float x = strength * Mathf.Cos(randomAngle);
-                                    float y = strength * Mathf.Sin(randomAngle);
-
-                                    randomOffset = new Vector3(x, y, 0);
-                                })
-                                .OnUpdate(() =>
-                                {
-                                    Vector3 movePos = Vector3.zero;
-                                    if (elapsed < (duration / 2))       // 밖으로 나가는 중
-                                    {
-                                        movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / duration);
-                                    }
-                                    else
-                                    {
-                                        movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / duration);
-                                    }
-                                    currentElement.transform.position = movePos;
-                                })
-                                .OnStepComplete(() =>
-                                {
-                                    currentElement.transform.position = originalPosition;
-
-                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
-                                    float x = strength * Mathf.Cos(randomAngle);
-                                    float y = strength * Mathf.Sin(randomAngle);
-
-                                    randomOffset = new Vector3(x, y, 0);
-                                    //Debug.Log(randomOffset);
-                                })
-                                .SetLoops(-1, LoopType.Restart);
-                            return;
-                        }
-                    case EChatEvent.OneVibration:
-                        {
-                            Vector3 originalPosition = currentElement.transform.position;
-                            Vector3 randomOffset = Vector3.zero;
-                            float elapsed = 0f;
-                            float _duration = 1;
-                            float _strength = 40;
-
-                            DOTween.To(() => elapsed, x => elapsed = x, 1f, 0.03f)
-                                .OnStart(() =>
-                                {
-                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
-                                    float x = _strength * Mathf.Cos(randomAngle);
-                                    float y = _strength * Mathf.Sin(randomAngle);
-
-                                    randomOffset = new Vector3(x, y, 0);
-                                    Debug.Log(randomOffset);
-                                })
-                                .OnUpdate(() =>
-                                {
-                                    Vector3 movePos = Vector3.zero;
-                                    if (elapsed < (_duration / 2))       // 밖으로 나가는 중
-                                    {
-                                        movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / _duration);
-                                    }
-                                    else
-                                    {
-                                        movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / _duration);
-                                    }
-                                    currentElement.transform.position = movePos;
-                                })
-                                .OnStepComplete(() =>
-                                {
-                                    currentElement.transform.position = originalPosition;
-
-                                    float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
-                                    float x = _strength * Mathf.Cos(randomAngle);
-                                    float y = _strength * Mathf.Sin(randomAngle);
-
-                                    randomOffset = new Vector3(x, y, 0);
-                                    Debug.Log(randomOffset);
-                                })
-                                .SetLoops(20, LoopType.Restart);
-                        }
-                        break;
-                }
-            }
-            // 만약 트윈이 되고 있는 중이라면 꺼주기
-            if (DoTween != null && DoTween.IsPlaying())
-            {
-                DoTween.Kill();
-            }
         }
     }
 
@@ -711,6 +668,7 @@ public class UIReader_Chatting : MonoBehaviour
         if (member != null)
         {
             // change currentMember
+            GameManager.Instance.chatHumanManager.checkEvidence.Clear();
             GameManager.Instance.chatHumanManager.ChatResetAndStart(member.nickName.ToString());
 
             // change profile
