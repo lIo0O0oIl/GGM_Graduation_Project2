@@ -61,13 +61,10 @@ public class FileManager : MonoBehaviour
         if (triggerName != "")
         {
             // the same trigger name and file name
-            if (GameManager.Instance.chatHumanManager.nowCondition != null)
+            if (!GameManager.Instance.chatHumanManager.checkEvidence.Contains(triggerName))     // 없으면
             {
-                if (triggerName == GameManager.Instance.chatHumanManager.nowCondition.fileName)
-                {
-                    GameManager.Instance.chatHumanManager.nowCondition.is_UseThis = true;
-                    GameManager.Instance.chatHumanManager.currentNode = GameManager.Instance.chatHumanManager.nowCondition;
-                }
+                // 넣기
+                GameManager.Instance.chatHumanManager.checkEvidence.Add(triggerName);
             }
         }
         else

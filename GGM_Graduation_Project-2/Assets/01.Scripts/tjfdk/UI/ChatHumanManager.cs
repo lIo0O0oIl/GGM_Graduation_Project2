@@ -19,7 +19,7 @@ public class ChatHumanManager : MonoBehaviour
     public string nowHumanName;        // Name of the human you're talking to
     public MemberProfile nowHuman;
     public Node currentNode;
-    public ConditionNode nowCondition;
+    public List<string> checkEvidence = new List<string>();
 
     //public Coroutine chatting;
     public bool isChattingRunning = false;
@@ -46,138 +46,21 @@ public class ChatHumanManager : MonoBehaviour
         }
     }
 
-    public void AddHuman(string who)     // HG
-    {
-        GameManager.Instance.chatSystem.AddMember(who);
-    }
-
     private void Update()
     {
         if (is_ChatStart)
         {
-            //currentTime += Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 NextChat();
-                //// node list
-                //var children = chatContainer.GetChatTree().GetChild(currentNode);
-
-                //Debug.Log(children[0]);     // 에스크 노드가 오는 경우
-
-                //foreach (Node node in children)
-                //{
-                //    if (node is ChatNode chatNode)
-                //    {
-                //        if (chatNode.test_isRead == false)
-                //        {
-                //            // load next
-                //            currentNode = children[0];
-                //            children[0].test_isRead = true;
-
-                //            // Input chat
-                //            GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
-                //                chatNode.type, chatNode.face, chatNode.chatText, true);
-
-                //            // chat event
-                //            GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode.state, chatNode, chatNode.face, chatNode.textEvent);
-                //        }
-                //    }
-                //    else if (node is AskNode askNode)
-                //    {
-                //        Debug.Log(askNode.test_isRead == false && askNode.is_UseThis == false);
-                //        if (askNode.test_isRead == false && askNode.is_UseThis == false)
-                //        {
-                //            currentNode = askNode.parent;
-                //            nowHuman.memCurrentNode = askNode.parent;
-
-                //            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode);
-                //            nowHuman.questions.Add(askNode);
-                //            askNode.test_isRead = true;
-
-                //            is_ChatStop = true;
-                //        }
-                //    }
-                //    else if (node is ConditionNode conditionNode)
-                //    {
-                //        // When allquestion condition
-                //        if (conditionNode.is_AllQuestion)
-                //        {
-                //            if (conditionNode.asks.Count > 0)
-                //            {
-                //                Debug.Log(conditionNode.Checkk());
-                //                // when all question is useThis true
-                //                if (conditionNode.Checkk())
-                //                {
-                //                    conditionNode.is_UseThis = true;
-                //                    currentNode = conditionNode;
-                //                }
-                //                else
-                //                {
-                //                    currentNode = conditionNode.asks[0].parent;
-                //                    if (currentNode is ConditionNode)
-                //                    {
-                //                        currentNode = (conditionNode.asks[0].parent as ConditionNode).parentList[0];
-                //                    }
-                //                    StartChatting();
-                //                }
-                //            }
-                //            else
-                //                Debug.LogError("not exist question, but exist question condition");
-                //        }
-                //        else if (conditionNode.is_SpecificFile)
-                //        {
-                //            if (conditionNode.is_UseThis == false)
-                //            {
-                //                nowCondition = conditionNode;
-                //                StartChatting();
-                //            }
-                //            else
-                //            {
-                //                //Debug.Log("file trigger on");
-                //                currentNode = conditionNode;
-                //            }
-                //        }
-                //        else if (conditionNode.is_LockQuestion)
-                //        {
-                //            AskNode ask = conditionNode.childList[0] as AskNode;
-
-                //            if (conditionNode.childList[0].test_isRead == false && conditionNode.childList[0].is_UseThis == false)
-                //            {
-                //                if (conditionNode.is_Unlock)
-                //                {
-                //                    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, ask);
-                //                }
-                //                else
-                //                {
-                //                    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
-                //                }
-                //                nowHuman.questions.Add(ask);
-                //                conditionNode.childList[0].test_isRead = true;
-                //                StartChatting();
-                //            }
-                //        }
-                //    }
-
-                //}
-
-                //if (is_ChatStop)
-                //{
-                //    StopChatting();
-                //    is_ChatStop = false;
-                //}
-
-                ////currentTime = 0f;
             }
         }
-        //else currentTime = 0f;
     }
 
     public void NextChat()
     {
         // node list
         var children = chatContainer.GetChatTree().GetChild(currentNode);
-
-        //Debug.Log(children[0]);     // 에스크 노드가 오는 경우
 
         foreach (Node node in children)
         {
@@ -205,7 +88,7 @@ public class ChatHumanManager : MonoBehaviour
                     currentNode = askNode.parent;
                     nowHuman.memCurrentNode = askNode.parent;
 
-                    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, askNode);
+                    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, askNode);
                     nowHuman.questions.Add(askNode);
                     askNode.test_isRead = true;
 
@@ -233,7 +116,7 @@ public class ChatHumanManager : MonoBehaviour
                             {
                                 currentNode = (conditionNode.asks[0].parent as ConditionNode).parentList[0];
                             }
-                            StartChatting();
+                            //StartChatting();
                         }
                     }
                     else
@@ -241,15 +124,13 @@ public class ChatHumanManager : MonoBehaviour
                 }
                 else if (conditionNode.is_SpecificFile)
                 {
-                    if (conditionNode.is_UseThis == false)
+                    if (checkEvidence.Contains(conditionNode.fileName))     // 이 증거를 봤던 것이라면
                     {
-                        nowCondition = conditionNode;
-                        StartChatting();
+                        currentNode = conditionNode;
                     }
                     else
                     {
-                        //Debug.Log("file trigger on");
-                        currentNode = conditionNode;
+                        StartChatting();
                     }
                 }
                 else if (conditionNode.is_LockQuestion)
@@ -261,11 +142,11 @@ public class ChatHumanManager : MonoBehaviour
                         Debug.Log(conditionNode.fileName + " " + conditionNode.is_Unlock);
                         if (conditionNode.is_Unlock)
                         {
-                            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, ask);
+                            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
                         }
                         else
                         {
-                            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
+                            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, ask);
                         }
                         nowHuman.questions.Add(ask);
                         conditionNode.childList[0].test_isRead = true;
@@ -273,7 +154,6 @@ public class ChatHumanManager : MonoBehaviour
                     }
                 }
             }
-
         }
 
         if (is_ChatStop)

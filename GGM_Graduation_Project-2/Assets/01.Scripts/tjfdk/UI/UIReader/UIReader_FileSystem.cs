@@ -192,7 +192,7 @@ public class UIReader_FileSystem : MonoBehaviour
                             area.parent.Remove(area);
                             //change from lockQustion to question
                             GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
-                                true, conditionNode.childList[0] as AskNode);
+                                false, conditionNode.childList[0] as AskNode);
                             GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode.childList[0] as AskNode);
                             beforeSlot.Add(target);
                         }

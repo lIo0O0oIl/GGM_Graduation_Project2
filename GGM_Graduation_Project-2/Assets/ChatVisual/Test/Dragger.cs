@@ -137,7 +137,7 @@ namespace ChatVisual
 
         IEnumerator CheckMouseHold()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             if (is_MouseDown)
             {
                 StartDrag(_evt);
