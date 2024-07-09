@@ -566,8 +566,8 @@ public class UIReader_Chatting : MonoBehaviour
         // chatting setting
         switch (type)
         {
-            case EChatType.Text: break;
-            case EChatType.Image: break;
+            case EChatType.Text:
+            case EChatType.Image:
             case EChatType.CutScene:
                 {
                     ChatNode chat = ScriptableObject.CreateInstance("ChatNode") as ChatNode;
@@ -649,7 +649,7 @@ public class UIReader_Chatting : MonoBehaviour
             newMember.Q<Label>("Name").text = member.name;
             // change member face 
             newMember.Q<VisualElement>("Face").style.backgroundImage
-                = new StyleBackground(member.faces[(int)member.currentFace]);
+                = new StyleBackground(member.faces[0]);
             // connection click event
             newMember.Q<Button>("ChatMember").clicked += () =>
             {
