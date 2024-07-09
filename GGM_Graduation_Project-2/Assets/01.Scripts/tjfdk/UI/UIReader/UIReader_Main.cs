@@ -55,10 +55,10 @@ public class UIReader_Main : MonoBehaviour
 
     public Tween currentUiTween;
 
-    public float MinWidth = 500f;
-    public float MinHeight = 500f;
-    public float MaxWidth = 1800f;
-    public float MaxHeight = 980f;
+    public float MinWidth;
+    public float MinHeight;
+    public float MaxWidth;
+    public float MaxHeight;
 
     private void Awake()
     {

@@ -50,13 +50,11 @@ namespace ChatVisual
             {
                 if (Time.time - _lastClickTime <= _doubleClickThreshold)
                 {
-                    Debug.Log("false 됨");
                     _isDrag = false;
                     _doubleClickInitiated = false;
                 }
                 else
                 {
-                    Debug.Log("true 됨");
                     GameManager.Instance.StartCoroutine(CheckMouseHold());
                     _evt = evt;
                     is_MouseDown = true;
@@ -120,16 +118,19 @@ namespace ChatVisual
             }
             else if (_doubleClickInitiated == false)
             {
-                target.schedule.Execute(() =>
-                {
+                //target.schedule.Execute(() =>
+                //{
                     if (_doubleClickInitiated == false)
                     {
                         if (GameManager.Instance.fileSystem.isPathClick == false)
+                        {
+                            Debug.Log("더블 클릭 입력");
                             _clickCallback?.Invoke();
+                        }
                         else
                             GameManager.Instance.fileSystem.isPathClick = false;
                     }
-                }).StartingIn((int)(_doubleClickThreshold * 1000));
+                //}).StartingIn((int)(_doubleClickThreshold * 1000));
             }
 
             _doubleClickInitiated = false;
