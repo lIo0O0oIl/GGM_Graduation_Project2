@@ -18,7 +18,24 @@ namespace ChatVisual
 
         public GameObject cube, cube2;
 
-        private void Awake()
+        public bool is_ok = false;
+
+        private void Update()
+        {
+            if (is_ok)
+            {
+                Debug.Log("is_OK!!!!");
+            }
+        }
+
+        public void OnIs_Ok()
+        {
+            Debug.Log("click me");
+            is_ok = true;
+            is_ok = false;
+        }
+
+/*        private void Awake()
         {
             uiDocument = GetComponent<UIDocument>();
         }
@@ -39,7 +56,7 @@ namespace ChatVisual
                 });
 
             ShakeChat();
-        }
+        }*/
 
         public float duration; // 흔들기 지속 시간
         public float strength; // 얼마나 멀리로 흔들리는지
@@ -66,7 +83,7 @@ namespace ChatVisual
                     float y = strength * Mathf.Sin(randomAngle);
 
                     randomOffset = new Vector3(x, y, 0);
-                    Debug.Log(randomOffset);
+                    //Debug.Log(randomOffset);
                 })
                 .OnUpdate(() =>
                 {
@@ -90,7 +107,7 @@ namespace ChatVisual
                     float y = strength * Mathf.Sin(randomAngle);
 
                     randomOffset = new Vector3(x, y, 0);
-                    Debug.Log(randomOffset);
+                    //Debug.Log(randomOffset);
                 })
                 .SetLoops(-1, LoopType.Restart);
             #endregion
@@ -121,7 +138,7 @@ namespace ChatVisual
                     float y = _strength * Mathf.Sin(randomAngle);
 
                     randomOffset = new Vector3(x, y, 0);
-                    Debug.Log(randomOffset);
+                    //Debug.Log(randomOffset);
                 })
                 .OnUpdate(() =>
                 {
@@ -145,7 +162,7 @@ namespace ChatVisual
                     float y = _strength * Mathf.Sin(randomAngle);
 
                     randomOffset = new Vector3(x, y, 0);
-                    Debug.Log(randomOffset);
+                    //Debug.Log(randomOffset);
                 })
                 .SetLoops(20, LoopType.Restart);
         }

@@ -71,6 +71,10 @@ namespace ChatVisual
                     }
                 });
             });
+
+            viewTransform.position = Vector3.zero;
+            UpdateViewTransform(viewTransform.position, viewTransform.scale);
+            // maybe move!
         }
 
 
