@@ -10,7 +10,6 @@ public class UIReader_MenuScene : MonoBehaviour
 {
     [Header("Menu")]
     public UIDocument menuUI;
-    private VisualElement menuRoot;
 
     public UnityEngine.UI.Button startBtn;
     public UnityEngine.UI.Button settingBtn;
@@ -19,32 +18,22 @@ public class UIReader_MenuScene : MonoBehaviour
     [SerializeField] private AudioClip buttonClickSound;
     private AudioSource audioSource;
 
+    private UIReader_SettingScene settingScene;
+
     public bool isSettingOpen;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        menuRoot = menuUI.rootVisualElement;
+        settingScene = GetComponent<UIReader_SettingScene>();
 
         // you have to change this scene name, no tutorial! game!!!
         startBtn.onClick.AddListener(() => { UIManager.Instance.SceneChange("Game"); });
 
         settingBtn.onClick.AddListener(() => { OpenSetting(); });
-        menuRoot.Q<Button>("ExitBtn").RegisterCallback<ClickEvent>(evt =>
-        {
-            Debug.Log("Button clicked");
-            OpenSetting();
-        });
+
 
         exitBtn.onClick.AddListener(() => { UIManager.Instance.Exit(); });
-
-        StartCoroutine(min());
-    }
-
-    private IEnumerator min()
-    {
-        yield return new WaitForEndOfFrame();
-        menuUI.enabled = false;
     }
 
     public void OnStart()
@@ -65,15 +54,19 @@ public class UIReader_MenuScene : MonoBehaviour
         if (isSettingOpen)
         {
             menuUI.enabled = false;
+            settingScene.enabled = false;
         }
         else
-        {   
-            menuUI.enabled = true;
-            menuUI.rootVisualElement.Q<Button>("ExitBtn").RegisterCallback<ClickEvent>(evt =>
         {
-            Debug.Log("Button clicked");
+            menuUI.enabled = true;
+            // 설정창 켰음
+
+            settingScene.enabled = true;
+
+            menuUI.rootVisualElement.Q<Button>("ExitBtn").RegisterCallback<ClickEvent>(evt =>
+            {
             OpenSetting();
-        });
+            });
 
         }
 

@@ -21,7 +21,7 @@ public class UIReader_SettingScene : MonoBehaviour
     //private Slider scroll;
 
 
-    private void Start()
+    private void OnEnable()
     {
         if (settingUI == null)
         {
@@ -47,6 +47,16 @@ public class UIReader_SettingScene : MonoBehaviour
         bgm.value = VolumeManager.Instance.bgmValue;
         sfx.value = VolumeManager.Instance.sfxValue;
         wheel.value = VolumeManager.Instance.wheelValue;
+
+        Debug.Log(master);
+    }
+
+    private void OnDisable()
+    {
+        master.UnregisterValueChangedCallback(OnMasterChange);
+        bgm.UnregisterValueChangedCallback(OnBGMChange);
+        sfx.UnregisterValueChangedCallback(OnSFXChange);
+        wheel.UnregisterValueChangedCallback(OnWheelSpeedhange);
     }
 
     public void ChangeDefaultValue()
@@ -60,6 +70,8 @@ public class UIReader_SettingScene : MonoBehaviour
 
     private void OnMasterChange(ChangeEvent<float> evt)
     {
+        Debug.Log("마스터 변경");
+
         VolumeManager.Instance.masterValue = master.value;
         VolumeManager.Instance.Master(master.value);
     }
