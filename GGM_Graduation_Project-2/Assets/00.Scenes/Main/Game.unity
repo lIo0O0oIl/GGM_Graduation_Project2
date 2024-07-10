@@ -224,7 +224,7 @@ MonoBehaviour:
     questions: []
     memCurrentNode: {fileID: 0}
   currentNode: {fileID: 0}
-  nowCondition: {fileID: 0}
+  checkEvidence: []
   isChattingRunning: 0
 --- !u!114 &150678888
 MonoBehaviour:
