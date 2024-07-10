@@ -229,7 +229,7 @@ public class UIReader_Chatting : MonoBehaviour
     }
 
     // input question
-    public void InputQuestion(string toWho, bool isLock, AskNode askNode, bool isRecord = true)
+    public void InputQuestion(string toWho, bool isLock, AskNode askNode, bool isRecord = false)
     {
         // create chat
         VisualElement chat = null;
@@ -266,7 +266,6 @@ public class UIReader_Chatting : MonoBehaviour
 
                 if (askNode.textEvent.Count == 1)
                 {
-                    Debug.Log(askNode.LoadNextDialog + " ????????????ъ몥?????");
                     GameManager.Instance.chatHumanManager.StopChatting();
                     AddMember(askNode.LoadNextDialog);
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
@@ -664,6 +663,12 @@ public class UIReader_Chatting : MonoBehaviour
     // change member
     public void ChoiceMember(MemberProfile member)
     {
+        GameManager.Instance.chatHumanManager.nowHuman.memCurrentNode = GameManager.Instance.chatHumanManager.currentNode;
+
+        MemberProfile beforeMember = GameManager.Instance.chatHumanManager.nowHuman;
+        foreach (AskNode askNode in beforeMember.questions)
+            askNode.test_isRead = false;
+
         // if member isn't null
         if (member != null)
         {
