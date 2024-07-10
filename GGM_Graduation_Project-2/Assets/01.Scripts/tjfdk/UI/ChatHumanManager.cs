@@ -60,6 +60,7 @@ public class ChatHumanManager : MonoBehaviour
     public void NextChat()
     {
         // node list
+        bool test = false;
         var children = chatContainer.GetChatTree().GetChild(currentNode);
 
         foreach (Node node in children)
@@ -78,17 +79,18 @@ public class ChatHumanManager : MonoBehaviour
                     // Input chat
                     GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
                         chatNode.type, chatNode.face, chatNode.chatText, true);
+                    test = true;
                 }
             }
             else if (node is AskNode askNode)
             {
-                Debug.Log(askNode.test_isRead == false && askNode.is_UseThis == false);
                 if (askNode.test_isRead == false && askNode.is_UseThis == false)
                 {
                     currentNode = askNode.parent;
                     nowHuman.memCurrentNode = askNode.parent;
 
                     GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, askNode);
+                    GameManager.Instance.chatHumanManager.StopChatting();
                     nowHuman.questions.Add(askNode);
                     askNode.test_isRead = true;
 
@@ -145,24 +147,27 @@ public class ChatHumanManager : MonoBehaviour
                         if (conditionNode.is_Unlock)
                         {
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
+                        //StartChatting();
                         }
                         else
                         {
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, ask);
+                            GameManager.Instance.chatHumanManager.StopChatting();
                         }
                         nowHuman.questions.Add(ask);
                         conditionNode.childList[0].test_isRead = true;
-                        StartChatting();
                     }
+
+                    currentNode = conditionNode.parentList[0];
                 }
             }
         }
 
-        if (is_ChatStop)
-        {
-            StopChatting();
-            is_ChatStop = false;
-        }
+        //if (is_ChatStop)
+        //{
+        //    StopChatting();
+        //    is_ChatStop = false;
+        //}
     }
 
     public void ChatResetAndStart(string name)      // HG
