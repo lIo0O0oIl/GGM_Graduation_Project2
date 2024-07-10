@@ -1740,7 +1740,7 @@ MonoBehaviour:
   m_Name: JH
   m_EditorClassIdentifier: 
   rootNode: {fileID: 8588252344044922516}
-  humanName: JH.
+  humanName: JH
   nodeList:
   - {fileID: 8588252344044922516}
   - {fileID: 6594497950726044491}
@@ -2150,9 +2150,9 @@ MonoBehaviour:
   - {fileID: -4533433683038494047}
   is_AllQuestion: 0
   asks: []
-  is_SpecificFile: 1
+  is_SpecificFile: 0
   fileName: "\uC77C\uAE30"
-  is_LockQuestion: 0
+  is_LockQuestion: 1
   is_Unlock: 0
 --- !u!114 &1912825889823018148
 MonoBehaviour:
