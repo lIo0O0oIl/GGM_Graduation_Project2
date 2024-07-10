@@ -125,17 +125,24 @@ public class UIReader_FileSystem : MonoBehaviour
         };
     }
 
-    private AskNode FindQuestion(VisualElement ask)
+    private AskNode FindQuestion(VisualElement file, VisualElement ask)
     {
-        MemberProfile member = GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName);
-
-        for (int i = 0; i < member.questions.Count; ++i)
+        MemberProfile member = GameManager.Instance.chatSystem.
+            FindMember(GameManager.Instance.chatHumanManager.nowHumanName);
+        if (ask.parent.name == GameManager.Instance.chatSystem.ui_questionGround.name)
         {
-            Debug.Log(member.questions[i].askText.Trim() == ask.name.Trim());
-            if (member.questions[i].askText.Trim() == ask.name.Trim())
+            for (int i = 0; i < member.questions.Count; ++i)
             {
-                Debug.Log("???곗꽑?띠럾???");
-                return member.questions[i];
+                ConditionNode condition = member.questions[i].parent as ConditionNode;
+
+                string fileName = file.Q<Label>("FileName").text;
+                string[] names = condition.fileName.Split('/');
+
+                foreach (string name in names)
+                {
+                    if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
+                        return member.questions[i];
+                }
             }
         }
 
@@ -175,33 +182,18 @@ public class UIReader_FileSystem : MonoBehaviour
                 beforeSlot.Add(target);
             else
             {
-                ConditionNode conditionNode = FindQuestion(area).parent as ConditionNode;
-                if (conditionNode != null)
+                if (FindQuestion(file, area).parent is ConditionNode conditionNode)
                 {
-                    string fileName = file.Q<Label>("FileName").text;
-                    string[] names = conditionNode.fileName.Split('/');
-
-                    foreach (string name in names)
-                    {
-                        if (GameManager.Instance.fileManager.FindFile(fileName).fileName.Trim() == name.Trim())
-                        {
-                            Debug.Log((conditionNode.childList[0] as AskNode).askText);
-                            // 컨디션 노드 열림
-                            conditionNode.is_Unlock = true;
-                            // remove this lockQuestion
-                            area.parent.Remove(area);
-                            //change from lockQustion to question
-                            GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
-                                false, conditionNode.childList[0] as AskNode);
-                            GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode.childList[0] as AskNode);
-                            beforeSlot.Add(target);
-                        }
-                        else
-                            beforeSlot.Add(target);
-                    }
+                    // 컨디션 노드 열림
+                    conditionNode.is_Unlock = true;
+                    // remove this lockQuestion
+                    area.parent.Remove(area);
+                    //change from lockQustion to question
+                    GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
+                        false, conditionNode.childList[0] as AskNode);
+                    GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode.childList[0] as AskNode);
                 }
-                else
-                    Debug.Log("it's not found in questions(current AskNode list)");
+                beforeSlot.Add(target);
             }
         },
         () => { action(); }

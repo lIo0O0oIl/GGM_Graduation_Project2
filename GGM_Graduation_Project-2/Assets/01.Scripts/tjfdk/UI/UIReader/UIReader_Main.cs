@@ -257,7 +257,7 @@ public class UIReader_Main : MonoBehaviour
                     float y = _strength * Mathf.Sin(randomAngle);
 
                     randomOffset = new Vector3(x, y, 0);
-                    Debug.Log(randomOffset);
+                    //Debug.Log(randomOffset);
                 })
                 .SetLoops(20, LoopType.Restart);
         }

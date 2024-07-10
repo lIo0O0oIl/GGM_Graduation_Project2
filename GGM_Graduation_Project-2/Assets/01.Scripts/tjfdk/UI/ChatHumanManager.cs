@@ -130,7 +130,9 @@ public class ChatHumanManager : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("검사 중");
                         StartChatting();
+                        GameManager.Instance.chatSystem.OnOffMemberListButton(true);
                     }
                 }
                 else if (conditionNode.is_LockQuestion)
