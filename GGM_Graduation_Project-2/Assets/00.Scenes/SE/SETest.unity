@@ -187,13 +187,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bbbd968b924444191c81e323af6906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutSceneSystem: {fileID: 1857801312}
+  cutSceneSystem: {fileID: 0}
   chatSystem: {fileID: 2099014332}
   fileSystem: {fileID: 378627795}
   imageSystem: {fileID: 1207175533}
   chatHumanManager: {fileID: 150678887}
   chatContainer: {fileID: 594023517}
-  cutSceneManager: {fileID: 1857801311}
+  cutSceneManager: {fileID: 0}
   fileManager: {fileID: 378627794}
   imageManager: {fileID: 1207175532}
   is_tutorial: 1
@@ -211,7 +211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatContainer: {fileID: 594023517}
-  nextChatTime: 1
   is_ChatStart: 0
   nowHumanName: 
   nowHuman:
@@ -223,8 +222,9 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   currentNode: {fileID: 0}
-  nowCondition: {fileID: 0}
+  checkEvidence: []
   isChattingRunning: 0
 --- !u!114 &150678888
 MonoBehaviour:
@@ -406,6 +406,7 @@ MonoBehaviour:
   nowName: Tutorial1
   chatTrees:
   - {fileID: 11400000, guid: 8a0e19d35d2db4545b83b352f6df53c7, type: 2}
+  - {fileID: 11400000, guid: 54aa57447ef13a048a05637a77b63b06, type: 2}
 --- !u!1 &1207175530
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,69 +583,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1857801309
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1857801310}
-  - component: {fileID: 1857801312}
-  - component: {fileID: 1857801311}
-  m_Layer: 0
-  m_Name: CutSceneSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1857801310
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857801309}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1857801311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857801309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c20c022a4e0a16448b58b29f96dcbbf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCutScene: {fileID: 0}
-  currentCutNum: 0
-  currentTextNum: 0
-  cutScenes:
-  - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
-  - {fileID: 11400000, guid: 8867d427f3bcade47a447a1766521e38, type: 2}
---- !u!114 &1857801312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857801309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b80d74f0e210ffe4a83059ff8df2b6b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2099014330
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +637,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: Tutorial2
     nickName: 12
     currentFace: 0
@@ -708,6 +647,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   changeMemberBtnOn: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   wheelSpeed: 25
@@ -729,7 +669,6 @@ SceneRoots:
   - {fileID: 1663529867}
   - {fileID: 150678876}
   - {fileID: 594023516}
-  - {fileID: 1857801310}
   - {fileID: 2099014331}
   - {fileID: 378627793}
   - {fileID: 1207175531}

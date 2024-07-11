@@ -8,12 +8,7 @@ public class ChatHumanManager : MonoBehaviour
 {
     public ChatContainer chatContainer;
 
-    //public float changeHumanTime = 1f;       // A time when humans change
-    public float nextChatTime = 1f;         // when load next chat time
-    //private float currentTime = 0f;
     public bool is_ChatStart = false;
-
-    private bool is_ChatStop = false;
 
     private List<Node> nowNodes = new List<Node>();
     public string nowHumanName;        // Name of the human you're talking to
@@ -60,7 +55,6 @@ public class ChatHumanManager : MonoBehaviour
     public void NextChat()
     {
         // node list
-        bool test = false;
         var children = chatContainer.GetChatTree().GetChild(currentNode);
 
         foreach (Node node in children)
@@ -79,7 +73,6 @@ public class ChatHumanManager : MonoBehaviour
                     // Input chat
                     GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
                         chatNode.type, chatNode.face, chatNode.chatText, true);
-                    test = true;
                 }
             }
             else if (node is AskNode askNode)
@@ -93,8 +86,6 @@ public class ChatHumanManager : MonoBehaviour
                     GameManager.Instance.chatHumanManager.StopChatting();
                     nowHuman.questions.Add(askNode);
                     askNode.test_isRead = true;
-
-                    is_ChatStop = true;
                 }
             }
             else if (node is ConditionNode conditionNode)
@@ -171,12 +162,6 @@ public class ChatHumanManager : MonoBehaviour
                 }
             }
         }
-
-        //if (is_ChatStop)
-        //{
-        //    StopChatting();
-        //    is_ChatStop = false;
-        //}
     }
 
     public void ChatResetAndStart(string name)      // HG
