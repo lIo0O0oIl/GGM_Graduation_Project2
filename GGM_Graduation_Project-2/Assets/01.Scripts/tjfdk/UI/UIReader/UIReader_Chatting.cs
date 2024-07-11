@@ -20,6 +20,8 @@ public class MemberProfile
     public List<ChatNode> chattings = new List<ChatNode>();
     public List<AskNode> questions = new List<AskNode>();
     public Node memCurrentNode;
+
+    public AskNode nowAskNode;
 }
 
 public class UIReader_Chatting : MonoBehaviour
@@ -264,15 +266,29 @@ public class UIReader_Chatting : MonoBehaviour
                     ask.test_isRead = false;
                 }
 
-                if (askNode.textEvent.Count == 1)
+                if (askNode.textEvent.Count == 1 /*&& askNode.textEvent[0] == EChatEvent.LoadNextDialog*/)
                 {
+                    Debug.Log("1차 통과");
                     GameManager.Instance.chatHumanManager.StopChatting();
                     AddMember(askNode.LoadNextDialog);
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
+
+                    if (askNode.askText == "*(돌아가자)*")
+                    {
+                    Debug.Log("오는 거");
+                        if (GameManager.Instance.chatHumanManager.nowHuman.nowAskNode != null)
+                            GameManager.Instance.chatHumanManager.nowHuman.nowAskNode.is_UseThis = true;
+                    }
+                    else
+                    {
+                    Debug.Log("가는 거");
+                        GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog).nowAskNode = askNode;
+                    }
                 }
                 else
                 {
                     GameManager.Instance.chatHumanManager.currentNode = askNode;
+                    askNode.is_UseThis = true;
                 }
 
                 // all question visualelement down
@@ -281,7 +297,6 @@ public class UIReader_Chatting : MonoBehaviour
 
                 // currntNode, member's currentNode change
                 member.memCurrentNode = askNode;
-                askNode.is_UseThis = true;
 
                 // chatting start
                 GameManager.Instance.chatHumanManager.StartChatting();
@@ -395,7 +410,6 @@ public class UIReader_Chatting : MonoBehaviour
                                     float y = strength * Mathf.Sin(randomAngle);
 
                                     randomOffset = new Vector3(x, y, 0);
-                                    //Debug.Log(randomOffset);
                                 })
                                 .SetLoops(-1, LoopType.Restart);
                             return;
@@ -416,7 +430,6 @@ public class UIReader_Chatting : MonoBehaviour
                                     float y = _strength * Mathf.Sin(randomAngle);
 
                                     randomOffset = new Vector3(x, y, 0);
-                                    Debug.Log(randomOffset);
                                 })
                                 .OnUpdate(() =>
                                 {
@@ -440,7 +453,6 @@ public class UIReader_Chatting : MonoBehaviour
                                     float y = _strength * Mathf.Sin(randomAngle);
 
                                     randomOffset = new Vector3(x, y, 0);
-                                    Debug.Log(randomOffset);
                                 })
                                 .SetLoops(20, LoopType.Restart);
                         }

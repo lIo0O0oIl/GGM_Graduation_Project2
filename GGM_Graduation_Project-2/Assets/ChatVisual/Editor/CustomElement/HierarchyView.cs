@@ -65,7 +65,6 @@ namespace ChatVisual
 
         private void ChangeHuman(int index)
         {
-            Debug.Log(index);
             chatView.PopulateView(chatContainer.chatTrees[index]);
             inspectorView.Clear();
         }

@@ -85,15 +85,16 @@ namespace ChatVisual
                  {
                      if (nowNode is ChatNode chatNode)
                      {
+                        Debug.Log("chat!");
                          nowNode = chatNode.parent;
                      }
                      if (nowNode is ConditionNode condition)
-                     {   
-                        break;
+                     {
+                        nowNode = condition.parentList[0];
                      }
                      if (nowNode is AskNode askNode)
                      {
-                        //Debug.Log(i + "_");
+                        Debug.Log(i + "_");
                         conditionNode.asks.Add(askNode);
                          break;
                      }
