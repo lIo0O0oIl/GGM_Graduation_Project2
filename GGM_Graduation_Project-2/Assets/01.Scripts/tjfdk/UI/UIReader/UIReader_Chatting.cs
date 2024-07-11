@@ -374,7 +374,6 @@ public class UIReader_Chatting : MonoBehaviour
                         break;
                     case EChatEvent.Vibration:
                         {
-                            Debug.Log("진동 시작");
                             Vector3 originalPosition = currentElement.transform.position;
                             Vector3 randomOffset = Vector3.zero;
                             float elapsed = 0f;
