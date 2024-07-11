@@ -359,7 +359,6 @@ public class UIReader_Chatting : MonoBehaviour
                         break;
                     case EChatEvent.Vibration:
                         {
-                            Debug.Log("진동 시작");
                             Vector3 originalPosition = currentElement.transform.position;
                             Vector3 randomOffset = Vector3.zero;
                             float elapsed = 0f;
@@ -395,7 +394,6 @@ public class UIReader_Chatting : MonoBehaviour
                                     float y = strength * Mathf.Sin(randomAngle);
 
                                     randomOffset = new Vector3(x, y, 0);
-                                    //Debug.Log(randomOffset);
                                 })
                                 .SetLoops(-1, LoopType.Restart);
                             return;
@@ -416,7 +414,6 @@ public class UIReader_Chatting : MonoBehaviour
                                     float y = _strength * Mathf.Sin(randomAngle);
 
                                     randomOffset = new Vector3(x, y, 0);
-                                    Debug.Log(randomOffset);
                                 })
                                 .OnUpdate(() =>
                                 {
@@ -440,7 +437,6 @@ public class UIReader_Chatting : MonoBehaviour
                                     float y = _strength * Mathf.Sin(randomAngle);
 
                                     randomOffset = new Vector3(x, y, 0);
-                                    Debug.Log(randomOffset);
                                 })
                                 .SetLoops(20, LoopType.Restart);
                         }

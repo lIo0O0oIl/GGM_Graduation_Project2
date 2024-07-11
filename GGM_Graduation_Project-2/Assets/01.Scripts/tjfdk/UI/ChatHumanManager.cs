@@ -50,7 +50,7 @@ public class ChatHumanManager : MonoBehaviour
     {
         if (is_ChatStart)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 NextChat();
             }
