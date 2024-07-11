@@ -70,6 +70,6 @@ public class FileManager : MonoBehaviour
         else
             Debug.LogError("Trigger name is null");
 
-        GameManager.Instance.chatHumanManager.StartChatting();
+        //GameManager.Instance.chatHumanManager.StartChatting();
     }
 }
