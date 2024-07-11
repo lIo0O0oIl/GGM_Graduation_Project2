@@ -265,6 +265,12 @@ namespace ChatVisual
 
                 //GUILayout.Space(5);
                 //EditorGUILayout.Toggle("child", is_ChildExist);
+
+                GUILayout.Space(5);
+                if (GUILayout.Button("Open SO"))
+                {
+                    Selection.activeObject = node.node;
+                }
             };
 
             Add(container);
