@@ -99,7 +99,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                 VisualElement imagePanel = UIReader_Main.Instance.RemoveContainer(ux_imageGround.Instantiate());
                 imagePanel.Q<VisualElement>("ImageGround").style.backgroundImage = new StyleBackground(image.image);
 
-                imagePanel.Q<Button>("ImageExitBtn").clicked += (() => { OpenImage(fileIcon, fileName); });
+                imagePanel.Q<Button>("ImageExitBtn").clicked += (() => { OpenImage(fileIcon, fileName); GameManager.Instance.chatHumanManager.StartChatting(); });
 
                 foreach (string evid in image.pngName)
                 {
@@ -199,6 +199,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                 // connection exit click event
                 panel.Q<Button>("CloseBtn").clicked += () =>
                 {
+                    GameManager.Instance.chatHumanManager.StartChatting();
                     // remove this panel 
                     ui_panelGround.Remove(panel);
 
@@ -242,6 +243,7 @@ public class UIReader_ImageFinding : MonoBehaviour
             // connection exit click event
             panel.Q<Button>("CloseBtn").clicked += () =>
             {
+                GameManager.Instance.chatHumanManager.StartChatting();
                 // remove this panel 
                 ui_panelGround.Remove(panel);
 
