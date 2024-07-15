@@ -14,12 +14,9 @@ namespace ChatVisual
         private Vector2 _startPos;
         private VisualElement _beforeSlot;
         private float _lastClickTime;
-        private float _clickThreshold = 0.2f; // ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 (珥?
-        private float _doubleClickThreshold = 0.3f; // ?붾툝 ?대┃?쇰줈 ?몄떇??理쒕? ?쒓컙 媛꾧꺽 (珥?
-        private float _moveThreshold = 5.0f; // ?대┃?쇰줈 ?몄떇??理쒕? ?대룞 嫄곕━ (?쎌?)
+        private float _doubleClickThreshold = 0.5f;
         public bool _doubleClickInitiated = false;
 
-        private float moveDelay;
         private bool is_MouseDown = false;
         private MouseDownEvent _evt;
 

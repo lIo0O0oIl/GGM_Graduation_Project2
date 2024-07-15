@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
@@ -125,21 +126,30 @@ public class UIReader_FileSystem : MonoBehaviour
         };
     }
 
-    private AskNode FindQuestion(VisualElement file, VisualElement ask)
+    private AskNode FindQuestion_t(VisualElement file, VisualElement ask)
     {
+        // find current member
         MemberProfile member = GameManager.Instance.chatSystem.
             FindMember(GameManager.Instance.chatHumanManager.nowHumanName);
+
+        // ask is exist question
         if (ask.parent.name == GameManager.Instance.chatSystem.ui_questionGround.name)
         {
+            // for member's question
             for (int i = 0; i < member.questions.Count; ++i)
             {
+                // get question's parent
                 ConditionNode condition = member.questions[i].parent as ConditionNode;
 
+                // file name
                 string fileName = file.Q<Label>("FileName").text;
+                // condition names
                 string[] names = condition.fileName.Split('/');
-
+                
+                // for names
                 foreach (string name in names)
                 {
+                    // name(condition) == fileName(file)
                     if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
                         return member.questions[i];
                 }
@@ -149,10 +159,12 @@ public class UIReader_FileSystem : MonoBehaviour
         return null;
     }
 
-    private VisualElement FindMoveArea(Vector2 position)
+    private VisualElement FindQuestion(VisualElement file, Vector2 position)
     {
+        if (GameManager.Instance.chatSystem.ui_questionGround.worldBound.Contains(position))
+            Debug.Log(GameManager.Instance.chatSystem.ui_questionGround.name + " : hit");
         VisualElement questions = GameManager.Instance.chatSystem.ui_questionGround;
-        for (int i = 0; i < GameManager.Instance.chatSystem.ui_questionGround.childCount; ++i)
+        for (int i = 0; i < questions.childCount; ++i)
         {
             // lock question
             if (questions.ElementAt(i).Q<VisualElement>("LockIcon") != null)
@@ -169,6 +181,12 @@ public class UIReader_FileSystem : MonoBehaviour
         }
 
         return null;
+
+
+        if (GameManager.Instance.chatSystem.ui_questionGround.worldBound.Contains(position))
+        {
+
+        }
     }
 
     private void LoadDragAndDrop(VisualElement file, Action action)
@@ -176,25 +194,80 @@ public class UIReader_FileSystem : MonoBehaviour
         // drl!
         file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         {
-            var area = FindMoveArea(evt.mousePosition);
-            //target.RemoveFromHierarchy();
-            if (area == null)
-                beforeSlot.Add(target);
-            else
+            // questionGround 가져오고
+            VisualElement questionGround = GameManager.Instance.chatSystem.ui_questionGround;
+            // 만약 questionGround와 부딪혔다면
+            if (questionGround.worldBound.Contains(evt.mousePosition))
             {
-                if (FindQuestion(file, area).parent is ConditionNode conditionNode)
+                // currnet member 가져오고
+                MemberProfile member = GameManager.Instance.chatHumanManager.nowHuman;
+                // current member의 question 다 돌고?
+                for (int i = 0; i < member.questions.Count; ++i)
                 {
-                    // 컨디션 노드 열림
-                    conditionNode.is_Unlock = true;
-                    // remove this lockQuestion
-                    area.parent.Remove(area);
-                    //change from lockQustion to question
-                    GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
-                        false, conditionNode.childList[0] as AskNode);
-                    GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode.childList[0] as AskNode);
+                    // ask의 condition 가져오기
+                    if (member.questions[i].parent is ConditionNode condition)
+                    {
+                        // file name 가져오고
+                        string fileName = file.Q<Label>("FileName").text;
+                        // condition names 가져와서
+                        string[] names = condition.fileName.Split('/');
+
+                        // 둘이 비교해
+                        foreach (string name in names)
+                        {
+                            // name(condition) == fileName(file)
+                            if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
+                            {
+                                Debug.Log(GameManager.Instance.fileManager.FindFile(name).fileName.Trim() + " " + fileName.Trim());
+                                condition.is_Unlock = true;
+                                // 해당 질문 visuaelelement ㅈ삭제하기
+                                questionGround.RemoveAt(i);
+                                //change from lockQustion to question - 질문으로 만드는 거
+                                GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
+                                // 질문 추가하기
+                                member.questions.Add(condition.childList[0] as AskNode);
+
+                                beforeSlot.Add(target);
+                                return;
+                            }
+                        }
+
+                        beforeSlot.Add(target);
+                    }
+                    else
+                    {
+                        beforeSlot.Add(target);
+                        Debug.LogError("아무튼 오류임;");
+                    }
                 }
-                beforeSlot.Add(target);
+                
+                //foreach (VisualElement question in questionGround.Children())
+                //{
+                //    if (question.)
+                //}
             }
+            else
+                beforeSlot.Add(target);
+
+            //var area = FindQuestion(file, evt.mousePosition);
+            ////target.RemoveFromHierarchy();
+            //if (area == null)
+            //    beforeSlot.Add(target);
+            //else
+            //{
+            //if (FindQuestion_t(file, area).parent is ConditionNode conditionNode)
+            //    {
+            //        // 컨디션 노드 열림
+            //        conditionNode.is_Unlock = true;
+            //        // remove this lockQuestion
+            //        area.parent.Remove(area);
+            //        //change from lockQustion to question
+            //        GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
+            //            false, conditionNode.childList[0] as AskNode);
+            //        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode.childList[0] as AskNode);
+            //    }
+            //    beforeSlot.Add(target);
+            //}
         },
         () => { action(); }
         ));
