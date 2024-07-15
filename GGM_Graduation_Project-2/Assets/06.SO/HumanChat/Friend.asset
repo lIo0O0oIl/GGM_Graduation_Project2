@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Name: Friend
   m_EditorClassIdentifier: 
   rootNode: {fileID: -2073506101436489320}
-  humanName: 'Friend '
+  humanName: Friend
   nodeList:
   - {fileID: -2073506101436489320}
   - {fileID: 5927108122935111430}
@@ -1293,11 +1293,11 @@ MonoBehaviour:
   guid: 9fdbf16764901e846a56b141d9fba8fc
   position: {x: 3746.4, y: 427.4}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   test_isRead: 1
   parent: {fileID: -6650985126050880310}
   child: {fileID: 0}
-  askText: "*(\uB098\uB3C4 \uC2AC\uC2AC \uB3CC\uC544\uAC00\uC57C\uACA0\uB2E4)*"
+  askText: "*(\uB3CC\uC544\uAC00\uC790)*"
   textEvent: 05000000
   LoadNextDialog: GJH
 --- !u!114 &2618585296656569549
@@ -2031,7 +2031,7 @@ MonoBehaviour:
   position: {x: 2769.5999, y: 2012.554}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 2861007320008211283}
   childList:
   - {fileID: 8890776048751046646}

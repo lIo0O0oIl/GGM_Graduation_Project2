@@ -92,8 +92,9 @@ public class ChatHumanManager : MonoBehaviour
             {
                 if (askNode.test_isRead == false && askNode.is_UseThis == false)
                 {
-                    currentNode = askNode.parent;
-                    nowHuman.memCurrentNode = askNode.parent;
+                    // askNode.parent 였는데 아래껄로 바꿈 오류나면 여긴줄아셈
+                    currentNode = askNode;
+                    nowHuman.memCurrentNode = askNode;
 
                     GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, askNode);
                     GameManager.Instance.chatHumanManager.StopChatting();
