@@ -1352,7 +1352,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 8f039cdb34fad2d42953f91888240fa0
-  position: {x: 7574.4, y: 3401.2}
+  position: {x: 7573.0776, y: 3405.6}
   index: 0
   is_UseThis: 0
   test_isRead: 1
@@ -1361,13 +1361,15 @@ MonoBehaviour:
   - {fileID: 1050291175924605982}
   state: 0
   type: 0
-  chatText: "\uC74C... \uAC19\uC740 /[\uBC18]\uBC18/\uC774\uB2C8\uAE4C /[\uC9C0\uD604
-    \uC11C\uB78D]\uAC15\uC9C0\uD604 \uD559\uC0DD\uC758 \uC790\uB9AC/\uB77C\uB3C4
+  chatText: "\uC74C... \uAC19\uC740 /[\uBC18]\uBC18/\uC774\uB2C8\uAE4C /[\uAC15\uC9C0\uD604
+    \uC0AC\uBB3C\uD568]\uAC15\uC9C0\uD604 \uD559\uC0DD\uC758 \uC790\uB9AC/\uB77C\uB3C4
     \uB458\uB7EC\uBD10\uC57C\uACA0\uAD70"
   face: 0
   loadFileName:
   - "\uAC15\uC9C0\uD604 \uC0AC\uBB3C\uD568"
-  textEvent: 04000000
+  - "\uAC15\uC9C0\uD604 \uAD50\uACFC\uC11C"
+  - "\uD3EC\uC2A4\uD2B8\uC787"
+  textEvent: 040000000400000004000000
   LoadNextDialog: 
 --- !u!114 &-6311907906931569750
 MonoBehaviour:
@@ -3799,7 +3801,7 @@ MonoBehaviour:
   m_Name: GJH
   m_EditorClassIdentifier: 
   rootNode: {fileID: 3332800361343203531}
-  humanName: GJH
+  humanName: GJH.
   nodeList:
   - {fileID: 3332800361343203531}
   - {fileID: 8966239018989811733}
@@ -6754,7 +6756,7 @@ MonoBehaviour:
   position: {x: 7740.799, y: 469.59995}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: -8985265911229609235}
   childList:
   - {fileID: 8237735289624063418}
@@ -7911,7 +7913,7 @@ MonoBehaviour:
   position: {x: 8140.8, y: -637.60004}
   index: 0
   is_UseThis: 0
-  test_isRead: 0
+  test_isRead: 1
   parent: {fileID: 1304909035800924588}
   child: {fileID: -8448190238174612435}
   askText: "\uC218\uC0C1\uD55C \uBA54\uBAA8\uC5D0 \uB300\uD574\uC11C"
