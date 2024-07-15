@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Unity.Jobs;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class ChatHumanManager : MonoBehaviour
@@ -115,11 +116,13 @@ public class ChatHumanManager : MonoBehaviour
                         {
                             if (conditionNode.Checkk())
                             {
+                                Debug.LogWarning("질문 다 함");
                                 conditionNode.is_UseThis = true;
                                 currentNode = conditionNode;
                             }
                             else
                             {
+                                Debug.LogWarning("질문 남음");
                                 if (conditionNode.asks[0].parent is ChatNode)
                                 {
                                     currentNode = (conditionNode.asks[0].parent as ChatNode);

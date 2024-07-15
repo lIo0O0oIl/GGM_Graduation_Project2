@@ -290,8 +290,8 @@ public class UIReader_Chatting : MonoBehaviour
                 else
                 {
                     GameManager.Instance.chatHumanManager.currentNode = askNode;
-                    askNode.is_UseThis = true;
                 }
+                    askNode.is_UseThis = true;
 
                 // all question visualelement down
                 GameManager.Instance.chatSystem.RemoveQuestion();
