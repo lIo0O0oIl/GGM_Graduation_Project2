@@ -223,6 +223,17 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
+  chapterHuman:
+    name: 
+    nickName: 0
+    currentFace: 0
+    faces: []
+    isOpen: 0
+    chattings: []
+    questions: []
+    memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   currentNode: {fileID: 0}
   checkEvidence: []
   isChattingRunning: 0
@@ -244,10 +255,10 @@ MonoBehaviour:
   isSettingOpen: 0
   isConnectionOpen: 0
   currentText: 
-  MinWidth: 800
-  MinHeight: 800
-  MaxWidth: 1850
-  MaxHeight: 1850
+  MinWidth: 700
+  MinHeight: 700
+  MaxWidth: 1700
+  MaxHeight: 1700
 --- !u!114 &150678889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,6 +729,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: "\uD669\uC900\uC6D0"
     nickName: 2
     currentFace: 0
@@ -729,6 +741,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: "\uACFD\uD604\uC11D"
     nickName: 3
     currentFace: 0
@@ -740,6 +753,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: "\uC774\uCC44\uBBFC"
     nickName: 4
     currentFace: 0
@@ -751,6 +765,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: "\uBC15\uD604\uADDC"
     nickName: 5
     currentFace: 0
@@ -762,6 +777,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: "\uACE0\uC9C4\uD601 \uC120\uBC30\uB2D8"
     nickName: 6
     currentFace: 0
@@ -773,6 +789,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: "\uAC15\uB300\uC591"
     nickName: 7
     currentFace: 0
@@ -784,6 +801,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: "\uB2F4\uC784\uC120\uC0DD\uB2D8"
     nickName: 8
     currentFace: 0
@@ -795,6 +813,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: "\uD559\uC0DD\uB4E4"
     nickName: 9
     currentFace: 0
@@ -806,6 +825,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   - name: "\uC774\uC218\uC5F0\uC758 \uBD80\uBAA8"
     nickName: 10
     currentFace: 0
@@ -817,6 +837,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
   changeMemberBtnOn: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   wheelSpeed: 25

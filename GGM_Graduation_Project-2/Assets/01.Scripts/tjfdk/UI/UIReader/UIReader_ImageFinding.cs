@@ -31,14 +31,10 @@ public class UIReader_ImageFinding : MonoBehaviour
 
 
 
-    bool isImageOpen;
+    bool isImageOpen = true;
 
     private void Awake()
     {
-        //UI_Reader.Instance.MinWidth = 1000;
-        //UI_Reader.Instance.MinHeight = 700;
-        //UI_Reader.Instance.MaxWidth = 1800f;
-        //UI_Reader.Instance.MaxHeight = 980f;
     }
 
     private void OnEnable()
@@ -64,23 +60,8 @@ public class UIReader_ImageFinding : MonoBehaviour
         {
             if (isImageOpen)
             {
-                // fileSystem size change button on
-                GameManager.Instance.fileSystem.ui_changeSizeButton.style.display = DisplayStyle.Flex;
-                // image panel off
-                ui_imageGround.style.display = DisplayStyle.None;
+                isImageOpen = false;
 
-                // image panel clear
-                for (int i = ui_imageGround.childCount - 1; i >= 0; i--)
-                    ui_imageGround.RemoveAt(i);
-
-                // image check action
-                FileSO fileT = GameManager.Instance.fileManager.FindFile(fileName);
-                //Debug.Log(fileT.fileName);
-                if (fileT != null)
-                    GameManager.Instance.fileManager.UnlockChat(fileT.name);
-            }
-            else
-            {
                 // fileSystem size change button off
                 GameManager.Instance.fileSystem.ui_changeSizeButton.style.display = DisplayStyle.None;
                 // fileSystem off bool value
@@ -99,7 +80,25 @@ public class UIReader_ImageFinding : MonoBehaviour
                 VisualElement imagePanel = UIReader_Main.Instance.RemoveContainer(ux_imageGround.Instantiate());
                 imagePanel.Q<VisualElement>("ImageGround").style.backgroundImage = new StyleBackground(image.image);
 
-                imagePanel.Q<Button>("ImageExitBtn").clicked += (() => { OpenImage(fileIcon, fileName); GameManager.Instance.chatHumanManager.StartChatting(); });
+                imagePanel.Q<Button>("ImageExitBtn").clicked += (() =>
+                {
+                    // fileSystem size change button on
+                    GameManager.Instance.fileSystem.ui_changeSizeButton.style.display = DisplayStyle.Flex;
+                    // image panel off
+                    ui_imageGround.style.display = DisplayStyle.None;
+
+                    // image panel clear
+                    for (int i = ui_imageGround.childCount - 1; i >= 0; i--)
+                        ui_imageGround.RemoveAt(i);
+
+                    // image check action
+                    FileSO fileT = GameManager.Instance.fileManager.FindFile(fileName);
+                    if (fileT != null)
+                        GameManager.Instance.fileManager.UnlockChat(fileT.name);
+
+                    GameManager.Instance.chatHumanManager.StartChatting();
+                    isImageOpen = true;
+                });
 
                 foreach (string evid in image.pngName)
                 {
@@ -173,7 +172,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                 GameManager.Instance.chatHumanManager.StopChatting();;
             }
 
-            isImageOpen = !isImageOpen;
+            //isImageOpen = !isImageOpen;
         }
         // png ????
         else
@@ -202,12 +201,12 @@ public class UIReader_ImageFinding : MonoBehaviour
                     GameManager.Instance.chatHumanManager.StartChatting();
                     // remove this panel 
                     ui_panelGround.Remove(panel);
-
-                    // png check action
-                    FileSO file = GameManager.Instance.fileManager.FindFile(png.name);
-                    if (file != null)
-                        GameManager.Instance.fileManager.UnlockChat(file.name);
                 };
+
+                // png check action
+                FileSO file = GameManager.Instance.fileManager.FindFile(png.name);
+                if (file != null)
+                    GameManager.Instance.fileManager.UnlockChat(file.name);
 
                 GameManager.Instance.fileManager.FindFile(png.name).isRead = true;
                 if (GameManager.Instance.fileManager.FindFile(png.name).isRead == true)

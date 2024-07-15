@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -233,6 +234,7 @@ public class UIReader_Chatting : MonoBehaviour
     // input question
     public void InputQuestion(string toWho, bool isLock, AskNode askNode, bool isRecord = false)
     {
+        Debug.Log(askNode.askText + "  : 현재 질문");
         // create chat
         VisualElement chat = null;
         // find member
@@ -300,12 +302,27 @@ public class UIReader_Chatting : MonoBehaviour
                 {
                     if (conditionNode.is_AllQuestion)
                     {
-                        if ((conditionNode.asks[0].parent as ChatNode).parent != null)
+                        if (conditionNode.asks.Count > 0)
                         {
-                            member.memCurrentNode = (conditionNode.asks[0].parent as ChatNode);
-                            ChatNode tt = (conditionNode.asks[0].parent as ChatNode).parent as ChatNode;
-                            Debug.Log("올퀘스천 만나서 부모 줘버림 : " + tt.chatText);
+                            if (conditionNode.Checkk())
+                            {
+                                conditionNode.is_UseThis = true;
+                                member.memCurrentNode = conditionNode;
+                            }
+                            else
+                            {
+                                if (conditionNode.asks[0].parent is ChatNode)
+                                {
+                                    member.memCurrentNode = (conditionNode.asks[0].parent as ChatNode);
+                                }
+                                else if (conditionNode.asks[0].parent is ConditionNode)
+                                {
+                                    ConditionNode parent = conditionNode.asks[0].parent as ConditionNode;
+                                    member.memCurrentNode = parent.parentList[0];
+                                }
+                            }
                         }
+                        
                     }
                 }
 

@@ -45,7 +45,7 @@ public class ChatHumanManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
             GoChat();
     }
 
@@ -87,8 +87,6 @@ public class ChatHumanManager : MonoBehaviour
                 {
                     currentNode = askNode.parent;
                     nowHuman.memCurrentNode = askNode.parent;
-                    if (askNode.parent is ConditionNode condi)
-                        Debug.Log("잠긴질문 조건노드 들어감");
 
                     GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, askNode);
                     GameManager.Instance.chatHumanManager.StopChatting();
@@ -101,39 +99,51 @@ public class ChatHumanManager : MonoBehaviour
                 // When allquestion condition
                 if (conditionNode.is_AllQuestion)
                 {
-                    if (conditionNode.asks.Count > 0)
+                    if (conditionNode.is_AllQuestion)
                     {
-                        Debug.Log(conditionNode.Checkk());
-                        // when all question is useThis true
-                        if (conditionNode.Checkk())
+                        if (conditionNode.asks.Count > 0)
                         {
-                            conditionNode.is_UseThis = true;
-                            currentNode = conditionNode;
-                        }
-                        else
-                        {
-                            // 둘 중 하나 이상함 지워야함
-                            if ((conditionNode.asks[0].parent as ConditionNode).parentList[0] != null)
-                                currentNode = (conditionNode.asks[0].parent as ConditionNode).parentList[0];
+                            if (conditionNode.Checkk())
+                            {
+                                conditionNode.is_UseThis = true;
+                                currentNode = conditionNode;
+                            }
                             else
-                                currentNode = conditionNode.asks[0].parent;
-                            //if (currentNode is ChatNode cc)
-                            //{
-                            //    bool tesst = false;
-                            //    foreach (AskNode aa in cc.childList)
-                            //    {
-                            //        if (aa.is_UseThis == false)
-                            //            test = true;
-                            //    }
-
-                            //    if (tesst == false)
-                            //        Debug.Log("이 코드를 써야 해 여기서 커런트를 애로 설정하는");
-                            //}
-                            ////StartChatting();
+                            {
+                                if (conditionNode.asks[0].parent is ChatNode)
+                                {
+                                    currentNode = (conditionNode.asks[0].parent as ChatNode);
+                                }
+                                else if (conditionNode.asks[0].parent is ConditionNode)
+                                {
+                                    ConditionNode parent = conditionNode.asks[0].parent as ConditionNode;
+                                    currentNode = parent.parentList[0];
+                                }
+                            }
                         }
+
                     }
-                    else
-                        Debug.LogError("not exist question, but exist question condition");
+
+                    //if (conditionNode.asks.Count > 0)
+                    //{
+                    //    Debug.Log(conditionNode.Checkk());
+                    //    // when all question is useThis true
+                    //    if (conditionNode.Checkk())
+                    //    {
+                    //        conditionNode.is_UseThis = true;
+                    //        currentNode = conditionNode;
+                    //    }
+                    //    else
+                    //    {
+                    //        // 둘 중 하나 이상함 지워야함
+                    //        if ((conditionNode.asks[0].parent as ConditionNode).parentList[0] != null)
+                    //            currentNode = (conditionNode.asks[0].parent as ConditionNode).parentList[0];
+                    //        else
+                    //            currentNode = conditionNode.asks[0].parent;
+                    //    }
+                    //}
+                    //else
+                    //    Debug.LogError("not exist question, but exist question condition");
                 }
                 else if (conditionNode.is_SpecificFile)
                 {
