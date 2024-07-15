@@ -51,7 +51,7 @@ public class ChatHumanManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
             GoChat();
     }
 
