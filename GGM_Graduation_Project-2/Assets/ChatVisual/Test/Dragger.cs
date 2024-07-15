@@ -121,7 +121,6 @@ namespace ChatVisual
                     {
                         if (GameManager.Instance.fileSystem.isPathClick == false)
                         {
-                            Debug.Log("더블 클릭 입력");
                             _clickCallback?.Invoke();
                         }
                         else

@@ -2,6 +2,7 @@ using ChatVisual;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Unity.Jobs;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -49,25 +50,21 @@ public class ChatHumanManager : MonoBehaviour
 
     private void Update()
     {
-        GoChat();
+        if (Input.GetKey(KeyCode.Space))
+            GoChat();
     }
 
     public void GoChat()
     {
         if (is_ChatStart)
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Debug.Log(nowHuman.name + " " + chapterHuman.name);
-                if (nowHuman.name == chapterHuman.name)
-                    NextChat();
-            }
+            if (nowHuman.name == chapterHuman.name)
+                NextChat();
         }
     }
 
     public void NextChat()
     {
-        Debug.Log("d");
         // node list
         bool test = false;
         var children = chatContainer.GetChatTree().GetChild(currentNode);
@@ -97,6 +94,8 @@ public class ChatHumanManager : MonoBehaviour
                 {
                     currentNode = askNode.parent;
                     nowHuman.memCurrentNode = askNode.parent;
+                    if (askNode.parent is ConditionNode condi)
+                        Debug.Log("잠긴질문 조건노드 들어감");
 
                     GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, askNode);
                     GameManager.Instance.chatHumanManager.StopChatting();
@@ -122,21 +121,24 @@ public class ChatHumanManager : MonoBehaviour
                         }
                         else
                         {
-                            currentNode = conditionNode.asks[0].parent; // 둘 중 하나 이상함 지워야함
-                            /*currentNode = (conditionNode.asks[0].parent as ConditionNode).parentList[0];
-                            if (currentNode is ChatNode cc)
-                            {
-                                bool tesst = false;
-                                foreach (AskNode aa in cc.childList)
-                                {
-                                    if (aa.is_UseThis == false)
-                                        test = true;
-                                }
+                            // 둘 중 하나 이상함 지워야함
+                            if ((conditionNode.asks[0].parent as ConditionNode).parentList[0] != null)
+                                currentNode = (conditionNode.asks[0].parent as ConditionNode).parentList[0];
+                            else
+                                currentNode = conditionNode.asks[0].parent;
+                            //if (currentNode is ChatNode cc)
+                            //{
+                            //    bool tesst = false;
+                            //    foreach (AskNode aa in cc.childList)
+                            //    {
+                            //        if (aa.is_UseThis == false)
+                            //            test = true;
+                            //    }
 
-                                if (tesst == false)
-                                    Debug.Log("이 코드를 써야 해 여기서 커런트를 애로 설정하는");
-                            }
-                            //StartChatting();*/
+                            //    if (tesst == false)
+                            //        Debug.Log("이 코드를 써야 해 여기서 커런트를 애로 설정하는");
+                            //}
+                            ////StartChatting();
                         }
                     }
                     else
@@ -150,7 +152,6 @@ public class ChatHumanManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("검사 중");
                         StartChatting();
                         GameManager.Instance.chatSystem.OnOffMemberListButton(true);
                     }
@@ -161,7 +162,6 @@ public class ChatHumanManager : MonoBehaviour
 
                     if (conditionNode.childList[0].test_isRead == false && conditionNode.childList[0].is_UseThis == false)
                     {
-                        Debug.Log(conditionNode.fileName + " " + conditionNode.is_Unlock);
                         if (conditionNode.is_Unlock)
                         {
                             GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
@@ -218,7 +218,6 @@ public class ChatHumanManager : MonoBehaviour
         //if (chapterHuman.name != nowHuman.name)
         //    is_ChatStart = false;
         //else
-        Debug.Log("켜짐");
         is_ChatStart = true;
 
         if (chapterHuman.name != nowHuman.name)
@@ -229,7 +228,6 @@ public class ChatHumanManager : MonoBehaviour
 
     public void StopChatting()
     {
-        Debug.Log("꺼짐");
         is_ChatStart = false;
         GameManager.Instance.chatSystem.OnOffMemberListButton(true);
     }

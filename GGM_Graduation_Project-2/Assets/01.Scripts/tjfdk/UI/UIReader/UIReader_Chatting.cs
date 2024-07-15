@@ -270,7 +270,6 @@ public class UIReader_Chatting : MonoBehaviour
                 if (askNode.textEvent.Count == 1 /*&& askNode.textEvent[0] == EChatEvent.LoadNextDialog*/)
                 {
                     GameManager.Instance.chatHumanManager.chapterHuman = GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog);
-                    Debug.Log("1차 통과");
                     GameManager.Instance.chatHumanManager.StopChatting();
                     AddMember(askNode.LoadNextDialog);
                     // 얘 날려ㄹㄴㅇ헏졈누ㄸ좈ㅇ픚ㄱㄴㅍㅋ
@@ -278,13 +277,11 @@ public class UIReader_Chatting : MonoBehaviour
 
                     if (askNode.askText == "*(돌아가자)*")
                     {
-                        Debug.Log("오는 거");
                         if (GameManager.Instance.chatHumanManager.nowHuman.nowAskNode != null)
                             GameManager.Instance.chatHumanManager.nowHuman.nowAskNode.is_UseThis = true;
                     }
                     else
                     {
-                        Debug.Log("가는 거");
                         GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog).nowAskNode = askNode;
                     }
                 }
@@ -299,7 +296,18 @@ public class UIReader_Chatting : MonoBehaviour
                 member.questions.Clear();
 
                 // currntNode, member's currentNode change
-                member.memCurrentNode = askNode;
+                if (askNode.child is ConditionNode conditionNode)
+                {
+                    if (conditionNode.is_AllQuestion)
+                    {
+                        if ((conditionNode.asks[0].parent as ChatNode).parent != null)
+                        {
+                            member.memCurrentNode = (conditionNode.asks[0].parent as ChatNode);
+                            ChatNode tt = (conditionNode.asks[0].parent as ChatNode).parent as ChatNode;
+                            Debug.Log("올퀘스천 만나서 부모 줘버림 : " + tt.chatText);
+                        }
+                    }
+                }
 
                 // chatting start
                 GameManager.Instance.chatHumanManager.StartChatting();
