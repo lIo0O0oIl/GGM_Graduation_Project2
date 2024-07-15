@@ -1,6 +1,7 @@
 using ChatVisual;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ public class ChatHumanManager : MonoBehaviour
 
     private List<Node> nowNodes = new List<Node>();
     public string nowHumanName;        // Name of the human you're talking to
-    public MemberProfile nowHuman;
+    public MemberProfile nowHuman, chapterHuman;
     public Node currentNode;
     public List<string> checkEvidence = new List<string>();
 
@@ -48,17 +49,25 @@ public class ChatHumanManager : MonoBehaviour
 
     private void Update()
     {
+        GoChat();
+    }
+
+    public void GoChat()
+    {
         if (is_ChatStart)
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                NextChat();
+                Debug.Log(nowHuman.name + " " + chapterHuman.name);
+                if (nowHuman.name == chapterHuman.name)
+                    NextChat();
             }
         }
     }
 
     public void NextChat()
     {
+        Debug.Log("d");
         // node list
         bool test = false;
         var children = chatContainer.GetChatTree().GetChild(currentNode);
@@ -206,12 +215,21 @@ public class ChatHumanManager : MonoBehaviour
 
     public void StartChatting()
     {
+        //if (chapterHuman.name != nowHuman.name)
+        //    is_ChatStart = false;
+        //else
+        Debug.Log("켜짐");
         is_ChatStart = true;
-        GameManager.Instance.chatSystem.OnOffMemberListButton(false);
+
+        if (chapterHuman.name != nowHuman.name)
+            GameManager.Instance.chatSystem.OnOffMemberListButton(true);
+        else
+            GameManager.Instance.chatSystem.OnOffMemberListButton(false);
     }
 
     public void StopChatting()
     {
+        Debug.Log("꺼짐");
         is_ChatStart = false;
         GameManager.Instance.chatSystem.OnOffMemberListButton(true);
     }

@@ -114,7 +114,7 @@ public class UIReader_Chatting : MonoBehaviour
         OnOffMemberList();
         ui_memberListButton.clicked += OnOffMemberList;
 
-        ui_nextChatButton.clicked += () => { GameManager.Instance.chatHumanManager.NextChat(); };
+        ui_nextChatButton.clicked += () => { GameManager.Instance.chatHumanManager.GoChat(); };
         ui_nextChatButton.RegisterCallback<PointerEnterEvent>(OnMouseEnterButton);
         ui_nextChatButton.RegisterCallback<PointerLeaveEvent>(OnMouseLeaveButton);
 
@@ -250,6 +250,7 @@ public class UIReader_Chatting : MonoBehaviour
             // connection click event
             chat.Q<Button>().clicked += (() =>
             {
+
                 // add chat
                 InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText, true, true);
 
@@ -268,20 +269,22 @@ public class UIReader_Chatting : MonoBehaviour
 
                 if (askNode.textEvent.Count == 1 /*&& askNode.textEvent[0] == EChatEvent.LoadNextDialog*/)
                 {
+                    GameManager.Instance.chatHumanManager.chapterHuman = GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog);
                     Debug.Log("1차 통과");
                     GameManager.Instance.chatHumanManager.StopChatting();
                     AddMember(askNode.LoadNextDialog);
+                    // 얘 날려ㄹㄴㅇ헏졈누ㄸ좈ㅇ픚ㄱㄴㅍㅋ
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
 
                     if (askNode.askText == "*(돌아가자)*")
                     {
-                    Debug.Log("오는 거");
+                        Debug.Log("오는 거");
                         if (GameManager.Instance.chatHumanManager.nowHuman.nowAskNode != null)
                             GameManager.Instance.chatHumanManager.nowHuman.nowAskNode.is_UseThis = true;
                     }
                     else
                     {
-                    Debug.Log("가는 거");
+                        Debug.Log("가는 거");
                         GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog).nowAskNode = askNode;
                     }
                 }
@@ -664,6 +667,7 @@ public class UIReader_Chatting : MonoBehaviour
             newMember.Q<Button>("ChatMember").clicked += () =>
             {
                 ChoiceMember(member);
+                //GameManager.Instance.chatHumanManager.chapterHuman = GameManager.Instance.chatHumanManager.nowHuman;
             };
 
             // add member to memberListGround
