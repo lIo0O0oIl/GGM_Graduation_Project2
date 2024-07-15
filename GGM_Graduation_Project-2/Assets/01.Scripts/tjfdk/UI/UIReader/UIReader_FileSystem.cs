@@ -153,19 +153,22 @@ public class UIReader_FileSystem : MonoBehaviour
                         foreach (string name in names)
                         {
                             // name(condition) == fileName(file)
-                            if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
+                            if (GameManager.Instance.fileManager.FindFile(name) != null)
                             {
-                                Debug.Log(GameManager.Instance.fileManager.FindFile(name).fileName.Trim() + " " + fileName.Trim());
-                                condition.is_Unlock = true;
-                                // 해당 질문 visuaelelement ㅈ삭제하기
-                                questionGround.RemoveAt(i);
-                                //change from lockQustion to question - 질문으로 만드는 거
-                                GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
-                                // 질문 추가하기
-                                member.questions.Add(condition.childList[0] as AskNode);
+                                if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
+                                {
+                                    Debug.Log(GameManager.Instance.fileManager.FindFile(name).fileName.Trim() + " " + fileName.Trim());
+                                    condition.is_Unlock = true;
+                                    // 해당 질문 visuaelelement ㅈ삭제하기
+                                    questionGround.RemoveAt(i);
+                                    //change from lockQustion to question - 질문으로 만드는 거
+                                    GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
+                                    // 질문 추가하기
+                                    member.questions.Add(condition.childList[0] as AskNode);
 
-                                beforeSlot.Add(target);
-                                return;
+                                    beforeSlot.Add(target);
+                                    return;
+                                }
                             }
                         }
 
