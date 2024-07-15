@@ -126,69 +126,6 @@ public class UIReader_FileSystem : MonoBehaviour
         };
     }
 
-    private AskNode FindQuestion_t(VisualElement file, VisualElement ask)
-    {
-        // find current member
-        MemberProfile member = GameManager.Instance.chatSystem.
-            FindMember(GameManager.Instance.chatHumanManager.nowHumanName);
-
-        // ask is exist question
-        if (ask.parent.name == GameManager.Instance.chatSystem.ui_questionGround.name)
-        {
-            // for member's question
-            for (int i = 0; i < member.questions.Count; ++i)
-            {
-                // get question's parent
-                ConditionNode condition = member.questions[i].parent as ConditionNode;
-
-                // file name
-                string fileName = file.Q<Label>("FileName").text;
-                // condition names
-                string[] names = condition.fileName.Split('/');
-                
-                // for names
-                foreach (string name in names)
-                {
-                    // name(condition) == fileName(file)
-                    if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
-                        return member.questions[i];
-                }
-            }
-        }
-
-        return null;
-    }
-
-    private VisualElement FindQuestion(VisualElement file, Vector2 position)
-    {
-        if (GameManager.Instance.chatSystem.ui_questionGround.worldBound.Contains(position))
-            Debug.Log(GameManager.Instance.chatSystem.ui_questionGround.name + " : hit");
-        VisualElement questions = GameManager.Instance.chatSystem.ui_questionGround;
-        for (int i = 0; i < questions.childCount; ++i)
-        {
-            // lock question
-            if (questions.ElementAt(i).Q<VisualElement>("LockIcon") != null)
-            {
-                if (questions.ElementAt(i).worldBound.Contains(position))
-                {
-                    return questions.ElementAt(i);
-                }
-            }
-            else
-            {
-                Debug.Log(questions.ElementAt(i).childCount);
-            }
-        }
-
-        return null;
-
-
-        if (GameManager.Instance.chatSystem.ui_questionGround.worldBound.Contains(position))
-        {
-
-        }
-    }
-
     private void LoadDragAndDrop(VisualElement file, Action action)
     {
         // drl!
@@ -240,34 +177,9 @@ public class UIReader_FileSystem : MonoBehaviour
                         Debug.LogError("아무튼 오류임;");
                     }
                 }
-                
-                //foreach (VisualElement question in questionGround.Children())
-                //{
-                //    if (question.)
-                //}
             }
             else
                 beforeSlot.Add(target);
-
-            //var area = FindQuestion(file, evt.mousePosition);
-            ////target.RemoveFromHierarchy();
-            //if (area == null)
-            //    beforeSlot.Add(target);
-            //else
-            //{
-            //if (FindQuestion_t(file, area).parent is ConditionNode conditionNode)
-            //    {
-            //        // 컨디션 노드 열림
-            //        conditionNode.is_Unlock = true;
-            //        // remove this lockQuestion
-            //        area.parent.Remove(area);
-            //        //change from lockQustion to question
-            //        GameManager.Instance.chatSystem.InputQuestion(GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).name,
-            //            false, conditionNode.childList[0] as AskNode);
-            //        GameManager.Instance.chatSystem.FindMember(GameManager.Instance.chatHumanManager.nowHumanName).questions.Add(conditionNode.childList[0] as AskNode);
-            //    }
-            //    beforeSlot.Add(target);
-            //}
         },
         () => { action(); }
         ));
