@@ -96,6 +96,13 @@ public class UIReader_Main : MonoBehaviour
         // Panel
 
         chattingButton = root.Q<Button>("ChattingBtn");
+        chattingButton.clicked += () => 
+        {
+            if (isSettingOpen)
+                settingPanel.style.display = DisplayStyle.None;
+            isSettingOpen = false;
+        };
+
         connectionButton = root.Q<Button>("ConnectionBtn");
         settingButton = root.Q<Button>("SoundSettingBtn");
 

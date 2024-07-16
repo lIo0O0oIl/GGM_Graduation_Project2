@@ -83,3 +83,15 @@
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
 }
+
+:hover > #ChattingBtn {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}
+
+:hover > #SoundSettingBtn {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}
