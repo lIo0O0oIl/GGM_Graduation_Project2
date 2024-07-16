@@ -6,19 +6,19 @@ using UnityEngine;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    [MenuItem("Scenes/Intro")]
-    public static void OpenScene1()
-    {
-        OpenScene("Assets/00.Scenes/Main/Intro.unity");
-    }
-
-    [MenuItem("Scenes/Game")]
+    [MenuItem("Scenes/1. Game")]
     public static void OpenScene2()
     {
         OpenScene("Assets/00.Scenes/Main/Game.unity");
     }
 
-    [MenuItem("Scenes/End")]
+    [MenuItem("Scenes/2. Intro")]
+    public static void OpenScene1()
+    {
+        OpenScene("Assets/00.Scenes/Main/Intro.unity");
+    }
+
+    [MenuItem("Scenes/3. End")]
     public static void OpenScene3()
     {
         OpenScene("Assets/00.Scenes/Main/End.unity");

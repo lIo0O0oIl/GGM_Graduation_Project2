@@ -93,7 +93,6 @@ public class ChatEditor : EditorWindow
 
     private void OnSelectionNodeChanged(NodeView nodeView)
     {
-        Selection.activeObject = nodeView.node;
         inspectorView.UpdateInspector(nodeView); 
     }
 

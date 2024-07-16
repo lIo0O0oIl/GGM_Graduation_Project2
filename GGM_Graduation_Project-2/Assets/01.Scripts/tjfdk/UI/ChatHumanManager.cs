@@ -6,17 +6,13 @@ using Unity.Jobs;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChatHumanManager : MonoBehaviour
 {
     public ChatContainer chatContainer;
 
-    //public float changeHumanTime = 1f;       // A time when humans change
-    public float nextChatTime = 1f;         // when load next chat time
-    //private float currentTime = 0f;
     public bool is_ChatStart = false;
-
-    private bool is_ChatStop = false;
 
     private List<Node> nowNodes = new List<Node>();
     public string nowHumanName;        // Name of the human you're talking to
@@ -67,7 +63,6 @@ public class ChatHumanManager : MonoBehaviour
     public void NextChat()
     {
         // node list
-        bool test = false;
         var children = chatContainer.GetChatTree().GetChild(currentNode);
 
         foreach (Node node in children)
@@ -86,7 +81,6 @@ public class ChatHumanManager : MonoBehaviour
                     // Input chat
                     GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
                         chatNode.type, chatNode.face, chatNode.chatText, true);
-                    test = true;
                 }
             }
             else if (node is AskNode askNode)
@@ -101,8 +95,6 @@ public class ChatHumanManager : MonoBehaviour
                     GameManager.Instance.chatHumanManager.StopChatting();
                     nowHuman.questions.Add(askNode);
                     askNode.test_isRead = true;
-
-                    is_ChatStop = true;
                 }
             }
             else if (node is ConditionNode conditionNode)
@@ -194,18 +186,16 @@ public class ChatHumanManager : MonoBehaviour
                 }
             }
         }
-
-        //if (is_ChatStop)
-        //{
-        //    StopChatting();
-        //    is_ChatStop = false;
-        //}
     }
 
     public void ChatResetAndStart(string name)      // HG
     {
         nowHumanName = name;
         nowHuman = GameManager.Instance.chatSystem.FindMember(nowHumanName);
+        if (SceneManager.GetActiveScene().name == "SETest")
+        {
+            chapterHuman = nowHuman;              // 이거 지우기 컷씬에서 옐 호출해줬던 거라 테스트 씬에서만 사용함
+        }
 
         // top name changed
         GameManager.Instance.chatSystem.ChangeMemberName
