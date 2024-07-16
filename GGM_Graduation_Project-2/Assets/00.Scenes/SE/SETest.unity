@@ -211,9 +211,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatContainer: {fileID: 594023517}
-  is_ChatStart: 0
-  nowHumanName: 
+  is_ChatStart: 1
+  nowHumanName: Test
   nowHuman:
+    name: 
+    nickName: 0
+    currentFace: 0
+    faces: []
+    isOpen: 0
+    chattings: []
+    questions: []
+    memCurrentNode: {fileID: 0}
+    nowAskNode: {fileID: 0}
+  chapterHuman:
     name: 
     nickName: 0
     currentFace: 0
@@ -331,6 +341,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e9501c5b49269d47ba6c467908910d1, type: 2}
   - {fileID: 11400000, guid: 1a4d03963b92e7e478adfbda854c4462, type: 2}
   - {fileID: 11400000, guid: 4ff2f94a7ba2a4a47b1b28c249f5e89a, type: 2}
+  - {fileID: 11400000, guid: ac994f062d573ad4dbb4df103331b42e, type: 2}
 --- !u!114 &378627795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21595680c07e20742a7ef1df761b1b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowName: Tutorial1
+  nowName: Test
   chatTrees:
   - {fileID: 11400000, guid: 8a0e19d35d2db4545b83b352f6df53c7, type: 2}
   - {fileID: 11400000, guid: 54aa57447ef13a048a05637a77b63b06, type: 2}
@@ -474,6 +485,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb5302528430c504b8ef61c2a61061ca, type: 2}
   texts:
   - {fileID: 11400000, guid: 406930a706ead504fbb8def487191b05, type: 2}
+  - {fileID: 11400000, guid: 8946ed675cba392449506387626178f6, type: 2}
 --- !u!114 &1207175533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   members:
-  - name: Tutorial1
+  - name: Test
     nickName: 11
     currentFace: 0
     faces:
@@ -638,7 +650,7 @@ MonoBehaviour:
     questions: []
     memCurrentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
-  - name: Tutorial2
+  - name: Test2
     nickName: 12
     currentFace: 0
     faces:

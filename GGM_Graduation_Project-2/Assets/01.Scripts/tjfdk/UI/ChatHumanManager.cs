@@ -5,6 +5,7 @@ using System.Text;
 using Unity.Jobs;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChatHumanManager : MonoBehaviour
 {
@@ -187,6 +188,10 @@ public class ChatHumanManager : MonoBehaviour
     {
         nowHumanName = name;
         nowHuman = GameManager.Instance.chatSystem.FindMember(nowHumanName);
+        if (SceneManager.GetActiveScene().name == "SETest")
+        {
+            chapterHuman = nowHuman;              // 이거 지우기 컷씬에서 옐 호출해줬던 거라 테스트 씬에서만 사용함
+        }
 
         // top name changed
         GameManager.Instance.chatSystem.ChangeMemberName

@@ -78,8 +78,14 @@ namespace ChatVisual
             Vector2 offset = evt.mousePosition - container.worldBound.position - _startPos;
 
             target.style.position = Position.Absolute;
-            //target.style.left = offset.x;
-            //target.style.top = offset.y;
+
+            Vector2 diff = evt.localMousePosition;
+
+            var x = target.layout.x;
+            var y = target.layout.y;
+
+            target.style.left = x + diff.x;
+            target.style.top = y + diff.y;
         }
 
         protected void OnMouseMove(MouseMoveEvent evt)
