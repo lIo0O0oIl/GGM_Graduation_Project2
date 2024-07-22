@@ -568,7 +568,7 @@ public class UIReader_Chatting : MonoBehaviour
 
                         textButton.RegisterCallback<ClickEvent>(evt =>
                         {
-                            UIReader_FileSystem.Instance.HighlightingFolderPathEvent(insideParentheses);
+                            UIReader_FileSystem.Instance.HyperLinkEvent(insideParentheses);
                         });
 
                         chat.Add(textButton);
