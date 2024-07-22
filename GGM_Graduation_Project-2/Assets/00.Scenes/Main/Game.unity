@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutSceneSystem: {fileID: 1857801312}
   chatSystem: {fileID: 2099014332}
+  relationshipSystem: {fileID: 1999584787}
   fileSystem: {fileID: 378627795}
   imageSystem: {fileID: 1207175533}
   chatHumanManager: {fileID: 150678887}
@@ -211,7 +212,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatContainer: {fileID: 594023517}
-  nextChatTime: 1
   is_ChatStart: 0
   nowHumanName: 
   nowHuman:
@@ -250,10 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   document: {fileID: 150678875}
-  isMainOpen: 0
   isCutSceneOpen: 0
-  isSettingOpen: 0
-  isConnectionOpen: 0
+  isRelationshipOpen: 0
   currentText: 
   MinWidth: 700
   MinHeight: 700
@@ -673,6 +671,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80d74f0e210ffe4a83059ff8df2b6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1999584786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1999584788}
+  - component: {fileID: 1999584787}
+  m_Layer: 0
+  m_Name: RelationshipSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1999584787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999584786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f8526c4b4530c45af1c5ff89dbd9f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1999584788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999584786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099014330
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,4 +904,5 @@ SceneRoots:
   - {fileID: 594023516}
   - {fileID: 2099014331}
   - {fileID: 378627793}
+  - {fileID: 1999584788}
   - {fileID: 1207175531}

@@ -95,3 +95,9 @@
     transition-duration: 0.1s;
     scale: 1.1 1.1;
 }
+
+:hover > #RelationshipBtn {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}

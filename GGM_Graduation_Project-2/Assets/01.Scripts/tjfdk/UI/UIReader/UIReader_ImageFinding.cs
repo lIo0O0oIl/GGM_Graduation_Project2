@@ -47,7 +47,7 @@ public class UIReader_ImageFinding : MonoBehaviour
         root = GameObject.Find("Game").GetComponent<UIDocument>().rootVisualElement;
 
         ui_imageGround = root.Q<VisualElement>("ImageFinding");
-        ui_panelGround = root.Q<VisualElement>("PanelGround");
+        ui_panelGround = root.Q<VisualElement>("PanelGround");      // 이걸 껴저 있을 때에도 해야 켜짐
     }
 
     public void OpenImage(VisualElement fileIcon, string fileName)

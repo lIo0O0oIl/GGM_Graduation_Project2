@@ -181,6 +181,21 @@ public class UIReader_FileSystem : MonoBehaviour
                     }
                 }
             }
+            else if (UIReader_Main.Instance.isRelationshipOpen)      // 관계도 시스템이 켜져 있었다면
+            {
+                VisualElement area = GameManager.Instance.relationshipSystem.GetEvidenceContains(evt.mousePosition);
+                if (area != null)
+                {
+                    area.style.backgroundColor = Color.clear;
+                    Label name = file.Q<Label>("FileName");
+                    Sprite sprite = GameManager.Instance.imageManager.FindPng(name.text).image;         // 일단 png 만 가능함.
+                    if (sprite != null)
+                    {
+                        area.style.backgroundImage = new StyleBackground(sprite);
+                    }
+                }
+                beforeSlot.Add(target);
+            }
             else
                 beforeSlot.Add(target);
         },
