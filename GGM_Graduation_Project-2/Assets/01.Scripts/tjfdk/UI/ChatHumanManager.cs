@@ -1,6 +1,7 @@
 using ChatVisual;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Unity.Jobs;
 using Unity.VisualScripting;
@@ -16,11 +17,11 @@ public class ChatHumanManager : MonoBehaviour
     //private float currentTime = 0f;
     public bool is_ChatStart = false;
 
-    private bool is_ChatStop = false;
+    //private bool is_ChatStop = false;
 
-    private List<Node> nowNodes = new List<Node>();
-    public string nowHumanName;        // Name of the human you're talking to
-    public MemberProfile nowHuman, chapterHuman;
+    private List<Node> currentNodes = new List<Node>();
+    //public string currentMemberName;        // Name of the human you're talking to
+    public MemberProfile currentMember, chapterMember;
     public Node currentNode;
     public List<string> checkEvidence = new List<string>();
 
@@ -40,7 +41,7 @@ public class ChatHumanManager : MonoBehaviour
                 if (chatTree.nodeList[j] != null)
                 {
                     chatTree.nodeList[j].is_UseThis = false;
-                    chatTree.nodeList[j].test_isRead = false;
+                    chatTree.nodeList[j].is_readThis = false;
 
                     if (chatTree.nodeList[j] is ConditionNode conditionNode)
                         conditionNode.is_Unlock = false;
@@ -59,7 +60,7 @@ public class ChatHumanManager : MonoBehaviour
     {
         if (is_ChatStart)
         {
-            if (nowHuman.name == chapterHuman.name)
+            if (currentMember.name == chapterMember.name)
                 NextChat();
         }
     }
@@ -67,182 +68,189 @@ public class ChatHumanManager : MonoBehaviour
     public void NextChat()
     {
         // node list
-        bool test = false;
         var children = chatContainer.GetChatTree().GetChild(currentNode);
 
         foreach (Node node in children)
         {
+            // when node is ChatNode
             if (node is ChatNode chatNode)
             {
-                if (chatNode.test_isRead == false)
+                if (chatNode.is_readThis == false)
                 {
                     // load next
                     currentNode = children[0];
-                    children[0].test_isRead = true;
+                    // check
+                    children[0].is_readThis = true;
 
                     // chat event
-                    GameManager.Instance.chatSystem.SettingChat(nowHuman, chatNode.state, chatNode, chatNode.face, chatNode.textEvent);
+                    GameManager.Instance.chatSystem.SettingChat
+                        (currentMember, chatNode.state, chatNode, chatNode.face, chatNode.textEvent);
 
                     // Input chat
-                    GameManager.Instance.chatSystem.InputChat(nowHumanName, chatNode.state,
-                        chatNode.type, chatNode.face, chatNode.chatText, true);
-                    test = true;
+                    GameManager.Instance.chatSystem.InputChat
+                        (currentMember.name, chatNode.state, chatNode.type, chatNode.face, chatNode.chatText, true);
                 }
             }
             else if (node is AskNode askNode)
             {
-                if (askNode.test_isRead == false && askNode.is_UseThis == false)
+                if (askNode.is_readThis == false && askNode.is_UseThis == false)
                 {
-                    // askNode.parent 였는데 아래껄로 바꿈 오류나면 여긴줄아셈
+                    // load next
                     currentNode = askNode;
-                    nowHuman.memCurrentNode = askNode;
+                    // check
+                    askNode.is_readThis = true;
 
-                    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, askNode);
-                    GameManager.Instance.chatHumanManager.StopChatting();
-                    nowHuman.questions.Add(askNode);
-                    askNode.test_isRead = true;
+                    // save member's currentNode
+                    currentMember.currentNode = askNode;
 
-                    is_ChatStop = true;
+                    // Input chat
+                    GameManager.Instance.chatSystem.InputQuestion(currentMember.name, false, askNode);
+
+                    // save question list
+                    currentMember.questions.Add(askNode);
+
+                    // stop chatting 
+                    IsChat(false);
+
+                    //is_ChatStop = true;
                 }
             }
             else if (node is ConditionNode conditionNode)
             {
-                // When allquestion condition
+                // when all question conditon
                 if (conditionNode.is_AllQuestion)
                 {
-                    if (conditionNode.is_AllQuestion)
+                    // when exist ask
+                    if (conditionNode.asks.Count > 0)
                     {
-                        if (conditionNode.asks.Count > 0)
+                        // when all question is use
+                        if (conditionNode.Checkk())
                         {
-                            if (conditionNode.Checkk())
+                            // load next
+                            currentNode = conditionNode;
+                            // check
+                            conditionNode.is_UseThis = true;
+                        }
+                        else
+                        {
+                            // when default question
+                            if (conditionNode.asks[0].parent is ChatNode)
                             {
-                                Debug.LogWarning("질문 다 함");
-                                conditionNode.is_UseThis = true;
-                                currentNode = conditionNode;
+                                // load next
+                                currentNode = (conditionNode.asks[0].parent as ChatNode);
                             }
-                            else
+                            // when lock question
+                            else if (conditionNode.asks[0].parent is ConditionNode)
                             {
-                                Debug.LogWarning("질문 남음");
-                                if (conditionNode.asks[0].parent is ChatNode)
-                                {
-                                    currentNode = (conditionNode.asks[0].parent as ChatNode);
-                                }
-                                else if (conditionNode.asks[0].parent is ConditionNode)
-                                {
-                                    ConditionNode parent = conditionNode.asks[0].parent as ConditionNode;
-                                    currentNode = parent.parentList[0];
-                                }
+                                ConditionNode parent = conditionNode.asks[0].parent as ConditionNode;
+
+                                // load next
+                                currentNode = parent.parentList[0];
                             }
                         }
-
                     }
-
-                    //if (conditionNode.asks.Count > 0)
-                    //{
-                    //    Debug.Log(conditionNode.Checkk());
-                    //    // when all question is useThis true
-                    //    if (conditionNode.Checkk())
-                    //    {
-                    //        conditionNode.is_UseThis = true;
-                    //        currentNode = conditionNode;
-                    //    }
-                    //    else
-                    //    {
-                    //        // 둘 중 하나 이상함 지워야함
-                    //        if ((conditionNode.asks[0].parent as ConditionNode).parentList[0] != null)
-                    //            currentNode = (conditionNode.asks[0].parent as ConditionNode).parentList[0];
-                    //        else
-                    //            currentNode = conditionNode.asks[0].parent;
-                    //    }
-                    //}
-                    //else
-                    //    Debug.LogError("not exist question, but exist question condition");
                 }
+                // when lock condition
                 else if (conditionNode.is_SpecificFile)
                 {
-                    if (checkEvidence.Contains(conditionNode.fileName))     // 이 증거를 봤던 것이라면
+                    // when lock is unlock
+                    if (checkEvidence.Contains(conditionNode.fileName))
                     {
+                        // load next
                         currentNode = conditionNode;
                     }
                     else
                     {
-                        StartChatting();
-                        GameManager.Instance.chatSystem.OnOffMemberListButton(true);
+                        // start chatting
+                        IsChat(true);
+
+                        //GameManager.Instance.chatSystem.MemberList(true);
                     }
                 }
+                // when lock question condition
                 else if (conditionNode.is_LockQuestion)
                 {
+                    // get ask
                     AskNode ask = conditionNode.childList[0] as AskNode;
 
-                    if (conditionNode.childList[0].test_isRead == false && conditionNode.childList[0].is_UseThis == false)
+                    if (ask.is_readThis == false && ask.is_UseThis == false)
                     {
-                        if (conditionNode.is_Unlock)
-                        {
-                            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
-                        //StartChatting();
-                        }
-                        else
-                        {
-                            GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, ask);
-                        }
-                            GameManager.Instance.chatHumanManager.StopChatting();
-                        nowHuman.questions.Add(ask);
-                        conditionNode.childList[0].test_isRead = true;
+                        // ** don't destory
+                        //if (conditionNode.is_Unlock)
+                        //{
+                        //    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, false, ask);
+                        //    StartChatting();
+                        //}
+                        //else
+                        //{
+                        //    GameManager.Instance.chatSystem.InputQuestion(nowHumanName, true, ask);
+                        //}
+
+                        // load next
+                        conditionNode.childList[0].is_readThis = true;
+
+                        // save question list
+                        currentMember.questions.Add(ask);
+
+                        // Input Question
+                        GameManager.Instance.chatSystem.InputQuestion
+                            (currentMember.name, !conditionNode.is_Unlock, ask);
+
+                        // stop chatting
+                        IsChat(false);
                     }
 
+                    // load next
                     currentNode = conditionNode.parentList[0];
                 }
             }
         }
-
-        //if (is_ChatStop)
-        //{
-        //    StopChatting();
-        //    is_ChatStop = false;
-        //}
     }
 
-    public void ChatResetAndStart(string name)      // HG
+    public void StartChat(string name)      // HG
     {
-        nowHumanName = name;
-        nowHuman = GameManager.Instance.chatSystem.FindMember(nowHumanName);
+        // change current member
+        currentMember = GameManager.Instance.chatSystem.FindMember(name);
 
-        // top name changed
+        // change member name ui
         GameManager.Instance.chatSystem.ChangeMemberName
-            (GameManager.Instance.chatSystem.FindMember(nowHumanName).name);
+            (GameManager.Instance.chatSystem.FindMember(currentMember.name).name);
 
-        chatContainer.nowName = name;
-        nowNodes = chatContainer.GetChatTree().nodeList;
+        // save current name
+        chatContainer.currentName = name;
+        // get current nodes
+        currentNodes = chatContainer.GetChatTree().nodeList;
 
-        if (nowNodes[0] is RootNode rootNode)
+        if (currentNodes[0] is RootNode rootNode)
         {
-            if (nowHuman.memCurrentNode != null)          // return human
-            {
-                currentNode = nowHuman.memCurrentNode;
-            }
+            // when current member's currentNode isn't null
+            // load next
+            if (currentMember.currentNode != null)
+                currentNode = currentMember.currentNode;
             else
                 currentNode = rootNode;
         }
 
-        StartChatting();
+        IsChat(true);
     }
 
-    public void StartChatting()
+    public void IsChat(bool isChat)
     {
-        //if (chapterHuman.name != nowHuman.name)
-        //    is_ChatStart = false;
-        //else
-        is_ChatStart = true;
+        if (isChat)
+        {
+            is_ChatStart = true;
 
-        if (chapterHuman.name != nowHuman.name)
-            GameManager.Instance.chatSystem.OnOffMemberListButton(true);
+            // when difference chapter member and current memer 
+            if (chapterMember.name != currentMember.name)
+                GameManager.Instance.chatSystem.MemberList(true);
+            else
+                GameManager.Instance.chatSystem.MemberList(false);
+        }
         else
-            GameManager.Instance.chatSystem.OnOffMemberListButton(false);
-    }
+        {
+            is_ChatStart = false;
 
-    public void StopChatting()
-    {
-        is_ChatStart = false;
-        GameManager.Instance.chatSystem.OnOffMemberListButton(true);
+            GameManager.Instance.chatSystem.MemberList(true);
+        }
     }
 }

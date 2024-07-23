@@ -128,7 +128,7 @@ public class UIReader_FileSystem : MonoBehaviour
             if (questionGround.worldBound.Contains(evt.mousePosition))
             {
                 // currnet member 가져오고
-                MemberProfile member = GameManager.Instance.chatHumanManager.nowHuman;
+                MemberProfile member = GameManager.Instance.chatHumanManager.currentMember;
 
                 // current member의 question 다 돌고?
                 for (int i = 0; i < member.questions.Count; ++i)

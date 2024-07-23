@@ -15,6 +15,6 @@ namespace ChatVisual
         public Label indexLabel;
 
         public bool is_UseThis;
-        public bool test_isRead;
+        public bool is_readThis;
     }
 }

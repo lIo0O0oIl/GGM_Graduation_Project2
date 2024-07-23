@@ -70,7 +70,7 @@ public class CutSceneManager : MonoBehaviour
                     if (currentCutScene.nextMemberName != "")
                         GameManager.Instance.chatSystem.ChoiceMember
                             (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName));
-                    GameManager.Instance.chatHumanManager.chapterHuman = GameManager.Instance.chatHumanManager.nowHuman;
+                    GameManager.Instance.chatHumanManager.chapterMember = GameManager.Instance.chatHumanManager.currentMember;
 
                     return;
                 }
