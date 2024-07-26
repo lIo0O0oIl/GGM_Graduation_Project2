@@ -342,27 +342,32 @@ public class UIReader_FileSystem : MonoBehaviour
     {
         isPathClick = true;
 
-        Stack<string> pathName = new Stack<string>();
-        string top = GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName;
-
-        // all remove paths
-        for (int i = ui_filePathGround.childCount - 1; i >= 0; i--)
-            ui_filePathGround.RemoveAt(i);
-
-        while (top != "Main")
+        if (GameManager.Instance.fileSystem.FindFolder(folderName) != null)
         {
-            pathName.Push(top);
-            top = GameManager.Instance.fileSystem.FindFolder(top).parentFolderName;
-        }
+            Stack<string> pathName = new Stack<string>();
+            string top = GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName;
 
-        AddFilePath("Main");
-        while (pathName.Count > 0)
-        {
-            AddFilePath(pathName.Peek());
-            pathName.Pop();
-        }
+            // all remove paths
+            for (int i = ui_filePathGround.childCount - 1; i >= 0; i--)
+                ui_filePathGround.RemoveAt(i);
 
-        DrawFile(GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName);
+            while (top != "Main")
+            {
+                pathName.Push(top);
+                top = GameManager.Instance.fileSystem.FindFolder(top).parentFolderName;
+            }
+
+            AddFilePath("Main");
+            while (pathName.Count > 0)
+            {
+                AddFilePath(pathName.Peek());
+                pathName.Pop();
+            }
+
+            DrawFile(GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName);
+        }
+        else
+            Debug.LogError("this folder is not exist");
     }
 
     public void OnOffFileSystem(float during)

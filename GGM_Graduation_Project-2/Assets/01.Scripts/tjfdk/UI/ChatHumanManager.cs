@@ -12,15 +12,10 @@ public class ChatHumanManager : MonoBehaviour
 {
     public ChatContainer chatContainer;
 
-    //public float changeHumanTime = 1f;       // A time when humans change
     public float nextChatTime = 1f;         // when load next chat time
-    //private float currentTime = 0f;
     public bool is_ChatStart = false;
 
-    //private bool is_ChatStop = false;
-
     private List<Node> currentNodes = new List<Node>();
-    //public string currentMemberName;        // Name of the human you're talking to
     public MemberProfile currentMember, chapterMember;
     public Node currentNode;
     public List<string> checkEvidence = new List<string>();
@@ -28,8 +23,6 @@ public class ChatHumanManager : MonoBehaviour
     //public Coroutine chatting;
     public bool isChattingRunning = false;
 
-    //public void SetChatSpeed(float value) => changeHumanTime = value;
-    public void SetWheelSpeed(float value) => GameManager.Instance.chatSystem.wheelSpeed = value;
 
     private void Start()
     {
