@@ -15,6 +15,7 @@ public class MemberProfile
     public ESaveLocation nickName;
     public EFace currentFace;
     public Sprite[] faces;
+    public Sprite[] evidence;
 
     public bool isOpen;
 
