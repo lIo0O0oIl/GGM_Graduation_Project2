@@ -219,6 +219,7 @@ MonoBehaviour:
     nickName: 0
     currentFace: 0
     faces: []
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -229,6 +230,7 @@ MonoBehaviour:
     nickName: 0
     currentFace: 0
     faces: []
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -768,6 +770,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: f5e3ed4b03b98fa4193dc281fa20c737, type: 3}
     - {fileID: 21300000, guid: e24ccc762dc6fbc4da13d5ccf521e562, type: 3}
     - {fileID: 21300000, guid: 301170adade2b0149abef527ec6f87ca, type: 3}
+    evidence:
+    - {fileID: 0}
     isOpen: 0
     chattings: []
     questions: []
@@ -780,6 +784,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 73475c8e610dbba408f8e5335ba563ef, type: 3}
     - {fileID: 21300000, guid: d73a50758a98dee4bbb8c8c22c873683, type: 3}
     - {fileID: 21300000, guid: 045478c7da9398b4994a8b82b6778662, type: 3}
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -792,6 +797,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 643df993bdde62340b5a4ef4ff38492a, type: 3}
     - {fileID: 21300000, guid: 99adf4b228622a24e82a42c5caafff72, type: 3}
     - {fileID: 21300000, guid: 2c146c3797c760b49bfa37fd539346a2, type: 3}
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -804,6 +810,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 5e5f7ea85e1271a4b8a3503d237e8722, type: 3}
     - {fileID: 21300000, guid: 5c81610dce86b794dad953475978cd7a, type: 3}
     - {fileID: 21300000, guid: c10ebd5668b09a249a6b736d8217d6c7, type: 3}
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -816,6 +823,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 0af0a498aac2b3c4b8f2933f75198551, type: 3}
     - {fileID: 21300000, guid: f73b7fc13a9f4fc4696dba895d845b60, type: 3}
     - {fileID: 21300000, guid: 4230f11a38d80e149bc6dfd3e9ff4fb0, type: 3}
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -828,6 +836,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 4e1725d5bfe5ba54b9c4524071df03d7, type: 3}
     - {fileID: 21300000, guid: 4e1725d5bfe5ba54b9c4524071df03d7, type: 3}
     - {fileID: 21300000, guid: d7b11a4f478940d418f1148d27b35cae, type: 3}
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -840,6 +849,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 1df6394bc8096fd4290208ac8d161298, type: 3}
     - {fileID: 21300000, guid: 61bd28446d3a86a49ad0d933de91e780, type: 3}
     - {fileID: 21300000, guid: 61bd28446d3a86a49ad0d933de91e780, type: 3}
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -852,6 +862,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -864,6 +875,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -876,6 +888,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
+    evidence: []
     isOpen: 0
     chattings: []
     questions: []

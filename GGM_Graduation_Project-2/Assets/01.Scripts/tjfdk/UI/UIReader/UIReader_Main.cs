@@ -355,14 +355,32 @@ public class UIReader_Main : MonoBehaviour
         return new Vector2(adjustedWidth, adjustedHeight);
     }
 
-    public List<VisualElement> GetRelationshipEvidence()
+    public void GetRelationshipEvidenceArea(ref List<VisualElement> evidenceAreaList, ref List<RelationshipHuman> relationshipHumanList)
     {
-        List<VisualElement> evidenceList = new List<VisualElement>();
-
         VisualElement parent = root.Q<VisualElement>("EvidencesParent");
+        foreach (var child in parent.Children())
+        {
+            // 자식 요소에 대한 작업 수행
+            RelationshipHuman temp = new RelationshipHuman();
+            temp.name = child.name;
+            temp.suspectArea = new List<VisualElement>();
+            temp.evidenceArea = new List<VisualElement>();
 
-        evidenceList = parent.Children().ToList();
-
-        return evidenceList;
+            foreach (var child2 in child.Children())
+            {
+                if (child2.name.Contains("suspect"))
+                {
+                    Debug.Log("suspect");
+                    temp.suspectArea.Add(child2);
+                }
+                else if (child2.name.Contains("evidence"))
+                {
+                    Debug.Log("evidence");
+                    temp.evidenceArea.Add(child2);
+                    evidenceAreaList.Add(child2);
+                }
+            }
+            relationshipHumanList.Add(temp);
+        }
     }
 }

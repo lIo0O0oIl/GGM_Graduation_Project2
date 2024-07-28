@@ -61,9 +61,6 @@ namespace ChatVisual
         public float duration; // 흔들기 지속 시간
         public float strength; // 얼마나 멀리로 흔들리는지
 
-        //[Header("Cube2")]
-        //public float dru
-
         private void ShakeChat()
         {
             cube.transform.DOShakePosition(60f, .025f, 10, 40, false, false, ShakeRandomnessMode.Harmonic);

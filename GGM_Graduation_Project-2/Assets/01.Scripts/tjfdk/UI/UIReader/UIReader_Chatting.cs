@@ -9,13 +9,21 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 [Serializable]
+public struct MemberEvidence
+{
+    public Sprite[] spriteEvidence;
+    // Text인 것 적용하기
+}
+
+[Serializable]
 public class MemberProfile
 {
     public string name;
     public ESaveLocation nickName;
     public EFace currentFace;
     public Sprite[] faces;
-    public Sprite[] evidence;
+
+    public MemberEvidence evidence;
 
     public bool isOpen;
 
@@ -30,6 +38,7 @@ public class UIReader_Chatting : MonoBehaviour
 {
     [Header("Member")]
     [SerializeField] List<MemberProfile> members = new List<MemberProfile>();
+    public List<MemberProfile> Members { get { return members; } set { members = value; } }
 
     // memberList arrow sprite
     [SerializeField]

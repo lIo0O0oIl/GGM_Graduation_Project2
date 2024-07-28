@@ -188,11 +188,12 @@ public class UIReader_FileSystem : MonoBehaviour
                 {
                     area.style.backgroundColor = Color.clear;
                     Label name = file.Q<Label>("FileName");
-                    Sprite sprite = GameManager.Instance.imageManager.FindPng(name.text).image;         // 일단 png 만 가능함.
+                    Sprite sprite = GameManager.Instance.imageManager.FindPng(name.text).image;         // png 랑 Text 가 다 가능해야함.
                     if (sprite != null)
                     {
                         area.style.backgroundImage = new StyleBackground(sprite);
                     }
+                    GameManager.Instance.relationshipSystem.EvidenceCheck(area);
                 }
                 beforeSlot.Add(target);
             }
