@@ -272,7 +272,7 @@ public class UIReader_Chatting : MonoBehaviour
                 if (askNode.textEvent.Count == 1 /*&& askNode.textEvent[0] == EChatEvent.LoadNextDialog*/)
                 {
                     GameManager.Instance.chatHumanManager.chapterMember = GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog);
-                    GameManager.Instance.chatHumanManager.StopChatting();
+                    GameManager.Instance.chatHumanManager.IsChat(false);
                     AddMember(askNode.LoadNextDialog);
                     // 얘 날려ㄹㄴㅇ헏졈누ㄸ좈ㅇ픚ㄱㄴㅍㅋ
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
@@ -327,7 +327,8 @@ public class UIReader_Chatting : MonoBehaviour
                 }
 
                 // chatting start
-                GameManager.Instance.chatHumanManager.StartChatting();
+                Debug.Log(" 여기다!");
+                GameManager.Instance.chatHumanManager.IsChat(true);
 
                 // question
                 type = EChatType.Question;
