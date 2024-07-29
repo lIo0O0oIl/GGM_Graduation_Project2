@@ -70,9 +70,11 @@ public class UIReader_Relationship : MonoBehaviour
                 }
             }
         }
+
+        // Text 도 해줘야함.
     }
 
-    public void CheckOther(Sprite ChangeSprite, VisualElement ChangeArea)
+    public void CheckOtherPng(Sprite ChangeSprite, VisualElement ChangeArea)
     {
         RelationshipHuman relationshipHuman = null;
 
@@ -91,7 +93,6 @@ public class UIReader_Relationship : MonoBehaviour
 
             if (evidenceArea.style.backgroundImage.value.sprite == ChangeSprite)
             {
-                Debug.Log(ChangeArea.style.backgroundImage.value);
                 if (ChangeArea.style.backgroundImage.value != null)
                 {
                     evidenceArea.style.backgroundImage = ChangeArea.style.backgroundImage;
@@ -107,34 +108,37 @@ public class UIReader_Relationship : MonoBehaviour
         }
     }
 
-    // VisualElement의 backgroundImage에서 Sprite 이름을 가져오는 메서드
-    private string GetSpriteNameFromBackground(VisualElement element)
+    public void CheckOtherText(string changeTooltip, VisualElement ChangeArea)
     {
-        StyleBackground styleBackground = element.style.backgroundImage;
-        if (styleBackground.value.texture != null)
+        RelationshipHuman relationshipHuman = null;
+
+        foreach (RelationshipHuman member in relationshipHumanList)
         {
-            // Texture2D에서 Sprite를 가져옵니다
-            Sprite sprite = GetSpriteFromTexture(styleBackground.value.texture);
-            if (sprite != null)
+            if (member.name == ChangeArea.parent.name)
             {
-                return sprite.name;
+                relationshipHuman = member;
             }
         }
-        return null;
-    }
 
-    // Texture2D에서 Sprite를 가져오는 메서드 (프로젝트의 모든 스프라이트를 검사)
-    private Sprite GetSpriteFromTexture(Texture2D texture)
-    {
-        Sprite[] sprites = Resources.FindObjectsOfTypeAll<Sprite>();
-        foreach (Sprite sprite in sprites)
+        foreach (VisualElement evidenceArea in relationshipHuman.evidenceArea)
         {
-            if (sprite.texture == texture)
-            {
-                return sprite;
-            }
-        }
-        return null;
-    }
+            if (evidenceArea == ChangeArea) continue;
 
+            /*if (evidenceArea.tooltip == changeTooltip)          // 이미 있는 툴팁이였다면
+            {
+                if (ChangeArea.tooltip != null)     // 바뀌야 하는 곳에 이미 다른 툴팁이 존재해
+                {
+                    evidenceArea.tooltip = ChangeArea.tooltip;
+                }
+                else
+                {
+                    evidenceArea.style.backgroundImage = null;
+                    evidenceArea.style.backgroundColor = Color.white;
+                    evidenceArea.tooltip = null;
+                }
+
+                break;
+            }*/
+        }
+    }
 }

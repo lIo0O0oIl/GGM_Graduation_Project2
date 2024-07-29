@@ -85,6 +85,9 @@ public class UIReader_FileSystem : MonoBehaviour
     private VisualElement fileDefaultArea;
     private List<VisualElement> lockQuestions;
 
+    [Header("Use Relationship")]
+    public Sprite textFileSprite;
+
     private void Awake()
     {
         Instance = this;
@@ -188,12 +191,26 @@ public class UIReader_FileSystem : MonoBehaviour
                 {
                     area.style.backgroundColor = Color.clear;
                     Label name = file.Q<Label>("FileName");
-                    Sprite sprite = GameManager.Instance.imageManager.FindPng(name.text).image;         // png 랑 Text 가 다 가능해야함.
-                    if (sprite != null)
+
+                    PngSO pngSo = GameManager.Instance.imageManager.FindPng(name.text);
+                    if (pngSo != null)
                     {
-                        GameManager.Instance.relationshipSystem.CheckOther(sprite, area);
-                        area.style.backgroundImage = new StyleBackground(sprite);
+                        Sprite sprite = pngSo.image;         // png 랑 Text 가 다 가능해야함.
+                        if (sprite != null)
+                        {
+                            GameManager.Instance.relationshipSystem.CheckOtherPng(sprite, area);
+                            area.style.backgroundImage = new StyleBackground(sprite);
+                        }
                     }
+
+                    TextSO textSo = GameManager.Instance.imageManager.FindText(name.text);
+                    if (textSo != null)
+                    {
+                        GameManager.Instance.relationshipSystem.CheckOtherText(textSo.memo, area);
+                        area.style.backgroundImage = new StyleBackground(textFileSprite);       // Text 이미지로 넣어주기
+                        //area.tooltip = textSo.memo;
+                    }
+
                     GameManager.Instance.relationshipSystem.EvidenceCheck(area);
                 }
                 beforeSlot.Add(target);
