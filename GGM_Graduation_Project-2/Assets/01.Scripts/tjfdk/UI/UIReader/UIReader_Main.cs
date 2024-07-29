@@ -370,12 +370,10 @@ public class UIReader_Main : MonoBehaviour
             {
                 if (child2.name.Contains("suspect"))
                 {
-                    Debug.Log("suspect");
                     temp.suspectArea.Add(child2);
                 }
                 else if (child2.name.Contains("evidence"))
                 {
-                    Debug.Log("evidence");
                     temp.evidenceArea.Add(child2);
                     evidenceAreaList.Add(child2);
                 }

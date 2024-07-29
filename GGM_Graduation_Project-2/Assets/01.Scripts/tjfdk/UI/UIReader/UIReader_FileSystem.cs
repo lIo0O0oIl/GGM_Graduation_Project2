@@ -191,6 +191,7 @@ public class UIReader_FileSystem : MonoBehaviour
                     Sprite sprite = GameManager.Instance.imageManager.FindPng(name.text).image;         // png 랑 Text 가 다 가능해야함.
                     if (sprite != null)
                     {
+                        GameManager.Instance.relationshipSystem.CheckOther(sprite, area);
                         area.style.backgroundImage = new StyleBackground(sprite);
                     }
                     GameManager.Instance.relationshipSystem.EvidenceCheck(area);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,9 +58,6 @@ public class UIReader_Relationship : MonoBehaviour
             }
         }
 
-        Debug.Log(memberProfile);
-        Debug.Log(relationshipHuman);
-
         int count = 0;
         foreach (var evidenceSprite in memberProfile.evidence.spriteEvidence)
         {
@@ -70,6 +68,41 @@ public class UIReader_Relationship : MonoBehaviour
                     relationshipHuman.suspectArea[count].style.visibility = Visibility.Visible;
                     count++;
                 }
+            }
+        }
+    }
+
+    public void CheckOther(Sprite ChangeSprite, VisualElement ChangeArea)
+    {
+        RelationshipHuman relationshipHuman = null;
+
+        foreach (RelationshipHuman member in relationshipHumanList)
+        {
+            if (member.name == ChangeArea.parent.name)
+            {
+                relationshipHuman = member;
+            }
+        }
+
+
+        foreach(VisualElement evidenceArea in relationshipHuman.evidenceArea)
+        {
+            if (evidenceArea == ChangeArea) continue;
+
+            if (evidenceArea.style.backgroundImage.value.sprite == ChangeSprite)
+            {
+                Debug.Log(ChangeArea.style.backgroundImage.value);
+                if (ChangeArea.style.backgroundImage.value != null)
+                {
+                    evidenceArea.style.backgroundImage = ChangeArea.style.backgroundImage;
+                }
+                else
+                {
+                    evidenceArea.style.backgroundImage = null;
+                    evidenceArea.style.backgroundColor = Color.white;
+                }
+
+                break;
             }
         }
     }
@@ -103,4 +136,5 @@ public class UIReader_Relationship : MonoBehaviour
         }
         return null;
     }
+
 }
