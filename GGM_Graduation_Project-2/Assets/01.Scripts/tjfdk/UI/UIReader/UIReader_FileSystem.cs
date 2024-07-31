@@ -56,6 +56,7 @@ public class UIReader_FileSystem : MonoBehaviour
     VisualElement ui_filePathGround;
     VisualElement ui_mainFilePath;
     [HideInInspector] public Button ui_changeSizeButton;
+    VisualElement ui_hpGround;
 
 
 
@@ -110,6 +111,7 @@ public class UIReader_FileSystem : MonoBehaviour
         ui_fileGround = UIReader_Main.Instance.root.Q<VisualElement>("FileGround");
         ui_filePathGround = UIReader_Main.Instance.root.Q<VisualElement>("FilePathGround");
         ui_changeSizeButton = UIReader_Main.Instance.root.Q<Button>("ChangeSize");
+        ui_hpGround = UIReader_Main.Instance.root.Q<VisualElement>("HPbar");
     }
 
     private void Event_Load()
@@ -134,7 +136,7 @@ public class UIReader_FileSystem : MonoBehaviour
                 // currnet member 가져오고
                 MemberProfile member = GameManager.Instance.chatHumanManager.currentMember;
 
-                bool test = false;
+                bool isRight = false;
 
                 // current member의 question 다 돌고?
                 for (int i = 0; i < member.questions.Count; ++i)
@@ -168,7 +170,7 @@ public class UIReader_FileSystem : MonoBehaviour
                                     // add question
                                     member.questions.Add(condition.childList[0] as AskNode);
 
-                                    test = true;
+                                    isRight = true;
                                     beforeSlot.Add(target);
                                     return;
                                 }
@@ -191,8 +193,9 @@ public class UIReader_FileSystem : MonoBehaviour
                     }
                 }
 
-                if (test == false)
+                if (isRight == false)
                 {
+                    ui_hpGround.Q<VisualElement>("HP_" + GameManager.Instance.chatHumanManager.hp).style.display = DisplayStyle.None;
                     GameManager.Instance.chatHumanManager.hp -= 1;
 
                     if (GameManager.Instance.chatHumanManager.hp <= 0)
