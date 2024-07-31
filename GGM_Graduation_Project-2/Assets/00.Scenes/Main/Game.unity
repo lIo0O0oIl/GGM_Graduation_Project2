@@ -213,8 +213,7 @@ MonoBehaviour:
   chatContainer: {fileID: 594023517}
   nextChatTime: 1
   is_ChatStart: 0
-  nowHumanName: 
-  nowHuman:
+  currentMember:
     name: 
     nickName: 0
     currentFace: 0
@@ -222,9 +221,9 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
-  chapterHuman:
+  chapterMember:
     name: 
     nickName: 0
     currentFace: 0
@@ -232,11 +231,12 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   currentNode: {fileID: 0}
   checkEvidence: []
   isChattingRunning: 0
+  hp: 3
 --- !u!114 &150678888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21595680c07e20742a7ef1df761b1b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowName: 
+  currentName: 
   chatTrees:
   - {fileID: 11400000, guid: c1a3e3bb83a6eac42ac8aba4b6bafb91, type: 2}
   - {fileID: 11400000, guid: 54f82722d96610b4c8b7f0ba28e12cee, type: 2}
@@ -662,6 +662,7 @@ MonoBehaviour:
   cutScenes:
   - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
   - {fileID: 11400000, guid: 8867d427f3bcade47a447a1766521e38, type: 2}
+  - {fileID: 11400000, guid: 82e59ced07f04b44f95fa815e3b6ade7, type: 2}
 --- !u!114 &1857801312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,7 +730,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   - name: "\uD669\uC900\uC6D0"
     nickName: 2
@@ -741,7 +742,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   - name: "\uACFD\uD604\uC11D"
     nickName: 3
@@ -753,7 +754,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   - name: "\uC774\uCC44\uBBFC"
     nickName: 4
@@ -765,7 +766,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   - name: "\uBC15\uD604\uADDC"
     nickName: 5
@@ -777,7 +778,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   - name: "\uACE0\uC9C4\uD601 \uC120\uBC30\uB2D8"
     nickName: 6
@@ -789,7 +790,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   - name: "\uAC15\uB300\uC591"
     nickName: 7
@@ -801,7 +802,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   - name: "\uB2F4\uC784\uC120\uC0DD\uB2D8"
     nickName: 8
@@ -813,7 +814,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   - name: "\uD559\uC0DD\uB4E4"
     nickName: 9
@@ -825,7 +826,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   - name: "\uC774\uC218\uC5F0\uC758 \uBD80\uBAA8"
     nickName: 10
@@ -837,7 +838,7 @@ MonoBehaviour:
     isOpen: 0
     chattings: []
     questions: []
-    memCurrentNode: {fileID: 0}
+    currentNode: {fileID: 0}
     nowAskNode: {fileID: 0}
   changeMemberBtnOn: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}

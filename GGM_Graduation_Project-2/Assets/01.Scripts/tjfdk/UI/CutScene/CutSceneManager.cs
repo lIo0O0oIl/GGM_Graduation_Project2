@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CutSceneManager : MonoBehaviour
 {
@@ -52,13 +53,20 @@ public class CutSceneManager : MonoBehaviour
                 if (currentCutScene.cutScenes.Count <= currentCutNum)
                 {
 
-                    GameManager.Instance.fileManager.UnlockChat(currentCutScene.name);
-                    UIReader_Main.Instance.OpenCutScene();
-
                     if (currentCutScene.nextMemberName != "")
+                    {
                         GameManager.Instance.chatSystem.ChoiceMember
                             (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName));
-                    GameManager.Instance.chatHumanManager.chapterMember = GameManager.Instance.chatHumanManager.currentMember;
+
+                        GameManager.Instance.fileManager.UnlockChat(currentCutScene.name);
+
+                        UIReader_Main.Instance.OpenCutScene();
+
+                        GameManager.Instance.chatHumanManager.chapterMember 
+                            = GameManager.Instance.chatHumanManager.currentMember;
+                    }
+                    else
+                        SceneManager.LoadScene("End");
 
                     return;
                 }

@@ -23,6 +23,8 @@ public class ChatHumanManager : MonoBehaviour
     //public Coroutine chatting;
     public bool isChattingRunning = false;
 
+    public int hp = 3;
+
 
     private void Start()
     {
@@ -82,6 +84,9 @@ public class ChatHumanManager : MonoBehaviour
                     // Input chat
                     GameManager.Instance.chatSystem.InputChat
                         (currentMember.name, chatNode.state, chatNode.type, chatNode.face, chatNode.chatText, true);
+                    
+                    // start chatting
+                    IsChat(true);
                 }
             }
             else if (node is AskNode askNode)
