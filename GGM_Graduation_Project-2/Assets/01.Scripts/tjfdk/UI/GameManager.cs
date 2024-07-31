@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     [Header("UI Manager")]
     public UIReader_CutScene cutSceneSystem;
     public UIReader_Chatting chatSystem;
+    public UIReader_Relationship relationshipSystem;
     public UIReader_FileSystem fileSystem;
     public UIReader_ImageFinding imageSystem;
 

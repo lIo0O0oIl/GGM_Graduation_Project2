@@ -9,13 +9,14 @@ using System.Net.Sockets;
 using Unity.VisualScripting;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public enum EPanel
 {
     MAIN,
     CUTSCENE,
     SETTING,
-    CONNECTION
+    RELATIONSHIP
 }
 
 public class UIReader_Main : MonoBehaviour
@@ -36,13 +37,15 @@ public class UIReader_Main : MonoBehaviour
     // Panel
     public VisualElement mainPanel;
     public VisualElement cutScenePanel;
-    public VisualElement settingPanel;
-    public VisualElement connectionPanel;
 
-    public bool isMainOpen;
+    public VisualElement gamePanel;
+    public VisualElement RelationshipPanel;
+    public VisualElement settingPanel;
+
+    //public bool isMainOpen;
     public bool isCutSceneOpen;
-    public bool isSettingOpen;
-    public bool isConnectionOpen;
+    //public bool isSettingOpen;
+    public bool isRelationshipOpen;
 
     //protected VisualElement previousPanel;
     //protected VisualElement chattingPanel;
@@ -94,32 +97,48 @@ public class UIReader_Main : MonoBehaviour
     private void GameLoad()
     {
         // Panel
-
-        chattingButton = root.Q<Button>("ChattingBtn");
-        chattingButton.clicked += () => 
-        {
-            if (isSettingOpen)
-                settingPanel.style.display = DisplayStyle.None;
-            isSettingOpen = false;
-        };
-
-        connectionButton = root.Q<Button>("ConnectionBtn");
-        settingButton = root.Q<Button>("SoundSettingBtn");
-
-        mainPanel = root.Q<VisualElement>("MainGame");
+        mainPanel = root.Q<VisualElement>("MainGame");      // 컷 씬에서 사용함.
         cutScenePanel = root.Q<VisualElement>("CutScene");
+
+        gamePanel = root.Q<VisualElement>("MainSystem");
+        RelationshipPanel = root.Q<VisualElement>("RelationshipSystem");
         settingPanel = root.Q<VisualElement>("Setting");
 
-        settingButton.clicked += () => { OpenSetting(); };
-        settingPanel.Q<Button>("ExitBtn").clicked += () => { OpenSetting(); };
+        chattingButton = root.Q<Button>("ChattingBtn");
+        chattingButton.clicked += () => { OpenPanel(EPanel.MAIN); };
+
+        connectionButton = root.Q<Button>("RelationshipBtn");
+        connectionButton.clicked += () => { OpenPanel(EPanel.RELATIONSHIP); };
+
+        settingButton = root.Q<Button>("SoundSettingBtn");
+        settingButton.clicked += () => { OpenPanel(EPanel.SETTING); };
     }
 
-    public VisualElement RemoveContainer(VisualElement visualElement)
+
+    private void OpenPanel(EPanel panelType)
     {
-        return visualElement[0];
+        isRelationshipOpen = false;
+        gamePanel.style.display = DisplayStyle.None;
+        RelationshipPanel.style.display = DisplayStyle.None;
+        settingPanel.style.display = DisplayStyle.None;
+
+        switch (panelType)
+        {
+            case EPanel.MAIN:
+                gamePanel.style.display = DisplayStyle.Flex;
+                break;
+            case EPanel.RELATIONSHIP:
+                isRelationshipOpen = true;
+                RelationshipPanel.style.display = DisplayStyle.Flex;
+                break;
+            case EPanel.SETTING:
+                gamePanel.style.display = DisplayStyle.Flex;
+                settingPanel.style.display = DisplayStyle.Flex;
+                break;
+        }
     }
 
-    public void OpenSetting()
+/*    public void OpenSetting()
     {
         if (isSettingOpen)
             settingPanel.style.display = DisplayStyle.None;
@@ -127,8 +146,14 @@ public class UIReader_Main : MonoBehaviour
             settingPanel.style.display = DisplayStyle.Flex;
 
         isSettingOpen = !isSettingOpen;
+    }*/
+
+    public VisualElement RemoveContainer(VisualElement visualElement)
+    {
+        return visualElement[0];
     }
 
+    // 이거 전부 주석처리 되어있음 설아 코드임.
     //public void OpenPanel(EPanel panelType)
     //{
     //    VisualElement panel = null;
@@ -172,14 +197,15 @@ public class UIReader_Main : MonoBehaviour
             cutScenePanel.style.display = DisplayStyle.Flex;
             mainPanel.style.display= DisplayStyle.None;
 
-            GameManager.Instance.chatHumanManager.StopChatting();
+            GameManager.Instance.chatHumanManager.IsChat(false);
         }
         else
         {
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
 
-            GameManager.Instance.chatHumanManager.StartChatting();
+            Debug.Log(" 여기다!");
+            GameManager.Instance.chatHumanManager.IsChat(true);
         }
     }
 
@@ -328,5 +354,32 @@ public class UIReader_Main : MonoBehaviour
         }
 
         return new Vector2(adjustedWidth, adjustedHeight);
+    }
+
+    public void GetRelationshipEvidenceArea(ref List<VisualElement> evidenceAreaList, ref List<RelationshipHuman> relationshipHumanList)
+    {
+        VisualElement parent = root.Q<VisualElement>("EvidencesParent");
+        foreach (var child in parent.Children())
+        {
+            // 자식 요소에 대한 작업 수행
+            RelationshipHuman temp = new RelationshipHuman();
+            temp.name = child.name;
+            temp.suspectArea = new List<VisualElement>();
+            temp.evidenceArea = new List<VisualElement>();
+
+            foreach (var child2 in child.Children())
+            {
+                if (child2.name.Contains("suspect"))
+                {
+                    temp.suspectArea.Add(child2);
+                }
+                else if (child2.name.Contains("evidence"))
+                {
+                    temp.evidenceArea.Add(child2);
+                    evidenceAreaList.Add(child2);
+                }
+            }
+            relationshipHumanList.Add(temp);
+        }
     }
 }

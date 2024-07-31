@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutSceneSystem: {fileID: 0}
   chatSystem: {fileID: 2099014332}
+  relationshipSystem: {fileID: 2067191152}
   fileSystem: {fileID: 378627795}
   imageSystem: {fileID: 1207175533}
   chatHumanManager: {fileID: 150678887}
@@ -218,6 +219,8 @@ MonoBehaviour:
     nickName: 0
     currentFace: 0
     faces: []
+    evidence:
+      spriteEvidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -228,6 +231,8 @@ MonoBehaviour:
     nickName: 0
     currentFace: 0
     faces: []
+    evidence:
+      spriteEvidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -249,10 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   document: {fileID: 150678875}
-  isMainOpen: 0
   isCutSceneOpen: 0
-  isSettingOpen: 0
-  isConnectionOpen: 0
+  isRelationshipOpen: 0
   currentText: 
   MinWidth: 500
   MinHeight: 500
@@ -370,6 +373,7 @@ MonoBehaviour:
   currentFileFolder:
     folderName: 
     parentFolderName: 
+  textFileSprite: {fileID: 21300000, guid: 7fc8ff71e7ef85040874c7435d0120ff, type: 3}
 --- !u!1 &594023513
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +599,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2067191151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2067191153}
+  - component: {fileID: 2067191152}
+  m_Layer: 0
+  m_Name: RelationshipSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2067191152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067191151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f8526c4b4530c45af1c5ff89dbd9f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  relationshipHumanList: []
+--- !u!4 &2067191153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067191151}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099014330
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +694,9 @@ MonoBehaviour:
     currentFace: 0
     faces:
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
+    evidence:
+      spriteEvidence:
+      - {fileID: 21300000, guid: 02148c26ebfb53a43a7c3b93d7a73b6f, type: 3}
     isOpen: 0
     chattings: []
     questions: []
@@ -655,6 +707,8 @@ MonoBehaviour:
     currentFace: 0
     faces:
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
+    evidence:
+      spriteEvidence: []
     isOpen: 0
     chattings: []
     questions: []
@@ -684,3 +738,4 @@ SceneRoots:
   - {fileID: 2099014331}
   - {fileID: 378627793}
   - {fileID: 1207175531}
+  - {fileID: 2067191153}

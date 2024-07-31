@@ -47,7 +47,7 @@ public class UIReader_ImageFinding : MonoBehaviour
         root = GameObject.Find("Game").GetComponent<UIDocument>().rootVisualElement;
 
         ui_imageGround = root.Q<VisualElement>("ImageFinding");
-        ui_panelGround = root.Q<VisualElement>("PanelGround");
+        ui_panelGround = root.Q<VisualElement>("PanelGround");      // 이걸 껴저 있을 때에도 해야 켜짐
     }
 
     public void OpenImage(VisualElement fileIcon, string fileName)
@@ -96,7 +96,8 @@ public class UIReader_ImageFinding : MonoBehaviour
                     if (fileT != null)
                         GameManager.Instance.fileManager.UnlockChat(fileT.name);
 
-                    GameManager.Instance.chatHumanManager.StartChatting();
+                    Debug.Log(" 여기다!");
+                    GameManager.Instance.chatHumanManager.IsChat(true);
                     isImageOpen = true;
                 });
 
@@ -169,7 +170,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                 }
 
                 ui_imageGround.Add(imagePanel);
-                GameManager.Instance.chatHumanManager.StopChatting();;
+                GameManager.Instance.chatHumanManager.IsChat(false);
             }
 
             //isImageOpen = !isImageOpen;
@@ -198,7 +199,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                 // connection exit click event
                 panel.Q<Button>("CloseBtn").clicked += () =>
                 {
-                    GameManager.Instance.chatHumanManager.StartChatting();
+                    GameManager.Instance.chatHumanManager.IsChat(true);
                     // remove this panel 
                     ui_panelGround.Remove(panel);
                 };
@@ -214,7 +215,7 @@ public class UIReader_ImageFinding : MonoBehaviour
 
                 ui_panelGround.Add(panel);
 
-                GameManager.Instance.chatHumanManager.StopChatting();
+                GameManager.Instance.chatHumanManager.IsChat(false);
             }
             else
                 Debug.Log("it's neither an image nor a png");
@@ -242,7 +243,7 @@ public class UIReader_ImageFinding : MonoBehaviour
             // connection exit click event
             panel.Q<Button>("CloseBtn").clicked += () =>
             {
-                GameManager.Instance.chatHumanManager.StartChatting();
+                GameManager.Instance.chatHumanManager.IsChat(true);
                 // remove this panel 
                 ui_panelGround.Remove(panel);
 
@@ -258,7 +259,7 @@ public class UIReader_ImageFinding : MonoBehaviour
 
             ui_panelGround.Add(panel);
 
-            GameManager.Instance.chatHumanManager.StopChatting();
+            GameManager.Instance.chatHumanManager.IsChat(false);
         }
     }
 }
