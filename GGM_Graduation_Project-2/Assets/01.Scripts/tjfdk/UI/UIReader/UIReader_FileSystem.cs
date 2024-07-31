@@ -1,12 +1,10 @@
 using ChatVisual;
 using DG.Tweening;
+using DG.Tweening.Core.Easing;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.Windows;
 
 public enum FileType
 {
@@ -74,8 +72,6 @@ public class UIReader_FileSystem : MonoBehaviour
     // folder
     public string currentFolderName;
     [SerializeField] List<FolderFile> fileFolders; // this is test, fileFolders -> fileFolderList X!!
-    // if dictionary is correct working, remove fileFolders!
-    //public Dictionary<string, FolderFile> fileFolderList;
 
     // path
     private Stack<string> filePathLisk;
@@ -95,11 +91,6 @@ public class UIReader_FileSystem : MonoBehaviour
         fileFolders = new List<FolderFile>();
         filePathLisk = new Stack<string>();
         lockQuestions = new List<VisualElement>();
-
-        //UI_Reader.Instance.MinWidth = 500f;
-        //UI_Reader.Instance.MinHeight = 500f;
-        //UI_Reader.Instance.MaxWidth = 1800f;
-        //UI_Reader.Instance.MaxHeight = 980f;
     }
 
     private void OnEnable()
@@ -134,13 +125,17 @@ public class UIReader_FileSystem : MonoBehaviour
         // drl!
         file.AddManipulator(new Dragger((evt, target, beforeSlot) =>
         {
-            // questionGround 가져오고
+            // get questionGround
             VisualElement questionGround = GameManager.Instance.chatSystem.ui_questionGround;
+
             // 만약 questionGround와 부딪혔다면
             if (questionGround.worldBound.Contains(evt.mousePosition))
             {
                 // currnet member 가져오고
-                MemberProfile member = GameManager.Instance.chatHumanManager.nowHuman;
+                MemberProfile member = GameManager.Instance.chatHumanManager.currentMember;
+
+                bool test = false;
+
                 // current member의 question 다 돌고?
                 for (int i = 0; i < member.questions.Count; ++i)
                 {
@@ -149,6 +144,7 @@ public class UIReader_FileSystem : MonoBehaviour
                     {
                         // file name 가져오고
                         string fileName = file.Q<Label>("FileName").text;
+
                         // condition names 가져와서
                         string[] names = condition.fileName.Split('/');
 
@@ -160,18 +156,30 @@ public class UIReader_FileSystem : MonoBehaviour
                             {
                                 if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
                                 {
-                                    Debug.Log(GameManager.Instance.fileManager.FindFile(name).fileName.Trim() + " " + fileName.Trim());
+                                    // unlock
                                     condition.is_Unlock = true;
-                                    // 해당 질문 visuaelelement ㅈ삭제하기
+
+                                    // remove visualElement
                                     questionGround.RemoveAt(i);
+
                                     //change from lockQustion to question - 질문으로 만드는 거
                                     GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
-                                    // 질문 추가하기
+
+                                    // add question
                                     member.questions.Add(condition.childList[0] as AskNode);
 
+                                    test = true;
                                     beforeSlot.Add(target);
                                     return;
                                 }
+                                //else
+                                //{
+                                //    Debug.LogError("ㅋㅋㅋㅋㅋ 틀렸어.");
+                                //    test = true;
+                                //}
+                                // 질문이 n개일 때 한 번만 드래그 앤 드롭해도 n번만큼 로그가 뜸
+                                // 로그 부분에 생명 =-1; 해버리면 오류가 생길 것임 bool 값 만들어서 이번 드래그 앤 드롭이 틀렸는지만 체크하고
+                                // 틀렸다면 마지막에 bool 값에 대해 생명 =- 1; 하는 게 좋을 것임
                             }
                         }
 
@@ -180,7 +188,17 @@ public class UIReader_FileSystem : MonoBehaviour
                     else
                     {
                         beforeSlot.Add(target);
-                        Debug.LogError("아무튼 오류임;");
+                    }
+                }
+
+                if (test == false)
+                {
+                    GameManager.Instance.chatHumanManager.hp -= 1;
+
+                    if (GameManager.Instance.chatHumanManager.hp <= 0)
+                    {
+                        GameManager.Instance.chatHumanManager.IsChat(false);
+                        GameManager.Instance.cutSceneSystem.PlayCutScene("BadEnd");
                     }
                 }
             }
@@ -242,20 +260,25 @@ public class UIReader_FileSystem : MonoBehaviour
         if (parentFolder != null)
         {
             VisualElement file;
+
             // register folder to parentFolder
             switch (fileType)
             {
                 case FileType.FOLDER:
                 {
                     FileSO folder = GameManager.Instance.fileManager.FindFile(fileName);
+
                     // create uxml
                     file = UIReader_Main.Instance.RemoveContainer(ux_folderFile.Instantiate());
+
                     // change file name
                     file.Q<Label>("FileName").text = folder.fileName;
+
                     // connection click event
                     LoadDragAndDrop(file, () => 
                     {
                         GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
+
                         // image check action
                         if (folder != null)
                             GameManager.Instance.fileManager.UnlockChat(folder.name);
@@ -264,6 +287,7 @@ public class UIReader_FileSystem : MonoBehaviour
                         
                         // draw current foluder
                         DrawFile(folder.fileName);
+
                         // add current folder path
                         AddFilePath(folder.fileName);
                     });
@@ -275,10 +299,13 @@ public class UIReader_FileSystem : MonoBehaviour
                 case FileType.IMAGE:
                 {
                     FileSO image = GameManager.Instance.fileManager.FindFile(fileName);
+
                     // create uxml
                     file = UIReader_Main.Instance.RemoveContainer(ux_imageFile.Instantiate());
+
                     // change file name
                     file.Q<Label>("FileName").text = image.fileName;
+
                     // connection drag and drop & button click event
                     LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(file, image.fileName); });
                     parentFolder.imageFiles.Add(file);
@@ -287,10 +314,13 @@ public class UIReader_FileSystem : MonoBehaviour
                 case FileType.TEXT:
                 {
                     FileSO text = GameManager.Instance.fileManager.FindFile(fileName);
+
                     // create uxml
                     file = UIReader_Main.Instance.RemoveContainer(ux_textFile.Instantiate());
+
                     // change file name
                     file.Q<Label>("FileName").text = text.fileName;
+
                     // connection drag and drop & button click event
                     LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(file, text.fileName); });
                     parentFolder.textFiles.Add(file);
@@ -309,55 +339,8 @@ public class UIReader_FileSystem : MonoBehaviour
         if (currentFolderName == fileParentName)
             DrawFile(currentFolderName);
     }
-
-    // ===============================================
-    // I will use this function, don't remove - tjfdk
-    // ===============================================
-    //private FolderFile CreateNewParent(FileType fileType, string fileParentName, string fileName)
-    //{
-    //    // file - parent
-    //    // create new parentFolder
-    //    FolderFile newParentFolder = new FolderFile(fileParentName, GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName);
-
-    //    // register parentFolder
-    //    fileFolders.Add(newParentFolder);
-    //    //fileFolderList.Add(newParentFolder.folderName, newParentFolder);
-
-    //    // add file to newParentFolder
-    //    switch (fileType)
-    //    {
-    //        case FileType.FOLDER:
-    //            newParentFolder.folderFiles.Add(fileName);
-    //            break;
-    //        case FileType.IMAGE:
-    //            newParentFolder.imageFiles.Add(fileName);
-    //            break;
-    //        case FileType.TEXT:
-    //            newParentFolder.textFiles.Add(fileName);
-    //            break;
-    //    }
-    //    // parent - super parent
-    //    // find super parent name
-    //    string superParentFolderName = GameManager.Instance.fileManager.FindFile(fileParentName).fileParentName;
-    //    // find super parent
-    //    FolderFile superParentFolder = FindFolder(superParentFolderName);
-    //    // if superParent is exist, add newParentFolder to it's parent
-    //    if (superParentFolder != null)
-    //        superParentFolder.folderFiles.Add(newParentFolder.folderName);
-    //    // if superParent isn't exist, add newParentFolder to it's new parent
-    //    else
-    //        CreateNewParent(FileType.FOLDER, superParentFolderName, fileParentName)
-    //            .folderFiles.Add(newParentFolder.folderName);
-    //    // return new parent
-    //    return newParentFolder;
-    //}
-
     public void DrawFile(string folderName)
     {
-        // fileGround - current folder ground
-        // fileFolders - current folder list
-        // folderName - current folder name
-
         // change current folder
         currentFolderName = folderName;
         currentFileFolder = FindFolder(folderName);
@@ -365,17 +348,12 @@ public class UIReader_FileSystem : MonoBehaviour
         // all file remove of fileGround
         RemoveFile();
 
-        // find current folder
-        //currentFileFolder = fileFolderList[folderName];
-
         // folder isn't null
         if (currentFileFolder != null)
         {
             // create current folder's childen
             foreach (VisualElement folder in currentFileFolder.folderFiles)
-            {
                 ui_fileGround.Add(folder);
-            }
 
             foreach (VisualElement image in currentFileFolder.imageFiles)
                 ui_fileGround.Add(image);
@@ -396,13 +374,15 @@ public class UIReader_FileSystem : MonoBehaviour
     private void AddFilePath(string pathName)
     {
         VisualElement filePath = UIReader_Main.Instance.RemoveContainer(ux_filePath.Instantiate());
+
         filePath.Q<Button>().text = pathName + "> ";
-        filePath.Q<Button>().clicked += () => { FolderPathEvent(pathName); isPathClick = true; };
+        filePath.Q<Button>().clicked += () => { PathEvent(pathName); isPathClick = true; };
+
         ui_filePathGround.Add(filePath);
         filePathLisk.Push(pathName);
     }
 
-    private void FolderPathEvent(string folderName)
+    private void PathEvent(string folderName)
     {
         while (true)
         {
@@ -415,31 +395,36 @@ public class UIReader_FileSystem : MonoBehaviour
         DrawFile(filePathLisk.Peek());
     }
 
-    public void HighlightingFolderPathEvent(string folderName)
+    public void HyperLinkEvent(string folderName)
     {
         isPathClick = true;
 
-        Stack<string> pathName = new Stack<string>();
-        string top = GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName;
-
-        // all remove paths
-        for (int i = ui_filePathGround.childCount - 1; i >= 0; i--)
-            ui_filePathGround.RemoveAt(i);
-
-        while (top != "Main")
+        if (GameManager.Instance.fileSystem.FindFolder(folderName) != null)
         {
-            pathName.Push(top);
-            top = GameManager.Instance.fileSystem.FindFolder(top).parentFolderName;
-        }
+            Stack<string> pathName = new Stack<string>();
+            string top = GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName;
 
-        AddFilePath("Main");
-        while (pathName.Count > 0)
-        {
-            AddFilePath(pathName.Peek());
-            pathName.Pop();
-        }
+            // all remove paths
+            for (int i = ui_filePathGround.childCount - 1; i >= 0; i--)
+                ui_filePathGround.RemoveAt(i);
 
-        DrawFile(GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName);
+            while (top != "Main")
+            {
+                pathName.Push(top);
+                top = GameManager.Instance.fileSystem.FindFolder(top).parentFolderName;
+            }
+
+            AddFilePath("Main");
+            while (pathName.Count > 0)
+            {
+                AddFilePath(pathName.Peek());
+                pathName.Pop();
+            }
+
+            DrawFile(GameManager.Instance.fileSystem.FindFolder(folderName).parentFolderName);
+        }
+        else
+            Debug.LogError("this folder is not exist");
     }
 
     public void OnOffFileSystem(float during)
