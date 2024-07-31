@@ -172,14 +172,15 @@ public class UIReader_Main : MonoBehaviour
             cutScenePanel.style.display = DisplayStyle.Flex;
             mainPanel.style.display= DisplayStyle.None;
 
-            GameManager.Instance.chatHumanManager.StopChatting();
+            GameManager.Instance.chatHumanManager.IsChat(false);
         }
         else
         {
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
 
-            GameManager.Instance.chatHumanManager.StartChatting();
+            Debug.Log(" 여기다!");
+            GameManager.Instance.chatHumanManager.IsChat(true);
         }
     }
 
