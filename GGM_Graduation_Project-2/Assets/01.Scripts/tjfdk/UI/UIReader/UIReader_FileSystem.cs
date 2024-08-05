@@ -174,14 +174,6 @@ public class UIReader_FileSystem : MonoBehaviour
                                     beforeSlot.Add(target);
                                     return;
                                 }
-                                //else
-                                //{
-                                //    Debug.LogError("ㅋㅋㅋㅋㅋ 틀렸어.");
-                                //    test = true;
-                                //}
-                                // 질문이 n개일 때 한 번만 드래그 앤 드롭해도 n번만큼 로그가 뜸
-                                // 로그 부분에 생명 =-1; 해버리면 오류가 생길 것임 bool 값 만들어서 이번 드래그 앤 드롭이 틀렸는지만 체크하고
-                                // 틀렸다면 마지막에 bool 값에 대해 생명 =- 1; 하는 게 좋을 것임
                             }
                         }
 

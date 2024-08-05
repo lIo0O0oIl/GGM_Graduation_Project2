@@ -31,6 +31,15 @@ public class GameManager : Singleton<GameManager>
         GameStart();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (chatHumanManager.hp < 3)
+                chatHumanManager.hp++;
+        }
+    }
+
     public void GameStart()
     {
         if (!is_tutorial)
