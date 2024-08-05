@@ -161,7 +161,8 @@ public class UIReader_Chatting : MonoBehaviour
     {
         foreach (ChatNode chat in member.chattings)
         {
-            InputChat(member.name, chat.state, chat.type, member.currentFace, chat.chatText, false);
+            InputChat(member.name, chat.state, chat.type, member.currentFace, chat.chatText, 
+                false, chat.type == EChatType.Question);
         }
 
         StartCoroutine(EndToScroll(scrollEndSpeed));
@@ -180,11 +181,15 @@ public class UIReader_Chatting : MonoBehaviour
         switch (type)
         {
             case EChatType.Text:
+            case EChatType.Question:
                 // create uxml
                 chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
                 chat.name = "chat";
                 if (isQuestion)
+                {
+                    Debug.Log(text + " : 질문이엇던 것");
                     chat.AddToClassList("Question");
+                }
                 EventChatText(chat, text);
                 break;
             case EChatType.Image:
@@ -225,17 +230,22 @@ public class UIReader_Chatting : MonoBehaviour
 
         // if you this chat record
         if (isRecord)
-            RecordChat(who, toWho, type, text);
+            RecordChat(who, toWho, type, text, isQuestion);
 
         // whose chat style setting        
-        if (who == EChatState.Me)
+        if (chat != null)
         {
-            chat.AddToClassList("MyChat");
+            if (who == EChatState.Me)
+            {   
+                chat.AddToClassList("MyChat"); // 여기서 널레퍼
+            }
+            else
+            {
+                chat.AddToClassList("OtherChat");
+            }
         }
         else
-        {
-            chat.AddToClassList("OtherChat");
-        }
+            Debug.Log("chat null임 " + type);
 
         ui_chatGround.Add(chat);
         currentElement = chat;
@@ -624,7 +634,10 @@ public class UIReader_Chatting : MonoBehaviour
                 {
                     ChatNode chat = ScriptableObject.CreateInstance("ChatNode") as ChatNode;
                     chat.state = who;
-                    chat.type = type;
+                    if (isQuestion)
+                        chat.type = EChatType.Question;
+                    else
+                        chat.type = type;
                     chat.chatText = msg;
                     member.chattings.Add(chat);
                 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public enum EPanel
 {
