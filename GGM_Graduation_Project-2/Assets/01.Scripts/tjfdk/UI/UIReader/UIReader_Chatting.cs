@@ -275,7 +275,6 @@ public class UIReader_Chatting : MonoBehaviour
             // connection click event
             chat.Q<Button>().clicked += (() =>
             {
-
                 // add chat
                 InputChat(toWho, EChatState.Me, type, member.currentFace, askNode.askText, true, true);
 
@@ -292,10 +291,30 @@ public class UIReader_Chatting : MonoBehaviour
                     ask.is_readThis = false;
                 }
 
-                if (askNode.textEvent.Count == 1 /*&& askNode.textEvent[0] == EChatEvent.LoadNextDialog*/)
+                if (askNode.askType != EAskType.Common)
                 {
-                    GameManager.Instance.chatHumanManager.chapterMember = GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog);
+                    if (askNode.askType != EAskType.Answer)
+                    {
+                        ChatNode parent = askNode.parent as ChatNode;
+                        foreach (AskNode ask1 in parent.childList)
+                        {
+                            ask1.is_readThis = true;
+                            ask1.is_UseThis = true;
+                            // 될지 안 될지 모름... 정답을 햇다! 하면 나머지 질문들도 true 주는건데 all question도 true 주ㅓ야 하나... 테스트 안 해봄
+                        }
+                    }
+                    else if (askNode.askType != EAskType.NoAnswer)
+                        GameManager.Instance.chatHumanManager.MinerHP();
+                }
+
+                // move next human
+                if (askNode.textEvent.Count == 1)
+                {
+                    GameManager.Instance.chatHumanManager.chapterMember 
+                        = GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog);
+
                     GameManager.Instance.chatHumanManager.IsChat(false);
+
                     AddMember(askNode.LoadNextDialog);
                     // 얘 날려ㄹㄴㅇ헏졈누ㄸ좈ㅇ픚ㄱㄴㅍㅋ
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
@@ -314,7 +333,8 @@ public class UIReader_Chatting : MonoBehaviour
                 {
                     GameManager.Instance.chatHumanManager.currentNode = askNode;
                 }
-                    askNode.is_UseThis = true;
+
+                askNode.is_UseThis = true;
 
                 // all question visualelement down
                 GameManager.Instance.chatSystem.RemoveQuestion();

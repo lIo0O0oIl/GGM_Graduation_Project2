@@ -7,6 +7,7 @@ using Unity.Jobs;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ChatHumanManager : MonoBehaviour
 {
@@ -57,6 +58,20 @@ public class ChatHumanManager : MonoBehaviour
         {
             if (currentMember.name == chapterMember.name)
                 NextChat();
+        }
+    }
+
+    public void MinerHP()
+    {
+        GameManager.Instance.fileSystem.ui_hpGround
+            .Q<VisualElement>("HP_" + hp).style.display = DisplayStyle.None;
+
+        hp -= 1;
+
+        if (hp <= 0)
+        {
+            IsChat(false);
+            GameManager.Instance.cutSceneSystem.PlayCutScene("BadEnd");
         }
     }
 
