@@ -260,9 +260,12 @@ public class UIReader_ImageFinding : MonoBehaviour
                     GameManager.Instance.fileManager.UnlockChat(file.name);
             };
 
+            if (fileIcon  != null)
+            {
                 GameManager.Instance.fileManager.FindFile(name).isRead = true;
                 if (GameManager.Instance.fileManager.FindFile(name).isRead == true)
                     fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
+            }
 
             ui_panelGround.Add(panel);
 

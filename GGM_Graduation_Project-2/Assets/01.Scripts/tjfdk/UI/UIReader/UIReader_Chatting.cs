@@ -73,6 +73,7 @@ public class UIReader_Chatting : MonoBehaviour
     [SerializeField] VisualTreeAsset ux_chat;
     [SerializeField] VisualTreeAsset ux_askChat;
     [SerializeField] VisualTreeAsset ux_hiddenAskChat;
+    [SerializeField] VisualTreeAsset ux_textFile;
     [SerializeField] VisualTreeAsset ux_memberList;
 
     // 흔들림 효과 넣어주기
@@ -192,6 +193,13 @@ public class UIReader_Chatting : MonoBehaviour
                 chat.name = "image";
                 // image size change
                 UIReader_Main.Instance.ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
+                break;
+            case EChatType.TextFile:
+                // create visualElement
+                chat = UIReader_Main.Instance.RemoveContainer(ux_textFile.Instantiate());
+                chat.name = "textFile";
+                chat.Q<Button>().text = text + ".txt";
+                chat.Q<Button>().clicked += () => { GameManager.Instance.imageSystem.OpenText(null, text); };
                 break;
             case EChatType.CutScene:
                 // create Button
