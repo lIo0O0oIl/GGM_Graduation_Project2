@@ -31,6 +31,11 @@ public class UIReader_ImageFinding : MonoBehaviour
 
 
 
+    // slider....
+    public Color sliderColor;
+
+
+
     bool isImageOpen = true;
 
     private void Awake()
@@ -226,6 +231,8 @@ public class UIReader_ImageFinding : MonoBehaviour
     {
         // create uxml
         VisualElement panel = UIReader_Main.Instance.RemoveContainer(ux_TextPanel.Instantiate());
+        RemoveSlider(panel);
+
         // find text
         TextSO text = GameManager.Instance.imageManager.FindText(name);
 
@@ -253,13 +260,47 @@ public class UIReader_ImageFinding : MonoBehaviour
                     GameManager.Instance.fileManager.UnlockChat(file.name);
             };
 
+            if (fileIcon  != null)
+            {
                 GameManager.Instance.fileManager.FindFile(name).isRead = true;
                 if (GameManager.Instance.fileManager.FindFile(name).isRead == true)
                     fileIcon.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
+            }
 
             ui_panelGround.Add(panel);
 
             GameManager.Instance.chatHumanManager.IsChat(false);
+        }
+    }
+
+    public void RemoveSlider(VisualElement scrollView)
+    {
+        // hidding scrollview slider
+        var verticalScroller = scrollView.Q<Scroller>(className: "unity-scroll-view__vertical-scroller");
+
+        if (verticalScroller != null)
+        {
+            var lowButton = verticalScroller.Q<VisualElement>(className: "unity-scroller__low-button");
+            var highButton = verticalScroller.Q<VisualElement>(className: "unity-scroller__high-button");
+
+            var sliderBG = verticalScroller.Q<VisualElement>(className: "unity-base-slider__tracker");
+            var sliderOL = verticalScroller.Q<VisualElement>(className: "unity-base-slider__dragger-border");
+            var slider = verticalScroller.Q<VisualElement>(className: "unity-base-slider__dragger");
+
+            if (lowButton != null)
+                lowButton.style.display = DisplayStyle.None;
+
+            if (highButton != null)
+                highButton.style.display = DisplayStyle.None;
+
+            if (sliderBG != null)
+                sliderBG.style.display = DisplayStyle.None;
+
+            if (sliderOL != null)
+                sliderOL.style.display = DisplayStyle.None;
+
+            if (slider != null)
+                slider.style.backgroundColor = sliderColor;
         }
     }
 }

@@ -33,6 +33,7 @@ namespace ChatVisual
     {
         Text = 0,
         Image,
+        TextFile,
         CutScene,
         Question,
         LockQuestion

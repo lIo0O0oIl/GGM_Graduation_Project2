@@ -1,15 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
-using ChatVisual;
-using System.Net.Sockets;
-using Unity.VisualScripting;
-using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
-using System.Linq;
 
 public enum EPanel
 {
@@ -127,6 +120,7 @@ public class UIReader_Main : MonoBehaviour
         {
             case EPanel.MAIN:
                 gamePanel.style.display = DisplayStyle.Flex;
+                StartCoroutine(GameManager.Instance.chatSystem.EndToScroll(0.05f));
                 break;
             case EPanel.RELATIONSHIP:
                 isRelationshipOpen = true;
@@ -201,7 +195,6 @@ public class UIReader_Main : MonoBehaviour
             cutScenePanel.style.display = DisplayStyle.None;
             mainPanel.style.display = DisplayStyle.Flex;
 
-            Debug.Log(" 여기다!");
             GameManager.Instance.chatHumanManager.IsChat(true);
         }
     }
