@@ -94,7 +94,7 @@ public class ChatHumanManager : MonoBehaviour
                 if (askNode.is_readThis == false && askNode.is_UseThis == false)
                 {
                     // load next
-                    currentNode = askNode;
+                    currentNode = askNode.parent;
                     // check
                     askNode.is_readThis = true;
 
@@ -224,7 +224,9 @@ public class ChatHumanManager : MonoBehaviour
             // when current member's currentNode isn't null
             // load next
             if (currentMember.currentNode != null)
+            {
                 currentNode = currentMember.currentNode;
+            }
             else
                 currentNode = rootNode;
         }
