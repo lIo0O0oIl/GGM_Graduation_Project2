@@ -194,6 +194,11 @@ namespace ChatVisual
                             GUILayout.EndVertical();
                             GUILayout.Space(10);
 
+                            enumValue = (int)askNode.askType;
+                            enumValue = GUILayout.Toolbar(enumValue, System.Enum.GetNames(typeof(EAskType)));
+                            askNode.askType = (EAskType)enumValue;
+                            GUILayout.Space(10);
+
                             if (is_LoadNextDialog)
                             {
                                 askNode.LoadNextDialog = EditorGUILayout.TextArea(askNode.LoadNextDialog, EditorStyles.textArea);
