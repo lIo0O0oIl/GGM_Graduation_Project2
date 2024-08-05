@@ -37,10 +37,7 @@ public class UIReader_SettingScene : MonoBehaviour
         bgm = root.Q<Slider>("SliderBGM");
         sfx = root.Q<Slider>("SliderSFX");
         wheel = root.Q<Slider>("SliderTextSpeed");
-        if (SceneManager.GetActiveScene().buildIndex != 0)      // Intro 가 아닌경우에만
-        {
-            root.Q<Button>("QuitBtn").clickable.clicked += () => { SceneManager.LoadScene("Intro"); };
-        }
+        root.Q<Button>("SettingCloseBtn").clicked += () => { root.Q<VisualElement>("Setting").style.display = DisplayStyle.None; };
 
         master.RegisterValueChangedCallback(OnMasterChange);
         bgm.RegisterValueChangedCallback(OnBGMChange);
@@ -61,10 +58,8 @@ public class UIReader_SettingScene : MonoBehaviour
         bgm.UnregisterValueChangedCallback(OnBGMChange);
         sfx.UnregisterValueChangedCallback(OnSFXChange);
         wheel.UnregisterValueChangedCallback(OnWheelSpeedhange);
-        if (SceneManager.GetActiveScene().buildIndex != 0)      // Intro 가 아닌경우에만
-        {
-            root.Q<Button>("QuitBtn").clickable.clicked -= () => { SceneManager.LoadScene("Intro"); };
-        }
+        root.Q<Button>("CloseBtn").clicked -= () => { root.Q<VisualElement>("Setting").style.display = DisplayStyle.None; };
+
     }
 
     public void ChangeDefaultValue()

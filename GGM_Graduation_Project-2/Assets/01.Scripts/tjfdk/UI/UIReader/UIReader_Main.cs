@@ -15,8 +15,9 @@ public enum EPanel
 {
     MAIN,
     CUTSCENE,
+    RELATIONSHIP,
     SETTING,
-    RELATIONSHIP
+    QUIT
 }
 
 public class UIReader_Main : MonoBehaviour
@@ -34,13 +35,14 @@ public class UIReader_Main : MonoBehaviour
     public Button chattingButton;
     public Button connectionButton;
     public Button settingButton;
-    // Panel
-    public VisualElement mainPanel;
-    public VisualElement cutScenePanel;
 
-    public VisualElement gamePanel;
-    public VisualElement RelationshipPanel;
-    public VisualElement settingPanel;
+    // Panel
+    private VisualElement mainPanel;
+    private VisualElement cutScenePanel;
+    private VisualElement gamePanel;
+    private VisualElement RelationshipPanel;
+    private VisualElement settingPanel;
+    private VisualElement quitPanel;
 
     //public bool isMainOpen;
     public bool isCutSceneOpen;
@@ -71,27 +73,7 @@ public class UIReader_Main : MonoBehaviour
     private void OnEnable()
     {
         root = document.rootVisualElement;
-
-        //if (document.visualTreeAsset.name == "Intro")
-        //    MenuLoad();
-        //else if (document.visualTreeAsset.name == "Game")
-            GameLoad();
-    }
-
-    private void MenuLoad()
-    {
-        Debug.Log("메뉴");
-        // Button
-        //playButton = root.Q<Button>("PlayBtn");
-        //settingButton = root.Q<Button>("SettingBtn");
-        //ExitButton = root.Q<Button>("ExitBtn");
-
-        settingPanel = root.Q<VisualElement>("Setting");
-
-        //playButton.clicked += () => { SceneManager.LoadScene("Game"); };
-        //settingButton.clicked += () => { OpenSetting(); };
-        //settingButton.Q<Button>("ExitBtn").clicked += () => { OpenSetting(); };
-        //ExitButton.clicked += () => { Application.Quit(); };
+        GameLoad();
     }
 
     private void GameLoad()
@@ -103,6 +85,7 @@ public class UIReader_Main : MonoBehaviour
         gamePanel = root.Q<VisualElement>("MainSystem");
         RelationshipPanel = root.Q<VisualElement>("RelationshipSystem");
         settingPanel = root.Q<VisualElement>("Setting");
+        quitPanel = root.Q<VisualElement>("Quit");
 
         chattingButton = root.Q<Button>("ChattingBtn");
         chattingButton.clicked += () => { OpenPanel(EPanel.MAIN); };
@@ -112,11 +95,29 @@ public class UIReader_Main : MonoBehaviour
 
         settingButton = root.Q<Button>("SoundSettingBtn");
         settingButton.clicked += () => { OpenPanel(EPanel.SETTING); };
+
+        root.Q<Button>("QuitBtn").clicked += () => { OpenPanel(EPanel.QUIT); };
     }
 
 
-    private void OpenPanel(EPanel panelType)
+    public void OpenPanel(EPanel panelType)
     {
+        if (panelType == EPanel.SETTING)
+        {
+            settingPanel.style.display = DisplayStyle.Flex;
+            return;
+        }
+        else if (panelType == EPanel.QUIT)
+        {
+            quitPanel.style.display = DisplayStyle.Flex;
+
+            quitPanel.Q<Button>("QuitCloseBtn1").clicked += () => { quitPanel.style.display = DisplayStyle.None; };
+            quitPanel.Q<Button>("QuitCloseBtn2").clicked += () => { quitPanel.style.display = DisplayStyle.None; };
+            quitPanel.Q<Button>("RealQuitBtn").clicked += () => { SceneManager.LoadScene("Intro"); };
+
+            return;
+        }
+
         isRelationshipOpen = false;
         gamePanel.style.display = DisplayStyle.None;
         RelationshipPanel.style.display = DisplayStyle.None;
@@ -130,10 +131,6 @@ public class UIReader_Main : MonoBehaviour
             case EPanel.RELATIONSHIP:
                 isRelationshipOpen = true;
                 RelationshipPanel.style.display = DisplayStyle.Flex;
-                break;
-            case EPanel.SETTING:
-                gamePanel.style.display = DisplayStyle.Flex;
-                settingPanel.style.display = DisplayStyle.Flex;
                 break;
         }
     }

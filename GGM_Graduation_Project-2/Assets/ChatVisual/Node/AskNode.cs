@@ -15,5 +15,7 @@ namespace ChatVisual
         public string askText;
         public List<EChatEvent> textEvent = new List<EChatEvent>();
         public string LoadNextDialog;
+
+        public EAskType askType;
     }
 }

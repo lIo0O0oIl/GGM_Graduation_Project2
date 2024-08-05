@@ -56,6 +56,13 @@ namespace ChatVisual
         LoadNextDialog
     }
 
+    public enum EAskType
+    {
+        Common,
+        Answer,
+        NoAnswer
+    }
+
 /*    [Serializable]
     public class Chat 
     {
