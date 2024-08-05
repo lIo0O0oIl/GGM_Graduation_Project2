@@ -101,3 +101,33 @@
     transition-duration: 0.1s;
     scale: 1.1 1.1;
 }
+
+:hover > #QuitBtn {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}
+
+:hover > #SettingCloseBtn {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}
+
+:hover > #QuitCloseBtn1 {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}
+
+:hover > #QuitCloseBtn2 {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}
+
+:hover > #RealQuitBtn {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}

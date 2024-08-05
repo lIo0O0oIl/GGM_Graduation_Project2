@@ -14,7 +14,6 @@ public class UIReader_MenuScene : MonoBehaviour
     public UnityEngine.UI.Button startBtn;
     public UnityEngine.UI.Button settingBtn;
     public UnityEngine.UI.Button exitBtn;
-    private VisualElement settingPanel;
     [SerializeField] private AudioClip buttonClickSound;
     private AudioSource audioSource;
 
@@ -29,14 +28,11 @@ public class UIReader_MenuScene : MonoBehaviour
 
         // you have to change this scene name, no tutorial! game!!!
         startBtn.onClick.AddListener(() => { UIManager.Instance.SceneChange("Game"); });
-
         settingBtn.onClick.AddListener(() => { OpenSetting(); });
-
-
         exitBtn.onClick.AddListener(() => { UIManager.Instance.Exit(); });
     }
 
-    public void OnStart()
+/*    public void OnStart()
     {
         Debug.Log("dk");
         UIManager.Instance.SceneChange("Game");
@@ -46,7 +42,7 @@ public class UIReader_MenuScene : MonoBehaviour
     {
         Debug.Log("나가");
         UIManager.Instance.Exit();
-    }
+    }*/
 
     public void OpenSetting()
     {
@@ -63,7 +59,7 @@ public class UIReader_MenuScene : MonoBehaviour
 
             settingScene.enabled = true;
 
-            menuUI.rootVisualElement.Q<Button>("ExitBtn").RegisterCallback<ClickEvent>(evt =>
+            menuUI.rootVisualElement.Q<Button>("CloseBtn").RegisterCallback<ClickEvent>(evt =>
             {
             OpenSetting();
             });
