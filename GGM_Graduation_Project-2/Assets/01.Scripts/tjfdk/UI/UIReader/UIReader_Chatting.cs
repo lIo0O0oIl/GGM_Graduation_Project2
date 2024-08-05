@@ -1,11 +1,9 @@
 using ChatVisual;
 using DG.Tweening;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 [Serializable]
@@ -45,10 +43,6 @@ public class UIReader_Chatting : MonoBehaviour
     private Texture2D changeMemberBtnOn, changeMemberBtnOff;
     public float wheelSpeed = 25f;
     public float scrollEndSpeed = 0.15f;
-
-    bool isConnectionOpen = false;
-    //bool isSettingOpen = false;
-
 
     // root
     VisualElement root;
@@ -169,7 +163,7 @@ public class UIReader_Chatting : MonoBehaviour
             InputChat(member.name, chat.state, chat.type, member.currentFace, chat.chatText, false);
         }
 
-        Invoke("EndToScroll", scrollEndSpeed);
+        StartCoroutine(EndToScroll(scrollEndSpeed));
     }
 
     // input chat
@@ -237,8 +231,9 @@ public class UIReader_Chatting : MonoBehaviour
 
         ui_chatGround.Add(chat);
         currentElement = chat;
+
         // scroll pos to end
-        Invoke("EndToScroll", scrollEndSpeed);
+        StartCoroutine(EndToScroll(scrollEndSpeed));
     }
 
     // input question
@@ -675,8 +670,9 @@ public class UIReader_Chatting : MonoBehaviour
     }
 
     // scroll pos to end
-    public void EndToScroll()
+    public IEnumerator EndToScroll(float timer)
     {
+        yield return new WaitForSeconds(timer);
         ui_chatGround.verticalScroller.value = ui_chatGround.verticalScroller.highValue;
     }
 
