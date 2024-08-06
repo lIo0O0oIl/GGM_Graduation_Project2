@@ -185,19 +185,9 @@ public class UIReader_FileSystem : MonoBehaviour
                     }
                 }
 
+                // minus hp
                 if (isRight == false)
-                {
-                    GameManager.Instance.chatHumanManager.MinerHP();
-
-                    //ui_hpGround.Q<VisualElement>("HP_" + GameManager.Instance.chatHumanManager.hp).style.display = DisplayStyle.None;
-                    //GameManager.Instance.chatHumanManager.hp -= 1;
-
-                    //if (GameManager.Instance.chatHumanManager.hp <= 0)
-                    //{
-                    //    GameManager.Instance.chatHumanManager.IsChat(false);
-                    //    GameManager.Instance.cutSceneSystem.PlayCutScene("BadEnd");
-                    //}
-                }
+                    UIReader_Main.Instance.MinusHP();
             }
             else if (UIReader_Main.Instance.isRelationshipOpen)      // 관계도 시스템이 켜져 있었다면
             {

@@ -35,8 +35,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (chatHumanManager.hp < 3)
-                chatHumanManager.hp++;
+            if (UIReader_Main.Instance.hp < 3)
+                UIReader_Main.Instance.hp++;
         }
     }
 

@@ -114,7 +114,7 @@ public class UIReader_Chatting : MonoBehaviour
     {
         // scrollview find, and wheel speed setting
         ui_chatGround = ui_chatGround.Q<ScrollView>(ui_chatGround.name);
-        //ui_chatGround.RegisterCallback<WheelEvent>(OnMouseWheel);
+        UIReader_Main.Instance.RemoveSlider(ui_chatGround);
 
         // member list hidden
         OnOffMemberList();
@@ -304,7 +304,7 @@ public class UIReader_Chatting : MonoBehaviour
                         }
                     }
                     else if (askNode.askType != EAskType.NoAnswer)
-                        GameManager.Instance.chatHumanManager.MinerHP();
+                        UIReader_Main.Instance.MinusHP();
                 }
 
                 // move next human

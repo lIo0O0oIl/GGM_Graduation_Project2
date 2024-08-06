@@ -24,7 +24,6 @@ public class ChatHumanManager : MonoBehaviour
     //public Coroutine chatting;
     public bool isChattingRunning = false;
 
-    public int hp = 3;
 
 
     private void Start()
@@ -58,20 +57,6 @@ public class ChatHumanManager : MonoBehaviour
         {
             if (currentMember.name == chapterMember.name)
                 NextChat();
-        }
-    }
-
-    public void MinerHP()
-    {
-        GameManager.Instance.fileSystem.ui_hpGround
-            .Q<VisualElement>("HP_" + hp).style.display = DisplayStyle.None;
-
-        hp -= 1;
-
-        if (hp <= 0)
-        {
-            IsChat(false);
-            GameManager.Instance.cutSceneSystem.PlayCutScene("BadEnd");
         }
     }
 

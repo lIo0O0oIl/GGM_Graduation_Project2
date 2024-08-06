@@ -59,6 +59,11 @@ public class UIReader_Main : MonoBehaviour
     public float MaxWidth;
     public float MaxHeight;
 
+    public int hp = 3;
+    public Color sliderColor;
+
+
+
     private void Awake()
     {
         Instance = this;
@@ -130,55 +135,10 @@ public class UIReader_Main : MonoBehaviour
         }
     }
 
-/*    public void OpenSetting()
-    {
-        if (isSettingOpen)
-            settingPanel.style.display = DisplayStyle.None;
-        else
-            settingPanel.style.display = DisplayStyle.Flex;
-
-        isSettingOpen = !isSettingOpen;
-    }*/
-
     public VisualElement RemoveContainer(VisualElement visualElement)
     {
         return visualElement[0];
     }
-
-    // 이거 전부 주석처리 되어있음 설아 코드임.
-    //public void OpenPanel(EPanel panelType)
-    //{
-    //    VisualElement panel = null;
-    //    bool isOpen = false;
-
-    //    switch (panelType)
-    //    {
-    //        case EPanel.MAIN:
-    //            panel = mainPanel;
-    //            isOpen = isMainOpen;
-    //            break;
-    //        case EPanel.CUTSCENE:
-    //            panel = cutScenePanel;
-    //            isOpen = isCutSceneOpen;
-    //            break;
-    //        case EPanel.SETTING:
-    //            panel = settingPanel;
-    //            isOpen = isSettingOpen;
-    //            break;
-    //        case EPanel.CONNECTION:
-    //            panel = connectionPanel;
-    //            isOpen = isConnectionOpen;
-    //            break;
-    //    }
-        
-    //    if (isOpen)
-    //        panel.style.display = DisplayStyle.None;
-    //    else
-    //        panel.style.display = DisplayStyle.Flex;
-
-    //    // 이거 어쩔거여 ㅠㅡ
-    //    isOpen = !isOpen;
-    //}
 
     public void OpenCutScene()
     {
@@ -281,7 +241,6 @@ public class UIReader_Main : MonoBehaviour
                     float y = _strength * Mathf.Sin(randomAngle);
 
                     randomOffset = new Vector3(x, y, 0);
-                    //Debug.Log(randomOffset);
                 })
                 .SetLoops(20, LoopType.Restart);
         }
@@ -371,6 +330,51 @@ public class UIReader_Main : MonoBehaviour
                 }
             }
             relationshipHumanList.Add(temp);
+        }
+    }
+
+    public void MinusHP()
+    {
+        GameManager.Instance.fileSystem.ui_hpGround
+            .Q<VisualElement>("HP_" + hp).style.display = DisplayStyle.None;
+
+        hp -= 1;
+
+        if (hp <= 0)
+        {
+            GameManager.Instance.chatHumanManager.IsChat(false);
+            GameManager.Instance.cutSceneSystem.PlayCutScene("BadEnd");
+        }
+    }
+
+    public void RemoveSlider(VisualElement scrollView)
+    {
+        // hidding scrollview slider
+        var verticalScroller = scrollView.Q<Scroller>(className: "unity-scroll-view__vertical-scroller");
+
+        if (verticalScroller != null)
+        {
+            var lowButton = verticalScroller.Q<VisualElement>(className: "unity-scroller__low-button");
+            var highButton = verticalScroller.Q<VisualElement>(className: "unity-scroller__high-button");
+
+            var sliderBG = verticalScroller.Q<VisualElement>(className: "unity-base-slider__tracker");
+            var sliderOL = verticalScroller.Q<VisualElement>(className: "unity-base-slider__dragger-border");
+            var slider = verticalScroller.Q<VisualElement>(className: "unity-base-slider__dragger");
+
+            if (lowButton != null)
+                lowButton.style.display = DisplayStyle.None;
+
+            if (highButton != null)
+                highButton.style.display = DisplayStyle.None;
+
+            if (sliderBG != null)
+                sliderBG.style.display = DisplayStyle.None;
+
+            if (sliderOL != null)
+                sliderOL.style.display = DisplayStyle.None;
+
+            if (slider != null)
+                slider.style.backgroundColor = sliderColor;
         }
     }
 }
