@@ -426,14 +426,12 @@ public class UIReader_FileSystem : MonoBehaviour
 
         if (isFileSystemOpen)
         {
-            Debug.Log("t");
             changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x =>
                 ui_fileSystemArea.style.flexBasis = x, fileAreaSizeOn, during);
             ui_changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOn);
         }
         else
         {
-            Debug.Log("t2refe");
             changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x =>
                 ui_fileSystemArea.style.flexBasis = x, fileAreaSizeOff, during);
             ui_changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOff);

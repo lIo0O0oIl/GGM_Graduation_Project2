@@ -133,8 +133,12 @@ public class UIReader_ImageFinding : MonoBehaviour
                                     }
                                     else
                                     {
-                                        GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, 
-                                            GameManager.Instance.fileManager.FindFile(png.name).fileParentName);
+                                        if (png.saveName != "")
+                                            GameManager.Instance.fileSystem.AddFile(FileType.TEXT, png.saveName,
+                                            GameManager.Instance.fileManager.FindFile(png.saveName).fileParentName);
+                                        else
+                                            GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, 
+                                                GameManager.Instance.fileManager.FindFile(png.name).fileParentName);
                                     }
 
                                     evidence.Q<Button>("EvidenceImage").pickingMode = PickingMode.Ignore;

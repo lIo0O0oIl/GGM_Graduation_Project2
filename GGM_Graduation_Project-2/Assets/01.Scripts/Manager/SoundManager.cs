@@ -38,21 +38,18 @@ public class SoundManager : Singleton<SoundManager>
                 return;
             }
         }
-        //Debug.LogError("배경음악 사운드 이름 잘못부름!");
     }
 
     public void PlaySFX(string name)
     {
-        Debug.Log(name + " : 실행 사운드");
         for (int i = 0; i < effectSounds.Length; i++)
         {
             if (name == effectSounds[i].soundName)
             {
-                audioSourceEffectsPlayers.PlayOneShot(effectSounds[i].clip);        // 소리 한번만 딱 내주는 것.
+                audioSourceEffectsPlayers.PlayOneShot(effectSounds[i].clip); 
                 return;
             }
         }
-        //Debug.LogError("이펙트 사운드 이름 잘못부름!");
     }
 
 

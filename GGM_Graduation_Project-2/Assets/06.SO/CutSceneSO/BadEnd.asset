@@ -15,19 +15,16 @@ MonoBehaviour:
   chapterName: BadEnd
   nextMemberName: 
   cutScenes:
+  - isAnim: 1
+    cut:
+    - {fileID: 21300000, guid: 6a8a428b1de28764488cf89d10d678af, type: 3}
+    - {fileID: 21300000, guid: 52a22924ca99e0643bf8d90308253d82, type: 3}
+    - {fileID: 21300000, guid: 015874a731bdc43498662543c2d3aa46, type: 3}
+    texts: []
   - isAnim: 0
     cut:
-    - {fileID: -826414567, guid: efe0cea9a68bfbd4d98ad36c8c48b3b0, type: 3}
+    - {fileID: 21300000, guid: ee95cff5f40e48a4787b6edef8262c9d, type: 3}
     texts:
-    - sound: 
-      text: "\uC624\uB298 \uC804\uD574\uB4DC\uB9B4 \uC18C\uC2DD\uC740"
-      vibration: 0
-    - sound: 
-      text: "\uBA4D\uCCAD\uD55C \uACBD\uCC30\uC774 \uC870\uC0AC\uC5D0 \uC2E4\uD328\uD574"
-      vibration: 0
-    - sound: 
-      text: "\uC5D4\uB529\uC744 \uBABB \uBCF4\uACE0 \uB05D\uB0AC\uB2E4\uB294 \uC18C\uC2DD\uC785\uB2C8\uB2E4."
-      vibration: 0
-    - sound: 
-      text: "\uC774\uC0C1\uC785\uB2C8\uB2E4 \u314B"
+    - sound: chizizic
+      text: 
       vibration: 0

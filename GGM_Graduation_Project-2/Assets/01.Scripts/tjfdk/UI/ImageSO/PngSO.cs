@@ -11,6 +11,7 @@ public class PngSO : ScriptableObject
 
     public string memo;
     public bool importance;
+    public string saveName;
     public Sprite saveSprite;
     public Vector2 size;
     public Vector2 pos;
