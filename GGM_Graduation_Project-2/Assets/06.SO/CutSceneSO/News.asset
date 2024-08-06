@@ -20,11 +20,35 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 6a8a428b1de28764488cf89d10d678af, type: 3}
     - {fileID: 21300000, guid: 52a22924ca99e0643bf8d90308253d82, type: 3}
     - {fileID: 21300000, guid: 015874a731bdc43498662543c2d3aa46, type: 3}
-    texts: []
+    texts:
+    - sound: chizizic
+      text: 
+      vibration: 0
   - isAnim: 0
     cut:
     - {fileID: 21300000, guid: ee95cff5f40e48a4787b6edef8262c9d, type: 3}
     texts:
-    - sound: chizizic
-      text: 
+    - sound: 
+      text: "\uC804\uC5D0 \uC804\uD574\uB4DC\uB838\uB358 \uC5EC\uACE0\uC0DD \uC790\uC0B4
+        \uC0AC\uAC74\uC758 \uC9C4\uC0C1\uC774 \uBC1D\uD600\uC84C\uC2B5\uB2C8\uB2E4."
+      vibration: 0
+    - sound: 
+      text: "\uCD5C\uADFC \uC870\uC0AC \uACB0\uACFC, \uC0AC\uAC74\uC774 \uB2E8\uC21C
+        \uC790\uC0B4\uC774 \uC544\uB2C8\uB77C"
+      vibration: 0
+    - sound: 
+      text: "\uAD50\uAC10\uC758 \uBE44\uB9AC \uC740\uD3D0\uC640 \uAE4A\uC774 \uC5F0\uAD00\uB418\uC5B4
+        \uC788\uC5C8\uB358 \uAC83\uC73C\uB85C \uB4DC\uB7EC\uB0AC\uC2B5\uB2C8\uB2E4."
+      vibration: 0
+    - sound: 
+      text: "\uC870\uC0AC \uACFC\uC815\uC5D0\uC11C \uAD50\uAC10\uC774 \uD589\uC815\uC2E4\uACFC
+        \uACF5\uBAA8\uD558\uC5EC \uD559\uAD50 \uC608\uC0B0\uC744 \uD6A1\uB839\uD558\uAE30
+        \uC704\uD574"
+      vibration: 0
+    - sound: 
+      text: "\uC625\uC0C1 \uB09C\uAC04\uC744 \uACE0\uC758\uB85C \uB0AE\uAC8C \uC124\uCE58\uD55C
+        \uC0AC\uC2E4\uB3C4 \uD655\uC778\uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+      vibration: 0
+    - sound: 
+      text: "\uC790\uC138\uD55C \uC18C\uC2DD \uC804\uD574\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4\u22EF  "
       vibration: 0
