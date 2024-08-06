@@ -18,6 +18,7 @@ public class CutSceneManager : MonoBehaviour
 
     [Header("Value")]
     [SerializeField] private float textSpeed;
+    [SerializeField] private float animSpeed;
 
     private void Awake()
     {
@@ -37,10 +38,12 @@ public class CutSceneManager : MonoBehaviour
     public void CutScene(string name)
     {
         currentCutScene = FindCutScene(name);
+
         currentCutNum = 0;
         currentTextNum = 0;
 
-        GameManager.Instance.cutSceneSystem.ChangeCut(false, currentCutScene.cutScenes[0].cut);
+        GameManager.Instance.cutSceneSystem.ChangeCut(currentCutScene.cutScenes[currentCutNum].isAnim,
+            animSpeed, currentCutScene.cutScenes[currentCutNum].cut);
         Next();
     }
 
@@ -75,7 +78,7 @@ public class CutSceneManager : MonoBehaviour
                 else
                 {
                     GameManager.Instance.cutSceneSystem.ChangeCut(currentCutScene.cutScenes[currentCutNum].isAnim,
-                        currentCutScene.cutScenes[currentCutNum].cut);
+                        animSpeed, currentCutScene.cutScenes[currentCutNum].cut);
                 }
             }
             if (currentCutScene.cutScenes[currentCutNum].texts.Count > currentTextNum)

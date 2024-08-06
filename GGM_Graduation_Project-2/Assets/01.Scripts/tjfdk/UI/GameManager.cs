@@ -38,6 +38,12 @@ public class GameManager : Singleton<GameManager>
             if (UIReader_Main.Instance.hp < 3)
                 UIReader_Main.Instance.hp++;
         }
+
+        if (Input.GetKey(KeyCode.U))
+            chatHumanManager.NextChat();
+
+        if (Input.GetKeyDown(KeyCode.I))
+            UIReader_Main.Instance.MinusHP();
     }
 
     public void GameStart()
