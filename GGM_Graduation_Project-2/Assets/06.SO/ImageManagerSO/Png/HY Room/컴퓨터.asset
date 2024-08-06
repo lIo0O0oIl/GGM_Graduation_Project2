@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54335cf8256e184b9b22df8faf96846, type: 3}
+  m_Name: "\uCEF4\uD4E8\uD130"
+  m_EditorClassIdentifier: 
+  name: "\uCEF4\uD4E8\uD130"
+  image: {fileID: 21300000, guid: e7502d889cb3d1543b3d96db99b32410, type: 3}
+  isOpen: 0
+  memo: "\uC911\uC694\uD55C \uD3F4\uB354\uAC00 \uB4E4\uC5B4\uAC00 \uC788\uB294 \uCEF4\uD4E8\uD130\uC774\uB2E4"
+  importance: 0
+  saveSprite: {fileID: 21300000, guid: d3b555cf975a5e2478214d27a348fd20, type: 3}
+  size: {x: 209, y: 239}
+  pos: {x: 489, y: 164}
+  memoPos: {x: 1174, y: 210}
