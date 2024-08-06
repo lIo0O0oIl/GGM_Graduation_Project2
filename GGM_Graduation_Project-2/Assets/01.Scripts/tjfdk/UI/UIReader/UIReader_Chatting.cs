@@ -114,7 +114,7 @@ public class UIReader_Chatting : MonoBehaviour
     {
         // scrollview find, and wheel speed setting
         ui_chatGround = ui_chatGround.Q<ScrollView>(ui_chatGround.name);
-        //ui_chatGround.RegisterCallback<WheelEvent>(OnMouseWheel);
+        UIReader_Main.Instance.RemoveSlider(ui_chatGround);
 
         // member list hidden
         OnOffMemberList();
@@ -186,10 +186,7 @@ public class UIReader_Chatting : MonoBehaviour
                 chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
                 chat.name = "chat";
                 if (isQuestion)
-                {
-                    Debug.Log(text + " : 질문이엇던 것");
                     chat.AddToClassList("Question");
-                }
                 EventChatText(chat, text);
                 break;
             case EChatType.Image:
@@ -257,13 +254,13 @@ public class UIReader_Chatting : MonoBehaviour
     // input question
     public void InputQuestion(string toWho, bool isLock, AskNode askNode, bool isRecord = false)
     {
-        Debug.Log(askNode.askText + "  : 현재 질문");
         // create chat
         VisualElement chat = null;
         // find member
         MemberProfile member = FindMember(toWho.ToString());
         // chat type
         EChatType type = EChatType.Text;
+
         if (!isLock)
         {
             // create uxml
@@ -293,18 +290,17 @@ public class UIReader_Chatting : MonoBehaviour
 
                 if (askNode.askType != EAskType.Common)
                 {
-                    if (askNode.askType != EAskType.Answer)
+                    if (askNode.askType == EAskType.Answer)
                     {
                         ChatNode parent = askNode.parent as ChatNode;
                         foreach (AskNode ask1 in parent.childList)
                         {
                             ask1.is_readThis = true;
                             ask1.is_UseThis = true;
-                            // 될지 안 될지 모름... 정답을 햇다! 하면 나머지 질문들도 true 주는건데 all question도 true 주ㅓ야 하나... 테스트 안 해봄
                         }
                     }
-                    else if (askNode.askType != EAskType.NoAnswer)
-                        GameManager.Instance.chatHumanManager.MinerHP();
+                    else if (askNode.askType == EAskType.NoAnswer)
+                        UIReader_Main.Instance.MinusHP();
                 }
 
                 // move next human
@@ -316,7 +312,6 @@ public class UIReader_Chatting : MonoBehaviour
                     GameManager.Instance.chatHumanManager.IsChat(false);
 
                     AddMember(askNode.LoadNextDialog);
-                    // 얘 날려ㄹㄴㅇ헏졈누ㄸ좈ㅇ픚ㄱㄴㅍㅋ
                     ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
 
                     if (askNode.askText == "*(돌아가자)*")
@@ -370,7 +365,6 @@ public class UIReader_Chatting : MonoBehaviour
                 }
 
                 // chatting start
-                Debug.Log(" 여기다!");
                 GameManager.Instance.chatHumanManager.IsChat(true);
 
                 // question
@@ -383,8 +377,6 @@ public class UIReader_Chatting : MonoBehaviour
             chat = UIReader_Main.Instance.RemoveContainer(ux_hiddenAskChat.Instantiate());
             // chat name setting
             chat.name = askNode.askText;
-            // question
-            //type = EChatType.LockQuestion;
         }
 
         // record
