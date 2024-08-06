@@ -165,7 +165,6 @@ public class UIReader_Main : MonoBehaviour
 
         ui.text = "";
 
-        Debug.Log(during + " : 입력 속도/...");
         currentTextTween = DOTween.To(() => currentTextLength, x => currentTextLength = x, text.Length, during)
             .SetEase(Ease.Linear)
             .OnPlay(() => 

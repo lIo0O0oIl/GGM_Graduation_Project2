@@ -698,13 +698,14 @@ MonoBehaviour:
   currentCutNum: 0
   currentTextNum: 0
   cutScenes:
-  - {fileID: 11400000, guid: cf94b55add86ed54eaed692631fc2a24, type: 2}
+  - {fileID: 11400000, guid: fe1f2115b53952d4a9e485f229a3fab5, type: 2}
   - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
   - {fileID: 11400000, guid: 335d08ef8de5db444a3f680faa41a6d0, type: 2}
   - {fileID: 11400000, guid: 7bff4bdc7c660cd429ac7ca7f43efd7e, type: 2}
   - {fileID: 11400000, guid: 87dc921c4534c8c459653291977005e7, type: 2}
   - {fileID: 11400000, guid: 8867d427f3bcade47a447a1766521e38, type: 2}
   textSpeed: 0.25
+  animSpeed: 0.5
 --- !u!114 &1857801312
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,10 +25,10 @@ public class UIReader_CutScene : MonoBehaviour
         UIReader_Main.Instance.OpenCutScene();
     }
 
-    public void ChangeCut(bool isAnim, Sprite[] cuts)
+    public void ChangeCut(bool isAnim, float during, Sprite[] cuts)
     {
         if (isAnim)
-            StartCoroutine(CutAnimation(cuts));
+            StartCoroutine(CutAnimation(during, cuts));
         else
             scene.style.backgroundImage = new StyleBackground(cuts[0]);
     }
@@ -43,12 +43,12 @@ public class UIReader_CutScene : MonoBehaviour
         UIReader_Main.Instance.EndText();
     }
 
-    IEnumerator CutAnimation(Sprite[] cuts)
+    IEnumerator CutAnimation(float during, Sprite[] cuts)
     {
         foreach (Sprite cut in cuts)
         {
             scene.style.backgroundImage = new StyleBackground(cut);
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(during);
         }
     }
 }
