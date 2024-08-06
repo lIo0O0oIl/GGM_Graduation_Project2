@@ -37,7 +37,8 @@ public class UIReader_SettingScene : MonoBehaviour
         bgm = root.Q<Slider>("SliderBGM");
         sfx = root.Q<Slider>("SliderSFX");
         wheel = root.Q<Slider>("SliderTextSpeed");
-        root.Q<Button>("SettingCloseBtn").clicked += () => { root.Q<VisualElement>("Setting").style.display = DisplayStyle.None; };
+        //root.Q<Button>("SettingCloseBtn").clicked += () => { root.Q<VisualElement>("Setting").style.display = DisplayStyle.None; };
+        root.Q<Button>("CloseBtn").clicked += () => { root.Q<VisualElement>("Setting").style.display = DisplayStyle.None; };
 
         master.RegisterValueChangedCallback(OnMasterChange);
         bgm.RegisterValueChangedCallback(OnBGMChange);
