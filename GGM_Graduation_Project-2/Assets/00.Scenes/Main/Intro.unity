@@ -1670,6 +1670,24 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4ad8345aa88cc464b98bad6508fe7a4f, type: 3}
   - soundName: typing
     clip: {fileID: 8300000, guid: 69785c176c52d214d82cebd4bf8dafb6, type: 3}
+  - soundName: minusHP
+    clip: {fileID: 8300000, guid: de47e476cc69e2849818d343be6e2118, type: 3}
+  - soundName: vibration
+    clip: {fileID: 8300000, guid: 96bb18ee853afa64eae9891472ecfe17, type: 3}
+  - soundName: milkPack
+    clip: {fileID: 8300000, guid: b11c728cd5522a64aa61b73d68ad002f, type: 3}
+  - soundName: Laughing
+    clip: {fileID: 8300000, guid: 985df6d50778b1e4086d8b288803103e, type: 3}
+  - soundName: heartBit
+    clip: {fileID: 8300000, guid: d662d0d9cead0a547966af66fe95e93b, type: 3}
+  - soundName: sigh
+    clip: {fileID: 8300000, guid: 83d9a30b01505204e8f4dd4ce47d8bd2, type: 3}
+  - soundName: wind
+    clip: {fileID: 8300000, guid: 4eaf5929d9372534eb98e06dec0b0430, type: 3}
+  - soundName: chizizic
+    clip: {fileID: 8300000, guid: 2af9804579044fa41911da13ec01de76, type: 3}
+  - soundName: video
+    clip: {fileID: 8300000, guid: 03d07ab42637beb42863eebf7c1175b1, type: 3}
   audioSourceBgmPlayers: {fileID: 1318594009}
   audioSourceEffectsPlayers: {fileID: 1318594010}
 --- !u!82 &1318594009

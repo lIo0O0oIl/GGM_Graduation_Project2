@@ -12,6 +12,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3058b5b5e71149549b1773c6fa0b9cae, type: 3}
   m_Name: Suicide
   m_EditorClassIdentifier: 
-  chapterName: 
-  nextMemberName: 
-  cutScenes: []
+  chapterName: Suicide
+  nextMemberName: HS
+  cutScenes:
+  - isAnim: 0
+    cut:
+    - {fileID: 21300000, guid: dbd8b2859af53a645b962fdd3c49f079, type: 3}
+    texts:
+    - sound: vibration
+      text: ...
+      vibration: 0
+  - isAnim: 1
+    cut:
+    - {fileID: 21300000, guid: a626f25676297394ab34b89d36d480ed, type: 3}
+    - {fileID: 21300000, guid: 9d18f30faea76b64da1f70092f0fff1b, type: 3}
+    - {fileID: 21300000, guid: 2401af68b20955c46ad7ef5e2494ea78, type: 3}
+    texts:
+    - sound: milkPack
+      text: ......
+      vibration: 0
+    - sound: Laughing
+      text: 
+      vibration: 0
+  - isAnim: 0
+    cut:
+    - {fileID: 21300000, guid: 1d2fb0aac4ee2e94ca1ea50c0ce20ba7, type: 3}
+    texts:
+    - sound: heartBit
+      text: 
+      vibration: 0
+  - isAnim: 0
+    cut:
+    - {fileID: 21300000, guid: 99e9abdc51ac43646b44b6a3b1f7b96c, type: 3}
+    texts:
+    - sound: sigh
+      text: 
+      vibration: 0
+  - isAnim: 0
+    cut:
+    - {fileID: 21300000, guid: f438efb2e8e04954087ac0fadd163db3, type: 3}
+    texts:
+    - sound: wind
+      text: 
+      vibration: 0
+  - isAnim: 0
+    cut:
+    - {fileID: 21300000, guid: 99e9abdc51ac43646b44b6a3b1f7b96c, type: 3}
+    texts:
+    - sound: bomb
+      text: 
+      vibration: 0

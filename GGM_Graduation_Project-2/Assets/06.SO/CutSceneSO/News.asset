@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3058b5b5e71149549b1773c6fa0b9cae, type: 3}
+  m_Name: News
+  m_EditorClassIdentifier: 
+  chapterName: News
+  nextMemberName: 
+  cutScenes:
+  - isAnim: 1
+    cut:
+    - {fileID: 21300000, guid: 6a8a428b1de28764488cf89d10d678af, type: 3}
+    - {fileID: 21300000, guid: 52a22924ca99e0643bf8d90308253d82, type: 3}
+    - {fileID: 21300000, guid: 015874a731bdc43498662543c2d3aa46, type: 3}
+    texts: []
+  - isAnim: 0
+    cut:
+    - {fileID: 21300000, guid: ee95cff5f40e48a4787b6edef8262c9d, type: 3}
+    texts:
+    - sound: chizizic
+      text: 
+      vibration: 0

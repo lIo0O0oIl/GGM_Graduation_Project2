@@ -24,8 +24,6 @@ public class UIReader_Main : MonoBehaviour
 
     // UXML
     // Button
-    //public Button playButton;
-    //public Button ExitButton;
     public Button chattingButton;
     public Button connectionButton;
     public Button settingButton;
@@ -39,15 +37,8 @@ public class UIReader_Main : MonoBehaviour
     private VisualElement settingPanel;
     private VisualElement quitPanel;
 
-    //public bool isMainOpen;
     public bool isCutSceneOpen;
-    //public bool isSettingOpen;
     public bool isRelationshipOpen;
-
-    //protected VisualElement previousPanel;
-    //protected VisualElement chattingPanel;
-    //protected VisualElement imageFindingPanel;
-    //private List<VisualElement> panels = new List<VisualElement>();
 
     public Tween currentTextTween;
     public string currentText;
@@ -342,6 +333,8 @@ public class UIReader_Main : MonoBehaviour
             .Q<VisualElement>("HP_" + hp).style.display = DisplayStyle.None;
 
         hp -= 1;
+
+        SoundManager.Instance.PlaySFX("minusHP");
 
         if (hp <= 0)
         {
