@@ -32,6 +32,7 @@ public class UIReader_Main : MonoBehaviour
 
     // Panel
     private VisualElement mainPanel;
+    private VisualElement filePanel;
     private VisualElement cutScenePanel;
     private VisualElement gamePanel;
     private VisualElement RelationshipPanel;
@@ -79,8 +80,8 @@ public class UIReader_Main : MonoBehaviour
     {
         // Panel
         mainPanel = root.Q<VisualElement>("MainGame");      // 컷 씬에서 사용함.
+        filePanel = root.Q<VisualElement>("FileSystem");
         cutScenePanel = root.Q<VisualElement>("CutScene");
-
         gamePanel = root.Q<VisualElement>("MainSystem");
         RelationshipPanel = root.Q<VisualElement>("RelationshipSystem");
         settingPanel = root.Q<VisualElement>("Setting");
@@ -125,11 +126,13 @@ public class UIReader_Main : MonoBehaviour
         switch (panelType)
         {
             case EPanel.MAIN:
+                filePanel.style.display = DisplayStyle.Flex;
                 gamePanel.style.display = DisplayStyle.Flex;
                 StartCoroutine(GameManager.Instance.chatSystem.EndToScroll(0.05f));
                 break;
             case EPanel.RELATIONSHIP:
                 isRelationshipOpen = true;
+                filePanel.style.display = DisplayStyle.None;
                 RelationshipPanel.style.display = DisplayStyle.Flex;
                 break;
         }
