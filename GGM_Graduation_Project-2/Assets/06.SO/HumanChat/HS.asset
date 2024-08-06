@@ -1406,8 +1406,9 @@ MonoBehaviour:
   type: 0
   chatText: "\uC774\uB9CC \uAC00\uBCF4\uACA0\uC2B5\uB2C8\uB2E4!"
   face: 0
-  loadFileName: []
-  textEvent: 
+  loadFileName:
+  - "\uAD50\uAC10 \uB300\uD6541"
+  textEvent: 04000000
   LoadNextDialog: 
 --- !u!114 &-5488866233987227402
 MonoBehaviour:
@@ -2777,8 +2778,9 @@ MonoBehaviour:
   type: 0
   chatText: "... \uB124"
   face: 0
-  loadFileName: []
-  textEvent: 
+  loadFileName:
+  - "\uAD50\uAC10 \uB300\uD6543"
+  textEvent: 04000000
   LoadNextDialog: 
 --- !u!114 &-1999013498274517208
 MonoBehaviour:
@@ -6143,8 +6145,9 @@ MonoBehaviour:
   type: 0
   chatText: "(\uC774 \uC815\uB3C4\uBA74 \uB41C \uAC70 \uAC19\uB2E4...)"
   face: 0
-  loadFileName: []
-  textEvent: 
+  loadFileName:
+  - "\uAD50\uAC10 \uB300\uD6542"
+  textEvent: 04000000
   LoadNextDialog: 
 --- !u!114 &7251086964859393823
 MonoBehaviour:
