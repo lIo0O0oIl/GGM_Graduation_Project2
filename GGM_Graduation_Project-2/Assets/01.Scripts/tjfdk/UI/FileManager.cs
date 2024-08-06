@@ -35,18 +35,6 @@ public class FileManager : MonoBehaviour
 
     public FileSO FindFile(string name) 
     {
-        //foreach (var f in folderFileList.Values)
-        //    Debug.Log(f.fileName + " " + name);
-
-        //FileSO file = folderFileList[name];
-        //if (file != null)
-        //    return file;
-        //else
-        //    return null;
-
-        ////return folderFileList[name]; 
-        ///
-
         foreach (FileSO file in folderFiles)
         {
             if (file.fileName == name)
