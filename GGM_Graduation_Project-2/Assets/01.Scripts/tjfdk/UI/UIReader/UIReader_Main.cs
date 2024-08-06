@@ -165,6 +165,7 @@ public class UIReader_Main : MonoBehaviour
 
         ui.text = "";
 
+        Debug.Log(during + " : 입력 속도/...");
         currentTextTween = DOTween.To(() => currentTextLength, x => currentTextLength = x, text.Length, during)
             .SetEase(Ease.Linear)
             .OnPlay(() => 
@@ -184,10 +185,14 @@ public class UIReader_Main : MonoBehaviour
             {
                 action();
 
+                if (currentUiTween != null)
+                    currentUiTween.Kill();
+
                 SoundManager.Instance.StopSFX();
 
                 if (isErase)
                     ui.text = "";
+
                 currentTextLength = 0;
             });
 
@@ -200,29 +205,28 @@ public class UIReader_Main : MonoBehaviour
             Vector3 originalPosition = ui.transform.position;
             Vector3 randomOffset = Vector3.zero;
             float elapsed = 0f;
-            float _duration = 0.5f;
-            float _strength = 30;
+            float duration = 1f;
+            float strength = 40;
 
-            currentUiTween = DOTween.To(() => elapsed, x => elapsed = x, 1f, 0.03f)
+            currentUiTween = DOTween.To(() => elapsed, x => elapsed = x, 1f, 0.25f)
                 .OnStart(() =>
                 {
                     float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
-                    float x = _strength * Mathf.Cos(randomAngle);
-                    float y = _strength * Mathf.Sin(randomAngle);
+                    float x = strength * Mathf.Cos(randomAngle);
+                    float y = strength * Mathf.Sin(randomAngle);
 
                     randomOffset = new Vector3(x, y, 0);
-                    Debug.Log(randomOffset);
                 })
                 .OnUpdate(() =>
                 {
                     Vector3 movePos = Vector3.zero;
-                    if (elapsed < (_duration / 2))       // 밖으로 나가는 중
+                    if (elapsed < (duration / 2))       // 밖으로 나가는 중
                     {
-                        movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / _duration);
+                        movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / duration);
                     }
                     else
                     {
-                        movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / _duration);
+                        movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / duration);
                     }
                     ui.transform.position = movePos;
                 })
@@ -231,12 +235,59 @@ public class UIReader_Main : MonoBehaviour
                     ui.transform.position = originalPosition;
 
                     float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
-                    float x = _strength * Mathf.Cos(randomAngle);
-                    float y = _strength * Mathf.Sin(randomAngle);
+                    float x = strength * Mathf.Cos(randomAngle);
+                    float y = strength * Mathf.Sin(randomAngle);
 
                     randomOffset = new Vector3(x, y, 0);
                 })
-                .SetLoops(20, LoopType.Restart);
+                .SetLoops(-1, LoopType.Restart);
+            return;
+
+            //Vector3 originalPosition = ui.transform.position;
+            //Vector3 randomOffset = Vector3.zero;
+            //float elapsed = 0f;
+            //float _duration = 0.5f;
+            //float _strength = 30;
+
+            //currentUiTween = DOTween.To(() => elapsed, x => elapsed = x, 1f, 0.03f)
+            //    .OnStart(() =>
+            //    {
+            //        float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+            //        float x = _strength * Mathf.Cos(randomAngle);
+            //        float y = _strength * Mathf.Sin(randomAngle);
+
+            //        randomOffset = new Vector3(x, y, 0);
+            //        Debug.Log(randomOffset);
+            //    })
+            //    .OnUpdate(() =>
+            //    {
+            //        Vector3 movePos = Vector3.zero;
+            //        if (elapsed < (_duration / 2))       // 밖으로 나가는 중
+            //        {
+            //            movePos = Vector3.Lerp(originalPosition, randomOffset, elapsed / _duration);
+            //        }
+            //        else
+            //        {
+            //            movePos = Vector3.Lerp(randomOffset, originalPosition, elapsed / _duration);
+            //        }
+            //        ui.transform.position = movePos;
+            //    })
+            //    .OnStepComplete(() =>
+            //    {
+            //        ui.transform.position = originalPosition;
+
+            //        float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+            //        float x = _strength * Mathf.Cos(randomAngle);
+            //        float y = _strength * Mathf.Sin(randomAngle);
+
+            //        randomOffset = new Vector3(x, y, 0);
+            //    })
+            //    .SetLoops(20, LoopType.Restart);
+        }
+        else
+        {
+            if (currentUiTween != null)
+                currentUiTween.Kill();
         }
     }
 
@@ -245,6 +296,7 @@ public class UIReader_Main : MonoBehaviour
         if (currentTextTween != null)
         {
             currentTextTween.Kill();
+            currentUiTween.Kill();
             currentTextUi.text = currentText;
             GameManager.Instance.cutSceneManager.currentTextNum++;
         }

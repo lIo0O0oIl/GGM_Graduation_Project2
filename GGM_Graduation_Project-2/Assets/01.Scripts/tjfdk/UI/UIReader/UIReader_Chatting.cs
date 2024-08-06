@@ -682,17 +682,6 @@ public class UIReader_Chatting : MonoBehaviour
     // scroll pos setting
     void OnMouseWheel(WheelEvent evt)
     {
-        //// working progress is stop
-        //evt.StopPropagation();
-
-        //// multitly scroll speed to current delta value
-        //float delta = evt.delta.y * wheelSpeed;
-
-        //// scroll pos setting
-        //ui_chatGround.scrollOffset += new Vector2(0, delta);
-
-
-
         if (isMouseOverButton)
         {
             // 마우스 휠 이벤트에 따라 ScrollView를 스크롤합니다.

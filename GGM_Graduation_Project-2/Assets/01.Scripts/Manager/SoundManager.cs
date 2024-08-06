@@ -43,6 +43,7 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlaySFX(string name)
     {
+        Debug.Log(name + " : 실행 사운드");
         for (int i = 0; i < effectSounds.Length; i++)
         {
             if (name == effectSounds[i].soundName)

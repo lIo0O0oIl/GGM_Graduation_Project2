@@ -16,6 +16,9 @@ public class CutSceneManager : MonoBehaviour
     [Header("Data")]
     [SerializeField] private List<CutSceneSO> cutScenes = new List<CutSceneSO>();
 
+    [Header("Value")]
+    [SerializeField] private float textSpeed;
+
     private void Awake()
     {
         Instance = this;
@@ -52,7 +55,6 @@ public class CutSceneManager : MonoBehaviour
 
                 if (currentCutScene.cutScenes.Count <= currentCutNum)
                 {
-
                     if (currentCutScene.nextMemberName != "")
                     {
                         GameManager.Instance.chatSystem.ChoiceMember
@@ -85,19 +87,25 @@ public class CutSceneManager : MonoBehaviour
                     else
                     {
                         CutSceneText msg = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum];
-                        if (msg.sound != "")
-                            GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound, msg.vibration);
-                        else
-                            GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, "", msg.vibration);
+
+                        //if (msg.sound != "")
+                            GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length * textSpeed, 
+                                () => { currentTextNum++; }, msg.sound, msg.vibration);
+                        //else
+                        //    GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / msg.text.Length * 0.5f, 
+                        //        () => { currentTextNum++; }, "", msg.vibration);
                     }
                 }
                 else
                 {
                     CutSceneText msg = currentCutScene.cutScenes[currentCutNum].texts[currentTextNum];
-                    if (msg.sound != "")
-                        GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, msg.sound, msg.vibration);
-                    else
-                        GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / 2, () => { currentTextNum++; }, "", msg.vibration);
+
+                    //if (msg.sound != "")
+                        GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length * textSpeed, 
+                            () => { currentTextNum++; }, msg.sound, msg.vibration);
+                    //else
+                    //    GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / msg.text.Length * 0.5f, 
+                    //        () => { currentTextNum++; }, "", msg.vibration);
                 }
             }
         }
