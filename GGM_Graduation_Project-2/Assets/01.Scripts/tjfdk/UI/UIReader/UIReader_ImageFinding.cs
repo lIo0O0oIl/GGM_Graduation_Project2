@@ -19,6 +19,7 @@ public class UIReader_ImageFinding : MonoBehaviour
     // UXML
     VisualElement ui_imageGround;
     VisualElement ui_panelGround;
+    VisualElement ui_description;
 
 
 
@@ -80,6 +81,9 @@ public class UIReader_ImageFinding : MonoBehaviour
                 VisualElement imagePanel = UIReader_Main.Instance.RemoveContainer(ux_imageGround.Instantiate());
                 imagePanel.Q<VisualElement>("ImageGround").style.backgroundImage = new StyleBackground(image.image);
 
+                imagePanel.Q<Button>("ImageGround").clicked += () => 
+                    { if (ui_description != null) ui_description.parent.Remove(ui_description); ui_description = null; };
+
                 imagePanel.Q<Button>("ImageExitBtn").clicked += (() =>
                 {
                     // fileSystem size change button on
@@ -124,7 +128,6 @@ public class UIReader_ImageFinding : MonoBehaviour
                                     TextSO text = GameManager.Instance.imageManager.FindText(evid);
                                     if (text != null)
                                     {
-                                        //Debug.Log(text.name + " " + image.name);
                                         GameManager.Instance.fileSystem.AddFile(FileType.TEXT, text.name,
                                             GameManager.Instance.fileManager.FindFile(text.name).fileParentName);
                                     }
@@ -140,19 +143,35 @@ public class UIReader_ImageFinding : MonoBehaviour
                             else
                             {
                                 evidence = UIReader_Main.Instance.RemoveContainer(ux_imageEvidence.Instantiate());
+
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
                                 evidence.Q<Button>("EvidenceImage").clicked += (() =>
                                 {
-                                    for (int i = imagePanel.Q<VisualElement>("ImageGround").childCount - 1; i >= 0; i--)
+                                    // remove description
+                                    //for (int i = imagePanel.Q<VisualElement>("ImageGround").childCount - 1; i >= 0; i--)
+                                    //{
+                                    //    if (imagePanel.Q<Button>("ImageGround").Children().ElementAt(i).name == "descriptionLabel")
+                                    //        imagePanel.Q<Button>("ImageGround").RemoveAt(i);
+                                    //}
+                                    // when description is not null
+                                    if (ui_description != null)
                                     {
-                                        if (imagePanel.Q<VisualElement>("ImageGround").Children().ElementAt(i).name == "descriptionLabel")
-                                            imagePanel.Q<VisualElement>("ImageGround").RemoveAt(i);
+                                        ui_description.parent.Remove(ui_description);
+                                        ui_description = null;
                                     }
-                                    VisualElement evidenceDescription = UIReader_Main.Instance.RemoveContainer(ux_evidenceExplanation.Instantiate());
-                                    evidenceDescription.name = "descriptionLabel";
-                                    imagePanel.Q<VisualElement>("ImageGround").Add(evidenceDescription);
-                                    UIReader_Main.Instance.DoText(evidenceDescription.Q<Label>("Text"), png.memo, 2f, false,
-                                        () => { /*imagePanel.Q<VisualElement>("ImageGround").Remove(evidenceDescription);*/ }, "", false);
+
+                                    // add description
+                                    // create description
+                                    VisualElement description 
+                                        = UIReader_Main.Instance.RemoveContainer(ux_evidenceExplanation.Instantiate());
+                                    // save description
+                                    ui_description = description;
+                                    // attach to imageGround
+                                    imagePanel.Q<Button>("ImageGround").Add(description);
+                                    // input description text
+                                    UIReader_Main.Instance.DoText(description.Q<Label>("Text"), png.memo, 2f, false,
+                                        () => {  }, "", false);
+                                    // check condition
                                     GameManager.Instance.fileManager.UnlockChat(png.name);
                                 });
                             }
@@ -161,7 +180,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                             evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
                             evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
                             evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
-                            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
+                            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;  
                             imagePanel.Q<VisualElement>("ImageGround").Add(evidence);
                         }
                     }
