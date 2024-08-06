@@ -69,21 +69,6 @@
     -unity-background-image-tint-color: rgba(255, 255, 255, 0.49);
 }
 
-:hover > #EvidenceImage {
-    border-left-width: 4px;
-    border-right-width: 4px;
-    border-top-width: 4px;
-    border-bottom-width: 4px;
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-}
-
 :hover > #ChattingBtn {
     transition-property: scale;
     transition-duration: 0.1s;
