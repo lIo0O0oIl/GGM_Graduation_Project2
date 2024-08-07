@@ -46,7 +46,6 @@ public class UIReader_MenuScene : MonoBehaviour
 
     public void OpenSetting()
     {
-        Debug.Log(isSettingOpen);
         if (isSettingOpen)
         {
             menuUI.enabled = false;

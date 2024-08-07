@@ -326,7 +326,6 @@ public class UIReader_Chatting : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("시발");
                     GameManager.Instance.chatHumanManager.currentNode = askNode;
                 }
 
@@ -657,9 +656,6 @@ public class UIReader_Chatting : MonoBehaviour
                 break;
             case EChatType.Question:
                 {
-                    Debug.Log("질문으로 들어옴");
-                    //Quesion
-
                 }
                 break;
         }
