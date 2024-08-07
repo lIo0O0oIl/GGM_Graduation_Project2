@@ -181,7 +181,7 @@ MonoBehaviour:
   guid: f2a5b0cf023d72e47b35195be22375e3
   position: {x: 1682.6039, y: 118.399994}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   is_readThis: 0
   parent: {fileID: -2656283217338904788}
   child: {fileID: 3491579369062142367}
@@ -295,7 +295,7 @@ MonoBehaviour:
   chatText: "\uD611\uC870\uD574 \uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
   face: 0
   loadFileName:
-  - "#1 \uB2F4\uC784 \uC120\uC0DD\uB2D8\uC758 \uC99D\uC5B8"
+  - "#1\uB2F4\uC784 \uC99D\uC5B8"
   textEvent: 04000000
   LoadNextDialog: 
 --- !u!114 &-4042609090963150104
@@ -341,7 +341,7 @@ MonoBehaviour:
   guid: 4eca7eddef9487f45b85f03a64d5c117
   position: {x: 3042.3994, y: 1085.5997}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   is_readThis: 0
   parent: {fileID: -4309996588586065549}
   child: {fileID: 0}
@@ -669,7 +669,7 @@ MonoBehaviour:
   guid: 0b8e9c3cb3293c94192293225c3f0d73
   position: {x: 2084.2036, y: 107.19999}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   is_readThis: 0
   parent: {fileID: -2656283217338904788}
   child: {fileID: -3204427216564470436}
@@ -939,7 +939,7 @@ MonoBehaviour:
   guid: c809c2c96f6d9ae4aba4aa8b577ecd2f
   position: {x: 2480.2039, y: 103.99999}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   is_readThis: 0
   parent: {fileID: -2656283217338904788}
   child: {fileID: -2400111015168597003}
@@ -1211,7 +1211,7 @@ MonoBehaviour:
   guid: c1df6291f71116f4d956ecd8117c6c97
   position: {x: 2963.2, y: -25.600037}
   index: 0
-  is_UseThis: 1
+  is_UseThis: 0
   is_readThis: 0
   parentList:
   - {fileID: 39648675074212568}

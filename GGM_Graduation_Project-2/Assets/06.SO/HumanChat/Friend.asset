@@ -327,7 +327,7 @@ MonoBehaviour:
   chatText: "\uB124 \uC548\uB155\uD788 \uACC4\uC138\uC694!"
   face: 0
   loadFileName:
-  - "#1 \uAC19\uC740 \uBC18 \uD559\uC0DD\uB4E4\uC758 \uC99D\uC5B8"
+  - "#1\uD559\uC0DD\uB4E4 \uC99D\uC5B8"
   textEvent: 04000000
   LoadNextDialog: 
 --- !u!114 &-6608545764354350578
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Name: Friend
   m_EditorClassIdentifier: 
   rootNode: {fileID: -2073506101436489320}
-  humanName: Friend
+  humanName: Friend.
   nodeList:
   - {fileID: -2073506101436489320}
   - {fileID: 5927108122935111430}
