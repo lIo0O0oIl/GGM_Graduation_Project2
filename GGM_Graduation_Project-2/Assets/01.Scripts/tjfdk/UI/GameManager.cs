@@ -39,7 +39,7 @@ public class GameManager : Singleton<GameManager>
         if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.O))
             UIReader_Main.Instance.MinusHP();
 
-        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.I))
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKey(KeyCode.I))
             chatHumanManager.NextChat();
 
         //if (Input.GetKeyDown(KeyCode.Escape))

@@ -224,7 +224,7 @@ public class UIReader_Chatting : MonoBehaviour
                 chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
 
                 // play cutScene
-                GameManager.Instance.cutSceneSystem.PlayCutScene(text);
+                //GameManager.Instance.cutSceneSystem.PlayCutScene(text);
 
                 break;
         }
