@@ -44,6 +44,12 @@ public class GameManager : Singleton<GameManager>
 
         if (Input.GetKeyDown(KeyCode.I))
             UIReader_Main.Instance.MinusHP();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (imageSystem.ui_panelGround.childCount > 0)
+                imageSystem.ui_panelGround.Remove(imageSystem.ui_panelGround.Q<VisualElement>("panel"));
+        }
     }
 
     public void GameStart()
