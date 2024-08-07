@@ -263,6 +263,7 @@ public class UIReader_FileSystem : MonoBehaviour
                     file = UIReader_Main.Instance.RemoveContainer(ux_folderFile.Instantiate());
 
                     // change file name
+                    file.name = folder.fileName;
                     file.Q<Label>("FileName").text = folder.fileName;
 
                     // connection click event
@@ -284,7 +285,12 @@ public class UIReader_FileSystem : MonoBehaviour
                     });
 
                     fileFolders.Add(new FolderFile(fileName, fileParentName));
-                    parentFolder.folderFiles.Add(file);
+                            parentFolder.folderFiles.Add(file);
+                    //foreach (VisualElement t in parentFolder.folderFiles)
+                    //{
+                    //    if (t.name != file.name)
+
+                    //}
                 }
                 break;
                 case FileType.IMAGE:
