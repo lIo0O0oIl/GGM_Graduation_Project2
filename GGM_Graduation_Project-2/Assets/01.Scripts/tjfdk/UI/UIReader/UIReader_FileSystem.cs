@@ -137,7 +137,7 @@ public class UIReader_FileSystem : MonoBehaviour
                 // currnet member 가져오고
                 MemberProfile member = GameManager.Instance.chatHumanManager.currentMember;
 
-                bool isRight = false;
+                bool isCorrect = false;
 
                 // current member의 question 다 돌고?
                 for (int i = 0; i < member.questions.Count; ++i)
@@ -154,9 +154,10 @@ public class UIReader_FileSystem : MonoBehaviour
                         // 둘이 비교해
                         foreach (string name in names)
                         {
-                            // name(condition) == fileName(file)
+                            // when file is not null
                             if (GameManager.Instance.fileManager.FindFile(name) != null)
                             {
+                                // name(condition) == fileName(file)
                                 if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
                                 {
                                     if (condition.is_Unlock == false)
@@ -165,7 +166,14 @@ public class UIReader_FileSystem : MonoBehaviour
                                         condition.is_Unlock = true;
 
                                         // remove visualElement
-                                        questionGround.RemoveAt(i);
+                                        for (int j = 0; j < questionGround.childCount; ++j)
+                                        {
+                                            if (questionGround[j].name == "HiddenAskChat")
+                                            {
+                                                questionGround.RemoveAt(j);
+                                                break;
+                                            }
+                                        }
 
                                         //change from lockQustion to question - 질문으로 만드는 거
                                         GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
@@ -174,7 +182,7 @@ public class UIReader_FileSystem : MonoBehaviour
                                         // 이거 다시 켜야될지도?
                                         //member.questions.Add(condition.childList[0] as AskNode);
 
-                                        isRight = true;
+                                        isCorrect = true;
                                         beforeSlot.Add(target);
                                         return;
                                     }
@@ -191,7 +199,7 @@ public class UIReader_FileSystem : MonoBehaviour
                 }
 
                 // minus hp
-                if (isRight == false)
+                if (isCorrect == false)
                     UIReader_Main.Instance.MinusHP();
             }
             else if (UIReader_Main.Instance.isRelationshipOpen)      // 관계도 시스템이 켜져 있었다면
