@@ -160,7 +160,6 @@ public class UIReader_FileSystem : MonoBehaviour
                                 {
                                     if (condition.is_Unlock == false)
                                     {
-                                        Debug.Log(name  + ": " + fileName);       
                                         // unlock
                                         condition.is_Unlock = true;
 
