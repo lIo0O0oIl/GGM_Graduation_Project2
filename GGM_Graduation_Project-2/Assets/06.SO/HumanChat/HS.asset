@@ -1543,7 +1543,7 @@ MonoBehaviour:
   is_readThis: 1
   parent: {fileID: -6788540871378524942}
   childList:
-  - {fileID: 8468025680950590656}
+  - {fileID: 3994515371954302300}
   state: 0
   type: 0
   chatText: ...
@@ -3438,7 +3438,7 @@ MonoBehaviour:
   m_Name: HS
   m_EditorClassIdentifier: 
   rootNode: {fileID: -4108237476524155638}
-  humanName: HS
+  humanName: HS.
   nodeList:
   - {fileID: -4108237476524155638}
   - {fileID: -2912861464369974143}
@@ -5194,7 +5194,7 @@ MonoBehaviour:
   index: 0
   is_UseThis: 0
   is_readThis: 1
-  parent: {fileID: 8468025680950590656}
+  parent: {fileID: -5134423132611182705}
   childList:
   - {fileID: -5488866233987227402}
   state: 0
@@ -6500,7 +6500,8 @@ MonoBehaviour:
   - "\uACFD\uD604\uC11D\uC758 \uACF5\uAE30\uACC4"
   - "\uACFD\uD604\uC11D_\uC774\uC0AC\uC7A51"
   - "\uACFD\uD604\uC11D_\uC774\uC0AC\uC7A52"
-  textEvent: 040000000400000004000000
+  - "\uACFD\uD604\uC11D_\uD669\uC900\uC6D0"
+  textEvent: 04000000040000000400000004000000
   LoadNextDialog: 
 --- !u!114 &7994241473700365411
 MonoBehaviour:
@@ -6743,9 +6744,8 @@ MonoBehaviour:
   index: 0
   is_UseThis: 0
   is_readThis: 1
-  parent: {fileID: -5134423132611182705}
-  childList:
-  - {fileID: 3994515371954302300}
+  parent: {fileID: 0}
+  childList: []
   state: 1
   type: 0
   chatText: "(\uC5ED\uC2DC \uC548 \uC8FC\uB824\uB098...)"
