@@ -100,7 +100,6 @@ public class UIReader_ImageFinding : MonoBehaviour
                     if (fileT != null)
                         GameManager.Instance.fileManager.UnlockChat(fileT.name);
 
-                    Debug.Log(" 여기다!");
                     GameManager.Instance.chatHumanManager.IsChat(true);
                     isImageOpen = true;
                 });
@@ -133,7 +132,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                                     }
                                     else
                                     {
-                                        if (png.saveName != null && png.saveName != "")
+                                        if (png.saveName != "" && png.saveName != null)
                                             GameManager.Instance.fileSystem.AddFile(FileType.TEXT, png.saveName,
                                             GameManager.Instance.fileManager.FindFile(png.saveName).fileParentName);
                                         else
