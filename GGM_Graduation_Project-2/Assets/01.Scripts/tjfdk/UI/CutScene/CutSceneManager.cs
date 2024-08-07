@@ -1,3 +1,4 @@
+using ChatVisual;
 using DG.Tweening;
 using System.Collections.Generic;
 
@@ -60,6 +61,7 @@ public class CutSceneManager : MonoBehaviour
                 {
                     if (currentCutScene.nextMemberName != "")
                     {
+                        Debug.Log("컷 씬 끝남");
                         GameManager.Instance.chatSystem.ChoiceMember
                             (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName), false);
 
@@ -69,6 +71,10 @@ public class CutSceneManager : MonoBehaviour
 
                         GameManager.Instance.chatHumanManager.chapterMember 
                             = GameManager.Instance.chatHumanManager.currentMember;
+
+                        //ChatNode chatNode = GameManager.Instance.chatHumanManager.chapterMember.currentNode as ChatNode;
+                        //GameManager.Instance.chatHumanManager.chapterMember.currentNode
+                        //    = chatNode.childList[0];
                     }
                     else
                         SceneManager.LoadScene("End");

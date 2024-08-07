@@ -728,6 +728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCutScene: {fileID: 0}
+  previous: {fileID: 11400000, guid: 30372cee5058183469433cd5583a8fa4, type: 2}
   currentCutNum: 0
   currentTextNum: 0
   cutScenes:
