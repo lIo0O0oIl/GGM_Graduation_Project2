@@ -436,7 +436,10 @@ public class UIReader_Chatting : MonoBehaviour
                         {
                             FileSO file = GameManager.Instance.fileManager.FindFile(chatNode.loadFileName[i]);
                             if (file != null)
+                            {
+                                Debug.Log(file.fileName + " : 파일 전송");
                                 GameManager.Instance.fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
+                            }
                             else
                                 Debug.Log("this file not exist");
                         }

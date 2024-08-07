@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 public enum FileType
 {
@@ -263,6 +264,7 @@ public class UIReader_FileSystem : MonoBehaviour
                     file = UIReader_Main.Instance.RemoveContainer(ux_folderFile.Instantiate());
 
                     // change file name
+                    file.name = folder.fileName;
                     file.Q<Label>("FileName").text = folder.fileName;
 
                     // connection click event
@@ -284,7 +286,16 @@ public class UIReader_FileSystem : MonoBehaviour
                     });
 
                     fileFolders.Add(new FolderFile(fileName, fileParentName));
-                    parentFolder.folderFiles.Add(file);
+
+                    // add file
+                    bool overlapping = false;
+                    for (int i = 0; i < parentFolder.imageFiles.Count; ++i)
+                    {
+                        if (parentFolder.imageFiles[i].name == file.name)
+                            overlapping = true;
+                    }
+                    if (overlapping == false)
+                        parentFolder.imageFiles.Add(file);
                 }
                 break;
                 case FileType.IMAGE:
@@ -295,11 +306,21 @@ public class UIReader_FileSystem : MonoBehaviour
                     file = UIReader_Main.Instance.RemoveContainer(ux_imageFile.Instantiate());
 
                     // change file name
+                    file.name = image.fileName;
                     file.Q<Label>("FileName").text = image.fileName;
 
                     // connection drag and drop & button click event
                     LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(file, image.fileName); });
-                    parentFolder.imageFiles.Add(file);
+
+                    // add file
+                    bool overlapping = false;
+                    for (int i = 0; i < parentFolder.imageFiles.Count; ++i)
+                    {
+                        if (parentFolder.imageFiles[i].name == file.name)
+                            overlapping = true;
+                    }
+                    if (overlapping == false)
+                        parentFolder.imageFiles.Add(file);
                 }
                 break;
                 case FileType.TEXT:
@@ -310,11 +331,21 @@ public class UIReader_FileSystem : MonoBehaviour
                     file = UIReader_Main.Instance.RemoveContainer(ux_textFile.Instantiate());
 
                     // change file name
+                    file.name = text.fileName;
                     file.Q<Label>("FileName").text = text.fileName;
 
                     // connection drag and drop & button click event
                     LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(file, text.fileName); });
-                    parentFolder.textFiles.Add(file);
+
+                    // add file
+                    bool overlapping = false;
+                    for (int i = 0; i < parentFolder.imageFiles.Count; ++i)
+                    {
+                        if (parentFolder.imageFiles[i].name == file.name)
+                            overlapping = true;
+                    }
+                    if (overlapping == false)
+                        parentFolder.imageFiles.Add(file);
                 }
                 break;
             }

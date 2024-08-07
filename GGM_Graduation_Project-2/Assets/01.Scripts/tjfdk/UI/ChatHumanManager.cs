@@ -75,8 +75,6 @@ public class ChatHumanManager : MonoBehaviour
     {
         // node list
         var children = chatContainer.GetChatTree().GetChild(currentNode);
-        Debug.Log("실행됨");
-        Debug.Log(children[0]);
 
         foreach (Node node in children)
         {
@@ -108,7 +106,6 @@ public class ChatHumanManager : MonoBehaviour
             {
                 if (askNode.is_readThis == false && askNode.is_UseThis == false)
                 {
-                    Debug.Log(askNode.askText + " : 질문 생성됨");
                     // load next
                     currentNode = askNode.parent;
                     // check
@@ -224,8 +221,6 @@ public class ChatHumanManager : MonoBehaviour
 
     public void StartChat(string name)      // HG
     {
-        Debug.Log($"쳇팅시작 {name}");
-
         // change current member
         currentMember = GameManager.Instance.chatSystem.FindMember(name);
 
