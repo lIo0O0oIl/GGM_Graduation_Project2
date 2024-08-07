@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/Button.uss?fileID=7433441132597879392&amp;guid=d28c6cf77bec8e54c92d108a96fd1e35&amp;type=3#Button" />
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-items: center; justify-content: center; height: 100%; align-self: auto; background-color: rgba(0, 0, 0, 0.5); width: 100%;">
         <ui:VisualElement name="TextPanel" style="flex-grow: 0; background-color: rgb(17, 17, 17); width: 45%; height: 80%; align-self: center; justify-content: flex-start; -unity-text-outline-color: rgba(0, 0, 0, 0); align-items: stretch; top: 25px;">
             <ui:VisualElement name="UpBar" style="flex-grow: 0; background-color: rgb(58, 58, 58); height: auto; color: rgb(120, 120, 120); flex-direction: row; justify-content: flex-end; align-self: auto; align-items: center;">
