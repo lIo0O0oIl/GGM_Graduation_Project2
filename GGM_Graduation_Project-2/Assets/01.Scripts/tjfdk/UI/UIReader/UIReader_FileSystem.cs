@@ -158,6 +158,7 @@ public class UIReader_FileSystem : MonoBehaviour
                             {
                                 if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
                                 {
+                                    Debug.Log(name  + ":fF " + fileName);       
                                     // unlock
                                     condition.is_Unlock = true;
 
@@ -167,8 +168,10 @@ public class UIReader_FileSystem : MonoBehaviour
                                     //change from lockQustion to question - 질문으로 만드는 거
                                     GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
 
+                                    member.questions.Remove(member.questions[i]);
                                     // add question
-                                    member.questions.Add(condition.childList[0] as AskNode);
+                                    // 이거 다시 켜야될지도?
+                                    //member.questions.Add(condition.childList[0] as AskNode);
 
                                     isRight = true;
                                     beforeSlot.Add(target);

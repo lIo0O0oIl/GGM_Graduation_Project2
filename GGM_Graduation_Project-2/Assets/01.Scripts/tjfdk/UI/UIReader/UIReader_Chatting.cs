@@ -732,7 +732,7 @@ public class UIReader_Chatting : MonoBehaviour
     // change member
     public void ChoiceMember(MemberProfile member)
     {
-        GameManager.Instance.chatHumanManager.currentMember.currentNode = GameManager.Instance.chatHumanManager.currentNode;
+        //GameManager.Instance.chatHumanManager.currentMember.currentNode = GameManager.Instance.chatHumanManager.currentNode;
 
         MemberProfile beforeMember = GameManager.Instance.chatHumanManager.currentMember;
         foreach (AskNode askNode in beforeMember.questions)
