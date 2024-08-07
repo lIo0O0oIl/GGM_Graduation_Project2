@@ -732,6 +732,7 @@ public class UIReader_Chatting : MonoBehaviour
     {
         ////GameManager.Instance.chatHumanManager.currentMember.currentNode = GameManager.Instance.chatHumanManager.currentNode;
 
+        // 다소 수정이 필요하지만 작동하긴함
         if (test)
         {
             if (member.currentAskNode != null)
@@ -741,6 +742,10 @@ public class UIReader_Chatting : MonoBehaviour
                     member.currentNode = member.currentAskNode.parent;
                 }
             }
+        }
+        else
+        {
+            member.currentNode = member.currentAskNode;
         }
 
         MemberProfile beforeMember = GameManager.Instance.chatHumanManager.currentMember;
