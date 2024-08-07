@@ -349,10 +349,10 @@ MonoBehaviour:
   is_readThis: 1
   parent: {fileID: -4533433683038494047}
   childList:
-  - {fileID: -5114989961001971589}
+  - {fileID: 4354081527623499403}
   state: 1
   type: 0
-  chatText: "\uC774 /[\uC774\uC218\uC5F0 \uC9D1]\uC77C\uAE30/\uC77C\uAE30, \uC77D\uC5B4\uBCFC\uB798?"
+  chatText: "\uC774 /[\uC774\uC218\uC5F0 \uC9D1]\uC77C\uAE30/, \uC77D\uC5B4\uBCFC\uB798?"
   face: 0
   loadFileName: []
   textEvent: 
@@ -827,13 +827,12 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: dcd8cea38933ceb458dd2b985b3aaa33
-  position: {x: 53.600014, y: 5177.6}
+  position: {x: 236.59998, y: 5080.8003}
   index: 0
   is_UseThis: 0
   is_readThis: 1
-  parent: {fileID: -7693139667682872966}
-  childList:
-  - {fileID: 4354081527623499403}
+  parent: {fileID: 0}
+  childList: []
   state: 1
   type: 2
   chatText: "\uC77C\uAE30"
@@ -2649,7 +2648,7 @@ MonoBehaviour:
   index: 0
   is_UseThis: 0
   is_readThis: 1
-  parent: {fileID: -5114989961001971589}
+  parent: {fileID: -7693139667682872966}
   childList:
   - {fileID: 1591192355867668969}
   state: 0

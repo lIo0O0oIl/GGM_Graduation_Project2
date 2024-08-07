@@ -200,11 +200,11 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 14b99726ebdaf664dbcaa3d67de6884a
-  position: {x: 402.40015, y: 2766.4001}
+  position: {x: 251.99997, y: 3339.2002}
   index: 0
   is_UseThis: 0
   is_readThis: 1
-  parent: {fileID: 5458467843835669292}
+  parent: {fileID: -5329762721305531100}
   childList:
   - {fileID: 4303246912297988320}
   state: 1
@@ -744,15 +744,16 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: 9edf8bd94c7d4fa4c97c1f75b02e07ef
-  position: {x: 229.58595, y: 3259.1692}
+  position: {x: 252.00005, y: 3221.6}
   index: 0
   is_UseThis: 1
   is_readThis: 0
   parentList:
   - {fileID: 7194046234121551382}
   - {fileID: 4513125737221114364}
+  - {fileID: 5458467843835669292}
   childList:
-  - {fileID: -720379844375509396}
+  - {fileID: -7985547165580826688}
   is_AllQuestion: 1
   asks:
   - {fileID: -8987247235283699724}
@@ -1536,6 +1537,7 @@ MonoBehaviour:
   parentList:
   - {fileID: 4513125737221114364}
   - {fileID: -5329762721305531100}
+  - {fileID: 4513125737221114364}
   childList:
   - {fileID: 4989637737929820179}
   is_AllQuestion: 0
@@ -2140,7 +2142,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: d07c30083b97b4f438389995e8525a92
-  position: {x: 403.19995, y: 2885.6}
+  position: {x: 252.79996, y: 3458.4004}
   index: 0
   is_UseThis: 0
   is_readThis: 1
@@ -2248,13 +2250,13 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: c40d0a16db61de04881dc74387703ee4
-  position: {x: 403.19995, y: 3004.8}
+  position: {x: 252.79996, y: 3577.6003}
   index: 0
   is_UseThis: 0
   is_readThis: 1
   parent: {fileID: 4303246912297988320}
   childList:
-  - {fileID: -5329762721305531100}
+  - {fileID: -720379844375509396}
   state: 1
   type: 0
   chatText: "(\uC774\uCBE4\uC5D0\uC11C \uC0AC\uAC74 \uB2F9\uC77C \uC54C\uB9AC\uBC14\uC774\uC5D0
@@ -2498,7 +2500,7 @@ MonoBehaviour:
   is_readThis: 1
   parent: {fileID: -4818514120652816819}
   childList:
-  - {fileID: -7985547165580826688}
+  - {fileID: -5329762721305531100}
   state: 0
   type: 0
   chatText: "\uB531\uD788 \uBB50 \uC544\uBB34\uAC83\uB3C4 \uC5C6\uC5B4\uC694"
