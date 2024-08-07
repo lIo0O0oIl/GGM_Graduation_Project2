@@ -38,6 +38,17 @@ public class ChatHumanManager : MonoBehaviour
                     chatTree.nodeList[j].is_UseThis = false;
                     chatTree.nodeList[j].is_readThis = false;
 
+                    if (chatTree.nodeList[j] is ChatNode chatNode)
+                    {
+                        for (int k = 0; k < chatNode.childList.Count; k++)
+                        {
+                            if (chatNode.childList[k] == null)
+                            {
+                                chatNode.childList.RemoveAt(k);
+                            }
+                        }
+                    }
+
                     if (chatTree.nodeList[j] is ConditionNode conditionNode)
                         conditionNode.is_Unlock = false;
                 }
