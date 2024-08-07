@@ -116,3 +116,27 @@
     transition-duration: 0.1s;
     scale: 1.05 1.05;
 }
+
+:hover > #CloseBtn {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}
+
+:hover > #ChangeTarget {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}
+
+:hover > #ChangeSize {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.05 1.05;
+}
+
+:hover > #ImageExitBtn {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}
