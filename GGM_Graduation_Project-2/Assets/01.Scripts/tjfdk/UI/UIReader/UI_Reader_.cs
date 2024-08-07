@@ -11,6 +11,6 @@ public class UI_Reader_ : MonoBehaviour
     private void OnEnable()
     {
         reButton = GetComponent<UIDocument>().rootVisualElement.Q<Button>("ReButton");
-        reButton.clicked += () => { SceneManager.LoadScene("Intro"); };
+        reButton.clicked += () => { SceneManager.LoadScene("Intro"); SoundManager.Instance.StopBGM(); };
     }
 }
