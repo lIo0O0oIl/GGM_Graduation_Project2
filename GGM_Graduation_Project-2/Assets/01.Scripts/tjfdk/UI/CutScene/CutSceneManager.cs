@@ -61,7 +61,7 @@ public class CutSceneManager : MonoBehaviour
                     if (currentCutScene.nextMemberName != "")
                     {
                         GameManager.Instance.chatSystem.ChoiceMember
-                            (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName));
+                            (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName), false);
 
                         GameManager.Instance.fileManager.UnlockChat(currentCutScene.name);
 

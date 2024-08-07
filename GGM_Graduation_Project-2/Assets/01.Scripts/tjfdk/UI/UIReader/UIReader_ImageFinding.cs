@@ -18,7 +18,7 @@ public class UIReader_ImageFinding : MonoBehaviour
 
     // UXML
     VisualElement ui_imageGround;
-    VisualElement ui_panelGround;
+    public VisualElement ui_panelGround;
     VisualElement ui_description;
 
 
@@ -212,6 +212,7 @@ public class UIReader_ImageFinding : MonoBehaviour
 
                 //create uxml
                 VisualElement panel = UIReader_Main.Instance.RemoveContainer(ux_ImagePanel.Instantiate());
+                panel.name = "panel";
                 // change png panel name
                 panel.Q<Label>("Name").text = png.name + ".png";
                 // change png image
@@ -260,6 +261,7 @@ public class UIReader_ImageFinding : MonoBehaviour
             for (int i = ui_panelGround.childCount - 1; i >= 0; i--)
                 ui_panelGround.RemoveAt(i);
 
+            panel.name = "panel";
             // change name
             panel.Q<Label>("Name").text = name + ".text";
             // change memo
