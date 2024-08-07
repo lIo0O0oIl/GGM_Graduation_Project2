@@ -49,8 +49,6 @@ public class UIReader_SettingScene : MonoBehaviour
         bgm.value = VolumeManager.Instance.bgmValue;
         sfx.value = VolumeManager.Instance.sfxValue;
         wheel.value = VolumeManager.Instance.wheelValue;
-
-        Debug.Log(master);
     }
 
     private void OnDisable()

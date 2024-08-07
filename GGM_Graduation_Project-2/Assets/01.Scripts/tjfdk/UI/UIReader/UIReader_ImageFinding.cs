@@ -133,7 +133,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                                     }
                                     else
                                     {
-                                        if (png.saveName != "")
+                                        if (png.saveName != null && png.saveName != "")
                                             GameManager.Instance.fileSystem.AddFile(FileType.TEXT, png.saveName,
                                             GameManager.Instance.fileManager.FindFile(png.saveName).fileParentName);
                                         else
