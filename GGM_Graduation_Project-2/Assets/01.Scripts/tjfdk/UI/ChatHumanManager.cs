@@ -99,6 +99,8 @@ public class ChatHumanManager : MonoBehaviour
                     
                     // start chatting
                     IsChat(true);
+
+                    currentMember.currentNode = chatNode;
                 }
             }
             else if (node is AskNode askNode)
