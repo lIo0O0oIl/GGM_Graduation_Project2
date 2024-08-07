@@ -270,7 +270,7 @@ public class UIReader_Chatting : MonoBehaviour
             // create uxml
             chat = UIReader_Main.Instance.RemoveContainer(ux_askChat.Instantiate());
             // chat name setting
-            chat.name = askNode.askText;
+            //chat.name = askNode.askText;
             // chat text setting
             chat.Q<Label>().text = askNode.askText;
             // connection click event
@@ -381,7 +381,7 @@ public class UIReader_Chatting : MonoBehaviour
             // create uxml
             chat = UIReader_Main.Instance.RemoveContainer(ux_hiddenAskChat.Instantiate());
             // chat name setting
-            chat.name = askNode.askText;
+            //chat.name = askNode.askText;
         }
 
         // record
