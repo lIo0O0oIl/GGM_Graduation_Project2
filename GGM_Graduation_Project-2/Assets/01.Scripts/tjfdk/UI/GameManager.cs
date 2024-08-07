@@ -63,7 +63,7 @@ public class GameManager : Singleton<GameManager>
         else
         {
             chatSystem.AddMember("Test");
-            chatSystem.ChoiceMember(chatSystem.FindMember("Test"));
+            chatSystem.ChoiceMember(chatSystem.FindMember("Test"), false);
             chatSystem.ChangeMyProfile("플레이어", myFaec);
             is_tutorial = false;
         }

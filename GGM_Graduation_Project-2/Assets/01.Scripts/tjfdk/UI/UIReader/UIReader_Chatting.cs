@@ -29,7 +29,7 @@ public class MemberProfile
     public List<AskNode> questions = new List<AskNode>();
     public Node currentNode;
 
-    public AskNode nowAskNode;
+    public AskNode currentAskNode;
 }
 
 public class UIReader_Chatting : MonoBehaviour
@@ -306,23 +306,24 @@ public class UIReader_Chatting : MonoBehaviour
                 // move next human
                 if (askNode.textEvent.Count == 1)
                 {
+                    GameManager.Instance.chatHumanManager.currentNode = askNode.child;
                     GameManager.Instance.chatHumanManager.chapterMember 
                         = GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog);
 
                     GameManager.Instance.chatHumanManager.IsChat(false);
 
                     AddMember(askNode.LoadNextDialog);
-                    ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog));
+                    ChoiceMember(GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog), false);
 
-                    if (askNode.askText == "*(돌아가자)*")
-                    {
-                        if (GameManager.Instance.chatHumanManager.currentMember.nowAskNode != null)
-                            GameManager.Instance.chatHumanManager.currentMember.nowAskNode.is_UseThis = true;
-                    }
-                    else
-                    {
-                        GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog).nowAskNode = askNode;
-                    }
+                    //if (askNode.askText == "*(돌아가자)*")
+                    //{
+                    //    if (GameManager.Instance.chatHumanManager.currentMember.currentAskNode != null)
+                    //        GameManager.Instance.chatHumanManager.currentMember.currentAskNode.is_UseThis = true;
+                    //}
+                    //else
+                    //{
+                    //    GameManager.Instance.chatSystem.FindMember(askNode.LoadNextDialog).currentAskNode = askNode;
+                    //}
                 }
                 else
                 {
@@ -717,7 +718,7 @@ public class UIReader_Chatting : MonoBehaviour
             // connection click event
             newMember.Q<Button>("ChatMember").clicked += () =>
             {
-                ChoiceMember(member);
+                ChoiceMember(member, true);
                 //GameManager.Instance.chatHumanManager.chapterHuman = GameManager.Instance.chatHumanManager.nowHuman;
             };
 
@@ -727,9 +728,20 @@ public class UIReader_Chatting : MonoBehaviour
     }
 
     // change member
-    public void ChoiceMember(MemberProfile member)
+    public void ChoiceMember(MemberProfile member, bool test)
     {
-        //GameManager.Instance.chatHumanManager.currentMember.currentNode = GameManager.Instance.chatHumanManager.currentNode;
+        ////GameManager.Instance.chatHumanManager.currentMember.currentNode = GameManager.Instance.chatHumanManager.currentNode;
+
+        if (test)
+        {
+            if (member.currentAskNode != null)
+            {
+                if (member.currentNode.is_UseThis == false)
+                {
+                    member.currentNode = member.currentAskNode.parent;
+                }
+            }
+        }
 
         MemberProfile beforeMember = GameManager.Instance.chatHumanManager.currentMember;
         foreach (AskNode askNode in beforeMember.questions)

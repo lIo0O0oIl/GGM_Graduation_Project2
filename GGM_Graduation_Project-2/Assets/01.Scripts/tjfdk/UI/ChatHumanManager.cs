@@ -100,6 +100,7 @@ public class ChatHumanManager : MonoBehaviour
 
                     // save member's currentNode
                     currentMember.currentNode = askNode;
+                    currentMember.currentAskNode = askNode;
 
                     // Input chat
                     GameManager.Instance.chatSystem.InputQuestion(currentMember.name, false, askNode);
