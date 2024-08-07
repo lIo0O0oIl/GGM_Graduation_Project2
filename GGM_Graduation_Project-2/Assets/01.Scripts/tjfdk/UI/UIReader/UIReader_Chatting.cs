@@ -326,6 +326,7 @@ public class UIReader_Chatting : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("시발");
                     GameManager.Instance.chatHumanManager.currentNode = askNode;
                 }
 
@@ -732,7 +733,7 @@ public class UIReader_Chatting : MonoBehaviour
     // change member
     public void ChoiceMember(MemberProfile member)
     {
-        GameManager.Instance.chatHumanManager.currentMember.currentNode = GameManager.Instance.chatHumanManager.currentNode;
+        //GameManager.Instance.chatHumanManager.currentMember.currentNode = GameManager.Instance.chatHumanManager.currentNode;
 
         MemberProfile beforeMember = GameManager.Instance.chatHumanManager.currentMember;
         foreach (AskNode askNode in beforeMember.questions)
