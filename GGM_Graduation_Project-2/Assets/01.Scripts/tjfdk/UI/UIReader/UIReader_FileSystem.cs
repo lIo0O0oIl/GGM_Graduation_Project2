@@ -158,24 +158,26 @@ public class UIReader_FileSystem : MonoBehaviour
                             {
                                 if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
                                 {
-                                    Debug.Log(name  + ":fF " + fileName);       
-                                    // unlock
-                                    condition.is_Unlock = true;
+                                    if (condition.is_Unlock == false)
+                                    {
+                                        Debug.Log(name  + ": " + fileName);       
+                                        // unlock
+                                        condition.is_Unlock = true;
 
-                                    // remove visualElement
-                                    questionGround.RemoveAt(i);
+                                        // remove visualElement
+                                        questionGround.RemoveAt(i);
 
-                                    //change from lockQustion to question - 질문으로 만드는 거
-                                    GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
+                                        //change from lockQustion to question - 질문으로 만드는 거
+                                        GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
 
-                                    member.questions.Remove(member.questions[i]);
-                                    // add question
-                                    // 이거 다시 켜야될지도?
-                                    //member.questions.Add(condition.childList[0] as AskNode);
+                                        // add question
+                                        // 이거 다시 켜야될지도?
+                                        //member.questions.Add(condition.childList[0] as AskNode);
 
-                                    isRight = true;
-                                    beforeSlot.Add(target);
-                                    return;
+                                        isRight = true;
+                                        beforeSlot.Add(target);
+                                        return;
+                                    }
                                 }
                             }
                         }
