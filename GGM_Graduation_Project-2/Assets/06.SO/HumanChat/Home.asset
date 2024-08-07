@@ -970,7 +970,7 @@ MonoBehaviour:
   m_Name: Home
   m_EditorClassIdentifier: 
   rootNode: {fileID: 2376478928536988069}
-  humanName: Home.
+  humanName: Home
   nodeList:
   - {fileID: 2376478928536988069}
   - {fileID: 4545021357648744603}
@@ -1699,7 +1699,7 @@ MonoBehaviour:
   parent: {fileID: 421194090308952518}
   childList:
   - {fileID: -8160059222234835227}
-  state: 1
+  state: 0
   type: 0
   chatText: "\uC218\uC5F0\uC774\uAC00 \uC77C\uAE30\uB97C \uC37C\uB098\uC694?"
   face: 0
