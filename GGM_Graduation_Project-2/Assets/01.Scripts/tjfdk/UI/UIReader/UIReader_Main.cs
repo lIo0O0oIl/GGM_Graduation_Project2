@@ -320,18 +320,19 @@ public class UIReader_Main : MonoBehaviour
         float adjustedWidth = originalWidth;
         float adjustedHeight = originalHeight;
 
-        if (originalWidth > MaxWidth || originalHeight > MaxHeight)
+        if (originalWidth > MaxWidth || originalHeight > MaxHeight)     // 넓이, 높이 중 하나라도 맥스보다 크면
         {
-            if (aspectRatio > 1)
+            if (aspectRatio > 1)        // 넓이가 더 길면
             {
-                adjustedWidth = MaxWidth;
-                adjustedHeight = MaxWidth / aspectRatio;
+                adjustedWidth = MaxWidth;       // 넓이를 맥스로 바꾸고
+                adjustedHeight = MaxWidth * (originalHeight / originalWidth);
             }
             else
             {
                 adjustedHeight = MaxHeight;
                 adjustedWidth = MaxHeight * aspectRatio;
             }
+            return new Vector2(adjustedWidth, adjustedHeight);
         }
 
         if (adjustedWidth < MinWidth || adjustedHeight < MinHeight)

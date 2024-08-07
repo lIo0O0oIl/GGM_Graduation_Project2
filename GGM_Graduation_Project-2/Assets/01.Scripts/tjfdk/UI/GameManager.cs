@@ -65,6 +65,7 @@ public class GameManager : Singleton<GameManager>
             chatSystem.AddMember("Test");
             chatSystem.ChoiceMember(chatSystem.FindMember("Test"), false);
             chatSystem.ChangeMyProfile("플레이어", myFaec);
+            Instance.chatHumanManager.chapterMember = Instance.chatHumanManager.currentMember;
             is_tutorial = false;
         }
     }
