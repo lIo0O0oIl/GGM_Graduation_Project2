@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: e89bcb5bf1923f040a37a8360039f3fd, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 2dbe1dc1aa823b54aa8cda3046fee610, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 2fc08d2482f62894c83c33c90155c3c8, type: 3}
   m_SortingOrder: 0
 --- !u!4 &150678876
 Transform:
@@ -197,8 +197,8 @@ MonoBehaviour:
   cutSceneManager: {fileID: 1857801311}
   fileManager: {fileID: 378627794}
   imageManager: {fileID: 1207175532}
-  is_tutorial: 0
-  myFaec: {fileID: 0}
+  is_tutorial: 1
+  myFaec: {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
 --- !u!114 &150678887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
+    currentAskNode: {fileID: 0}
   chapterMember:
     name: 
     nickName: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
     chattings: []
     questions: []
     currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
+    currentAskNode: {fileID: 0}
   currentNode: {fileID: 0}
   checkEvidence: []
   isChattingRunning: 0
@@ -259,9 +259,9 @@ MonoBehaviour:
   currentText: 
   MinWidth: 700
   MinHeight: 700
-  MaxWidth: 1700
-  MaxHeight: 1700
-  hp: 3
+  MaxWidth: 850
+  MaxHeight: 850
+  hp: 5
   sliderColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0.49803922}
 --- !u!114 &150678889
 MonoBehaviour:
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150678874}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66964fd372bf01b42a6aa7f52ef5108b, type: 3}
   m_Name: 
@@ -329,10 +329,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b45bb9e558ed47f4e92eed9073287079, type: 2}
   - {fileID: 11400000, guid: c1e655613908da44f83524e529a299f0, type: 2}
   - {fileID: 11400000, guid: 7a47900d93c836b44aeaa52a4fa485dd, type: 2}
-  - {fileID: 11400000, guid: b840c2b00679a5b45a94043560fd8626, type: 2}
   - {fileID: 11400000, guid: 3cc417de2d36e8847ac4e361f2e4ae0b, type: 2}
   - {fileID: 11400000, guid: 3c7b736caa1ee874eadf7d52321ffbaa, type: 2}
-  - {fileID: 11400000, guid: 93e7aa4a5d4469541bbf889e69fc989b, type: 2}
   - {fileID: 11400000, guid: f7cc9d5022deeca46b5ffdc18b1c9413, type: 2}
   - {fileID: 11400000, guid: cd75f6f4586360546b2a6702c54587cb, type: 2}
   - {fileID: 11400000, guid: f3453f8eb8941e845b5b43169af9c319, type: 2}
@@ -348,8 +346,31 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4ff2f94a7ba2a4a47b1b28c249f5e89a, type: 2}
   - {fileID: 11400000, guid: ac994f062d573ad4dbb4df103331b42e, type: 2}
   - {fileID: 11400000, guid: cd3b8820cd0dcba49b8894836c69d051, type: 2}
+  - {fileID: 11400000, guid: ee602487dc761be4aa3891ec461b232e, type: 2}
+  - {fileID: 11400000, guid: 023fe57d8e4389b4aaa57f73ba6e454e, type: 2}
+  - {fileID: 11400000, guid: 1642458e07f3de14f814a88208c633a9, type: 2}
+  - {fileID: 11400000, guid: e5c4fdd11895c614d82f4905d8f3c682, type: 2}
+  - {fileID: 11400000, guid: b51fc489b1e362f4582fc4a5e81a8e7a, type: 2}
+  - {fileID: 11400000, guid: d0a4383d320fcac42a59a848c045c49a, type: 2}
+  - {fileID: 11400000, guid: 8b0fcbb228ab4904bafa018543fc1e80, type: 2}
+  - {fileID: 11400000, guid: 5131ebc7f83191045ba2a686f6ffafc6, type: 2}
+  - {fileID: 11400000, guid: ee602487dc761be4aa3891ec461b232e, type: 2}
+  - {fileID: 11400000, guid: 25ffcd399441e83449bfa29e2dd4d72d, type: 2}
+  - {fileID: 11400000, guid: 243a841370a7baf4996695b338ba40d5, type: 2}
+  - {fileID: 11400000, guid: 0651ea446041d1e4bacc88a4eb99fd18, type: 2}
+  - {fileID: 11400000, guid: 933c88adab8862b4cb94a0a986e13cd9, type: 2}
+  - {fileID: 11400000, guid: 5a885aa7af7592549919de40a379304c, type: 2}
+  - {fileID: 11400000, guid: aeb492a89b5a24d4497a588d3754c06b, type: 2}
+  - {fileID: 11400000, guid: c5525b65c8a360240a53b16777d51d54, type: 2}
+  - {fileID: 11400000, guid: ff47af6a61ab86a47907f214a7e74749, type: 2}
   - {fileID: 11400000, guid: 392f1e139380fc9459b3fe462e245a1a, type: 2}
-  - {fileID: 11400000, guid: fb6c3d383b42b5f45bbb7bdadcade3cf, type: 2}
+  - {fileID: 11400000, guid: f7cc9d5022deeca46b5ffdc18b1c9413, type: 2}
+  - {fileID: 11400000, guid: 9825fe363e07971499283eb154750c9a, type: 2}
+  - {fileID: 11400000, guid: 5417de12d055323498d8e2f4835c5beb, type: 2}
+  - {fileID: 11400000, guid: b840c2b00679a5b45a94043560fd8626, type: 2}
+  - {fileID: 11400000, guid: 725b93c68cc916d4db90c3590bda33b1, type: 2}
+  - {fileID: 11400000, guid: 4849f7fe9e4cca44b8aa74feda292d3f, type: 2}
+  - {fileID: 11400000, guid: 93e7aa4a5d4469541bbf889e69fc989b, type: 2}
 --- !u!114 &378627795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,14 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentName: 
   chatTrees:
-  - {fileID: 11400000, guid: c1a3e3bb83a6eac42ac8aba4b6bafb91, type: 2}
-  - {fileID: 11400000, guid: 54f82722d96610b4c8b7f0ba28e12cee, type: 2}
-  - {fileID: 11400000, guid: d63e5984b26b81648ad7802fafd2d8ee, type: 2}
-  - {fileID: 11400000, guid: b1e07402b87ee024697916645591cd2a, type: 2}
-  - {fileID: 11400000, guid: 2f5daa0cbefe73f49a2ec62c2b6e0261, type: 2}
-  - {fileID: 11400000, guid: ca67aae2c0e705f499388730b1dabd01, type: 2}
-  - {fileID: 11400000, guid: 8106376919f6904468b65f83a790d6ec, type: 2}
-  - {fileID: 11400000, guid: 6665dd4f61bc0c140b86c22d2150a0b8, type: 2}
+  - {fileID: 11400000, guid: 8a0e19d35d2db4545b83b352f6df53c7, type: 2}
 --- !u!1 &1207175530
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,8 +496,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 075c6194b901161478aa8a848fc8a197, type: 2}
   - {fileID: 11400000, guid: f864ad77c2a53f6469a2b7f074260a06, type: 2}
   - {fileID: 11400000, guid: bb6e1c015e0b3424281e75e086915889, type: 2}
-  - {fileID: 11400000, guid: e1d3f014e117c814aaeda6d87659d54e, type: 2}
-  - {fileID: 11400000, guid: 076114b5ea0c1d74ab6694dcb2d834c5, type: 2}
+  - {fileID: 11400000, guid: b5208718a2a75d743b7180c827c4874a, type: 2}
+  - {fileID: 11400000, guid: 38ca2276e49805146a5498b4f172320c, type: 2}
   pngs:
   - {fileID: 11400000, guid: a887f32d772ff4d418ca35b167c56c25, type: 2}
   - {fileID: 11400000, guid: 62627cb4959ae6a4db55f275aaa58a85, type: 2}
@@ -504,9 +518,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f8e5d8640d576294e9d119225cb122d1, type: 2}
   - {fileID: 11400000, guid: 5c88a63a7f598f248b2fec95ae84092b, type: 2}
   - {fileID: 11400000, guid: 91fa2c7e37753f14ca55a7656e45a05a, type: 2}
+  - {fileID: 11400000, guid: 86ee3ad50c9f66c4795c7d13980a3591, type: 2}
+  - {fileID: 11400000, guid: ca224e8b53ba4c249991222ae7df61a5, type: 2}
+  - {fileID: 11400000, guid: 429d3d0dc7a70974d9e9301f0780e926, type: 2}
+  - {fileID: 11400000, guid: 0667045ad4cc9674a97dc9c7d2e66334, type: 2}
+  - {fileID: 11400000, guid: fe074ba30d652e642be71e3dcbe67222, type: 2}
   texts:
   - {fileID: 11400000, guid: 406930a706ead504fbb8def487191b05, type: 2}
   - {fileID: 11400000, guid: 8946ed675cba392449506387626178f6, type: 2}
+  - {fileID: 11400000, guid: 0fe1a525c014df84fa5433fe0f540a81, type: 2}
+  - {fileID: 11400000, guid: 1223f122bf88a9242b3d72dabb4a135a, type: 2}
+  - {fileID: 11400000, guid: c6c3f4168f57f5b4385095961d22549d, type: 2}
+  - {fileID: 11400000, guid: 8ac41b49ca79b454a9a8b6a6a759825a, type: 2}
+  - {fileID: 11400000, guid: e4de9d97a6e4c9a4296ae70d3007c7ec, type: 2}
+  - {fileID: 11400000, guid: ab0e37c0286e6254c99c101435779939, type: 2}
+  - {fileID: 11400000, guid: e690050173f51ef4cafe4baa8405e375, type: 2}
+  - {fileID: 11400000, guid: c937d94fae80d5841bcfeb58ffdd7ae0, type: 2}
+  - {fileID: 11400000, guid: c2cf71b38ba1cbf4e83bbbe4e2d2dcbc, type: 2}
+  - {fileID: 11400000, guid: ffcb97b50212ee34da14a7058f5b32b2, type: 2}
 --- !u!114 &1207175533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,9 +694,14 @@ MonoBehaviour:
   currentCutNum: 0
   currentTextNum: 0
   cutScenes:
+  - {fileID: 11400000, guid: fe1f2115b53952d4a9e485f229a3fab5, type: 2}
   - {fileID: 11400000, guid: b754b1000e923b34f84d8d8bf78c3efc, type: 2}
+  - {fileID: 11400000, guid: 335d08ef8de5db444a3f680faa41a6d0, type: 2}
+  - {fileID: 11400000, guid: 7bff4bdc7c660cd429ac7ca7f43efd7e, type: 2}
+  - {fileID: 11400000, guid: 87dc921c4534c8c459653291977005e7, type: 2}
   - {fileID: 11400000, guid: 8867d427f3bcade47a447a1766521e38, type: 2}
-  - {fileID: 11400000, guid: 82e59ced07f04b44f95fa815e3b6ade7, type: 2}
+  textSpeed: 0.25
+  animSpeed: 0.5
 --- !u!114 &1857801312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,7 +724,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1999584788}
   - component: {fileID: 1999584787}
-  - component: {fileID: 1999584789}
   m_Layer: 0
   m_Name: RelationshipSystem
   m_TagString: Untagged
@@ -726,18 +759,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1999584789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999584786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fce695033b02b104aa81feeb92752463, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2099014330
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,146 +804,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   members:
-  - name: "\uAC15\uC9C0\uD604"
-    nickName: 1
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: f5e3ed4b03b98fa4193dc281fa20c737, type: 3}
-    - {fileID: 21300000, guid: e24ccc762dc6fbc4da13d5ccf521e562, type: 3}
-    - {fileID: 21300000, guid: 301170adade2b0149abef527ec6f87ca, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
-  - name: "\uD669\uC900\uC6D0"
-    nickName: 2
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 73475c8e610dbba408f8e5335ba563ef, type: 3}
-    - {fileID: 21300000, guid: d73a50758a98dee4bbb8c8c22c873683, type: 3}
-    - {fileID: 21300000, guid: 045478c7da9398b4994a8b82b6778662, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
-  - name: "\uACFD\uD604\uC11D"
-    nickName: 3
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 643df993bdde62340b5a4ef4ff38492a, type: 3}
-    - {fileID: 21300000, guid: 99adf4b228622a24e82a42c5caafff72, type: 3}
-    - {fileID: 21300000, guid: 2c146c3797c760b49bfa37fd539346a2, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
-  - name: "\uC774\uCC44\uBBFC"
-    nickName: 4
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 5e5f7ea85e1271a4b8a3503d237e8722, type: 3}
-    - {fileID: 21300000, guid: 5c81610dce86b794dad953475978cd7a, type: 3}
-    - {fileID: 21300000, guid: c10ebd5668b09a249a6b736d8217d6c7, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
-  - name: "\uBC15\uD604\uADDC"
-    nickName: 5
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 0af0a498aac2b3c4b8f2933f75198551, type: 3}
-    - {fileID: 21300000, guid: f73b7fc13a9f4fc4696dba895d845b60, type: 3}
-    - {fileID: 21300000, guid: 4230f11a38d80e149bc6dfd3e9ff4fb0, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
-  - name: "\uACE0\uC9C4\uD601 \uC120\uBC30\uB2D8"
-    nickName: 6
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 4e1725d5bfe5ba54b9c4524071df03d7, type: 3}
-    - {fileID: 21300000, guid: 4e1725d5bfe5ba54b9c4524071df03d7, type: 3}
-    - {fileID: 21300000, guid: d7b11a4f478940d418f1148d27b35cae, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
-  - name: "\uAC15\uB300\uC591"
-    nickName: 7
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 1df6394bc8096fd4290208ac8d161298, type: 3}
-    - {fileID: 21300000, guid: 61bd28446d3a86a49ad0d933de91e780, type: 3}
-    - {fileID: 21300000, guid: 61bd28446d3a86a49ad0d933de91e780, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
-  - name: "\uB2F4\uC784\uC120\uC0DD\uB2D8"
-    nickName: 8
+  - name: Test
+    nickName: 11
     currentFace: 0
     faces:
     - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
     evidence:
       spriteEvidence: []
     isOpen: 0
     chattings: []
     questions: []
     currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
-  - name: "\uD559\uC0DD\uB4E4"
-    nickName: 9
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
-  - name: "\uC774\uC218\uC5F0\uC758 \uBD80\uBAA8"
-    nickName: 10
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    nowAskNode: {fileID: 0}
+    currentAskNode: {fileID: 0}
   changeMemberBtnOn: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   wheelSpeed: 25
@@ -934,7 +827,7 @@ MonoBehaviour:
   ux_chat: {fileID: 9197481963319205126, guid: 790f5ecd05e5c664789ec66b990f0cee, type: 3}
   ux_askChat: {fileID: 9197481963319205126, guid: eca624ffc6976be4cbe63439f47c4452, type: 3}
   ux_hiddenAskChat: {fileID: 9197481963319205126, guid: 167b99bf43499a4418fb5d4f44cf9276, type: 3}
-  ux_textFile: {fileID: 0}
+  ux_textFile: {fileID: 9197481963319205126, guid: c9483a7051a65d14680722732c83e9e1, type: 3}
   ux_memberList: {fileID: 9197481963319205126, guid: b8fd32671ecc31340bf018f921558420, type: 3}
   duration: 1
   strength: 10
