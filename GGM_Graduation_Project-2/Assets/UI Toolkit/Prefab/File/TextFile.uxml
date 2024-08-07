@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/USS/File.uss?fileID=7433441132597879392&amp;guid=52529ae86f49f7f48b6ba569bcb8bcb6&amp;type=3#File" />
     <ui:VisualElement name="TextFile" class="File">
         <ui:Button name="FileImage" picking-mode="Ignore" class="FileImage NoButtonBorder" style="background-image: url(&apos;project://database/Assets/02.Sprites/Icons/Txt.png?fileID=2800000&amp;guid=7fc8ff71e7ef85040874c7435d0120ff&amp;type=3#Txt&apos;);" />
-        <ui:Label text="텍스트" name="FileName" class="FileName" style="-unity-font: initial; -unity-font-definition: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo-toolkit%20SDF.asset?fileID=11400000&amp;guid=8a1a53547849f8e41ab1f62754582c6e&amp;type=2#DungGeunMo-toolkit SDF&apos;); white-space: normal; height: auto;" />
+        <ui:Label text="텍스트" name="FileName" class="FileName" style="-unity-font: initial; -unity-font-definition: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo-toolkit%20SDF.asset?fileID=11400000&amp;guid=8a1a53547849f8e41ab1f62754582c6e&amp;type=2#DungGeunMo-toolkit SDF&apos;); white-space: normal; height: auto; width: 109px;" />
         <ui:VisualElement name="NewIcon" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; top: 5px; right: 5px; width: 25px; height: 25px; background-image: url(&apos;project://database/Assets/02.Sprites/Icons/dot.png?fileID=2800000&amp;guid=63b8764e1638a174f98458cf4d775b30&amp;type=3#dot&apos;); -unity-background-image-tint-color: rgb(243, 51, 51);" />
     </ui:VisualElement>
 </ui:UXML>
