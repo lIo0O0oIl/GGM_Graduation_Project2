@@ -830,7 +830,7 @@ MonoBehaviour:
   position: {x: 236.59998, y: 5080.8003}
   index: 0
   is_UseThis: 0
-  is_readThis: 1
+  is_readThis: 0
   parent: {fileID: 0}
   childList: []
   state: 1
@@ -1694,7 +1694,7 @@ MonoBehaviour:
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
   guid: ca322fb04f5187848899e83aabe5b6d4
-  position: {x: 548.8, y: 378.80008}
+  position: {x: 548.8, y: 379.20007}
   index: 0
   is_UseThis: 0
   is_readThis: 0
@@ -1706,7 +1706,7 @@ MonoBehaviour:
   asks:
   - {fileID: -4613346943335803281}
   is_SpecificFile: 0
-  fileName: "\uD3EC\uC2A4\uD2B8\uC787"
+  fileName: "\uB0A0\uC9DC/\uD3EC\uC2A4\uD2B8\uC787"
   is_LockQuestion: 1
   is_Unlock: 1
 --- !u!114 &-158266683968308311
@@ -1909,7 +1909,7 @@ MonoBehaviour:
   m_Name: AskNode
   m_EditorClassIdentifier: 
   guid: cec3dc30e3b87b643be3e3890327f0d4
-  position: {x: 560.8, y: 500.80008}
+  position: {x: 560.8001, y: 501.95013}
   index: 0
   is_UseThis: 1
   is_readThis: 1
@@ -2626,7 +2626,7 @@ MonoBehaviour:
   - {fileID: 1397812084045623859}
   state: 1
   type: 1
-  chatText: "\uAC15\uC9C0\uD604 \uAD50\uACFC\uC11C"
+  chatText: "\uB0A0\uC9DC"
   face: 0
   loadFileName: []
   textEvent: 
