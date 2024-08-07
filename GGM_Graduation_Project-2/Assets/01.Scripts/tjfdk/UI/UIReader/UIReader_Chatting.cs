@@ -222,6 +222,10 @@ public class UIReader_Chatting : MonoBehaviour
                 
                 // connection click event, play cutscene
                 chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
+
+                // play cutScene
+                GameManager.Instance.cutSceneSystem.PlayCutScene(text);
+
                 break;
         }
 
