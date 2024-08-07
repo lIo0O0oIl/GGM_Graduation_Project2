@@ -33,23 +33,20 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (UIReader_Main.Instance.hp < 3)
-                UIReader_Main.Instance.hp++;
-        }
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.P))
+                UIReader_Main.Instance.PlusHP();
 
-        if (Input.GetKey(KeyCode.U))
-            chatHumanManager.NextChat();
-
-        if (Input.GetKeyDown(KeyCode.I))
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.O))
             UIReader_Main.Instance.MinusHP();
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (imageSystem.ui_panelGround.childCount > 0)
-                imageSystem.ui_panelGround.Remove(imageSystem.ui_panelGround.Q<VisualElement>("panel"));
-        }
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.I))
+            chatHumanManager.NextChat();
+
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (imageSystem.ui_panelGround.childCount > 0)
+        //        imageSystem.ui_panelGround.Remove(imageSystem.ui_panelGround.Q<VisualElement>("panel"));
+        //}
     }
 
     public void GameStart()

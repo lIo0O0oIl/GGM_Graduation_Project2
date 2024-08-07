@@ -395,6 +395,18 @@ public class UIReader_Main : MonoBehaviour
         }
     }
 
+    public void PlusHP()
+    {
+        Debug.Log("hp+");
+        if (hp < 5)
+        {
+            hp += 1;
+
+            GameManager.Instance.fileSystem.ui_hpGround
+                .Q<VisualElement>("HP_" + hp).style.display = DisplayStyle.Flex;
+        }
+    }
+
     public void RemoveSlider(VisualElement scrollView)
     {
         // hidding scrollview slider
