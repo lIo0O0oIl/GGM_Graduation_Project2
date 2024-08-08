@@ -743,9 +743,18 @@ public class UIReader_Chatting : MonoBehaviour
         {
             if (chatNode.type == EChatType.CutScene)
             {
+                Debug.Log("컷씬이다!!");
+                if (GameManager.Instance.cutSceneManager.FindCutScene(chatNode.chatText))
+                {
+                    Debug.Log("자동 컷씬 ㅋ");
+                    GameManager.Instance.chatHumanManager.currentMember.currentNode = chatNode.childList[0];
+                }
+                else
+                {
+                    Debug.Log("수동 컷씬");
+                    //GameManager.Instance.chatHumanManager.currentMember.currentNode = chatNode.childList[0];
+                }
 
-            Debug.Log("컷씬이다!!");
-                GameManager.Instance.chatHumanManager.currentMember.currentNode = chatNode.childList[0];
             }
         }
         else

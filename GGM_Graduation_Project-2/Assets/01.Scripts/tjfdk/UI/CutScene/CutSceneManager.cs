@@ -77,13 +77,6 @@ public class CutSceneManager : MonoBehaviour
                 {
                     if (currentCutScene.nextMemberName != "")
                     {
-                        //if (GameManager.Instance.chatHumanManager.chapterMember.currentNode is ChatNode current)
-                        //{
-                        //    Debug.Log("다음 노드로 이동해 제발;ㄴ");
-                        //    GameManager.Instance.chatHumanManager.chapterMember.currentNode = current.childList[0];
-                        //}
-                        //else
-                        //    Debug.Log("chatnode가 아닐리가 없는데");
                         GameManager.Instance.chatSystem.ChoiceMember
                             (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName), false);
 
@@ -93,7 +86,6 @@ public class CutSceneManager : MonoBehaviour
 
                         GameManager.Instance.chatHumanManager.chapterMember
                             = GameManager.Instance.chatHumanManager.currentMember;
-
                     }
                     else
                         SceneManager.LoadScene("End");
