@@ -177,6 +177,8 @@ public class UIReader_FileSystem : MonoBehaviour
                                         //change from lockQustion to question - 질문으로 만드는 거
                                         GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
 
+                                        UIReader_Main.Instance.PlusHP();
+
                                         // add question
                                         // 이거 다시 켜야될지도?
                                         //member.questions.Add(condition.childList[0] as AskNode);

@@ -6,5 +6,6 @@ using UnityEngine;
 public class TextSO : ScriptableObject
 {
     public string name;
+    [TextArea(10, 50)]
     public string memo;
 }
