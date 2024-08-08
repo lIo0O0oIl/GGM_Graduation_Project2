@@ -398,7 +398,7 @@ public class UIReader_Main : MonoBehaviour
     public void PlusHP()
     {
         Debug.Log("hp+");
-        if (hp < 5)
+        if (hp < 10)
         {
             hp += 1;
 
