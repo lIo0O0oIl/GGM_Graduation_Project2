@@ -1,7 +1,7 @@
 using ChatVisual;
 using DG.Tweening;
 using System.Collections.Generic;
-
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +26,14 @@ public class CutSceneManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < cutScenes.Count; ++i)
+        {
+            cutScenes[i].test = false;
+        }
+    }
+
     public CutSceneSO FindCutScene(string name)
     {
         foreach (CutSceneSO cutScene in cutScenes)
@@ -40,12 +48,20 @@ public class CutSceneManager : MonoBehaviour
     {
         currentCutScene = FindCutScene(name);
 
-        currentCutNum = 0;
-        currentTextNum = 0;
+        if (currentCutScene.test == false)
+        {
+            currentCutNum = 0;
+            currentTextNum = 0;
 
-        GameManager.Instance.cutSceneSystem.ChangeCut(currentCutScene.cutScenes[currentCutNum].isAnim,
-            animSpeed, currentCutScene.cutScenes[currentCutNum].cut);
-        Next();
+            GameManager.Instance.cutSceneSystem.ChangeCut(currentCutScene.cutScenes[currentCutNum].isAnim,
+                animSpeed, currentCutScene.cutScenes[currentCutNum].cut);
+            Next();
+
+            currentCutScene.test = true;
+        }
+        else
+            UIReader_Main.Instance.OpenCutScene();
+
     }
 
     public void Next()
@@ -61,7 +77,13 @@ public class CutSceneManager : MonoBehaviour
                 {
                     if (currentCutScene.nextMemberName != "")
                     {
-                        Debug.Log("컷 씬 끝남");
+                        //if (GameManager.Instance.chatHumanManager.chapterMember.currentNode is ChatNode current)
+                        //{
+                        //    Debug.Log("다음 노드로 이동해 제발;ㄴ");
+                        //    GameManager.Instance.chatHumanManager.chapterMember.currentNode = current.childList[0];
+                        //}
+                        //else
+                        //    Debug.Log("chatnode가 아닐리가 없는데");
                         GameManager.Instance.chatSystem.ChoiceMember
                             (GameManager.Instance.chatSystem.FindMember(currentCutScene.nextMemberName), false);
 
@@ -69,12 +91,9 @@ public class CutSceneManager : MonoBehaviour
 
                         UIReader_Main.Instance.OpenCutScene();
 
-                        GameManager.Instance.chatHumanManager.chapterMember 
+                        GameManager.Instance.chatHumanManager.chapterMember
                             = GameManager.Instance.chatHumanManager.currentMember;
 
-                        //ChatNode chatNode = GameManager.Instance.chatHumanManager.chapterMember.currentNode as ChatNode;
-                        //GameManager.Instance.chatHumanManager.chapterMember.currentNode
-                        //    = chatNode.childList[0];
                     }
                     else
                         SceneManager.LoadScene("End");

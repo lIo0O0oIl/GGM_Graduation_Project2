@@ -221,10 +221,12 @@ public class UIReader_Chatting : MonoBehaviour
                 chat.style.backgroundImage = new StyleBackground(sprite);
                 
                 // connection click event, play cutscene
-                chat.Q<Button>().clicked += (() => { GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
+                chat.Q<Button>().clicked += (() => {
+                    GameManager.Instance.cutSceneManager.FindCutScene(text).test = false;
+                    GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
 
                 // play cutScene
-                //GameManager.Instance.cutSceneSystem.PlayCutScene(text);
+                GameManager.Instance.cutSceneSystem.PlayCutScene(text);
 
                 break;
         }
@@ -436,10 +438,7 @@ public class UIReader_Chatting : MonoBehaviour
                         {
                             FileSO file = GameManager.Instance.fileManager.FindFile(chatNode.loadFileName[i]);
                             if (file != null)
-                            {
-                                Debug.Log(file.fileName + " : 파일 전송");
                                 GameManager.Instance.fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
-                            }
                             else
                                 Debug.Log("this file not exist");
                         }
@@ -740,19 +739,32 @@ public class UIReader_Chatting : MonoBehaviour
         ////GameManager.Instance.chatHumanManager.currentMember.currentNode = GameManager.Instance.chatHumanManager.currentNode;
 
         // 다소 수정이 필요하지만 작동하긴함
-        if (test)
+        if (GameManager.Instance.chatHumanManager.currentMember.currentNode is ChatNode chatNode)
         {
-            if (member.currentAskNode != null)
+            if (chatNode.type == EChatType.CutScene)
             {
-                if (member.currentNode.is_UseThis == false)
-                {
-                    member.currentNode = member.currentAskNode.parent;
-                }
+
+            Debug.Log("컷씬이다!!");
+                GameManager.Instance.chatHumanManager.currentMember.currentNode = chatNode.childList[0];
             }
         }
         else
         {
-            member.currentNode = member.currentAskNode;
+            Debug.Log("컷씬아님1");
+            if (test)
+            {
+                if (member.currentAskNode != null)
+                {
+                    if (member.currentNode.is_UseThis == false)
+                    {
+                        member.currentNode = member.currentAskNode.parent;
+                    }
+                }
+            }
+            else
+            {
+                member.currentNode = member.currentAskNode;
+            }
         }
 
         MemberProfile beforeMember = GameManager.Instance.chatHumanManager.currentMember;

@@ -21,7 +21,6 @@ public class UIReader_CutScene : MonoBehaviour
 
     public void PlayCutScene(string name)
     {
-        Debug.Log("컷 씬 시작함");
         GameManager.Instance.cutSceneManager.CutScene(name);
         UIReader_Main.Instance.OpenCutScene();
     }

@@ -35,7 +35,6 @@ public class FileManager : MonoBehaviour
 
     public FileSO FindFile(string name) 
     {
-        Debug.Log(name +  " : 찾기 위해 노력중 ㅎ");
         foreach (FileSO file in folderFiles)
         {
             if (file.fileName == name)

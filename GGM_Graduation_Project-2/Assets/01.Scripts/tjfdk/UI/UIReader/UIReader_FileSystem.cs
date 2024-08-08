@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.WSA;
 
 public enum FileType
 {
@@ -162,7 +161,7 @@ public class UIReader_FileSystem : MonoBehaviour
                                 {
                                     if (condition.is_Unlock == false)
                                     {
-                                        // unlock
+                                        // unlock 
                                         condition.is_Unlock = true;
 
                                         // remove visualElement
