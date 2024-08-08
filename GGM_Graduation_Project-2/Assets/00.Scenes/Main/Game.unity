@@ -396,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPathClick: 0
   fileAreaSizeOn: 150
-  fileAreaSizeOff: 310
+  fileAreaSizeOff: 305
   changeSizeBtnOn: {fileID: -2236324273849735119, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeSizeBtnOff: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   isFileSystemOpen: 0
@@ -728,7 +728,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCutScene: {fileID: 0}
-  previous: {fileID: 11400000, guid: 30372cee5058183469433cd5583a8fa4, type: 2}
   currentCutNum: 0
   currentTextNum: 0
   cutScenes:
