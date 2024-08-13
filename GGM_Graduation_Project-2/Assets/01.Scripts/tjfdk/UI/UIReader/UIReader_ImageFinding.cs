@@ -80,6 +80,7 @@ public class UIReader_ImageFinding : MonoBehaviour
                 // create uxml
                 VisualElement imagePanel = UIReader_Main.Instance.RemoveContainer(ux_imageGround.Instantiate());
                 imagePanel.Q<VisualElement>("ImageGround").style.backgroundImage = new StyleBackground(image.image);
+                imagePanel.Q<Label>("Count").text = image.pngName.Count.ToString();
 
                 imagePanel.Q<Button>("ImageGround").clicked += () => 
                     { if (ui_description != null) ui_description.parent.Remove(ui_description); ui_description = null; };
