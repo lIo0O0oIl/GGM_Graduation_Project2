@@ -73,6 +73,8 @@ public class ChatHumanManager : MonoBehaviour
 
     public void NextChat()
     {
+        Debug.Log("실행은되는중.ㄴ");
+
         // node list
         var children = chatContainer.GetChatTree().GetChild(currentNode);
 
