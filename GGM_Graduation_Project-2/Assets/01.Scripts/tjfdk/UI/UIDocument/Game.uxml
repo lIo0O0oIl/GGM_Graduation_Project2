@@ -174,7 +174,7 @@
                         <ui:Label tabindex="-1" text="개발중입니다." display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/07.%20Font/DungGeunMo%20TTF/DungGeunMo.ttf?fileID=12800000&amp;guid=ac8392ea6f9e97949882302322851c02&amp;type=3#DungGeunMo&apos;); font-size: 75px; position: relative; -unity-text-align: middle-center; top: 10px;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="FileSystem" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row-reverse; flex-basis: 300px;">
+                <ui:VisualElement name="FileSystem" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row-reverse; flex-basis: 310px;">
                     <ui:VisualElement name="Ground" class="BackGround" style="flex-basis: initial; flex-grow: 1; width: 100%; max-width: none; min-width: auto; display: flex;">
                         <ui:VisualElement name="FileSystemGround" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: auto;">
                             <ui:VisualElement name="FilePath" style="flex-grow: 1; background-color: rgb(54, 54, 54); width: 100%; height: 5%; align-self: auto; align-items: auto; flex-direction: row; flex-wrap: nowrap; justify-content: flex-start; border-bottom-width: 5px; border-left-color: rgb(203, 203, 203); border-right-color: rgb(203, 203, 203); border-top-color: rgb(203, 203, 203); border-bottom-color: rgb(203, 203, 203);">
