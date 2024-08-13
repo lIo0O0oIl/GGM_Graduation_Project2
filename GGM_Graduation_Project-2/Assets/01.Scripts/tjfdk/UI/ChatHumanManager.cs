@@ -58,8 +58,11 @@ public class ChatHumanManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            GoChat();
+        if (UIReader_Main.Instance.NextChatBtn.focusable == false)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+                GoChat();
+        }
     }
 
     public void GoChat()

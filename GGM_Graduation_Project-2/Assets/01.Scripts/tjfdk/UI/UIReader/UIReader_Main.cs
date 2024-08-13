@@ -27,6 +27,7 @@ public class UIReader_Main : MonoBehaviour
     public Button chattingButton;
     public Button connectionButton;
     public Button settingButton;
+    public Button NextChatBtn;
 
     // Panel
     private VisualElement mainPanel;
@@ -86,6 +87,8 @@ public class UIReader_Main : MonoBehaviour
 
         settingButton = root.Q<Button>("SoundSettingBtn");
         settingButton.clicked += () => { OpenPanel(EPanel.SETTING); };
+
+        NextChatBtn = root.Q<Button>("NextChatBtn");
 
         root.Q<Button>("QuitBtn").clicked += () => { OpenPanel(EPanel.QUIT); };
     }
