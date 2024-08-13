@@ -42,6 +42,8 @@ public class UIReader_Main : MonoBehaviour
 
     public Tween currentTextTween;
     public string currentText;
+
+    private Vector2 originalPosition;
     public Label currentTextUi;
 
     public Tween currentUiTween;
@@ -161,6 +163,8 @@ public class UIReader_Main : MonoBehaviour
         int previousTextLength = -1;
 
         currentTextUi = ui;
+        originalPosition = currentTextUi.transform.position;
+
         currentText = text;
 
         ui.text = "";
@@ -297,6 +301,7 @@ public class UIReader_Main : MonoBehaviour
             currentTextTween.Kill();
             currentUiTween.Kill();
             currentTextUi.text = currentText;
+            currentTextUi.transform.position = originalPosition;
             GameManager.Instance.cutSceneManager.currentTextNum++;
         }
     }
