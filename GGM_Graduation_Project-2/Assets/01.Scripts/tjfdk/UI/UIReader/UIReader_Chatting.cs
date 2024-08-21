@@ -537,107 +537,108 @@ public class UIReader_Chatting : MonoBehaviour
         }
     }
 
+    // chat event - highligh, hyperlink, whisper
     private void EventChatText(VisualElement chat, string text)
     {
-        if (text.Contains("*"))
+        List<(string text, bool isHighlight, bool isHyperlink, string hyperlink)> segments = new List<(string, bool, bool, string)>();
+
+        bool isHighlight = false;
+        foreach (var segment in text.Split('*'))
         {
-            string[] segments = text.Split('*');
-            bool isHighlight = false;
-
-            foreach (var segment in segments)
+            if (isHighlight)
             {
-                if (string.IsNullOrEmpty(segment))
-                {
-                    isHighlight = !isHighlight;
-                    continue;
-                }
+                segments.Add((segment, true, false, null));
+            }
+            else
+            {
+                segments.AddRange(SplitHyperlinks(segment));
+            }
+            isHighlight = !isHighlight;
+        }
 
-                if (isHighlight)
+        foreach (var (segmentText, highlight, hyperlink, link) in segments)
+        {
+            if (highlight)
+            {
+                Label highlightedLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
+                highlightedLabel.text = segmentText;
+                chat.Add(highlightedLabel);
+            }
+            else if (hyperlink)
+            {
+                Button textButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate())?.Q<Button>();
+
+                if (textButton != null)
                 {
-                    Label highlightedLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
-                    highlightedLabel.text = segment;
-                    chat.Add(highlightedLabel);
+                    Label textLabel = textButton.Q<Label>();
+                    textLabel.text = segmentText;
+
+                    textButton.RegisterCallback<MouseEnterEvent>(evt =>
+                    {
+                        textLabel.style.color = new UnityEngine.Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
+                    });
+
+                    textButton.RegisterCallback<MouseLeaveEvent>(evt =>
+                    {
+                        textLabel.style.color = new UnityEngine.Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
+                    });
+
+                    textButton.RegisterCallback<ClickEvent>(evt =>
+                    {
+                        UIReader_FileSystem.Instance.HyperLinkEvent(link);
+                    });
+
+                    chat.Add(textButton);
                 }
                 else
                 {
-                    Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
-                    textLabel.text = segment;
-                    chat.Add(textLabel);
+                    Debug.LogWarning("인스턴스화가 안 됨");
                 }
-
-                isHighlight = !isHighlight;
             }
-        }
-        else if (text.Contains("/"))
-        {
-            string[] segments = text.Split('/');
-            bool isHyperlink = false;
-
-            foreach (var segment in segments)
+            else
             {
-                if (isHyperlink)
-                {
-                    string removeSegment = segment;
-                    string insideParentheses = "";
-
-                    if (segment.Contains("[") && segment.Contains("]"))
-                    {
-                        int startIndex = segment.IndexOf("[") + 1;
-                        int endIndex = segment.IndexOf("]");
-                        if (startIndex < endIndex)
-                        {
-                            insideParentheses = segment.Substring(startIndex, endIndex - startIndex);
-
-                            removeSegment = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
-                        }
-                    }
-
-                    Button textButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate())?.Q<Button>();
-
-                    if (textButton != null)
-                    {
-                        Label textLabel = textButton.Q<Label>();
-                        textLabel.text = removeSegment;
-
-                        textButton.RegisterCallback<MouseEnterEvent>(evt =>
-                        {
-                            textLabel.style.color = new UnityEngine.Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
-                        });
-
-                        textButton.RegisterCallback<MouseLeaveEvent>(evt =>
-                        {
-                            textLabel.style.color = new UnityEngine.Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
-                        });
-
-                        textButton.RegisterCallback<ClickEvent>(evt =>
-                        {
-                            UIReader_FileSystem.Instance.HyperLinkEvent(insideParentheses);
-                        });
-
-                        chat.Add(textButton);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Failed to instantiate textButton from RemoveContainer.");
-                    }
-                }
-                else
-                {
-                    Label textb = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate())?.Q<Label>();
-                    textb.text = segment;
-                    chat.Add(textb);
-                }
-
-                isHyperlink = !isHyperlink;
+                Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
+                textLabel.text = segmentText;
+                chat.Add(textLabel);
             }
-        }
-        else
-        {
-            Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
-            textLabel.text = text;
-            chat.Add(textLabel);
         }
     }
+
+    private List<(string text, bool isHighlight, bool isHyperlink, string hyperlink)> SplitHyperlinks(string text)
+    {
+        List<(string, bool, bool, string)> segments = new List<(string, bool, bool, string)>();
+
+        bool isHyperlink = false;
+        foreach (var segment in text.Split('/'))
+        {
+            if (isHyperlink)
+            {
+                string removeSegment = segment;
+                string insideParentheses = "";
+
+                if (segment.Contains("[") && segment.Contains("]"))
+                {
+                    int startIndex = segment.IndexOf("[") + 1;
+                    int endIndex = segment.IndexOf("]");
+                    if (startIndex < endIndex)
+                    {
+                        insideParentheses = segment.Substring(startIndex, endIndex - startIndex);
+                        removeSegment = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
+                    }
+                }
+
+                segments.Add((removeSegment, false, true, insideParentheses));
+            }
+            else
+            {
+                segments.Add((segment, false, false, null));
+            }
+            isHyperlink = !isHyperlink;
+        }
+
+        return segments;
+    }
+
 
     private void RecordChat(EChatState who, string toWho, EChatType type, string msg, bool isQuestion = false)
     {
