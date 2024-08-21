@@ -190,12 +190,6 @@ public class UIReader_FileSystem : MonoBehaviour
                                 }
                             }
                         }
-
-                        beforeSlot.Add(target);
-                    }
-                    else
-                    {
-                        beforeSlot.Add(target);
                     }
                 }
 
@@ -232,10 +226,9 @@ public class UIReader_FileSystem : MonoBehaviour
 
                     GameManager.Instance.relationshipSystem.EvidenceCheck(area);
                 }
-                beforeSlot.Add(target);
             }
-            else
-                beforeSlot.Add(target);
+
+            beforeSlot.Add(target);
         },
         () => { action(); }
         ));

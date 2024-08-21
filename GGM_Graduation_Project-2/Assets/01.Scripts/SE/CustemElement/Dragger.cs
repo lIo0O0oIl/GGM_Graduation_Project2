@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,10 +16,25 @@ namespace ChatVisual
         private VisualElement _beforeSlot;
         private float _lastClickTime;
         private float _doubleClickThreshold = 0.5f;
+        private float _holdClickThreshold = 0.5f;
         public bool _doubleClickInitiated = false;
 
         private bool is_MouseDown = false;
         private MouseDownEvent _evt;
+
+        private Charging _charging;
+
+        private Charging charging
+        {
+            get
+            {
+                if (_charging == null)
+                {
+                    _charging = GameObject.Find("Game").GetComponent<Charging>();
+                }
+                return _charging;
+            }
+        }
 
         public Dragger(Action<MouseUpEvent, VisualElement, VisualElement> DropCallback, Action ClickCallback)
         {
@@ -45,6 +61,8 @@ namespace ChatVisual
         {
             if (CanStartManipulation(evt))
             {
+                charging.isFile = true;
+
                 if (Time.time - _lastClickTime <= _doubleClickThreshold)
                 {
                     _isDrag = false;
@@ -104,6 +122,8 @@ namespace ChatVisual
 
         protected void OnMouseUp(MouseUpEvent evt)
         {
+            charging.isFile = false;
+
             is_MouseDown = false;
             GameManager.Instance.StopCoroutine(CheckMouseHold());
             if (_isDrag)
@@ -140,7 +160,7 @@ namespace ChatVisual
 
         IEnumerator CheckMouseHold()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_holdClickThreshold);
             if (is_MouseDown)
             {
                 StartDrag(_evt);
