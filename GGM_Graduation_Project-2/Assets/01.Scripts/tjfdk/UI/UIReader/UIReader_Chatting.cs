@@ -537,106 +537,156 @@ public class UIReader_Chatting : MonoBehaviour
         }
     }
 
+    // chat event - highligh, hyperlink, whisper
     private void EventChatText(VisualElement chat, string text)
     {
-        if (text.Contains("*"))
+        var segments = ParseTextSegments(text);
+
+        foreach (var (segmentText, highlight, hyperlink, link, whisper) in segments)
         {
-            string[] segments = text.Split('*');
-            bool isHighlight = false;
-
-            foreach (var segment in segments)
+            if (whisper)
             {
-                if (string.IsNullOrEmpty(segment))
-                {
-                    isHighlight = !isHighlight;
-                    continue;
-                }
-
-                if (isHighlight)
-                {
-                    Label highlightedLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
-                    highlightedLabel.text = segment;
-                    chat.Add(highlightedLabel);
-                }
-                else
-                {
-                    Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
-                    textLabel.text = segment;
-                    chat.Add(textLabel);
-                }
-
-                isHighlight = !isHighlight;
+                AddWhisperText(chat, segmentText);
+            }
+            else if (highlight)
+            {
+                AddHighlightedText(chat, segmentText);
+            }
+            else if (hyperlink)
+            {
+                AddHyperlinkText(chat, segmentText, link);
+            }
+            else
+            {
+                AddNormalText(chat, segmentText);
             }
         }
-        else if (text.Contains("/"))
+    }
+
+    private List<(string text, bool isHighlight, bool isHyperlink, string hyperlink, bool isWhisper)> ParseTextSegments(string text)
+    {
+        var segments = new List<(string, bool, bool, string, bool)>();
+        bool isWhisper = false, isHighlight = false, isHyperlink = false;
+
+        foreach (var whisperSegment in text.Split('$'))
         {
-            string[] segments = text.Split('/');
-            bool isHyperlink = false;
-
-            foreach (var segment in segments)
+            if (isWhisper)
             {
-                if (isHyperlink)
+                segments.Add((whisperSegment, false, false, null, true));
+            }
+            else
+            {
+                foreach (var segment in whisperSegment.Split('*'))
                 {
-                    string removeSegment = segment;
-                    string insideParentheses = "";
-
-                    if (segment.Contains("[") && segment.Contains("]"))
+                    if (isHighlight)
                     {
-                        int startIndex = segment.IndexOf("[") + 1;
-                        int endIndex = segment.IndexOf("]");
-                        if (startIndex < endIndex)
-                        {
-                            insideParentheses = segment.Substring(startIndex, endIndex - startIndex);
-
-                            removeSegment = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
-                        }
-                    }
-
-                    Button textButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate())?.Q<Button>();
-
-                    if (textButton != null)
-                    {
-                        Label textLabel = textButton.Q<Label>();
-                        textLabel.text = removeSegment;
-
-                        textButton.RegisterCallback<MouseEnterEvent>(evt =>
-                        {
-                            textLabel.style.color = new UnityEngine.Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
-                        });
-
-                        textButton.RegisterCallback<MouseLeaveEvent>(evt =>
-                        {
-                            textLabel.style.color = new UnityEngine.Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
-                        });
-
-                        textButton.RegisterCallback<ClickEvent>(evt =>
-                        {
-                            UIReader_FileSystem.Instance.HyperLinkEvent(insideParentheses);
-                        });
-
-                        chat.Add(textButton);
+                        segments.Add((segment, true, false, null, false));
                     }
                     else
                     {
-                        Debug.LogWarning("Failed to instantiate textButton from RemoveContainer.");
+                        segments.AddRange(ParseHyperlinks(segment));
                     }
+                    isHighlight = !isHighlight;
                 }
-                else
+            }
+            isWhisper = !isWhisper;
+        }
+
+        return segments;
+    }
+
+    private List<(string text, bool isHighlight, bool isHyperlink, string hyperlink, bool isWhisper)> ParseHyperlinks(string text)
+    {
+        var segments = new List<(string, bool, bool, string, bool)>();
+        bool isHyperlink = false;
+
+        foreach (var segment in text.Split('/'))
+        {
+            if (isHyperlink)
+            {
+                string linkText = segment;
+                string hyperlink = null;
+
+                if (segment.Contains("[") && segment.Contains("]"))
                 {
-                    Label textb = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate())?.Q<Label>();
-                    textb.text = segment;
-                    chat.Add(textb);
+                    int startIndex = segment.IndexOf("[") + 1;
+                    int endIndex = segment.IndexOf("]");
+                    hyperlink = segment.Substring(startIndex, endIndex - startIndex);
+                    linkText = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
                 }
 
-                isHyperlink = !isHyperlink;
+                segments.Add((linkText, false, true, hyperlink, false));
             }
+            else
+            {
+                segments.Add((segment, false, false, null, false));
+            }
+            isHyperlink = !isHyperlink;
         }
-        else
+
+        return segments;
+    }
+
+    // Whisper 
+    private void AddWhisperText(VisualElement chat, string segmentText)
+    {
+        for (int i = 0; i < segmentText.Length; i++)
         {
-            Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
-            textLabel.text = text;
-            chat.Add(textLabel);
+            Label whisperLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
+
+            float grayScale = 0.2f + (0.7f * i / (segmentText.Length - 1));
+            int grayScaleValue = (int)(grayScale * 255);
+
+            whisperLabel.style.color = new Color(grayScaleValue / 255f, grayScaleValue / 255f, grayScaleValue / 255f, 1f);
+            whisperLabel.text = segmentText[i].ToString();
+
+            chat.Add(whisperLabel);
         }
+    }
+
+    // Highlight
+    private void AddHighlightedText(VisualElement chat, string segmentText)
+    {
+        Label highlightedLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
+        highlightedLabel.text = segmentText;
+        chat.Add(highlightedLabel);
+    }
+
+    // Hyperlink
+    private void AddHyperlinkText(VisualElement chat, string segmentText, string hyperlink)
+    {
+        Button textButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate())?.Q<Button>();
+
+        if (textButton != null)
+        {
+            Label textLabel = textButton.Q<Label>();
+            textLabel.text = segmentText;
+
+            textButton.RegisterCallback<MouseEnterEvent>(evt =>
+            {
+                textLabel.style.color = new Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
+            });
+
+            textButton.RegisterCallback<MouseLeaveEvent>(evt =>
+            {
+                textLabel.style.color = new Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
+            });
+
+            textButton.RegisterCallback<ClickEvent>(evt =>
+            {
+                UIReader_FileSystem.Instance.HyperLinkEvent(hyperlink);
+            });
+
+            chat.Add(textButton);
+        }
+    }
+
+    // narmal text 
+    private void AddNormalText(VisualElement chat, string segmentText)
+    {
+        Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
+        textLabel.text = segmentText;
+        chat.Add(textLabel);
     }
 
     private void RecordChat(EChatState who, string toWho, EChatType type, string msg, bool isQuestion = false)
