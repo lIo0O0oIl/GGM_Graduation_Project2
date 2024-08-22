@@ -540,98 +540,86 @@ public class UIReader_Chatting : MonoBehaviour
     // chat event - highligh, hyperlink, whisper
     private void EventChatText(VisualElement chat, string text)
     {
-        List<(string text, bool isHighlight, bool isHyperlink, string hyperlink)> segments = new List<(string, bool, bool, string)>();
+        var segments = ParseTextSegments(text);
 
-        bool isHighlight = false;
-        foreach (var segment in text.Split('*'))
+        foreach (var (segmentText, highlight, hyperlink, link, whisper) in segments)
         {
-            if (isHighlight)
+            if (whisper)
             {
-                segments.Add((segment, true, false, null));
+                AddWhisperText(chat, segmentText);
             }
-            else
+            else if (highlight)
             {
-                segments.AddRange(SplitHyperlinks(segment));
-            }
-            isHighlight = !isHighlight;
-        }
-
-        foreach (var (segmentText, highlight, hyperlink, link) in segments)
-        {
-            if (highlight)
-            {
-                Label highlightedLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
-                highlightedLabel.text = segmentText;
-                chat.Add(highlightedLabel);
+                AddHighlightedText(chat, segmentText);
             }
             else if (hyperlink)
             {
-                Button textButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate())?.Q<Button>();
-
-                if (textButton != null)
-                {
-                    Label textLabel = textButton.Q<Label>();
-                    textLabel.text = segmentText;
-
-                    textButton.RegisterCallback<MouseEnterEvent>(evt =>
-                    {
-                        textLabel.style.color = new UnityEngine.Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
-                    });
-
-                    textButton.RegisterCallback<MouseLeaveEvent>(evt =>
-                    {
-                        textLabel.style.color = new UnityEngine.Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
-                    });
-
-                    textButton.RegisterCallback<ClickEvent>(evt =>
-                    {
-                        UIReader_FileSystem.Instance.HyperLinkEvent(link);
-                    });
-
-                    chat.Add(textButton);
-                }
-                else
-                {
-                    Debug.LogWarning("인스턴스화가 안 됨");
-                }
+                AddHyperlinkText(chat, segmentText, link);
             }
             else
             {
-                Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
-                textLabel.text = segmentText;
-                chat.Add(textLabel);
+                AddNormalText(chat, segmentText);
             }
         }
     }
 
-    private List<(string text, bool isHighlight, bool isHyperlink, string hyperlink)> SplitHyperlinks(string text)
+    private List<(string text, bool isHighlight, bool isHyperlink, string hyperlink, bool isWhisper)> ParseTextSegments(string text)
     {
-        List<(string, bool, bool, string)> segments = new List<(string, bool, bool, string)>();
+        var segments = new List<(string, bool, bool, string, bool)>();
+        bool isWhisper = false, isHighlight = false, isHyperlink = false;
 
+        foreach (var whisperSegment in text.Split('$'))
+        {
+            if (isWhisper)
+            {
+                segments.Add((whisperSegment, false, false, null, true));
+            }
+            else
+            {
+                foreach (var segment in whisperSegment.Split('*'))
+                {
+                    if (isHighlight)
+                    {
+                        segments.Add((segment, true, false, null, false));
+                    }
+                    else
+                    {
+                        segments.AddRange(ParseHyperlinks(segment));
+                    }
+                    isHighlight = !isHighlight;
+                }
+            }
+            isWhisper = !isWhisper;
+        }
+
+        return segments;
+    }
+
+    private List<(string text, bool isHighlight, bool isHyperlink, string hyperlink, bool isWhisper)> ParseHyperlinks(string text)
+    {
+        var segments = new List<(string, bool, bool, string, bool)>();
         bool isHyperlink = false;
+
         foreach (var segment in text.Split('/'))
         {
             if (isHyperlink)
             {
-                string removeSegment = segment;
-                string insideParentheses = "";
+                string linkText = segment;
+                string hyperlink = null;
 
                 if (segment.Contains("[") && segment.Contains("]"))
                 {
                     int startIndex = segment.IndexOf("[") + 1;
                     int endIndex = segment.IndexOf("]");
-                    if (startIndex < endIndex)
-                    {
-                        insideParentheses = segment.Substring(startIndex, endIndex - startIndex);
-                        removeSegment = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
-                    }
+                    hyperlink = segment.Substring(startIndex, endIndex - startIndex);
+                    linkText = segment.Remove(startIndex - 1, endIndex - startIndex + 2);
                 }
 
-                segments.Add((removeSegment, false, true, insideParentheses));
+                segments.Add((linkText, false, true, hyperlink, false));
             }
             else
             {
-                segments.Add((segment, false, false, null));
+                segments.Add((segment, false, false, null, false));
             }
             isHyperlink = !isHyperlink;
         }
@@ -639,6 +627,67 @@ public class UIReader_Chatting : MonoBehaviour
         return segments;
     }
 
+    // Whisper 
+    private void AddWhisperText(VisualElement chat, string segmentText)
+    {
+        for (int i = 0; i < segmentText.Length; i++)
+        {
+            Label whisperLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
+
+            float grayScale = 0.2f + (0.7f * i / (segmentText.Length - 1));
+            int grayScaleValue = (int)(grayScale * 255);
+
+            whisperLabel.style.color = new Color(grayScaleValue / 255f, grayScaleValue / 255f, grayScaleValue / 255f, 1f);
+            whisperLabel.text = segmentText[i].ToString();
+
+            chat.Add(whisperLabel);
+        }
+    }
+
+    // Highlight
+    private void AddHighlightedText(VisualElement chat, string segmentText)
+    {
+        Label highlightedLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
+        highlightedLabel.text = segmentText;
+        chat.Add(highlightedLabel);
+    }
+
+    // Hyperlink
+    private void AddHyperlinkText(VisualElement chat, string segmentText, string hyperlink)
+    {
+        Button textButton = UIReader_Main.Instance.RemoveContainer(ux_button.Instantiate())?.Q<Button>();
+
+        if (textButton != null)
+        {
+            Label textLabel = textButton.Q<Label>();
+            textLabel.text = segmentText;
+
+            textButton.RegisterCallback<MouseEnterEvent>(evt =>
+            {
+                textLabel.style.color = new Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
+            });
+
+            textButton.RegisterCallback<MouseLeaveEvent>(evt =>
+            {
+                textLabel.style.color = new Color(0f / 255f, 112f / 255f, 255f / 255f, 255f / 255f);
+            });
+
+            textButton.RegisterCallback<ClickEvent>(evt =>
+            {
+                UIReader_FileSystem.Instance.HyperLinkEvent(hyperlink);
+            });
+
+            chat.Add(textButton);
+        }
+    }
+
+    // narmal text 
+    private void AddNormalText(VisualElement chat, string segmentText)
+    {
+        Label textLabel = UIReader_Main.Instance.RemoveContainer(ux_text.Instantiate()).Q<Label>();
+        textLabel.text = segmentText;
+        chat.Add(textLabel);
+    }
 
     private void RecordChat(EChatState who, string toWho, EChatType type, string msg, bool isQuestion = false)
     {
