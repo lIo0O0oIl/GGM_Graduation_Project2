@@ -16,15 +16,11 @@ public class AddEvidence : MonoBehaviour
             EvidenceFile evidence = eventData.pointerDrag.GetComponent<EvidenceFile>();
             if (evidence.IsUseable)
             {
-                Debug.Log("아앗 개 지리는 단서다!");
-
                 //GameObject temp = Instantiate(evidencePanel);
                 //temp.GetComponent<EvidencePanel>().
 
                 //TextBox.Instance.InputFile(true, temp, evidence.Type);
             }
-            else
-                Debug.Log("크킄 의미 없는 단서죠?");
 
             //upload.SetActive(false);
         }
