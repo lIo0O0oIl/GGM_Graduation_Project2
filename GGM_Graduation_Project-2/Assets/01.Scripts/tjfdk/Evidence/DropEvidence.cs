@@ -16,8 +16,6 @@ public class DropEvidence : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
         //    EvidenceFile evidence = eventData.pointerDrag.GetComponent<EvidenceFile>();
         //    if (evidence.IsUseable)
         //    {
-        //        Debug.Log("아앗 개 지리는 단서다!");
-
         //        GameObject temp = new GameObject();
         //        if (evidence.Type == "Image")
         //            temp.AddComponent<Image>().sprite = evidence.Spriet;
@@ -26,8 +24,6 @@ public class DropEvidence : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
 
         //        TextBox.Instance.InputFile(true, temp, evidence.Type);
         //    }
-        //    else
-        //        Debug.Log("크킄 의미 없는 단서죠?");
 
         //    upload.SetActive(false);
         //}
