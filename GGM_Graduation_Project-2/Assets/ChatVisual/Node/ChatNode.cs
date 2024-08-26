@@ -11,7 +11,7 @@ namespace ChatVisual
         public List<Node> childList = new List<Node>();
 
         public EChatState state;
-        public EChatType type = EChatType.Text;
+        public EChatType type = EChatType.Chat;
         public string chatText;    
         public EFace face; 
 

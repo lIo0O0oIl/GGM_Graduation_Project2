@@ -180,7 +180,7 @@ public class UIReader_Chatting : MonoBehaviour
         // chat type
         switch (type)
         {
-            case EChatType.Text:
+            case EChatType.Chat:
             case EChatType.Question:
                 // create uxml
                 chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
@@ -196,7 +196,7 @@ public class UIReader_Chatting : MonoBehaviour
                 // image size change
                 UIReader_Main.Instance.ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
                 break;
-            case EChatType.TextFile:
+            case EChatType.Text:
                 // create visualElement
                 chat = UIReader_Main.Instance.RemoveContainer(ux_textFile.Instantiate());
                 chat.name = "textFile";
@@ -265,7 +265,7 @@ public class UIReader_Chatting : MonoBehaviour
         // find member
         MemberProfile member = FindMember(toWho.ToString());
         // chat type
-        EChatType type = EChatType.Text;
+        EChatType type = EChatType.Chat;
 
         if (!isLock)
         {
@@ -647,7 +647,7 @@ public class UIReader_Chatting : MonoBehaviour
         // chatting setting
         switch (type)
         {
-            case EChatType.Text:
+            case EChatType.Chat:
             case EChatType.Image:
             case EChatType.CutScene:
                 {
