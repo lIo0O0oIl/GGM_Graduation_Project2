@@ -746,7 +746,7 @@ public class UIReader_Chatting : MonoBehaviour
                 Debug.Log("컷씬이다!!");
                 if (GameManager.Instance.cutSceneManager.FindCutScene(chatNode.chatText))
                 {
-                    Debug.Log("자동 컷씬 ㅋ");
+                    Debug.Log("자동 컷씬");
                     GameManager.Instance.chatHumanManager.currentMember.currentNode = chatNode.childList[0];
                 }
                 else
@@ -759,7 +759,7 @@ public class UIReader_Chatting : MonoBehaviour
         }
         else
         {
-            Debug.Log("컷씬아님1");
+            Debug.Log("컷씬아님");
             if (test)
             {
                 if (member.currentAskNode != null)
