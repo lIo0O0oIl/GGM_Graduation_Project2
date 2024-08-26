@@ -34,13 +34,11 @@ public class UIReader_MenuScene : MonoBehaviour
 
 /*    public void OnStart()
     {
-        Debug.Log("dk");
         UIManager.Instance.SceneChange("Game");
     }
 
     public void OnExit()
     {
-        Debug.Log("나가");
         UIManager.Instance.Exit();
     }*/
 
