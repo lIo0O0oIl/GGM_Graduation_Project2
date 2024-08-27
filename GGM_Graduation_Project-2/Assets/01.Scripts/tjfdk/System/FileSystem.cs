@@ -32,9 +32,9 @@ public class FolderFile
     }
 }
 
-public class UIReader_FileSystem : MonoBehaviour
+public class FileSystem : MonoBehaviour
 {
-    static public UIReader_FileSystem Instance;
+    static public FileSystem Instance;
 
     public bool isPathClick = false;
 

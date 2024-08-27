@@ -9,11 +9,11 @@ using UnityEngine.UIElements;
 public class GameManager : Singleton<GameManager>
 {
     [Header("UI Manager")]
-    public UIReader_CutScene cutSceneSystem;
-    public UIReader_Chatting chatSystem;
+    public CutScene cutSceneSystem;
+    public Chatting chatSystem;
     public UIReader_Relationship relationshipSystem;
-    public UIReader_FileSystem fileSystem;
-    public UIReader_ImageFinding imageSystem;
+    public FileSystem fileSystem;
+    public Investigation imageSystem;
 
     [Header("Manager")]
     public ChatHumanManager chatHumanManager;

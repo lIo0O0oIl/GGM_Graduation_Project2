@@ -6,14 +6,14 @@ namespace ChatVisual
 {
     public class Default
     {
-        EChatState who;
         string text;
-        EChatType type;
         bool isUse, isRead;
     }
 
     public class Chat : Default
     {
+        EChatState who;
+        EChatType type;
         string[] fildLoad;
         EFace face;
         EChatEvent evt;
@@ -21,15 +21,15 @@ namespace ChatVisual
 
     public class Question : Default
     {
+        EChatType type;
         string[] fildLoad;
         string nextName;
-        EFace face;
-        EChatEvent evt;
     }
 
     public class Condition : Default
     {
-        string location;
+        ECdtType type;
+        List<Question> asks = new List<Question>();
     }
 
     public enum ESaveLocation
@@ -63,10 +63,21 @@ namespace ChatVisual
         Image,
         Text,
         CutScene,
-        Question,
+        Question
+    }
+
+    public enum EAskType
+    {
+        Common,
+        Answer,
+        NoAnswer
+    }
+
+    public enum ECdtType
+    {
+        AllQuestion,
         Specific,
         LockQuestion,
-        AllQuestion,
         YesOrNot
     }
 
@@ -83,17 +94,9 @@ namespace ChatVisual
         Default,
         Vibration,
         OneVibration,
-        Camera,
-        LoadFile,
-        LoadNextDialog
+        Camera
     }
 
-    public enum EAskType
-    {
-        Common,
-        Answer,
-        NoAnswer
-    }
 
 /*    [Serializable]
     public class Chat 

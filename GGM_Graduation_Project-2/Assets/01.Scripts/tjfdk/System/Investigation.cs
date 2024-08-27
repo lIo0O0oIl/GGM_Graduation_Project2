@@ -1,17 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net.NetworkInformation;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using UnityEngine.U2D;
 using UnityEngine.UIElements;
 
-public class UIReader_ImageFinding : MonoBehaviour
+public class Investigation : MonoBehaviour
 {
     // root
     VisualElement root;

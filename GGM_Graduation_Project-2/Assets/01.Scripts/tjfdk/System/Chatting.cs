@@ -32,7 +32,7 @@ public class MemberProfile
     public AskNode currentAskNode;
 }
 
-public class UIReader_Chatting : MonoBehaviour
+public class Chatting : MonoBehaviour
 {
     [Header("Member")]
     [SerializeField] List<MemberProfile> members = new List<MemberProfile>();
@@ -434,15 +434,15 @@ public class UIReader_Chatting : MonoBehaviour
             {
                 switch (evts[i])
                 {
-                    case EChatEvent.LoadFile:
-                        {
-                            FileSO file = GameManager.Instance.fileManager.FindFile(chatNode.loadFileName[i]);
-                            if (file != null)
-                                GameManager.Instance.fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
-                            else
-                                Debug.Log("this file not exist");
-                        }
-                        break;
+                    //case EChatEvent.LoadFile:
+                    //    {
+                    //        FileSO file = GameManager.Instance.fileManager.FindFile(chatNode.loadFileName[i]);
+                    //        if (file != null)
+                    //            GameManager.Instance.fileSystem.AddFile(file.fileType, file.fileName, file.fileParentName);
+                    //        else
+                    //            Debug.Log("this file not exist");
+                    //    }
+                    //    break;
                     case EChatEvent.Vibration:
                         {
                             Vector3 originalPosition = currentElement.transform.position;
@@ -674,7 +674,7 @@ public class UIReader_Chatting : MonoBehaviour
 
             textButton.RegisterCallback<ClickEvent>(evt =>
             {
-                UIReader_FileSystem.Instance.HyperLinkEvent(hyperlink);
+                FileSystem.Instance.HyperLinkEvent(hyperlink);
             });
 
             chat.Add(textButton);

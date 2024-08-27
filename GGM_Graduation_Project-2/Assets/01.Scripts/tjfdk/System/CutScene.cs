@@ -6,7 +6,7 @@ using DG.Tweening;
 using System.Linq;
 using System;
 
-public class UIReader_CutScene : MonoBehaviour
+public class CutScene : MonoBehaviour
 {
     Button scene;
     Label text;
