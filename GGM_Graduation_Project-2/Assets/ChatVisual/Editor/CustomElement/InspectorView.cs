@@ -124,14 +124,14 @@ namespace ChatVisual
                             int loadFileCount = 0;
                             for (int i = 0; i < chatEventList.Count; i++)
                             {
-                                if (chatEventList[i] == EChatEvent.LoadFile)
-                                {
-                                     loadFileCount++;
-                                }
-                                if (chatEventList[i] == EChatEvent.LoadNextDialog)
-                                {
-                                    is_LoadNextDialog = true;
-                                }
+                                //if (chatEventList[i] == EChatEvent.LoadFile)
+                                //{
+                                //     loadFileCount++;
+                                //}
+                                //if (chatEventList[i] == EChatEvent.LoadNextDialog)
+                                //{
+                                //    is_LoadNextDialog = true;
+                                //}
                             }
                             for (int i = 0; i < loadFileCount; i++)
                             {
@@ -179,10 +179,10 @@ namespace ChatVisual
                                 for (int i = 0; i < chatEventList.Count; ++i)
                                 {
                                     chatEventList[i] = (EChatEvent)EditorGUILayout.EnumPopup(chatEventList[i]);
-                                    if (chatEventList[i] == EChatEvent.LoadNextDialog)
-                                    {
-                                        is_LoadNextDialog = true;
-                                    }
+                                    //if (chatEventList[i] == EChatEvent.LoadNextDialog)
+                                    //{
+                                    //    is_LoadNextDialog = true;
+                                    //}
                                 }
                                 if (GUILayout.Button("Add Chat Event"))
                                 {

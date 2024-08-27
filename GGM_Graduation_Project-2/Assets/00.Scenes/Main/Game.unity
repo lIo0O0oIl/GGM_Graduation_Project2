@@ -748,6 +748,7 @@ MonoBehaviour:
   ux_evidenceExplanation: {fileID: 9197481963319205126, guid: 59e4ecba2e6007344b4cdeec523cead0, type: 3}
   ux_ImagePanel: {fileID: 9197481963319205126, guid: f6726c4728b3a814f82ddd84830328b8, type: 3}
   ux_TextPanel: {fileID: 9197481963319205126, guid: e8c60d51bb630034c9a05845955ac419, type: 3}
+  isImageOpen: 1
 --- !u!1 &1518757890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1248,7 @@ MonoBehaviour:
   wheelSpeed: 25
   scrollEndSpeed: 0.15
   isMemberListOpen: 0
+  isMouseOverButton: 0
   ux_text: {fileID: 9197481963319205126, guid: 7214ad9c964cfbe43bb36a1fe2d9ea0e, type: 3}
   ux_highlightedtext: {fileID: 9197481963319205126, guid: 4ee041c9c45728d47a43d9275dc3fcdd, type: 3}
   ux_button: {fileID: 9197481963319205126, guid: 208813f5d2e5d5f498fbbbd3e6d94f1e, type: 3}

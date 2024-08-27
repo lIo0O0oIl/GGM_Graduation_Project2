@@ -4,6 +4,34 @@ using UnityEngine;
 
 namespace ChatVisual
 {
+    public class Default
+    {
+        string text;
+        bool isUse, isRead;
+    }
+
+    public class Chat : Default
+    {
+        EChatState who;
+        EChatType type;
+        string[] fildLoad;
+        EFace face;
+        EChatEvent evt;
+    }
+
+    public class Question : Default
+    {
+        EChatType type;
+        string[] fildLoad;
+        string nextName;
+    }
+
+    public class Condition : Default
+    {
+        ECdtType type;
+        List<Question> asks = new List<Question>();
+    }
+
     public enum ESaveLocation
     {
         NotSave,
@@ -31,12 +59,26 @@ namespace ChatVisual
 
     public enum EChatType
     {
-        Text = 0,
+        Chat = 0,
         Image,
-        TextFile,
+        Text,
         CutScene,
-        Question,
-        LockQuestion
+        Question
+    }
+
+    public enum EAskType
+    {
+        Common,
+        Answer,
+        NoAnswer
+    }
+
+    public enum ECdtType
+    {
+        AllQuestion,
+        Specific,
+        LockQuestion,
+        YesOrNot
     }
 
     public enum EFace
@@ -52,17 +94,9 @@ namespace ChatVisual
         Default,
         Vibration,
         OneVibration,
-        Camera,
-        LoadFile,
-        LoadNextDialog
+        Camera
     }
 
-    public enum EAskType
-    {
-        Common,
-        Answer,
-        NoAnswer
-    }
 
 /*    [Serializable]
     public class Chat 

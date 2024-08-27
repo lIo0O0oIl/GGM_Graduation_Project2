@@ -33,15 +33,7 @@
 }
 
 .MyChat {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
     align-self: flex-end;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
     background-image: url('project://database/Assets/02.Sprites/Button/Chat.png?fileID=21300000&guid=e085a94efd6dc254482ed4b34fc42f4a&type=3#Chat');
 }
 
