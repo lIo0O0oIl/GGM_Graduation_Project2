@@ -182,7 +182,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150678874}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15bbbd968b924444191c81e323af6906, type: 3}
   m_Name: 
@@ -199,6 +199,7 @@ MonoBehaviour:
   imageManager: {fileID: 1207175532}
   is_tutorial: 1
   myFaec: {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
+  cutScenePlayIcon: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
 --- !u!114 &150678887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +271,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150678874}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66964fd372bf01b42a6aa7f52ef5108b, type: 3}
   m_Name: 
@@ -383,23 +384,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34011704b4b14504098dcfd848e9ebba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPathClick: 0
-  fileAreaSizeOn: 150
-  fileAreaSizeOff: 300
+--- !u!1 &484731577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 484731579}
+  - component: {fileID: 484731578}
+  m_Layer: 0
+  m_Name: SelectHumanSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &484731578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484731577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd1602abb18f8e48a88765a04ba6945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sizeOn: 350
+  sizeOff: 5
   changeSizeBtnOn: {fileID: -2236324273849735119, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
   changeSizeBtnOff: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
-  isFileSystemOpen: 0
-  ux_filePath: {fileID: 9197481963319205126, guid: d084b4306b8061540a874c5bc65ce1db, type: 3}
-  ux_fileGround: {fileID: 9197481963319205126, guid: 686b642fd19029f439c65c71961710fb, type: 3}
-  ux_folderFile: {fileID: 9197481963319205126, guid: 97d090321a49d2b4cb3770b8f1c42745, type: 3}
-  ux_imageFile: {fileID: 9197481963319205126, guid: 62d9a1e8d802fb84dbfd92f03b55e170, type: 3}
-  ux_textFile: {fileID: 9197481963319205126, guid: 11fa36b68714722449c3f829480f6ec8, type: 3}
-  currentFolderName: 
-  fileFolders: []
-  currentFileFolder:
-    folderName: 
-    parentFolderName: 
-  textFileSprite: {fileID: 0}
+--- !u!4 &484731579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484731577}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &594023513
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,11 +580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60a90a836d390c439310a8232a8b994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ux_imageGround: {fileID: 9197481963319205126, guid: 151fc6a00485a8b4fa3cbd171c4a41e2, type: 3}
-  ux_imageEvidence: {fileID: 9197481963319205126, guid: 9c545897f9c89ee44a64ba60abdb5167, type: 3}
-  ux_evidenceExplanation: {fileID: 9197481963319205126, guid: 59e4ecba2e6007344b4cdeec523cead0, type: 3}
-  ux_ImagePanel: {fileID: 9197481963319205126, guid: f6726c4728b3a814f82ddd84830328b8, type: 3}
-  ux_TextPanel: {fileID: 9197481963319205126, guid: e8c60d51bb630034c9a05845955ac419, type: 3}
 --- !u!1 &1663529864
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,34 +830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b7eefaa5f8df24ba5d2a3637293abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  members:
-  - name: Test
-    nickName: 11
-    currentFace: 0
-    faces:
-    - {fileID: 21300000, guid: 3bd66d5f57d14db4a916fd6cf0dbfe76, type: 3}
-    evidence:
-      spriteEvidence: []
-    isOpen: 0
-    chattings: []
-    questions: []
-    currentNode: {fileID: 0}
-    currentAskNode: {fileID: 0}
-  changeMemberBtnOn: {fileID: -1087164816274819069, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
-  changeMemberBtnOff: {fileID: -1304905567622442630, guid: 16f27281cac1a0141b962fbf7037ed3d, type: 3}
-  wheelSpeed: 25
-  scrollEndSpeed: 0.15
-  isMemberListOpen: 0
-  ux_text: {fileID: 9197481963319205126, guid: 7214ad9c964cfbe43bb36a1fe2d9ea0e, type: 3}
-  ux_highlightedtext: {fileID: 9197481963319205126, guid: 4ee041c9c45728d47a43d9275dc3fcdd, type: 3}
-  ux_button: {fileID: 9197481963319205126, guid: 208813f5d2e5d5f498fbbbd3e6d94f1e, type: 3}
-  ux_chat: {fileID: 9197481963319205126, guid: 790f5ecd05e5c664789ec66b990f0cee, type: 3}
-  ux_askChat: {fileID: 9197481963319205126, guid: eca624ffc6976be4cbe63439f47c4452, type: 3}
-  ux_hiddenAskChat: {fileID: 9197481963319205126, guid: 167b99bf43499a4418fb5d4f44cf9276, type: 3}
-  ux_textFile: {fileID: 9197481963319205126, guid: c9483a7051a65d14680722732c83e9e1, type: 3}
-  ux_memberList: {fileID: 9197481963319205126, guid: b8fd32671ecc31340bf018f921558420, type: 3}
-  duration: 1
-  strength: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -843,3 +842,4 @@ SceneRoots:
   - {fileID: 378627793}
   - {fileID: 1999584788}
   - {fileID: 1207175531}
+  - {fileID: 484731579}

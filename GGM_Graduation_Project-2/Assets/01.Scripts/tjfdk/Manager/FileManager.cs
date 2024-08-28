@@ -20,18 +20,6 @@ using UnityEngine;
 public class FileManager : MonoBehaviour
 {
     [SerializeField] List<FileSO> folderFiles = new List<FileSO>();
-    //public Dictionary<string, FileSO> folderFileList;
-
-    private void Awake()
-    {
-        //folderFileList = new Dictionary<string, FileSO>();
-    }
-
-    private void OnEnable()
-    {
-        //foreach (FileSO file in folderFiles)
-        //    folderFileList.Add(file.fileName, file);
-    }
 
     public FileSO FindFile(string name) 
     {

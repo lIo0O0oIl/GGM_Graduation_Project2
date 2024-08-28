@@ -387,6 +387,16 @@ public class UIReader_Main : MonoBehaviour
         }
     }
 
+    public VisualElement GetSelectHumanSystem()
+    {
+        return root.Q<VisualElement>("SelectHumanSystem");
+    }
+
+    public VisualElement GetTopBar()
+    {
+        return root.Q<VisualElement>("TopBar");
+    }
+
     public void MinusHP()
     {
         GameManager.Instance.fileSystem.ui_hpGround
