@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ChapterManager : MonoBehaviour
 {
@@ -46,7 +47,8 @@ public class ChapterManager : MonoBehaviour
 
     private void UpdateChapterPosition()
     {
-        chapter.anchoredPosition = new Vector2(currentChapterIndex * -chapterSpacing, chapter.anchoredPosition.y);
+        chapter.DOAnchorPosX(currentChapterIndex * -chapterSpacing, 0.5f).SetEase(Ease.OutCubic);
+
         UpdateChapterScales();
         UpdateUIState();
     }
@@ -56,7 +58,8 @@ public class ChapterManager : MonoBehaviour
         for (int i = 0; i < chapterList.Count; i++)
         {
             float distanceToCenter = Mathf.Abs(i - currentChapterIndex);
-            chapterList[i].localScale = distanceToCenter == 0 ? Vector3.one * scaleNormal : Vector3.one * scaleReduced;
+
+            chapterList[i].DOScale(distanceToCenter == 0 ? scaleNormal : scaleReduced, 0.5f).SetEase(Ease.OutCubic);
         }
     }
 
