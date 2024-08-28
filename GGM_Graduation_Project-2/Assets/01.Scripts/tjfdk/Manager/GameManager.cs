@@ -22,9 +22,10 @@ public class GameManager : Singleton<GameManager>
     public FileManager fileManager;
     public ImageManager imageManager;
 
+    [Header("SE")]
     [SerializeField] private bool is_tutorial = false;
     [SerializeField] private Sprite myFaec;
-
+    public Texture2D cutScenePlayIcon;
 
     private void Start()
     {
