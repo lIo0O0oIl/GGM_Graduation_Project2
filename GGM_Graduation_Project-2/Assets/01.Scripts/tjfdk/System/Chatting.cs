@@ -82,14 +82,6 @@ public class Chatting : MonoBehaviour
     public float strength = 1; // 얼마나 멀리로 흔들리는지
     private VisualElement currentElement;
 
-    private void Awake()
-    {
-    }
-
-    private void Update()
-    {
-    }
-
     private void OnEnable()
     {
         UXML_Load();
@@ -182,53 +174,67 @@ public class Chatting : MonoBehaviour
         {
             case EChatType.Chat:
             case EChatType.Question:
-                // create uxml
-                chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
-                chat.name = "chat";
-                if (isQuestion)
-                    chat.AddToClassList("Question");
-                EventChatText(chat, text);
-                break;
+                {
+                    // create uxml
+                    chat = UIReader_Main.Instance.RemoveContainer(ux_chat.Instantiate());
+                    chat.name = "chat";
+                    if (isQuestion)
+                        chat.AddToClassList("Question");
+                    EventChatText(chat, text);
+                    break;
+                }
             case EChatType.Image:
-                // create VisualElement
-                chat = new VisualElement();
-                chat.name = "image";
-                // image size change
-                UIReader_Main.Instance.ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
-                break;
+                {
+                    // create VisualElement
+                    chat = new VisualElement();
+                    chat.name = "image";
+                    // image size change
+                    UIReader_Main.Instance.ReSizeImage(chat, GameManager.Instance.imageManager.FindPng(text).saveSprite);
+                    break;
+                }
             case EChatType.Text:
-                // create visualElement
-                chat = UIReader_Main.Instance.RemoveContainer(ux_textFile.Instantiate());
-                chat.name = "textFile";
-                chat.Q<Button>().text = text + ".txt";
-                chat.Q<Button>().clicked += () => { GameManager.Instance.imageSystem.OpenText(null, text); };
-                break;
+                {
+                    // create visualElement
+                    chat = UIReader_Main.Instance.RemoveContainer(ux_textFile.Instantiate());
+                    chat.name = "textFile";
+                    chat.Q<Button>().text = text + ".txt";
+                    chat.Q<Button>().clicked += () => { GameManager.Instance.imageSystem.OpenText(null, text); };
+                    break;
+                }
             case EChatType.CutScene:
-                // create Button
-                chat = new Button();
-                chat.name = "cutScene";
-                
-                // change chat style
-                chat.AddToClassList("FileChatSize");
-                chat.AddToClassList("NoButtonBorder");
-                
-                // find first cut of cutscene
-                ChatNode cutScene = GameManager.Instance.chatHumanManager.currentNode as ChatNode;
-                //GameManager.Instance.chatHumanManager.nowCondition = cutScene.childList[0] as ConditionNode;
-                
-                // change background to image
-                Sprite sprite = GameManager.Instance.cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
-                chat.style.backgroundImage = new StyleBackground(sprite);
-                
-                // connection click event, play cutscene
-                chat.Q<Button>().clicked += (() => {
-                    GameManager.Instance.cutSceneManager.FindCutScene(text).test = false;
-                    GameManager.Instance.cutSceneSystem.PlayCutScene(text); });
+                {
+                    // create Button
+                    chat = new Button();
+                    chat.name = "cutScene";
 
-                // play cutScene
-                GameManager.Instance.cutSceneSystem.PlayCutScene(text);
+                    // change chat style
+                    chat.AddToClassList("FileChatSize");
+                    chat.AddToClassList("NoButtonBorder");
 
-                break;
+                    // find first cut of cutscene
+                    ChatNode cutScene = GameManager.Instance.chatHumanManager.currentNode as ChatNode;
+                    //GameManager.Instance.chatHumanManager.nowCondition = cutScene.childList[0] as ConditionNode;
+
+                    // change background to image
+                    Sprite sprite = GameManager.Instance.cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
+                    chat.style.backgroundImage = new StyleBackground(sprite);
+
+                    // Create Play Icon
+                    chat.Add(new VisualElement());
+                    chat.Q<VisualElement>().style.backgroundImage = new StyleBackground(GameManager.Instance.cutScenePlayIcon);
+
+                    // connection click event, play cutscene
+                    chat.Q<Button>().clicked += (() =>
+                    {
+                        GameManager.Instance.cutSceneManager.FindCutScene(text).test = false;
+                        GameManager.Instance.cutSceneSystem.PlayCutScene(text);
+                    });
+
+                    // play cutScene
+                    GameManager.Instance.cutSceneSystem.PlayCutScene(text);
+
+                    break;
+                }
         }
 
         // if you this chat record
@@ -799,12 +805,6 @@ public class Chatting : MonoBehaviour
                     Debug.Log("자동 컷씬");
                     GameManager.Instance.chatHumanManager.currentMember.currentNode = chatNode.childList[0];
                 }
-                else
-                {
-                    Debug.Log("수동 컷씬");
-                    //GameManager.Instance.chatHumanManager.currentMember.currentNode = chatNode.childList[0];
-                }
-
             }
         }
         else
@@ -867,6 +867,8 @@ public class Chatting : MonoBehaviour
     // member list button on/off
     public void MemberList(bool isOpen)
     {
+        Debug.Log("이게 챗팅 버튼 여는건가?");
+
         if (isOpen)
         {
             ui_memberListButton.style.backgroundImage = new StyleBackground(changeMemberBtnOn);
