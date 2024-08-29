@@ -17,6 +17,9 @@ public class UIReader_Relationship : MonoBehaviour
     public List<VisualElement> relationshipEvidenceList = new List<VisualElement>();
     public List<RelationshipHuman> relationshipHumanList = new List<RelationshipHuman>();
 
+    //public List<RSLinkedData> humans = new List<RSLinkedData>();
+    public GameObject linkLineDotPrefabs;
+
     private void Start()
     {
         UIReader_Main.Instance.GetRelationshipEvidenceArea(ref relationshipEvidenceList, ref relationshipHumanList);
