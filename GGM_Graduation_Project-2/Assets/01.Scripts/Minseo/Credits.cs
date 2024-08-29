@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,7 @@ public class Credits : MonoBehaviour
 
     [SerializeField] private Image titleImg;
     [SerializeField] private Image logoImg;
+    [SerializeField] private TextMeshProUGUI logoText;
 
     [SerializeField] private GameObject credits;
 
@@ -67,6 +69,7 @@ public class Credits : MonoBehaviour
         {
             logoColor.a -= fadeSpeed * Time.deltaTime;
             logoImg.color = logoColor;
+
             yield return null;
         }
     }
