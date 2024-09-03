@@ -14,6 +14,7 @@ public class UIReader_MenuScene : MonoBehaviour
     public UnityEngine.UI.Button startBtn;
     public UnityEngine.UI.Button settingBtn;
     public UnityEngine.UI.Button exitBtn;
+    public UnityEngine.UI.Button creditsBtn;
     [SerializeField] private AudioClip buttonClickSound;
     private AudioSource audioSource;
 
@@ -28,6 +29,7 @@ public class UIReader_MenuScene : MonoBehaviour
 
         // you have to change this scene name, no tutorial! game!!!
         startBtn.onClick.AddListener(() => { UIManager.Instance.SceneChange("Game"); });
+        creditsBtn.onClick.AddListener(() => { UIManager.Instance.SceneChange("End"); });
         settingBtn.onClick.AddListener(() => { OpenSetting(); });
         exitBtn.onClick.AddListener(() => { UIManager.Instance.Exit(); });
     }

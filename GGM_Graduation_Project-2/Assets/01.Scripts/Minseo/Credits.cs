@@ -69,7 +69,7 @@ public class Credits : MonoBehaviour
         {
             logoColor.a -= fadeSpeed * Time.deltaTime;
             logoImg.color = logoColor;
-
+            logoText.color = logoColor;
             yield return null;
         }
     }
