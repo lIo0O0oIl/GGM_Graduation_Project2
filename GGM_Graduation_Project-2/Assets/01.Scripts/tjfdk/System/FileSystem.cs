@@ -6,13 +6,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public enum FileType
-{
-    FOLDER,
-    IMAGE,
-    TEXT
-}
-
 [Serializable]
 public class FolderFile
 {
@@ -48,6 +41,7 @@ public class FileSystem : MonoBehaviour
 
 
     // root
+    public UIDocument document;
     VisualElement root;
 
     // UXML
@@ -96,11 +90,10 @@ public class FileSystem : MonoBehaviour
 
     private void OnEnable()
     {
+        root = document.rootVisualElement;
+
         UXML_Load();
         Event_Load();
-
-        fileFolders.Add(new FolderFile("Main", "Main"));
-        AddFilePath("Main");
     }
 
     private void UXML_Load()
@@ -108,10 +101,10 @@ public class FileSystem : MonoBehaviour
         root = GameObject.Find("Game").GetComponent<UIDocument>().rootVisualElement;
 
         ui_fileSystemArea = root.Q<VisualElement>("FileSystem");
-        ui_fileGround = UIReader_Main.Instance.root.Q<VisualElement>("FileGround");
-        ui_filePathGround = UIReader_Main.Instance.root.Q<VisualElement>("FilePathGround");
-        ui_changeSizeButton = UIReader_Main.Instance.root.Q<Button>("ChangeSize");
-        ui_hpGround = UIReader_Main.Instance.root.Q<VisualElement>("HPbar");
+        ui_fileGround = root.Q<VisualElement>("FileGround");
+        ui_filePathGround = root.Q<VisualElement>("FilePathGround");
+        ui_changeSizeButton = root.Q<Button>("ChangeSize");
+        ui_hpGround = root.Q<VisualElement>("HPbar");
     }
 
     private void Event_Load()
@@ -142,13 +135,13 @@ public class FileSystem : MonoBehaviour
                 for (int i = 0; i < member.questions.Count; ++i)
                 {
                     // ask의 condition 가져오기
-                    if (member.questions[i].parent is ConditionNode condition)
+                    if (member.questions[i].fileName != "" || member.questions[i].fileName != null)
                     {
                         // file name 가져오고
                         string fileName = file.Q<Label>("FileName").text;
 
                         // condition names 가져와서
-                        string[] names = condition.fileName.Split('/');
+                        string[] names = member.questions[i].fileName.Split('/');
 
                         // 둘이 비교해
                         foreach (string name in names)
@@ -159,10 +152,10 @@ public class FileSystem : MonoBehaviour
                                 // name(condition) == fileName(file)
                                 if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
                                 {
-                                    if (condition.is_Unlock == false)
+                                    if (member.questions[i].type == EAskType.Lock)
                                     {
                                         // unlock 
-                                        condition.is_Unlock = true;
+                                        member.questions[i].type = EAskType.All;
 
                                         // remove visualElement
                                         for (int j = 0; j < questionGround.childCount; ++j)
@@ -175,9 +168,8 @@ public class FileSystem : MonoBehaviour
                                         }
 
                                         //change from lockQustion to question - 질문으로 만드는 거
-                                        GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
-
-                                        UIReader_Main.Instance.PlusHP();
+                                        GameManager.Instance.chatSystem.InputQuestion
+                                            (member.name, member.questions[i].type == EAskType.Lock, member.questions[i]);
 
                                         // add question
                                         // 이거 다시 켜야될지도?
@@ -185,6 +177,7 @@ public class FileSystem : MonoBehaviour
 
                                         isCorrect = true;
                                         beforeSlot.Add(target);
+
                                         return;
                                     }
                                 }
@@ -245,7 +238,14 @@ public class FileSystem : MonoBehaviour
         return null;
     }
 
-    public void AddFile(FileType fileType, string fileName, string fileParentName)
+    public void TestStart()
+    {
+        Debug.Log("main 추가");
+        fileFolders.Add(new FolderFile("Main", "Main"));
+        AddFilePath("Main");
+    }
+
+    public void AddFile(EFileType fileType, string fileName, string fileParentName)
     {
         // find parentFolder
         FolderFile parentFolder = FindFolder(fileParentName);
@@ -258,7 +258,7 @@ public class FileSystem : MonoBehaviour
             // register folder to parentFolder
             switch (fileType)
             {
-                case FileType.FOLDER:
+                case EFileType.FOLDER:
                 {
                     FileSO folder = GameManager.Instance.fileManager.FindFile(fileName);
 
@@ -300,7 +300,7 @@ public class FileSystem : MonoBehaviour
                         parentFolder.imageFiles.Add(file);
                 }
                 break;
-                case FileType.IMAGE:
+                case EFileType.IMAGE:
                 {
                     FileSO image = GameManager.Instance.fileManager.FindFile(fileName);
 
@@ -325,7 +325,7 @@ public class FileSystem : MonoBehaviour
                         parentFolder.imageFiles.Add(file);
                 }
                 break;
-                case FileType.TEXT:
+                case EFileType.TEXT:
                 {
                     FileSO text = GameManager.Instance.fileManager.FindFile(fileName);
 
@@ -391,8 +391,13 @@ public class FileSystem : MonoBehaviour
 
     private void RemoveFile()
     {
-        for (int i = ui_fileGround.childCount - 1; i >= 0; i--)
-            ui_fileGround.RemoveAt(i);
+        if (ui_fileGround != null)
+        {
+            for (int i = ui_fileGround.childCount - 1; i >= 0; i--)
+                ui_fileGround.RemoveAt(i);
+        }
+        else
+            Debug.Log("비엇음");
     }
 
     private void AddFilePath(string pathName)

@@ -1,3 +1,4 @@
+using ChatVisual;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -103,7 +104,7 @@ public class Investigation : MonoBehaviour
                         if (evid == png.name)
                         {
                             VisualElement evidence = null;
-                            if (png.importance)
+                            if (png.is_save)
                             {
                                 evidence = UIReader_Main.Instance.RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
@@ -118,16 +119,16 @@ public class Investigation : MonoBehaviour
                                     TextSO text = GameManager.Instance.imageManager.FindText(evid);
                                     if (text != null)
                                     {
-                                        GameManager.Instance.fileSystem.AddFile(FileType.TEXT, text.name,
+                                        GameManager.Instance.fileSystem.AddFile(EFileType.TEXT, text.name,
                                             GameManager.Instance.fileManager.FindFile(text.name).fileParentName);
                                     }
                                     else
                                     {
                                         if (png.saveName != "" && png.saveName != null)
-                                            GameManager.Instance.fileSystem.AddFile(FileType.TEXT, png.saveName,
+                                            GameManager.Instance.fileSystem.AddFile(EFileType.TEXT, png.saveName,
                                             GameManager.Instance.fileManager.FindFile(png.saveName).fileParentName);
                                         else
-                                            GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name, 
+                                            GameManager.Instance.fileSystem.AddFile(EFileType.IMAGE, png.name, 
                                                 GameManager.Instance.fileManager.FindFile(png.name).fileParentName);
                                     }
 

@@ -17,7 +17,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Manager")]
     public ChatHumanManager chatHumanManager;
-    public ChatContainer chatContainer;
+    //public ChatContainer chatContainer;
     public CutSceneManager cutSceneManager;
     public FileManager fileManager;
     public ImageManager imageManager;
@@ -30,6 +30,8 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         GameStart();
+
+        //fileSystem.TestStart();
     }
 
     private void Update()
@@ -41,8 +43,8 @@ public class GameManager : Singleton<GameManager>
             UIReader_Main.Instance.MinusHP();
 
         //if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKey(KeyCode.I))
-        if (Input.GetKey(KeyCode.I))
-            chatHumanManager.NextChat();
+        //if (Input.GetKey(KeyCode.I))
+        //    chatHumanManager.NextChat(currentMember.excelChat[currentMember.currentIdx]);
 
         //if (Input.GetKeyDown(KeyCode.Escape))
         //{
@@ -58,7 +60,9 @@ public class GameManager : Singleton<GameManager>
             cutSceneSystem.PlayCutScene("DieFall");
             chatSystem.AddMember("GJH");
             chatSystem.OnOffMemberList();
-    }
+
+            fileSystem.TestStart();
+        }
         else
         {
             chatSystem.AddMember("Test");
