@@ -8,12 +8,9 @@ public class RSDot : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("RelationshipData"))
-        {
-            Debug.Log("연결가능한 데이터와 닿음");
-            myData.touchObj = other.gameObject;
-            myData.is_LinkedObject = true;
-        }
+        // 충돌은 같은 레이어에 있는 애들만 가능함.
+        myData.touchObj = other.gameObject.transform.parent.transform.gameObject;
+        myData.is_LinkedObject = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)
