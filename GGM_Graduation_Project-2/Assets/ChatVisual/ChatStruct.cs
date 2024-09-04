@@ -4,33 +4,62 @@ using UnityEngine;
 
 namespace ChatVisual
 {
-    public class Default
+    [Serializable]
+    public class NormalChat
     {
-        string text;
-        bool isUse, isRead;
+        public string text;
+        public bool isUse, isRead;
+        public string[] fildLoad;
+        public string fileName;
     }
 
-    public class Chat : Default
+    [Serializable]
+    public class Chat : NormalChat
     {
-        EChatState who;
-        EChatType type;
-        string[] fildLoad;
-        EFace face;
-        EChatEvent evt;
+        //public Chat()
+        //{
+
+        //}
+        public EChatState who;
+        public EChatType type;
+        public EFace face;
+        public EChatEvent evt;
     }
 
-    public class Question : Default
+    [Serializable]
+    public class Question : NormalChat
     {
-        EChatType type;
-        string[] fildLoad;
-        string nextName;
+        public EAskType type;
+        public string nextName;
+        public List<Chat> answers;
     }
 
-    public class Condition : Default
+    public enum EFileType
     {
-        ECdtType type;
-        List<Question> asks = new List<Question>();
+        FOLDER,
+        IMAGE,
+        TEXT
     }
+
+    [Serializable]
+    public class MemberProfile
+    {
+        public string name;
+        public ESaveLocation nickName;
+        public EFace currentFace;
+        public Sprite[] faces;
+
+        public MemberEvidence evidence;
+
+        public bool isOpen;
+
+        public List<NormalChat> excelChat = new List<NormalChat>();
+        public List<Chat> recode = new List<Chat>();
+        public List<Question> questions = new List<Question>();
+
+        public int currentIdx, currentAskIdx;
+    }
+
 
     public enum ESaveLocation
     {
@@ -68,84 +97,27 @@ namespace ChatVisual
 
     public enum EAskType
     {
-        Common,
+        All,
+        Lock,
         Answer,
         NoAnswer
-    }
-
-    public enum ECdtType
-    {
-        AllQuestion,
-        Specific,
-        LockQuestion,
-        YesOrNot
     }
 
     public enum EFace
     {
         NotChange,       
-        Default,       
-        Blush,      
+        Normal,       
+        Shy,      
         Angry   
     }
 
     public enum EChatEvent
     {
-        Default,
+        Normal,
         Vibration,
         OneVibration,
         Camera
     }
-
-
-/*    [Serializable]
-    public class Chat 
-    {
-        public EChatState state; 
-        public EChatType type;
-        public string text;        // ???????留⑶뜮??????猷몄굡???????
-        public bool is_UseThis;     // ????????????????釉먮폁??????
-        public EFace face;       // ?????????????遺얘턁???????
-        public bool isCan;
-        public List<EChatEvent> textEvent = new List<EChatEvent>();
-    }
-
-    [Serializable]
-    public class AskAndReply
-    {
-        public string ask;        // ?????????????????????????????????????????癲ル슢????????μ떜媛?걫???
-        public List<Chat> reply = new List<Chat>();     // ????????ロ깫?????우뒭亦낆쥋援??룰큿??????猷??????????????
-        public bool is_UseThis;     // ????????????????釉먮폁??????
-
-        public ESaveLocation changeWhoName;
-        public bool isChange;
-        public string changeName;
-    }
-
-    [Serializable]
-    public class LockAskAndReply
-    {
-        public List<string> evidence = new List<string>();
-        public string ask;       
-        public List<Chat> reply = new List<Chat>();  
-        public bool is_UseThis; 
-    }
-
-    [Serializable]
-    public class Chapter
-    {
-        public string showName;    
-        public ESaveLocation saveLocation;   
-        public List<Chat> chat = new List<Chat>();      
-        public List<AskAndReply> askAndReply = new List<AskAndReply>();   
-        public List<LockAskAndReply> lockAskAndReply = new List<LockAskAndReply>();      
-        public List<string> round = new List<string>();       
-      
-        public bool isChapterEnd;     // is this chapter ended?
-        public bool isCan;            // can this chapter play?
-        public bool is_nextChapter;     // is this chapter have next chapter?
-        public string nextChapterName;         // next chapter name
-    }*/
 
     public class ChatStruct : MonoBehaviour { }
 }

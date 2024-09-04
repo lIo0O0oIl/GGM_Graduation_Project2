@@ -5,9 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "imageSO", menuName = "SO/ImageSO")]
 public class ImageSO : ScriptableObject
 {
-    public string name;
-    public Sprite image;
+    public bool isRead;
     public bool isOpen;
+
+    public Sprite image;
 
     public List<string> pngName = new List<string>();
     public List<string> textName = new List<string>();

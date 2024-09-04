@@ -27,10 +27,21 @@ public class FileManager : MonoBehaviour
         //folderFileList = new Dictionary<string, FileSO>();
     }
 
+    private void Start()
+    {
+        ReSetFileSO();
+    }
+
     private void OnEnable()
     {
         //foreach (FileSO file in folderFiles)
         //    folderFileList.Add(file.fileName, file);
+    }
+
+    public void ReSetFileSO()
+    {
+        foreach (FileSO file in folderFiles)
+            file.isRead = false;
     }
 
     public FileSO FindFile(string name) 
