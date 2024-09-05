@@ -690,7 +690,7 @@ public class Chatting : MonoBehaviour
 
             textButton.RegisterCallback<MouseEnterEvent>(evt =>
             {
-                textLabel.style.color = new Color(98f / 255f, 167f / 255f, 255f / 255f, 255f / 255f);
+                textLabel.style.color = new Color(42f / 255f, 152f / 255f, 219f / 255f, 255f / 255f);
             });
 
             textButton.RegisterCallback<MouseLeaveEvent>(evt =>
