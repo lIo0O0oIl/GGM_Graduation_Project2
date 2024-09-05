@@ -39,7 +39,6 @@ public class FileSystem : MonoBehaviour
 
     Tween changeFileSystemSizeDOT;
 
-
     // root
     public UIDocument document;
     VisualElement root;
@@ -52,8 +51,6 @@ public class FileSystem : MonoBehaviour
     [HideInInspector] public Button ui_changeSizeButton;
     [HideInInspector] public VisualElement ui_hpGround;
 
-
-
     // Template
     [Header("Template")]
     [SerializeField] VisualTreeAsset ux_filePath;
@@ -61,8 +58,6 @@ public class FileSystem : MonoBehaviour
     [SerializeField] VisualTreeAsset ux_folderFile;
     [SerializeField] VisualTreeAsset ux_imageFile;
     [SerializeField] VisualTreeAsset ux_textFile;
-
-
 
     // folder
     public string currentFolderName;

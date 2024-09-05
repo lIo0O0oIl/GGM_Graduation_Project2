@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -18,17 +19,28 @@ public class RSLinkedData : MonoBehaviour
 
     private Vector2 dotOriginPos;
     private bool is_Hold = false;
+    private bool is_MouseDown = false;
     [SerializeField] private int nowLineIndex = 0;
     private int totalLineIndex = 0;
 
+    // InputTextUI
+    private List<TMP_InputField> inputFiledList = new List<TMP_InputField>();
+    private float lastClickTime = 0f;
+    private float doubleClickThreshold = 0.5f;
+    private TMP_InputField nowInputField;
+
+    // Link
     public RSLinkedData touchObj;
     public bool is_LinkedObject = false;
+
+    private WaitForSeconds waitForSeconds;
 
     private void Awake()
     {
         mainSystem = GetComponentInParent<UIReader_Relationship>();
         lineRenderer = GetComponent<LineRenderer>();
         lineEdgeCollider = GetComponent<EdgeCollider2D>();
+        waitForSeconds = new WaitForSeconds(0.5f);
     }
 
     private void Start()
@@ -38,42 +50,40 @@ public class RSLinkedData : MonoBehaviour
 
     private void OnMouseDown()
     {
+        is_MouseDown = true;
+
         Vector3 mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Debug.Log(Vector2.Distance(mousePos, transform.position));
-        if (Vector2.Distance(mousePos, transform.position) > 0.65f)     // 선을 건들였음.
+        // 선을 건들였을 때
+        if (Vector2.Distance(mousePos, transform.position) > 0.65f)
         {
-            if (movedDot == null) return;
-
-            float close = 5;
-            int index = -1;
-            for (int i = 0; i < linePosList.Count; i++)
+            // 더블클릭
+            if (Time.time - lastClickTime < doubleClickThreshold)
             {
-                if (Vector2.Distance(mousePos, linePosList[i]) < close)     // 가장 가까운 곳의 포지션 찾기
-                {
-                    close = Vector2.Distance(mousePos, linePosList[i]);
-                    index = i;
-                }
+                Debug.Log("더블클릭함");
+                int index = FindCloseDotIndex(mousePos);
+                int dataIndex = index % 2 == 1 ? (index / 2) + 1 : index / 2;
+                Vector2 inputFieldPos = Camera.main.WorldToScreenPoint((transform.position + linkdataList[dataIndex].transform.position) / 2);
+                //Vector3 direction = transform.position - linkdataList[dataIndex].transform.position;
+                //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;            // 얘 때문에 텍스트 입력 한 것이 보이지 않음.
+                nowInputField = Instantiate(mainSystem.inputFieldPrefabs, inputFieldPos,
+                    Quaternion.identity/*Quaternion.Euler(0, 0, angle)*/, mainSystem.canvas.transform).GetComponent<TMP_InputField>();
+                nowInputField.ActivateInputField();
+                return;
             }
-            if (index % 2 == 0) { index++; }
-            Debug.Log(index);
+            else lastClickTime = Time.time;
 
-            movedDot.transform.position = mousePos;
-
-            // 데이터 연동 해제
-            linkdataList[index].GetComponent<RSLinkedData>().linkdataList.Remove(this);
-            linkdataList.RemoveAt(index);
-
-            // 선 콜라이더 해제
-            linePosList.RemoveAt(index + 1);
-            linePosList.RemoveAt(index);
-
-           // LineAndColliderChange();
-
-            nowLineIndex = index - 1;
+            StartCoroutine(StartHolding(mousePos));
+            return;
         }
 
+        // 다 아니면 새로 선을 생성함.
+        NewLineStart();
+    }
+
+    private void NewLineStart()
+    {
         if (movedDot == null)
         {
             movedDot = Instantiate(mainSystem.linkLineDotPrefabs, transform.position, Quaternion.identity, gameObject.transform);
@@ -93,8 +103,47 @@ public class RSLinkedData : MonoBehaviour
         is_Hold = true;
     }
 
+    private void LineCilck(Vector3 mousePos)
+    {
+        if (movedDot == null) return;
+        int index = FindCloseDotIndex(mousePos);
+
+        movedDot.transform.position = mousePos;
+
+        // 데이터 연동 해제
+        int dataIndex = index % 2 == 1 ? (index / 2) + 1 : index / 2;
+        linkdataList[dataIndex].GetComponent<RSLinkedData>().linkdataList.Remove(this);
+        linkdataList.RemoveAt(dataIndex);
+
+        // 선 콜라이더 해제
+        linePosList.RemoveAt(index + 1);
+        linePosList.RemoveAt(index);
+
+        nowLineIndex = index - 1;
+    }
+
+    private int FindCloseDotIndex(Vector3 mousePos)
+    {
+        float close = 5;
+        int index = -1;
+        for (int i = 0; i < linePosList.Count; i++)
+        {
+            if (Vector2.Distance(mousePos, linePosList[i]) < close)     // 가장 가까운 곳의 포지션 찾기
+            {
+                close = Vector2.Distance(mousePos, linePosList[i]);
+                index = i;
+            }
+        }
+        if (index % 2 == 0) { index++; }
+        Debug.Log(index);
+        return index;
+    }
+
     private void OnMouseUp()
     {
+        mainSystem.Charging(false);
+        is_MouseDown = false;
+
         if (movedDot == null) return;
         movedDot.transform.localPosition = dotOriginPos;     // 원위치
 
@@ -114,7 +163,10 @@ public class RSLinkedData : MonoBehaviour
         else
         {
             lineRenderer.positionCount -= 1;
-            nowLineIndex--;
+            if (nowLineIndex > 0)
+            {
+                nowLineIndex--;
+            }
             lineRenderer.SetPosition(nowLineIndex, Vector2.zero);
 
             if (linePosList.Count < 2)
@@ -179,6 +231,19 @@ public class RSLinkedData : MonoBehaviour
         for (int i = 1; i < linkdataList.Count; i++)
         {
             linkdataList[i].ChangeLinePosition();
+        }
+    }
+
+    private IEnumerator StartHolding(Vector3 mousePos)
+    {
+        mainSystem.Charging(true);
+        yield return waitForSeconds;
+        if (is_MouseDown)
+        {
+            Debug.Log("흠");
+            LineCilck(mousePos);
+            NewLineStart();
+            is_Hold = true;
         }
     }
 }

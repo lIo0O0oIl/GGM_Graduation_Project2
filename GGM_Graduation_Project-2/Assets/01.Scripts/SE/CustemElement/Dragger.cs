@@ -21,6 +21,7 @@ namespace ChatVisual
 
         private bool is_MouseDown = false;
         private MouseDownEvent _evt;
+        private WaitForSeconds waitForSeconds;
 
         private Charging _charging;
 
@@ -41,6 +42,7 @@ namespace ChatVisual
             activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
             _dropCallback = DropCallback;
             _clickCallback = ClickCallback;
+            waitForSeconds = new WaitForSeconds(_holdClickThreshold);
         }
 
         protected override void RegisterCallbacksOnTarget()
@@ -160,7 +162,7 @@ namespace ChatVisual
 
         IEnumerator CheckMouseHold()
         {
-            yield return new WaitForSeconds(_holdClickThreshold);
+            yield return waitForSeconds;
             if (is_MouseDown)
             {
                 StartDrag(_evt);
