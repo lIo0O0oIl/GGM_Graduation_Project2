@@ -165,7 +165,7 @@ public class Investigation : MonoBehaviour
                                     imagePanel.Q<Button>("ImageGround").Add(description);
                                     // input description text
                                     UIReader_Main.Instance.DoText(description.Q<Label>("Text"), png.memo, 2f, false,
-                                        () => {  }, "", false);
+                                        () => {  }, "");
                                     // check condition
                                     GameManager.Instance.fileManager.UnlockChat(png.name);
                                 });

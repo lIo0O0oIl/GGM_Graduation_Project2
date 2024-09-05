@@ -44,6 +44,14 @@ public class CutSceneManager : MonoBehaviour
         return null;
     }
 
+    public void CutSceneReset(string name)
+    {
+        currentCutScene = FindCutScene(name);
+
+        GameManager.Instance.cutSceneSystem.ChangeCut(false, 0f, currentCutScene.cutScenes[0].cut);
+        GameManager.Instance.cutSceneSystem.ChangeText("", 0f, () => { }, "");
+    }
+
     public void CutScene(string name)
     {
         currentCutScene = FindCutScene(name);
@@ -110,7 +118,7 @@ public class CutSceneManager : MonoBehaviour
 
                         //if (msg.sound != "")
                             GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length * textSpeed, 
-                                () => { currentTextNum++; }, msg.sound, msg.vibration);
+                                () => { currentTextNum++; }, msg.sound);
                         //else
                         //    GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / msg.text.Length * 0.5f, 
                         //        () => { currentTextNum++; }, "", msg.vibration);
@@ -122,7 +130,7 @@ public class CutSceneManager : MonoBehaviour
 
                     //if (msg.sound != "")
                         GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length * textSpeed, 
-                            () => { currentTextNum++; }, msg.sound, msg.vibration);
+                            () => { currentTextNum++; }, msg.sound);
                     //else
                     //    GameManager.Instance.cutSceneSystem.ChangeText(msg.text, msg.text.Length / msg.text.Length * 0.5f, 
                     //        () => { currentTextNum++; }, "", msg.vibration);

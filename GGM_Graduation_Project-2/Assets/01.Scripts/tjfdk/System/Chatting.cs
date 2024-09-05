@@ -423,22 +423,10 @@ public class Chatting : MonoBehaviour
             memberFace.RemoveFromClassList("talkingSize");
         }
 
-        //// 코드 수정하기... (얼굴 커지는 스타일 추가 및 삭제하는 코드를)
-        //memberFace.AddToClassList("talkingSize");
-        //if (who == EChatState.Me)
-        //{
-        //    member = FindMember("HG");
-
-        //    memberFace = ui_myFace.Q<VisualElement>("Face");
-        //    memberFace.AddToClassList("defaultSize");
-        //    memberFace.RemoveFromClassList("talkingSize");
-        //}
-        //else
-        //{
-        //    memberFace = ui_otherFace.Q<VisualElement>("Face");
-        //    memberFace.AddToClassList("defaultSize");
-        //    memberFace.RemoveFromClassList("talkingSize");
-        //}
+        if (who == EChatState.Me)
+            memberFace = ui_myFace.Q<VisualElement>("Face");
+        else
+            memberFace = ui_otherFace.Q<VisualElement>("Face");
 
         // face type
         switch (face)
