@@ -192,33 +192,7 @@ public class FileSystem : MonoBehaviour
             }
             else if (UIReader_Main.Instance.isRelationshipOpen)      // 관계도 시스템이 켜져 있었다면
             {
-                VisualElement area = GameManager.Instance.relationshipSystem.GetEvidenceContains(evt.mousePosition);
-                if (area != null)
-                {
-                    area.style.backgroundColor = Color.clear;
-                    Label name = file.Q<Label>("FileName");
-
-                    PngSO pngSo = GameManager.Instance.imageManager.FindPng(name.text);
-                    if (pngSo != null)
-                    {
-                        Sprite sprite = pngSo.image;         // png 랑 Text 가 다 가능해야함.
-                        if (sprite != null)
-                        {
-                            GameManager.Instance.relationshipSystem.CheckOtherPng(sprite, area);
-                            area.style.backgroundImage = new StyleBackground(sprite);
-                        }
-                    }
-
-                    TextSO textSo = GameManager.Instance.imageManager.FindText(name.text);
-                    if (textSo != null)
-                    {
-                        GameManager.Instance.relationshipSystem.CheckOtherText(textSo.memo, area);
-                        area.style.backgroundImage = new StyleBackground(textFileSprite);       // Text 이미지로 넣어주기
-                        //area.tooltip = textSo.memo;
-                    }
-
-                    GameManager.Instance.relationshipSystem.EvidenceCheck(area);
-                }
+                Debug.Log("관계도 시스템 켜져있음");
             }
 
             beforeSlot.Add(target);

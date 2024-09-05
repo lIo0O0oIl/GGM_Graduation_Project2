@@ -31,11 +31,6 @@ public class UIReader_SelectHuman : MonoBehaviour
     {
         is_Open = !is_Open;
 
-        Debug.Log(SelectHumanRoot.style.flexBasis.value.value);
-        Debug.Log(SelectHumanRoot.style.flexBasis.value);
-        Debug.Log(SelectHumanRoot.style.flexBasis);
-
-
         if (is_Open)
         {
             changeSizeTween = DOTween.To(() => SelectHumanRoot.style.flexBasis.value.value, x =>
