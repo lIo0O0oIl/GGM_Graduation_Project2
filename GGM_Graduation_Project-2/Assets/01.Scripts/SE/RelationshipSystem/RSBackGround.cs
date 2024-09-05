@@ -2,26 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RSMovedPicture : MonoBehaviour
+[System.Serializable]
+public struct ScreenClamp
+{
+    public float xMin, xMax;
+    public float yMin, yMax;
+}
+
+public class RSBackGround : MonoBehaviour
 {
     private bool is_Hold = false;
     private float startPosX, startPosY;
 
-    private RSLinkedData myLinkedData;
+    public Transform backGroundTrm;
     public ScreenClamp screenClamp;
-
-    private void Awake()
-    {
-        myLinkedData = transform.GetChild(0).GetComponent<RSLinkedData>();
-    }
 
     private void OnMouseDown()
     {
+        Debug.Log("배경 눌러짐!");
+
         Vector3 mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        startPosX = mousePos.x - transform.position.x;
-        startPosY = mousePos.y - transform.position.y;
+        startPosX = mousePos.x - backGroundTrm.position.x;
+        startPosY = mousePos.y - backGroundTrm.position.y;
 
         is_Hold = true;
     }
@@ -38,14 +42,12 @@ public class RSMovedPicture : MonoBehaviour
             Vector2 mousePos;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 movedPos = new Vector2(mousePos.x - startPosX, mousePos.y - startPosY);
-            transform.position = movedPos;
-
-            myLinkedData.ChangeOtherLinePosition();
+            backGroundTrm.position = movedPos;
         }
 
-        float clampedX = Mathf.Clamp(transform.localPosition.x, screenClamp.xMin, screenClamp.xMax);
-        float clampedY = Mathf.Clamp(transform.localPosition.y, screenClamp.yMin, screenClamp.yMax);
+        float clampedX = Mathf.Clamp(backGroundTrm.position.x, screenClamp.xMin, screenClamp.xMax);
+        float clampedY = Mathf.Clamp(backGroundTrm.position.y, screenClamp.yMin, screenClamp.yMax);
 
-        transform.localPosition = new Vector2(clampedX, clampedY);
+        backGroundTrm.position = new Vector2(clampedX, clampedY);
     }
 }
