@@ -67,7 +67,7 @@ public class Credits : MonoBehaviour
         Color logoColor = logoImg.color;
         while (logoImg.color.a > 0f)
         {
-            logoColor.a -= fadeSpeed * Time.deltaTime;
+            logoColor.a -= 2 * Time.deltaTime;
             logoImg.color = logoColor;
             logoText.color = logoColor;
             yield return null;
