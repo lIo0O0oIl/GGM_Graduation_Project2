@@ -7,7 +7,7 @@ public class RSLinkedData : MonoBehaviour
 {
     // Main
     private UIReader_Relationship mainSystem;
-    public List<GameObject> linkdataList = new List<GameObject>();
+    public List<RSLinkedData> linkdataList = new List<RSLinkedData>();
     private LineRenderer lineRenderer;
 
     // Line
@@ -18,10 +18,10 @@ public class RSLinkedData : MonoBehaviour
 
     private Vector2 dotOriginPos;
     private bool is_Hold = false;
-    private float startPosX, startPosY;
     [SerializeField] private int nowLineIndex = 0;
+    private int totalLineIndex = 0;
 
-    public GameObject touchObj;
+    public RSLinkedData touchObj;
     public bool is_LinkedObject = false;
 
     private void Awake()
@@ -33,7 +33,7 @@ public class RSLinkedData : MonoBehaviour
 
     private void Start()
     {
-        linkdataList.Add(this.gameObject);
+        linkdataList.Add(this);
     }
 
     private void OnMouseDown()
@@ -41,7 +41,8 @@ public class RSLinkedData : MonoBehaviour
         Vector3 mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Vector2.Distance(mousePos, transform.position) > 0.5f)     // 선을 건들였음.
+        Debug.Log(Vector2.Distance(mousePos, transform.position));
+        if (Vector2.Distance(mousePos, transform.position) > 0.65f)     // 선을 건들였음.
         {
             if (movedDot == null) return;
 
@@ -61,16 +62,14 @@ public class RSLinkedData : MonoBehaviour
             movedDot.transform.position = mousePos;
 
             // 데이터 연동 해제
-            linkdataList[index - 1].GetComponent<RSLinkedData>().linkdataList.Remove(gameObject);
-            linkdataList.RemoveAt(index - 1);
+            linkdataList[index].GetComponent<RSLinkedData>().linkdataList.Remove(this);
+            linkdataList.RemoveAt(index);
 
             // 선 콜라이더 해제
             linePosList.RemoveAt(index + 1);
             linePosList.RemoveAt(index);
 
-            lineRenderer.positionCount = linePosList.Count;
-            lineRenderer.SetPositions(ConvertVertor2ToVector3(linePosList).ToArray());      // 선 바꿔주기
-            lineEdgeCollider.points = linePosList.ToArray();
+           // LineAndColliderChange();
 
             nowLineIndex = index - 1;
         }
@@ -86,9 +85,6 @@ public class RSLinkedData : MonoBehaviour
         {
             movedDotCollider.enabled = true;
         }
-
-        startPosX = mousePos.x - movedDot.transform.position.x;
-        startPosY = mousePos.y - movedDot.transform.position.y;
 
         lineRenderer.positionCount += 1;
         nowLineIndex++;
@@ -110,7 +106,7 @@ public class RSLinkedData : MonoBehaviour
             linePosList.Add(new Vector2(0, 0));     // 위치 2개 추가해주기
 
             linkdataList.Add(touchObj);
-            touchObj.GetComponent<RSLinkedData>().linkdataList.Add(gameObject);     // 서로 넣어주기
+            touchObj.GetComponent<RSLinkedData>().linkdataList.Add(this);     // 서로 넣어주기
 
             lineRenderer.positionCount++;
             nowLineIndex++;
@@ -127,12 +123,17 @@ public class RSLinkedData : MonoBehaviour
                 nowLineIndex = 0;
             }
         }
-        lineRenderer.positionCount = linePosList.Count;
-        lineRenderer.SetPositions(ConvertVertor2ToVector3(linePosList).ToArray());      // 선 바꾸기
-        lineEdgeCollider.points = linePosList.ToArray();
+        LineAndColliderChange();
 
         movedDotCollider.enabled = false;
         is_Hold = false;
+    }
+
+    private void LineAndColliderChange()
+    {
+        lineRenderer.positionCount = linePosList.Count;
+        lineRenderer.SetPositions(ConvertVertor2ToVector3(linePosList).ToArray());      // 선 바꾸기
+        lineEdgeCollider.points = linePosList.ToArray();
     }
 
     private void Update()
@@ -141,10 +142,8 @@ public class RSLinkedData : MonoBehaviour
         {
             Vector2 mousePos;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //Vector2 movedPos = new Vector2(mousePos.x - startPosX, mousePos.y - startPosY);
 
             movedDot.transform.localPosition = transform.InverseTransformPoint(mousePos);
-
             lineRenderer.SetPosition(nowLineIndex, MovedLineAdjust(transform.InverseTransformPoint(mousePos)));
         }
     }
@@ -162,5 +161,24 @@ public class RSLinkedData : MonoBehaviour
             vector3.Add(v);
         }
         return vector3;
+    }
+
+    private void ChangeLinePosition()
+    {
+        int dataCount = 1;
+        for (int i = 1; i < linePosList.Count; i += 2)
+        {
+            linePosList[i] = transform.InverseTransformPoint(linkdataList[dataCount].gameObject.transform.position);
+            dataCount++;
+        }
+        LineAndColliderChange();
+    }
+
+    public void ChangeOtherLinePosition()
+    {
+        for (int i = 1; i < linkdataList.Count; i++)
+        {
+            linkdataList[i].ChangeLinePosition();
+        }
     }
 }

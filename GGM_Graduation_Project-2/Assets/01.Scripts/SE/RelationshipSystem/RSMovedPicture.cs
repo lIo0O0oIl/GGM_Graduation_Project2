@@ -7,6 +7,13 @@ public class RSMovedPicture : MonoBehaviour
     private bool is_Hold = false;
     private float startPosX, startPosY;
 
+    private RSLinkedData myLinkedData;
+
+    private void Awake()
+    {
+        myLinkedData = transform.GetChild(0).GetComponent<RSLinkedData>();
+    }
+
     private void OnMouseDown()
     {
         Vector3 mousePos;
@@ -31,6 +38,8 @@ public class RSMovedPicture : MonoBehaviour
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 movedPos = new Vector2(mousePos.x - startPosX, mousePos.y - startPosY);
             transform.position = movedPos;
+
+            myLinkedData.ChangeOtherLinePosition();
         }
     }
 }
