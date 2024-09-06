@@ -117,6 +117,7 @@ public class FileSystem : MonoBehaviour
         {
             // get questionGround
             VisualElement questionGround = GameManager.Instance.chatSystem.ui_questionGround;
+            VisualElement relationshipGround = GameManager.Instance.relationshipSystem.ui_RelationshipGround;
 
             // 만약 questionGround와 부딪혔다면
             if (questionGround.worldBound.Contains(evt.mousePosition))
@@ -188,6 +189,10 @@ public class FileSystem : MonoBehaviour
             else if (UIReader_Main.Instance.isRelationshipOpen)      // 관계도 시스템이 켜져 있었다면
             {
                 Debug.Log("관계도 시스템 켜져있음");
+                if (relationshipGround.worldBound.Contains(evt.mousePosition))
+                {
+                    GameManager.Instance.relationshipSystem.AddEvidence(file.Q<Label>("FileName").text);
+                }
             }
 
             beforeSlot.Add(target);

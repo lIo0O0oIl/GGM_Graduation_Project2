@@ -9,7 +9,7 @@ public class RSDot : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // 충돌은 같은 레이어에 있는 애들만 가능함.
-        myData.touchObj = other.gameObject.GetComponent<RSLinkedData>();
+        myData.touchObj = other.gameObject.GetComponent<RSEvidenceData>();
         myData.is_LinkedObject = true;
     }
 

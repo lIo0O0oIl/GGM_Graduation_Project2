@@ -34,7 +34,7 @@ public class UIReader_Main : MonoBehaviour
     private VisualElement filePanel;
     private VisualElement cutScenePanel;
     private VisualElement gamePanel;
-    private VisualElement RelationshipPanel;
+    public VisualElement RelationshipPanel;
     private VisualElement settingPanel;
     private VisualElement quitPanel;
 

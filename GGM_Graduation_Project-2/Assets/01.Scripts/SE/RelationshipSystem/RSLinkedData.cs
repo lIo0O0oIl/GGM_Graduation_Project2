@@ -8,7 +8,7 @@ public class RSLinkedData : MonoBehaviour
 {
     // Main
     private UIReader_Relationship mainSystem;
-    public List<RSLinkedData> linkdataList = new List<RSLinkedData>();
+    public List<RSEvidenceData> linkdataList = new List<RSEvidenceData>();
     private LineRenderer lineRenderer;
 
     // Line
@@ -24,13 +24,13 @@ public class RSLinkedData : MonoBehaviour
     private int totalLineIndex = 0;
 
     // InputTextUI
-    private List<TMP_InputField> inputFiledList = new List<TMP_InputField>();
+    [SerializeField] private List<TMP_InputField> inputFiledList = new List<TMP_InputField>();
     private float lastClickTime = 0f;
     private float doubleClickThreshold = 0.5f;
     private TMP_InputField nowInputField;
 
     // Link
-    public RSLinkedData touchObj;
+    public RSEvidenceData touchObj;
     public bool is_LinkedObject = false;
 
     private WaitForSeconds waitForSeconds;
@@ -43,11 +43,6 @@ public class RSLinkedData : MonoBehaviour
         waitForSeconds = new WaitForSeconds(0.5f);
     }
 
-    private void Start()
-    {
-        linkdataList.Add(this);
-    }
-
     private void OnMouseDown()
     {
         is_MouseDown = true;
@@ -58,18 +53,31 @@ public class RSLinkedData : MonoBehaviour
         // 선을 건들였을 때
         if (Vector2.Distance(mousePos, transform.position) > 0.65f)
         {
+             Debug.Log("선이 눌렸음");
+            nowLineIndex++;
             // 더블클릭
             if (Time.time - lastClickTime < doubleClickThreshold)
             {
-                Debug.Log("더블클릭함");
+
                 int index = FindCloseDotIndex(mousePos);
-                int dataIndex = index % 2 == 1 ? (index / 2) + 1 : index / 2;
+                int dataIndex = index % 2 == 1 ? index / 2 : index / 2 - 1;
                 Vector2 inputFieldPos = Camera.main.WorldToScreenPoint((transform.position + linkdataList[dataIndex].transform.position) / 2);
                 //Vector3 direction = transform.position - linkdataList[dataIndex].transform.position;
                 //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;            // 얘 때문에 텍스트 입력 한 것이 보이지 않음.
+
+                for (int i = 0; i < inputFiledList.Count; i++)
+                {
+                    if (Vector2.Distance(inputFiledList[i].transform.position, inputFieldPos) < 0.5f)
+                    {
+                        return;
+                    }
+                }
+
                 nowInputField = Instantiate(mainSystem.inputFieldPrefabs, inputFieldPos,
                     Quaternion.identity/*Quaternion.Euler(0, 0, angle)*/, mainSystem.canvas.transform).GetComponent<TMP_InputField>();
                 nowInputField.ActivateInputField();
+
+                inputFiledList.Add(nowInputField);
                 return;
             }
             else lastClickTime = Time.time;
@@ -106,13 +114,14 @@ public class RSLinkedData : MonoBehaviour
     private void LineCilck(Vector3 mousePos)
     {
         if (movedDot == null) return;
-        int index = FindCloseDotIndex(mousePos);
 
         movedDot.transform.position = mousePos;
 
         // 데이터 연동 해제
-        int dataIndex = index % 2 == 1 ? (index / 2) + 1 : index / 2;
-        linkdataList[dataIndex].GetComponent<RSLinkedData>().linkdataList.Remove(this);
+        int index = FindCloseDotIndex(mousePos);
+        int dataIndex = index % 2 == 1 ? index / 2 : index / 2 - 1;
+        Debug.Log(dataIndex);
+        linkdataList[dataIndex].GetComponent<RSEvidenceData>().linkdataList.Remove(this);
         linkdataList.RemoveAt(dataIndex);
 
         // 선 콜라이더 해제
@@ -155,7 +164,7 @@ public class RSLinkedData : MonoBehaviour
             linePosList.Add(new Vector2(0, 0));     // 위치 2개 추가해주기
 
             linkdataList.Add(touchObj);
-            touchObj.GetComponent<RSLinkedData>().linkdataList.Add(this);     // 서로 넣어주기
+            touchObj.GetComponent<RSEvidenceData>().linkdataList.Add(this);     // 서로 넣어주기
 
             lineRenderer.positionCount++;
             nowLineIndex++;
@@ -167,7 +176,6 @@ public class RSLinkedData : MonoBehaviour
             {
                 nowLineIndex--;
             }
-            lineRenderer.SetPosition(nowLineIndex, Vector2.zero);
 
             if (linePosList.Count < 2)
             {
@@ -215,23 +223,20 @@ public class RSLinkedData : MonoBehaviour
         return vector3;
     }
 
-    private void ChangeLinePosition()
+    public void ChangeLinePosition()
     {
-        int dataCount = 1;
+        int dataCount = 0;
         for (int i = 1; i < linePosList.Count; i += 2)
         {
             linePosList[i] = transform.InverseTransformPoint(linkdataList[dataCount].gameObject.transform.position);
+            if (inputFiledList.Count > dataCount)
+            {
+                Vector2 inputFieldPos = Camera.main.WorldToScreenPoint((transform.position + linkdataList[dataCount].transform.position) / 2);
+                inputFiledList[dataCount].transform.position = inputFieldPos;
+            }
             dataCount++;
         }
         LineAndColliderChange();
-    }
-
-    public void ChangeOtherLinePosition()
-    {
-        for (int i = 1; i < linkdataList.Count; i++)
-        {
-            linkdataList[i].ChangeLinePosition();
-        }
     }
 
     private IEnumerator StartHolding(Vector3 mousePos)
@@ -240,7 +245,22 @@ public class RSLinkedData : MonoBehaviour
         yield return waitForSeconds;
         if (is_MouseDown)
         {
-            Debug.Log("흠");
+            int index = FindCloseDotIndex(mousePos);
+            int dataIndex = index % 2 == 1 ? index / 2 : index / 2 - 1;
+            Vector2 inputFieldPos = Camera.main.WorldToScreenPoint((transform.position + linkdataList[dataIndex].transform.position) / 2);
+            for (int i = 0; i < inputFiledList.Count; i++)
+            {
+                if (Vector2.Distance(inputFiledList[i].transform.position, inputFieldPos) < 0.5f)
+                {
+                    Debug.Log("리스트에서 삭제해");
+                    nowInputField = inputFiledList[dataIndex];
+                    inputFiledList.Remove(nowInputField);
+                    Destroy(nowInputField.gameObject, 1f);
+
+                    yield return null;
+                }
+            }
+
             LineCilck(mousePos);
             NewLineStart();
             is_Hold = true;
