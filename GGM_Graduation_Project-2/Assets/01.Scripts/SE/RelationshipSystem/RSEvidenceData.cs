@@ -10,7 +10,7 @@ public class RSEvidenceData : MonoBehaviour
     public List<RSLinkedData> linkdataList = new List<RSLinkedData>();
 
     // My Type
-    public EFileType fileType = EFileType.IMAGE;
+    public FileType fileType = FileType.IMAGE;
 
     public void ChangeOtherLinePosition()
     {

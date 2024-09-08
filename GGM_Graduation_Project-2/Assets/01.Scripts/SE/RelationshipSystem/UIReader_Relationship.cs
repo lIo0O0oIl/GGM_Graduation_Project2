@@ -32,7 +32,7 @@ public class UIReader_Relationship : MonoBehaviour
 
     private void Start()
     {
-        ui_RelationshipGround = UIReader_Main.Instance.RelationshipPanel;
+        //ui_RelationshipGround = UIReader_Main.Instance.RelationshipPanel;
     }
 
     public void AddHumanPicture()

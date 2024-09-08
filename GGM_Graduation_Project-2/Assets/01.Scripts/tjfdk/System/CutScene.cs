@@ -32,8 +32,6 @@ public class CutScene : MonoBehaviour
 
     public void BarAnim(float start, float end, float during, Action startAction, Action endAction)
     {
-        Debug.Log(downBar.name);
-
         DOTween.To(() => start, x => start = x, end, during)
         .OnStart(() =>
         {

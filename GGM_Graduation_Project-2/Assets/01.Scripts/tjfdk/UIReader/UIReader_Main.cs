@@ -34,7 +34,7 @@ public class UIReader_Main : MonoBehaviour
     private VisualElement filePanel;
     private VisualElement cutScenePanel;
     private VisualElement gamePanel;
-    public VisualElement RelationshipPanel;
+    //public VisualElement RelationshipPanel;
     private VisualElement settingPanel;
     private VisualElement quitPanel;
 
@@ -77,7 +77,7 @@ public class UIReader_Main : MonoBehaviour
         filePanel = root.Q<VisualElement>("FileSystem");
         cutScenePanel = root.Q<VisualElement>("CutScene");
         gamePanel = root.Q<VisualElement>("MainSystem");
-        RelationshipPanel = root.Q<VisualElement>("RelationshipSystem");
+        //RelationshipPanel = root.Q<VisualElement>("RelationshipSystem");
         settingPanel = root.Q<VisualElement>("Setting");
         quitPanel = root.Q<VisualElement>("Quit");
 
@@ -116,7 +116,7 @@ public class UIReader_Main : MonoBehaviour
 
         isRelationshipOpen = false;
         gamePanel.style.display = DisplayStyle.None;
-        RelationshipPanel.style.display = DisplayStyle.None;
+        //RelationshipPanel.style.display = DisplayStyle.None;
         settingPanel.style.display = DisplayStyle.None;
 
         switch (panelType)
@@ -129,7 +129,7 @@ public class UIReader_Main : MonoBehaviour
             case EPanel.RELATIONSHIP:
                 isRelationshipOpen = true;
                 filePanel.style.display = DisplayStyle.None;
-                RelationshipPanel.style.display = DisplayStyle.Flex;
+                //RelationshipPanel.style.display = DisplayStyle.Flex;
                 break;
         }
     }
