@@ -49,3 +49,16 @@
     min-width: 150px;
     height: 100%;
 }
+
+.OnFileSystem {
+    flex-basis: 300px;
+    transition-property: all;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+
+.OffFileSystem {
+    transition-duration: 0.25s;
+    flex-basis: 150px;
+}

@@ -6,6 +6,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+public enum FileType
+{
+    FOLDER,
+    IMAGE,
+    TEXT
+}
+
 [Serializable]
 public class FolderFile
 {
@@ -40,7 +47,6 @@ public class FileSystem : MonoBehaviour
     Tween changeFileSystemSizeDOT;
 
     // root
-    public UIDocument document;
     VisualElement root;
 
     // UXML
@@ -85,10 +91,11 @@ public class FileSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        root = document.rootVisualElement;
-
         UXML_Load();
         Event_Load();
+
+        fileFolders.Add(new FolderFile("Main", "Main"));
+        AddFilePath("Main");
     }
 
     private void UXML_Load()
@@ -96,10 +103,10 @@ public class FileSystem : MonoBehaviour
         root = GameObject.Find("Game").GetComponent<UIDocument>().rootVisualElement;
 
         ui_fileSystemArea = root.Q<VisualElement>("FileSystem");
-        ui_fileGround = root.Q<VisualElement>("FileGround");
-        ui_filePathGround = root.Q<VisualElement>("FilePathGround");
-        ui_changeSizeButton = root.Q<Button>("ChangeSize");
-        ui_hpGround = root.Q<VisualElement>("HPbar");
+        ui_fileGround = UIReader_Main.Instance.root.Q<VisualElement>("FileGround");
+        ui_filePathGround = UIReader_Main.Instance.root.Q<VisualElement>("FilePathGround");
+        ui_changeSizeButton = UIReader_Main.Instance.root.Q<Button>("ChangeSize");
+        ui_hpGround = UIReader_Main.Instance.root.Q<VisualElement>("HPbar");
     }
 
     private void Event_Load()
@@ -131,13 +138,13 @@ public class FileSystem : MonoBehaviour
                 for (int i = 0; i < member.questions.Count; ++i)
                 {
                     // ask의 condition 가져오기
-                    if (member.questions[i].fileName != "" || member.questions[i].fileName != null)
+                    if (member.questions[i].parent is ConditionNode condition)
                     {
                         // file name 가져오고
                         string fileName = file.Q<Label>("FileName").text;
 
                         // condition names 가져와서
-                        string[] names = member.questions[i].fileName.Split('/');
+                        string[] names = condition.fileName.Split('/');
 
                         // 둘이 비교해
                         foreach (string name in names)
@@ -148,10 +155,10 @@ public class FileSystem : MonoBehaviour
                                 // name(condition) == fileName(file)
                                 if (GameManager.Instance.fileManager.FindFile(name).fileName.Trim() == fileName.Trim())
                                 {
-                                    if (member.questions[i].type == EAskType.Lock)
+                                    if (condition.is_Unlock == false)
                                     {
                                         // unlock 
-                                        member.questions[i].type = EAskType.All;
+                                        condition.is_Unlock = true;
 
                                         // remove visualElement
                                         for (int j = 0; j < questionGround.childCount; ++j)
@@ -164,8 +171,9 @@ public class FileSystem : MonoBehaviour
                                         }
 
                                         //change from lockQustion to question - 질문으로 만드는 거
-                                        GameManager.Instance.chatSystem.InputQuestion
-                                            (member.name, member.questions[i].type == EAskType.Lock, member.questions[i]);
+                                        GameManager.Instance.chatSystem.InputQuestion(member.name, false, condition.childList[0] as AskNode);
+
+                                        UIReader_Main.Instance.PlusHP();
 
                                         // add question
                                         // 이거 다시 켜야될지도?
@@ -173,7 +181,6 @@ public class FileSystem : MonoBehaviour
 
                                         isCorrect = true;
                                         beforeSlot.Add(target);
-
                                         return;
                                     }
                                 }
@@ -212,14 +219,7 @@ public class FileSystem : MonoBehaviour
         return null;
     }
 
-    public void TestStart()
-    {
-        Debug.Log("main 추가");
-        fileFolders.Add(new FolderFile("Main", "Main"));
-        AddFilePath("Main");
-    }
-
-    public void AddFile(EFileType fileType, string fileName, string fileParentName)
+    public void AddFile(FileType fileType, string fileName, string fileParentName)
     {
         // find parentFolder
         FolderFile parentFolder = FindFolder(fileParentName);
@@ -232,98 +232,98 @@ public class FileSystem : MonoBehaviour
             // register folder to parentFolder
             switch (fileType)
             {
-                case EFileType.FOLDER:
-                {
-                    FileSO folder = GameManager.Instance.fileManager.FindFile(fileName);
-
-                    // create uxml
-                    file = UIReader_Main.Instance.RemoveContainer(ux_folderFile.Instantiate());
-
-                    // change file name
-                    file.name = folder.fileName;
-                    file.Q<Label>("FileName").text = folder.fileName;
-
-                    // connection click event
-                    LoadDragAndDrop(file, () => 
+                case FileType.FOLDER:
                     {
-                        GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
+                        FileSO folder = GameManager.Instance.fileManager.FindFile(fileName);
 
-                        // image check action
-                        if (folder != null)
-                            GameManager.Instance.fileManager.UnlockChat(folder.name);
-                        if (GameManager.Instance.fileManager.FindFile(fileName).isRead == true)
-                            file.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
-                        
-                        // draw current foluder
-                        DrawFile(folder.fileName);
+                        // create uxml
+                        file = UIReader_Main.Instance.RemoveContainer(ux_folderFile.Instantiate());
 
-                        // add current folder path
-                        AddFilePath(folder.fileName);
-                    });
+                        // change file name
+                        file.name = folder.fileName;
+                        file.Q<Label>("FileName").text = folder.fileName;
 
-                    fileFolders.Add(new FolderFile(fileName, fileParentName));
+                        // connection click event
+                        LoadDragAndDrop(file, () =>
+                        {
+                            GameManager.Instance.fileManager.FindFile(fileName).isRead = true;
 
-                    // add file
-                    bool overlapping = false;
-                    for (int i = 0; i < parentFolder.imageFiles.Count; ++i)
-                    {
-                        if (parentFolder.imageFiles[i].name == file.name)
-                            overlapping = true;
+                            // image check action
+                            if (folder != null)
+                                GameManager.Instance.fileManager.UnlockChat(folder.name);
+                            if (GameManager.Instance.fileManager.FindFile(fileName).isRead == true)
+                                file.Q<VisualElement>("NewIcon").style.display = DisplayStyle.None;
+
+                            // draw current foluder
+                            DrawFile(folder.fileName);
+
+                            // add current folder path
+                            AddFilePath(folder.fileName);
+                        });
+
+                        fileFolders.Add(new FolderFile(fileName, fileParentName));
+
+                        // add file
+                        bool overlapping = false;
+                        for (int i = 0; i < parentFolder.imageFiles.Count; ++i)
+                        {
+                            if (parentFolder.imageFiles[i].name == file.name)
+                                overlapping = true;
+                        }
+                        if (overlapping == false)
+                            parentFolder.imageFiles.Add(file);
                     }
-                    if (overlapping == false)
-                        parentFolder.imageFiles.Add(file);
-                }
-                break;
-                case EFileType.IMAGE:
-                {
-                    FileSO image = GameManager.Instance.fileManager.FindFile(fileName);
-
-                    // create uxml
-                    file = UIReader_Main.Instance.RemoveContainer(ux_imageFile.Instantiate());
-
-                    // change file name
-                    file.name = image.fileName;
-                    file.Q<Label>("FileName").text = image.fileName;
-
-                    // connection drag and drop & button click event
-                    LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(file, image.fileName); });
-
-                    // add file
-                    bool overlapping = false;
-                    for (int i = 0; i < parentFolder.imageFiles.Count; ++i)
+                    break;
+                case FileType.IMAGE:
                     {
-                        if (parentFolder.imageFiles[i].name == file.name)
-                            overlapping = true;
+                        FileSO image = GameManager.Instance.fileManager.FindFile(fileName);
+
+                        // create uxml
+                        file = UIReader_Main.Instance.RemoveContainer(ux_imageFile.Instantiate());
+
+                        // change file name
+                        file.name = image.fileName;
+                        file.Q<Label>("FileName").text = image.fileName;
+
+                        // connection drag and drop & button click event
+                        LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenImage(file, image.fileName); });
+
+                        // add file
+                        bool overlapping = false;
+                        for (int i = 0; i < parentFolder.imageFiles.Count; ++i)
+                        {
+                            if (parentFolder.imageFiles[i].name == file.name)
+                                overlapping = true;
+                        }
+                        if (overlapping == false)
+                            parentFolder.imageFiles.Add(file);
                     }
-                    if (overlapping == false)
-                        parentFolder.imageFiles.Add(file);
-                }
-                break;
-                case EFileType.TEXT:
-                {
-                    FileSO text = GameManager.Instance.fileManager.FindFile(fileName);
-
-                    // create uxml
-                    file = UIReader_Main.Instance.RemoveContainer(ux_textFile.Instantiate());
-
-                    // change file name
-                    file.name = text.fileName;
-                    file.Q<Label>("FileName").text = text.fileName;
-
-                    // connection drag and drop & button click event
-                    LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(file, text.fileName); });
-
-                    // add file
-                    bool overlapping = false;
-                    for (int i = 0; i < parentFolder.imageFiles.Count; ++i)
+                    break;
+                case FileType.TEXT:
                     {
-                        if (parentFolder.imageFiles[i].name == file.name)
-                            overlapping = true;
+                        FileSO text = GameManager.Instance.fileManager.FindFile(fileName);
+
+                        // create uxml
+                        file = UIReader_Main.Instance.RemoveContainer(ux_textFile.Instantiate());
+
+                        // change file name
+                        file.name = text.fileName;
+                        file.Q<Label>("FileName").text = text.fileName;
+
+                        // connection drag and drop & button click event
+                        LoadDragAndDrop(file, () => { GameManager.Instance.imageSystem.OpenText(file, text.fileName); });
+
+                        // add file
+                        bool overlapping = false;
+                        for (int i = 0; i < parentFolder.imageFiles.Count; ++i)
+                        {
+                            if (parentFolder.imageFiles[i].name == file.name)
+                                overlapping = true;
+                        }
+                        if (overlapping == false)
+                            parentFolder.imageFiles.Add(file);
                     }
-                    if (overlapping == false)
-                        parentFolder.imageFiles.Add(file);
-                }
-                break;
+                    break;
             }
         }
         // if not exist parenteFolder
@@ -356,7 +356,7 @@ public class FileSystem : MonoBehaviour
             foreach (VisualElement image in currentFileFolder.imageFiles)
                 ui_fileGround.Add(image);
 
-            foreach (VisualElement text in currentFileFolder.textFiles)                
+            foreach (VisualElement text in currentFileFolder.textFiles)
                 ui_fileGround.Add(text);
         }
         else
@@ -365,13 +365,8 @@ public class FileSystem : MonoBehaviour
 
     private void RemoveFile()
     {
-        if (ui_fileGround != null)
-        {
-            for (int i = ui_fileGround.childCount - 1; i >= 0; i--)
-                ui_fileGround.RemoveAt(i);
-        }
-        else
-            Debug.Log("비엇음");
+        for (int i = ui_fileGround.childCount - 1; i >= 0; i--)
+            ui_fileGround.RemoveAt(i);
     }
 
     private void AddFilePath(string pathName)
@@ -434,22 +429,16 @@ public class FileSystem : MonoBehaviour
     {
         isFileSystemOpen = !isFileSystemOpen;
 
-        if (changeFileSystemSizeDOT != null)
-        {
-            changeFileSystemSizeDOT.Complete();
-            changeFileSystemSizeDOT = null;
-        }
-
         if (isFileSystemOpen)
         {
-            changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x =>
-                ui_fileSystemArea.style.flexBasis = x, fileAreaSizeOn, during);
+            ui_fileSystemArea.RemoveFromClassList("OffFileSystem");
+            ui_fileSystemArea.AddToClassList("OnFileSystem");
             ui_changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOn);
         }
         else
         {
-            changeFileSystemSizeDOT = DOTween.To(() => ui_fileSystemArea.style.flexBasis.value.value, x =>
-                ui_fileSystemArea.style.flexBasis = x, fileAreaSizeOff, during);
+            ui_fileSystemArea.RemoveFromClassList("OnFileSystem");
+            ui_fileSystemArea.AddToClassList("OffFileSystem");
             ui_changeSizeButton.style.backgroundImage = new StyleBackground(changeSizeBtnOff);
         }
     }

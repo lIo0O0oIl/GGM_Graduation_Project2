@@ -8,6 +8,8 @@ public class PngSO : ScriptableObject
     public bool isRead;
     public bool isOpen;
 
+    public bool importance;
+
     public Sprite image;
     public Vector2 pos;
     public Vector2 size;
