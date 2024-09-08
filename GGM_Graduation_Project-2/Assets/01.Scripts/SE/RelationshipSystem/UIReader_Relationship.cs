@@ -20,7 +20,7 @@ public class UIReader_Relationship : MonoBehaviour
 
     private void Start()
     {
-        UIReader_Main.Instance.GetRelationshipEvidenceArea(ref relationshipEvidenceList, ref relationshipHumanList);
+        //UIReader_Main.Instance.GetRelationshipEvidenceArea(ref relationshipEvidenceList, ref relationshipHumanList);
     }
 
     public VisualElement GetEvidenceContains(Vector2 mousePos)

@@ -1,4 +1,3 @@
-using ChatVisual;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -59,6 +58,7 @@ public class Investigation : MonoBehaviour
                 // fileSystem off bool value
                 GameManager.Instance.fileSystem.isFileSystemOpen = false;
                 // fileSystem size function
+                GameManager.Instance.fileSystem.isFileSystemOpen = true;
                 GameManager.Instance.fileSystem.OnOffFileSystem(0f);
 
                 // png panel ground on
@@ -73,8 +73,8 @@ public class Investigation : MonoBehaviour
                 imagePanel.Q<VisualElement>("ImageGround").style.backgroundImage = new StyleBackground(image.image);
                 imagePanel.Q<Label>("Count").text = image.pngName.Count.ToString();
 
-                imagePanel.Q<Button>("ImageGround").clicked += () => 
-                    { if (ui_description != null) ui_description.parent.Remove(ui_description); ui_description = null; };
+                imagePanel.Q<Button>("ImageGround").clicked += () =>
+                { if (ui_description != null) ui_description.parent.Remove(ui_description); ui_description = null; };
 
                 imagePanel.Q<Button>("ImageExitBtn").clicked += (() =>
                 {
@@ -104,7 +104,7 @@ public class Investigation : MonoBehaviour
                         if (evid == png.name)
                         {
                             VisualElement evidence = null;
-                            if (png.is_save)
+                            if (png.importance)
                             {
                                 evidence = UIReader_Main.Instance.RemoveContainer(ux_imageEvidence.Instantiate());
                                 evidence.Q<Button>("EvidenceImage").style.backgroundImage = new StyleBackground(png.image);
@@ -119,16 +119,16 @@ public class Investigation : MonoBehaviour
                                     TextSO text = GameManager.Instance.imageManager.FindText(evid);
                                     if (text != null)
                                     {
-                                        GameManager.Instance.fileSystem.AddFile(EFileType.TEXT, text.name,
+                                        GameManager.Instance.fileSystem.AddFile(FileType.TEXT, text.name,
                                             GameManager.Instance.fileManager.FindFile(text.name).fileParentName);
                                     }
                                     else
                                     {
                                         if (png.saveName != "" && png.saveName != null)
-                                            GameManager.Instance.fileSystem.AddFile(EFileType.TEXT, png.saveName,
+                                            GameManager.Instance.fileSystem.AddFile(FileType.TEXT, png.saveName,
                                             GameManager.Instance.fileManager.FindFile(png.saveName).fileParentName);
                                         else
-                                            GameManager.Instance.fileSystem.AddFile(EFileType.IMAGE, png.name, 
+                                            GameManager.Instance.fileSystem.AddFile(FileType.IMAGE, png.name,
                                                 GameManager.Instance.fileManager.FindFile(png.name).fileParentName);
                                     }
 
@@ -157,7 +157,7 @@ public class Investigation : MonoBehaviour
 
                                     // add description
                                     // create description
-                                    VisualElement description 
+                                    VisualElement description
                                         = UIReader_Main.Instance.RemoveContainer(ux_evidenceExplanation.Instantiate());
                                     // save description
                                     ui_description = description;
@@ -165,7 +165,7 @@ public class Investigation : MonoBehaviour
                                     imagePanel.Q<Button>("ImageGround").Add(description);
                                     // input description text
                                     UIReader_Main.Instance.DoText(description.Q<Label>("Text"), png.memo, 2f, false,
-                                        () => {  }, "");
+                                        () => { }, "");
                                     // check condition
                                     GameManager.Instance.fileManager.UnlockChat(png.name);
                                 });
@@ -175,7 +175,7 @@ public class Investigation : MonoBehaviour
                             evidence.Q<Button>("EvidenceImage").style.left = png.pos.x;
                             evidence.Q<Button>("EvidenceImage").style.top = png.pos.y;
                             evidence.Q<Button>("EvidenceImage").style.width = png.size.x;
-                            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;  
+                            evidence.Q<Button>("EvidenceImage").style.height = png.size.y;
                             imagePanel.Q<VisualElement>("ImageGround").Add(evidence);
                         }
                     }
@@ -271,7 +271,7 @@ public class Investigation : MonoBehaviour
                     GameManager.Instance.fileManager.UnlockChat(file.name);
             };
 
-            if (fileIcon  != null)
+            if (fileIcon != null)
             {
                 GameManager.Instance.fileManager.FindFile(name).isRead = true;
                 if (GameManager.Instance.fileManager.FindFile(name).isRead == true)

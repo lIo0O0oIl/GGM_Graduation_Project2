@@ -4,63 +4,6 @@ using UnityEngine;
 
 namespace ChatVisual
 {
-    [Serializable]
-    public class NormalChat
-    {
-        public string text;
-        public bool isUse, isRead;
-        public string[] fildLoad;
-        public string fileName;
-    }
-
-    [Serializable]
-    public class Chat : NormalChat
-    {
-        //public Chat()
-        //{
-
-        //}
-        public EChatState who;
-        public EChatType type;
-        public EFace face;
-        public EChatEvent evt;
-    }
-
-    [Serializable]
-    public class Question : NormalChat
-    {
-        public EAskType type;
-        public string nextName;
-        public List<Chat> answers;
-    }
-
-    public enum EFileType
-    {
-        FOLDER,
-        IMAGE,
-        TEXT
-    }
-
-    [Serializable]
-    public class MemberProfile
-    {
-        public string name;
-        public ESaveLocation nickName;
-        public EFace currentFace;
-        public Sprite[] faces;
-
-        public MemberEvidence evidence;
-
-        public bool isOpen;
-
-        public List<NormalChat> excelChat = new List<NormalChat>();
-        public List<Chat> recode = new List<Chat>();
-        public List<Question> questions = new List<Question>();
-
-        public int currentIdx, currentAskIdx;
-    }
-
-
     public enum ESaveLocation
     {
         NotSave,
@@ -88,35 +31,37 @@ namespace ChatVisual
 
     public enum EChatType
     {
-        Chat = 0,
+        Text = 0,
         Image,
-        Text,
+        TextFile,
         CutScene,
-        Question
-    }
-
-    public enum EAskType
-    {
-        All,
-        Lock,
-        Answer,
-        NoAnswer
+        Question,
+        LockQuestion
     }
 
     public enum EFace
     {
-        NotChange,       
-        Normal,       
-        Shy,      
-        Angry   
+        NotChange,
+        Default,
+        Blush,
+        Angry
     }
 
     public enum EChatEvent
     {
-        Normal,
+        Default,
         Vibration,
         OneVibration,
-        Camera
+        Camera,
+        LoadFile,
+        LoadNextDialog
+    }
+
+    public enum EAskType
+    {
+        Common,
+        Answer,
+        NoAnswer
     }
 
     public class ChatStruct : MonoBehaviour { }
