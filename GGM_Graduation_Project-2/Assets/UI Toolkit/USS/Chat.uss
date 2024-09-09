@@ -10,14 +10,14 @@
 
 .OtherChat {
     align-self: flex-start;
-    margin-left: 30px;
+    margin-left: 45px;
     margin-right: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding-left: 7.5px;
-    padding-right: 7.5px;
-    padding-top: 7.5px;
-    padding-bottom: 7.5px;
+    padding-left: 12.5px;
+    padding-right: 12.5px;
+    padding-top: 12.5px;
+    padding-bottom: 12.5px;
     background-image: url('project://database/Assets/02.Sprites/Button/Chat.png?fileID=21300000&guid=e085a94efd6dc254482ed4b34fc42f4a&type=3#Chat');
 }
 
@@ -35,14 +35,15 @@
 .MyChat {
     align-self: flex-end;
     background-image: url('project://database/Assets/02.Sprites/Button/Chat.png?fileID=21300000&guid=e085a94efd6dc254482ed4b34fc42f4a&type=3#Chat');
-    margin-right: 30px;
-    padding-left: 7.5px;
-    padding-right: 7.5px;
-    padding-top: 7.5px;
-    padding-bottom: 7.5px;
+    margin-right: 45px;
+    padding-left: 12.5px;
+    padding-right: 12.5px;
+    padding-top: 12.5px;
+    padding-bottom: 12.5px;
     margin-left: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
+    -unity-background-image-tint-color: rgb(178, 178, 178);
 }
 
 .FileChatSize {
@@ -55,8 +56,8 @@
 }
 
 .talkingSize {
-    width: 350px;
-    height: 350px;
+    width: 375px;
+    height: 375px;
     transition-duration: 0.25s;
 }
 
