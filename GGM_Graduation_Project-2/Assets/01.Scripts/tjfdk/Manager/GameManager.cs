@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
     public CutScene cutSceneSystem;
     public Chatting chatSystem;
     public UIReader_Relationship relationshipSystem;
+    public UIReader_SelectHuman selectHumanSystem;
     public FileSystem fileSystem;
     public Investigation imageSystem;
 

@@ -97,7 +97,7 @@ public class Chatting : MonoBehaviour
         ui_questionGround = UIReader_Main.Instance.root.Q<VisualElement>("QuestionGround");
         ui_otherFace = UIReader_Main.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("OtherFace");
         ui_myFace = UIReader_Main.Instance.root.Q<VisualElement>("FaceGround").Q<VisualElement>("MyFace");
-        ui_memberListButton = UIReader_Main.Instance.root.Q<Button>("ChangeTarget");
+        ui_memberListButton = UIReader_Main.Instance.root.Q<Button>("SelectHumanOpenBtn");
         ui_nextChatButton = UIReader_Main.Instance.root.Q<Button>("NextChatBtn");
         ui_otherMemberName = UIReader_Main.Instance.root.Q<Label>("TargetName");
         ui_memberListGround = UIReader_Main.Instance.root.Q<VisualElement>("ChatMemberList");
@@ -225,8 +225,8 @@ public class Chatting : MonoBehaviour
                     //chat.Add(new VisualElement());
                     //chat.Q<VisualElement>().style.backgroundImage = new StyleBackground(GameManager.Instance.cutScenePlayIcon);
 
-                        Debug.Log(text + "  자동으로 한 번");
-                    GameManager.Instance.cutSceneSystem.PlayCutScene(text);
+                    //    Debug.Log(text + "  자동으로 한 번");
+                    //GameManager.Instance.cutSceneSystem.PlayCutScene(text);
                     // connection click event, play cutscene
                     chat.Q<Button>().clicked += (() =>
                     {
@@ -879,6 +879,7 @@ public class Chatting : MonoBehaviour
                     if (member.currentNode.is_UseThis == false)
                     {
                         member.currentNode = member.currentAskNode.parent;
+                        GameManager.Instance.chatHumanManager.IsChat(true);
                     }
                 }
             }
@@ -904,6 +905,8 @@ public class Chatting : MonoBehaviour
             // off memberListGround
             isMemberListOpen = false;
             OnOffMemberList();
+            GameManager.Instance.selectHumanSystem.is_Open = true;
+            GameManager.Instance.selectHumanSystem.OnOffThisSystem(0f);
             // remove all chat and question
             RemoveChatting();
             RemoveQuestion();

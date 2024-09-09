@@ -61,6 +61,9 @@ public class Investigation : MonoBehaviour
                 GameManager.Instance.fileSystem.isFileSystemOpen = true;
                 GameManager.Instance.fileSystem.OnOffFileSystem(0f);
 
+                GameManager.Instance.selectHumanSystem.is_Open = true;
+                GameManager.Instance.selectHumanSystem.OnOffThisSystem(0f);
+
                 // png panel ground on
                 ui_imageGround.style.display = DisplayStyle.Flex;
 
