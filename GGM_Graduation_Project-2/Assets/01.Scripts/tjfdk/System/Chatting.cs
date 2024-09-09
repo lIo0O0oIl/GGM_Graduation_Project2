@@ -692,19 +692,21 @@ public class Chatting : MonoBehaviour
     // Whisper 
     private void AddWhisperText(VisualElement chat, string segmentText)
     {
+        float maxGrayScaleValue = 140f / 255f; 
+
         for (int i = 0; i < segmentText.Length; i++)
         {
             Label whisperLabel = UIReader_Main.Instance.RemoveContainer(ux_highlightedtext.Instantiate()).Q<Label>();
 
-            float grayScale = 0.2f + (0.7f * i / (segmentText.Length - 1));
-            int grayScaleValue = (int)(grayScale * 255);
+            float grayScale = (maxGrayScaleValue * i) / (segmentText.Length - 1);
 
-            whisperLabel.style.color = new Color(grayScaleValue / 255f, grayScaleValue / 255f, grayScaleValue / 255f, 1f);
+            whisperLabel.style.color = new Color(grayScale, grayScale, grayScale, 1f);
             whisperLabel.text = segmentText[i].ToString();
 
             chat.Add(whisperLabel);
         }
     }
+
 
     // Highlight
     private void AddHighlightedText(VisualElement chat, string segmentText)
