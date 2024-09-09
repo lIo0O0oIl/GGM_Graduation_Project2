@@ -26,8 +26,8 @@ public class CutScene : MonoBehaviour
     {
         UIReader_Main.Instance.OpenCutScene();
         BarAnim(0f, 130.5f, 1f, 
-            () => { GameManager.Instance.cutSceneManager.CutSceneReset(name); }, 
-            () => { GameManager.Instance.cutSceneManager.CutScene(name); });
+            () => { GameManager.Instance.cutSceneManager.CutSceneReset(name); scene.pickingMode = PickingMode.Ignore; }, 
+            () => { GameManager.Instance.cutSceneManager.CutScene(name); scene.pickingMode = PickingMode.Position; });
     }
 
     public void BarAnim(float start, float end, float during, Action startAction, Action endAction)

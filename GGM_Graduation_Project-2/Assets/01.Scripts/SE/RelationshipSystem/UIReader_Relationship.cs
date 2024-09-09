@@ -27,7 +27,7 @@ public class UIReader_Relationship : MonoBehaviour
 
     private void Awake()
     {
-        charging = GetComponent<Charging>();
+        charging = GameObject.Find("Game").GetComponent<Charging>();
     }
 
     private void Start()

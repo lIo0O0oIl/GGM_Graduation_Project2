@@ -74,6 +74,7 @@ public class Chatting : MonoBehaviour
     [SerializeField] VisualTreeAsset ux_askChat;
     [SerializeField] VisualTreeAsset ux_hiddenAskChat;
     [SerializeField] VisualTreeAsset ux_textFile;
+    [SerializeField] VisualTreeAsset ux_cutSceneFile;
     [SerializeField] VisualTreeAsset ux_memberList;
 
     // 흔들림 효과 넣어주기
@@ -204,34 +205,37 @@ public class Chatting : MonoBehaviour
             case EChatType.CutScene:
                 {
                     // create Button
-                    chat = new Button();
-                    chat.name = "cutScene";
+                    chat = UIReader_Main.Instance.RemoveContainer(ux_cutSceneFile.Instantiate());
+                    //chat = new Button();
+                    //chat.name = "cutScene";
 
-                    // change chat style
-                    chat.AddToClassList("FileChatSize");
-                    chat.AddToClassList("NoButtonBorder");
+                    //// change chat style
+                    //chat.AddToClassList("FileChatSize");
+                    //chat.AddToClassList("NoButtonBorder");
 
-                    // find first cut of cutscene
-                    ChatNode cutScene = GameManager.Instance.chatHumanManager.currentNode as ChatNode;
+                    //// find first cut of cutscene
+                    //ChatNode cutScene = GameManager.Instance.chatHumanManager.currentNode as ChatNode;
                     //GameManager.Instance.chatHumanManager.nowCondition = cutScene.childList[0] as ConditionNode;
 
-                    // change background to image
+                    //// change background to image
                     Sprite sprite = GameManager.Instance.cutSceneManager.FindCutScene(text).cutScenes[0].cut[0];
                     chat.style.backgroundImage = new StyleBackground(sprite);
 
-                    // Create Play Icon
-                    chat.Add(new VisualElement());
-                    chat.Q<VisualElement>().style.backgroundImage = new StyleBackground(GameManager.Instance.cutScenePlayIcon);
+                    //// Create Play Icon
+                    //chat.Add(new VisualElement());
+                    //chat.Q<VisualElement>().style.backgroundImage = new StyleBackground(GameManager.Instance.cutScenePlayIcon);
 
+                        Debug.Log(text + "  자동으로 한 번");
+                    GameManager.Instance.cutSceneSystem.PlayCutScene(text);
                     // connection click event, play cutscene
                     chat.Q<Button>().clicked += (() =>
                     {
-                        GameManager.Instance.cutSceneManager.FindCutScene(text).test = false;
+                        GameManager.Instance.cutSceneManager.FindCutScene(text).isRead = false;
+                        Debug.Log("클릭으로 한 번");
                         GameManager.Instance.cutSceneSystem.PlayCutScene(text);
                     });
 
                     // play cutScene
-                    GameManager.Instance.cutSceneSystem.PlayCutScene(text);
 
                     break;
                 }

@@ -1,5 +1,3 @@
-using ChatVisual;
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "fileSO", menuName = "SO/FileSO")]

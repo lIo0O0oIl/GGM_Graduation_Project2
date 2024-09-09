@@ -25,10 +25,6 @@
     background-color: rgba(0, 0, 0, 0);
     font-size: 35px;
     color: rgb(27, 27, 27);
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
     -unity-text-align: middle-center;
 }
 
@@ -52,7 +48,6 @@
 }
 
 .Question {
-    -unity-background-image-tint-color: rgb(183, 183, 183);
 }
 
 .talkingSize {

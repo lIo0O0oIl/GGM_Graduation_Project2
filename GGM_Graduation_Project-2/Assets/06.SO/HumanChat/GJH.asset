@@ -4452,7 +4452,7 @@ MonoBehaviour:
   position: {x: 2068.6, y: -251}
   index: 0
   is_UseThis: 0
-  is_readThis: 1
+  is_readThis: 0
   parent: {fileID: 8966239018989811733}
   childList:
   - {fileID: -1468350654541524224}
@@ -5417,7 +5417,7 @@ MonoBehaviour:
   position: {x: 2268.8, y: -116.79999}
   index: 0
   is_UseThis: 0
-  is_readThis: 1
+  is_readThis: 0
   parent: {fileID: -2542312368845786048}
   childList:
   - {fileID: 4895186222371653666}
@@ -7169,6 +7169,7 @@ MonoBehaviour:
   - {fileID: 5387943553227245625}
   - {fileID: 1412484508941263295}
   - {fileID: 6163332403614951468}
+  - {fileID: 4916966927129034889}
 --- !u!114 &10005552213000085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8810,7 +8811,7 @@ MonoBehaviour:
   position: {x: 2249.6, y: 141.6}
   index: 0
   is_UseThis: 0
-  is_readThis: 1
+  is_readThis: 0
   parent: {fileID: 4895186222371653666}
   childList:
   - {fileID: 2885290818629059961}
@@ -9573,12 +9574,12 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   guid: 227ea8fd4bd3fa64c9a508ede1f4a37a
-  position: {x: 2259.4775, y: -537.60016}
+  position: {x: 2236.2, y: -723.12006}
   index: 0
   is_UseThis: 0
   is_readThis: 0
   parent: {fileID: 11400000}
-  child: {fileID: 8966239018989811733}
+  child: {fileID: 4916966927129034889}
   showName: GJH
 --- !u!114 &3448636270957256003
 MonoBehaviour:
@@ -10660,7 +10661,7 @@ MonoBehaviour:
   position: {x: 2064.079, y: -0.07914874}
   index: 0
   is_UseThis: 0
-  is_readThis: 1
+  is_readThis: 0
   parent: {fileID: -1468350654541524224}
   childList:
   - {fileID: 2302774928242339614}
@@ -10694,6 +10695,33 @@ MonoBehaviour:
   textEvent: 05000000
   LoadNextDialog: HS
   askType: 0
+--- !u!114 &4916966927129034889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9018f846bbe34bbd4f46f093bbc35, type: 3}
+  m_Name: ChatNode
+  m_EditorClassIdentifier: 
+  guid: 218cebecf7ececb4096e98b77736281c
+  position: {x: 2241.045, y: -568.8001}
+  index: 0
+  is_UseThis: 0
+  is_readThis: 1
+  parent: {fileID: 3332800361343203531}
+  childList:
+  - {fileID: 8966239018989811733}
+  state: 0
+  type: 3
+  chatText: NextDay
+  face: 0
+  loadFileName: []
+  textEvent: 
+  LoadNextDialog: 
 --- !u!114 &4964586863881338891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13271,8 +13299,8 @@ MonoBehaviour:
   position: {x: 2249.5999, y: -388}
   index: 0
   is_UseThis: 0
-  is_readThis: 1
-  parent: {fileID: 3332800361343203531}
+  is_readThis: 0
+  parent: {fileID: 4916966927129034889}
   childList:
   - {fileID: -2542312368845786048}
   state: 1
