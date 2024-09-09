@@ -5778,8 +5778,8 @@ MonoBehaviour:
   state: 1
   type: 0
   chatText: "\uC758\uBB38\uC810\uC774 \uB108\uBB34 \uB9CE\uB124\uC694... \uC815\uBCF4\uB3C4
-    \uB108\uBB34 \uC5C6\uACE0... \uD798\uB4E4\uACE0... \uC9D1\uC5D0 \uAC00\uACE0
-    \uC2F6\uACE0..."
+    \uB108\uBB34 \uC5C6\uACE0... $\uD798\uB4E4\uACE0... \uC9D1\uC5D0 \uAC00\uACE0
+    \uC2F6\uACE0...$"
   face: 0
   loadFileName: []
   textEvent: 
@@ -6694,7 +6694,7 @@ MonoBehaviour:
   m_Name: GJH
   m_EditorClassIdentifier: 
   rootNode: {fileID: 3332800361343203531}
-  humanName: GJH.
+  humanName: GJH
   nodeList:
   - {fileID: 3332800361343203531}
   - {fileID: 8966239018989811733}
@@ -9220,7 +9220,7 @@ MonoBehaviour:
   - {fileID: 10005552213000085}
   state: 0
   type: 0
-  chatText: "\uAC00\uAE34 \uC5B4\uB51C \uAC00? $\uAFC8 \uAFE8\uB0D0?$"
+  chatText: "\uC5B4\uB51C \uAC00? \uAFC8\uAFE8\uB0D0?"
   face: 0
   loadFileName: []
   textEvent: 
@@ -13277,7 +13277,7 @@ MonoBehaviour:
   - {fileID: -2542312368845786048}
   state: 1
   type: 0
-  chatText: "(zzz...) \uD760... \uD760\uB0D0..."
+  chatText: "(zzz...) \uD760... $\uD760\uB0D0...$"
   face: 2
   loadFileName: []
   textEvent: 

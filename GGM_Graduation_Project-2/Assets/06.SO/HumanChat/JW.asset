@@ -237,7 +237,7 @@ MonoBehaviour:
   - {fileID: 4184044054823012636}
   state: 0
   type: 0
-  chatText: "\uB124. \uC54C\uB824\uB4DC\uB9AC\uAE34 \uC880 \uADF8\uB7F0\uB370\uC694..."
+  chatText: "\uB124. \uC54C\uB824\uB4DC\uB9AC\uAE34 $\uC880 \uADF8\uB7F0\uB370\uC694...$"
   face: 0
   loadFileName: []
   textEvent: 
@@ -1722,7 +1722,7 @@ MonoBehaviour:
   m_Name: JW
   m_EditorClassIdentifier: 
   rootNode: {fileID: 5492412774260184574}
-  humanName: JW.
+  humanName: JW
   nodeList:
   - {fileID: 5492412774260184574}
   - {fileID: -3968470587112397776}
@@ -3040,7 +3040,7 @@ MonoBehaviour:
   m_Name: ChatNode
   m_EditorClassIdentifier: 
   guid: 05befb9f77797674cb325c8842e1f0c3
-  position: {x: -70.80003, y: 2739.9995}
+  position: {x: -70.40001, y: 2741.1504}
   index: 0
   is_UseThis: 0
   is_readThis: 0
