@@ -235,9 +235,9 @@ public class ChatHumanManager : MonoBehaviour
             is_ChatStart = true;
 
             // when difference chapter member and current memer 
-            if (chapterMember.name != currentMember.name)
-                GameManager.Instance.chatSystem.MemberList(true);
-            else
+            //if (chapterMember.name != currentMember.name)
+                //GameManager.Instance.chatSystem.MemberList(true);
+            //else
                 GameManager.Instance.chatSystem.MemberList(false);
         }
         else

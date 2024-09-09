@@ -931,12 +931,14 @@ public class Chatting : MonoBehaviour
     {
         if (isOpen)
         {
+            Debug.Log("열 수 있음");
             ui_memberListButton.style.backgroundImage = new StyleBackground(changeMemberBtnOn);
             ui_memberListButton.pickingMode = PickingMode.Position;
             ui_memberListButton.RemoveFromClassList("translucence");
         }
         else
         {
+            Debug.Log("열 수 없음");
             ui_memberListButton.style.backgroundImage = new StyleBackground(changeMemberBtnOff);
             ui_memberListButton.pickingMode = PickingMode.Ignore;
             ui_memberListButton.AddToClassList("translucence");
