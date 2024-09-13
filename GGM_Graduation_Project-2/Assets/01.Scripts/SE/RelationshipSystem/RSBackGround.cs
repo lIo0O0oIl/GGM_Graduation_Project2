@@ -19,8 +19,6 @@ public class RSBackGround : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("배경 눌러짐!");
-
         Vector3 mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

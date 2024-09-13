@@ -12,45 +12,40 @@ public class GameManager : Singleton<GameManager>
     public CutScene cutSceneSystem;
     public Chatting chatSystem;
     public UIReader_Relationship relationshipSystem;
+    public UIReader_SelectHuman selectHumanSystem;
     public FileSystem fileSystem;
     public Investigation imageSystem;
 
     [Header("Manager")]
     public ChatHumanManager chatHumanManager;
-    //public ChatContainer chatContainer;
+    public ChatContainer chatContainer;
     public CutSceneManager cutSceneManager;
     public FileManager fileManager;
     public ImageManager imageManager;
 
-    [Header("SE")]
     [SerializeField] private bool is_tutorial = false;
     [SerializeField] private Sprite myFaec;
-    public Texture2D cutScenePlayIcon;
+
+    // 내가 임의로 추가한거임 충돌나면 내껄 버려
+    public Sprite cutScenePlayIcon;
+
 
     private void Start()
     {
         GameStart();
-
-        //fileSystem.TestStart();
     }
 
     private void Update()
     {
         if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.P))
-                UIReader_Main.Instance.PlusHP();
+            UIReader_Main.Instance.PlusHP();
 
         if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.O))
             UIReader_Main.Instance.MinusHP();
 
         //if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKey(KeyCode.I))
-        //if (Input.GetKey(KeyCode.I))
-        //    chatHumanManager.NextChat(currentMember.excelChat[currentMember.currentIdx]);
-
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    if (imageSystem.ui_panelGround.childCount > 0)
-        //        imageSystem.ui_panelGround.Remove(imageSystem.ui_panelGround.Q<VisualElement>("panel"));
-        //}
+        if (Input.GetKey(KeyCode.I))
+            chatHumanManager.NextChat();
     }
 
     public void GameStart()
@@ -60,8 +55,6 @@ public class GameManager : Singleton<GameManager>
             cutSceneSystem.PlayCutScene("DieFall");
             chatSystem.AddMember("GJH");
             chatSystem.OnOffMemberList();
-
-            fileSystem.TestStart();
         }
         else
         {

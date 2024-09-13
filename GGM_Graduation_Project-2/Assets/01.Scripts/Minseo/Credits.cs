@@ -77,5 +77,6 @@ public class Credits : MonoBehaviour
     public void GameBtn()
     {
         SceneManager.LoadScene(0);
+        SoundManager.Instance.StopBGM();
     }
 }

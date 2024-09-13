@@ -1,19 +1,17 @@
 using ChatVisual;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChatHumanManager : MonoBehaviour
 {
-    //public ChatContainer chatContainer;
+    public ChatContainer chatContainer;
 
     public float nextChatTime = 1f;         // when load next chat time
     public bool is_ChatStart = false;
 
-    //private List<NormalCHat> currentNodes = new List<NormalCHat>();
-    //public string currentName;
+    private List<Node> currentNodes = new List<Node>();
     public MemberProfile currentMember, chapterMember;
-    public NormalChat currentNode;
+    public Node currentNode;
     public List<string> checkEvidence = new List<string>();
 
     //public Coroutine chatting;
@@ -23,173 +21,211 @@ public class ChatHumanManager : MonoBehaviour
 
     private void Start()
     {
-        // so 초기화 해줘야함...
+        for (int i = 0; i < chatContainer.chatTrees.Count; i++)
+        {
+            ChatTree chatTree = chatContainer.chatTrees[i];
+            for (int j = 0; j < chatTree.nodeList.Count; j++)
+            {
+                if (chatTree.nodeList[j] != null)
+                {
+                    chatTree.nodeList[j].is_UseThis = false;
+                    chatTree.nodeList[j].is_readThis = false;
 
-        //// 값 초기화
-        //for (int i = 0; i < chatContainer.chatTrees.Count; i++)
-        //{
-        //    ChatTree chatTree = chatContainer.chatTrees[i];
-        //    for (int j = 0; j < chatTree.nodeList.Count; j++)
-        //    {
-        //        if (chatTree.nodeList[j] != null)
-        //        {
-        //            chatTree.nodeList[j].is_UseThis = false;
-        //            chatTree.nodeList[j].is_readThis = false;
-        //            if (chatTree.nodeList[j] is ChatNode chatNode)
-        //            {
-        //                for (int k = 0; k < chatNode.childList.Count; k++)
-        //                {
-        //                    if (chatNode.childList[k] == null)
-        //                    {
-        //                        chatNode.childList.RemoveAt(k);
-        //                    }
-        //                }
-        //            }
-        //            if (chatTree.nodeList[j] is ConditionNode conditionNode)
-        //                conditionNode.is_Unlock = false;
-        //        }
-        //    }
-        //}
+                    if (chatTree.nodeList[j] is ChatNode chatNode)
+                    {
+                        for (int k = 0; k < chatNode.childList.Count; k++)
+                        {
+                            if (chatNode.childList[k] == null)
+                            {
+                                chatNode.childList.RemoveAt(k);
+                            }
+                        }
+                    }
+
+                    if (chatTree.nodeList[j] is ConditionNode conditionNode)
+                        conditionNode.is_Unlock = false;
+                }
+            }
+        }
     }
 
     private void Update()
     {
-        if (UIReader_Main.Instance.NextChatBtn.focusable == false)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-                GoChat();
-        }
+        if (Input.GetKeyDown(KeyCode.Space))
+            GoChat();
     }
 
     public void GoChat()
     {
         if (is_ChatStart)
         {
-            //if (currentMember.name == chapterMember.name)
+            if (currentMember.name == chapterMember.name)
                 NextChat();
         }
     }
 
     public void NextChat()
     {
-        // 해당 턴의 채팅 받아오기
-        NormalChat chat = currentMember.excelChat[currentMember.currentIdx];
+        // node list
+        var children = chatContainer.GetChatTree().GetChild(currentNode);
 
-        // 만약 텍스트라면
-        if (chat is Chat text)
-            Chat(text);
-        // 만약 질문이라면
-        else if (chat is Question ask)
-            Question(ask);
-    }
-
-    public void Chat(Chat text)
-    {
-        // 만약 읽지도 출력하지도 않은 글이라면 (text는 둘 다 같은 뜻으로 사용함)
-        if (text.isRead == false && text.isUse == false)
+        foreach (Node node in children)
         {
-            // 만약 채팅에 잠금이 걸려있다면 (글이 존재한다면)
-            //if (text.fileName != "" || text.fileName != null)
-            if (!string.IsNullOrEmpty(text.fileName))
+            // when node is ChatNode
+            if (node is ChatNode chatNode)
             {
-                // file name에 파일명이 하나가 아님 파일이름1/파일이름2 라서 / 기준으로 구분해야할듯?
-                if (GameManager.Instance.fileManager.FindFile(text.fileName) != null)
+                if (chatNode.is_readThis == false)
                 {
-                    // 만약 잠금 해제 조건이 충족했다면
-                    if (GameManager.Instance.fileManager.FindFile(text.fileName).isRead == false)
-                        return;
-                }
-                else
-                {
-                    Debug.LogError(text.fileName + " 파일이 존재하지 않음");
-                    return;
+                    // load next
+                    currentNode = children[0];
+                    // check
+                    children[0].is_readThis = true;
+
+                    // chat event
+                    GameManager.Instance.chatSystem.SettingChat
+                        (currentMember, chatNode.state, chatNode, chatNode.face, chatNode.textEvent);
+
+                    // Input chat
+                    GameManager.Instance.chatSystem.InputChat
+                        (currentMember.name, chatNode.state, chatNode.type, chatNode.face, chatNode.chatText, true);
+
+                    // start chatting
+                    IsChat(true);
+
+                    currentMember.currentNode = chatNode;
                 }
             }
+            else if (node is AskNode askNode)
+            {
+                if (askNode.is_readThis == false && askNode.is_UseThis == false)
+                {
+                    // load next
+                    currentNode = askNode.parent;
+                    // check
+                    askNode.is_readThis = true;
 
-            // 해당 채팅 체크
-            text.isRead = true;
-            text.isUse = true;
+                    // save member's currentNode
+                    currentMember.currentNode = askNode;
+                    currentMember.currentAskNode = askNode;
 
-            // 채팅 출력
-            GameManager.Instance.chatSystem.InputChat
-                (currentMember.name, text.who, text.type, text.text);
+                    // Input chat
+                    GameManager.Instance.chatSystem.InputQuestion(currentMember.name, false, askNode);
 
-            // 채팅 세팅
-            GameManager.Instance.chatSystem.SettingChat
-                (currentMember, text.who, text.face, text.fildLoad, text.evt);
+                    // save question list
+                    currentMember.questions.Add(askNode);
 
-            // 채팅 진행
-            IsChat(true);
+                    // stop chatting 
+                    IsChat(false);
 
-            // 다음 채팅으로
-            currentMember.currentIdx++;
-        }
-    }
+                    //is_ChatStop = true;
+                }
+            }
+            else if (node is ConditionNode conditionNode)
+            {
+                // when all question conditon
+                if (conditionNode.is_AllQuestion)
+                {
+                    // when exist ask
+                    if (conditionNode.asks.Count > 0)
+                    {
+                        // when all question is use
+                        if (conditionNode.Checkk())
+                        {
+                            // load next
+                            currentNode = conditionNode;
+                            // check
+                            conditionNode.is_UseThis = true;
+                        }
+                        else
+                        {
+                            // when default question
+                            if (conditionNode.asks[0].parent is ChatNode)
+                            {
+                                // load next
+                                currentNode = (conditionNode.asks[0].parent as ChatNode);
+                            }
+                            // when lock question
+                            else if (conditionNode.asks[0].parent is ConditionNode)
+                            {
+                                ConditionNode parent = conditionNode.asks[0].parent as ConditionNode;
 
-    public void Question(Question ask)
-    {
-        if (ask.isRead == false && ask.isUse == false)
-        {
-            // 읽음으로 확인
-            ask.isRead = true;
+                                // load next
+                                currentNode = parent.parentList[0];
+                            }
+                        }
+                    }
+                }
+                // when lock condition
+                else if (conditionNode.is_SpecificFile)
+                {
+                    // when lock is unlock
+                    if (checkEvidence.Contains(conditionNode.fileName))
+                    {
+                        // load next
+                        currentNode = conditionNode;
+                    }
+                    else
+                    {
+                        // start chatting
+                        IsChat(true);
+                    }
+                }
+                // when lock question condition
+                else if (conditionNode.is_LockQuestion)
+                {
+                    // get ask
+                    AskNode ask = conditionNode.childList[0] as AskNode;
 
-            // 질문 출력
-            GameManager.Instance.chatSystem.InputQuestion
-                (currentMember.name, ask.type == EAskType.Lock, ask);
+                    if (ask.is_readThis == false && ask.is_UseThis == false)
+                    {
+                        // load next
+                        conditionNode.childList[0].is_readThis = true;
 
-            // 질문 추가
-            currentMember.questions.Add(ask);
+                        // save question list
+                        currentMember.questions.Add(ask);
 
-            // 대화 일시정지
-            IsChat(false);
+                        // Input Question
+                        GameManager.Instance.chatSystem.InputQuestion
+                            (currentMember.name, !conditionNode.is_Unlock, ask);
 
-            // 다음 채팅 & 채팅으로 이동
-            currentMember.currentIdx++;
-            currentMember.currentAskIdx++;
+                        // stop chatting
+                        IsChat(false);
+                    }
 
-            if (currentMember.excelChat[currentMember.currentIdx] is Question)
-                NextChat();
-            //고쳐야함...
+                    // load next
+                    currentNode = conditionNode.parentList[0];
+                }
+            }
         }
     }
 
     public void StartChat(string name)      // HG
     {
-        // 사람 찾고
+        // change current member
         currentMember = GameManager.Instance.chatSystem.FindMember(name);
 
-        // 사람 변경
-        GameManager.Instance.chatSystem.ChangeMemberName(name);
+        // change member name ui
+        GameManager.Instance.chatSystem.ChangeMemberName
+            (GameManager.Instance.chatSystem.FindMember(currentMember.name).name);
 
-        // 현재 노드 설정... (안 쓰는듯함)
-        if (currentMember.currentIdx != 0)
-            currentNode = currentMember.excelChat[currentMember.currentIdx];
-        else
-            currentNode = currentMember.excelChat[0];
+        // save current name
+        chatContainer.currentName = name;
+        // get current nodes
+        currentNodes = chatContainer.GetChatTree().nodeList;
+
+        if (currentNodes[0] is RootNode rootNode)
+        {
+            // when current member's currentNode isn't null
+            // load next
+            if (currentMember.currentNode != null)
+            {
+                currentNode = currentMember.currentNode;
+            }
+            else
+                currentNode = rootNode;
+        }
 
         IsChat(true);
-
-        //// change current member
-        //currentMember = GameManager.Instance.chatSystem.FindMember(name);
-        //// change member name ui
-        //GameManager.Instance.chatSystem.ChangeMemberName
-        //    (GameManager.Instance.chatSystem.FindMember(currentMember.name).name
-        //// save current name
-        //chatContainer.currentName = name;
-        //// get current nodes
-        //currentNodes = chatContainer.GetChatTree().nodeList;
-        //if (currentNodes[0] is RootNode rootNode)
-        //{
-        //    // when current member's currentNode isn't null
-        //    // load next
-        //    if (currentMember.currentNode != null)
-        //    {
-        //        currentNode = currentMember.currentNode;
-        //    }
-        //    else
-        //        currentNode = rootNode;
-        //}
-        //IsChat(true);
     }
 
     public void IsChat(bool isChat)
@@ -198,11 +234,11 @@ public class ChatHumanManager : MonoBehaviour
         {
             is_ChatStart = true;
 
-            //// when difference chapter member and current memer 
-            //if (chapterMember.name != currentMember.name)
-            GameManager.Instance.chatSystem.MemberList(true);
-            //else
-            //GameManager.Instance.chatSystem.MemberList(false);
+            //when difference chapter member and current memer
+            if (chapterMember.name != currentMember.name)
+                GameManager.Instance.chatSystem.MemberList(true);
+            else
+                GameManager.Instance.chatSystem.MemberList(false);
         }
         else
         {

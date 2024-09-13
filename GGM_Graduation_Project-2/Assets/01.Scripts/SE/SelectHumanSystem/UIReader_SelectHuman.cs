@@ -9,7 +9,7 @@ public class UIReader_SelectHuman : MonoBehaviour
     private VisualElement SelectHumanRoot;
     private Button changeSizeBtn;
     
-    private bool is_Open = true;        // 나중에 바꾸기
+    public bool is_Open = true;        // 나중에 바꾸기
     private Tween changeSizeTween = null;
     [SerializeField] private float sizeOn = 350, sizeOff = 5;
     [SerializeField] private Texture2D changeSizeBtnOn, changeSizeBtnOff;
@@ -18,7 +18,7 @@ public class UIReader_SelectHuman : MonoBehaviour
     private void Start()
     {
         SelectHumanRoot = UIReader_Main.Instance.GetSelectHumanSystem();
-        SelectHumanRoot.style.flexBasis = new Length(sizeOn, LengthUnit.Pixel);
+        SelectHumanRoot.style.flexBasis = new Length(sizeOff, LengthUnit.Pixel);
 
         changeSizeBtn = UIReader_Main.Instance.GetTopBar().Q<Button>("SelectHumanOpenBtn");
         if (changeSizeBtn != null)
@@ -27,7 +27,7 @@ public class UIReader_SelectHuman : MonoBehaviour
         }
     }
 
-    private void OnOffThisSystem(float during)
+    public void OnOffThisSystem(float during)
     {
         is_Open = !is_Open;
 

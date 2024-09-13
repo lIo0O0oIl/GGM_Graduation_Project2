@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class RSMovedPicture : MonoBehaviour
 {
+    private RSEvidenceData myEvidenceData;
+
     private bool is_Hold = false;
     private float startPosX, startPosY;
-
-    private RSLinkedData myLinkedData;
     public ScreenClamp screenClamp;
+
+    private float lastClickTime = 0f;
+    private float doubleClickThreshold = 0.5f;
 
     private void Awake()
     {
-        myLinkedData = transform.GetChild(0).GetComponent<RSLinkedData>();
+        myEvidenceData = transform.GetChild(0).GetComponent<RSEvidenceData>();
     }
 
     private void OnMouseDown()
     {
-        Vector3 mousePos;
+        if (Time.time - lastClickTime < doubleClickThreshold)
+        {
+            Debug.Log("더블클릭 : " + myEvidenceData.fileType);
+            return;
+        }
+        else lastClickTime = Time.time;
+
+            Vector3 mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         startPosX = mousePos.x - transform.position.x;
@@ -40,7 +50,7 @@ public class RSMovedPicture : MonoBehaviour
             Vector2 movedPos = new Vector2(mousePos.x - startPosX, mousePos.y - startPosY);
             transform.position = movedPos;
 
-            myLinkedData.ChangeOtherLinePosition();
+            myEvidenceData.ChangeOtherLinePosition();
         }
 
         float clampedX = Mathf.Clamp(transform.localPosition.x, screenClamp.xMin, screenClamp.xMax);

@@ -30,7 +30,7 @@ public class CutSceneManager : MonoBehaviour
     {
         for (int i = 0; i < cutScenes.Count; ++i)
         {
-            cutScenes[i].test = false;
+            cutScenes[i].isRead = false;
         }
     }
 
@@ -56,7 +56,7 @@ public class CutSceneManager : MonoBehaviour
     {
         currentCutScene = FindCutScene(name);
 
-        if (currentCutScene.test == false)
+        if (currentCutScene.isRead == false)
         {
             currentCutNum = 0;
             currentTextNum = 0;
@@ -65,7 +65,7 @@ public class CutSceneManager : MonoBehaviour
                 animSpeed, currentCutScene.cutScenes[currentCutNum].cut);
             Next();
 
-            currentCutScene.test = true;
+            currentCutScene.isRead = true;
         }
         else
             UIReader_Main.Instance.OpenCutScene();

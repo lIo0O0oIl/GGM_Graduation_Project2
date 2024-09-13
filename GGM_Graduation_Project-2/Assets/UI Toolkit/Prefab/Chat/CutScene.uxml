@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/Button.uss?fileID=7433441132597879392&amp;guid=d28c6cf77bec8e54c92d108a96fd1e35&amp;type=3#Button" />
+    <ui:Button text="Button" display-tooltip-when-elided="true" name="CutScene" class="NoButtonBorder FileChatSize" style="background-image: url(&apos;project://database/Assets/02.Sprites/CutScene/DieFall/CutScene0.png?fileID=21300000&amp;guid=4180a4bc080b8df418e185e2786ba2da&amp;type=3#CutScene0&apos;);">
+        <ui:VisualElement picking-mode="Ignore" name="PlayIcon" class="MenuTopButton" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/02.Sprites/Icons/playButton.png?fileID=2800000&amp;guid=1e5e649a242bb0c43ad305ecf4f94469&amp;type=3#playButton&apos;); width: 60%; height: 100%; align-self: center;" />
+    </ui:Button>
+</ui:UXML>

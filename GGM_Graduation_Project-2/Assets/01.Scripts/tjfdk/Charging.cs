@@ -25,6 +25,10 @@ public class Charging : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 charging.fillAmount += Time.deltaTime * 2f;
+                if (charging.fillAmount > 0.95f)
+                {
+                    charging.gameObject.SetActive(false);
+                }
             }
         }
 

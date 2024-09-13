@@ -34,7 +34,8 @@ public class UIReader_Main : MonoBehaviour
     private VisualElement filePanel;
     private VisualElement cutScenePanel;
     private VisualElement gamePanel;
-    private VisualElement RelationshipPanel;
+    public VisualElement RelationshipPanel;
+    public GameObject relationshipCanvas;
     private VisualElement settingPanel;
     private VisualElement quitPanel;
 
@@ -62,6 +63,11 @@ public class UIReader_Main : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        relationshipCanvas.SetActive(false);
     }
 
     private void OnEnable()
@@ -122,14 +128,16 @@ public class UIReader_Main : MonoBehaviour
         switch (panelType)
         {
             case EPanel.MAIN:
-                filePanel.style.display = DisplayStyle.Flex;
+                //filePanel.style.display = DisplayStyle.Flex;
                 gamePanel.style.display = DisplayStyle.Flex;
+                relationshipCanvas.SetActive(false);
                 StartCoroutine(GameManager.Instance.chatSystem.EndToScroll(0.05f));
                 break;
             case EPanel.RELATIONSHIP:
                 isRelationshipOpen = true;
-                filePanel.style.display = DisplayStyle.None;
+                //filePanel.style.display = DisplayStyle.None;
                 RelationshipPanel.style.display = DisplayStyle.Flex;
+                relationshipCanvas.SetActive(true);
                 break;
         }
     }
